@@ -1,16 +1,14 @@
 {
-	"tabWidth": 2,
-	"useTabs": true,
-	"editorconfig": true,
-	"bracketSpacing": true,
-	"arrowParens": "always",
 	"bracketSameLine": false,
-	"endOfLine": "lf",
+	"bracketSpacing": true,
+	"editorconfig": true,
+	"endOfLine": "auto",
 	"jsxSingleQuote": false,
-	"quoteProps": "as-needed",
 	"printWidth": 120,
+	"quoteProps": "as-needed",
 	"semi": true,
-	"trailingComma": "es5",
 	"singleQuote": true,
-	"singleAttributePerLine": false
+	"tabWidth": 2,
+	"trailingComma": "none",
+	"useTabs": true
 }
