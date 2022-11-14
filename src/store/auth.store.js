@@ -5,6 +5,10 @@ export const useAuthStore = create(
 	devtools((set) => ({
 		isLoggedIn: false,
 
-		setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn })
+		authLogin: (values) => {
+			set({ isLoggedIn: true });
+		}
 	}))
 );
+
+export const { getState, setState, destroy } = useAuthStore;
