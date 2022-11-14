@@ -28,7 +28,11 @@
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
 		"test": "react-app-rewired test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"format": "npm run format:js && npm run format:json && npm run format:md",
+		"format:js": "prettier --write \"src/**/*.js\"",
+		"format:json": "prettier --write \"**/*.json\"",
+		"format:md": "prettier --write \"**/*.md\""
 	},
 	"eslintConfig": {
 		"extends": [
