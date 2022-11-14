@@ -20,7 +20,7 @@
 			"error",
 			{
 				"endOfLine": "auto",
-				"trailingComma": "all"
+				"trailingComma": "none"
 			}
 		],
 		"react/jsx-props-no-spreading": "off",
