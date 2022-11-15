@@ -1,1 +1,1 @@
-export const APP_NAME = 'DC Web';
+export const APP_NAME = process.env.REACT_APP_APP_NAME;
