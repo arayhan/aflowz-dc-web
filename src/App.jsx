@@ -1,8 +1,11 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { SystemInformationContainer } from './components/organisms';
+import { useAuthStore } from './store';
+
 import Home from './pages/SystemInformation/Home/Home';
 import Login from './pages/Auth/Login/Login';
-import { useAuthStore } from './store';
+import Program from './pages/SystemInformation/Program/Program';
+import SystemInformationPageContainer from './components/organisms/SystemInformationPageContainer/SystemInformationPageContainer';
 
 const ProtectedRoute = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -24,6 +27,14 @@ function App() {
 			<Route element={<ProtectedRoute />}>
 				<Route path="/" element={<SystemInformationContainer />}>
 					<Route path="/" element={<Home />} />
+					<Route path="/" element={<SystemInformationPageContainer />}>
+						<Route path="/mitra" element={<Program />} />
+						<Route path="/sekolah" element={<Program />} />
+						<Route path="/kampus" element={<Program />} />
+						<Route path="/desa" element={<Program />} />
+						<Route path="/kota" element={<Program />} />
+						<Route path="/program" element={<Program />} />
+					</Route>
 				</Route>
 			</Route>
 		</Routes>

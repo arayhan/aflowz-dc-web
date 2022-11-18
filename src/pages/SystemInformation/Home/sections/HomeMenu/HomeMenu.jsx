@@ -1,15 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { MENUS } from '@/utils/constants';
 
 export const HomeMenu = () => {
-	const MENUS = [
-		{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
-		{ title: 'Sekolah', icon: require('@/images/icons/box.svg').default, path: '/sekolah' },
-		{ title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },
-		{ title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/desa' },
-		{ title: 'Kota', icon: require('@/images/icons/box.svg').default, path: '/kota' },
-		{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' }
-	];
 	return (
 		<div className="bg-gray-100">
 			<div className="container py-20 space-y-10">
