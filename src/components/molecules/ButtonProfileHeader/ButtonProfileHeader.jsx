@@ -3,7 +3,7 @@ import { GoSignOut } from 'react-icons/go';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useAuthStore } from '@/store';
 
-export const HeaderProfileButton = () => {
+export const ButtonProfileHeader = () => {
 	const { authLogout } = useAuthStore();
 
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);

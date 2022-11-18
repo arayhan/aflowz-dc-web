@@ -1,2 +1,1 @@
-export * from './SystemInformationContainer/SystemInformationContainer';
-export * from './SystemInformationPageContainer/SystemInformationPageContainer';
+export * from './SiteLayout/SiteLayout';

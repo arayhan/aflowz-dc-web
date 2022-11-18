@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HeaderProfileButton } from './HeaderProfileButton/HeaderProfileButton';
+import { ButtonProfileHeader } from '@/components/molecules';
 
-export const SystemInformationHeader = () => {
+export const SiteHeader = () => {
 	return (
 		<div className="bg-primary-600">
 			<div className="container">
@@ -10,7 +10,7 @@ export const SystemInformationHeader = () => {
 					<Link to={'/'} className="text-white font-extralight text-xl">
 						DC Web
 					</Link>
-					<HeaderProfileButton />
+					<ButtonProfileHeader />
 				</div>
 			</div>
 		</div>

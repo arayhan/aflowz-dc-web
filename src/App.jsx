@@ -1,11 +1,11 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { SystemInformationContainer } from './components/organisms';
 import { useAuthStore } from './store';
 
-import Home from './pages/SystemInformation/Home/Home';
+import { SiteLayout } from './components/organisms';
+
 import Login from './pages/Auth/Login/Login';
-import Program from './pages/SystemInformation/Program/Program';
-import SystemInformationPageContainer from './components/organisms/SystemInformationPageContainer/SystemInformationPageContainer';
+import Home from './pages/Home/Home';
+import Program from './pages/Program/Program';
 
 const ProtectedRoute = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -25,16 +25,14 @@ function App() {
 			</Route>
 
 			<Route element={<ProtectedRoute />}>
-				<Route path="/" element={<SystemInformationContainer />}>
+				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/" element={<SystemInformationPageContainer />}>
-						<Route path="/mitra" element={<Program />} />
-						<Route path="/sekolah" element={<Program />} />
-						<Route path="/kampus" element={<Program />} />
-						<Route path="/desa" element={<Program />} />
-						<Route path="/kota" element={<Program />} />
-						<Route path="/program" element={<Program />} />
-					</Route>
+					<Route path="/mitra" element={<Program />} />
+					<Route path="/sekolah" element={<Program />} />
+					<Route path="/kampus" element={<Program />} />
+					<Route path="/desa" element={<Program />} />
+					<Route path="/kota" element={<Program />} />
+					<Route path="/program" element={<Program />} />
 				</Route>
 			</Route>
 		</Routes>
