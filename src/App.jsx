@@ -1,15 +1,17 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { SystemInformationContainer } from './components/layout';
+import Home from './pages/SystemInformation/Home/Home';
 import Login from './pages/Auth/Login/Login';
 import { useAuthStore } from './store';
 
-const AuthenticationRoute = () => {
-	const { isLoggedIn } = useAuthStore();
-	return isLoggedIn ? <Navigate to="/" /> : <Outlet />;
-};
-
 const ProtectedRoute = () => {
 	const { isLoggedIn } = useAuthStore();
-	return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+	return !isLoggedIn ? <Navigate to="/login" replace /> : <Outlet />;
+};
+
+const AuthenticationRoute = () => {
+	const { isLoggedIn } = useAuthStore();
+	return isLoggedIn ? <Navigate to="/" replace /> : <Outlet />;
 };
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
 			</Route>
 
 			<Route element={<ProtectedRoute />}>
-				<Route path="/" element={<div>Home</div>} />
+				<Route path="/" element={<SystemInformationContainer />}>
+					<Route path="/" element={<Home />} />
+				</Route>
 			</Route>
 		</Routes>
 	);
