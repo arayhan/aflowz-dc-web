@@ -16,6 +16,12 @@ export const useAuthStore = create(
 					role: USER_ROLE_TYPES.ADMIN
 				}
 			});
+		},
+		authLogout: () => {
+			set({
+				isLoggedIn: false,
+				auth: null
+			});
 		}
 	}))
 );
