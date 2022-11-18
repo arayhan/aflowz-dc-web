@@ -1,5 +1,5 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { SystemInformationContainer } from './components/layout';
+import { SystemInformationContainer } from './components/organisms';
 import Home from './pages/SystemInformation/Home/Home';
 import Login from './pages/Auth/Login/Login';
 import { useAuthStore } from './store';
