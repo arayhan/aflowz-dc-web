@@ -1,5 +1,4 @@
 import React from 'react';
-import { ImFileEmpty } from 'react-icons/im';
 import Skeleton from 'react-loading-skeleton';
 import { useTable } from 'react-table';
 
@@ -31,7 +30,7 @@ export const Table = ({ loading, columns, data }) => {
 			<tbody {...getTableBodyProps()}>
 				{loading &&
 					[1, 2, 3].map((array) => (
-						<tr key={array} className="border-b last:border-b-0">
+						<tr key={array} className="hover:bg-gray-50 border-b last:border-b-0">
 							{columns.map((column) => (
 								<td key={column.Header} className="px-6 py-3">
 									<Skeleton height={20} />
@@ -54,7 +53,7 @@ export const Table = ({ loading, columns, data }) => {
 					rows.map((row, i) => {
 						prepareRow(row);
 						return (
-							<tr key={row.id} className="border-b last:border-b-0" {...row.getRowProps()}>
+							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
 								{row.cells.map((cell) => {
 									return (
 										<td key={cell.value} className="px-6 py-3 text-sm" {...cell.getCellProps()}>
