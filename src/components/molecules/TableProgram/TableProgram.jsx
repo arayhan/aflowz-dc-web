@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
-export const TableProgram = ({ selectedCategory }) => {
+export const TableProgram = ({ category }) => {
 	const { fetchingProgramList, programList } = useProgramStore();
 	const { getProgramList } = useProgramStore();
 
@@ -58,12 +58,11 @@ export const TableProgram = ({ selectedCategory }) => {
 
 	useEffect(() => {
 		const params = {
-			program_category: selectedCategory.name_alias,
 			limit: 10,
 			offset: 0
 		};
 		getProgramList(params);
-	}, [selectedCategory]);
+	}, [category]);
 
 	useEffect(() => {
 		if (programList) setData(programList.items);

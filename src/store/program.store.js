@@ -20,7 +20,6 @@ const states = (set) => ({
 		set({ fetchingProgramCategoryList: true });
 
 		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
-		console.log({ payload });
 
 		set({ programCategoryList: success ? payload : null });
 		set({ fetchingProgramCategoryList: false });
