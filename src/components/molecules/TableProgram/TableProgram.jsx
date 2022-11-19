@@ -13,10 +13,9 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: '#',
 				accessor: '',
-				width: 10,
-				maxWidth: 10,
 				disableSortBy: true,
 				disableFilters: true,
+				maxWidth: 20,
 				Cell: (row) => {
 					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
 				}
@@ -24,11 +23,11 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Name',
 				accessor: 'name',
-				minWidth: 250
+				minWidth: 175
 			},
 			{
 				Header: 'Category',
-				minWidth: 300,
+				minWidth: 225,
 				Cell: (row) => <div>{row.row.original.program_category.name}</div>
 			},
 			{
@@ -44,7 +43,7 @@ export const TableProgram = ({ selectedCategory }) => {
 						<div>
 							<Link
 								to={`/program/${row.row.original.id}`}
-								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-sm px-4 py-2 rounded-md"
+								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
 							>
 								See Detail
 							</Link>

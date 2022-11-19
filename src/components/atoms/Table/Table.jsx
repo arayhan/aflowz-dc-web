@@ -16,7 +16,7 @@ export const Table = ({ loading, columns, data }) => {
 						{headerGroup.headers.map((column) => (
 							<th
 								key={column.id}
-								className="px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
+								className="px-5 md:px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
 								{...column.getHeaderProps({
 									style: { minWidth: column.minWidth, width: column.width, maxWidth: column.maxWidth }
 								})}
@@ -32,7 +32,7 @@ export const Table = ({ loading, columns, data }) => {
 					[1, 2, 3].map((array) => (
 						<tr key={array} className="hover:bg-gray-50 border-b last:border-b-0">
 							{columns.map((column) => (
-								<td key={column.Header} className="px-6 py-3">
+								<td key={column.Header} className="px-5 md:px-6 py-2 md:py-3">
 									<Skeleton height={20} />
 								</td>
 							))}
@@ -56,7 +56,11 @@ export const Table = ({ loading, columns, data }) => {
 							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
 								{row.cells.map((cell) => {
 									return (
-										<td key={cell.value} className="px-6 py-3 text-sm" {...cell.getCellProps()}>
+										<td
+											key={cell.value}
+											className="px-5 md:px-6 py-2 md:py-3 text-xs md:text-sm"
+											{...cell.getCellProps()}
+										>
 											{cell.render('Cell')}
 										</td>
 									);
