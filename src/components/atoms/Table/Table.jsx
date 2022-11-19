@@ -8,12 +8,18 @@ export const Table = ({ columns, data }) => {
 	});
 
 	return (
-		<table {...getTableProps()}>
-			<thead>
+		<table className="w-full" {...getTableProps()}>
+			<thead className="bg-gray-100">
 				{headerGroups.map((headerGroup) => (
 					<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
 						{headerGroup.headers.map((column) => (
-							<th key={column.id} {...column.getHeaderProps()}>
+							<th
+								key={column.id}
+								className="px-3 py-2 text-left border"
+								{...column.getHeaderProps({
+									style: { minWidth: column.minWidth, width: column.width, maxWidth: column.maxWidth }
+								})}
+							>
 								{column.render('Header')}
 							</th>
 						))}
@@ -27,7 +33,7 @@ export const Table = ({ columns, data }) => {
 						<tr key={row.id} {...row.getRowProps()}>
 							{row.cells.map((cell) => {
 								return (
-									<td key={cell.value} {...cell.getCellProps()}>
+									<td key={cell.value} className="px-3 py-2 text-sm border" {...cell.getCellProps()}>
 										{cell.render('Cell')}
 									</td>
 								);

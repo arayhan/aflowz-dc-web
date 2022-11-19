@@ -1,13 +1,10 @@
-import { BannerFeature } from '@/components/molecules';
+import { BannerFeature, TableProgram } from '@/components/molecules';
 import React from 'react';
 
 const Program = () => {
 	const MENUS = [
 		{ title: 'Kemendikbud', icon: require('@/images/icons/box.svg').default, path: '/kemendikbud' },
 		{ title: 'Kemenpora', icon: require('@/images/icons/box.svg').default, path: '/kemenpora' },
-		{ title: 'Kemkominfo', icon: require('@/images/icons/box.svg').default, path: '/kemkominfo' },
-		{ title: 'Kemkominfo', icon: require('@/images/icons/box.svg').default, path: '/kemkominfo' },
-		{ title: 'Kemkominfo', icon: require('@/images/icons/box.svg').default, path: '/kemkominfo' },
 		{ title: 'Kemkominfo', icon: require('@/images/icons/box.svg').default, path: '/kemkominfo' }
 	];
 
@@ -18,11 +15,11 @@ const Program = () => {
 				<div className="bg-white p-6 rounded-md">
 					<div className="container">
 						<div className="space-y-6">
-							<div className="flex gap-4">
+							<div className="flex flex-wrap gap-4">
 								{MENUS.map((menu) => (
 									<div
 										key={menu.path}
-										className="flex flex-col items-center text-center border p-4 rounded-md hover:bg-gray-100 cursor-pointer"
+										className="flex w-32 flex-col items-center text-center border p-4 rounded-md hover:bg-gray-100 cursor-pointer"
 									>
 										<img className="w-12" src={menu.icon} alt="" />
 										<div className="text-xs text-gray-400">{menu.title}</div>
@@ -43,7 +40,8 @@ const Program = () => {
 						</div>
 						<hr />
 						<div className="p-4">
-							<table className="w-full text-center">
+							<TableProgram />
+							{/* <table className="w-full text-center">
 								<thead>
 									<tr>
 										<th className="border p-2 bg-gray-50">No.</th>
@@ -95,7 +93,7 @@ const Program = () => {
 										</td>
 									</tr>
 								</tbody>
-							</table>
+							</table> */}
 						</div>
 					</div>
 				</div>
