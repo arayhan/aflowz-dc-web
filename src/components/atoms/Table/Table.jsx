@@ -7,6 +7,8 @@ export const Table = ({ columns, data }) => {
 		data
 	});
 
+	console.log({ rows });
+
 	return (
 		<table className="w-full" {...getTableProps()}>
 			<thead className="bg-gray-100">
@@ -33,7 +35,7 @@ export const Table = ({ columns, data }) => {
 						<tr key={row.id} {...row.getRowProps()}>
 							{row.cells.map((cell) => {
 								return (
-									<td key={cell.value} className="px-3 py-2 text-sm border" {...cell.getCellProps()}>
+									<td key={cell.value} className="px-3 py-2 text-sm border border-t-0" {...cell.getCellProps()}>
 										{cell.render('Cell')}
 									</td>
 								);
