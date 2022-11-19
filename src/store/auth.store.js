@@ -17,18 +17,17 @@ const states = (set) => ({
 		setPageLoading(true);
 
 		const loader = toast.loading('Logging in...');
-		const request = { login: values.username, password: values.password, db: process.env.REACT_APP_API_DB };
-		const response = await SERVICE_AUTH.authLogin(request);
+		const params = { login: values.username, password: values.password, db: process.env.REACT_APP_API_DB };
+		const response = await SERVICE_AUTH.authLogin(params);
 
-		if (response.success) {
-			set({
-				isLoggedIn: true,
-				auth: {
-					name: values.username,
-					role: USER_ROLE_TYPES.ADMIN
-				}
-			});
-		}
+		// TODO: Check if response is success or not
+		set({
+			isLoggedIn: true,
+			auth: {
+				name: values.username,
+				role: USER_ROLE_TYPES.ADMIN
+			}
+		});
 
 		toast.update(loader, {
 			type: response.success ? 'success' : 'error',
