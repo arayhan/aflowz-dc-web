@@ -45,7 +45,7 @@ export const TableProgram = () => {
 					const slug = slugify(row.row.original.name);
 					return (
 						<div>
-							<Link to={'/dashboard/program/' + slug} className="bg-primary text-white px-3 py-1 text-sm rounded-md">
+							<Link to={'/program/' + slug} className="bg-primary text-white px-3 py-1 text-sm rounded-md">
 								Detail
 							</Link>
 						</div>
