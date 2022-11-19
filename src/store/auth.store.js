@@ -1,14 +1,26 @@
+import { SERVICE_AUTH } from '@/services';
 import { USER_ROLE_TYPES } from '@/utils/constants';
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
+import { toast } from 'react-toastify';
+import { useAppStore } from './app.store';
 
-export const useAuthStore = create(
-	devtools((set) => ({
-		isProcessLogin: false,
-		isLoggedIn: false,
-		auth: null,
+const { setPageLoading } = useAppStore.getState();
 
-		authLogin: (values) => {
+const states = (set) => ({
+	isProcessLogin: false,
+	isLoggedIn: false,
+	auth: null,
+
+	authLogin: async (values) => {
+		set({ isProcessLogin: true });
+		setPageLoading(true);
+
+		const loader = toast.loading('Logging in...');
+		const request = { login: values.username, password: values.password, db: process.env.REACT_APP_API_DB };
+		const response = await SERVICE_AUTH.authLogin(request);
+
+		if (response.success) {
 			set({
 				isLoggedIn: true,
 				auth: {
@@ -16,14 +28,24 @@ export const useAuthStore = create(
 					role: USER_ROLE_TYPES.ADMIN
 				}
 			});
-		},
-		authLogout: () => {
-			set({
-				isLoggedIn: false,
-				auth: null
-			});
 		}
-	}))
-);
 
-export const { getState, setState, destroy } = useAuthStore;
+		toast.update(loader, {
+			type: response.success ? 'success' : 'error',
+			render: response.success ? 'Login success' : 'Login failed',
+			isLoading: false,
+			autoClose: 1500
+		});
+
+		set({ isProcessLogin: false });
+		setPageLoading(false);
+	},
+	authLogout: () => {
+		set({
+			isLoggedIn: false,
+			auth: null
+		});
+	}
+});
+
+export const useAuthStore = create(devtools(persist(states, { name: 'auth-store', getStorage: () => localStorage })));

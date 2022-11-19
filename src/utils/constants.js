@@ -1,8 +1,18 @@
 export const APP_NAME = process.env.REACT_APP_APP_NAME;
+export const APP_COLOR_PRIMARY = '#274c77';
 
 export const USER_ROLE_TYPES = {
 	ADMIN: 'admin',
 	OWNER: 'owner'
+};
+
+export const VARIANT_TYPES = {
+	LOADING: 'loading',
+	ERROR: 'error',
+	INFO: 'info',
+	SUCCESS: 'success',
+	WARNING: 'warning',
+	DANGER: 'danger'
 };
 
 export const MENUS = [

@@ -12,6 +12,7 @@ const Login = () => {
 		formState: { errors }
 	} = useForm({ resolver: yupResolver(loginSchema) });
 
+	const { isProcessLogin } = useAuthStore();
 	const { authLogin } = useAuthStore();
 
 	const handleLogin = (values) => authLogin({ username: values.username, password: values.password });
@@ -35,6 +36,7 @@ const Login = () => {
 									className="w-full border-gray-300 rounded-md focus:ring-0 focus:outline-none focus:border-gray-300"
 									id="username"
 									placeholder="Username"
+									disabled={isProcessLogin}
 									type="text"
 								/>
 								{errors.username && <div className="text-sm text-red-500">{errors.username.message}</div>}
@@ -51,6 +53,7 @@ const Login = () => {
 									className="w-full border-gray-300 rounded-md focus:ring-primary focus:outline-none"
 									id="password"
 									placeholder="Password"
+									disabled={isProcessLogin}
 									type="password"
 								/>
 								{errors.password && <div className="text-sm text-red-500">{errors.password.message}</div>}
@@ -59,6 +62,7 @@ const Login = () => {
 					</div>
 					<div className="px-8 py-6">
 						<button
+							disabled={isProcessLogin}
 							className="w-full bg-primary hover:bg-primary-600 transition-all text-white rounded-md py-3 disabled:bg-primary-300"
 							onClick={handleSubmit(handleLogin)}
 						>
