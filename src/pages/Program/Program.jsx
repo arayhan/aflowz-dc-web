@@ -28,20 +28,7 @@ const Program = () => {
 			<div className="bg-gray-100">
 				<ProgramCategoryList selectedCategory={selectedCategory} />
 				<div className="py-6 container">
-					<div className="bg-white p-6 rounded-md space-y-6">
-						<div className="flex items-center justify-between">
-							<div>
-								<div className="text-lg font-extralight">{selectedCategory?.name || 'All Category'}</div>
-								<div className="text-sm text-gray-400">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div className="p-4">
-							<TableProgram selectedCategory={selectedCategory} />
-						</div>
-					</div>
+					<TableProgram selectedCategory={selectedCategory} />
 				</div>
 			</div>
 		</div>

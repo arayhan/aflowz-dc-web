@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import { VARIANT_TYPES } from './utils/constants';
 import App from '@/App';
 
+import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/index.css';
 
