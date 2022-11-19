@@ -18,25 +18,25 @@ export const ButtonProfileHeader = () => {
 	const handleLogout = () => authLogout();
 
 	return (
-		<div className="relative flex items-center space-x-3">
+		<div className="relative flex items-center space-x-3 py-2 md:py-3">
 			<button
 				ref={dropdownRef}
-				className="flex items-center hover:bg-white hover:bg-opacity-5 px-4 py-4 space-x-2"
+				className="flex items-center hover:bg-white hover:bg-opacity-5 px-3 md:px-4 py-2 md:py-3 space-x-2 rounded-md"
 				onClick={() => setIsDropdownOpen(true)}
 			>
 				<img
-					className="w-8 rounded-full"
+					className="w-7 md:w-8 rounded-full"
 					src="https://static.wixstatic.com/media/0e8679_e83474054db34680800cb2c1bd81fb72~mv2.png/v1/fill/w_544,h_577,al_c,lg_1,q_85,enc_auto/avatars%20-%20Amanda.png"
 					alt=""
 				/>
-				<div className="text-white">
+				<div className="text-white text-sm md:text-base">
 					<span>Welcome, </span> <span className="font-extralight">{profile.username}</span>
 				</div>
 			</button>
 
 			{isDropdownOpen && (
 				<div className="absolute right-0 bottom-0 transform translate-y-full w-48 bg-white rounded-sm shadow-lg overflow-hidden">
-					<div className="flex flex-col divide-y">
+					<div className="flex flex-col divide-y text-xs md:text-sm">
 						{isSystem && (
 							<button className={dropdownItemClasses} onClick={() => navigate('/')}>
 								<RiHomeLine />
