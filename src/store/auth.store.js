@@ -1,5 +1,4 @@
 import { SERVICE_AUTH } from '@/services';
-import { USER_ROLE_TYPES } from '@/utils/constants';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { toast } from 'react-toastify';
@@ -10,28 +9,34 @@ const { setPageLoading } = useAppStore.getState();
 const states = (set) => ({
 	isProcessLogin: false,
 	isLoggedIn: false,
-	auth: null,
+	isAdmin: false,
+	isSystem: false,
+	profile: null,
 
 	authLogin: async (values) => {
 		set({ isProcessLogin: true });
 		setPageLoading(true);
 
 		const loader = toast.loading('Logging in...');
-		const params = { login: values.username, password: values.password, db: process.env.REACT_APP_API_DB };
-		const response = await SERVICE_AUTH.authLogin(params);
+		const params = { login: values.username, password: values.password };
+		const { success, payload } = await SERVICE_AUTH.authLogin(params);
 
-		// TODO: Check if response is success or not
-		set({
-			isLoggedIn: true,
-			auth: {
-				name: values.username,
-				role: USER_ROLE_TYPES.ADMIN
-			}
-		});
+		if (success) {
+			set({
+				isLoggedIn: true,
+				isAdmin: payload.is_admin,
+				isSystem: payload.is_system,
+				maxUploadSize: payload.max_file_upload_size,
+				profile: {
+					name: payload.name,
+					username: payload.username
+				}
+			});
+		}
 
 		toast.update(loader, {
-			type: response.success ? 'success' : 'error',
-			render: response.success ? 'Login success' : 'Login failed',
+			type: success ? 'success' : 'error',
+			render: success ? 'Login success' : payload?.odoo_error || 'Login failed',
 			isLoading: false,
 			autoClose: 1500
 		});

@@ -4,7 +4,7 @@ import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useAuthStore } from '@/store';
 
 export const ButtonProfileHeader = () => {
-	const { authLogout } = useAuthStore();
+	const { profile, authLogout } = useAuthStore();
 
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -25,7 +25,7 @@ export const ButtonProfileHeader = () => {
 					alt=""
 				/>
 				<div className="text-white">
-					<span>Welcome, </span> <span className="font-extralight">Dewi Coryati</span>
+					<span>Welcome, </span> <span className="font-extralight">{profile.username}</span>
 				</div>
 			</button>
 
