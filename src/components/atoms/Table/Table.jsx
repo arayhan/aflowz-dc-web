@@ -1,4 +1,5 @@
 import React from 'react';
+import { ImFileEmpty } from 'react-icons/im';
 import Skeleton from 'react-loading-skeleton';
 import { useTable } from 'react-table';
 
@@ -7,8 +8,6 @@ export const Table = ({ loading, columns, data }) => {
 		columns,
 		data
 	});
-
-	console.log({ columns });
 
 	return (
 		<table className="w-full" {...getTableProps()}>
@@ -40,7 +39,18 @@ export const Table = ({ loading, columns, data }) => {
 							))}
 						</tr>
 					))}
+				{!loading && rows.length === 0 && (
+					<tr>
+						<td colSpan={columns.length}>
+							<div className="w-full flex flex-col items-center p-10 rounded-md text-gray-300">
+								<img className="w-40 opacity-70" src={require('@/images/icons/state-empty.jpg')} alt="" />
+								<div>There is no data yet</div>
+							</div>
+						</td>
+					</tr>
+				)}
 				{!loading &&
+					rows.length > 0 &&
 					rows.map((row, i) => {
 						prepareRow(row);
 						return (

@@ -84,12 +84,6 @@ export const TableProgram = ({ selectedCategory }) => {
 					</div>
 				</div>
 			</div>
-			{programList?.total === 0 && (
-				<div className="flex flex-col items-center space-y-3 bg-gray-100 p-10 rounded-md text-gray-500">
-					<ImFileEmpty size={40} />
-					<div>No Data Found</div>
-				</div>
-			)}
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
 			</div>
