@@ -14,8 +14,8 @@ export const BannerFeature = ({ title, description, loading }) => {
 
 				{!loading && (
 					<div className="space-y-6 text-white">
-						<div className="font-extralight text-4xl md:text-5xl">{title}</div>
-						<div className="text-gray-400">{description}</div>
+						{title && <div className="font-extralight text-4xl md:text-5xl">{title}</div>}
+						{description && <div className="text-gray-400">{description}</div>}
 					</div>
 				)}
 			</div>

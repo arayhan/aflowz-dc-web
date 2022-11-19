@@ -8,7 +8,7 @@ export const ProgramCategoryList = ({ selectedCategory, onSelectCategory }) => {
 	return (
 		<div className="bg-white rounded-md">
 			<div>
-				<div className="container space-y-3 text-left xl:text-center pt-8 pb-4">
+				<div className="container space-y-3 text-left xl:text-center pt-6 pb-4">
 					<div className="text-xl md:text-2xl font-extralight">Select Category</div>
 				</div>
 				{(fetchingProgramCategoryList || programCategoryList === null) && (
