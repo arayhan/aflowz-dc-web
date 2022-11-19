@@ -8,6 +8,7 @@ import Home from './pages/Home/Home';
 import Program from './pages/Program/Program';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import ProgramDetail from './pages/Program/ProgramDetail';
+import Mitra from './pages/Mitra/Mitra';
 
 export const AppRoutes = () => {
 	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
@@ -31,7 +32,7 @@ export const AppRoutes = () => {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/mitra" element={<Program />} />
+					<Route path="/mitra" element={<Mitra />} />
 					<Route path="/sekolah" element={<Program />} />
 					<Route path="/kampus" element={<Program />} />
 					<Route path="/desa" element={<Program />} />
