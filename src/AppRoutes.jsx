@@ -35,6 +35,7 @@ export const AppRoutes = () => {
 					<Route path="/kampus" element={<Program />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
+					<Route path="/program/:category" element={<Program />} />
 					<Route path="/program" element={<Program />} />
 				</Route>
 				<Route path="/dashboard" element={<DashboardLayout />}>

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
-export const TableProgram = () => {
+export const TableProgram = ({ selectedCategory }) => {
 	const { fetchingProgramList, programList } = useProgramStore();
 	const { getProgramList } = useProgramStore();
 
@@ -58,12 +58,12 @@ export const TableProgram = () => {
 
 	useEffect(() => {
 		const params = {
-			program_category: 'kemendikbud',
+			program_category: selectedCategory.name_alias,
 			limit: 10,
 			offset: 0
 		};
 		getProgramList(params);
-	}, []);
+	}, [selectedCategory]);
 
 	useEffect(() => {
 		if (programList) setData(programList.items);
@@ -71,14 +71,13 @@ export const TableProgram = () => {
 
 	return (
 		<div>
-			{fetchingProgramList && <div>Loading...</div>}
-			{!fetchingProgramList && programList?.total === 0 && (
+			{programList?.total === 0 && (
 				<div className="flex flex-col items-center space-y-3 bg-gray-100 p-10 rounded-md text-gray-500">
 					<ImFileEmpty size={40} />
 					<div>No Data Found</div>
 				</div>
 			)}
-			{!fetchingProgramList && programList?.total > 0 && <Table columns={columns} data={data} />}
+			{programList?.total > 0 && <Table columns={columns} data={data} />}
 		</div>
 	);
 };

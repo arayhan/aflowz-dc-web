@@ -10,3 +10,12 @@ export const getProgramList = async (params) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getProgramCategoryList = async () => {
+	try {
+		const response = await http.get('/program/category');
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
