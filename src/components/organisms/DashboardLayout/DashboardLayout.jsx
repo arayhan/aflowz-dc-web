@@ -1,12 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { DashboardHeader } from './DashboardHeader/DashboardHeader';
+import { DashboardSideNav } from './DashboardSideNav/DashboardSideNav';
 
 export const DashboardLayout = () => {
 	return (
-		<div>
+		<div className="max-h-screen overflow-hidden">
 			<DashboardHeader />
-			<Outlet />
+			<div className="flex">
+				<DashboardSideNav />
+				<Outlet />
+			</div>
 		</div>
 	);
 };

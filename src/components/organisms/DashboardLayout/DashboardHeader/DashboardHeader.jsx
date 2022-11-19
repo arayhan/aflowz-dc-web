@@ -6,7 +6,7 @@ export const DashboardHeader = () => {
 	return (
 		<div>
 			<div className="bg-primary-600">
-				<div className="container">
+				<div className="px-4">
 					<div className="flex items-center justify-between">
 						<Link to={'/'} className="text-white font-extralight text-xl">
 							DC Web
