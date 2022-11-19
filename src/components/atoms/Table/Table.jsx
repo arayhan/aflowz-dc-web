@@ -7,8 +7,6 @@ export const Table = ({ columns, data }) => {
 		data
 	});
 
-	console.log({ rows });
-
 	return (
 		<table className="w-full" {...getTableProps()}>
 			<thead className="bg-gray-100">

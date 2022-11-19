@@ -6,7 +6,7 @@ import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
 export const TableProgram = ({ category }) => {
-	const { fetchingProgramList, programList } = useProgramStore();
+	const { programList } = useProgramStore();
 	const { getProgramList } = useProgramStore();
 
 	const [data, setData] = useState([]);
@@ -61,6 +61,9 @@ export const TableProgram = ({ category }) => {
 			limit: 10,
 			offset: 0
 		};
+
+		if (category) Object.assign(params, { program_category_id: category.id });
+
 		getProgramList(params);
 	}, [category]);
 

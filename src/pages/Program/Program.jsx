@@ -1,6 +1,5 @@
 import { BannerFeature, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
-import { slugify } from '@/utils/helpers';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -17,11 +16,11 @@ const Program = () => {
 	}, []);
 
 	useEffect(() => {
-		if (params?.categoryID) {
-			const findCategory = programCategoryList?.items.find((category) => category.id === params.categoryID);
+		if (params?.categoryID && programCategoryList) {
+			const findCategory = programCategoryList?.items.find((category) => category.id === Number(params.categoryID));
 			setSelectedCategory(findCategory);
 		}
-	}, [params]);
+	}, [params, programCategoryList]);
 
 	return (
 		<div>
@@ -43,7 +42,7 @@ const Program = () => {
 										<button
 											key={category.id}
 											className={`flex w-32 flex-col items-center text-center border p-4 rounded-md hover:bg-gray-100 cursor-pointer space-y-2 ${
-												params?.categoryID == category.id
+												params?.categoryID && Number(params?.categoryID) === category.id
 													? 'bg-primary-100 bg-opacity-20 border-primary-500 border-opacity-20'
 													: ''
 											}`}
@@ -59,22 +58,20 @@ const Program = () => {
 					)}
 				</div>
 
-				{selectedCategory && (
-					<div className="py-6">
-						<div className="container bg-white p-6 rounded-md space-y-6">
-							<div>
-								<div className="text-lg font-extralight">{selectedCategory.name}</div>
-								<div className="text-sm text-gray-400">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-								</div>
-							</div>
-							<hr />
-							<div className="p-4">
-								<TableProgram category={selectedCategory} />
+				<div className="py-6 container">
+					<div className="bg-white p-6 rounded-md space-y-6">
+						<div>
+							<div className="text-lg font-extralight">{selectedCategory?.name || 'All Category'}</div>
+							<div className="text-sm text-gray-400">
+								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
 							</div>
 						</div>
+						<hr />
+						<div className="p-4">
+							<TableProgram category={selectedCategory} />
+						</div>
 					</div>
-				)}
+				</div>
 			</div>
 		</div>
 	);
