@@ -32,6 +32,7 @@ export const AppRoutes = () => {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route path="/mitra/:mitraID" element={<Mitra />} />
 					<Route path="/mitra" element={<Mitra />} />
 					<Route path="/sekolah" element={<Program />} />
 					<Route path="/kampus" element={<Program />} />
