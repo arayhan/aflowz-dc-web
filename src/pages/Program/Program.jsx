@@ -2,7 +2,7 @@ import { BannerFeature, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProgramCategoryMenu } from './sections/ProgramCategoryMenu';
+import { ProgramCategoryList } from './sections/ProgramCategoryList';
 
 const Program = () => {
 	const params = useParams();
@@ -26,7 +26,7 @@ const Program = () => {
 		<div>
 			<BannerFeature title="Program" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<ProgramCategoryMenu selectedCategory={selectedCategory} />
+				<ProgramCategoryList selectedCategory={selectedCategory} />
 				<div className="py-6 container">
 					<div className="bg-white p-6 rounded-md space-y-6">
 						<div className="flex items-center justify-between">
