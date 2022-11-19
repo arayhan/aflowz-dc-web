@@ -1,7 +1,6 @@
 import { BannerFeature, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { ProgramCategoryList } from './sections/ProgramCategoryList';
 
 const Program = () => {
