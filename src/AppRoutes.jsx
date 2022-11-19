@@ -7,6 +7,7 @@ import Login from './pages/Auth/Login/Login';
 import Home from './pages/Home/Home';
 import Program from './pages/Program/Program';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import ProgramDetail from './pages/Program/ProgramDetail';
 
 export const AppRoutes = () => {
 	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
@@ -35,7 +36,7 @@ export const AppRoutes = () => {
 					<Route path="/kampus" element={<Program />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
-					<Route path="/program/:categorySlug" element={<Program />} />
+					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
 				</Route>
 				<Route path="/dashboard" element={<DashboardLayout />}>

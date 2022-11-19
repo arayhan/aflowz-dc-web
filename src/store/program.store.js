@@ -3,11 +3,21 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set) => ({
-	fetchingProgramList: false,
 	fetchingProgramCategoryList: false,
-	programList: null,
+	fetchingProgramList: false,
+	fetchingProgramDetail: false,
 	programCategoryList: null,
+	programList: null,
+	programDetail: null,
 
+	getProgramCategoryList: async () => {
+		set({ fetchingProgramCategoryList: true });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+
+		set({ programCategoryList: success ? payload : null });
+		set({ fetchingProgramCategoryList: false });
+	},
 	getProgramList: async (params) => {
 		set({ fetchingProgramList: true });
 
@@ -19,13 +29,13 @@ const states = (set) => ({
 		set({ programList: success ? payload : null });
 		set({ fetchingProgramList: false });
 	},
-	getProgramCategoryList: async () => {
-		set({ fetchingProgramCategoryList: true });
+	getProgramDetail: async (programID) => {
+		set({ fetchingProgramDetail: true });
 
-		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+		const { success, payload } = await SERVICE_PROGRAM.getProgramDetail(programID);
 
-		set({ programCategoryList: success ? payload : null });
-		set({ fetchingProgramCategoryList: false });
+		set({ programDetail: success ? payload : null });
+		set({ fetchingProgramDetail: false });
 	}
 });
 
