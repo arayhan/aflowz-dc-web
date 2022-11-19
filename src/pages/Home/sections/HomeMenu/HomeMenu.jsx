@@ -16,7 +16,7 @@ export const HomeMenu = () => {
 				</div>
 				<hr />
 				<div className="flex justify-center">
-					<div className="max-w-screen-xl w-full grid grid-cols-6 gap-6">
+					<div className="max-w-screen-xl w-full grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6">
 						{MENUS.map((menu, index) => (
 							<Link
 								key={menu.path}
