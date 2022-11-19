@@ -2,7 +2,7 @@ import { useProgramStore } from '@/store';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-export const ProgramCategoryList = ({ selectedCategory, onSelectCategory }) => {
+export const MitraList = ({ selectedCategory, onSelectCategory }) => {
 	const { fetchingProgramCategoryList, programCategoryList, getProgramCategoryList } = useProgramStore();
 
 	useEffect(() => {
@@ -13,7 +13,7 @@ export const ProgramCategoryList = ({ selectedCategory, onSelectCategory }) => {
 		<div className="bg-white rounded-md">
 			<div>
 				<div className="container space-y-3 text-left xl:text-center pt-6 pb-4">
-					<div className="text-xl md:text-2xl font-extralight">Select Category</div>
+					<div className="text-xl md:text-2xl font-extralight">Select Mitra</div>
 				</div>
 				{(fetchingProgramCategoryList || programCategoryList === null) && (
 					<div className="container max-w-screen-md pb-6">
