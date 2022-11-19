@@ -38,9 +38,11 @@ const Program = () => {
 							</div>
 						</div>
 						<hr />
-						<div className="p-4">
-							<TableProgram category={selectedCategory} />
-						</div>
+						{selectedCategory && (
+							<div className="p-4">
+								<TableProgram selectedCategory={selectedCategory} />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

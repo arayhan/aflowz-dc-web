@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
-export const TableProgram = ({ category }) => {
+export const TableProgram = ({ selectedCategory }) => {
 	const { programList } = useProgramStore();
 	const { getProgramList } = useProgramStore();
 
@@ -42,10 +42,12 @@ export const TableProgram = ({ category }) => {
 				Header: 'Detail',
 				maxWidth: 80,
 				Cell: (row) => {
-					const slug = slugify(row.row.original.name);
 					return (
 						<div>
-							<Link to={'/program/' + slug} className="bg-primary text-white px-3 py-1 text-sm rounded-md">
+							<Link
+								to={`/program/${selectedCategory.id}/${row.row.original.id}`}
+								className="bg-primary text-white px-3 py-1 text-sm rounded-md"
+							>
 								Detail
 							</Link>
 						</div>
@@ -62,10 +64,10 @@ export const TableProgram = ({ category }) => {
 			offset: 0
 		};
 
-		if (category) Object.assign(params, { program_category_id: category.id });
+		if (selectedCategory) Object.assign(params, { program_category_id: selectedCategory.id });
 
 		getProgramList(params);
-	}, [category]);
+	}, [selectedCategory]);
 
 	useEffect(() => {
 		if (programList) setData(programList.items);
