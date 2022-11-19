@@ -1,7 +1,6 @@
 import { Table } from '@/components/atoms';
 import { useProgramStore } from '@/store';
-import { slugify } from '@/utils/helpers';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +10,7 @@ export const TableProgram = ({ selectedCategory }) => {
 
 	const [data, setData] = useState([]);
 
-	const columns = React.useMemo(
+	const columns = useMemo(
 		() => [
 			{
 				Header: 'No',
@@ -45,7 +44,7 @@ export const TableProgram = ({ selectedCategory }) => {
 					return (
 						<div>
 							<Link
-								to={`/program/${selectedCategory.id}/${row.row.original.id}`}
+								to={`/program/${row.row.original.program_category.id}/${row.row.original.id}`}
 								className="bg-primary text-white px-3 py-1 text-sm rounded-md"
 							>
 								Detail
