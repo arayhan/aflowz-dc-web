@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import { IoMdClose, IoMdWarning, IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { BiLoaderAlt } from 'react-icons/bi';
