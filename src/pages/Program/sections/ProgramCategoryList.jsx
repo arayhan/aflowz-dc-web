@@ -1,4 +1,5 @@
 import { useProgramStore } from '@/store';
+import { slugify } from '@/utils/helpers';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +35,7 @@ export const ProgramCategoryList = ({ selectedCategory }) => {
 											? 'bg-primary-500  border-primary-500 hover:bg-primary-500 text-white'
 											: 'text-gray-400 hover:bg-gray-100'
 									}`}
-									onClick={() => navigate('/program/' + category.id)}
+									onClick={() => navigate('/program/' + category.slug)}
 								>
 									<img className="w-10" src={require('@/images/icons/box.svg').default} alt="" />
 									<div className="text-xs">{category.name}</div>

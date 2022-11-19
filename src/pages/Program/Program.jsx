@@ -16,8 +16,8 @@ const Program = () => {
 	}, []);
 
 	useEffect(() => {
-		if (params?.categoryID && programCategoryList) {
-			const findCategory = programCategoryList?.items.find((category) => category.id === Number(params.categoryID));
+		if (params?.categorySlug && programCategoryList) {
+			const findCategory = programCategoryList?.items.find((category) => category.slug === params.categorySlug);
 			setSelectedCategory(findCategory);
 		}
 	}, [params, programCategoryList]);
