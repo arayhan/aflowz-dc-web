@@ -1,11 +1,12 @@
 import React from 'react';
 import { useAuthStore } from './store';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { SiteLayout } from './components/organisms';
+import { DashboardLayout, SiteLayout } from './components/organisms';
 
 import Login from './pages/Auth/Login/Login';
 import Home from './pages/Home/Home';
 import Program from './pages/Program/Program';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 export const AppRoutes = () => {
 	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
@@ -27,7 +28,7 @@ export const AppRoutes = () => {
 			</Route>
 
 			<Route element={<ProtectedRoute />}>
-				<Route element={<SiteLayout isAdmin isRoute />}>
+				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
 					<Route path="/mitra" element={<Program />} />
 					<Route path="/sekolah" element={<Program />} />
@@ -35,6 +36,9 @@ export const AppRoutes = () => {
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program" element={<Program />} />
+				</Route>
+				<Route element={<DashboardLayout />}>
+					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 			</Route>
 		</Routes>
