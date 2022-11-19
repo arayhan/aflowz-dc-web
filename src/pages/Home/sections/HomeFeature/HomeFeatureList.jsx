@@ -9,14 +9,12 @@ export const HomeFeatureList = () => {
 					<Link
 						key={menu.path}
 						to={menu.path}
-						className="p-4 bg-white bg-opacity-10 shadow-md rounded-md hover:bg-opacity-20 cursor-pointer text-white text-opacity-50 transition-all"
+						className="bg-white py-2 bg-opacity-10 shadow-md rounded-md hover:bg-opacity-20 cursor-pointer text-white text-opacity-50 transition-all"
 					>
-						<div>
+						<div className="px-5">
 							<img className="w-full" src={menu.icon} alt="" />
 						</div>
-						<div className="space-y-2 text-center">
-							<div className="text-sm lg:text-lg font-extralight">{menu.title}</div>
-						</div>
+						<div className="text-center text-sm lg:text-lg font-extralight">{menu.title}</div>
 					</Link>
 				))}
 			</div>
