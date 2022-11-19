@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 import { ProgramCategoryList } from './sections/ProgramCategoryList';
 
 const Program = () => {
-	const params = useParams();
-	const { programCategoryList } = useProgramStore();
 	const { getProgramCategoryList } = useProgramStore();
 
 	const [selectedCategory, setSelectedCategory] = useState(null);
@@ -15,18 +13,14 @@ const Program = () => {
 		getProgramCategoryList();
 	}, []);
 
-	useEffect(() => {
-		if (params?.categorySlug && programCategoryList) {
-			const findCategory = programCategoryList?.items.find((category) => category.slug === params.categorySlug);
-			setSelectedCategory(findCategory);
-		}
-	}, [params, programCategoryList]);
-
 	return (
 		<div>
 			<BannerFeature title="Program" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<ProgramCategoryList selectedCategory={selectedCategory} />
+				<ProgramCategoryList
+					selectedCategory={selectedCategory}
+					onSelectCategory={(category) => setSelectedCategory(category)}
+				/>
 				<div className="py-6 container">
 					<TableProgram selectedCategory={selectedCategory} />
 				</div>

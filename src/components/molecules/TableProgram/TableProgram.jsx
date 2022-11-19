@@ -1,8 +1,6 @@
 import { Table } from '@/components/atoms';
 import { useProgramStore } from '@/store';
-import { slugify } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
-import { ImFileEmpty } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
@@ -46,7 +44,7 @@ export const TableProgram = ({ selectedCategory }) => {
 					return (
 						<div>
 							<Link
-								to={`/program/${slugify(row.row.original.program_category.name)}/${row.row.original.slug}`}
+								to={`/program/${row.row.original.id}`}
 								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-sm px-4 py-2 rounded-md"
 							>
 								See Detail
@@ -60,13 +58,7 @@ export const TableProgram = ({ selectedCategory }) => {
 	);
 
 	useEffect(() => {
-		const params = {
-			limit: 10,
-			offset: 0
-		};
-
-		if (selectedCategory) Object.assign(params, { program_category_id: selectedCategory.id });
-
+		const params = selectedCategory ? { program_category_id: selectedCategory.id } : null;
 		getProgramList(params);
 	}, [selectedCategory]);
 
