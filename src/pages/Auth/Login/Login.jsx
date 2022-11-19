@@ -20,7 +20,7 @@ const Login = () => {
 	return (
 		<div className="bg-primary-100">
 			<div className="container flex justify-center items-center min-h-screen">
-				<div className="w-full max-w-md bg-white rounded-md shadow-md">
+				<form className="w-full max-w-md bg-white rounded-md shadow-md" onSubmit={handleLogin}>
 					<div className="px-8 py-8 border-b text-center space-y-3">
 						<div className="text-3xl text-primary font-extralight">{APP_NAME}</div>
 						<div className="text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
@@ -69,7 +69,7 @@ const Login = () => {
 							Masuk
 						</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
