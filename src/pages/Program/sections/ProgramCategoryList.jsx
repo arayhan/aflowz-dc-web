@@ -8,21 +8,17 @@ export const ProgramCategoryList = ({ selectedCategory, onSelectCategory }) => {
 	return (
 		<div className="bg-white rounded-md">
 			<div>
-				<div className="container space-y-3 text-center p-8">
-					<div className="text-2xl font-extralight">Select Category</div>
-					<div className="text-sm text-gray-400">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus obcaecati repudiandae, quaerat
-						soluta fuga.
-					</div>
+				<div className="container space-y-3 text-left xl:text-center pt-8 pb-4">
+					<div className="text-xl md:text-2xl font-extralight">Select Category</div>
 				</div>
 				{(fetchingProgramCategoryList || programCategoryList === null) && (
-					<div className="container max-w-screen-md pb-8">
+					<div className="container max-w-screen-md pb-6">
 						<Skeleton inline containerClassName="grid grid-cols-3 gap-3" height={50} count={3} />
 					</div>
 				)}
 				{!fetchingProgramCategoryList && programCategoryList?.total > 0 && (
-					<div className="px-4 md:px-8">
-						<div className="overflow-x-scroll pb-4 md:pb-8 flex xl:justify-center gap-3">
+					<div className="container">
+						<div className="overflow-x-scroll pb-4 md:pb-6 flex xl:justify-center gap-3">
 							{programCategoryList.items.map((category) => (
 								<button
 									key={category.id}
