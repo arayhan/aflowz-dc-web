@@ -1,16 +1,9 @@
 import { BannerFeature, TableProgram } from '@/components/molecules';
-import { useProgramStore } from '@/store';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProgramCategoryList } from './sections/ProgramCategoryList';
 
 const Program = () => {
-	const { getProgramCategoryList } = useProgramStore();
-
 	const [selectedCategory, setSelectedCategory] = useState(null);
-
-	useEffect(() => {
-		getProgramCategoryList();
-	}, []);
 
 	return (
 		<div>

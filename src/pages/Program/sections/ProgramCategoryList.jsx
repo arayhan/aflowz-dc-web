@@ -1,9 +1,13 @@
 import { useProgramStore } from '@/store';
-import React from 'react';
+import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 export const ProgramCategoryList = ({ selectedCategory, onSelectCategory }) => {
-	const { fetchingProgramCategoryList, programCategoryList } = useProgramStore();
+	const { fetchingProgramCategoryList, programCategoryList, getProgramCategoryList } = useProgramStore();
+
+	useEffect(() => {
+		getProgramCategoryList();
+	}, []);
 
 	return (
 		<div className="bg-white rounded-md">
