@@ -1,0 +1,54 @@
+{
+	"description": "",
+	"name": "Success",
+	"success": true,
+	"data": {
+		"uid": 2,
+		"is_system": true,
+		"is_admin": true,
+		"user_context": {
+			"lang": "en_US",
+			"tz": "Asia/Jakarta",
+			"uid": 2
+		},
+		"db": "dcstg",
+		"server_version": "14.0-20221025",
+		"server_version_info": [14, 0, 0, "final", 0, ""],
+		"name": "Administrator",
+		"username": "admindc",
+		"partner_display_name": "Administrator",
+		"company_id": 1,
+		"partner_id": 3,
+		"web.base.url": "http://dcstg.timtangguhdc.id",
+		"active_ids_limit": 20000,
+		"max_file_upload_size": 134217728,
+		"user_companies": {
+			"current_company": [1, "My Company"],
+			"allowed_companies": [[1, "My Company"]]
+		},
+		"currencies": {
+			"1": {
+				"symbol": "€",
+				"position": "after",
+				"digits": [69, 2]
+			},
+			"2": {
+				"symbol": "$",
+				"position": "before",
+				"digits": [69, 2]
+			}
+		},
+		"show_effect": "True",
+		"display_switch_company_menu": false,
+		"cache_hashes": {
+			"load_menus": "5f204f4dc5214b5ea61e5128df73156015ba1e30252ad08ef44c5ad77c486934",
+			"qweb": "706807103c997e518b8733acbc9c9b08ff9e0c3c0a37ff140235a57c5323f5f1",
+			"translations": "10674cd2c3a573660773f772735969ac278efcb2"
+		},
+		"user_id": [2],
+		"web_tours": [],
+		"notification_type": "email",
+		"odoobot_initialized": true
+	},
+	"code": 200
+}
