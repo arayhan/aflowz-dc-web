@@ -3,11 +3,11 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PieChartPriaWanita = ({ totalPria, totalWanita }) => {
+export const PieChartPenerimaProgramByGender = ({ totalPria, totalWanita }) => {
 	return (
 		<div>
 			<div className="p-4 space-y-2">
-				<div className="font-light text-xl">Pria vs Wanita</div>
+				<div className="font-light text-xl">Penerima Program by Gender</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />

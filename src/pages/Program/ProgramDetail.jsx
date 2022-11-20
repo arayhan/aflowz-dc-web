@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import { PieChartPenerimaProgram } from './components/PieChartPenerimaProgram';
-import { PieChartPriaWanita } from './components/PieChartPriaWanita';
+import { PieChartPenerimaProgramByGender } from './components/PieChartPenerimaProgramByGender';
 
 const ProgramDetail = () => {
 	const params = useParams();
@@ -65,7 +65,7 @@ const ProgramDetail = () => {
 									</div>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPriaWanita
+									<PieChartPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
 										totalPria={programDetail?.total_pria}
 										totalWanita={programDetail?.total_wanita}
