@@ -27,10 +27,7 @@ const ProgramDetail = () => {
 						{!fetchingProgramDetail && programDetail && (
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 md:col-span-5 xl:col-span-3 bg-white rounded-md">
-									<PieChartPriaWanita
-										totalPria={programDetail?.total_pria || 19}
-										totalWanita={programDetail?.total_wanita || 32}
-									/>
+									<PieChartPriaWanita totalPria={programDetail?.total_pria} totalWanita={programDetail?.total_wanita} />
 								</div>
 								<div className="col-span-12 md:col-span-7 xl:col-span-9 bg-white rounded-md">
 									<div className="p-4 space-y-2">
