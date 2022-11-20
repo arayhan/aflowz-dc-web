@@ -1,5 +1,4 @@
 import { SERVICE_PROGRAM } from '@/services';
-import { MOCK_SERVICE_PROGRAM } from '@/services/mock';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -30,11 +29,10 @@ const states = (set) => ({
 		set({ programList: success ? payload : null });
 		set({ fetchingProgramList: false });
 	},
-	getProgramDetail: (programID) => {
+	getProgramDetail: async (programID) => {
 		set({ fetchingProgramDetail: true });
 
-		const { success, payload } = MOCK_SERVICE_PROGRAM.getProgramDetail(programID);
-		// const { success, payload } = await SERVICE_PROGRAM.getProgramDetail(programID);
+		const { success, payload } = await SERVICE_PROGRAM.getProgramDetail(programID);
 
 		set({ programDetail: success ? payload : null });
 		set({ fetchingProgramDetail: false });
