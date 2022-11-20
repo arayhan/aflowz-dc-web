@@ -50,10 +50,10 @@ const ProgramDetail = () => {
 												{programDetail?.total_penerima_program || 0}
 											</div>
 
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Vilage PIC</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{programDetail?.village_pic}{' '}
-												{programDetail?.village_pic_mobile && `(${programDetail?.village_pic_mobile})`}
+												{programDetail?.program_pic}{' '}
+												{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
 											</div>
 
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
