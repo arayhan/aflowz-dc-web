@@ -1,15 +1,12 @@
 import { BannerFeature } from '@/components/molecules';
-import { MitraList } from '@/components/sections';
-import { useState } from 'react';
+import { TableMitra } from '@/components/molecules/TableMitra/TableMitra';
 
 const Mitra = () => {
-	const [selectedCategory, setSelectedCategory] = useState(null);
-
 	return (
-		<div>
+		<div className="bg-gray-100">
 			<BannerFeature title="Mitra" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-			<div className="bg-gray-100">
-				<MitraList selectedCategory={selectedCategory} onSelectCategory={(category) => setSelectedCategory(category)} />
+			<div className="container py-16">
+				<TableMitra />
 			</div>
 		</div>
 	);
