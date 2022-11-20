@@ -19,8 +19,8 @@ export const AppRoutes = () => {
 	};
 
 	const AuthenticationRoute = () => {
-		if (isLoggedIn && isAdmin) return <Navigate to="/dashboard" replace />;
 		if (isLoggedIn && isSystem) return <Navigate to="/" replace />;
+		if (isLoggedIn && isAdmin) return <Navigate to="/dashboard" replace />;
 		return <Outlet />;
 	};
 
