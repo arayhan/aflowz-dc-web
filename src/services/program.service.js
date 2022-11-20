@@ -22,7 +22,7 @@ export const getProgramList = async (params) => {
 
 export const getProgramDetail = async (programID) => {
 	try {
-		const response = await http.get('/program/' + programID);
+		const response = await http.get('/page-detail/program/' + programID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
