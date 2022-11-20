@@ -27,27 +27,6 @@ const ProgramDetail = () => {
 						{fetchingProgramDetail && <ProgramDetailSkeleton />}
 						{!fetchingProgramDetail && programDetail && (
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPriaWanita
-										total={programDetail?.total_penerima_program || 0}
-										totalPria={programDetail?.total_pria}
-										totalWanita={programDetail?.total_wanita}
-									/>
-								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_village}
-										isPerVillage
-									/>
-								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_city}
-										isPerCity
-									/>
-								</div>
 								<div className="col-span-12 bg-white rounded-md">
 									<div className="p-4 space-y-2">
 										<div className="font-light text-xl">Details</div>
@@ -76,6 +55,27 @@ const ProgramDetail = () => {
 											</div>
 										</div>
 									</div>
+								</div>
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPriaWanita
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
+									/>
+								</div>
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPenerimaProgram
+										totalPenerima={programDetail?.total_penerima_program || 0}
+										penerimaPerArea={programDetail?.total_penerima_program_per_village}
+										isPerVillage
+									/>
+								</div>
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPenerimaProgram
+										totalPenerima={programDetail?.total_penerima_program || 0}
+										penerimaPerArea={programDetail?.total_penerima_program_per_city}
+										isPerCity
+									/>
 								</div>
 							</div>
 						)}
