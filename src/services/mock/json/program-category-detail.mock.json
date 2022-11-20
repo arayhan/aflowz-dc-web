@@ -1,0 +1,70 @@
+{
+	"data": {
+		"mitra_id": 1,
+		"mitra_name": "Program Kementrian Pendidikan & Kebudayaan",
+		"mitra_pic": "Anto",
+		"mitra_pic_mobile": "9283198313123",
+		"pic_staff": {
+			"id": 9,
+			"name": "Cantik Mutiara",
+			"mobile": "0877341431476"
+		},
+		"total_penerima_program_mitra": 7,
+		"penerima_program": [
+			{
+				"program_id": 1,
+				"program_name": "PIP",
+				"total_penerima_program": 2
+			},
+			{
+				"program_id": 3,
+				"program_name": "KIP",
+				"total_penerima_program": 0
+			},
+			{
+				"program_id": 4,
+				"program_name": "Beasiswa unggulan",
+				"total_penerima_program": 0
+			},
+			{
+				"program_id": 5,
+				"program_name": "Sosialisasi UU",
+				"total_penerima_program": 1
+			},
+			{
+				"program_id": 6,
+				"program_name": "Bimtek guru",
+				"total_penerima_program": 0
+			},
+			{
+				"program_id": 7,
+				"program_name": "Bantuan alat TIK",
+				"total_penerima_program": 1
+			},
+			{
+				"program_id": 8,
+				"program_name": "Rehabilitasi ruang kelas",
+				"total_penerima_program": 2
+			},
+			{
+				"program_id": 20,
+				"program_name": "PIP",
+				"total_penerima_program": 1
+			}
+		],
+		"total_program_by_periode": [
+			{
+				"periode": "2021",
+				"total_program": 1
+			},
+			{
+				"periode": "2022",
+				"total_program": 7
+			}
+		]
+	},
+	"description": "",
+	"success": true,
+	"code": 200,
+	"name": "Success"
+}

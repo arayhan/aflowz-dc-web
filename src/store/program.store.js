@@ -4,9 +4,11 @@ import { devtools } from 'zustand/middleware';
 
 const states = (set) => ({
 	fetchingProgramCategoryList: false,
+	fetchingProgramCategoryDetail: false,
 	fetchingProgramList: false,
 	fetchingProgramDetail: false,
 	programCategoryList: null,
+	programCategoryDetail: null,
 	programList: null,
 	programDetail: null,
 
@@ -36,6 +38,14 @@ const states = (set) => ({
 
 		set({ programDetail: success ? payload : null });
 		set({ fetchingProgramDetail: false });
+	},
+	getProgramCategoryDetail: async (mitraID) => {
+		set({ fetchingProgramCategoryDetail: true });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryDetail(mitraID);
+
+		set({ programCategoryDetail: success ? payload : null });
+		set({ fetchingProgramCategoryDetail: false });
 	}
 });
 

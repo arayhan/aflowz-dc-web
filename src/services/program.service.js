@@ -28,3 +28,12 @@ export const getProgramDetail = async (programID) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getProgramCategoryDetail = async (mitraID) => {
+	try {
+		const response = await http.get('/page-detail/mitra/' + mitraID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
