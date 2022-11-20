@@ -3,6 +3,7 @@ import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
+import { PieChartPenerimaProgram } from './components/PieChartPenerimaProgram';
 import { PieChartPriaWanita } from './components/PieChartPriaWanita';
 
 const ProgramDetail = () => {
@@ -26,10 +27,28 @@ const ProgramDetail = () => {
 						{fetchingProgramDetail && <ProgramDetailSkeleton />}
 						{!fetchingProgramDetail && programDetail && (
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 md:col-span-5 xl:col-span-3 bg-white rounded-md">
-									<PieChartPriaWanita totalPria={programDetail?.total_pria} totalWanita={programDetail?.total_wanita} />
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPriaWanita
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
+									/>
 								</div>
-								<div className="col-span-12 md:col-span-7 xl:col-span-9 bg-white rounded-md">
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPenerimaProgram
+										totalPenerima={programDetail?.total_penerima_program || 0}
+										penerimaPerArea={programDetail?.total_penerima_program_per_village}
+										isPerVillage
+									/>
+								</div>
+								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
+									<PieChartPenerimaProgram
+										totalPenerima={programDetail?.total_penerima_program || 0}
+										penerimaPerArea={programDetail?.total_penerima_program_per_city}
+										isPerCity
+									/>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
 									<div className="p-4 space-y-2">
 										<div className="font-light text-xl">Details</div>
 										<div className="text-sm text-gray-400">
@@ -39,12 +58,21 @@ const ProgramDetail = () => {
 									<hr />
 									<div className="p-5">
 										<div className="grid grid-cols-12 gap-y-1 text-sm">
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-200 px-3 py-2">Nama Program</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-200 px-3 py-2">PIC</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Total Penerima</div>
+											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+												{programDetail?.total_penerima_program || 0}
+											</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Vilage PIC</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{programDetail?.village_pic}{' '}
-												{programDetail?.village_pic_mobile && `${programDetail?.village_pic_mobile}`}
+												{programDetail?.village_pic_mobile && `(${programDetail?.village_pic_mobile})`}
+											</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
+											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+												{programDetail?.pic_staff.name}{' '}
+												{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
 											</div>
 										</div>
 									</div>

@@ -15,6 +15,12 @@ export const VARIANT_TYPES = {
 	DANGER: 'danger'
 };
 
+export const NEGATIVE_CASE_TYPES = {
+	EMPTY_RESULT: 'EMPTY_RESULT',
+	EMPTY_SEARCH: 'EMPTY_SEARCH',
+	ERROR_CONNECTION: 'ERROR_CONNECTION'
+};
+
 export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
 	// { title: 'Sekolah', icon: require('@/images/icons/box.svg').default, path: '/sekolah' },
