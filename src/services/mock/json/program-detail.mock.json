@@ -1,0 +1,39 @@
+{
+	"description": "",
+	"success": true,
+	"name": "Success",
+	"data": {
+		"program_id": 3,
+		"program_name": "KIP",
+		"village_pic": null,
+		"village_pic_mobile": null,
+		"pic_staff": {
+			"id": null,
+			"name": null,
+			"mobile": null
+		},
+		"total_penerima_program": 6,
+		"total_pria": 6,
+		"total_wanita": 0,
+		"total_penerima_program_per_village": [
+			{
+				"village_id": 1,
+				"village_name": "Pancoran Mas",
+				"total_penerima": 4
+			},
+			{
+				"village_id": 2,
+				"village_name": "Tapos",
+				"total_penerima": 2
+			}
+		],
+		"total_penerima_program_per_city": [
+			{
+				"city_id": 2502,
+				"city_name": "Kota Depok",
+				"total_penerima": 6
+			}
+		]
+	},
+	"code": 200
+}
