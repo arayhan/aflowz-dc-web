@@ -39,15 +39,23 @@ const ProgramDetail = () => {
 										<div className="grid grid-cols-12 gap-y-1 text-sm">
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
+
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
+											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+												{programDetail?.program_periode}
+											</div>
+
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Total Penerima</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{programDetail?.total_penerima_program || 0}
 											</div>
+
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Vilage PIC</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{programDetail?.village_pic}{' '}
 												{programDetail?.village_pic_mobile && `(${programDetail?.village_pic_mobile})`}
 											</div>
+
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{programDetail?.pic_staff.name}{' '}
