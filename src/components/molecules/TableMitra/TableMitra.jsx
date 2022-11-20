@@ -23,12 +23,12 @@ export const TableMitra = ({ selectedCategory }) => {
 			{
 				Header: 'Name',
 				accessor: 'name',
-				minWidth: 175
+				minWidth: 225
 			},
 			{
-				Header: 'Name',
+				Header: 'Alias',
 				accessor: 'name_alias',
-				minWidth: 225
+				minWidth: 120
 			},
 			{
 				Header: 'Detail',
