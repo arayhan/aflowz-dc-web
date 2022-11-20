@@ -12,7 +12,7 @@ export const MitraList = ({ selectedCategory, onSelectCategory }) => {
 	return (
 		<div className="bg-white rounded-md">
 			<div>
-				<div className="container space-y-3 text-left xl:text-center pt-6 pb-4">
+				<div className="container space-y-3 text-left 2xl:text-center pt-6 pb-4">
 					<div className="text-xl md:text-2xl font-extralight">Select Mitra</div>
 				</div>
 				{(fetchingProgramCategoryList || programCategoryList === null) && (
@@ -22,7 +22,7 @@ export const MitraList = ({ selectedCategory, onSelectCategory }) => {
 				)}
 				{!fetchingProgramCategoryList && programCategoryList?.total > 0 && (
 					<div className="container">
-						<div className="overflow-x-scroll pb-4 md:pb-6 flex xl:justify-center gap-3">
+						<div className="overflow-x-scroll pb-4 md:pb-6 flex 2xl:justify-center gap-3">
 							{programCategoryList.items.map((category) => (
 								<button
 									key={category.id}
