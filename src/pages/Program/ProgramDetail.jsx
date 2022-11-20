@@ -2,7 +2,7 @@ import { BannerFeature } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { PieChartPriaWanita } from './components/PieChartPriaWanita';
 
 const ProgramDetail = () => {
