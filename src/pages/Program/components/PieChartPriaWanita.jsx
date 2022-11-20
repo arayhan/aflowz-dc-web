@@ -11,7 +11,7 @@ export const PieChartPriaWanita = ({ totalPria, totalWanita }) => {
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
-			<div className="flex items-center justify-center px-4 md:px-8 py-4">
+			<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
 				<Pie
 					data={{
 						labels: ['Pria', 'Wanita'],
