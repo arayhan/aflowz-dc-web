@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import { PiePenerimaMitra } from './components/PiePenerimaMitra';
-import { PiePenerimaMitraByPeriode } from './components/PiePenerimaMitraByPeriode';
+import { PieProgramByPeriode } from './components/PieProgramByPeriode';
 
 const MitraDetail = () => {
 	const params = useParams();
@@ -67,7 +67,7 @@ const MitraDetail = () => {
 								/>
 							</div>
 							<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
-								<PiePenerimaMitraByPeriode
+								<PieProgramByPeriode
 									total={programCategoryDetail?.total_program_by_periode.length}
 									penerima={programCategoryDetail?.total_program_by_periode}
 								/>

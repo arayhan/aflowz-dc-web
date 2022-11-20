@@ -6,11 +6,11 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PiePenerimaMitraByPeriode = ({ total, penerima }) => {
+export const PieProgramByPeriode = ({ total, penerima }) => {
 	return (
 		<div>
 			<div className="p-4 space-y-2">
-				<div className="font-light text-xl">Penerima Mitra by Periode</div>
+				<div className="font-light text-xl">Jumlah Program by Periode</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
