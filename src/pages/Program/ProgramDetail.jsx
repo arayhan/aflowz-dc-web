@@ -23,47 +23,50 @@ const ProgramDetail = () => {
 
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">
-					<div className="space-y-6">
-						{fetchingProgramDetail && <ProgramDetailSkeleton />}
-						{!fetchingProgramDetail && programDetail && (
-							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 bg-white rounded-md">
-									<div className="p-4 space-y-2">
-										<div className="font-light text-xl">Details</div>
-										<div className="text-sm text-gray-400">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					{fetchingProgramDetail && <ProgramDetailSkeleton />}
+					{!fetchingProgramDetail && programDetail && (
+						<div className="space-y-6">
+							<div className="col-span-12 bg-white rounded-md">
+								<div className="p-4 space-y-2">
+									<div className="font-light text-xl">Details</div>
+									<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+								</div>
+								<hr />
+								<div className="p-5">
+									<div className="grid grid-cols-12 gap-y-1 text-sm">
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
+
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{programDetail?.program_periode}
 										</div>
-									</div>
-									<hr />
-									<div className="p-5">
-										<div className="grid grid-cols-12 gap-y-1 text-sm">
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
 
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{programDetail?.program_periode}
-											</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{programDetail?.program_pic}{' '}
+											{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
+										</div>
 
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Total Penerima</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{programDetail?.total_penerima_program || 0}
-											</div>
-
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{programDetail?.program_pic}{' '}
-												{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
-											</div>
-
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{programDetail?.pic_staff.name}{' '}
-												{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
-											</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{programDetail?.pic_staff.name}{' '}
+											{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
 										</div>
 									</div>
 								</div>
+							</div>
+							<div className="flex items-center justify-center gap-4">
+								<div className="bg-white rounded-md px-10 md:px-16 py-6">
+									<div className="flex flex-col items-center justify-center space-y-1 text-center">
+										<span className="text-2xl md:text-4xl font-extralight">
+											{programDetail?.total_penerima_program || 0}
+										</span>
+										<div className="font-light text-gray-400">Total Penerima</div>
+									</div>
+								</div>
+							</div>
+							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
 									<ChartPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
@@ -86,8 +89,8 @@ const ProgramDetail = () => {
 									/>
 								</div>
 							</div>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
 			</section>
 		</div>

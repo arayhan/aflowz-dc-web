@@ -1,11 +1,20 @@
 import { NegativeCaseView } from '@/components/molecules';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const ChartPenerimaProgram = ({ totalPenerima, penerimaPerArea, isPerVillage, isPerCity }) => {
+	const options = {
+		responsive: true,
+		plugins: {
+			legend: {
+				position: 'top'
+			}
+		}
+	};
+
 	const labels = penerimaPerArea.map((program) => {
 		if (isPerVillage) return program.village_name;
 		if (isPerCity) return program.city_name;
@@ -24,7 +33,8 @@ export const ChartPenerimaProgram = ({ totalPenerima, penerimaPerArea, isPerVill
 			{totalPenerima === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{totalPenerima > 0 && (
 				<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
-					<Pie
+					<Bar
+						options={options}
 						data={{
 							labels,
 							datasets: [
