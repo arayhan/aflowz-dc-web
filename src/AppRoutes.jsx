@@ -1,15 +1,15 @@
 import React from 'react';
 import { useAuthStore } from './store';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { DashboardLayout, SiteLayout } from './components/organisms';
+import { SiteLayout } from './components/organisms';
 
 import Login from './pages/Auth/Login/Login';
 import Home from './pages/Home/Home';
 import Program from './pages/Program/Program';
-import { Dashboard } from './pages/Dashboard/Dashboard';
 import ProgramDetail from './pages/Program/ProgramDetail';
 import Mitra from './pages/Mitra/Mitra';
 import MitraDetail from './pages/Mitra/MitraDetail';
+import ProgramForm from './pages/Program/ProgramForm';
 
 export const AppRoutes = () => {
 	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
@@ -19,9 +19,7 @@ export const AppRoutes = () => {
 	};
 
 	const AuthenticationRoute = () => {
-		if (isLoggedIn && isSystem) return <Navigate to="/" replace />;
-		if (isLoggedIn && isAdmin) return <Navigate to="/dashboard" replace />;
-		return <Outlet />;
+		return isLoggedIn ? <Navigate to="/" replace /> : <Outlet />;
 	};
 
 	return (
@@ -39,13 +37,9 @@ export const AppRoutes = () => {
 					<Route path="/kampus" element={<Program />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
+					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
-				</Route>
-				<Route path="/dashboard" element={<DashboardLayout />}>
-					<Route path="" element={<Dashboard />} />
-					<Route path="sekolah" element={<Dashboard />} />
-					<Route path="program" element={<Dashboard />} />
 				</Route>
 			</Route>
 		</Routes>

@@ -38,15 +38,32 @@ export const TableProgram = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Detail',
-				minWidth: 180,
+				minWidth: 100,
+				maxWidth: 100,
 				Cell: (row) => {
 					return (
-						<div>
+						<div className="min-w-[100px] w-full">
 							<Link
 								to={`/program/${row.row.original.id}`}
 								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
 							>
 								See Detail
+							</Link>
+						</div>
+					);
+				}
+			},
+			{
+				Header: 'Actions',
+				minWidth: 180,
+				Cell: (row) => {
+					return (
+						<div className="grid grid-cols-2 gap-2">
+							<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+								Update
+							</Link>
+							<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+								Delete
 							</Link>
 						</div>
 					);
