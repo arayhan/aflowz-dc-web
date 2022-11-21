@@ -37,18 +37,10 @@ export const ButtonProfileHeader = () => {
 			{isDropdownOpen && (
 				<div className="absolute right-0 bottom-0 transform translate-y-full w-48 bg-white rounded-sm shadow-lg overflow-hidden">
 					<div className="flex flex-col divide-y text-xs md:text-sm">
-						{isSystem && (
-							<button className={dropdownItemClasses} onClick={() => navigate('/')}>
-								<RiHomeLine />
-								<span>Home</span>
-							</button>
-						)}
-						{isAdmin && (
-							<button className={dropdownItemClasses} onClick={() => navigate('/dashboard')}>
-								<RiAdminLine />
-								<span>Dashboard</span>
-							</button>
-						)}
+						<button className={dropdownItemClasses} onClick={() => navigate('/')}>
+							<RiHomeLine />
+							<span>Home</span>
+						</button>
 						<button className={dropdownItemClasses} onClick={handleLogout}>
 							<GoSignOut />
 							<span>Logout</span>
