@@ -3,8 +3,8 @@ import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
-import { PieChartPenerimaProgram } from './components/PieChartPenerimaProgram';
-import { PieChartPenerimaProgramByGender } from './components/PieChartPenerimaProgramByGender';
+import { ChartPenerimaProgram } from './components/ChartPenerimaProgram';
+import { ChartPenerimaProgramByGender } from './components/ChartPenerimaProgramByGender';
 
 const ProgramDetail = () => {
 	const params = useParams();
@@ -65,21 +65,21 @@ const ProgramDetail = () => {
 									</div>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPenerimaProgramByGender
+									<ChartPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
 										totalPria={programDetail?.total_pria}
 										totalWanita={programDetail?.total_wanita}
 									/>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPenerimaProgram
+									<ChartPenerimaProgram
 										totalPenerima={programDetail?.total_penerima_program || 0}
 										penerimaPerArea={programDetail?.total_penerima_program_per_village}
 										isPerVillage
 									/>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<PieChartPenerimaProgram
+									<ChartPenerimaProgram
 										totalPenerima={programDetail?.total_penerima_program || 0}
 										penerimaPerArea={programDetail?.total_penerima_program_per_city}
 										isPerCity

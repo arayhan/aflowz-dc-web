@@ -1,30 +1,37 @@
 import { NegativeCaseView } from '@/components/molecules';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
-import { getRandomColor } from '@/utils/helpers';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PiePenerimaMitra = ({ total, penerima }) => {
+export const ChartPenerimaProgram = ({ totalPenerima, penerimaPerArea, isPerVillage, isPerCity }) => {
+	const labels = penerimaPerArea.map((program) => {
+		if (isPerVillage) return program.village_name;
+		if (isPerCity) return program.city_name;
+		return null;
+	});
+
 	return (
 		<div>
 			<div className="p-4 space-y-2">
-				<div className="font-light text-xl">Penerima Mitra</div>
+				<div className="font-light text-xl">
+					Penerima Program {isPerVillage && 'PerVillage'} {isPerCity && 'PerCity'}
+				</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
-			{total === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
-			{total > 0 && (
+			{totalPenerima === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
+			{totalPenerima > 0 && (
 				<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
 					<Pie
 						data={{
-							labels: penerima.map((item) => item.program_name),
+							labels,
 							datasets: [
 								{
 									label: 'Total',
-									data: penerima.map((item) => item.total_penerima_program),
-									backgroundColor: penerima.map(() => getRandomColor()),
+									data: penerimaPerArea.map((program) => program.total_penerima),
+									backgroundColor: ['rgba(40, 74, 245, 0.6)', 'rgba(255, 35, 138, 0.6)'],
 									borderWidth: 1
 								}
 							]

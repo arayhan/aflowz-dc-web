@@ -3,8 +3,8 @@ import { useProgramStore } from '@/store';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
-import { PiePenerimaMitra } from './components/PiePenerimaMitra';
-import { PieProgramByPeriode } from './components/PieProgramByPeriode';
+import { ChartPenerimaMitra } from './components/ChartPenerimaMitra';
+import { ChartProgramByPeriode } from './components/ChartProgramByPeriode';
 
 const MitraDetail = () => {
 	const params = useParams();
@@ -61,13 +61,13 @@ const MitraDetail = () => {
 								</div>
 							</div>
 							<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
-								<PiePenerimaMitra
+								<ChartPenerimaMitra
 									total={programCategoryDetail?.total_penerima_program_mitra}
 									penerima={programCategoryDetail?.penerima_program}
 								/>
 							</div>
 							<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
-								<PieProgramByPeriode
+								<ChartProgramByPeriode
 									total={programCategoryDetail?.total_program_by_periode.length}
 									penerima={programCategoryDetail?.total_program_by_periode}
 								/>

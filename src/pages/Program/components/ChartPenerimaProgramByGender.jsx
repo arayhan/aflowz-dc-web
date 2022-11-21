@@ -3,7 +3,7 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PieChartPenerimaProgramByGender = ({ totalPria, totalWanita }) => {
+export const ChartPenerimaProgramByGender = ({ totalPria, totalWanita }) => {
 	return (
 		<div>
 			<div className="p-4 space-y-2">

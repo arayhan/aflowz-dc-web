@@ -6,7 +6,7 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PieProgramByPeriode = ({ total, penerima }) => {
+export const ChartProgramByPeriode = ({ total, penerima }) => {
 	return (
 		<div>
 			<div className="p-4 space-y-2">
