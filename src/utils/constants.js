@@ -23,8 +23,8 @@ export const NEGATIVE_CASE_TYPES = {
 
 export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
-	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' }
-	// { title: 'Sekolah', icon: require('@/images/icons/box.svg').default, path: '/sekolah' },
+	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' },
+	{ title: 'Konstituen', icon: require('@/images/icons/box.svg').default, path: '/konstituen' }
 	// { title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },
 	// { title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/desa' },
 	// { title: 'Kota', icon: require('@/images/icons/box.svg').default, path: '/kota' },

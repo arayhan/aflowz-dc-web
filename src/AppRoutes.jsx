@@ -10,6 +10,7 @@ import ProgramDetail from './pages/Program/ProgramDetail';
 import Mitra from './pages/Mitra/Mitra';
 import MitraDetail from './pages/Mitra/MitraDetail';
 import ProgramForm from './pages/Program/ProgramForm';
+import Konstituen from './pages/Konstituen/Konstituen';
 
 export const AppRoutes = () => {
 	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
@@ -33,8 +34,9 @@ export const AppRoutes = () => {
 					<Route path="/" element={<Home />} />
 					<Route path="/mitra/:mitraID" element={<MitraDetail />} />
 					<Route path="/mitra" element={<Mitra />} />
-					<Route path="/sekolah" element={<Program />} />
-					<Route path="/kampus" element={<Program />} />
+					<Route path="/konstituen" element={<Konstituen />} />
+					<Route path="/konstituen/:konstituenID" element={<Konstituen />} />
+					<Route path="/konstituen/create" element={<ProgramForm />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/create" element={<ProgramForm />} />
