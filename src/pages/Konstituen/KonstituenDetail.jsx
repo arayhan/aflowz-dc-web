@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { BarChartPenerimaKonstituenPerTahun } from "./components/BarChartPenerimaKonstituenByPeriode";
 import { PieChartPenerimaKonstituenByGender } from "./components/PieChartPenerimaKonstituenByGender";
 import { TablePenerimaKonstituenDetail } from "./components/TablePenerimaKonstituen";
-import { set } from "react-hook-form";
-
+import Skeleton from 'react-loading-skeleton';
 
 const KonstituenDetail = () => {
     const params = useParams();
@@ -27,6 +26,7 @@ const KonstituenDetail = () => {
             />
             <section className="bg-gray-100 py-12 md:py-12">
                 <div className="container">
+                    {fetchingKonstituenDetail && <KonstituenDetailSkeleton />}
                     {!fetchingKonstituenDetail && konstituenDetail && (
                         <div className="space-y-6">
                             <div className="col-span-12 bg-white rounded-md p-5">
@@ -98,5 +98,26 @@ const KonstituenDetail = () => {
         </div>
     )
 };
+
+const KonstituenDetailSkeleton = () => {
+    return (
+        <div className="space-y-6 bg-white rounded-md p-5">
+            <div className="col-span-12">
+                <Skeleton height={250} />
+            </div>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-12 md:col-span-6">
+                    <Skeleton height={300}/>
+                </div>
+                <div className="col-span-12 md:col-span-6">
+                    <Skeleton height={300}/>
+                </div>
+                <div className="col-span-12">
+                    <Skeleton height={250}/>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default KonstituenDetail;
