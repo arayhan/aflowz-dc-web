@@ -3,7 +3,7 @@ import { BannerFeature } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ChartPenerimaProgram } from './components/ChartPenerimaProgram';
 import { ChartPenerimaProgramByGender } from './components/ChartPenerimaProgramByGender';
 
@@ -51,12 +51,18 @@ const ProgramDetail = () => {
 
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programDetail?.pic_staff.name}{' '}
-											{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
+											<Link
+												to={`/staff/${programDetail?.pic_staff.id}`}
+												className="text-primary underline hover:text-primary-400"
+											>
+												{programDetail?.pic_staff.name}{' '}
+												{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
+											</Link>
 										</div>
 									</div>
 								</div>
 							</div>
+
 							<div className="flex items-center justify-center gap-4">
 								<div className="bg-white rounded-md px-10 md:px-16 py-6">
 									<div className="flex flex-col items-center justify-center space-y-1 text-center">
@@ -67,6 +73,7 @@ const ProgramDetail = () => {
 									</div>
 								</div>
 							</div>
+
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
 									<Card
