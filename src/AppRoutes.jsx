@@ -12,7 +12,7 @@ import MitraDetail from './pages/Mitra/MitraDetail';
 import ProgramForm from './pages/Program/ProgramForm';
 
 export const AppRoutes = () => {
-	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
+	const { isLoggedIn } = useAuthStore();
 
 	const ProtectedRoute = () => {
 		return !isLoggedIn ? <Navigate to="/login" replace /> : <Outlet />;

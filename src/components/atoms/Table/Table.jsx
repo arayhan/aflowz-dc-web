@@ -50,7 +50,7 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 				)}
 				{!loading &&
 					rows.length > 0 &&
-					rows.map((row, i) => {
+					rows.map((row) => {
 						prepareRow(row);
 						return (
 							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
