@@ -12,7 +12,7 @@ export const Table = ({ loading, columns, data }) => {
 
 	return (
 		<table className="w-full" {...getTableProps()}>
-			<thead className="bg-gray-100">
+			<thead className="bg-[#e9edf6]">
 				{headerGroups.map((headerGroup) => (
 					<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
 						{headerGroup.headers.map((column) => (

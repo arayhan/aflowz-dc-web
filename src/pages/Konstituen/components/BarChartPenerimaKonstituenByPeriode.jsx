@@ -8,13 +8,14 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export const BarChartPenerimaKonstituenPerTahun = ({ totalPenerima }) => {
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top'
             }
-        }
+        },
     };
-    
+
     return (
         <div>
             <div className="p-4 space-y-2">
@@ -26,11 +27,11 @@ export const BarChartPenerimaKonstituenPerTahun = ({ totalPenerima }) => {
             <hr />
             {totalPenerima.length === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
             {totalPenerima.length > 0 && (
-                <div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
+                <div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4 w-auto h-96">
                     <Bar
                         options={options}
                         data={{
-                            labels: totalPenerima.map((data) => data.periode),
+                            labels: totalPenerima.map((data) => `${data.periode}\n(${data.total_penerima_program} Orang)`),
                             datasets: [
                                 {
                                     label: 'Total Penerima',

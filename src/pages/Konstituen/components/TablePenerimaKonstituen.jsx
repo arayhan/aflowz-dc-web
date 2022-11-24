@@ -12,24 +12,26 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading }) => {
                 accessor: '',
                 disableSortBy: true,
                 disableFilters: true,
-                maxWidth: 10,
+                maxWidth: 5,
                 Cell: (row) => {
                     return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
                 }
             },
             {
                 Header: 'Nama Penerima',
-                maxWidth: 10,
+                minWidth: 200,
                 Cell: (row) => <div className="transform: capitalize">{row.row.original.name}</div>
             },
             {
                 Header: 'NIK',
-                maxWidth: 10,
+                minWidth: 100,
+                maxWidth: 100,
                 Cell: (row) => <div className="transform: capitalize">{row.row.original.nik_number}</div>
             },
             {
                 Header: 'Alamat',
-                maxWidth: 10,
+                minWidth: 300,
+                maxWidth: 500,
                 Cell: (row) => <div className="transform: capitalize">{row.row.original.address}</div>
             }
         ],
@@ -47,7 +49,9 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading }) => {
             <hr />
             {dataPenerima.length === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
             {dataPenerima.length > 0 && (
-                <Table columns={columns} data={dataPenerima} loading={setLoading} />
+                <div className="overflow-x-auto">
+                    <Table columns={columns} data={dataPenerima} loading={setLoading} />
+                </div>
             )}
         </div>
     );
