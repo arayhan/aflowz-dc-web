@@ -9,7 +9,7 @@ export const HomeFeatureList = () => {
 					<Link
 						key={menu.path}
 						to={menu.path}
-						className="w-24 sm:w-28 md:w-32 bg-white py-2 bg-opacity-10 shadow-md rounded-md hover:bg-opacity-20 cursor-pointer text-white text-opacity-50 transition-all"
+						className="w-24 sm:w-28 md:w-32 bg-white py-2 shadow-md rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
 					>
 						<div className="px-5">
 							<img className="w-full" src={menu.icon} alt="" />

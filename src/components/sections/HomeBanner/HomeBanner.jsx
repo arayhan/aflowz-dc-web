@@ -1,9 +1,8 @@
 import React from 'react';
-import { HomeFeatureList } from '../HomeFeature/HomeFeatureList';
 
 export const HomeBanner = () => {
 	return (
-		<div className="fixed -z-10 top-0 w-full h-screen flex flex-col items-center justify-center bg-primary">
+		<div className="w-full flex flex-col items-center justify-center bg-primary py-60">
 			<div className="container max-w-screen-lg space-y-8 md:space-y-12 lg:space-y-16">
 				<div className="space-y-6 text-white text-center">
 					<div className="font-extralight text-3xl md:text-4xl lg:text-5xl">DEWI CORYATI&apos;S WEB</div>
@@ -13,8 +12,6 @@ export const HomeBanner = () => {
 						necessitatibus adipisci. Iusto.
 					</div>
 				</div>
-				<hr className="opacity-10" />
-				<HomeFeatureList />
 			</div>
 		</div>
 	);
