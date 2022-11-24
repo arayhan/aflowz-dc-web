@@ -3,7 +3,7 @@ import { KonstituenType } from '@/components/sections';
 import { useState } from 'react';
 
 const Konstituen = () => {
-	const [selectedKonstituen, setSelectedKonstituen] = useState('');
+	const [selectedKonstituen, setSelectedKonstituen] = useState(null);
 
 	return (
 		<div>
