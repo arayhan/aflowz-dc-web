@@ -4,10 +4,11 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useTable } from 'react-table';
 
-export const Table = ({ loading, columns, data }) => {
+export const Table = ({ loading, columns, data, hiddenColumns }) => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
 		columns,
-		data
+		data,
+		initialState: { hiddenColumns: hiddenColumns || [] }
 	});
 
 	return (
@@ -70,4 +71,11 @@ export const Table = ({ loading, columns, data }) => {
 			</tbody>
 		</table>
 	);
+};
+
+Table.defaultProps = {
+	loading: false,
+	columns: [],
+	data: [],
+	hiddenColumns: []
 };

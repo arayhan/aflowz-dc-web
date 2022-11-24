@@ -1,10 +1,13 @@
 import { Table } from '@/components/atoms';
-import { useProgramStore } from '@/store';
+import { useAuthStore, useProgramStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
+	const RESTRICTED_ADMIN_COLUMNS = ['Actions'];
+
+	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
 	const [data, setData] = useState([]);
@@ -56,16 +59,19 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Actions',
 				minWidth: 180,
-				Cell: (row) => {
+				show: isAdmin,
+				Cell: () => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
-							<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
-								Update
-							</Link>
-							<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
-								Delete
-							</Link>
-						</div>
+						isAdmin && (
+							<div className="grid grid-cols-2 gap-2">
+								<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+									Update
+								</Link>
+								<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+									Delete
+								</Link>
+							</div>
+						)
 					);
 				}
 			}
@@ -91,21 +97,28 @@ export const TableProgram = ({ selectedCategory }) => {
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
 					</div>
 				</div>
-				<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
-					<button className="bg-green-500 hover:bg-green-600 space-x-1 text-white px-5 py-3 flex items-center justify-center rounded-md transition-all">
-						<SiGooglesheets />
-						<span className="text-sm">Upload XLS</span>
-					</button>
-					<Link
-						to="/program/create"
-						className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
-					>
-						<span>Create Program</span>
-					</Link>
-				</div>
+				{isAdmin && (
+					<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
+						<button className="bg-green-500 hover:bg-green-600 space-x-1 text-white px-5 py-3 flex items-center justify-center rounded-md transition-all">
+							<SiGooglesheets />
+							<span className="text-sm">Upload XLS</span>
+						</button>
+						<Link
+							to="/program/create"
+							className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
+						>
+							<span>Create Program</span>
+						</Link>
+					</div>
+				)}
 			</div>
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
+				<Table
+					columns={columns}
+					data={data}
+					loading={fetchingProgramList || programList === null}
+					hiddenColumns={!isAdmin && RESTRICTED_ADMIN_COLUMNS}
+				/>
 			</div>
 		</div>
 	);
