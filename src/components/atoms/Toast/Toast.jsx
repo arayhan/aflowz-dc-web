@@ -2,7 +2,7 @@ import { IoMdClose, IoMdWarning, IoMdCheckmarkCircleOutline } from 'react-icons/
 import { BiLoaderAlt } from 'react-icons/bi';
 import { MdErrorOutline, MdInfoOutline } from 'react-icons/md';
 import classNames from 'classnames';
-import { VARIANT_TYPES } from './utils/constants';
+import { VARIANT_TYPES } from '@/utils/constants';
 
 export const Toast = ({ options, message, close }) => {
 	const variantClasses = classNames({

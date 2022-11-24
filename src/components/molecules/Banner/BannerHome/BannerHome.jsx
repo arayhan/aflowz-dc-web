@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const HomeBanner = () => {
+export const BannerHome = () => {
 	return (
 		<div className="w-full flex flex-col items-center justify-center bg-primary py-60">
 			<div className="container max-w-screen-lg space-y-8 md:space-y-12 lg:space-y-16">

@@ -1,4 +1,4 @@
-import { NegativeCaseView } from '@/components/molecules';
+import { NegativeCase } from '@/components/atoms';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -44,7 +44,7 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 				{!loading && rows.length === 0 && (
 					<tr>
 						<td colSpan={columns.length}>
-							<NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />
+							<NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />
 						</td>
 					</tr>
 				)}

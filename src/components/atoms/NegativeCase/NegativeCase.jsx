@@ -1,6 +1,6 @@
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 
-export const NegativeCaseView = ({ type, title }) => {
+export const NegativeCase = ({ type, title }) => {
 	const renderIcon = () => {
 		switch (type) {
 			case NEGATIVE_CASE_TYPES.EMPTY_RESULT:

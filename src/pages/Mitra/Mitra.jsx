@@ -1,5 +1,5 @@
 import { BannerFeature } from '@/components/molecules';
-import { TableMitra } from '@/components/molecules/TableMitra/TableMitra';
+import { TableMitra } from '@/components/molecules/Table/TableMitra/TableMitra';
 
 const Mitra = () => {
 	return (
