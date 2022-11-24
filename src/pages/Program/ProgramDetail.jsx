@@ -1,3 +1,4 @@
+import { Card } from '@/components/atoms';
 import { BannerFeature } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
@@ -68,25 +69,43 @@ const ProgramDetail = () => {
 							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgramByGender
-										total={programDetail?.total_penerima_program || 0}
-										totalPria={programDetail?.total_pria}
-										totalWanita={programDetail?.total_wanita}
-									/>
+									<Card
+										title={'Penerima Program by Gender'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgramByGender
+											total={programDetail?.total_penerima_program || 0}
+											totalPria={programDetail?.total_pria}
+											totalWanita={programDetail?.total_wanita}
+										/>
+									</Card>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_village}
-										isPerVillage
-									/>
+									<Card
+										title={'Penerima Program PerVillage'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgram
+											totalPenerima={programDetail?.total_penerima_program || 0}
+											penerimaPerArea={programDetail?.total_penerima_program_per_village}
+											isPerVillage
+										/>
+									</Card>
 								</div>
 								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_city}
-										isPerCity
-									/>
+									<Card
+										title={'Penerima Program PerVillage'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgram
+											totalPenerima={programDetail?.total_penerima_program || 0}
+											penerimaPerArea={programDetail?.total_penerima_program_per_city}
+											isPerCity
+										/>
+									</Card>
 								</div>
 							</div>
 						</div>

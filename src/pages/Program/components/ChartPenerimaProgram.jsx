@@ -23,13 +23,6 @@ export const ChartPenerimaProgram = ({ totalPenerima, penerimaPerArea, isPerVill
 
 	return (
 		<div>
-			<div className="p-4 space-y-2">
-				<div className="font-light text-xl">
-					Penerima Program {isPerVillage && 'PerVillage'} {isPerCity && 'PerCity'}
-				</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-			</div>
-			<hr />
 			{totalPenerima === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{totalPenerima > 0 && (
 				<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
