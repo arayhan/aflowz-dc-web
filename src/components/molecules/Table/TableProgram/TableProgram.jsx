@@ -1,9 +1,11 @@
 import { Table, TableHeader } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
+	const location = useLocation();
+
 	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
@@ -57,11 +59,14 @@ export const TableProgram = ({ selectedCategory }) => {
 				Header: 'Actions',
 				minWidth: 100,
 				hidden: !isAdmin,
-				Cell: () => {
+				Cell: (row) => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<Link className="inline-block text-center px-3 py-1 bg-green-500 hover:bg-green-400 text-white rounded-sm text-xs transition-all">
+								<Link
+									to={`${location.pathname}/update/${row.row.original.id}`}
+									className="inline-block text-center px-3 py-1 bg-green-500 hover:bg-green-400 text-white rounded-sm text-xs transition-all"
+								>
 									Update
 								</Link>
 								<Link className="inline-block text-center px-3 py-1 bg-red-500 hover:bg-red-400 text-white rounded-sm text-xs transition-all">
