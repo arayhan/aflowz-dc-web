@@ -1,12 +1,12 @@
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
 
-export const getCityList = async () => {
+export const getStaffList = async () => {
     try {
-        const queryParams = objectToQueryString({ province_id: 617 });
+        const queryParams = objectToQueryString({ is_staff: true });
 
-        const response = await http.get('/city' + queryParams);
-
+        const response = await http.get('/partner' + queryParams);
+        
         return { success: response.data.success, payload: response.data.data };
     } catch (error) {
         return { success: false, payload: error };

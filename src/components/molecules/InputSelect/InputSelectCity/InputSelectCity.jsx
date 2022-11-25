@@ -2,23 +2,23 @@ import { useCityStore } from '@/store';
 import React, { useEffect, useState } from 'react';
 import ReactSelect from 'react-select';
 
-export const InputSelectCity = () => {
+export const InputSelectCity = ({ selectedCity }) => {
     const { cityList, getCityList } = useCityStore();
 
-    const [cityData, setCityData] = useState([]);
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
         getCityList();
     }, []);
 
     useEffect(() => {
-        if (cityList.length > 0) {
+        if (cityList?.total > 0) {
             const mapCity = cityList.items.map((city) => ({
                 label: city.name,
                 value: city.id
             }));
 
-            setCityData(mapCity);
+            setOptions(mapCity);
         }
     }, [cityList]);
 
@@ -38,7 +38,8 @@ export const InputSelectCity = () => {
 				}}
 				id="city"
 				name="city"
-				options={cityData}
+				options={options}
+                onChange={(selectedOption) => selectedCity(selectedOption.value)}
 			/>
 		</div>
     );

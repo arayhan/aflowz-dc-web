@@ -9,6 +9,8 @@ const states = (set) => ({
     konstituenList: null,
     konstituenDetail: null,
     penerimaKonstituenDetail: null,
+    successKonstituenCreate: null,
+
 
     getKonstituenList: async (params) => {
         set({ fetchingKonstituenList: true });
@@ -39,6 +41,14 @@ const states = (set) => ({
 
         set({ penerimaKonstituenDetail: success ? payload : null });
         set({ fetchingPenerimaKonstituenDetail: false });
+    },
+    postKonstituenCreate: async (data) => {
+        const { success, payload } = await SERVICE_KONSTITUEN.postKonstituenCreate(data);
+
+        set({ successKonstituenCreate: success ? payload : null });
+    },
+    deleteKonstituen: async (data) => {
+        
     }
 });
 

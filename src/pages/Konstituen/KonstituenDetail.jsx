@@ -32,7 +32,7 @@ const KonstituenDetail = () => {
                     {!fetchingKonstituenDetail && konstituenDetail && (
                         <div className="space-y-6">
                             <div className="col-span-12 bg-gray-100 p-5">
-                                <div className="bg-white shadow-lg rounded-md">
+                                <div className="bg-white shadow-lg rounded-md ">
                                     <div className="p-4">
                                         <div className="font-light text-xl">Details</div>
                                         <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>

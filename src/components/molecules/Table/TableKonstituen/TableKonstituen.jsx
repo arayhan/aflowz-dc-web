@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { SiGooglesheets } from 'react-icons/si';
 
 export const TableKonstituen = ({ selectedType }) => {
-    const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
+	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
 
-    const [data, setData] = useState([]);
+	const [data, setData] = useState([]);
+	const [konstituen, setKonstituen] = useState(null);
 
-    const columns = useMemo(
+	const columns = useMemo(
 		() => [
 			{
 				Header: '#',
@@ -29,12 +30,12 @@ export const TableKonstituen = ({ selectedType }) => {
 			{
 				Header: 'Konstitusi',
 				minWidth: 125,
-                Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
 			},
 			{
-                Header: 'Kota / Kabupaten',
+				Header: 'Kota / Kabupaten',
 				minWidth: 150,
-                Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
 			},
 			{
 				Header: 'Detail',
@@ -62,9 +63,10 @@ export const TableKonstituen = ({ selectedType }) => {
 							<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
 								Update
 							</Link>
-							<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+							<button onClick={() => setKonstituen(row.row.original)}
+								className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
 								Delete
-							</Link>
+							</button>
 						</div>
 					);
 				}
@@ -73,16 +75,20 @@ export const TableKonstituen = ({ selectedType }) => {
 		[]
 	);
 
-    useEffect(() => {
-        const params = selectedType ? selectedType : null;
-        getKonstituenList(params);
-    }, [selectedType]);
+	useEffect(() => {
+		const params = selectedType ? selectedType : null;
+		getKonstituenList(params);
+	}, [selectedType]);
 
-    useEffect(() => {
-        if (konstituenList) setData(konstituenList.items);
-    });
+	useEffect(() => {
+		if (konstituenList) setData(konstituenList.items);
+	});
 
-    return (
+	const handleDelete = () => {
+		
+	};
+
+	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
 				<div>
@@ -100,13 +106,35 @@ export const TableKonstituen = ({ selectedType }) => {
 						to="/konstituen/create"
 						className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
 					>
-						<span>Create Program</span>
+						<span>Create New Institution</span>
 					</Link>
 				</div>
 			</div>
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />
 			</div>
+			{
+				konstituen ?
+					<div tabIndex={-1} className="overflow-y-auto overflow-x-hidden backdrop-blur-sm fixed right-0 left-0 top-0 flex justify-center items-center z-50 md:inset-0 h-modal sm:h-full">
+						<div className="relative p-4 w-full max-w-md h-auto">
+							<div className="relative border-2 bg-white rounded-lg shadow border-main-500">
+								<div className="p-6 text-center">
+									<p className="font-normal text-black">Anda yakin ingin menghapus institusi ini?</p>
+									<p className='mb-3'>{konstituen.name}</p>
+									<button type="button" className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+										>
+										Yes, Delete
+									</button>
+									<button type="button" onClick={() => {setKonstituen(null); getKonstituenList()}}
+										className="text-main-500 bg-white focus:ring-2 focus:ring-main-500 border border-gray-300 hover:bg-gray-100 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 "
+										>Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					:
+					""
+			}
 		</div>
 	);
 };

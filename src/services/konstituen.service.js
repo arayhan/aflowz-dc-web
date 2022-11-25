@@ -34,4 +34,22 @@ export const getPenerimaKonstituenDetail = async (params) => {
     } catch (error) {
         return { success: false, payload: error };
     }
-}
+};
+
+export const postKonstituenCreate = async (data) => {
+    try {
+        const response = await http.post('/konstituen', data);
+
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};
+
+export const deleteKonstituen = async (data) => {
+    try {
+        console.log(data)
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};

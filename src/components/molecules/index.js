@@ -21,6 +21,8 @@ export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstitu
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
+export * from './InputSelect/InputSelectKonstituen/InputSelectKonstituen';
+export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
