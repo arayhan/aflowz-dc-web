@@ -116,7 +116,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={`Penerima ${programName ? `Program ${programName}` : 'Semua Program'}`}
+					title={`Penerima Program ${programName ? programName : ''}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin || isReadonly}
 				/>
