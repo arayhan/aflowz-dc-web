@@ -12,10 +12,12 @@ export * from './Chart/ChartProgramByPeriode/ChartProgramByPeriode';
 
 export * from './Form/FormProgram/FormProgram';
 
-export * from './Table/TableMitra/TableMitra';
-export * from './Table/TableProgram/TableProgram';
-
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
+
+export * from './Table/TableMitra/TableMitra';
+export * from './Table/TableProgram/TableProgram';
+
+export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
