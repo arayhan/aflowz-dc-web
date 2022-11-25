@@ -2,8 +2,6 @@ import { ButtonAction, Table, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
-import { SiGooglesheets } from 'react-icons/si';
-import { Link } from 'react-router-dom';
 
 export const TablePartner = ({ programID, programName, isInDetail, isReadonly }) => {
 	const { isAdmin } = useAuthStore();
@@ -122,10 +120,6 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin || isReadonly}
 				/>
-				<div>
-					<div className="text-xl font-light"></div>
-					<div className="text-sm text-gray-400"></div>
-				</div>
 			</div>
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingPartnerList || partnerList === null} />
