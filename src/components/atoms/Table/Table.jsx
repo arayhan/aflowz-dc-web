@@ -16,20 +16,25 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 			<thead className="bg-gray-100">
 				{headerGroups.map((headerGroup) => (
 					<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-						{headerGroup.headers.map(
-							(column) =>
+						{headerGroup.headers.map((column) => {
+							return (
 								!column.hidden && (
 									<th
 										key={column.id}
 										className="px-5 md:px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
 										{...column.getHeaderProps({
-											style: { minWidth: column.minWidth, width: column.width, maxWidth: column.maxWidth }
+											style: data.length > 0 && {
+												minWidth: column.minWidth,
+												width: column.width,
+												maxWidth: column.maxWidth
+											}
 										})}
 									>
 										{column.render('Header')}
 									</th>
 								)
-						)}
+							);
+						})}
 					</tr>
 				))}
 			</thead>
