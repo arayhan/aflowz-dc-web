@@ -19,7 +19,7 @@ export const FormProgram = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">Tambah Program</div>
+				<div className="font-light text-xl">{params.programID ? 'Edit' : 'Tambah'} Program</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />

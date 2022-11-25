@@ -38,6 +38,7 @@ export const AppRoutes = () => {
 					<Route path="/kampus" element={<Program />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
+					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
