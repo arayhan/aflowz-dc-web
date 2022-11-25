@@ -45,7 +45,7 @@ export const TableProgram = ({ selectedCategory }) => {
 						<div className="min-w-[100px] w-full">
 							<Link
 								to={`/program/${row.row.original.id}`}
-								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
+								className="inline-block text-center px-3 py-1 bg-blue-500 hover:bg-blue-400 text-white rounded-sm text-xs transition-all"
 							>
 								See Detail
 							</Link>
@@ -61,10 +61,10 @@ export const TableProgram = ({ selectedCategory }) => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+								<Link className="inline-block text-center px-3 py-1 bg-green-500 hover:bg-green-400 text-white rounded-sm text-xs transition-all">
 									Update
 								</Link>
-								<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+								<Link className="inline-block text-center px-3 py-1 bg-red-500 hover:bg-red-400 text-white rounded-sm text-xs transition-all">
 									Delete
 								</Link>
 							</div>

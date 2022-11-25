@@ -1,4 +1,4 @@
-import { Table } from '@/components/atoms';
+import { Table, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
@@ -114,12 +114,14 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
+			<div className="p-6">
+				<TableHeader
+					title={`Penerima ${`Program ${programName}` || 'Semua Program'}`}
+					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+				/>
 				<div>
-					<div className="text-xl font-light">Penerima Program {programName || 'All Category'}</div>
-					<div className="text-sm text-gray-400">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-					</div>
+					<div className="text-xl font-light"></div>
+					<div className="text-sm text-gray-400"></div>
 				</div>
 				{isAdmin && !isReadonly && (
 					<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
