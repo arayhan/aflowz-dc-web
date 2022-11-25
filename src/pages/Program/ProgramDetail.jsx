@@ -79,7 +79,7 @@ const ProgramDetail = () => {
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
-										<div className="flex p-4 overflow-x-scroll">
+										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailPenerimaProgram
 												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
 												isPerVillage
@@ -93,7 +93,7 @@ const ProgramDetail = () => {
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
-										<div className="px-4 md:px-8 xl:px-12 py-4">
+										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailPenerimaProgram
 												dataPenerimaPerArea={programDetail?.total_penerima_program_per_city}
 												isPerCity
