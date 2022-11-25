@@ -28,8 +28,6 @@ export const getPenerimaKonstituenDetail = async (params) => {
     try {
         const queryParams = objectToQueryString(params);
 
-        console.log('/partner' + queryParams)
-
         const response = await http.get('/partner' + queryParams);
 
         return { success: response.data.success, payload: response.data.data };

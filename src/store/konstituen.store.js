@@ -18,15 +18,15 @@ const states = (set) => ({
 
         const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(requestParams);
         
-        set({ konstituenList: success ? payload : null })
+        set({ konstituenList: success ? payload : null });
         set({ fetchingKonstituenList: false });
     },
     getKonstituenDetail: async (konstituenID) => {
         set({ fetchingKonstituenDetail: true });
 
-        const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenDetail(konstituenID)
+        const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenDetail(konstituenID);
         
-        set({ konstituenDetail: success ? payload : null })
+        set({ konstituenDetail: success ? payload : null });
         set({ fetchingKonstituenDetail: false });
     },
     getPenerimaKonstituenDetail: async (params) => {
@@ -37,7 +37,7 @@ const states = (set) => ({
 
         const { success, payload } = await SERVICE_KONSTITUEN.getPenerimaKonstituenDetail(requestParams);
 
-        set({ penerimaKonstituenDetail: success ? payload : null })
+        set({ penerimaKonstituenDetail: success ? payload : null });
         set({ fetchingPenerimaKonstituenDetail: false });
     }
 });

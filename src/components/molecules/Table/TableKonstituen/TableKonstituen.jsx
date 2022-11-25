@@ -97,7 +97,7 @@ export const TableKonstituen = ({ selectedType }) => {
 						<span className="text-sm">Upload XLS</span>
 					</button>
 					<Link
-						to="/program/create"
+						to="/konstituen/create"
 						className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
 					>
 						<span>Create Program</span>
