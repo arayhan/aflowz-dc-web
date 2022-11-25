@@ -1,9 +1,12 @@
 import { Card } from '@/components/atoms';
-import { TabContainer, TabMenu, TabPanel } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaProgram, ChartPenerimaProgramByGender } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardPenerimaProgramByGender,
+	ChartPenerimaProgram,
+	ChartPenerimaProgramByGender
+} from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
-import { BiBarChartAlt2, BiTable } from 'react-icons/bi';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
@@ -102,19 +105,11 @@ const ProgramDetail = () => {
 								</div>
 
 								<div className="col-span-12 sm:col-span-6 md:col-span-4">
-									<Card
-										title={'Penerima Program by Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
-										<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
-											<ChartPenerimaProgramByGender
-												total={programDetail?.total_penerima_program || 0}
-												totalPria={programDetail?.total_pria}
-												totalWanita={programDetail?.total_wanita}
-											/>
-										</div>
-									</Card>
+									<CardPenerimaProgramByGender
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
+									/>
 								</div>
 							</div>
 						</div>

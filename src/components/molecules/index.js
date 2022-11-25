@@ -3,6 +3,8 @@ export * from './Banner/BannerHome/BannerHome';
 
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 
+export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
+
 export * from './Chart/ChartPenerimaMitra/ChartPenerimaMitra';
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
 export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender';
