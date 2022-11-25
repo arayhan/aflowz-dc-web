@@ -1,1 +1,1 @@
-export * from './KonstituenType/KonstituenType';
+

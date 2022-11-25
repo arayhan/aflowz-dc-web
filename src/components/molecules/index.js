@@ -22,3 +22,4 @@ export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
+export * from './Section/KonstituenType/KonstituenType';
