@@ -1,5 +1,6 @@
-import { Button, Table, TableHeader } from '@/components/atoms';
+import { Table, TableButton, TableHeader } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -44,13 +45,11 @@ export const TableProgram = ({ selectedCategory }) => {
 				maxWidth: 50,
 				Cell: (row) => {
 					return (
-						<Button
-							className={'min-w-[100px] w-full px-3 py-2 rounded-sm text-xs'}
-							linkTo={`${location.pathname}/${row.row.original.id}`}
-							variant="info"
-						>
-							See Detail
-						</Button>
+						<TableButton
+							className="min-w-[100px] w-full"
+							action={ACTION_TYPES.SEE_DETAIL}
+							detailID={row.row.original.id}
+						/>
 					);
 				}
 			},
@@ -62,20 +61,8 @@ export const TableProgram = ({ selectedCategory }) => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<Button
-									className={'px-3 py-2 rounded-sm text-xs'}
-									linkTo={`${location.pathname}/update/${row.row.original.id}`}
-									variant="success"
-								>
-									Update
-								</Button>
-								<Button
-									className={'px-3 py-2 rounded-sm text-xs'}
-									onClick={() => handleDeleteProgram(row.row.original.id)}
-									variant="danger"
-								>
-									Delete
-								</Button>
+								<TableButton action={ACTION_TYPES.UPDATE} detailID={row.row.original.id} />
+								<TableButton action={ACTION_TYPES.DELETE} onDelete={() => handleDeleteProgram(row.row.original.id)} />
 							</div>
 						)
 					);

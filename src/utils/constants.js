@@ -15,6 +15,13 @@ export const VARIANT_TYPES = {
 	DANGER: 'danger'
 };
 
+export const ACTION_TYPES = {
+	CREATE: 'create',
+	SEE_DETAIL: 'see_detail',
+	UPDATE: 'update',
+	DELETE: 'delete'
+};
+
 export const NEGATIVE_CASE_TYPES = {
 	EMPTY_RESULT: 'EMPTY_RESULT',
 	EMPTY_SEARCH: 'EMPTY_SEARCH',
