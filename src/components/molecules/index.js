@@ -18,6 +18,7 @@ export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
 
 export * from './Table/TableMitra/TableMitra';
+export * from './Table/TablePartner/TablePartner';
 export * from './Table/TableProgram/TableProgram';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
