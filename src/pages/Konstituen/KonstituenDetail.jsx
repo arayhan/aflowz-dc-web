@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useKonstituenStore } from "@/store";
-import { BannerFeature } from "@/components/molecules";
+import {
+    BannerFeature,
+    BarChartPenerimaKonstituenPerTahun,
+    PieChartPenerimaKonstituenByGender,
+    TablePenerimaKonstituenDetail
+} from "@/components/molecules";
 import { useEffect, useState } from "react";
-import { BarChartPenerimaKonstituenPerTahun } from "./components/BarChartPenerimaKonstituenByPeriode";
-import { PieChartPenerimaKonstituenByGender } from "./components/PieChartPenerimaKonstituenByGender";
-import { TablePenerimaKonstituenDetail } from "./components/TablePenerimaKonstituen";
 import Skeleton from 'react-loading-skeleton';
 
 const KonstituenDetail = () => {
@@ -29,36 +31,37 @@ const KonstituenDetail = () => {
                     {fetchingKonstituenDetail && <KonstituenDetailSkeleton />}
                     {!fetchingKonstituenDetail && konstituenDetail && (
                         <div className="space-y-6">
-                            <div className="col-span-12 bg-white rounded-md p-5">
-                                <div className="p-4">
-                                    <div className="font-light text-xl">Details</div>
-                                    <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-                                </div>
-                                <hr />
-                                <div className="p-5 rounded-md shadow-lg my-2">
-                                    <div className="grid grid-cols-12 gap-y-1 text-sm">
-                                        <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">Nama {konstituenType || "institusi"}</div>
-                                        <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-                                            {konstituenDetail?.konstituen_name || "Belum Tercantum"}
-                                        </div>
+                            <div className="col-span-12 bg-gray-100 p-5">
+                                <div className="bg-white shadow-lg rounded-md">
+                                    <div className="p-4">
+                                        <div className="font-light text-xl">Details</div>
+                                        <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                    </div>
+                                    <hr />
+                                    <div className="p-5 rounded-md my-2">
+                                        <div className="grid grid-cols-12 gap-y-1 text-sm">
+                                            <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">Nama {konstituenType || "institusi"}</div>
+                                            <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+                                                {konstituenDetail?.konstituen_name || "Belum Tercantum"}
+                                            </div>
 
-                                        <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">Alamat {konstituenType || "institusi"}</div>
-                                        <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-                                            {konstituenDetail.alamat_konstituen ? konstituenDetail.alamat_konstituen : "Belum Ada Alamat"}
-                                        </div>
+                                            <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">Alamat {konstituenType || "institusi"}</div>
+                                            <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+                                                {konstituenDetail.alamat_konstituen ? konstituenDetail.alamat_konstituen : "Belum Ada Alamat"}
+                                            </div>
 
-                                        <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">PIC {konstituenType || "institusi"}</div>
-                                        <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-                                            {konstituenDetail?.konstituen_pic || "Belum Ada Nama PIC"}{' '}
-                                            {konstituenDetail?.konstituen_pic_mobile ? `(${konstituenDetail?.konstituen_pic_mobile})` : "(Belum Ada No. Kontak)"}
-                                        </div>
+                                            <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">PIC {konstituenType || "institusi"}</div>
+                                            <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+                                                {konstituenDetail?.konstituen_pic || "Belum Ada Nama PIC"}{' '}
+                                                {konstituenDetail?.konstituen_pic_mobile ? `(${konstituenDetail?.konstituen_pic_mobile})` : "(Belum Ada No. Kontak)"}
+                                            </div>
 
-                                        <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">PIC Staff</div>
-                                        <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-                                            {konstituenDetail?.pic_staff.name || "Belum Ada Nama PIC"}{' '}
-                                            {konstituenDetail?.pic_staff.mobile ? `(${konstituenDetail?.pic_staff.mobile})` : "(Belum Ada No. Kontak)"}
+                                            <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">PIC Staff</div>
+                                            <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+                                                {konstituenDetail?.pic_staff.name || "Belum Ada Nama PIC"}{' '}
+                                                {konstituenDetail?.pic_staff.mobile ? `(${konstituenDetail?.pic_staff.mobile})` : "(Belum Ada No. Kontak)"}
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-center justify-center">
@@ -107,13 +110,13 @@ const KonstituenDetailSkeleton = () => {
             </div>
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
-                    <Skeleton height={300}/>
+                    <Skeleton height={300} />
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                    <Skeleton height={300}/>
+                    <Skeleton height={300} />
                 </div>
                 <div className="col-span-12">
-                    <Skeleton height={250}/>
+                    <Skeleton height={250} />
                 </div>
             </div>
         </div>

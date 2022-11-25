@@ -1,5 +1,5 @@
 import { Table } from "@/components/atoms";
-import { NegativeCaseView } from '@/components/molecules';
+import { NegativeCase } from '@/components/atoms';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 import { useMemo } from "react";
 
@@ -47,7 +47,7 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading }) => {
                 <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
             </div>
             <hr />
-            {dataPenerima.length === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
+            {dataPenerima.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
             {dataPenerima.length > 0 && (
                 <div className="overflow-x-auto">
                     <Table columns={columns} data={dataPenerima} loading={setLoading} />

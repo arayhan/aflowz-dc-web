@@ -7,12 +7,16 @@ export * from './Chart/ChartPenerimaMitra/ChartPenerimaMitra';
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
 export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender';
 export * from './Chart/ChartProgramByPeriode/ChartProgramByPeriode';
+export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
+export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 
 export * from './Form/FormProgram/FormProgram';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
-export * from './TableKonstituen/TableKonstituen';
+export * from './Table/TableKonstituen/TableKonstituen';
+
+export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 
