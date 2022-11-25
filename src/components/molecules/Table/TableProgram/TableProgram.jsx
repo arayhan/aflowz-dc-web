@@ -88,7 +88,7 @@ export const TableProgram = ({ selectedCategory }) => {
 				<TableHeader
 					title={selectedCategory?.name || 'All Category'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={isAdmin}
+					isReadonly={!isAdmin}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
