@@ -1,12 +1,9 @@
-import { Table } from '@/components/atoms';
+import { Table, TableHeader } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
-import { SiGooglesheets } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
-	const RESTRICTED_ADMIN_COLUMNS = ['Actions'];
-
 	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
@@ -59,7 +56,7 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Actions',
 				minWidth: 180,
-				show: isAdmin,
+				hidden: !isAdmin,
 				Cell: () => {
 					return (
 						isAdmin && (
@@ -90,35 +87,15 @@ export const TableProgram = ({ selectedCategory }) => {
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
-				<div>
-					<div className="text-lg font-extralight">{selectedCategory?.name || 'All Category'}</div>
-					<div className="text-sm text-gray-400">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-					</div>
-				</div>
-				{isAdmin && (
-					<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
-						<button className="bg-green-500 hover:bg-green-600 space-x-1 text-white px-5 py-3 flex items-center justify-center rounded-md transition-all">
-							<SiGooglesheets />
-							<span className="text-sm">Upload XLS</span>
-						</button>
-						<Link
-							to="/program/create"
-							className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
-						>
-							<span>Create Program</span>
-						</Link>
-					</div>
-				)}
+			<div className="p-6">
+				<TableHeader
+					title={selectedCategory?.name || 'All Category'}
+					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					isReadonly={isAdmin}
+				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table
-					columns={columns}
-					data={data}
-					loading={fetchingProgramList || programList === null}
-					hiddenColumns={!isAdmin && RESTRICTED_ADMIN_COLUMNS}
-				/>
+				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
 			</div>
 		</div>
 	);
