@@ -15,6 +15,7 @@ export * from './Form/FormProgram/FormProgram';
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
+export * from './Section/SectionSelectProgram/SectionSelectProgram';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
 
 export * from './Table/TableMitra/TableMitra';

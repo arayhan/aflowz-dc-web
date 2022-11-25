@@ -34,7 +34,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'Program',
 				hidden: isInDetail,
-				minWidth: 350,
+				minWidth: 150,
 				Cell: (row) => {
 					const programs = row.row.original.programs;
 					return (
