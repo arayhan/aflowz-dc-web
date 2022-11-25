@@ -10,19 +10,21 @@ export const ChartPenerimaProgramByGender = ({ totalPria, totalWanita }) => {
 		<>
 			{totalPria === 0 && totalWanita === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{(totalPria > 0 || totalWanita > 0) && (
-				<Pie
-					data={{
-						labels: ['Pria', 'Wanita'],
-						datasets: [
-							{
-								label: 'Total',
-								data: [totalPria || 0, totalWanita || 0],
-								backgroundColor: ['rgba(40, 74, 245, 0.6)', 'rgba(255, 35, 138, 0.6)'],
-								borderWidth: 1
-							}
-						]
-					}}
-				/>
+				<div className="flex justify-center">
+					<Pie
+						data={{
+							labels: ['Pria', 'Wanita'],
+							datasets: [
+								{
+									label: 'Total',
+									data: [totalPria || 0, totalWanita || 0],
+									backgroundColor: ['rgba(40, 74, 245, 0.6)', 'rgba(255, 35, 138, 0.6)'],
+									borderWidth: 1
+								}
+							]
+						}}
+					/>
+				</div>
 			)}
 		</>
 	);
