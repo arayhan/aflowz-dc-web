@@ -36,19 +36,22 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'Program',
 				hidden: isInDetail,
+				minWidth: 350,
 				Cell: (row) => {
 					const programs = row.row.original.programs;
 					return (
 						<div className="flex flex-wrap gap-1">
-							{programs.map((program) => (
-								<ButtonAction
-									key={program.id}
-									className="bg-purple-500 hover:bg-purple-400"
-									action={ACTION_TYPES.SEE_DETAIL}
-									linkTo={`/program/${program.id}`}
-									text={program.name}
-								/>
-							))}
+							{programs.length === 0 && '-'}
+							{programs.length > 0 &&
+								programs.map((program) => (
+									<ButtonAction
+										key={program.id}
+										className="bg-purple-500 hover:bg-purple-400"
+										action={ACTION_TYPES.SEE_DETAIL}
+										linkTo={`/program/${program.id}`}
+										text={program.name}
+									/>
+								))}
 						</div>
 					);
 				}
@@ -88,16 +91,8 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction
-								key={row.row.original.id}
-								action={ACTION_TYPES.UPDATE}
-								linkTo={`/partner/update/${row.row.original.id}`}
-							/>
-							<ButtonAction
-								key={row.row.original.id}
-								action={ACTION_TYPES.DELETE}
-								onClick={() => handleDeletePartner(row.row.original.id)}
-							/>
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/partner/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDeletePartner(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -106,8 +101,8 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		[]
 	);
 
-	const handleDeleteKonstituen = (konstituenID) => {
-		console.log({ konstituenID });
+	const handleDeletePartner = (partnerID) => {
+		console.log({ partnerID });
 	};
 
 	useEffect(() => {
@@ -123,27 +118,14 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={`Penerima ${`Program ${programName}` || 'Semua Program'}`}
+					title={`Penerima ${programName ? `Program ${programName}` : 'Semua Program'}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					isReadonly={!isAdmin || isReadonly}
 				/>
 				<div>
 					<div className="text-xl font-light"></div>
 					<div className="text-sm text-gray-400"></div>
 				</div>
-				{isAdmin && !isReadonly && (
-					<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
-						<button className="bg-green-500 hover:bg-green-600 space-x-1 text-white px-5 py-3 flex items-center justify-center rounded-md transition-all">
-							<SiGooglesheets />
-							<span className="text-sm">Upload XLS</span>
-						</button>
-						<Link
-							to="/program/create"
-							className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
-						>
-							<span>Create Program</span>
-						</Link>
-					</div>
-				)}
 			</div>
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingPartnerList || partnerList === null} />
