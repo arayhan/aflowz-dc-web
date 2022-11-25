@@ -2,6 +2,7 @@ export * from './Button/Button';
 export * from './Button/ButtonAction';
 export * from './Card/Card';
 export * from './InputText/InputText';
+export * from './Modal/Modal';
 export * from './NegativeCase/NegativeCase';
 export * from './Tab/Tab';
 export * from './Table/Table';
