@@ -26,7 +26,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'NIK',
 				accessor: 'nik_number',
-				minWidth: 175
+				minWidth: 70
 			},
 			{
 				Header: 'Name',
@@ -36,18 +36,22 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'Program',
 				hidden: isInDetail,
-				Cell: (row) => (
-					<div className="flex flex-wrap gap-1">
-						{row.row.original.programs.map((program) => (
-							<ButtonAction
-								key={program.id}
-								className="bg-purple-500 hover:bg-purple-400"
-								action={ACTION_TYPES.SEE_DETAIL}
-								linkTo={`/program/${program.id}`}
-							/>
-						))}
-					</div>
-				)
+				Cell: (row) => {
+					const programs = row.row.original.programs;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{programs.map((program) => (
+								<ButtonAction
+									key={program.id}
+									className="bg-purple-500 hover:bg-purple-400"
+									action={ACTION_TYPES.SEE_DETAIL}
+									linkTo={`/program/${program.id}`}
+									text={program.name}
+								/>
+							))}
+						</div>
+					);
+				}
 			},
 			{
 				Header: 'Konstituen',
@@ -55,15 +59,17 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Cell: (row) => {
 					const konstituen = row.row.original.konstituen;
 					return (
-						<div>
-							<ButtonAction
-								key={konstituen.id}
-								className="bg-purple-500 hover:bg-purple-400"
-								action={ACTION_TYPES.SEE_DETAIL}
-								linkTo={`/konstituen/${konstituen.id}`}
-								text={konstituen.name}
-							/>
-						</div>
+						konstituen && (
+							<div>
+								<ButtonAction
+									key={konstituen.id}
+									className="bg-purple-500 hover:bg-purple-400"
+									action={ACTION_TYPES.SEE_DETAIL}
+									linkTo={`/konstituen/${konstituen.id}`}
+									text={konstituen.name}
+								/>
+							</div>
+						)
 					);
 				}
 			},
@@ -79,20 +85,18 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Header: 'Actions',
 				minWidth: 180,
 				hidden: isReadonly || !isAdmin,
-				Cell: () => {
+				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
 							<ButtonAction
-								key={konstituen.id}
-								className="bg-purple-500 hover:bg-purple-400"
+								key={row.row.original.id}
 								action={ACTION_TYPES.UPDATE}
-								linkTo={`/partner/update/${konstituen.id}`}
+								linkTo={`/partner/update/${row.row.original.id}`}
 							/>
 							<ButtonAction
-								key={konstituen.id}
-								className="bg-purple-500 hover:bg-purple-400"
+								key={row.row.original.id}
 								action={ACTION_TYPES.DELETE}
-								onClick={() => handleDeleteKonstituen(konstituen.id)}
+								onClick={() => handleDeletePartner(row.row.original.id)}
 							/>
 						</div>
 					);

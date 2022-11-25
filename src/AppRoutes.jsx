@@ -10,6 +10,7 @@ import ProgramDetail from './pages/Program/ProgramDetail';
 import Mitra from './pages/Mitra/Mitra';
 import MitraDetail from './pages/Mitra/MitraDetail';
 import ProgramForm from './pages/Program/ProgramForm';
+import Partner from './pages/Partner/Partner';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -40,6 +41,7 @@ export const AppRoutes = () => {
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
+					<Route path="/partner" element={<Partner />} />
 				</Route>
 			</Route>
 		</Routes>
