@@ -1,5 +1,6 @@
-import { Table, TableHeader } from '@/components/atoms';
+import { ButtonAction, Table, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link } from 'react-router-dom';
@@ -36,15 +37,14 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Header: 'Program',
 				hidden: isInDetail,
 				Cell: (row) => (
-					<div>
+					<div className="flex flex-wrap gap-1">
 						{row.row.original.programs.map((program) => (
-							<Link
+							<ButtonAction
 								key={program.id}
-								className="inline-block text-center px-3 py-1 bg-purple-500 hover:bg-purple-400 text-white rounded-sm text-xs transition-all"
-								to={`/program/${program.id}`}
-							>
-								{program.name}
-							</Link>
+								className="bg-purple-500 hover:bg-purple-400"
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/program/${program.id}`}
+							/>
 						))}
 					</div>
 				)
@@ -56,13 +56,13 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 					const konstituen = row.row.original.konstituen;
 					return (
 						<div>
-							<Link
+							<ButtonAction
 								key={konstituen.id}
-								className="inline-block text-center px-3 py-1 bg-purple-500 hover:bg-purple-400 text-white rounded-sm text-xs transition-all"
-								to={`/konstituen/${konstituen.id}`}
-							>
-								{konstituen.name}
-							</Link>
+								className="bg-purple-500 hover:bg-purple-400"
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/konstituen/${konstituen.id}`}
+								text={konstituen.name}
+							/>
 						</div>
 					);
 				}
@@ -72,14 +72,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				minWidth: 150,
 				maxWidth: 150,
 				Cell: (row) => {
-					return (
-						<Link
-							to={`/partner/${row.row.original.id}`}
-							className="inline-block text-center px-3 py-1 bg-blue-500 hover:bg-blue-400 text-white rounded-sm text-xs transition-all"
-						>
-							See Detail
-						</Link>
-					);
+					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/partner/${row.row.original.id}`} />;
 				}
 			},
 			{
@@ -89,12 +82,18 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Cell: () => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<Link className="inline-block text-center px-3 py-1 bg-green-500 hover:bg-green-400 text-white rounded-sm text-xs transition-all">
-								Update
-							</Link>
-							<Link className="inline-block text-center px-3 py-1 bg-red-500 hover:bg-red-400 text-white rounded-sm text-xs transition-all">
-								Delete
-							</Link>
+							<ButtonAction
+								key={konstituen.id}
+								className="bg-purple-500 hover:bg-purple-400"
+								action={ACTION_TYPES.UPDATE}
+								linkTo={`/partner/update/${konstituen.id}`}
+							/>
+							<ButtonAction
+								key={konstituen.id}
+								className="bg-purple-500 hover:bg-purple-400"
+								action={ACTION_TYPES.DELETE}
+								onClick={() => handleDeleteKonstituen(konstituen.id)}
+							/>
 						</div>
 					);
 				}
@@ -102,6 +101,10 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		],
 		[]
 	);
+
+	const handleDeleteKonstituen = (konstituenID) => {
+		console.log({ konstituenID });
+	};
 
 	useEffect(() => {
 		const params = programID ? { program_id: programID } : null;

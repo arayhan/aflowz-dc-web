@@ -2,7 +2,6 @@ import { Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
-	ChartPenerimaProgram,
 	TableDetailPenerimaProgram,
 	TablePartner
 } from '@/components/molecules';

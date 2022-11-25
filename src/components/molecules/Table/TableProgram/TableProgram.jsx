@@ -1,12 +1,9 @@
-import { Table, TableButton, TableHeader } from '@/components/atoms';
+import { Table, ButtonAction, TableHeader } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
-	const location = useLocation();
-
 	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
@@ -45,10 +42,10 @@ export const TableProgram = ({ selectedCategory }) => {
 				maxWidth: 50,
 				Cell: (row) => {
 					return (
-						<TableButton
+						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							detailID={row.row.original.id}
+							linkTo={`/program/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -61,8 +58,8 @@ export const TableProgram = ({ selectedCategory }) => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<TableButton action={ACTION_TYPES.UPDATE} detailID={row.row.original.id} />
-								<TableButton action={ACTION_TYPES.DELETE} onDelete={() => handleDeleteProgram(row.row.original.id)} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDeleteProgram(row.row.original.id)} />
 							</div>
 						)
 					);
