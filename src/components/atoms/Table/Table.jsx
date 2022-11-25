@@ -1,13 +1,14 @@
-import { NegativeCaseView } from '@/components/molecules';
+import { NegativeCase } from '@/components/atoms';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useTable } from 'react-table';
 
-export const Table = ({ loading, columns, data }) => {
+export const Table = ({ loading, columns, data, hiddenColumns }) => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
 		columns,
-		data
+		data,
+		initialState: { hiddenColumns: hiddenColumns || [] }
 	});
 
 	return (
@@ -43,13 +44,13 @@ export const Table = ({ loading, columns, data }) => {
 				{!loading && rows.length === 0 && (
 					<tr>
 						<td colSpan={columns.length}>
-							<NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />
+							<NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />
 						</td>
 					</tr>
 				)}
 				{!loading &&
 					rows.length > 0 &&
-					rows.map((row, i) => {
+					rows.map((row) => {
 						prepareRow(row);
 						return (
 							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
@@ -70,4 +71,11 @@ export const Table = ({ loading, columns, data }) => {
 			</tbody>
 		</table>
 	);
+};
+
+Table.defaultProps = {
+	loading: false,
+	columns: [],
+	data: [],
+	hiddenColumns: []
 };

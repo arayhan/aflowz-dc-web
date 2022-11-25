@@ -1,10 +1,10 @@
-import { HomeBanner } from '@/components/sections';
-import React from 'react';
+import { BannerHome, SectionSelectFeatures } from '@/components/molecules';
 
 const Home = () => {
 	return (
 		<div>
-			<HomeBanner />
+			<BannerHome />
+			<SectionSelectFeatures />
 		</div>
 	);
 };

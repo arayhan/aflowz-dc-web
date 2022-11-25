@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RiAdminLine, RiHomeLine } from 'react-icons/ri';
+import { RiHomeLine } from 'react-icons/ri';
 import { GoSignOut } from 'react-icons/go';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useAuthStore } from '@/store';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ButtonProfileHeader = () => {
 	const navigate = useNavigate();
-	const { isAdmin, isSystem, profile, authLogout } = useAuthStore();
+	const { profile, authLogout } = useAuthStore();
 
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

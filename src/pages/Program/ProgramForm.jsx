@@ -1,14 +1,20 @@
-import { BannerFeature } from '@/components/molecules';
-import { FormProgram } from '@/components/sections';
+import { BannerFeature, FormProgram } from '@/components/molecules';
 import React from 'react';
 
 const ProgramForm = () => {
 	return (
 		<div>
 			<BannerFeature title="Program - Create" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-			<div>
-				<FormProgram />
-			</div>
+
+			<section className="bg-gray-100">
+				<div className="container py-16">
+					<div className="max-w-screen-lg mx-auto">
+						<div className="bg-white p-8 rounded-md">
+							<FormProgram />
+						</div>
+					</div>
+				</div>
+			</section>
 		</div>
 	);
 };

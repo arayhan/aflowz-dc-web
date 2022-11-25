@@ -29,7 +29,7 @@ export const InputSelectMitra = () => {
 			</label>
 			<ReactSelect
 				styles={{
-					input: (provided, state) => ({
+					input: (provided) => ({
 						...provided,
 						'input:focus': {
 							boxShadow: 'none'

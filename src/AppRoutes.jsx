@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthStore } from './store';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { SiteLayout } from './components/organisms';
+import { SiteLayout } from './components/layouts';
 
 import Login from './pages/Auth/Login/Login';
 import Home from './pages/Home/Home';
@@ -14,7 +14,7 @@ import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 
 export const AppRoutes = () => {
-	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
+	const { isLoggedIn } = useAuthStore();
 
 	const ProtectedRoute = () => {
 		return !isLoggedIn ? <Navigate to="/login" replace /> : <Outlet />;
