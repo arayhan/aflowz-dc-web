@@ -24,11 +24,11 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Name',
 				accessor: 'name',
-				minWidth: 175
+				minWidth: 215
 			},
 			{
 				Header: 'Category',
-				minWidth: 225,
+				minWidth: 250,
 				Cell: (row) => <div>{row.row.original.program_category.name}</div>
 			},
 			{
@@ -38,8 +38,8 @@ export const TableProgram = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Detail',
-				minWidth: 100,
-				maxWidth: 100,
+				minWidth: 50,
+				maxWidth: 50,
 				Cell: (row) => {
 					return (
 						<div className="min-w-[100px] w-full">
@@ -55,7 +55,7 @@ export const TableProgram = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Actions',
-				minWidth: 180,
+				minWidth: 100,
 				hidden: !isAdmin,
 				Cell: () => {
 					return (
