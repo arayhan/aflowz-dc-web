@@ -74,12 +74,19 @@ const ProgramDetail = () => {
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12">
+								<div className="col-span-12 md:col-span-6">
 									<TablePartner
 										programID={programDetail?.program_id}
 										programName={programDetail?.program_name}
 										isReadonly
 										isInDetail
+									/>
+								</div>
+								<div className="col-span-12 md:col-span-6">
+									<CardPenerimaProgramByGender
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
 									/>
 								</div>
 								<div className="col-span-12 md:col-span-6">
@@ -109,14 +116,6 @@ const ProgramDetail = () => {
 											/>
 										</div>
 									</Card>
-								</div>
-
-								<div className="col-span-12 sm:col-span-6">
-									<CardPenerimaProgramByGender
-										total={programDetail?.total_penerima_program || 0}
-										totalPria={programDetail?.total_pria}
-										totalWanita={programDetail?.total_wanita}
-									/>
 								</div>
 							</div>
 						</div>
