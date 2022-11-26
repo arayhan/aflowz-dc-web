@@ -10,6 +10,7 @@ const { setPageLoading } = useAppStore.getState();
 const states = (set) => ({
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
+	fetchingProgram: false,
 	fetchingProgramList: false,
 	fetchingProgramDetail: false,
 
@@ -17,6 +18,7 @@ const states = (set) => ({
 
 	programCategoryList: null,
 	programCategoryDetail: null,
+	program: null,
 	programList: null,
 	programDetail: null,
 
@@ -27,6 +29,15 @@ const states = (set) => ({
 
 		set({ programCategoryList: success ? payload : null });
 		set({ fetchingProgramCategoryList: false });
+	},
+	getProgram: async (programID) => {
+		set({ fetchingProgram: true });
+		set({ program: null });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgram(programID);
+
+		set({ program: success ? payload : null });
+		set({ fetchingProgram: false });
 	},
 	getProgramList: async (params) => {
 		set({ fetchingProgramList: true });

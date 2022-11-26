@@ -10,6 +10,15 @@ export const getProgramCategoryList = async () => {
 	}
 };
 
+export const getProgram = async (programID) => {
+	try {
+		const response = await http.get(`/program/${programID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getProgramList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);
