@@ -1,4 +1,4 @@
-import { NegativeCaseView } from '@/components/molecules';
+import { NegativeCase } from '@/components/atoms';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 import { Chart as ChartJS, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
@@ -25,7 +25,7 @@ export const BarChartPenerimaKonstituenPerTahun = ({ totalPenerima }) => {
                 <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
             </div>
             <hr />
-            {totalPenerima.length === 0 && <NegativeCaseView type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
+            {totalPenerima.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
             {totalPenerima.length > 0 && (
                 <div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4 w-auto h-96">
                     <Bar
