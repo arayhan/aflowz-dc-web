@@ -7,7 +7,7 @@ import { useAppStore } from './app.store';
 
 const { setPageLoading } = useAppStore.getState();
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
 	fetchingProgram: false,
@@ -23,12 +23,14 @@ const states = (set) => ({
 	programDetail: null,
 
 	getProgramCategoryList: async () => {
-		set({ fetchingProgramCategoryList: true });
+		if (get().programCategoryList === null) {
+			set({ fetchingProgramCategoryList: true });
 
-		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+			const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
 
-		set({ programCategoryList: success ? payload : null });
-		set({ fetchingProgramCategoryList: false });
+			set({ programCategoryList: success ? payload : null });
+			set({ fetchingProgramCategoryList: false });
+		}
 	},
 	getProgram: async (programID) => {
 		set({ fetchingProgram: true });
@@ -76,6 +78,20 @@ const states = (set) => ({
 
 		toastRequestResult(loader, success, 'Program created', payload?.odoo_error || payload?.message);
 		set({ processingCreateProgram: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+
+	updateProgram: async (programID, params, callback) => {
+		setPageLoading(true);
+		set({ processingUpdateProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.updateProgram(programID, params);
+
+		toastRequestResult(loader, success, 'Program updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateProgram: false });
 		setPageLoading(false);
 
 		callback({ payload, success });

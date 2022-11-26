@@ -1,6 +1,6 @@
 import { Button, InputText } from '@/components/atoms';
 import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/components/molecules';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProgramSchema } from '@/utils/validation-schema';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,24 +11,29 @@ export const FormProgram = () => {
 	const { programID } = useParams();
 	const navigate = useNavigate();
 
-	const { program, fetchingProgram, processingCreateProgram, clearStateProgram, createProgram, getProgram } =
-		useProgramStore();
+	const { program, fetchingProgram, processingCreateProgram } = useProgramStore();
+	const { getProgram, createProgram, updateProgram } = useProgramStore();
 
-	const {
-		getValues,
-		setValue,
-		setError,
-		register,
-		handleSubmit,
-		formState: { errors }
-	} = useForm({ resolver: yupResolver(formProgramSchema) });
+	const { control, setValue, setError, handleSubmit } = useForm({
+		resolver: yupResolver(formProgramSchema),
+		defaultValues: {
+			name: '',
+			periode: undefined,
+			program_category_id: undefined,
+			pic: '',
+			pic_mobile: '',
+			pic_staff_id: undefined
+		}
+	});
 
 	const onSubmitProgram = (values) => {
 		if (programID) {
-			console.log({ values, programID });
+			updateProgram(programID, values, ({ success }) => {
+				if (success) navigate(`/program/${programID}`);
+			});
 		} else {
-			createProgram(values, ({ success }) => {
-				if (success) navigate('/program');
+			createProgram(values, ({ payload, success }) => {
+				if (success) navigate(`/program/${payload.id}`);
 			});
 		}
 	};
@@ -38,7 +43,7 @@ export const FormProgram = () => {
 	}, [programID]);
 
 	useEffect(() => {
-		if (program) {
+		if (programID && program) {
 			setValue('program_category_id', program.program_category?.id || null);
 			setValue('name', program.name || '');
 			setValue('periode', program.periode || null);
@@ -46,7 +51,7 @@ export const FormProgram = () => {
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
 		}
-	}, [program]);
+	}, [programID, program]);
 
 	return (
 		<div className="space-y-8">
@@ -56,61 +61,93 @@ export const FormProgram = () => {
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
-				<InputSelectMitra
-					{...register('program_category_id')}
-					loading={fetchingProgram}
-					value={getValues('program_category_id')}
-					disabled={processingCreateProgram}
-					onChange={({ value }) => {
-						setValue('program_category_id', value);
-						setError('program_category_id', null);
-					}}
-					error={errors.program_category_id}
+				<Controller
+					name={'program_category_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectMitra
+							{...field}
+							disabled={processingCreateProgram || fetchingProgram}
+							onChange={({ value }) => {
+								setValue('program_category_id', value);
+								setError('program_category_id', null);
+							}}
+							error={error}
+						/>
+					)}
 				/>
-				<InputText
-					{...register('name')}
-					disabled={processingCreateProgram}
-					label="Nama Program"
-					name="name"
-					placeholder="Nama Program"
-					error={errors.name}
+
+				<Controller
+					name={'name'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Nama Program"
+							placeholder="Nama Program"
+							disabled={programID || processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
 				/>
-				<InputSelectPeriode
-					{...register('periode')}
-					value={getValues('periode')}
-					disabled={processingCreateProgram}
-					onChange={({ value }) => {
-						setValue('periode', value);
-						setError('periode', null);
-					}}
-					error={errors.periode}
+
+				<Controller
+					name={'periode'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectPeriode
+							{...field}
+							disabled={programID || processingCreateProgram || fetchingProgram}
+							onChange={({ value }) => {
+								setValue('periode', value);
+								setError('periode', null);
+							}}
+							error={error}
+						/>
+					)}
 				/>
-				<InputSelectStaff
-					{...register('pic_staff_id')}
-					loading={fetchingProgram}
-					value={getValues('pic_staff_id')}
-					disabled={processingCreateProgram}
-					onChange={({ value }) => {
-						setValue('pic_staff_id', value);
-						setError('pic_staff_id', null);
-					}}
-					error={errors.pic_staff_id}
+
+				<Controller
+					name={'pic_staff_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectStaff
+							{...field}
+							disabled={processingCreateProgram || fetchingProgram}
+							onChange={({ value }) => {
+								setValue('pic_staff_id', value);
+								setError('pic_staff_id', null);
+							}}
+							error={error}
+						/>
+					)}
 				/>
-				<InputText
-					{...register('pic')}
-					disabled={processingCreateProgram}
-					label="Nama PIC Eksternal"
-					name="pic"
-					placeholder="Nama PIC Eksternal"
-					error={errors.pic}
+
+				<Controller
+					name={'pic'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Nama PIC Eksternal"
+							placeholder="Nama PIC Eksternal"
+							disabled={programID || processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
 				/>
-				<InputText
-					{...register('pic_mobile')}
-					disabled={processingCreateProgram}
-					label="Nomor Telepon PIC Eksternal"
-					name="pic_mobile"
-					placeholder="Contoh : 08xxxxxxxxxx"
-					error={errors.pic_mobile}
+				<Controller
+					name={'pic_mobile'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Nomor Telepon PIC Eksternal"
+							placeholder="Contoh : 08xxxxxxxxxx"
+							disabled={programID || processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
 				/>
 			</div>
 			<hr />

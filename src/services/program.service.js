@@ -64,3 +64,17 @@ export const createProgram = async (params) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const updateProgram = async (programID, params) => {
+	const request = {
+		program_category_id: params?.program_category_id || 0,
+		pic_staff_id: params?.pic_staff_id || 0
+	};
+
+	try {
+		const response = await http.put(`/program/${programID}`, request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
