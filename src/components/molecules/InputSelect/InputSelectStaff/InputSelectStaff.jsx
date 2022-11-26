@@ -25,7 +25,7 @@ export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) 
 
 	return (
 		<div className="space-y-1">
-			<InputLabel text="Pilih Staff PIC" name={props.name} />
+			<InputLabel text="Pilih Staff PIC Internal" name={props.name} />
 			{fetchingPartnerList && <Skeleton height={36} />}
 			{!fetchingPartnerList && <InputSelect ref={ref} options={options} onChange={onChange} {...props} />}
 			{error && <InputError message={error.message} />}

@@ -67,12 +67,27 @@ export const FormProgram = () => {
 				<InputSelectStaff
 					{...register('pic_staff_id')}
 					disabled={processingCreateProgram}
-					onChange={({ label, value }) => {
-						setValue('pic', label);
+					onChange={({ value }) => {
 						setValue('pic_staff_id', value);
 						setError('pic_staff_id', null);
 					}}
 					error={errors.pic_staff_id}
+				/>
+				<InputText
+					{...register('pic')}
+					disabled={processingCreateProgram}
+					label="Nama PIC Eksternal"
+					name="pic"
+					placeholder="Nama PIC Eksternal"
+					error={errors.pic}
+				/>
+				<InputText
+					{...register('pic_mobile')}
+					disabled={processingCreateProgram}
+					label="Nomor Telepon PIC Eksternal"
+					name="pic_mobile"
+					placeholder="Contoh : 08xxxxxxxxxx"
+					error={errors.pic_mobile}
 				/>
 			</div>
 			<hr />
