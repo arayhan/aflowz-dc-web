@@ -3,6 +3,7 @@ export * from './Button/ButtonAction';
 export * from './Card/Card';
 export * from './InputError/InputError';
 export * from './InputLabel/InputLabel';
+export * from './InputSelect/InputSelect';
 export * from './InputText/InputText';
 export * from './Modal/Modal';
 export * from './NegativeCase/NegativeCase';
