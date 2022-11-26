@@ -1,3 +1,14 @@
+import { toast } from 'react-toastify';
+
+export const toastRequestResult = (loader, success, successText, failedText) => {
+	toast.update(loader, {
+		type: success ? 'success' : 'error',
+		render: success ? successText || 'Success' : failedText || 'Failed',
+		isLoading: false,
+		autoClose: 1500
+	});
+};
+
 export const slugify = (str) =>
 	str
 		.toLowerCase()
