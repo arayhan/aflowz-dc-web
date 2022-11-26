@@ -4,7 +4,7 @@ import { InputLabel } from '../InputLabel/InputLabel';
 
 export const InputText = forwardRef(({ label, placeholder, error, ...props }, ref) => {
 	return (
-		<div className="space-y-1 flex flex-col justify-start">
+		<div className="space-y-2 flex flex-col justify-start">
 			<InputLabel text={label} name={props.name} />
 			<input
 				{...props}
