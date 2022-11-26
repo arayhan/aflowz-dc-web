@@ -14,6 +14,7 @@ export * from './Form/FormProgram/FormProgram';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
+export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
