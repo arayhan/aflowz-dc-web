@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo } from 'react';
 
 export const TableProgram = ({ selectedCategory }) => {
 	const { isAdmin } = useAuthStore();
-	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
+	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
 	const [data, setData] = useState([]);
 
@@ -59,7 +59,7 @@ export const TableProgram = ({ selectedCategory }) => {
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDeleteProgram(row.row.original.id)} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgram(row.row.original.id)} />
 							</div>
 						)
 					);
@@ -68,10 +68,6 @@ export const TableProgram = ({ selectedCategory }) => {
 		],
 		[]
 	);
-
-	const handleDeleteProgram = (programID) => {
-		console.log({ programID });
-	};
 
 	useEffect(() => {
 		const params = selectedCategory ? { program_category_id: selectedCategory.id } : null;

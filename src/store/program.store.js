@@ -15,6 +15,8 @@ const states = (set, get) => ({
 	fetchingProgramDetail: false,
 
 	processingCreateProgram: false,
+	processingUpdateProgram: false,
+	processingDeleteProgram: false,
 
 	programCategoryList: null,
 	programCategoryDetail: null,
@@ -95,6 +97,19 @@ const states = (set, get) => ({
 		setPageLoading(false);
 
 		callback({ payload, success });
+	},
+
+	deleteProgram: async (programID) => {
+		setPageLoading(true);
+		set({ processingDeleteProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgram(programID);
+
+		toastRequestResult(loader, success, 'Program deleted', payload?.odoo_error || payload?.message);
+		get().getProgramList();
+		set({ processingDeleteProgram: false });
+		setPageLoading(false);
 	}
 });
 
