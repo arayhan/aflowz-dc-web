@@ -1,7 +1,7 @@
 import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectPeriode = forwardRef(({ error, onChange, ...props }, ref) => {
+export const InputSelectPeriode = forwardRef(({ error, value, disabled, onChange, ...props }, ref) => {
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
@@ -23,7 +23,14 @@ export const InputSelectPeriode = forwardRef(({ error, onChange, ...props }, ref
 	return (
 		<div className="space-y-1">
 			<InputLabel text="Pilih Periode" name={props.name} />
-			<InputSelect ref={ref} options={options} onChange={onChange} {...props} />
+			<InputSelect
+				ref={ref}
+				value={value ? Number(value) : value}
+				options={options}
+				onChange={onChange}
+				disabled={disabled}
+				{...props}
+			/>
 			{error && <InputError message={error.message} />}
 		</div>
 	);

@@ -3,7 +3,7 @@ import { usePartnerStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) => {
+export const InputSelectStaff = forwardRef(({ loading, error, onChange, ...props }, ref) => {
 	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
 
 	const [options, setOptions] = useState([]);
@@ -26,8 +26,8 @@ export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) 
 	return (
 		<div className="space-y-1">
 			<InputLabel text="Pilih Staff PIC Internal" name={props.name} />
-			{fetchingPartnerList && <Skeleton height={36} />}
-			{!fetchingPartnerList && <InputSelect ref={ref} options={options} onChange={onChange} {...props} />}
+			{(fetchingPartnerList || loading) && <Skeleton height={36} />}
+			{!fetchingPartnerList && !loading && <InputSelect ref={ref} options={options} onChange={onChange} {...props} />}
 			{error && <InputError message={error.message} />}
 		</div>
 	);
