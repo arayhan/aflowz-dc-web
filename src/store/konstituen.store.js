@@ -9,6 +9,9 @@ const states = (set) => ({
     konstituenList: null,
     konstituenDetail: null,
     penerimaKonstituenDetail: null,
+    successKonstituenCreate: null,
+    successKonstituenDelete: null,
+    successKonstituenUpdate: null,
 
     getKonstituenList: async (params) => {
         set({ fetchingKonstituenList: true });
@@ -18,15 +21,15 @@ const states = (set) => ({
 
         const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(requestParams);
         
-        set({ konstituenList: success ? payload : null })
+        set({ konstituenList: success ? payload : null });
         set({ fetchingKonstituenList: false });
     },
     getKonstituenDetail: async (konstituenID) => {
         set({ fetchingKonstituenDetail: true });
 
-        const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenDetail(konstituenID)
+        const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenDetail(konstituenID);
         
-        set({ konstituenDetail: success ? payload : null })
+        set({ konstituenDetail: success ? payload : null });
         set({ fetchingKonstituenDetail: false });
     },
     getPenerimaKonstituenDetail: async (params) => {
@@ -37,8 +40,23 @@ const states = (set) => ({
 
         const { success, payload } = await SERVICE_KONSTITUEN.getPenerimaKonstituenDetail(requestParams);
 
-        set({ penerimaKonstituenDetail: success ? payload : null })
+        set({ penerimaKonstituenDetail: success ? payload : null });
         set({ fetchingPenerimaKonstituenDetail: false });
+    },
+    postKonstituenCreate: async (data) => {
+        const { success, payload } = await SERVICE_KONSTITUEN.postKonstituenCreate(data);
+
+        set({ successKonstituenCreate: success ? payload : null });
+    },
+    deleteKonstituen: async (params) => {
+        const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(params);
+
+        set({ successKonstituenDelete: success ? payload : null });
+    },
+    updateKonstituen: async (params, data) => {
+        const { success, payload } = await SERVICE_KONSTITUEN.updateKonstituen(params, data);
+
+        set({ successKonstituenUpdate: success ? payload : null });
     }
 });
 

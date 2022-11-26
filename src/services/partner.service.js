@@ -10,3 +10,15 @@ export const getPartnerList = async (params) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getStaffList = async () => {
+    try {
+        const queryParams = objectToQueryString({ is_staff: true });
+
+        const response = await http.get('/partner' + queryParams);
+        
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};

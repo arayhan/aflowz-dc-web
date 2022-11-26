@@ -1,5 +1,4 @@
-import { BannerFeature, TableKonstituen } from '@/components/molecules';
-import { KonstituenType } from '@/components/sections';
+import { BannerFeature, TableKonstituen, KonstituenType } from '@/components/molecules';
 import { useState } from 'react';
 
 const Konstituen = () => {

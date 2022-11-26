@@ -12,6 +12,8 @@ import MitraDetail from './pages/Mitra/MitraDetail';
 import ProgramForm from './pages/Program/ProgramForm';
 import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
+import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
+import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
 import Partner from './pages/Partner/Partner';
 
 export const AppRoutes = () => {
@@ -38,7 +40,8 @@ export const AppRoutes = () => {
 					<Route path="/mitra" element={<Mitra />} />
 					<Route path="/konstituen" element={<Konstituen />} />
 					<Route path="/konstituen/:konstituenID" element={<KonstituenDetail />} />
-					<Route path="/konstituen/create" element={<ProgramForm />} />
+					<Route path="/konstituen/create" element={<KonstituenCreate />} />
+					<Route path="/konstituen/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />

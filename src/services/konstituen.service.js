@@ -28,12 +28,39 @@ export const getPenerimaKonstituenDetail = async (params) => {
     try {
         const queryParams = objectToQueryString(params);
 
-        console.log('/partner' + queryParams)
-
         const response = await http.get('/partner' + queryParams);
 
         return { success: response.data.success, payload: response.data.data };
     } catch (error) {
         return { success: false, payload: error };
     }
-}
+};
+
+export const postKonstituenCreate = async (data) => {
+    try {
+        const response = await http.post('/konstituen', data);
+
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};
+
+export const deleteKonstituen = async (params) => {
+    try {
+        const response = await http.delete('/konstituen'+ `/${params}`);
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};
+
+export const updateKonstituen = async (params, data) => {
+    try {
+        const response = await http.put('/konstituen'+ `/${params}`, data);
+        
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};
