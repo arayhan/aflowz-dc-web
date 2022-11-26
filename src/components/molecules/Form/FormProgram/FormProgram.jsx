@@ -1,5 +1,5 @@
 import { Button, InputText } from '@/components/atoms';
-import { InputSelectMitra } from '@/components/molecules';
+import { InputSelectMitra, InputSelectPeriode } from '@/components/molecules';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProgramSchema } from '@/utils/validation-schema';
@@ -41,7 +41,14 @@ export const FormProgram = () => {
 					placeholder="Nama Program"
 					error={errors.name}
 				/>
-				<InputText {...register('periode')} label="Periode" placeholder="contoh: 2022" error={errors.periode} />
+				<InputSelectPeriode
+					{...register('periode')}
+					onChange={({ value }) => {
+						setValue('periode', value);
+						setError('periode', null);
+					}}
+					error={errors.periode}
+				/>
 			</div>
 			<hr />
 			<div className="flex justify-end">
