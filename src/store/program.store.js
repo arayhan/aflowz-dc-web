@@ -49,4 +49,4 @@ const states = (set) => ({
 	}
 });
 
-export const useProgramStore = create(devtools(states, { name: 'auth-store', getStorage: () => localStorage }));
+export const useProgramStore = create(devtools(states, { name: 'program-store', getStorage: () => localStorage }));

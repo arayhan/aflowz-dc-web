@@ -4,3 +4,7 @@ export const loginSchema = yup.object().shape({
 	username: yup.string().required('Username wajib diisi'),
 	password: yup.string().required('Password wajib diisi')
 });
+
+export const formProgramSchema = yup.object().shape({
+	name: yup.string().required('Nama program wajib diisi')
+});

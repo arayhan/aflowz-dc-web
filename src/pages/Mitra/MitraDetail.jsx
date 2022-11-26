@@ -1,10 +1,9 @@
-import { BannerFeature } from '@/components/molecules';
+import { Card } from '@/components/atoms';
+import { BannerFeature, ChartPenerimaMitra, ChartProgramByPeriode } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
-import { ChartPenerimaMitra } from './components/ChartPenerimaMitra';
-import { ChartProgramByPeriode } from './components/ChartProgramByPeriode';
 
 const MitraDetail = () => {
 	const params = useParams();
@@ -65,16 +64,28 @@ const MitraDetail = () => {
 							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
-									<ChartPenerimaMitra
-										total={programCategoryDetail?.total_penerima_program_mitra}
-										penerima={programCategoryDetail?.penerima_program}
-									/>
+									<Card
+										title={'Penerima Mitra'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaMitra
+											total={programCategoryDetail?.total_penerima_program_mitra}
+											penerima={programCategoryDetail?.penerima_program}
+										/>
+									</Card>
 								</div>
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
-									<ChartProgramByPeriode
-										total={programCategoryDetail?.total_program_by_periode.length}
-										penerima={programCategoryDetail?.total_program_by_periode}
-									/>
+									<Card
+										title={'Jumlah Program by Periode'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartProgramByPeriode
+											total={programCategoryDetail?.total_program_by_periode.length}
+											penerima={programCategoryDetail?.total_program_by_periode}
+										/>
+									</Card>
 								</div>
 							</div>
 						</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthStore } from './store';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { SiteLayout } from './components/organisms';
+import { SiteLayout } from './components/layouts';
 
 import Login from './pages/Auth/Login/Login';
 import Home from './pages/Home/Home';
@@ -12,9 +12,10 @@ import MitraDetail from './pages/Mitra/MitraDetail';
 import ProgramForm from './pages/Program/ProgramForm';
 import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
+import Partner from './pages/Partner/Partner';
 
 export const AppRoutes = () => {
-	const { isAdmin, isSystem, isLoggedIn } = useAuthStore();
+	const { isLoggedIn } = useAuthStore();
 
 	const ProtectedRoute = () => {
 		return !isLoggedIn ? <Navigate to="/login" replace /> : <Outlet />;
@@ -40,9 +41,11 @@ export const AppRoutes = () => {
 					<Route path="/konstituen/create" element={<ProgramForm />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
+					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
+					<Route path="/partner" element={<Partner />} />
 				</Route>
 			</Route>
 		</Routes>

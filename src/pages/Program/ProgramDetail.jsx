@@ -1,10 +1,14 @@
-import { BannerFeature } from '@/components/molecules';
+import { Card } from '@/components/atoms';
+import {
+	BannerFeature,
+	CardPenerimaProgramByGender,
+	TableDetailPenerimaProgram,
+	TablePartner
+} from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
-import { ChartPenerimaProgram } from './components/ChartPenerimaProgram';
-import { ChartPenerimaProgramByGender } from './components/ChartPenerimaProgramByGender';
+import { Link, useParams } from 'react-router-dom';
 
 const ProgramDetail = () => {
 	const params = useParams();
@@ -26,36 +30,37 @@ const ProgramDetail = () => {
 					{fetchingProgramDetail && <ProgramDetailSkeleton />}
 					{!fetchingProgramDetail && programDetail && (
 						<div className="space-y-6">
-							<div className="col-span-12 bg-white rounded-md">
-								<div className="p-4 space-y-2">
-									<div className="font-light text-xl">Details</div>
-									<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-								</div>
-								<hr />
-								<div className="p-5">
-									<div className="grid grid-cols-12 gap-y-1 text-sm">
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
+							<Card
+								title={'Details'}
+								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+								className={'bg-white rounded-md'}
+							>
+								<div className="grid grid-cols-12 gap-y-1 text-sm p-5">
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
+									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_name}</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programDetail?.program_periode}
-										</div>
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
+									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_periode}</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programDetail?.program_pic}{' '}
-											{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
-										</div>
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
+									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										{programDetail?.program_pic}{' '}
+										{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
+									</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
+									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<Link
+											to={`/staff/${programDetail?.pic_staff.id}`}
+											className="text-primary underline hover:text-primary-400"
+										>
 											{programDetail?.pic_staff.name}{' '}
 											{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
-										</div>
+										</Link>
 									</div>
 								</div>
-							</div>
+							</Card>
+
 							<div className="flex items-center justify-center gap-4">
 								<div className="bg-white rounded-md px-10 md:px-16 py-6">
 									<div className="flex flex-col items-center justify-center space-y-1 text-center">
@@ -66,27 +71,50 @@ const ProgramDetail = () => {
 									</div>
 								</div>
 							</div>
+
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgramByGender
+								<div className="col-span-12 md:col-span-6">
+									<TablePartner
+										programID={programDetail?.program_id}
+										programName={programDetail?.program_name}
+										isReadonly
+										isInDetail
+									/>
+								</div>
+								<div className="col-span-12 md:col-span-6">
+									<CardPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
 										totalPria={programDetail?.total_pria}
 										totalWanita={programDetail?.total_wanita}
 									/>
 								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_village}
-										isPerVillage
-									/>
+								<div className="col-span-12 md:col-span-6">
+									<Card
+										title={'Penerima Program PerVillage'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailPenerimaProgram
+												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
+												isPerVillage
+											/>
+										</div>
+									</Card>
 								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4 bg-white rounded-md">
-									<ChartPenerimaProgram
-										totalPenerima={programDetail?.total_penerima_program || 0}
-										penerimaPerArea={programDetail?.total_penerima_program_per_city}
-										isPerCity
-									/>
+								<div className="col-span-12 md:col-span-6">
+									<Card
+										title={'Penerima Program PerCity'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailPenerimaProgram
+												dataPenerimaPerArea={programDetail?.total_penerima_program_per_city}
+												isPerCity
+											/>
+										</div>
+									</Card>
 								</div>
 							</div>
 						</div>
