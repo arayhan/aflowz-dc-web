@@ -1,8 +1,9 @@
+import { InputError, InputLabel } from '@/components/atoms';
 import { useProgramStore } from '@/store';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import ReactSelect from 'react-select';
 
-export const InputSelectMitra = () => {
+export const InputSelectMitra = forwardRef(({ error, onChange, ...props }, ref) => {
 	const { programCategoryList, getProgramCategoryList } = useProgramStore();
 
 	const [options, setOptions] = useState([]);
@@ -24,10 +25,11 @@ export const InputSelectMitra = () => {
 
 	return (
 		<div className="space-y-1">
-			<label className="text-sm text-gray-600" htmlFor="category">
-				Pilih Mitra
-			</label>
+			<InputLabel text="Pilih Mitra" name={props.name} />
 			<ReactSelect
+				{...props}
+				ref={ref}
+				onChange={onChange}
 				styles={{
 					input: (provided) => ({
 						...provided,
@@ -36,10 +38,14 @@ export const InputSelectMitra = () => {
 						}
 					})
 				}}
-				id="category"
-				name="category"
 				options={options}
 			/>
+			{error && <InputError message={error.message} />}
 		</div>
 	);
+});
+
+InputSelectMitra.displayName = 'InputSelectMitra';
+InputSelectMitra.defaultProps = {
+	name: 'mitra'
 };
