@@ -1,9 +1,10 @@
 import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useProgramStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 export const InputSelectMitra = forwardRef(({ error, onChange, ...props }, ref) => {
-	const { programCategoryList, getProgramCategoryList } = useProgramStore();
+	const { programCategoryList, fetchingProgramCategoryList, getProgramCategoryList } = useProgramStore();
 
 	const [options, setOptions] = useState([]);
 
@@ -25,7 +26,8 @@ export const InputSelectMitra = forwardRef(({ error, onChange, ...props }, ref) 
 	return (
 		<div className="space-y-1">
 			<InputLabel text="Pilih Mitra" name={props.name} />
-			<InputSelect ref={ref} options={options} onChange={onChange} {...props} />
+			{fetchingProgramCategoryList && <Skeleton height={36} />}
+			{!fetchingProgramCategoryList && <InputSelect ref={ref} options={options} onChange={onChange} {...props} />}
 			{error && <InputError message={error.message} />}
 		</div>
 	);

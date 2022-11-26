@@ -1,9 +1,10 @@
 import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { usePartnerStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) => {
-	const { partnerList, getPartnerList } = usePartnerStore();
+	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
 
 	const [options, setOptions] = useState([]);
 
@@ -25,7 +26,8 @@ export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) 
 	return (
 		<div className="space-y-1">
 			<InputLabel text="Pilih Staff PIC" name={props.name} />
-			<InputSelect ref={ref} options={options} onChange={onChange} {...props} />
+			{fetchingPartnerList && <Skeleton height={36} />}
+			{!fetchingPartnerList && <InputSelect ref={ref} options={options} onChange={onChange} {...props} />}
 			{error && <InputError message={error.message} />}
 		</div>
 	);
