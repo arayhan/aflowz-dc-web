@@ -1,5 +1,5 @@
 import { Button, InputText } from '@/components/atoms';
-import { InputSelectMitra, InputSelectPeriode } from '@/components/molecules';
+import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/components/molecules';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProgramSchema } from '@/utils/validation-schema';
@@ -48,6 +48,15 @@ export const FormProgram = () => {
 						setError('periode', null);
 					}}
 					error={errors.periode}
+				/>
+				<InputSelectStaff
+					{...register('pic_staff_id')}
+					onChange={({ label, value }) => {
+						setValue('pic', label);
+						setValue('pic_staff_id', value);
+						setError('pic_staff_id', null);
+					}}
+					error={errors.pic_staff_id}
 				/>
 			</div>
 			<hr />
