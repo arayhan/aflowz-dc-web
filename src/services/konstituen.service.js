@@ -46,9 +46,20 @@ export const postKonstituenCreate = async (data) => {
     }
 };
 
-export const deleteKonstituen = async (data) => {
+export const deleteKonstituen = async (params) => {
     try {
-        console.log(data)
+        const response = await http.delete('/konstituen'+ `/${params}`);
+        return { success: response.data.success, payload: response.data.data };
+    } catch (error) {
+        return { success: false, payload: error };
+    }
+};
+
+export const updateKonstituen = async (params, data) => {
+    try {
+        const response = await http.put('/konstituen'+ `/${params}`, data);
+        
+        return { success: response.data.success, payload: response.data.data };
     } catch (error) {
         return { success: false, payload: error };
     }

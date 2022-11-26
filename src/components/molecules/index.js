@@ -12,6 +12,7 @@ export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstitue
 
 export * from './Form/FormProgram/FormProgram';
 export * from './Form/FormKonstituen/FormKonstituenCreate';
+export * from './Form/FormKonstituen/FormKonstituenUpdate';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';

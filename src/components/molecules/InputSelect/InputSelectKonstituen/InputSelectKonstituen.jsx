@@ -1,10 +1,10 @@
 import ReactSelect from 'react-select';
 
-export const InputSelectKonstituen = ({ selectedKonstituen }) => {
+export const InputSelectKonstituen = ({ selectedKonstituen, setPlaceholder }) => {
 
     const options = [
-        {label: 'Sekolah', value: 'sekolah'}, 
-        {label: 'Kampus', value: 'kampus'}
+        {label: 'sekolah', value: 'sekolah'}, 
+        {label: 'kampus', value: 'kampus'}
     ];
 
     return (
@@ -25,6 +25,7 @@ export const InputSelectKonstituen = ({ selectedKonstituen }) => {
 				name="konstituen"
 				options={options}
                 onChange={(selectedOption) => selectedKonstituen(selectedOption.value)}
+				placeholder={setPlaceholder}
 			/>
 		</div>
     );

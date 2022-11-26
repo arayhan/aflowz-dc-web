@@ -13,6 +13,7 @@ import ProgramForm from './pages/Program/ProgramForm';
 import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
+import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -39,6 +40,7 @@ export const AppRoutes = () => {
 					<Route path="/konstituen" element={<Konstituen />} />
 					<Route path="/konstituen/:konstituenID" element={<KonstituenDetail />} />
 					<Route path="/konstituen/create" element={<KonstituenCreate />} />
+					<Route path="/konstituen/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/create" element={<ProgramForm />} />

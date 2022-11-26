@@ -2,7 +2,7 @@ import { usePartnerStore } from '@/store';
 import React, { useEffect, useState } from 'react';
 import ReactSelect from 'react-select';
 
-export const InputSelectStaff = ({ selectedStaff }) => {
+export const InputSelectStaff = ({ selectedStaff, setPlaceholder }) => {
     const { staffList, getStaffList } = usePartnerStore();
 
     const [options, setOptions] = useState([]);
@@ -40,6 +40,7 @@ export const InputSelectStaff = ({ selectedStaff }) => {
 				name="staff"
 				options={options}
                 onChange={(selectedOption) => selectedStaff(selectedOption.value)}
+                placeholder={setPlaceholder}
 			/>
 		</div>
     );

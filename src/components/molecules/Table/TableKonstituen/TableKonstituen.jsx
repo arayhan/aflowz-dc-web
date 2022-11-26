@@ -1,11 +1,12 @@
-import { Table } from "@/components/atoms";
+import { Table, Toast } from "@/components/atoms";
 import { useKonstituenStore } from "@/store";
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { SiGooglesheets } from 'react-icons/si';
+import { toast } from 'react-toastify';
 
 export const TableKonstituen = ({ selectedType }) => {
-	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
+	const { fetchingKonstituenList, konstituenList, getKonstituenList, deleteKonstituen } = useKonstituenStore();
 
 	const [data, setData] = useState([]);
 	const [konstituen, setKonstituen] = useState(null);
@@ -60,7 +61,9 @@ export const TableKonstituen = ({ selectedType }) => {
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+							<Link 
+								to={`/konstituen/update/${row.row.original.id}`} 
+								className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
 								Update
 							</Link>
 							<button onClick={() => setKonstituen(row.row.original)}
@@ -84,8 +87,22 @@ export const TableKonstituen = ({ selectedType }) => {
 		if (konstituenList) setData(konstituenList.items);
 	});
 
-	const handleDelete = () => {
-		
+	const handleDelete = (konstituenID) => {
+		deleteKonstituen(konstituenID);
+
+		toast.success('Berhasil Menghapus Konstituen', {
+			position: "top-right",
+			autoClose: 1500,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		});
+
+		setKonstituen(null);
+		getKonstituenList();
 	};
 
 	return (
@@ -120,14 +137,14 @@ export const TableKonstituen = ({ selectedType }) => {
 							<div className="relative border-2 bg-white rounded-lg shadow border-main-500">
 								<div className="p-6 text-center">
 									<p className="font-normal text-black">Anda yakin ingin menghapus institusi ini?</p>
-									<p className='mb-3'>{konstituen.name}</p>
+									<p className='my-3 font-semibold'>{konstituen.name}</p>
 									<button type="button" className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-										>
+										onClick={() => handleDelete(konstituen.id)}>
 										Yes, Delete
 									</button>
-									<button type="button" onClick={() => {setKonstituen(null); getKonstituenList()}}
+									<button type="button" onClick={() => setKonstituen(null)}
 										className="text-main-500 bg-white focus:ring-2 focus:ring-main-500 border border-gray-300 hover:bg-gray-100 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 "
-										>Cancel</button>
+									>Cancel</button>
 								</div>
 							</div>
 						</div>

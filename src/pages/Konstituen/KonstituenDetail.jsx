@@ -32,7 +32,7 @@ const KonstituenDetail = () => {
                     {!fetchingKonstituenDetail && konstituenDetail && (
                         <div className="space-y-6">
                             <div className="col-span-12 bg-gray-100 p-5">
-                                <div className="bg-white shadow-lg rounded-md ">
+                                <div className="bg-white shadow-lg rounded-md">
                                     <div className="p-4">
                                         <div className="font-light text-xl">Details</div>
                                         <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
@@ -73,7 +73,7 @@ const KonstituenDetail = () => {
                                             <div className="font-light text-gray-400">Total Penerima</div>
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-12 gap-4 container">
+                                    <div className="grid grid-cols-12 gap-4 w-full">
                                         <div className="col-span-12 md:col-span-6 bg-white rounded-md shadow-lg">
                                             <BarChartPenerimaKonstituenPerTahun
                                                 totalPenerima={konstituenDetail?.total_penerima_program_konstituen_by_periode_per_orang || 0}
