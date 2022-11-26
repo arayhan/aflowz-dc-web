@@ -1,12 +1,20 @@
 import { SERVICE_PROGRAM } from '@/services';
+import { toastRequestResult } from '@/utils/helpers';
+import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { useAppStore } from './app.store';
+
+const { setPageLoading } = useAppStore.getState();
 
 const states = (set) => ({
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
 	fetchingProgramList: false,
 	fetchingProgramDetail: false,
+
+	processingCreateProgram: false,
+
 	programCategoryList: null,
 	programCategoryDetail: null,
 	programList: null,
@@ -46,6 +54,20 @@ const states = (set) => ({
 
 		set({ programCategoryDetail: success ? payload : null });
 		set({ fetchingProgramCategoryDetail: false });
+	},
+
+	createProgram: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.createProgram(params);
+
+		toastRequestResult(loader, success, 'Program created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProgram: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
 	}
 });
 

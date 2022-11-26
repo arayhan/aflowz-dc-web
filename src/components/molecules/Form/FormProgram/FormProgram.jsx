@@ -3,10 +3,14 @@ import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/compon
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProgramSchema } from '@/utils/validation-schema';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useProgramStore } from '@/store';
 
 export const FormProgram = () => {
-	const params = useParams();
+	const { programID } = useParams();
+	const navigate = useNavigate();
+
+	const { processingCreateProgram, createProgram } = useProgramStore();
 
 	const {
 		setValue,
@@ -16,18 +20,27 @@ export const FormProgram = () => {
 		formState: { errors }
 	} = useForm({ resolver: yupResolver(formProgramSchema) });
 
-	const onSubmitProgram = (values) => console.log(values);
+	const onSubmitProgram = (values) => {
+		if (programID) {
+			console.log({ programID });
+		} else {
+			createProgram(values, ({ success }) => {
+				if (success) navigate('/program');
+			});
+		}
+	};
 
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{params.programID ? 'Edit' : 'Tambah'} Program</div>
+				<div className="font-light text-xl">{programID ? 'Edit' : 'Tambah'} Program</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
 				<InputSelectMitra
 					{...register('program_category_id')}
+					disabled={processingCreateProgram}
 					onChange={({ value }) => {
 						setValue('program_category_id', value);
 						setError('program_category_id', null);
@@ -36,6 +49,7 @@ export const FormProgram = () => {
 				/>
 				<InputText
 					{...register('name')}
+					disabled={processingCreateProgram}
 					label="Nama Program"
 					name="name"
 					placeholder="Nama Program"
@@ -43,6 +57,7 @@ export const FormProgram = () => {
 				/>
 				<InputSelectPeriode
 					{...register('periode')}
+					disabled={processingCreateProgram}
 					onChange={({ value }) => {
 						setValue('periode', value);
 						setError('periode', null);
@@ -51,6 +66,7 @@ export const FormProgram = () => {
 				/>
 				<InputSelectStaff
 					{...register('pic_staff_id')}
+					disabled={processingCreateProgram}
 					onChange={({ label, value }) => {
 						setValue('pic', label);
 						setValue('pic_staff_id', value);
@@ -61,7 +77,12 @@ export const FormProgram = () => {
 			</div>
 			<hr />
 			<div className="flex justify-end">
-				<Button className={'px-7 py-3 rounded-sm'} variant="primary" onClick={handleSubmit(onSubmitProgram)}>
+				<Button
+					className={'px-7 py-3 rounded-sm'}
+					variant="primary"
+					disabled={processingCreateProgram}
+					onClick={handleSubmit(onSubmitProgram)}
+				>
 					Submit
 				</Button>
 			</div>
