@@ -9,6 +9,8 @@ export const FormProgram = () => {
 	const params = useParams();
 
 	const {
+		setValue,
+		setError,
 		register,
 		handleSubmit,
 		formState: { errors }
@@ -24,7 +26,14 @@ export const FormProgram = () => {
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
-				<InputSelectMitra />
+				<InputSelectMitra
+					{...register('program_category_id')}
+					onChange={({ value }) => {
+						setValue('program_category_id', value);
+						setError('program_category_id', null);
+					}}
+					error={errors.program_category_id}
+				/>
 				<InputText
 					{...register('name')}
 					label="Nama Program"
@@ -32,7 +41,7 @@ export const FormProgram = () => {
 					placeholder="Nama Program"
 					error={errors.name}
 				/>
-				<InputText label="Periode" name="periode" placeholder="Periode" error={errors.periode} />
+				<InputText {...register('periode')} label="Periode" placeholder="contoh: 2022" error={errors.periode} />
 			</div>
 			<hr />
 			<div className="flex justify-end">

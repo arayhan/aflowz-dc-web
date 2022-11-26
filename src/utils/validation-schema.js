@@ -6,5 +6,8 @@ export const loginSchema = yup.object().shape({
 });
 
 export const formProgramSchema = yup.object().shape({
-	name: yup.string().required('Nama program wajib diisi')
+	program_category_id: yup.number().required('Mitra wajib diisi'),
+	name: yup.string().required('Nama program wajib diisi'),
+	periode: yup.number('Periode harus berupa angka').required('Periode wajib diisi')
+	// pic: yup.string().required('PIC wajib diisi')
 });
