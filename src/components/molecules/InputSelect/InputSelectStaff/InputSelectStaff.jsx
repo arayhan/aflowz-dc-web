@@ -1,47 +1,34 @@
+import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { usePartnerStore } from '@/store';
-import React, { useEffect, useState } from 'react';
-import ReactSelect from 'react-select';
+import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectStaff = ({ selectedStaff, setPlaceholder }) => {
-    const { staffList, getStaffList } = usePartnerStore();
+export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) => {
+	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
 
-    const [options, setOptions] = useState([]);
+	const [options, setOptions] = useState([]);
 
-    useEffect(() => {
-        getStaffList();
-    }, []);
+	useEffect(() => {
+		getPartnerList({ is_staff: true, limit: 10, offset: 0 });
+	}, []);
 
-    useEffect(() => {
-        if (staffList?.total > 0) {
-            const mapStaff = staffList.items.map((staff) => ({
-                label: staff.name,
-                value: staff.id
-            }));
+	useEffect(() => {
+		if (partnerList?.total > 0) {
+			const mapPartner = partnerList.items.map((partner) => ({
+				label: partner.name,
+				value: partner.id
+			}));
 
-            setOptions(mapStaff);
-        }
-    }, [staffList]);
+			setOptions(mapPartner);
+		}
+	}, [partnerList]);
 
-    return (
-        <div className="space-y-1">
-			<label className="text-sm text-gray-600" htmlFor="staff">
-				Pilih Staff
-			</label>
-			<ReactSelect
-				styles={{
-					input: (provided) => ({
-						...provided,
-						'input:focus': {
-							boxShadow: 'none'
-						}
-					})
-				}}
-				id="staff"
-				name="staff"
-				options={options}
-                onChange={(selectedOption) => selectedStaff(selectedOption.value)}
-                placeholder={setPlaceholder}
-			/>
+	return (
+		<div className="space-y-1">
+			<InputLabel text="Pilih Staff PIC Internal" name={props.name} />
+			<InputSelect ref={ref} options={options} loading={fetchingPartnerList} onChange={onChange} {...props} />
+			{error && <InputError message={error.message} />}
 		</div>
-    );
-};
+	);
+});
+
+InputSelectStaff.displayName = 'InputSelectStaff';

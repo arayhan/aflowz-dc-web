@@ -1,24 +1,47 @@
 import { SERVICE_PROGRAM } from '@/services';
+import { toastRequestResult } from '@/utils/helpers';
+import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { useAppStore } from './app.store';
 
-const states = (set) => ({
+const { setPageLoading } = useAppStore.getState();
+
+const states = (set, get) => ({
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
+	fetchingProgram: false,
 	fetchingProgramList: false,
 	fetchingProgramDetail: false,
+
+	processingCreateProgram: false,
+	processingUpdateProgram: false,
+	processingDeleteProgram: false,
+
 	programCategoryList: null,
 	programCategoryDetail: null,
+	program: null,
 	programList: null,
 	programDetail: null,
 
 	getProgramCategoryList: async () => {
-		set({ fetchingProgramCategoryList: true });
+		if (get().programCategoryList === null) {
+			set({ fetchingProgramCategoryList: true });
 
-		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+			const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
 
-		set({ programCategoryList: success ? payload : null });
-		set({ fetchingProgramCategoryList: false });
+			set({ programCategoryList: success ? payload : null });
+			set({ fetchingProgramCategoryList: false });
+		}
+	},
+	getProgram: async (programID) => {
+		set({ fetchingProgram: true });
+		set({ program: null });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgram(programID);
+
+		set({ program: success ? payload : null });
+		set({ fetchingProgram: false });
 	},
 	getProgramList: async (params) => {
 		set({ fetchingProgramList: true });
@@ -46,6 +69,47 @@ const states = (set) => ({
 
 		set({ programCategoryDetail: success ? payload : null });
 		set({ fetchingProgramCategoryDetail: false });
+	},
+
+	createProgram: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.createProgram(params);
+
+		toastRequestResult(loader, success, 'Program created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProgram: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+
+	updateProgram: async (programID, params, callback) => {
+		setPageLoading(true);
+		set({ processingUpdateProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.updateProgram(programID, params);
+
+		toastRequestResult(loader, success, 'Program updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateProgram: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+
+	deleteProgram: async (programID) => {
+		setPageLoading(true);
+		set({ processingDeleteProgram: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgram(programID);
+
+		toastRequestResult(loader, success, 'Program deleted', payload?.odoo_error || payload?.message);
+		get().getProgramList();
+		set({ processingDeleteProgram: false });
+		setPageLoading(false);
 	}
 });
 
