@@ -56,22 +56,21 @@ export const FormKonstituenCreate = () => {
 			postKonstituenCreate(data);
 
 			toast.success('Berhasil Menambah Konstituen', {
-				position: "top-right",
+				position: 'top-right',
 				autoClose: 1500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				theme: "light",
+				theme: 'light'
 			});
 
 			const defaultParams = { limit: 10, offset: 0 };
 			const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
-			
 			if (success) {
 				getKonstituenList();
-				navigate('/konstituen', {replace: true});
+				navigate('/konstituen', { replace: true });
 			}
 		}
 	};
@@ -143,7 +142,12 @@ export const FormKonstituenCreate = () => {
 			</div>
 			<hr />
 			<div className="flex justify-end">
-				<button className="px-7 py-3 rounded-sm inline-block text-center transition-all bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white" onClick={handleForm}>Submit</button>
+				<button
+					className="px-7 py-3 rounded-sm inline-block text-center transition-all bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white"
+					onClick={handleForm}
+				>
+					Submit
+				</button>
 			</div>
 		</div>
 	);
