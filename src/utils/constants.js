@@ -28,6 +28,8 @@ export const NEGATIVE_CASE_TYPES = {
 	ERROR_CONNECTION: 'ERROR_CONNECTION'
 };
 
+export const PER_PAGE_OPTIONS = [10, 20, 50, 100];
+
 export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
 	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' },
