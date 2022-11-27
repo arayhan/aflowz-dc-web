@@ -1,4 +1,6 @@
 import { Table, ButtonAction, TableHeader } from '@/components/atoms';
+import { TableFooter } from '@/components/atoms/Table/TableFooter';
+import { TableContextProvider } from '@/contexts';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
@@ -79,17 +81,22 @@ export const TableProgram = ({ selectedCategory }) => {
 	}, [programList]);
 
 	return (
-		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6">
-				<TableHeader
-					title={selectedCategory?.name || 'All Category'}
-					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin}
-				/>
+		<TableContextProvider>
+			<div className="bg-white rounded-md shadow-md">
+				<div className="p-6">
+					<TableHeader
+						title={selectedCategory?.name || 'All Category'}
+						description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+						isReadonly={!isAdmin}
+					/>
+				</div>
+				<div className="overflow-x-scroll">
+					<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
+				</div>
+				<div className="p-6">
+					<TableFooter />
+				</div>
 			</div>
-			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
-			</div>
-		</div>
+		</TableContextProvider>
 	);
 };
