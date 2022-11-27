@@ -3,6 +3,8 @@ import { InputSelectCity, InputSelectKonstituen, InputSelectStaff } from '@/comp
 import { useKonstituenStore } from '@/store';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SERVICE_KONSTITUEN } from '@/services';
+import { toast } from 'react-toastify';
 
 export const FormKonstituenCreate = () => {
 	const { postKonstituenCreate, getKonstituenList } = useKonstituenStore();
@@ -18,7 +20,7 @@ export const FormKonstituenCreate = () => {
 
 	const navigate = useNavigate();
 
-	const handleForm = () => {
+	const handleForm = async () => {
 		if (inputNamaInstitusi === '') setShowError(true);
 		if (typeKonstituen === '') setShowError(true);
 		if (inputAlamat === '') setShowError(true);
@@ -43,9 +45,25 @@ export const FormKonstituenCreate = () => {
 			};
 
 			postKonstituenCreate(data);
-			getKonstituenList();
-			navigate('/konstituen', {replace: true});
 
+			toast.success('Berhasil Menambah Konstituen', {
+				position: "top-right",
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+
+			const defaultParams = { limit: 10, offset: 0 };
+			const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
+			
+			if (success) {
+				getKonstituenList();
+				navigate('/konstituen', {replace: true});
+			}
 		}
 	};
 
@@ -88,7 +106,7 @@ export const FormKonstituenCreate = () => {
 			</div>
 			<hr />
 			<div className="flex justify-end">
-				<button className="px-8 py-3 bg-primary-500 hover:bg-primary-600 rounded-md text-white" onClick={handleForm}>Submit</button>
+				<button className="px-7 py-3 rounded-sm inline-block text-center transition-all bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white" onClick={handleForm}>Submit</button>
 			</div>
 		</div>
 	);
