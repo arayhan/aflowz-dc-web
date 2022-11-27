@@ -1,5 +1,3 @@
-import { SiGooglesheets } from 'react-icons/si';
-import { Link } from 'react-router-dom';
 import { TablePerPage } from './TablePerPage';
 
 export const TableFooter = () => {
