@@ -1,6 +1,4 @@
-import { Table, ButtonAction, TableHeader } from '@/components/atoms';
-import { TableFooter } from '@/components/atoms/Table/TableFooter';
-import { TableContextProvider } from '@/contexts';
+import { Table, ButtonAction, TableHeader, TableFooter } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
@@ -9,6 +7,10 @@ export const TableProgram = ({ selectedCategory }) => {
 	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
 	const columns = useMemo(
@@ -19,9 +21,7 @@ export const TableProgram = ({ selectedCategory }) => {
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
-				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
-				}
+				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'Name',
@@ -68,35 +68,41 @@ export const TableProgram = ({ selectedCategory }) => {
 				}
 			}
 		],
-		[]
+		[offset, perPage, page, isAdmin]
 	);
 
 	useEffect(() => {
-		const params = selectedCategory ? { program_category_id: selectedCategory.id } : null;
+		const initOffset = (page - 1) * perPage;
+		const params = { limit: perPage, offset: initOffset };
+
+		if (selectedCategory) Object.assign(params, { program_category_id: selectedCategory.id });
+
+		setOffset(initOffset);
 		getProgramList(params);
-	}, [selectedCategory]);
+	}, [selectedCategory, page, perPage]);
 
 	useEffect(() => {
-		if (programList) setData(programList.items);
+		if (programList) {
+			setData(programList.items);
+			setPageCount(Math.ceil(programList.total / perPage));
+		}
 	}, [programList]);
 
 	return (
-		<TableContextProvider>
-			<div className="bg-white rounded-md shadow-md">
-				<div className="p-6">
-					<TableHeader
-						title={selectedCategory?.name || 'All Category'}
-						description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-						isReadonly={!isAdmin}
-					/>
-				</div>
-				<div className="overflow-x-scroll">
-					<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
-				</div>
-				<div className="p-6">
-					<TableFooter />
-				</div>
+		<div className="bg-white rounded-md shadow-md">
+			<div className="p-6">
+				<TableHeader
+					title={selectedCategory?.name || 'All Category'}
+					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					isReadonly={!isAdmin}
+				/>
 			</div>
-		</TableContextProvider>
+			<div className="overflow-x-scroll">
+				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
+			</div>
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+			</div>
+		</div>
 	);
 };
