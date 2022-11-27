@@ -1,14 +1,25 @@
 import { SERVICE_KONSTITUEN } from '@/services';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { toastRequestResult } from '@/utils/helpers';
+import { useAppStore } from './app.store';
+import { toast } from 'react-toastify';
+
+const { setPageLoading } = useAppStore.getState();
 
 const states = (set) => ({
 	fetchingKonstituenList: false,
 	fetchingKonstituenDetail: false,
 	fetchingPenerimaKonstituenDetail: false,
+	fetchingKonstituen: false,
+	processingCreateKonstituen: false,
+	processingEditKonstituen: false,
+
 	konstituenList: null,
 	konstituenDetail: null,
 	penerimaKonstituenDetail: null,
+	konstituen: null,
+
 	successKonstituenCreate: null,
 	successKonstituenDelete: null,
 	successKonstituenUpdate: null,
@@ -43,20 +54,45 @@ const states = (set) => ({
 		set({ penerimaKonstituenDetail: success ? payload : null });
 		set({ fetchingPenerimaKonstituenDetail: false });
 	},
-	postKonstituenCreate: async (data) => {
-		const { success, payload } = await SERVICE_KONSTITUEN.postKonstituenCreate(data);
+	postKonstituenCreate: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateKonstituen: true });
 
-		set({ successKonstituenCreate: success ? payload : null });
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_KONSTITUEN.postKonstituenCreate(params);
+
+		toastRequestResult(loader, success, 'Konstituen created', payload?.odoo_error || payload?.message);
+		set({ processingCreateKonstituen: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
 	},
 	deleteKonstituen: async (params) => {
 		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(params);
 
 		set({ successKonstituenDelete: success ? payload : null });
 	},
-	updateKonstituen: async (params, data) => {
-		const { success, payload } = await SERVICE_KONSTITUEN.updateKonstituen(params, data);
+	updateKonstituen: async (konstituenID, params, callback) => {
+		setPageLoading(true);
+		set({ processingEditKonstituen: true });
 
-		set({ successKonstituenUpdate: success ? payload : null });
+		const loader = toast.loading('Updating...');
+		const { payload, success } = await SERVICE_KONSTITUEN.updateKonstituen(konstituenID, params);
+
+		toastRequestResult(loader, success, 'Konstituen updated', payload?.odoo_error || payload?.message);
+		set({ processingEditKonstituen: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	getKonstituen: async (konstituenID) => {
+		set({ fetchingKonstituen: true });
+		set({ konstituen: null });
+
+		const { success, payload } = await SERVICE_KONSTITUEN.getKonstituen(konstituenID);
+
+		set({ konstituen: success ? payload : null });
+		set({ fetchingKonstituen: false });
 	}
 });
 

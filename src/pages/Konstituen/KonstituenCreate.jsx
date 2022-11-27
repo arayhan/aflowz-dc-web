@@ -1,4 +1,4 @@
-import { BannerFeature, FormKonstituenCreate } from '@/components/molecules';
+import { BannerFeature, FormKonstituen } from '@/components/molecules';
 import React from 'react';
 
 const KonstituenCreate = () => {
@@ -13,7 +13,7 @@ const KonstituenCreate = () => {
 				<div className="container py-16">
 					<div className="max-w-screen-lg mx-auto">
 						<div className="bg-white p-8 rounded-md">
-							<FormKonstituenCreate />
+							<FormKonstituen />
 						</div>
 					</div>
 				</div>
