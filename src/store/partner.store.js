@@ -29,4 +29,5 @@ const states = (set) => ({
 		set({ fetchingPartnerList: false });
 	}
 });
-export const usePartnerStore = create(devtools(states, { name: 'partner-store', getStorage: () => localStorage }));
+
+export const usePartnerStore = create(devtools(states, { name: 'auth-store', getStorage: () => localStorage }));
