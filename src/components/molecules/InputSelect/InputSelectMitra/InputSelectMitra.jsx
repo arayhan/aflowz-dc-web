@@ -1,9 +1,9 @@
+import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useProgramStore } from '@/store';
-import React, { useEffect, useState } from 'react';
-import ReactSelect from 'react-select';
+import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectMitra = () => {
-	const { programCategoryList, getProgramCategoryList } = useProgramStore();
+export const InputSelectMitra = forwardRef(({ error, onChange, ...props }, ref) => {
+	const { programCategoryList, fetchingProgramCategoryList, getProgramCategoryList } = useProgramStore();
 
 	const [options, setOptions] = useState([]);
 
@@ -24,22 +24,14 @@ export const InputSelectMitra = () => {
 
 	return (
 		<div className="space-y-1">
-			<label className="text-sm text-gray-600" htmlFor="category">
-				Pilih Mitra
-			</label>
-			<ReactSelect
-				styles={{
-					input: (provided) => ({
-						...provided,
-						'input:focus': {
-							boxShadow: 'none'
-						}
-					})
-				}}
-				id="category"
-				name="category"
-				options={options}
-			/>
+			<InputLabel text="Pilih Mitra" name={props.name} />
+			<InputSelect ref={ref} options={options} loading={fetchingProgramCategoryList} onChange={onChange} {...props} />
+			{error && <InputError message={error.message} />}
 		</div>
 	);
+});
+
+InputSelectMitra.displayName = 'InputSelectMitra';
+InputSelectMitra.defaultProps = {
+	name: 'mitra'
 };

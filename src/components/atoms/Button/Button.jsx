@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-export const Button = ({ className, linkTo, onClick, variant, children }) => {
+export const Button = ({ className, disabled, linkTo, onClick, variant, children }) => {
 	const variantClasses = classNames({
 		'bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white': variant === 'primary',
 		'bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 text-white': variant === 'info',
@@ -13,8 +13,9 @@ export const Button = ({ className, linkTo, onClick, variant, children }) => {
 	const navigate = useNavigate();
 	return (
 		<button
-			onClick={() => (linkTo ? navigate(linkTo) : onClick())}
 			className={`inline-block text-center transition-all ${className} ${variantClasses}`}
+			onClick={() => (linkTo ? navigate(linkTo) : onClick())}
+			disabled={disabled}
 		>
 			{children}
 		</button>
