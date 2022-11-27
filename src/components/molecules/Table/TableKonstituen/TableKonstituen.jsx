@@ -1,7 +1,7 @@
-import { Table, Toast } from "@/components/atoms";
-import { useKonstituenStore } from "@/store";
-import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Table, Toast } from '@/components/atoms';
+import { useKonstituenStore } from '@/store';
+import { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { SiGooglesheets } from 'react-icons/si';
 import { toast } from 'react-toastify';
 
@@ -61,13 +61,16 @@ export const TableKonstituen = ({ selectedType }) => {
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<Link 
-								to={`/konstituen/update/${row.row.original.id}`} 
-								className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+							<Link
+								to={`/konstituen/update/${row.row.original.id}`}
+								className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
+							>
 								Update
 							</Link>
-							<button onClick={() => setKonstituen(row.row.original)}
-								className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
+							<button
+								onClick={() => setKonstituen(row.row.original)}
+								className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
+							>
 								Delete
 							</button>
 						</div>
@@ -91,14 +94,14 @@ export const TableKonstituen = ({ selectedType }) => {
 		deleteKonstituen(konstituenID);
 
 		toast.success('Berhasil Menghapus Konstituen', {
-			position: "top-right",
+			position: 'top-right',
 			autoClose: 1500,
 			hideProgressBar: false,
 			closeOnClick: true,
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: "light",
+			theme: 'light'
 		});
 
 		setKonstituen(null);
@@ -109,7 +112,9 @@ export const TableKonstituen = ({ selectedType }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
 				<div>
-					<div className="text-lg font-extralight transform: capitalize">{selectedType ? selectedType.konstituen_type : 'Semua Konstitusi'}</div>
+					<div className="text-lg font-extralight transform: capitalize">
+						{selectedType ? selectedType.konstituen_type : 'Semua Konstitusi'}
+					</div>
 					<div className="text-sm text-gray-400">
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
 					</div>
@@ -130,28 +135,37 @@ export const TableKonstituen = ({ selectedType }) => {
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />
 			</div>
-			{
-				konstituen ?
-					<div tabIndex={-1} className="overflow-y-auto overflow-x-hidden backdrop-blur-sm fixed right-0 left-0 top-0 flex justify-center items-center z-50 md:inset-0 h-modal sm:h-full">
-						<div className="relative p-4 w-full max-w-md h-auto">
-							<div className="relative border-2 bg-white rounded-lg shadow border-main-500">
-								<div className="p-6 text-center">
-									<p className="font-normal text-black">Anda yakin ingin menghapus institusi ini?</p>
-									<p className='my-3 font-semibold'>{konstituen.name}</p>
-									<button type="button" className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-										onClick={() => handleDelete(konstituen.id)}>
-										Yes, Delete
-									</button>
-									<button type="button" onClick={() => setKonstituen(null)}
-										className="text-main-500 bg-white focus:ring-2 focus:ring-main-500 border border-gray-300 hover:bg-gray-100 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 "
-									>Cancel</button>
-								</div>
+			{konstituen ? (
+				<div
+					tabIndex={-1}
+					className="overflow-y-auto overflow-x-hidden backdrop-blur-sm fixed right-0 left-0 top-0 flex justify-center items-center z-50 md:inset-0 h-modal sm:h-full"
+				>
+					<div className="relative p-4 w-full max-w-md h-auto">
+						<div className="relative border-2 bg-white rounded-lg shadow border-main-500">
+							<div className="p-6 text-center">
+								<p className="font-normal text-black">Anda yakin ingin menghapus institusi ini?</p>
+								<p className="my-3 font-semibold">{konstituen.name}</p>
+								<button
+									type="button"
+									className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+									onClick={() => handleDelete(konstituen.id)}
+								>
+									Yes, Delete
+								</button>
+								<button
+									type="button"
+									onClick={() => setKonstituen(null)}
+									className="text-main-500 bg-white focus:ring-2 focus:ring-main-500 border border-gray-300 hover:bg-gray-100 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 "
+								>
+									Cancel
+								</button>
 							</div>
 						</div>
 					</div>
-					:
-					""
-			}
+				</div>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

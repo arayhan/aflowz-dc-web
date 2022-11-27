@@ -31,7 +31,16 @@ export const FormKonstituenCreate = () => {
 			setShowError(false);
 		}, 3000);
 
-		if (inputNamaInstitusi !== '' && typeKonstituen !== '' && inputAlamat !== '' && selectCity !== 0 && inputNamaPIC !== '' && inputMobilePIC !== '' && !inputMobilePIC.match(/[a-zA-Z]/i) && selectStaff !== 0) {
+		if (
+			inputNamaInstitusi !== '' &&
+			typeKonstituen !== '' &&
+			inputAlamat !== '' &&
+			selectCity !== 0 &&
+			inputNamaPIC !== '' &&
+			inputMobilePIC !== '' &&
+			!inputMobilePIC.match(/[a-zA-Z]/i) &&
+			selectStaff !== 0
+		) {
 			const data = {
 				name: inputNamaInstitusi,
 				konstituen_type: typeKonstituen,
@@ -44,8 +53,7 @@ export const FormKonstituenCreate = () => {
 
 			postKonstituenCreate(data);
 			getKonstituenList();
-			navigate('/konstituen', {replace: true});
-
+			navigate('/konstituen', { replace: true });
 		}
 	};
 
@@ -58,37 +66,67 @@ export const FormKonstituenCreate = () => {
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
 				<div>
-					<InputText label="Nama Institusi" name="nama_institusi" placeholder="Nama Institusi" onChange={(e) => setInputNamaInstitusi(e.target.value)} />
-					{(showError && inputNamaInstitusi === '') && <div className="text-sm text-red-500">Belum Mengisi Nama Institusi</div>}
+					<InputText
+						label="Nama Institusi"
+						name="nama_institusi"
+						placeholder="Nama Institusi"
+						onChange={(e) => setInputNamaInstitusi(e.target.value)}
+					/>
+					{showError && inputNamaInstitusi === '' && (
+						<div className="text-sm text-red-500">Belum Mengisi Nama Institusi</div>
+					)}
 				</div>
 				<div>
 					<InputSelectKonstituen selectedKonstituen={setTypeKonstituen} />
-					{(showError && typeKonstituen === '') && <div className="text-sm text-red-500">Belum Pilih Institusi</div>}
+					{showError && typeKonstituen === '' && <div className="text-sm text-red-500">Belum Pilih Institusi</div>}
 				</div>
 				<div>
-					<InputText label="Alamat" name="alamat" placeholder="Alamat Institusi" onChange={(e) => setInputAlamat(e.target.value)} />
-					{(showError && inputAlamat === '') && <div className="text-sm text-red-500">Belum Mengisi Alamat Institusi</div>}
+					<InputText
+						label="Alamat"
+						name="alamat"
+						placeholder="Alamat Institusi"
+						onChange={(e) => setInputAlamat(e.target.value)}
+					/>
+					{showError && inputAlamat === '' && (
+						<div className="text-sm text-red-500">Belum Mengisi Alamat Institusi</div>
+					)}
 				</div>
 				<div>
 					<InputSelectCity selectedCity={setSelectCity} />
-					{(showError && selectCity === 0) && <div className="text-sm text-red-500">Belum Mengisi Kota Institusi</div>}
+					{showError && selectCity === 0 && <div className="text-sm text-red-500">Belum Mengisi Kota Institusi</div>}
 				</div>
 				<div>
-					<InputText label="Nama PIC Institusi" name="nama_pic_institusi" placeholder="Nama PIC Institusi" onChange={(e) => setInputNamaPIC(e.target.value)} />
-					{(showError && inputNamaPIC === '') && <div className="text-sm text-red-500">Belum Mengisi Nama PIC Institusi</div>}
+					<InputText
+						label="Nama PIC Institusi"
+						name="nama_pic_institusi"
+						placeholder="Nama PIC Institusi"
+						onChange={(e) => setInputNamaPIC(e.target.value)}
+					/>
+					{showError && inputNamaPIC === '' && (
+						<div className="text-sm text-red-500">Belum Mengisi Nama PIC Institusi</div>
+					)}
 				</div>
 				<div>
-					<InputText label="Kontak PIC Institusi" name="mobile_pic_institusi" placeholder="Kontak PIC Institusi" onChange={(e) => setInputMobilePIC(e.target.value)} />
-					{(showError && (inputMobilePIC === '' || inputMobilePIC.replace(/[^a-zA-Z]/gi, ''))) && <div className="text-sm text-red-500">Belum Mengisi Kontak PIC Institusi</div>}
+					<InputText
+						label="Kontak PIC Institusi"
+						name="mobile_pic_institusi"
+						placeholder="Kontak PIC Institusi"
+						onChange={(e) => setInputMobilePIC(e.target.value)}
+					/>
+					{showError && (inputMobilePIC === '' || inputMobilePIC.replace(/[^a-zA-Z]/gi, '')) && (
+						<div className="text-sm text-red-500">Belum Mengisi Kontak PIC Institusi</div>
+					)}
 				</div>
 				<div>
 					<InputSelectStaff selectedStaff={setSelectStaff} />
-					{(showError && selectStaff === 0) && <div className="text-sm text-red-500">Belum Memilih Staff</div>}
+					{showError && selectStaff === 0 && <div className="text-sm text-red-500">Belum Memilih Staff</div>}
 				</div>
 			</div>
 			<hr />
 			<div className="flex justify-end">
-				<button className="px-8 py-3 bg-primary-500 hover:bg-primary-600 rounded-md text-white" onClick={handleForm}>Submit</button>
+				<button className="px-8 py-3 bg-primary-500 hover:bg-primary-600 rounded-md text-white" onClick={handleForm}>
+					Submit
+				</button>
 			</div>
 		</div>
 	);

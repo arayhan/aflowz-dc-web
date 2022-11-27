@@ -4,16 +4,19 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const KonstituenUpdate = () => {
-    const params = useParams();
-    const { konstituenDetail, getKonstituenDetail } = useKonstituenStore();
+	const params = useParams();
+	const { konstituenDetail, getKonstituenDetail } = useKonstituenStore();
 
-    useEffect(() => {
-        getKonstituenDetail(params.konstituenID);
-    }, [params]);
+	useEffect(() => {
+		getKonstituenDetail(params.konstituenID);
+	}, [params]);
 
 	return (
 		<div>
-			<BannerFeature title={konstituenDetail?.konstituen_name} description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature
+				title={konstituenDetail?.konstituen_name}
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+			/>
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

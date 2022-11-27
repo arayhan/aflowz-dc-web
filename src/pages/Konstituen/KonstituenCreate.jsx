@@ -4,7 +4,10 @@ import React from 'react';
 const KonstituenCreate = () => {
 	return (
 		<div>
-			<BannerFeature title="Konstituen - Create" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature
+				title="Konstituen - Create"
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+			/>
 
 			<section className="bg-gray-100">
 				<div className="container py-16">
