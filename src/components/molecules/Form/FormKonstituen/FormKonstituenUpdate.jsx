@@ -3,7 +3,8 @@ import { useKonstituenStore } from "@/store";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputSelectCity, InputSelectKonstituen, InputSelectStaff } from '@/components/molecules';
-
+import { toast } from 'react-toastify';
+import { SERVICE_KONSTITUEN } from '@/services';
 
 export const FormKonstituenUpdate = () => {
     const params = useParams();
@@ -23,7 +24,7 @@ export const FormKonstituenUpdate = () => {
 
     const navigate = useNavigate();
 
-    const handleForm = () => {
+    const handleForm = async () => {
         const data = {
             name: inputNamaInstitusi,
             konstituen_type: typeKonstituen,
@@ -43,8 +44,25 @@ export const FormKonstituenUpdate = () => {
         if (selectStaff === 0) delete data.pic_staff_id;
 
         updateKonstituen(params.konstituenID, data);
-        getKonstituenList();
-        navigate('/konstituen', {replace: true});
+
+        toast.success('Berhasil Merubah Konstituen', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+
+        const defaultParams = { limit: 10, offset: 0 };
+        const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
+        
+        if (success) {
+            getKonstituenList();
+            navigate('/konstituen', {replace: true});
+        }
     };
 
     return (
@@ -87,10 +105,10 @@ export const FormKonstituenUpdate = () => {
                 </div>
                 <hr />
                 <div className="flex justify-end">
-                    <button className="px-8 py-3 bg-primary-500 hover:bg-primary-600 rounded-md text-white mx-2 disabled:bg-opacity-50 disabled:hover:bg-primary-500 disabled:hover:bg-opacity-50 disabled:cursor-not-allowed" 
+                    <button className="px-7 py-3 rounded-sm inline-block text-center transition-all bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white mx-2 disabled:bg-opacity-50 disabled:hover:bg-primary-500 disabled:hover:bg-opacity-50 disabled:cursor-not-allowed" 
                         disabled={(inputNamaInstitusi || typeKonstituen || inputAlamat || inputNamaPIC || inputMobilePIC) !== '' || (selectCity || selectStaff) !== 0 ? false : true}
                         onClick={handleForm}>Submit</button>
-                    <button className="px-8 py-3 border bg-white border-gray-300 hover:bg-gray-100 rounded-md" onClick={() => navigate('/konstituen')}>Cancel</button>
+                    <button className="px-7 py-3 rounded-sm inline-block text-center transition-all bg-white hover:bg-primary-200 text-primary-200 hover:text-primary-100 border" onClick={() => navigate('/konstituen')}>Cancel</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useKonstituenStore } from "@/store";
 import {
     BannerFeature,
@@ -58,20 +58,29 @@ const KonstituenDetail = () => {
 
                                             <div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">PIC Staff</div>
                                             <div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-                                                {konstituenDetail?.pic_staff.name || "Belum Ada Nama PIC"}{' '}
-                                                {konstituenDetail?.pic_staff.mobile ? `(${konstituenDetail?.pic_staff.mobile})` : "(Belum Ada No. Kontak)"}
+                                                <Link
+                                                    to={`/staff/${konstituenDetail?.pic_staff.id}`}
+                                                    className="text-primary underline hover:text-primary-400"
+                                                >
+                                                    {konstituenDetail?.pic_staff.name || "Belum Ada Nama PIC"}{' '}
+                                                    {konstituenDetail?.pic_staff.mobile ? `(${konstituenDetail?.pic_staff.mobile})` : "(Belum Ada No. Kontak)"}
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-center justify-center">
                                     <div className="bg-white rounded-md px-10 md:px-16 py-6 mb-2 shadow-lg cursor-pointer">
-                                        <div className="flex flex-col items-center justify-center space-y-1 text-center">
-                                            <span className="text-2xl md:text-4xl font-extralight">
-                                                {(konstituenDetail?.total_pria + konstituenDetail?.total_wanita) || 0}
-                                            </span>
-                                            <div className="font-light text-gray-400">Total Penerima</div>
-                                        </div>
+                                        <Link
+                                            to={`/partner`}
+                                        >
+                                            <div className="flex flex-col items-center justify-center space-y-1 text-center">
+                                                <span className="text-2xl md:text-4xl font-extralight">
+                                                    {(konstituenDetail?.total_pria + konstituenDetail?.total_wanita) || 0}
+                                                </span>
+                                                <div className="font-light text-gray-400">Total Penerima</div>
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="grid grid-cols-12 gap-4 w-full">
                                         <div className="col-span-12 md:col-span-6 bg-white rounded-md shadow-lg">
