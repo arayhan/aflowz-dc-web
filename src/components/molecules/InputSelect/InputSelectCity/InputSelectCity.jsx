@@ -1,9 +1,9 @@
+import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useCityStore } from '@/store';
-import React, { useEffect, useState } from 'react';
-import ReactSelect from 'react-select';
+import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectCity = ({ selectedCity }) => {
-	const { cityList, getCityList } = useCityStore();
+export const InputSelectCity = forwardRef(({ error, onChange, ...props }, ref) => {
+	const { cityList, fetchingCityList, getCityList } = useCityStore();
 
 	const [options, setOptions] = useState([]);
 
@@ -24,23 +24,14 @@ export const InputSelectCity = ({ selectedCity }) => {
 
 	return (
 		<div className="space-y-1">
-			<label className="text-sm text-gray-600" htmlFor="city">
-				Pilih Kota
-			</label>
-			<ReactSelect
-				styles={{
-					input: (provided) => ({
-						...provided,
-						'input:focus': {
-							boxShadow: 'none'
-						}
-					})
-				}}
-				id="city"
-				name="city"
-				options={options}
-				onChange={(selectedOption) => selectedCity(selectedOption.value)}
-			/>
+			<InputLabel text="Pilih Kota" name={props.name} />
+			<InputSelect ref={ref} options={options} loading={fetchingCityList} onChange={onChange} {...props} />
+			{error && <InputError message={error.message} />}
 		</div>
 	);
+});
+
+InputSelectCity.displayName = 'InputSelectCity';
+InputSelectCity.defaultProps = {
+	name: 'city'
 };
