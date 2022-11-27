@@ -72,21 +72,24 @@ export const TableProgram = ({ selectedCategory }) => {
 	);
 
 	useEffect(() => {
-		const initOffset = (page - 1) * perPage;
-		const params = { limit: perPage, offset: initOffset };
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
 
 		if (selectedCategory) Object.assign(params, { program_category_id: selectedCategory.id });
 
-		setOffset(initOffset);
-		getProgramList(params);
-	}, [selectedCategory, page, perPage]);
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getProgramList(params);
+		}
+	}, [selectedCategory, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (programList) {
 			setData(programList.items);
 			setPageCount(Math.ceil(programList.total / perPage));
 		}
-	}, [programList]);
+	}, [programList, pageCount]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
