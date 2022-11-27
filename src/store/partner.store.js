@@ -3,8 +3,19 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set) => ({
+	fetchingStaffList: false,
 	fetchingPartnerList: false,
+	staffList: null,
 	partnerList: null,
+
+	getStaffList: async () => {
+		set({ fetchingStaffList: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getStaffList();
+
+		set({ staffList: success ? payload : null });
+		set({ fetchingStaffList: false });
+	},
 
 	getPartnerList: async (params) => {
 		set({ fetchingPartnerList: true });
@@ -19,4 +30,4 @@ const states = (set) => ({
 	}
 });
 
-export const usePartnerStore = create(devtools(states, { name: 'partner-store', getStorage: () => localStorage }));
+export const usePartnerStore = create(devtools(states, { name: 'auth-store', getStorage: () => localStorage }));
