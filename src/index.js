@@ -7,6 +7,7 @@ import App from '@/App';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'sweetalert2/src/sweetalert2.scss';
 import '@/styles/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

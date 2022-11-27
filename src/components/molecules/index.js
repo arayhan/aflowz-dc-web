@@ -3,6 +3,8 @@ export * from './Banner/BannerHome/BannerHome';
 
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 
+export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
+
 export * from './Chart/ChartPenerimaMitra/ChartPenerimaMitra';
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
 export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender';
@@ -26,5 +28,12 @@ export * from './InputSelect/InputSelectKonstituen/InputSelectKonstituen';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
+export * from './Section/SectionSelectProgram/SectionSelectProgram';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
 export * from './Section/KonstituenType/KonstituenType';
+
+export * from './Table/TableMitra/TableMitra';
+export * from './Table/TablePartner/TablePartner';
+export * from './Table/TableProgram/TableProgram';
+
+export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

@@ -16,17 +16,25 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 			<thead className="bg-[#e9edf6]">
 				{headerGroups.map((headerGroup) => (
 					<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-						{headerGroup.headers.map((column) => (
-							<th
-								key={column.id}
-								className="px-5 md:px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
-								{...column.getHeaderProps({
-									style: { minWidth: column.minWidth, width: column.width, maxWidth: column.maxWidth }
-								})}
-							>
-								{column.render('Header')}
-							</th>
-						))}
+						{headerGroup.headers.map((column) => {
+							return (
+								!column.hidden && (
+									<th
+										key={column.id}
+										className="px-5 md:px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
+										{...column.getHeaderProps({
+											style: data.length > 0 && {
+												minWidth: column.minWidth,
+												width: column.width,
+												maxWidth: column.maxWidth
+											}
+										})}
+									>
+										{column.render('Header')}
+									</th>
+								)
+							);
+						})}
 					</tr>
 				))}
 			</thead>
@@ -56,13 +64,15 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
 								{row.cells.map((cell) => {
 									return (
-										<td
-											key={cell.value}
-											className="px-5 md:px-6 py-2 md:py-3 text-xs md:text-sm"
-											{...cell.getCellProps()}
-										>
-											{cell.render('Cell')}
-										</td>
+										!cell.column.hidden && (
+											<td
+												key={cell.value}
+												className="px-5 md:px-6 py-2 md:py-3 text-xs md:text-sm"
+												{...cell.getCellProps()}
+											>
+												{cell.render('Cell')}
+											</td>
+										)
 									);
 								})}
 							</tr>

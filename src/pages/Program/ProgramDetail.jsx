@@ -1,5 +1,10 @@
 import { Card } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaProgram, ChartPenerimaProgramByGender } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardPenerimaProgramByGender,
+	TableDetailPenerimaProgram,
+	TablePartner
+} from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -68,46 +73,44 @@ const ProgramDetail = () => {
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 sm:col-span-6 md:col-span-4">
-									<Card
-										title={'Penerima Program by Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
-										<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
-											<ChartPenerimaProgramByGender
-												total={programDetail?.total_penerima_program || 0}
-												totalPria={programDetail?.total_pria}
-												totalWanita={programDetail?.total_wanita}
-											/>
-										</div>
-									</Card>
+								<div className="col-span-12 md:col-span-6">
+									<TablePartner
+										programID={programDetail?.program_id}
+										programName={programDetail?.program_name}
+										isReadonly
+										isInDetail
+									/>
 								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4">
+								<div className="col-span-12 md:col-span-6">
+									<CardPenerimaProgramByGender
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
+									/>
+								</div>
+								<div className="col-span-12 md:col-span-6">
 									<Card
-										title={'Penerima Program by Gender'}
+										title={'Penerima Program PerVillage'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
-										<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
-											<ChartPenerimaProgram
-												totalPenerima={programDetail?.total_penerima_program || 0}
-												penerimaPerArea={programDetail?.total_penerima_program_per_village}
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailPenerimaProgram
+												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
 												isPerVillage
 											/>
 										</div>
 									</Card>
 								</div>
-								<div className="col-span-12 sm:col-span-6 md:col-span-4">
+								<div className="col-span-12 md:col-span-6">
 									<Card
-										title={'Penerima Program by Gender'}
+										title={'Penerima Program PerCity'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
-										<div className="flex items-center justify-center px-4 md:px-8 xl:px-12 py-4">
-											<ChartPenerimaProgram
-												totalPenerima={programDetail?.total_penerima_program || 0}
-												penerimaPerArea={programDetail?.total_penerima_program_per_city}
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailPenerimaProgram
+												dataPenerimaPerArea={programDetail?.total_penerima_program_per_city}
 												isPerCity
 											/>
 										</div>

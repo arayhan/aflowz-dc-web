@@ -1,10 +1,15 @@
 import { BannerFeature, FormProgram } from '@/components/molecules';
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const ProgramForm = () => {
+	const params = useParams();
+
 	return (
 		<div>
-			<BannerFeature title="Program - Create" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature
+				title={`Program - ${params.programID ? 'Update' : 'Create'}`}
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+			/>
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

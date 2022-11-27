@@ -1,12 +1,9 @@
-import { Table } from '@/components/atoms';
+import { Table, ButtonAction, TableHeader } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
-import { SiGooglesheets } from 'react-icons/si';
-import { Link } from 'react-router-dom';
 
 export const TableProgram = ({ selectedCategory }) => {
-	const RESTRICTED_ADMIN_COLUMNS = ['Actions'];
-
 	const { isAdmin } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
@@ -27,11 +24,11 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Name',
 				accessor: 'name',
-				minWidth: 175
+				minWidth: 215
 			},
 			{
 				Header: 'Category',
-				minWidth: 225,
+				minWidth: 250,
 				Cell: (row) => <div>{row.row.original.program_category.name}</div>
 			},
 			{
@@ -41,35 +38,28 @@ export const TableProgram = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Detail',
-				minWidth: 100,
-				maxWidth: 100,
+				minWidth: 50,
+				maxWidth: 50,
 				Cell: (row) => {
 					return (
-						<div className="min-w-[100px] w-full">
-							<Link
-								to={`/program/${row.row.original.id}`}
-								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
-							>
-								See Detail
-							</Link>
-						</div>
+						<ButtonAction
+							className="min-w-[100px] w-full"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/program/${row.row.original.id}`}
+						/>
 					);
 				}
 			},
 			{
 				Header: 'Actions',
-				minWidth: 180,
-				show: isAdmin,
-				Cell: () => {
+				minWidth: 220,
+				hidden: !isAdmin,
+				Cell: (row) => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<Link className="w-full max-w-[200px] text-center bg-green-500 hover:bg-green-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
-									Update
-								</Link>
-								<Link className="w-full max-w-[200px] text-center bg-red-500 hover:bg-red-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md">
-									Delete
-								</Link>
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDeleteProgram(row.row.original.id)} />
 							</div>
 						)
 					);
@@ -78,6 +68,10 @@ export const TableProgram = ({ selectedCategory }) => {
 		],
 		[]
 	);
+
+	const handleDeleteProgram = (programID) => {
+		console.log({ programID });
+	};
 
 	useEffect(() => {
 		const params = selectedCategory ? { program_category_id: selectedCategory.id } : null;
@@ -90,35 +84,15 @@ export const TableProgram = ({ selectedCategory }) => {
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
-				<div>
-					<div className="text-lg font-extralight">{selectedCategory?.name || 'All Category'}</div>
-					<div className="text-sm text-gray-400">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-					</div>
-				</div>
-				{isAdmin && (
-					<div className="w-full lg:w-1/4 flex flex-col sm:justify-end sm:flex-row gap-3">
-						<button className="bg-green-500 hover:bg-green-600 space-x-1 text-white px-5 py-3 flex items-center justify-center rounded-md transition-all">
-							<SiGooglesheets />
-							<span className="text-sm">Upload XLS</span>
-						</button>
-						<Link
-							to="/program/create"
-							className="block bg-blue-500 hover:bg-blue-600 space-x-1 text-white px-5 py-3 rounded-md transition-all text-center text-sm"
-						>
-							<span>Create Program</span>
-						</Link>
-					</div>
-				)}
+			<div className="p-6">
+				<TableHeader
+					title={selectedCategory?.name || 'All Category'}
+					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					isReadonly={!isAdmin}
+				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table
-					columns={columns}
-					data={data}
-					loading={fetchingProgramList || programList === null}
-					hiddenColumns={!isAdmin && RESTRICTED_ADMIN_COLUMNS}
-				/>
+				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
 			</div>
 		</div>
 	);
