@@ -28,14 +28,19 @@ export const TableStaff = () => {
 				}
 			},
 			{
-				Header: 'Nama Institusi',
+				Header: 'NIK',
+				accessor: 'nik_number',
+				minWidth: 100
+			},
+			{
+				Header: 'Nama Staff',
 				accessor: 'name',
 				minWidth: 175
 			},
 			{
-				Header: 'Konstitusi',
-				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
+				Header: 'Role',
+				minWidth: 100,
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.staff_title.name}</div>
 			},
 			{
 				Header: 'Kota / Kabupaten',
@@ -51,7 +56,7 @@ export const TableStaff = () => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/konstituen/${row.row.original.id}`}
+							linkTo={`/staff/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -63,7 +68,7 @@ export const TableStaff = () => {
 					return (
 						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/konstituen/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
 							</div>
 						)
