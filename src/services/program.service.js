@@ -72,7 +72,7 @@ export const deleteProgram = async (programID) => {
 
 export const getProgramCategory = async (programCategoryID) => {
 	try {
-		const response = await http.get('/program/' + programCategoryID);
+		const response = await http.get('/program/category/' + programCategoryID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
