@@ -61,7 +61,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 		const file = event.target.files[0];
 
 		if (file && file.type.indexOf('sheet') === -1 && file.type.indexOf('csv') === -1) {
-			toast.warning('File harus format .csv atau .xls');
+			toast.warning('File harus format .csv, .xls atau .xlsx');
 			event.target.value = '';
 			return;
 		} else if (file && file.size > MAXIMUM_FILE_SIZE.value) {
