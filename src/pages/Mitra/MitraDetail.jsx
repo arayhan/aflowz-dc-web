@@ -6,12 +6,12 @@ import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
 const MitraDetail = () => {
-	const { mitraID } = useParams();
+	const { programCategoryID } = useParams();
 	const { programCategoryDetail, fetchingProgramCategoryDetail, getProgramCategoryDetail } = useProgramStore();
 
 	useEffect(() => {
-		if (mitraID) getProgramCategoryDetail(mitraID);
-	}, [mitraID]);
+		if (programCategoryID) getProgramCategoryDetail(programCategoryID);
+	}, [programCategoryID]);
 
 	return (
 		<div>
