@@ -68,7 +68,16 @@ export const TableMitra = () => {
 		[offset, perPage, page, isAdmin]
 	);
 
-	useEffect(() => getProgramCategoryList(), []);
+	useEffect(() => {
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getProgramCategoryList(params);
+		}
+	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (programCategoryList) {
