@@ -13,8 +13,6 @@ export const TableStaff = () => {
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 
-	console.log(staffList);
-
 	const columns = useMemo(
 		() => [
 			{
@@ -88,31 +86,30 @@ export const TableStaff = () => {
 		if (staffList) setData(staffList.items);
 	});
 
-	// const handleDelete = async (konstituenID) => {
-	// 	const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(konstituenID);
+	const handleDelete = async (staffID) => {
+		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
 
-	// 	if (success) {
-	// 		toast.success('Berhasil Menghapus Konstituen', {
-	// 			position: 'top-right',
-	// 			autoClose: 1500,
-	// 			hideProgressBar: false,
-	// 			closeOnClick: true,
-	// 			pauseOnHover: true,
-	// 			draggable: true,
-	// 			progress: undefined,
-	// 			theme: 'light'
-	// 		});
+		if (success) {
+			toast.success('Berhasil Menghapus Staff', {
+				position: 'top-right',
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'light'
+			});
 
-	// 		const defaultParams = { limit: 10, offset: 0 };
-	// 		const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
+			const defaultParams = { limit: 10, offset: 0 };
+			const { success, payload } = await SERVICE_PARTNER.getStaffList(defaultParams);
 
-	// 		if (success) {
-	// 			setKonstituen(null);
-	// 			getKonstituenList();
-	// 			setData(payload.items);
-	// 		}
-	// 	}
-	// };
+			if (success) {
+				getStaffList({ limit: 10, offset: 0 });
+				setData(payload.items);
+			}
+		}
+	};
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -121,6 +118,8 @@ export const TableStaff = () => {
 					title="Daftar Staff"
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin}
+					showButtonCreate={true}
+					feature={'New Staff'}
 				/>
 			</div>
 			<div className="overflow-x-auto">

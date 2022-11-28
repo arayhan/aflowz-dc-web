@@ -69,19 +69,35 @@ export const getPartner = async (partnerID) => {
 };
 
 export const postStaffCreate = async (params) => {
-	console.log(params);
+	const provinceDom = await http.get(`/province/${params.province}`);
+	const cityDom = await http.get(`/city/${params.city}`);
+	const villageDom = await http.get(`/village/${params.village}`);
+
+	const data = [
+		{
+			nik_number: params?.nik_number || 0,
+			name: params?.name || '',
+			birth_place: params?.birth_place || '',
+			birth_date: params?.birth_date || '',
+			gender: params?.gender || '',
+			address: params?.address || '',
+			country: 'Indonesia',
+			province: provinceDom.data.data.name || '',
+			city: cityDom.data.data.name || '',
+			village: villageDom.data.data.name || '',
+			mobile: params?.mobile || '',
+			email: params?.email || '',
+			religion: params?.religion || '',
+			staff_title: params?.staff_title || '',
+			is_staff: true
+		}
+	];
+
+	const { username } = useAuthStore.getState().profile;
 	const request = {
-		nik_number: params?.nik_number || 0,
-		name: params?.name || '',
-		address: params?.address || '',
-		city_id: params?.city || 0,
-		mobile: params?.mobile || '',
-		email: params?.email || '',
-		gender: params?.gender || '',
-		staff_title: params?.staff_title || '',
-		is_staff: true
+		created_by: username,
+		datas: data
 	};
-	console.log(request);
 
 	try {
 		const response = await http.post('/partner', request);
@@ -92,18 +108,31 @@ export const postStaffCreate = async (params) => {
 };
 
 export const updateStaff = async (staffID, params) => {
+	const data = [
+		{
+			mobile: params?.mobile || '',
+			email: params?.email || '',
+			staff_title: params?.staff_title || ''
+		}
+	];
+
+	const { username } = useAuthStore.getState().profile;
 	const request = {
-		name: params?.name || '',
-		konstituen_type: params?.konstituen_type || '',
-		address: params?.address || '',
-		city_id: params?.city || 0,
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0
+		created_by: username,
+		datas: data
 	};
 
 	try {
-		const response = await http.post('/konstituen', request);
+		const response = await http.put(`/partner/${staffID}`, request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteStaff = async (staffID) => {
+	try {
+		const response = await http.delete(`/partner/${staffID}`);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

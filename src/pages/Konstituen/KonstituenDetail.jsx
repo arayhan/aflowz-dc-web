@@ -93,7 +93,7 @@ const KonstituenDetail = () => {
 										<Link to={`/partner`}>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
 												<span className="text-2xl md:text-4xl font-extralight">
-													{konstituenDetail?.total_pria + konstituenDetail?.total_wanita || 0}
+													{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}
 												</span>
 												<div className="font-light text-gray-400">Total Penerima</div>
 											</div>

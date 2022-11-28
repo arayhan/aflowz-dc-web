@@ -18,6 +18,7 @@ import Partner from './pages/Partner/Partner';
 import StaffListPage from './pages/Staff/StaffListPage';
 import StaffCreate from './pages/Staff/StaffCreate';
 import PartnerDetail from './pages/Partner/PartnerDetail';
+import StaffUpdate from './pages/Staff/StaffUpdate';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -55,6 +56,7 @@ export const AppRoutes = () => {
 					<Route path="/partner" element={<Partner />} />
 					<Route path="/staff" element={<StaffListPage />} />
 					<Route path="/staff/create" element={<StaffCreate />} />
+					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
 				</Route>
 			</Route>
 		</Routes>

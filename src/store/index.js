@@ -4,3 +4,5 @@ export * from './program.store';
 export * from './konstituen.store';
 export * from './city.store';
 export * from './partner.store';
+export * from './province.store';
+export * from './village.store';

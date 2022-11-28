@@ -114,6 +114,8 @@ export const TableKonstituen = ({ selectedType }) => {
 					title={selectedType?.konstituen_type || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin}
+					showButtonCreate={true}
+					feature={'Konstituen'}
 				/>
 			</div>
 			<div className="overflow-x-auto">

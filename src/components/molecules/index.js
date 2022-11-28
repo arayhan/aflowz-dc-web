@@ -29,6 +29,9 @@ export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 export * from './InputSelect/InputSelectGender/InpurSelectGender';
 export * from './InputSelect/InputSelectStaffTitle/InputSelectStaffTitle';
+export * from './InputSelect/InputSelectProvince/InputSelectProvince';
+export * from './InputSelect/InputSelectVillage/InputSelectVillage';
+export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 
 export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
 

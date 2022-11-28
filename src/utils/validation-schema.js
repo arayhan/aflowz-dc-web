@@ -46,14 +46,19 @@ export const formStaffSchema = yup.object().shape({
 		.max(16, 'NIK tidak valid')
 		.required('NIK wajib diisi'),
 	name: yup.string().required('Nama wajib diisi'),
+	birth_place: yup.string().required('Belum memiliih kota kelahiran'),
+	birth_date: yup.string().required('Belum mengisi tanggal lahir'),
+	gender: yup.string().required('Belum memilih jenis kelamin'),
 	address: yup.string().required('Belum mengisi alamat domisili'),
+	province: yup.number().required('Belum memiliih provinsi'),
 	city: yup.number().required('Belum memiliih kota domisili'),
+	village: yup.number().required('Belum memiliih kecamatan'),
 	mobile: yup
 		.string()
 		.required('Nomor wajib diisi')
 		.matches(/^[0-9]*$/, 'Nomor tidak valid')
 		.min(8, 'Minimal 8 angka'),
 	email: yup.string().email().required('Belum mengisi email'),
-	gender: yup.string().required('Belum memilih jenis kelamin'),
+	religion: yup.string().required('Belum memilih agama'),
 	staff_title: yup.string().required('Belum memiliih role')
 });

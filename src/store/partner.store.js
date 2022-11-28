@@ -3,9 +3,7 @@ import { toastRequestResult } from '@/utils/helpers';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { toastRequestResult } from '@/utils/helpers';
 import { useAppStore } from './app.store';
-import { toast } from 'react-toastify';
 
 const { setPageLoading } = useAppStore.getState();
 
@@ -25,6 +23,9 @@ const states = (set) => ({
 	staffTitleList: null,
 	partnerDetail: null,
 	staff: null,
+
+	successStaffDelete: null,
+
 	getStaffList: async (params) => {
 		set({ fetchingStaffList: true });
 
@@ -79,7 +80,7 @@ const states = (set) => ({
 		callback({ payload, success });
 	},
 
-	updateStaff: async (staffID, params) => {
+	updateStaff: async (staffID, params, callback) => {
 		setPageLoading(true);
 		set({ processingEditStaff: true });
 
@@ -89,8 +90,10 @@ const states = (set) => ({
 		toastRequestResult(loader, success, 'Staff updated', payload?.odoo_error || payload?.message);
 		set({ pprocessingEditStaff: false });
 		setPageLoading(false);
+
+		callback({ payload, success });
 	},
-	
+
 	getPartnerDetail: async (partnerID) => {
 		set({ fetchingPartnerDetail: true });
 
@@ -112,6 +115,12 @@ const states = (set) => ({
 		setPageLoading(false);
 
 		callback({ payload, success });
+	},
+
+	deleteStaff: async (staffID) => {
+		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
+
+		set({ successStaffDelete: success ? payload : null });
 	}
 });
 
