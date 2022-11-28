@@ -13,8 +13,7 @@ export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstitue
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 
 export * from './Form/FormProgram/FormProgram';
-export * from './Form/FormKonstituen/FormKonstituenCreate';
-export * from './Form/FormKonstituen/FormKonstituenUpdate';
+export * from './Form/FormKonstituen/FormKonstituen';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
@@ -37,5 +36,6 @@ export * from './Section/KonstituenType/KonstituenType';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePartner/TablePartner';
 export * from './Table/TableProgram/TableProgram';
+export * from './Table/TableKonstituen/TableKonstituen';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

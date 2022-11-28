@@ -1,4 +1,4 @@
-import { BannerFeature, FormKonstituenUpdate } from '@/components/molecules';
+import { BannerFeature, FormKonstituen } from '@/components/molecules';
 import { useKonstituenStore } from '@/store';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,7 @@ const KonstituenUpdate = () => {
 				<div className="container py-16">
 					<div className="max-w-screen-lg mx-auto">
 						<div className="bg-white p-8 rounded-md">
-							<FormKonstituenUpdate />
+							<FormKonstituen />
 						</div>
 					</div>
 				</div>
