@@ -3,7 +3,14 @@ import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
 
-export const TableHeader = ({ feature, title, description, isReadonly, showButtonUploadPartnerSheet }) => {
+export const TableHeader = ({
+	feature,
+	title,
+	description,
+	isReadonly,
+	showButtonCreate,
+	showButtonUploadPartnerSheet
+}) => {
 	const location = useLocation();
 
 	const [showModalUploadPartnerSheet, setShowModalUploadPartnerSheet] = useState(false);
@@ -28,14 +35,20 @@ export const TableHeader = ({ feature, title, description, isReadonly, showButto
 							<span className="text-sm">Upload Sheet Penerima Program</span>
 						</button>
 					)}
-					<Link
-						to={`${location.pathname}/create`}
-						className="block bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
-					>
-						<span>Create {feature}</span>
-					</Link>
+					{showButtonCreate && (
+						<Link
+							to={`${location.pathname}/create`}
+							className="block bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						>
+							<span>Create {feature}</span>
+						</Link>
+					)}
 				</div>
 			)}
 		</div>
 	);
+};
+
+TableHeader.defaultProps = {
+	showButtonCreate: true
 };

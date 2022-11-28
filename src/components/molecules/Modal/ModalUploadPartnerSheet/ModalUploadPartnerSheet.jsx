@@ -4,8 +4,14 @@ import * as xlsx from 'xlsx';
 import { SiGooglesheets } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { usePartnerStore } from '@/store';
+import { useNavigate } from 'react-router';
+import { objectToQueryString } from '@/utils/helpers';
 
 export const ModalUploadPartnerSheet = ({ onClose }) => {
+	const navigate = useNavigate();
+	const { bulkCreatePartner } = usePartnerStore();
+
 	const MAXIMUM_FILE_SIZE = 10; // in MegaByte
 	const [file, setFile] = useState(null);
 
@@ -20,11 +26,13 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 			const worksheet = workbook.Sheets[sheetName];
 			const json = xlsx.utils.sheet_to_json(worksheet);
 
-			console.log({ json });
-
-			// handleBulkCreatePartner(json, (success) => {
-			// 	if (success) onSubmitted();
-			// });
+			bulkCreatePartner(json, ({ success }) => {
+				if (success) {
+					const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
+					const queryString = objectToQueryString(queryParams);
+					navigate('/partner' + queryString);
+				}
+			});
 		};
 	};
 
