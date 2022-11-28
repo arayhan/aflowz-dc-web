@@ -27,7 +27,7 @@ export * from './InputSelect/InputSelectKonstituen/InputSelectKonstituen';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 
-export * from './Modal/ModalUploadXLS/ModalUploadXLS';
+export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';

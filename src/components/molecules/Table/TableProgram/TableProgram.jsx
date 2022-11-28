@@ -99,6 +99,7 @@ export const TableProgram = ({ selectedCategory }) => {
 					title={selectedCategory?.name || 'All Category'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin}
+					showButtonUploadPartnerSheet
 				/>
 			</div>
 			<div className="overflow-x-scroll">

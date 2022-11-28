@@ -1,17 +1,42 @@
 import { Modal } from '@/components/atoms';
 import { useState } from 'react';
+import * as xlsx from 'xlsx';
 import { SiGooglesheets } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-export const ModalUploadXLS = ({ feature, onClose }) => {
+export const ModalUploadPartnerSheet = ({ onClose }) => {
+	const MAXIMUM_FILE_SIZE = 10; // in MegaByte
 	const [file, setFile] = useState(null);
+
+	const handleExtractSheetToJSON = () => {
+		const reader = new FileReader();
+
+		reader.readAsArrayBuffer(file);
+		reader.onload = (event) => {
+			const data = event.target.result;
+			const workbook = xlsx.read(data, { type: 'array' });
+			const sheetName = workbook.SheetNames[0];
+			const worksheet = workbook.Sheets[sheetName];
+			const json = xlsx.utils.sheet_to_json(worksheet);
+
+			console.log({ json });
+
+			// handleBulkCreatePartner(json, (success) => {
+			// 	if (success) onSubmitted();
+			// });
+		};
+	};
 
 	const handleChangeFile = (event) => {
 		const file = event.target.files[0];
 
 		if (file && file.type.indexOf('sheet') === -1 && file.type.indexOf('csv') === -1) {
 			toast.warning('File harus format .csv atau .xls');
+			event.target.value = '';
+			return;
+		} else if (file && file.size > MAXIMUM_FILE_SIZE * 1024) {
+			toast.warning(`File tidak boleh lebih dari MB ${MAXIMUM_FILE_SIZE}`);
 			event.target.value = '';
 			return;
 		}
@@ -36,8 +61,10 @@ export const ModalUploadXLS = ({ feature, onClose }) => {
 
 	return (
 		<Modal
-			title={`Upload XLS ${feature}`}
+			title={`Upload Sheet Penerima Program`}
 			description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
+			submitButtonText={'Upload'}
+			onSubmit={handleExtractSheetToJSON}
 			onClose={handleClose}
 		>
 			{file && (
