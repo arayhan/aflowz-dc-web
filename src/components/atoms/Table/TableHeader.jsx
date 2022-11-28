@@ -3,7 +3,7 @@ import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
 import { Modal } from '../Modal/Modal';
 
-export const TableHeader = ({ title, description, isReadonly }) => {
+export const TableHeader = ({ feature, title, description, isReadonly }) => {
 	const location = useLocation();
 
 	const [showUploadForm, setShowUploadForm] = useState(false);
@@ -12,7 +12,7 @@ export const TableHeader = ({ title, description, isReadonly }) => {
 		<div className="flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
 			{showUploadForm && (
 				<Modal
-					title="Upload XLS Program"
+					title={`Upload XLS ${feature}`}
 					description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
 					onClose={() => setShowUploadForm(false)}
 				>
@@ -44,7 +44,7 @@ export const TableHeader = ({ title, description, isReadonly }) => {
 						to={`${location.pathname}/create`}
 						className="block bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
-						<span>Create Program</span>
+						<span>Create {feature}</span>
 					</Link>
 				</div>
 			)}

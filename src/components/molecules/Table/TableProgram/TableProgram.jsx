@@ -95,6 +95,7 @@ export const TableProgram = ({ selectedCategory }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
+					feature="Program"
 					title={selectedCategory?.name || 'All Category'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin}
