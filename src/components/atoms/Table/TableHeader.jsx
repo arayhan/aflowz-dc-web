@@ -44,7 +44,7 @@ export const TableHeader = ({ title, description, isReadonly }) => {
 						to={`${location.pathname}/create`}
 						className="block bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
-						<span>Create Program</span>
+						<span className="transform: capitalize">Create New {location.pathname.replace('/', '')}</span>
 					</Link>
 				</div>
 			)}
