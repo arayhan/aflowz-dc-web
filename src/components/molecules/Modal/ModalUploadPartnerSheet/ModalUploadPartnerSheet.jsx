@@ -32,24 +32,26 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 				const worksheet = workbook.Sheets[sheetName];
 				const json = xlsx.utils.sheet_to_json(worksheet);
 
-				const params = json.map((data) => {
-					const allValuesToStringResult = data;
-					Object.keys(data).forEach((key) => {
-						allValuesToStringResult[key] = data[key].toString();
+				if (json.length > 0) {
+					const params = json.map((data) => {
+						const allValuesToStringResult = data;
+						Object.keys(data).forEach((key) => {
+							allValuesToStringResult[key] = data[key].toString();
+						});
+						return allValuesToStringResult;
 					});
-					return allValuesToStringResult;
-				});
 
-				bulkCreatePartner(params, ({ payload, success }) => {
-					if (success) {
-						const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
-						const queryString = objectToQueryString(queryParams);
-						setErrors(null);
-						navigate('/partner' + queryString);
-					} else {
-						setErrors(payload);
-					}
-				});
+					bulkCreatePartner(params, ({ payload, success }) => {
+						if (success) {
+							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
+							const queryString = objectToQueryString(queryParams);
+							setErrors(null);
+							navigate('/partner' + queryString);
+						} else {
+							setErrors(payload);
+						}
+					});
+				}
 			};
 		}
 	};
@@ -97,7 +99,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 			onClose={handleClose}
 		>
 			<div className="space-y-6">
-				{errors && (
+				{errors && errors.length > 0 && (
 					<div className="bg-red-500 text-white rounded-md overflow-y-scroll max-h-[300px]">
 						<div className="p-3">Errors :</div>
 						<hr className="border-red-400" />
