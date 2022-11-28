@@ -1,7 +1,7 @@
+import { ModalUploadXLS } from '@/components/molecules';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
-import { Modal } from '../Modal/Modal';
 
 export const TableHeader = ({ feature, title, description, isReadonly }) => {
 	const location = useLocation();
@@ -10,21 +10,7 @@ export const TableHeader = ({ feature, title, description, isReadonly }) => {
 
 	return (
 		<div className="flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
-			{showUploadForm && (
-				<Modal
-					title={`Upload XLS ${feature}`}
-					description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
-					onClose={() => setShowUploadForm(false)}
-				>
-					<label
-						htmlFor="uploadXls"
-						className="block border border-dashed text-center px-4 py-16 text-gray-300 rounded-md cursor-pointer hover:bg-gray-100"
-					>
-						<div>UPLOAD HERE</div>
-						<input type="file" id="uploadXls" className="hidden" />
-					</label>
-				</Modal>
-			)}
+			{showUploadForm && <ModalUploadXLS feature="Program" onClose={() => setShowUploadForm(false)} />}
 			<div>
 				<div className="text-xl font-light">{title}</div>
 				<div className="text-sm text-gray-400">{description}</div>
