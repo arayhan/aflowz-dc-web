@@ -21,35 +21,37 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 	const [file, setFile] = useState(null);
 
 	const handleExtractSheetToJSON = () => {
-		const reader = new FileReader();
+		if (file) {
+			const reader = new FileReader();
 
-		reader.readAsArrayBuffer(file);
-		reader.onload = (event) => {
-			const data = event.target.result;
-			const workbook = xlsx.read(data, { type: 'array' });
-			const sheetName = workbook.SheetNames[0];
-			const worksheet = workbook.Sheets[sheetName];
-			const json = xlsx.utils.sheet_to_json(worksheet);
+			reader.readAsArrayBuffer(file);
+			reader.onload = (event) => {
+				const data = event.target.result;
+				const workbook = xlsx.read(data, { type: 'array' });
+				const sheetName = workbook.SheetNames[0];
+				const worksheet = workbook.Sheets[sheetName];
+				const json = xlsx.utils.sheet_to_json(worksheet);
 
-			const params = json.map((data) => {
-				const allValuesToStringResult = data;
-				Object.keys(data).forEach((key) => {
-					allValuesToStringResult[key] = data[key].toString();
+				const params = json.map((data) => {
+					const allValuesToStringResult = data;
+					Object.keys(data).forEach((key) => {
+						allValuesToStringResult[key] = data[key].toString();
+					});
+					return allValuesToStringResult;
 				});
-				return allValuesToStringResult;
-			});
 
-			bulkCreatePartner(params, ({ payload, success }) => {
-				if (success) {
-					const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
-					const queryString = objectToQueryString(queryParams);
-					setErrors(null);
-					navigate('/partner' + queryString);
-				} else {
-					setErrors(payload);
-				}
-			});
-		};
+				bulkCreatePartner(params, ({ payload, success }) => {
+					if (success) {
+						const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
+						const queryString = objectToQueryString(queryParams);
+						setErrors(null);
+						navigate('/partner' + queryString);
+					} else {
+						setErrors(payload);
+					}
+				});
+			};
+		}
 	};
 
 	const handleChangeFile = (event) => {
@@ -82,7 +84,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 			});
 		} else if (!errors) {
 			onClose();
-		}
+		} else return undefined;
 	};
 
 	return (

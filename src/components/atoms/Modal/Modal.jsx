@@ -4,7 +4,10 @@ import { Button } from '../Button/Button';
 export const Modal = ({ title, description, children, onClose, submitButtonText, onSubmit, isLoading }) => {
 	return (
 		<div className="fixed left-0 top-0 w-full h-screen flex items-center justify-center">
-			<div onClick={!isLoading && onClose} className="absolute left-0 top-0 w-full h-full bg-black bg-opacity-30" />
+			<div
+				onClick={!isLoading ? onClose : undefined}
+				className="absolute left-0 top-0 w-full h-full bg-black bg-opacity-30"
+			/>
 			<div className="relative bg-white rounded-md shadow-md w-full max-w-screen-lg m-8">
 				<div className="p-8">
 					<div className="text-xl font-light">{title}</div>
@@ -24,4 +27,8 @@ export const Modal = ({ title, description, children, onClose, submitButtonText,
 			</div>
 		</div>
 	);
+};
+
+Modal.defaultProps = {
+	onClose: () => {}
 };
