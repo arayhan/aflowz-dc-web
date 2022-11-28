@@ -10,11 +10,13 @@ const { setPageLoading } = useAppStore.getState();
 const states = (set) => ({
 	fetchingStaffList: false,
 	fetchingPartnerList: false,
+	fetchingPartnerDetail: false,
 
 	processingBulkCreatePartner: false,
 
 	staffList: null,
 	partnerList: null,
+	partnerDetail: null,
 
 	getStaffList: async () => {
 		set({ fetchingStaffList: true });
@@ -35,6 +37,15 @@ const states = (set) => ({
 
 		set({ partnerList: success ? payload : null });
 		set({ fetchingPartnerList: false });
+	},
+
+	getPartnerDetail: async (partnerID) => {
+		set({ fetchingPartnerDetail: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(partnerID);
+
+		set({ partnerDetail: success ? payload : null });
+		set({ fetchingPartnerDetail: false });
 	},
 
 	bulkCreatePartner: async (params, callback) => {
