@@ -70,6 +70,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 			return;
 		}
 
+		setErrors(null);
 		setFile(file);
 	};
 
