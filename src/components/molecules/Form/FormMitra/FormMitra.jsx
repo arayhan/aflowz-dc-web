@@ -13,8 +13,7 @@ export const FormMitra = () => {
 
 	const { programCategory, fetchingProgramCategory, processingCreateProgramCategory, programCategoryErrors } =
 		useProgramStore();
-	const { getProgramCategory, createProgramCategory, updateProgramCategory, clearStateProgramCategory } =
-		useProgramStore();
+	const { getProgramCategory, createProgramCategory, updateProgramCategory, clearStateErrors } = useProgramStore();
 
 	const { control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formMitraSchema),
@@ -53,7 +52,7 @@ export const FormMitra = () => {
 		}
 	}, [programCategoryID, programCategory]);
 
-	useEffect(() => () => clearStateProgramCategory(), []);
+	useEffect(() => () => clearStateErrors(), []);
 
 	return (
 		<div className="space-y-8">
