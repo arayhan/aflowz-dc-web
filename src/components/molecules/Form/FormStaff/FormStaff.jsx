@@ -163,7 +163,7 @@ export const FormStaff = () => {
 							{...field}
 							label="Alamat Domisili"
 							placeholder="Alamat Domisili"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							error={error}
 						/>
 					)}

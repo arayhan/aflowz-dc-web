@@ -21,6 +21,7 @@ import PartnerDetail from './pages/Partner/PartnerDetail';
 import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
+import StaffDetail from './pages/Staff/StaffDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -62,6 +63,7 @@ export const AppRoutes = () => {
 					<Route path="/staff" element={<StaffListPage />} />
 					<Route path="/staff/create" element={<StaffCreate />} />
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
+					<Route path="/staff/:staffID" element={<StaffDetail />} />
 				</Route>
 			</Route>
 		</Routes>

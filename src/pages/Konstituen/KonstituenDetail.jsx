@@ -115,6 +115,7 @@ const KonstituenDetail = () => {
 											<TablePenerimaKonstituenDetail
 												dataPenerima={penerimaKonstituenDetail ? penerimaKonstituenDetail.items : []}
 												setLoading={fetchingPenerimaKonstituenDetail || penerimaKonstituenDetail === null}
+												konstituenID={konstituenDetail?.konstituen_id}
 											/>
 										</div>
 									</div>

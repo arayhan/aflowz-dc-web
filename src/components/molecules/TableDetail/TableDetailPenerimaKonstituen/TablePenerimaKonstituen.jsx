@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ACTION_TYPES } from '@/utils/constants';
 
-export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading }) => {
+export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading, konstituenID }) => {
 	const columns = useMemo(
 		() => [
 			{
@@ -80,7 +80,7 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading }) => {
 			<div className="p-4 space-y-2">
 				<div className="flex justify-between">
 					<div className="font-light text-xl">Tabel Penerima</div>
-					<Link to={`/partner`} className="text-primary underline hover:text-primary-400">
+					<Link to={`/konstituen/${konstituenID}/partner`} className="text-primary underline hover:text-primary-400">
 						Lihat Semua
 					</Link>
 				</div>
