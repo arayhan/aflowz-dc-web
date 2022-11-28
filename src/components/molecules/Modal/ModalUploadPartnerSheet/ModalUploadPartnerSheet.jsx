@@ -37,6 +37,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 						const allValuesToStringResult = data;
 						Object.keys(data).forEach((key) => {
 							allValuesToStringResult[key] = data[key].toString();
+							allValuesToStringResult['programs'] = [];
 						});
 						return allValuesToStringResult;
 					});
