@@ -1,4 +1,6 @@
 import { SERVICE_PARTNER } from '@/services';
+import { toastRequestResult } from '@/utils/helpers';
+import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { toastRequestResult } from '@/utils/helpers';
@@ -12,13 +14,16 @@ const states = (set) => ({
 	fetchingPartnerList: false,
 	fetchingStaffTitleList: false,
 	fetchingStaff: false,
+	fetchingPartnerDetail: false,
 
 	processingCreateStaff: false,
 	processingEditStaff: false,
+	processingBulkCreatePartner: false,
 
 	staffList: null,
 	partnerList: null,
 	staffTitleList: null,
+	partnerDetail: null,
 	staff: null,
 	getStaffList: async (params) => {
 		set({ fetchingStaffList: true });
@@ -84,6 +89,29 @@ const states = (set) => ({
 		toastRequestResult(loader, success, 'Staff updated', payload?.odoo_error || payload?.message);
 		set({ pprocessingEditStaff: false });
 		setPageLoading(false);
+	},
+	
+	getPartnerDetail: async (partnerID) => {
+		set({ fetchingPartnerDetail: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(partnerID);
+
+		set({ partnerDetail: success ? payload : null });
+		set({ fetchingPartnerDetail: false });
+	},
+
+	bulkCreatePartner: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingBlukCreatePartner: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
+
+		toastRequestResult(loader, success, 'Partners Created', payload?.odoo_error || payload?.message);
+		set({ processingBulkCreatePartner: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
 	}
 });
 

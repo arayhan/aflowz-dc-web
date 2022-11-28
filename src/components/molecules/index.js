@@ -23,13 +23,14 @@ export * from './Table/TableKonstituen/TableKonstituen';
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
-
 export * from './InputSelect/InputSelectCity/InputSelectCity';
 export * from './InputSelect/InputSelectKonstituen/InputSelectKonstituen';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
 export * from './InputSelect/InputSelectGender/InpurSelectGender';
 export * from './InputSelect/InputSelectStaffTitle/InputSelectStaffTitle';
+
+export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
