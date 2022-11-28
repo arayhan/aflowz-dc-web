@@ -2,9 +2,11 @@ import { useAuthStore } from '@/store';
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
 
-export const getStaffList = async () => {
+export const getStaffList = async (params) => {
 	try {
-		const queryParams = objectToQueryString({ is_staff: true });
+		const defaultParams = { is_staff: true };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+		const queryParams = objectToQueryString(requestParams);
 
 		const response = await http.get('/partner' + queryParams);
 

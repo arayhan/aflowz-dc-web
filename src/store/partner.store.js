@@ -8,10 +8,10 @@ const states = (set) => ({
 	staffList: null,
 	partnerList: null,
 
-	getStaffList: async () => {
+	getStaffList: async (params) => {
 		set({ fetchingStaffList: true });
 
-		const { success, payload } = await SERVICE_PARTNER.getStaffList();
+		const { success, payload } = await SERVICE_PARTNER.getStaffList(params);
 
 		set({ staffList: success ? payload : null });
 		set({ fetchingStaffList: false });
