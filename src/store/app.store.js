@@ -1,12 +1,12 @@
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-export const useAppStore = create(
-	devtools((set) => ({
-		isPageLoading: false,
-		isFullPageLoading: false,
+const states = (set) => ({
+	isPageLoading: false,
+	isFullPageLoading: false,
 
-		setPageLoading: (isPageLoading) => set({ isPageLoading }),
-		setFullPageLoading: (isFullPageLoading) => set({ isFullPageLoading })
-	}))
-);
+	setPageLoading: (isPageLoading) => set({ isPageLoading }),
+	setFullPageLoading: (isFullPageLoading) => set({ isFullPageLoading })
+});
+
+export const useAppStore = create(devtools(states, { name: 'app-store', getStorage: () => localStorage }));
