@@ -119,6 +119,8 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 					title={`Penerima Program ${programName ? programName : ''}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin || isReadonly}
+					showButtonUploadPartnerSheet
+					showButtonCreate={false}
 				/>
 			</div>
 			<div className="overflow-x-scroll">

@@ -15,6 +15,7 @@ import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
 import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
 import Partner from './pages/Partner/Partner';
+import PartnerDetail from './pages/Partner/PartnerDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -48,6 +49,7 @@ export const AppRoutes = () => {
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
+					<Route path="/partner/:partnerID" element={<PartnerDetail />} />
 					<Route path="/partner" element={<Partner />} />
 				</Route>
 			</Route>
