@@ -11,7 +11,7 @@ export const Modal = ({ title, description, children, onClose, submitButtonText,
 					<div className="text-gray-400">{description}</div>
 				</div>
 				<hr />
-				<div className="p-8">{children}</div>
+				<div className="p-8 overflow-y-scroll max-h-[70vh]">{children}</div>
 				<hr />
 				<div className="p-8 flex items-center justify-between">
 					<Button className={'px-6 py-2 rounded-sm'} variant={'danger'} disabled={isLoading} onClick={onClose}>
