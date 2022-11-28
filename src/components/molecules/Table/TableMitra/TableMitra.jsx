@@ -1,11 +1,17 @@
-import { Table } from '@/components/atoms';
-import { useProgramStore } from '@/store';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { useAuthStore, useProgramStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
-export const TableMitra = ({ selectedCategory }) => {
-	const { programCategoryList, fetchingProgramCategoryList, getProgramCategoryList } = useProgramStore();
+export const TableMitra = () => {
+	const { isSystem } = useAuthStore();
+	const { programCategoryList, fetchingProgramCategoryList } = useProgramStore();
+	const { getProgramCategoryList, deleteProgramCategory } = useProgramStore();
 
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
 	const columns = useMemo(
@@ -35,42 +41,64 @@ export const TableMitra = ({ selectedCategory }) => {
 				minWidth: 180,
 				Cell: (row) => {
 					return (
-						<div>
-							<Link
-								to={`/mitra/${row.row.original.id}`}
-								className="w-full max-w-[200px] text-center bg-blue-500 hover:bg-blue-600 transition-all inline-block text-white text-xs md:text-sm px-2 py-2 rounded-md"
-							>
-								See Detail
-							</Link>
+						<ButtonAction
+							className="min-w-[100px] w-full"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/mitra/${row.row.original.id}`}
+						/>
+					);
+				}
+			},
+			{
+				Header: 'Actions',
+				minWidth: 220,
+				hidden: !isSystem,
+				Cell: (row) => {
+					return (
+						<div className="grid grid-cols-2 gap-2">
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgramCategory(row.row.original.id)} />
 						</div>
 					);
 				}
 			}
 		],
-		[]
+		[offset, perPage, page, isSystem]
 	);
 
 	useEffect(() => {
-		const params = selectedCategory ? { program_category_id: selectedCategory.id } : null;
-		getProgramCategoryList(params);
-	}, [selectedCategory]);
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getProgramCategoryList(params);
+		}
+	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (programCategoryList) setData(programCategoryList.items);
+		if (programCategoryList) {
+			setData(programCategoryList.items);
+			setPageCount(Math.ceil(programCategoryList.total / perPage));
+		}
 	}, [programCategoryList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex items-center justify-between">
-				<div>
-					<div className="text-lg font-extralight">List Mitra</div>
-					<div className="text-sm text-gray-400">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet.
-					</div>
-				</div>
+				<TableHeader
+					feature="Mitra"
+					title={'List Mitra'}
+					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					isReadonly={!isSystem}
+				/>
 			</div>
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingProgramCategoryList || programCategoryList === null} />
+			</div>
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 			</div>
 		</div>
 	);

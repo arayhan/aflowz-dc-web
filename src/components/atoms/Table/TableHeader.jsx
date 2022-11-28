@@ -16,7 +16,7 @@ export const TableHeader = ({
 	const [showModalUploadPartnerSheet, setShowModalUploadPartnerSheet] = useState(false);
 
 	return (
-		<div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+		<div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
 			{showModalUploadPartnerSheet && <ModalUploadPartnerSheet onClose={() => setShowModalUploadPartnerSheet(false)} />}
 			<div>
 				<div className="text-xl font-light">{title}</div>
