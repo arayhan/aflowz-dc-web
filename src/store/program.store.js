@@ -165,7 +165,8 @@ const states = (set, get) => ({
 		set({ processingDeleteProgramCategory: false });
 		setPageLoading(false);
 	},
-	clearStateErrors: () => {
+	clearStateProgramCategory: () => {
+		set({ programCategory: null });
 		set({ programCategoryErrors: null });
 	}
 });
