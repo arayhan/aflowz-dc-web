@@ -10,7 +10,7 @@ import { objectToQueryString } from '@/utils/helpers';
 
 export const ModalUploadPartnerSheet = ({ onClose }) => {
 	const navigate = useNavigate();
-	const { bulkCreatePartner } = usePartnerStore();
+	const { processingBulkCreatePartner, bulkCreatePartner } = usePartnerStore();
 
 	const MAXIMUM_FILE_SIZE = 10; // in MegaByte
 	const [file, setFile] = useState(null);
@@ -72,6 +72,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 			title={`Upload Sheet Penerima Program`}
 			description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
 			submitButtonText={'Upload'}
+			isLoading={processingBulkCreatePartner}
 			onSubmit={handleExtractSheetToJSON}
 			onClose={handleClose}
 		>
