@@ -8,33 +8,29 @@ import { useAppStore } from './app.store';
 const { setPageLoading } = useAppStore.getState();
 
 const states = (set, get) => ({
-	fetchingProgramCategoryList: false,
-	fetchingProgramCategoryDetail: false,
 	fetchingProgram: false,
 	fetchingProgramList: false,
 	fetchingProgramDetail: false,
+	fetchingProgramCategory: false,
+	fetchingProgramCategoryList: false,
+	fetchingProgramCategoryDetail: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
 	processingDeleteProgram: false,
+	processingCreateProgramCategory: false,
+	processingUpdateProgramCategory: false,
 	processingDeleteProgramCategory: false,
 
-	programCategoryList: null,
-	programCategoryDetail: null,
 	program: null,
 	programList: null,
 	programDetail: null,
+	programCategory: null,
+	programCategoryList: null,
+	programCategoryDetail: null,
 
-	getProgramCategoryList: async () => {
-		if (get().programCategoryList === null) {
-			set({ fetchingProgramCategoryList: true });
+	programCategoryErrors: null,
 
-			const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
-
-			set({ programCategoryList: success ? payload : null });
-			set({ fetchingProgramCategoryList: false });
-		}
-	},
 	getProgram: async (programID) => {
 		set({ fetchingProgram: true });
 		set({ program: null });
@@ -63,15 +59,6 @@ const states = (set, get) => ({
 		set({ programDetail: success ? payload : null });
 		set({ fetchingProgramDetail: false });
 	},
-	getProgramCategoryDetail: async (mitraID) => {
-		set({ fetchingProgramCategoryDetail: true });
-
-		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryDetail(mitraID);
-
-		set({ programCategoryDetail: success ? payload : null });
-		set({ fetchingProgramCategoryDetail: false });
-	},
-
 	createProgram: async (params, callback) => {
 		setPageLoading(true);
 		set({ processingCreateProgram: true });
@@ -85,7 +72,6 @@ const states = (set, get) => ({
 
 		callback({ payload, success });
 	},
-
 	updateProgram: async (programID, params, callback) => {
 		setPageLoading(true);
 		set({ processingUpdateProgram: true });
@@ -99,7 +85,6 @@ const states = (set, get) => ({
 
 		callback({ payload, success });
 	},
-
 	deleteProgram: async (programID) => {
 		setPageLoading(true);
 		set({ processingDeleteProgram: true });
@@ -112,7 +97,62 @@ const states = (set, get) => ({
 		set({ processingDeleteProgram: false });
 		setPageLoading(false);
 	},
+	getProgramCategory: async (programCategoryID) => {
+		if (get().programCategory === null) {
+			set({ fetchingProgramCategory: true });
 
+			const { success, payload } = await SERVICE_PROGRAM.getProgramCategory(programCategoryID);
+
+			if (!success) set({ programCategoryErrors: payload });
+
+			set({ programCategory: success ? payload : null });
+			set({ fetchingProgramCategory: false });
+		}
+	},
+	getProgramCategoryList: async () => {
+		if (get().programCategoryList === null) {
+			set({ fetchingProgramCategoryList: true });
+
+			const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+
+			set({ programCategoryList: success ? payload : null });
+			set({ fetchingProgramCategoryList: false });
+		}
+	},
+	getProgramCategoryDetail: async (programCategoryID) => {
+		set({ fetchingProgramCategoryDetail: true });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryDetail(programCategoryID);
+
+		set({ programCategoryDetail: success ? payload : null });
+		set({ fetchingProgramCategoryDetail: false });
+	},
+	createProgramCategory: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProgramCategory: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.createProgramCategory(params);
+
+		toastRequestResult(loader, success, 'Program Category created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProgramCategory: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	updateProgramCategory: async (programCategoryID, params, callback) => {
+		setPageLoading(true);
+		set({ processingUpdateProgramCategory: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.updateProgramCategory(programCategoryID, params);
+
+		toastRequestResult(loader, success, 'Program Category updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateProgramCategory: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
 	deleteProgramCategory: async (programCategoryID) => {
 		setPageLoading(true);
 		set({ processingDeleteProgramCategory: true });
@@ -124,6 +164,10 @@ const states = (set, get) => ({
 		get().getProgramList();
 		set({ processingDeleteProgramCategory: false });
 		setPageLoading(false);
+	},
+	clearStateProgramCategory: () => {
+		set({ programCategory: null });
+		set({ programCategoryErrors: null });
 	}
 });
 
