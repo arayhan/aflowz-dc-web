@@ -4,7 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
 export const TablePartner = ({ programID, programName, isInDetail, isReadonly }) => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem } = useAuthStore();
 	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
 
 	const [page, setPage] = useState(1);
@@ -89,7 +89,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'Actions',
 				minWidth: 180,
-				hidden: isReadonly || !isAdmin,
+				hidden: isReadonly || !isSystem,
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
@@ -134,7 +134,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 					feature="Partner"
 					title={`Penerima Program ${programName ? programName : ''}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin || isReadonly}
+					isReadonly={!isSystem || isReadonly}
 					showButtonUploadPartnerSheet
 					showButtonCreate={false}
 				/>

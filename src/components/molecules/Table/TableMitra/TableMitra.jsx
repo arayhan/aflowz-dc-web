@@ -4,7 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
 export const TableMitra = () => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem } = useAuthStore();
 	const { programCategoryList, fetchingProgramCategoryList } = useProgramStore();
 	const { getProgramCategoryList, deleteProgramCategory } = useProgramStore();
 
@@ -52,20 +52,18 @@ export const TableMitra = () => {
 			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isAdmin,
+				hidden: !isSystem,
 				Cell: (row) => {
 					return (
-						isAdmin && (
-							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgramCategory(row.row.original.id)} />
-							</div>
-						)
+						<div className="grid grid-cols-2 gap-2">
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgramCategory(row.row.original.id)} />
+						</div>
 					);
 				}
 			}
 		],
-		[offset, perPage, page, isAdmin]
+		[offset, perPage, page, isSystem]
 	);
 
 	useEffect(() => {
@@ -93,7 +91,7 @@ export const TableMitra = () => {
 					feature="Mitra"
 					title={'List Mitra'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin}
+					isReadonly={!isSystem}
 				/>
 			</div>
 			<div className="overflow-x-scroll">

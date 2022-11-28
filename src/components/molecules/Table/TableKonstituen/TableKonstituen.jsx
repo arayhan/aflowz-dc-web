@@ -7,7 +7,7 @@ import { TableHeader } from '@/components/atoms/Table/TableHeader';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableKonstituen = ({ selectedType }) => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem } = useAuthStore();
 	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
 
 	const [data, setData] = useState([]);
@@ -59,7 +59,7 @@ export const TableKonstituen = ({ selectedType }) => {
 				minWidth: 180,
 				Cell: (row) => {
 					return (
-						isAdmin && (
+						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/konstituen/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
@@ -113,7 +113,7 @@ export const TableKonstituen = ({ selectedType }) => {
 				<TableHeader
 					title={selectedType?.konstituen_type || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin}
+					isReadonly={!isSystem}
 				/>
 			</div>
 			<div className="overflow-x-auto">
