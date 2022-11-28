@@ -46,7 +46,7 @@ export const FormMitra = () => {
 	useEffect(() => {
 		if (programCategoryID && programCategory) {
 			setValue('name', programCategory.name || '');
-			setValue('alias', programCategory.alias || '');
+			setValue('alias', programCategory.name_alias || '');
 			setValue('pic_staff_id', programCategory?.pic_staff?.id || 0);
 			setValue('pic', programCategory.pic || '');
 			setValue('pic_mobile', programCategory.pic_mobile || '');
