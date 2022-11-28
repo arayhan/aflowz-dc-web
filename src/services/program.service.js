@@ -87,3 +87,12 @@ export const deleteProgram = async (programID) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const deleteProgramCategory = async (programCategoryID) => {
+	try {
+		const response = await http.delete(`/program/category/${programCategoryID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
