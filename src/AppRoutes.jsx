@@ -18,6 +18,7 @@ import Partner from './pages/Partner/Partner';
 import StaffListPage from './pages/Staff/StaffListPage';
 import StaffCreate from './pages/Staff/StaffCreate';
 import PartnerDetail from './pages/Partner/PartnerDetail';
+import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 
 export const AppRoutes = () => {
@@ -40,7 +41,9 @@ export const AppRoutes = () => {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/mitra/:mitraID" element={<MitraDetail />} />
+					<Route path="/mitra/update/:programCategoryID" element={<MitraForm />} />
+					<Route path="/mitra/create" element={<MitraForm />} />
+					<Route path="/mitra/:programCategoryID" element={<MitraDetail />} />
 					<Route path="/mitra" element={<Mitra />} />
 					<Route path="/konstituen" element={<Konstituen />} />
 					<Route path="/konstituen/:konstituenID" element={<KonstituenDetail />} />

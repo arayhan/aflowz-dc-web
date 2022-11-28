@@ -4,7 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
 export const TableProgram = ({ selectedCategory }) => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
 	const [page, setPage] = useState(1);
@@ -55,10 +55,10 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isAdmin,
+				hidden: !isSystem,
 				Cell: (row) => {
 					return (
-						isAdmin && (
+						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgram(row.row.original.id)} />
@@ -68,7 +68,7 @@ export const TableProgram = ({ selectedCategory }) => {
 				}
 			}
 		],
-		[offset, perPage, page, isAdmin]
+		[offset, perPage, page, isSystem]
 	);
 
 	useEffect(() => {
@@ -98,7 +98,7 @@ export const TableProgram = ({ selectedCategory }) => {
 					feature="Program"
 					title={selectedCategory?.name || 'All Category'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin}
+					isReadonly={!isSystem}
 					showButtonUploadPartnerSheet
 				/>
 			</div>

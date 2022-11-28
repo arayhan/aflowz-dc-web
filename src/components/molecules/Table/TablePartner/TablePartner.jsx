@@ -1,12 +1,16 @@
-import { ButtonAction, Table, TableHeader } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
 export const TablePartner = ({ programID, programName, isInDetail, isReadonly }) => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem } = useAuthStore();
 	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
 
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
 	const columns = useMemo(
@@ -85,7 +89,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 			{
 				Header: 'Actions',
 				minWidth: 180,
-				hidden: isReadonly || !isAdmin,
+				hidden: isReadonly || !isSystem,
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
@@ -104,27 +108,42 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 	};
 
 	useEffect(() => {
-		const params = programID ? { program_id: programID } : null;
-		getPartnerList(params);
-	}, [programID]);
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
+
+		if (programID) Object.assign(params, { program_id: programID });
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getPartnerList(params);
+		}
+	}, [programID, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (partnerList) setData(partnerList.items);
-	}, [partnerList]);
+		if (partnerList) {
+			setData(partnerList.items);
+			setPageCount(Math.ceil(partnerList.total / perPage));
+		}
+	}, [partnerList, pageCount]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
+					feature="Partner"
 					title={`Penerima Program ${programName ? programName : ''}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isAdmin || isReadonly}
+					isReadonly={!isSystem || isReadonly}
 					showButtonUploadPartnerSheet
 					showButtonCreate={false}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingPartnerList || partnerList === null} />
+			</div>
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 			</div>
 		</div>
 	);

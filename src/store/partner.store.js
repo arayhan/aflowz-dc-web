@@ -3,9 +3,6 @@ import { toastRequestResult } from '@/utils/helpers';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { useAppStore } from './app.store';
-
-const { setPageLoading } = useAppStore.getState();
 
 const states = (set) => ({
 	fetchingStaffList: false,
@@ -104,15 +101,13 @@ const states = (set) => ({
 	},
 
 	bulkCreatePartner: async (params, callback) => {
-		setPageLoading(true);
-		set({ processingBlukCreatePartner: true });
+		set({ processingBulkCreatePartner: true });
 
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
 
 		toastRequestResult(loader, success, 'Partners Created', payload?.odoo_error || payload?.message);
 		set({ processingBulkCreatePartner: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	},
@@ -124,4 +119,4 @@ const states = (set) => ({
 	}
 });
 
-export const usePartnerStore = create(devtools(states, { name: 'auth-store', getStorage: () => localStorage }));
+export const usePartnerStore = create(devtools(states, { name: 'partner-store', getStorage: () => localStorage }));

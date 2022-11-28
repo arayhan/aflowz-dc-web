@@ -21,6 +21,21 @@ export const formProgramSchema = yup.object().shape(
 	['pic_mobile', 'pic_mobile']
 );
 
+export const formMitraSchema = yup.object().shape(
+	{
+		name: yup.string().required('Nama program wajib diisi'),
+		alias: yup.string().required('Alias program wajib diisi'),
+		pic_staff_id: yup.number().required('PIC internal wajib diisi'),
+		pic: yup.string().required('PIC eksternal wajib diisi'),
+		pic_mobile: yup
+			.string()
+			.required('Nomor PIC eksternal wajib diisi')
+			.matches(/^[0-9]*$/, 'Nomor tidak valid')
+			.min(8, 'Minimal 8 angka')
+	},
+	['pic_mobile', 'pic_mobile']
+);
+
 export const formKonstituenSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama Institusi wajib diisi'),
