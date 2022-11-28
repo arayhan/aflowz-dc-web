@@ -25,8 +25,8 @@ const ListPenerimaByKonstituen = () => {
 				title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Konstituen'}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 			/>
-			<div className="bg-gray-100">
-				<div className="py-6 container">
+			<div className="bg-gray-100 py-6">
+				<div className="py-6 container bg-white rounded-md">
 					<TablePenerimaKonstituenDetail
 						dataPenerima={penerimaKonstituenDetail ? penerimaKonstituenDetail.items : []}
 						setLoading={fetchingPenerimaKonstituenDetail || penerimaKonstituenDetail === null}

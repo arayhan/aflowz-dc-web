@@ -1,9 +1,8 @@
-import { ButtonAction, Table } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { SERVICE_PARTNER } from '@/services';
-import { TableHeader } from '@/components/atoms/Table/TableHeader';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableStaff = () => {
@@ -12,6 +11,9 @@ export const TableStaff = () => {
 
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 
 	const columns = useMemo(
 		() => [
@@ -78,13 +80,22 @@ export const TableStaff = () => {
 	);
 
 	useEffect(() => {
-		const params = page === 1 ? { limit: 10, offset: 0 } : { limit: 10, offset: (page - 1) * 10 };
-		getStaffList(params);
-	}, [page]);
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getStaffList(params);
+		}
+	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (staffList) setData(staffList.items);
-	});
+		if (staffList) {
+			setData(staffList.items);
+			setPageCount(Math.ceil(staffList.total / perPage));
+		}
+	}, [staffList, pageCount]);
 
 	const handleDelete = async (staffID) => {
 		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
@@ -124,6 +135,9 @@ export const TableStaff = () => {
 			</div>
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingStaffList || staffList === null} />
+			</div>
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 			</div>
 		</div>
 	);

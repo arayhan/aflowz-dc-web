@@ -16,8 +16,6 @@ const StaffDetail = () => {
 		getStaff(params.staffID);
 	}, [params]);
 
-	console.log(staff);
-
 	return (
 		<div>
 			<BannerFeature title={staff ? `${staff.name}` : 'Staff'} loading={fetchingStaff} />

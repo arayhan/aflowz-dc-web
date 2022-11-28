@@ -26,11 +26,9 @@ export const getKonstituenDetail = async (konstituenID) => {
 
 export const getPenerimaKonstituenDetail = async (params) => {
 	try {
-		console.log(params);
 		const defaultParams = { is_staff: false };
 		const requestParams = params ? { ...params, ...defaultParams } : defaultParams;
 		const queryParams = objectToQueryString(requestParams);
-		console.log(queryParams);
 
 		const response = await http.get('/partner' + queryParams);
 

@@ -1,15 +1,17 @@
-import { ButtonAction, Table } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { SERVICE_KONSTITUEN } from '@/services';
-import { TableHeader } from '@/components/atoms/Table/TableHeader';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableKonstituen = ({ selectedType }) => {
 	const { isSystem } = useAuthStore();
 	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
-
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 	const [konstituen, setKonstituen] = useState(null);
 
@@ -39,6 +41,21 @@ export const TableKonstituen = ({ selectedType }) => {
 				Header: 'Kota / Kabupaten',
 				minWidth: 150,
 				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
+			},
+			{
+				Header: 'List Penerima',
+				minWidth: 100,
+				maxWidth: 100,
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400"
+							action={ACTION_TYPES.SEE_DETAIL}
+							text="List Penerima"
+							linkTo={`/konstituen/${row.row.original.id}/partner`}
+						/>
+					);
+				}
 			},
 			{
 				Header: 'Detail',
@@ -73,13 +90,24 @@ export const TableKonstituen = ({ selectedType }) => {
 	);
 
 	useEffect(() => {
-		const params = selectedType ? selectedType : null;
-		getKonstituenList(params);
-	}, [selectedType, konstituen]);
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult };
+
+		if (selectedType) Object.assign(params, { konstituen_type: selectedType.konstituen_type });
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getKonstituenList(params);
+		}
+	}, [selectedType, page, perPage, pageCount, konstituen]);
 
 	useEffect(() => {
-		if (konstituenList) setData(konstituenList.items);
-	});
+		if (konstituenList) {
+			setData(konstituenList.items);
+			setPageCount(Math.ceil(konstituenList.total / perPage));
+		}
+	}, [konstituenList, pageCount]);
 
 	const handleDelete = async (konstituenID) => {
 		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(konstituenID);
@@ -120,6 +148,9 @@ export const TableKonstituen = ({ selectedType }) => {
 			</div>
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />
+			</div>
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 			</div>
 		</div>
 	);

@@ -1,11 +1,39 @@
-import { ButtonAction, Table } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter } from '@/components/atoms';
 import { NegativeCase } from '@/components/atoms';
 import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ACTION_TYPES } from '@/utils/constants';
+import { useKonstituenStore } from '@/store';
 
-export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading, konstituenID }) => {
+export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
+	const { fetchingPenerimaKonstituenDetail, penerimaKonstituenDetail, getPenerimaKonstituenDetail } =
+		useKonstituenStore();
+
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		const offsetResult = (page - 1) * perPage;
+		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID };
+
+		if (page > pageCount) setPage(pageCount);
+		else {
+			setOffset(offsetResult);
+			getPenerimaKonstituenDetail(params);
+		}
+	}, [page, perPage, pageCount]);
+
+	useEffect(() => {
+		if (penerimaKonstituenDetail) {
+			setData(penerimaKonstituenDetail.items);
+			setPageCount(Math.ceil(penerimaKonstituenDetail.total / perPage));
+		}
+	}, [penerimaKonstituenDetail, pageCount]);
+
 	const columns = useMemo(
 		() => [
 			{
@@ -15,7 +43,7 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading, konsti
 				disableFilters: true,
 				maxWidth: 20,
 				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
+					return <div className="text-gray-400">{(page - 1) * perPage + Number(row.row.id) + 1}</div>;
 				}
 			},
 			{
@@ -80,18 +108,33 @@ export const TablePenerimaKonstituenDetail = ({ dataPenerima, setLoading, konsti
 			<div className="p-4 space-y-2">
 				<div className="flex justify-between">
 					<div className="font-light text-xl">Tabel Penerima</div>
-					<Link to={`/konstituen/${konstituenID}/partner`} className="text-primary underline hover:text-primary-400">
-						Lihat Semua
-					</Link>
+					{isInDetail && (
+						<Link to={`/konstituen/${konstituenID}/partner`} className="text-primary underline hover:text-primary-400">
+							Lihat Semua
+						</Link>
+					)}
 				</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
-			{dataPenerima.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
-			{dataPenerima.length > 0 && (
-				<div className="overflow-x-auto">
-					<Table columns={columns} data={dataPenerima} loading={setLoading} />
-				</div>
+			{data.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
+			{data.length > 0 && (
+				<>
+					<div className="overflow-x-auto">
+						<Table columns={columns} data={data} loading={fetchingPenerimaKonstituenDetail} />
+					</div>
+					{!isInDetail && (
+						<div className="p-6">
+							<TableFooter
+								page={page}
+								setPage={setPage}
+								pageCount={pageCount}
+								perPage={perPage}
+								setPerPage={setPerPage}
+							/>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	);

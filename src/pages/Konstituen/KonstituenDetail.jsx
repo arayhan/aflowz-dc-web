@@ -112,11 +112,7 @@ const KonstituenDetail = () => {
 											/>
 										</div>
 										<div className="col-span-12 bg-white rounded-md shadow-lg">
-											<TablePenerimaKonstituenDetail
-												dataPenerima={penerimaKonstituenDetail ? penerimaKonstituenDetail.items : []}
-												setLoading={fetchingPenerimaKonstituenDetail || penerimaKonstituenDetail === null}
-												konstituenID={konstituenDetail?.konstituen_id}
-											/>
+											<TablePenerimaKonstituenDetail konstituenID={konstituenDetail?.konstituen_id} isInDetail />
 										</div>
 									</div>
 								</div>
