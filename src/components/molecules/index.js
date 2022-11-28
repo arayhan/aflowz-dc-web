@@ -15,6 +15,7 @@ export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstitue
 export * from './Form/FormProgram/FormProgram';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
+export * from './Form/FormStaff/FormStaff';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
@@ -27,6 +28,11 @@ export * from './InputSelect/InputSelectCity/InputSelectCity';
 export * from './InputSelect/InputSelectKonstituen/InputSelectKonstituen';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
+export * from './InputSelect/InputSelectGender/InpurSelectGender';
+export * from './InputSelect/InputSelectStaffTitle/InputSelectStaffTitle';
+export * from './InputSelect/InputSelectProvince/InputSelectProvince';
+export * from './InputSelect/InputSelectVillage/InputSelectVillage';
+export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 
 export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
 
