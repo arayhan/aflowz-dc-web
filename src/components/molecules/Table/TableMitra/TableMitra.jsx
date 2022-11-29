@@ -29,12 +29,8 @@ export const TableMitra = () => {
 			{
 				Header: 'Name',
 				accessor: 'name',
-				minWidth: 225
-			},
-			{
-				Header: 'Alias',
-				accessor: 'name_alias',
-				minWidth: 120
+				width: '100%',
+				minWidth: 300
 			},
 			{
 				Header: 'Detail',
@@ -66,10 +62,10 @@ export const TableMitra = () => {
 		[offset, perPage, page, isSystem]
 	);
 
-	useEffect(() => {
-		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult };
+	const offsetResult = (page - 1) * perPage;
+	const params = { limit: perPage, offset: offsetResult };
 
+	useEffect(() => {
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
