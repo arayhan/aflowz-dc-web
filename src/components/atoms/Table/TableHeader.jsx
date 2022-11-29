@@ -19,7 +19,7 @@ export const TableHeader = ({
 		<div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
 			{showModalUploadPartnerSheet && <ModalUploadPartnerSheet onClose={() => setShowModalUploadPartnerSheet(false)} />}
 			<div>
-				<div className="text-xl font-light">{title}</div>
+				<div className="text-xl font-light transform: capitalize">{title}</div>
 				<div className="text-sm text-gray-400">{description}</div>
 			</div>
 			{!isReadonly && (

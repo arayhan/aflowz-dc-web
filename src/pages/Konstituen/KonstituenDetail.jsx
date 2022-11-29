@@ -11,14 +11,8 @@ import Skeleton from 'react-loading-skeleton';
 
 const KonstituenDetail = () => {
 	const params = useParams();
-	const {
-		konstituenDetail,
-		fetchingKonstituenDetail,
-		getKonstituenDetail,
-		fetchingPenerimaKonstituenDetail,
-		penerimaKonstituenDetail,
-		getPenerimaKonstituenDetail
-	} = useKonstituenStore();
+	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail, getPenerimaKonstituenDetail } =
+		useKonstituenStore();
 	const [konstituenType, setKonstituenType] = useState('');
 
 	useEffect(() => {
@@ -30,7 +24,7 @@ const KonstituenDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={konstituenDetail ? `${konstituenDetail.konstituen_name}` : 'Konstitusi'}
+				title={konstituenDetail ? `${konstituenDetail.konstituen_name}` : 'Institusi'}
 				loading={fetchingKonstituenDetail}
 			/>
 			<section className="bg-gray-100 py-12 md:py-12">
@@ -50,36 +44,38 @@ const KonstituenDetail = () => {
 									<div className="p-5 rounded-md my-2">
 										<div className="grid grid-cols-12 gap-y-1 text-sm">
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												Nama {konstituenType || 'institusi'}
+												Nama {konstituenDetail?.konstituen_type || 'institusi'}
 											</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{konstituenDetail?.konstituen_name || 'Belum Tercantum'}
 											</div>
 
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												Alamat {konstituenType || 'institusi'}
+												Alamat {konstituenDetail?.konstituen_type || 'institusi'}
 											</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												{konstituenDetail.alamat_konstituen ? konstituenDetail.alamat_konstituen : 'Belum Ada Alamat'}
 											</div>
 
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												PIC {konstituenType || 'institusi'}
+												PIC {konstituenDetail?.konstituen_type || 'institusi'}
 											</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{konstituenDetail?.konstituen_pic || 'Belum Ada Nama PIC'}{' '}
+												{konstituenDetail?.konstituen_pic || 'Belum Ada Nama PIC Institusi'}{' '}
 												{konstituenDetail?.konstituen_pic_mobile
 													? `(${konstituenDetail?.konstituen_pic_mobile})`
 													: '(Belum Ada No. Kontak)'}
 											</div>
 
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">PIC Staff</div>
+											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">
+												PIC Tim Internal
+											</div>
 											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 												<Link
 													to={`/staff/${konstituenDetail?.pic_staff.id}`}
 													className="text-primary underline hover:text-primary-400"
 												>
-													{konstituenDetail?.pic_staff.name || 'Belum Ada Nama PIC'}{' '}
+													{konstituenDetail?.pic_staff.name || 'Belum Ada Nama PIC Tim Internal'}{' '}
 													{konstituenDetail?.pic_staff.mobile
 														? `(${konstituenDetail?.pic_staff.mobile})`
 														: '(Belum Ada No. Kontak)'}
@@ -89,13 +85,13 @@ const KonstituenDetail = () => {
 									</div>
 								</div>
 								<div className="flex flex-col items-center justify-center">
-									<div className="bg-white rounded-md px-10 md:px-16 py-6 mb-2 shadow-lg cursor-pointer">
-										<Link to={`/institusi/${konstituenDetail?.konstituen_id}/partner`}>
+									<div className="bg-white rounded-md px-8 md:px-10 py-6 mb-2 shadow-lg cursor-pointer">
+										<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
 												<span className="text-2xl md:text-4xl font-extralight">
 													{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}
 												</span>
-												<div className="font-light text-gray-400">Total Penerima</div>
+												<div className="font-light text-gray-400">Total Penerima Program </div>
 											</div>
 										</Link>
 									</div>

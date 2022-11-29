@@ -51,7 +51,7 @@ export const AppRoutes = () => {
 					<Route path="/institusi/:konstituenID" element={<KonstituenDetail />} />
 					<Route path="/institusi/create" element={<KonstituenCreate />} />
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
-					<Route path="/institusi/:konstituenID/partner" element={<ListPenerimaByKonstituen />} />
+					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />

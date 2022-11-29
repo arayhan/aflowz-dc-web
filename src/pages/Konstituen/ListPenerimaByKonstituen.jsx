@@ -4,18 +4,11 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ListPenerimaByKonstituen = () => {
-	const {
-		fetchingPenerimaKonstituenDetail,
-		penerimaKonstituenDetail,
-		getPenerimaKonstituenDetail,
-		konstituenDetail,
-		getKonstituenDetail
-	} = useKonstituenStore();
+	const { konstituenDetail, getKonstituenDetail } = useKonstituenStore();
 
 	const params = useParams();
 
 	useEffect(() => {
-		getPenerimaKonstituenDetail(params.konstituenID);
 		getKonstituenDetail(params.konstituenID);
 	}, [params]);
 
@@ -27,10 +20,7 @@ const ListPenerimaByKonstituen = () => {
 			/>
 			<div className="bg-gray-100 py-6">
 				<div className="py-6 container bg-white rounded-md">
-					<TablePenerimaKonstituenDetail
-						dataPenerima={penerimaKonstituenDetail ? penerimaKonstituenDetail.items : []}
-						setLoading={fetchingPenerimaKonstituenDetail || penerimaKonstituenDetail === null}
-					/>
+					<TablePenerimaKonstituenDetail konstituenID={parseInt(params.konstituenID)} />
 				</div>
 			</div>
 		</div>
