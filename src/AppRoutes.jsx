@@ -15,8 +15,13 @@ import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
 import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
 import Partner from './pages/Partner/Partner';
+import StaffListPage from './pages/Staff/StaffListPage';
+import StaffCreate from './pages/Staff/StaffCreate';
 import PartnerDetail from './pages/Partner/PartnerDetail';
 import MitraForm from './pages/Mitra/MitraForm';
+import StaffUpdate from './pages/Staff/StaffUpdate';
+import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
+import StaffDetail from './pages/Staff/StaffDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -46,6 +51,7 @@ export const AppRoutes = () => {
 					<Route path="/konstituen/:konstituenID" element={<KonstituenDetail />} />
 					<Route path="/konstituen/create" element={<KonstituenCreate />} />
 					<Route path="/konstituen/update/:konstituenID" element={<KonstituenUpdate />} />
+					<Route path="/konstituen/:konstituenID/partner" element={<ListPenerimaByKonstituen />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
@@ -54,6 +60,10 @@ export const AppRoutes = () => {
 					<Route path="/program" element={<Program />} />
 					<Route path="/partner/:partnerID" element={<PartnerDetail />} />
 					<Route path="/partner" element={<Partner />} />
+					<Route path="/staff" element={<StaffListPage />} />
+					<Route path="/staff/create" element={<StaffCreate />} />
+					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
+					<Route path="/staff/:staffID" element={<StaffDetail />} />
 				</Route>
 			</Route>
 		</Routes>

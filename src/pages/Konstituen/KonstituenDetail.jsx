@@ -90,10 +90,10 @@ const KonstituenDetail = () => {
 								</div>
 								<div className="flex flex-col items-center justify-center">
 									<div className="bg-white rounded-md px-10 md:px-16 py-6 mb-2 shadow-lg cursor-pointer">
-										<Link to={`/partner`}>
+										<Link to={`/konstituen/${konstituenDetail?.konstituen_id}/partner`}>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
 												<span className="text-2xl md:text-4xl font-extralight">
-													{konstituenDetail?.total_pria + konstituenDetail?.total_wanita || 0}
+													{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}
 												</span>
 												<div className="font-light text-gray-400">Total Penerima</div>
 											</div>
@@ -112,10 +112,7 @@ const KonstituenDetail = () => {
 											/>
 										</div>
 										<div className="col-span-12 bg-white rounded-md shadow-lg">
-											<TablePenerimaKonstituenDetail
-												dataPenerima={penerimaKonstituenDetail ? penerimaKonstituenDetail.items : []}
-												setLoading={fetchingPenerimaKonstituenDetail || penerimaKonstituenDetail === null}
-											/>
+											<TablePenerimaKonstituenDetail konstituenID={konstituenDetail?.konstituen_id} isInDetail />
 										</div>
 									</div>
 								</div>

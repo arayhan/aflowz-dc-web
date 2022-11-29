@@ -1,19 +1,19 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
-import { useAuthStore, useKonstituenStore } from '@/store';
+import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
-import { SERVICE_KONSTITUEN } from '@/services';
+import { SERVICE_PARTNER } from '@/services';
 import { ACTION_TYPES } from '@/utils/constants';
 
-export const TableKonstituen = ({ selectedType }) => {
-	const { isSystem } = useAuthStore();
-	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
+export const TableStaff = () => {
+	const { isAdmin } = useAuthStore();
+	const { fetchingStaffList, staffList, getStaffList } = usePartnerStore();
+
+	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
-	const [data, setData] = useState([]);
-	const [konstituen, setKonstituen] = useState(null);
 
 	const columns = useMemo(
 		() => [
@@ -28,34 +28,24 @@ export const TableKonstituen = ({ selectedType }) => {
 				}
 			},
 			{
-				Header: 'Nama Institusi',
+				Header: 'NIK',
+				accessor: 'nik_number',
+				minWidth: 100
+			},
+			{
+				Header: 'Nama Staff',
 				accessor: 'name',
 				minWidth: 175
 			},
 			{
-				Header: 'Konstitusi',
-				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
+				Header: 'Role',
+				minWidth: 100,
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.staff_title.name}</div>
 			},
 			{
 				Header: 'Kota / Kabupaten',
 				minWidth: 150,
 				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
-			},
-			{
-				Header: 'List Penerima',
-				minWidth: 100,
-				maxWidth: 100,
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400"
-							action={ACTION_TYPES.SEE_DETAIL}
-							text="List Penerima"
-							linkTo={`/konstituen/${row.row.original.id}/partner`}
-						/>
-					);
-				}
 			},
 			{
 				Header: 'Detail',
@@ -66,7 +56,7 @@ export const TableKonstituen = ({ selectedType }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/konstituen/${row.row.original.id}`}
+							linkTo={`/staff/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -76,9 +66,9 @@ export const TableKonstituen = ({ selectedType }) => {
 				minWidth: 180,
 				Cell: (row) => {
 					return (
-						isSystem && (
+						isAdmin && (
 							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/konstituen/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
 							</div>
 						)
@@ -93,27 +83,25 @@ export const TableKonstituen = ({ selectedType }) => {
 		const offsetResult = (page - 1) * perPage;
 		const params = { limit: perPage, offset: offsetResult };
 
-		if (selectedType) Object.assign(params, { konstituen_type: selectedType.konstituen_type });
-
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getKonstituenList(params);
+			getStaffList(params);
 		}
-	}, [selectedType, page, perPage, pageCount, konstituen]);
+	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (konstituenList) {
-			setData(konstituenList.items);
-			setPageCount(Math.ceil(konstituenList.total / perPage));
+		if (staffList) {
+			setData(staffList.items);
+			setPageCount(Math.ceil(staffList.total / perPage));
 		}
-	}, [konstituenList, pageCount]);
+	}, [staffList, pageCount]);
 
-	const handleDelete = async (konstituenID) => {
-		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(konstituenID);
+	const handleDelete = async (staffID) => {
+		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
 
 		if (success) {
-			toast.success('Berhasil Menghapus Konstituen', {
+			toast.success('Berhasil Menghapus Staff', {
 				position: 'top-right',
 				autoClose: 1500,
 				hideProgressBar: false,
@@ -125,11 +113,10 @@ export const TableKonstituen = ({ selectedType }) => {
 			});
 
 			const defaultParams = { limit: 10, offset: 0 };
-			const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
+			const { success, payload } = await SERVICE_PARTNER.getStaffList(defaultParams);
 
 			if (success) {
-				setKonstituen(null);
-				getKonstituenList();
+				getStaffList({ limit: 10, offset: 0 });
 				setData(payload.items);
 			}
 		}
@@ -139,15 +126,15 @@ export const TableKonstituen = ({ selectedType }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={selectedType?.konstituen_type || 'Semua Institusi'}
+					title="Daftar Staff"
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isSystem}
+					isReadonly={!isAdmin}
 					showButtonCreate={true}
-					feature={'Konstituen'}
+					feature={'New Staff'}
 				/>
 			</div>
 			<div className="overflow-x-auto">
-				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />
+				<Table columns={columns} data={data} loading={fetchingStaffList || staffList === null} />
 			</div>
 			<div className="p-6">
 				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
