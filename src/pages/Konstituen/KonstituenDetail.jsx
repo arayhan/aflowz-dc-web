@@ -90,7 +90,7 @@ const KonstituenDetail = () => {
 								</div>
 								<div className="flex flex-col items-center justify-center">
 									<div className="bg-white rounded-md px-10 md:px-16 py-6 mb-2 shadow-lg cursor-pointer">
-										<Link to={`/konstituen/${konstituenDetail?.konstituen_id}/partner`}>
+										<Link to={`/institusi/${konstituenDetail?.konstituen_id}/partner`}>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
 												<span className="text-2xl md:text-4xl font-extralight">
 													{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}

@@ -52,7 +52,7 @@ export const TableKonstituen = ({ selectedType }) => {
 							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400"
 							action={ACTION_TYPES.SEE_DETAIL}
 							text="List Penerima"
-							linkTo={`/konstituen/${row.row.original.id}/partner`}
+							linkTo={`/institusi/${row.row.original.id}/partner`}
 						/>
 					);
 				}
@@ -66,7 +66,7 @@ export const TableKonstituen = ({ selectedType }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/konstituen/${row.row.original.id}`}
+							linkTo={`/institusi/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -78,7 +78,7 @@ export const TableKonstituen = ({ selectedType }) => {
 					return (
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/konstituen/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/institusi/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
 							</div>
 						)

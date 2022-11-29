@@ -47,11 +47,11 @@ export const AppRoutes = () => {
 					<Route path="/mitra/create" element={<MitraForm />} />
 					<Route path="/mitra/:programCategoryID" element={<MitraDetail />} />
 					<Route path="/mitra" element={<Mitra />} />
-					<Route path="/konstituen" element={<Konstituen />} />
-					<Route path="/konstituen/:konstituenID" element={<KonstituenDetail />} />
-					<Route path="/konstituen/create" element={<KonstituenCreate />} />
-					<Route path="/konstituen/update/:konstituenID" element={<KonstituenUpdate />} />
-					<Route path="/konstituen/:konstituenID/partner" element={<ListPenerimaByKonstituen />} />
+					<Route path="/institusi" element={<Konstituen />} />
+					<Route path="/institusi/:konstituenID" element={<KonstituenDetail />} />
+					<Route path="/institusi/create" element={<KonstituenCreate />} />
+					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
+					<Route path="/institusi/:konstituenID/partner" element={<ListPenerimaByKonstituen />} />
 					<Route path="/desa" element={<Program />} />
 					<Route path="/kota" element={<Program />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />

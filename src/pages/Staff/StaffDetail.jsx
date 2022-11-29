@@ -86,7 +86,7 @@ const StaffDetail = () => {
 														key={staff?.konstituen.id}
 														className="bg-purple-500 hover:bg-purple-400"
 														action={ACTION_TYPES.SEE_DETAIL}
-														linkTo={`/konstituen/${staff?.konstituen.id}`}
+														linkTo={`/institusi/${staff?.konstituen.id}`}
 														text={staff?.konstituen.name}
 													/>
 												</div>

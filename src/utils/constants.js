@@ -33,7 +33,7 @@ export const PER_PAGE_OPTIONS = [10, 20, 50, 100];
 export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
 	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' },
-	{ title: 'Konstituen', icon: require('@/images/icons/box.svg').default, path: '/konstituen' },
+	{ title: 'Institusi', icon: require('@/images/icons/box.svg').default, path: '/institusi' },
 	{ title: 'Partner', icon: require('@/images/icons/box.svg').default, path: '/partner' },
 	{ title: 'Staff', icon: require('@/images/icons/box.svg').default, path: '/staff' }
 	// { title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },

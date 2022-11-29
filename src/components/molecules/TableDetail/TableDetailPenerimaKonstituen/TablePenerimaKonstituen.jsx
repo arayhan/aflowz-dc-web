@@ -109,7 +109,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 				<div className="flex justify-between">
 					<div className="font-light text-xl">Tabel Penerima</div>
 					{isInDetail && (
-						<Link to={`/konstituen/${konstituenID}/partner`} className="text-primary underline hover:text-primary-400">
+						<Link to={`/institusi/${konstituenID}/partner`} className="text-primary underline hover:text-primary-400">
 							Lihat Semua
 						</Link>
 					)}

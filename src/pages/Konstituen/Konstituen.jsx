@@ -6,7 +6,7 @@ const Konstituen = () => {
 
 	return (
 		<div>
-			<BannerFeature title="Konstituen" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="List Institusi" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
 				<KonstituenType selectedType={selectedKonstituen} onSelectedType={(type) => setSelectedKonstituen(type)} />
 				<div className="py-6 container">

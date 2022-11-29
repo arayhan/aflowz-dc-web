@@ -36,11 +36,11 @@ export const FormKonstituen = () => {
 	const onHandleSubmit = (values) => {
 		if (konstituenID) {
 			updateKonstituen(konstituenID, values, ({ success }) => {
-				if (success) navigate(`/konstituen/${konstituenID}`);
+				if (success) navigate(`/institusi/${konstituenID}`);
 			});
 		} else {
 			postKonstituenCreate(values, ({ payload, success }) => {
-				if (success) navigate(`/konstituen/${payload.id}`);
+				if (success) navigate(`/institusi/${payload.id}`);
 			});
 		}
 	};
