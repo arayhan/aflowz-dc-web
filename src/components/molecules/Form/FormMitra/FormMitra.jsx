@@ -20,10 +20,9 @@ export const FormMitra = () => {
 		resolver: yupResolver(formMitraSchema),
 		defaultValues: {
 			name: '',
-			alias: '',
 			pic: '',
 			pic_mobile: '',
-			pic_staff_id: 0
+			pic_staff_id: undefined
 		}
 	});
 
@@ -46,7 +45,6 @@ export const FormMitra = () => {
 	useEffect(() => {
 		if (programCategoryID && programCategory) {
 			setValue('name', programCategory.name || '');
-			setValue('alias', programCategory.name_alias || '');
 			setValue('pic_staff_id', programCategory?.pic_staff?.id || 0);
 			setValue('pic', programCategory.pic || '');
 			setValue('pic_mobile', programCategory.pic_mobile || '');
@@ -78,20 +76,6 @@ export const FormMitra = () => {
 				/>
 
 				<Controller
-					name={'alias'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputText
-							{...field}
-							label="Alias"
-							placeholder="Alias"
-							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
-							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
@@ -103,6 +87,7 @@ export const FormMitra = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							text={'PIC Kementerian'}
 						/>
 					)}
 				/>
@@ -113,8 +98,8 @@ export const FormMitra = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Eksternal"
-							placeholder="Nama PIC Eksternal"
+							label="Nama PIC Staff Internal"
+							placeholder="Nama PIC Staff Internal"
 							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
 							error={error}
 						/>
@@ -127,7 +112,7 @@ export const FormMitra = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nomor Telepon PIC Eksternal"
+							label="Nomor Telepon PIC Staff Internal"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
 							error={error}

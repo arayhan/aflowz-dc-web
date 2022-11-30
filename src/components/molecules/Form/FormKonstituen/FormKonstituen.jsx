@@ -168,6 +168,7 @@ export const FormKonstituen = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							text={'PIC Tim Internal'}
 						/>
 					)}
 				/>

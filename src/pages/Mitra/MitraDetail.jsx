@@ -38,13 +38,15 @@ const MitraDetail = () => {
 											{programCategoryDetail?.mitra_name}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Mitra PIC</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Kementerian</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											{programCategoryDetail?.mitra_pic}{' '}
 											{programCategoryDetail?.mitra_pic_mobile && `(${programCategoryDetail?.mitra_pic_mobile})`}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">
+											PIC Staff Internal
+										</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											{programCategoryDetail?.pic_staff.name}{' '}
 											{programCategoryDetail?.pic_staff.mobile && `(${programCategoryDetail?.pic_staff.mobile})`}

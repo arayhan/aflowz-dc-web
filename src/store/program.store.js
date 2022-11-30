@@ -110,14 +110,12 @@ const states = (set, get) => ({
 		}
 	},
 	getProgramCategoryList: async () => {
-		if (get().programCategoryList === null) {
-			set({ fetchingProgramCategoryList: true });
+		set({ fetchingProgramCategoryList: true });
 
-			const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryList();
 
-			set({ programCategoryList: success ? payload : null });
-			set({ fetchingProgramCategoryList: false });
-		}
+		set({ programCategoryList: success ? payload : null });
+		set({ fetchingProgramCategoryList: false });
 	},
 	getProgramCategoryDetail: async (programCategoryID) => {
 		set({ fetchingProgramCategoryDetail: true });

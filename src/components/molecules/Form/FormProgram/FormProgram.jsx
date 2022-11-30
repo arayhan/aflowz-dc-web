@@ -119,6 +119,7 @@ export const FormProgram = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							text={'PIC Kementerian'}
 						/>
 					)}
 				/>
@@ -129,8 +130,8 @@ export const FormProgram = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Eksternal"
-							placeholder="Nama PIC Eksternal"
+							label="Nama PIC Staff Internal"
+							placeholder="Nama PIC Staff Internal"
 							disabled={programID || processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
