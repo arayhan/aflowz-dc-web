@@ -1,6 +1,7 @@
 export * from './Banner/BannerFeature/BannerFeature';
 export * from './Banner/BannerHome/BannerHome';
 
+export * from './Button/ButtonBack/ButtonBack';
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
