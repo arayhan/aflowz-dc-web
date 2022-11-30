@@ -16,12 +16,33 @@ export const ChartProgramByPeriode = ({ total, penerima }) => {
 						labels: penerima.map((item) => item.periode),
 						datasets: [
 							{
-								label: 'Total',
+								label: penerima.map((item) => item.periode),
 								data: penerima.map((item) => item.total_program),
 								backgroundColor: penerima.map(() => getRandomColor()),
 								borderWidth: 1
 							}
 						]
+					}}
+					options={{
+						scales: {
+							x: {
+								title: {
+									display: true,
+									text: 'Periode',
+									color: '#aaa'
+								}
+							},
+							y: {
+								title: {
+									display: true,
+									text: 'Penerima Per Periode',
+									color: '#aaa'
+								},
+								ticks: {
+									stepSize: 1
+								}
+							}
+						}
 					}}
 				/>
 			)}

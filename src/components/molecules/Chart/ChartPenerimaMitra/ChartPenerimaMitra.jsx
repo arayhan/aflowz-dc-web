@@ -16,12 +16,33 @@ export const ChartPenerimaMitra = ({ total, penerima }) => {
 						labels: penerima.map((item) => item.program_name),
 						datasets: [
 							{
-								label: 'Total',
+								label: penerima.map((item) => item.program_name),
 								data: penerima.map((item) => item.total_penerima_program),
-								backgroundColor: penerima.map(() => getRandomColor()),
+								backgroundColor: penerima.map(getRandomColor),
 								borderWidth: 1
 							}
 						]
+					}}
+					options={{
+						scales: {
+							x: {
+								title: {
+									display: true,
+									text: 'Nama Program',
+									color: '#aaa'
+								}
+							},
+							y: {
+								title: {
+									display: true,
+									text: 'Jumlah Penerima',
+									color: '#aaa'
+								},
+								ticks: {
+									stepSize: 1
+								}
+							}
+						}
 					}}
 				/>
 			)}

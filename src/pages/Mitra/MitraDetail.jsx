@@ -1,4 +1,4 @@
-import { ButtonAction, Card } from '@/components/atoms';
+import { Button, ButtonAction, Card } from '@/components/atoms';
 import { BannerFeature, ChartPenerimaMitra, ChartProgramByPeriode, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -60,12 +60,22 @@ const MitraDetail = () => {
 								</div>
 							</div>
 							<div className="flex items-center justify-center gap-4">
-								<div className="bg-white rounded-md px-10 md:px-16 py-6">
-									<div className="flex flex-col items-center justify-center space-y-1 text-center">
+								<div className="bg-white rounded-md">
+									<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
 										<span className="text-2xl md:text-4xl font-extralight">
 											{programCategoryDetail?.total_penerima_program_mitra || 0}
 										</span>
 										<div className="font-light text-gray-400">Total Penerima</div>
+									</div>
+									<hr />
+									<div className="p-3">
+										<Button
+											className={'w-full px-5 py-2 rounded-sm text-sm'}
+											linkTo={`/penerima?mitra_id=${programCategoryID}`}
+											variant={'info'}
+										>
+											Lihat Semua
+										</Button>
 									</div>
 								</div>
 							</div>
