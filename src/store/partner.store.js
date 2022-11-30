@@ -3,6 +3,9 @@ import { toastRequestResult } from '@/utils/helpers';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { useAppStore } from './app.store';
+
+const { setPageLoading } = useAppStore.getState();
 
 const states = (set) => ({
 	fetchingStaffList: false,

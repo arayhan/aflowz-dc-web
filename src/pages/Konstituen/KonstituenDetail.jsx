@@ -16,11 +16,9 @@ const KonstituenDetail = () => {
 	const params = useParams();
 	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail, getPenerimaKonstituenDetail } =
 		useKonstituenStore();
-	const [konstituenType, setKonstituenType] = useState('');
 
 	useEffect(() => {
 		getKonstituenDetail(params.konstituenID);
-		if (konstituenDetail) setKonstituenType(konstituenDetail.konstituen_type);
 		getPenerimaKonstituenDetail({ konstituen_id: params.konstituenID });
 	}, [params]);
 

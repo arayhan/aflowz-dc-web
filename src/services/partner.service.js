@@ -69,6 +69,10 @@ export const getPartner = async (partnerID) => {
 };
 
 export const postStaffCreate = async (params) => {
+	const splitDate = params?.birth_date.toString().split(' ');
+	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
+	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
+
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
 	const villageDom = await http.get(`/village/${params.village}`);
@@ -78,7 +82,7 @@ export const postStaffCreate = async (params) => {
 			nik_number: params?.nik_number || 0,
 			name: params?.name || '',
 			birth_place: params?.birth_place || '',
-			birth_date: params?.birth_date || '',
+			birth_date: formatDate || '',
 			gender: params?.gender || '',
 			address: params?.address || '',
 			country: 'Indonesia',
@@ -108,11 +112,31 @@ export const postStaffCreate = async (params) => {
 };
 
 export const updateStaff = async (staffID, params) => {
+	const splitDate = params?.birth_date.toString().split(' ');
+	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
+	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
+
+	const provinceDom = await http.get(`/province/${params.province}`);
+	const cityDom = await http.get(`/city/${params.city}`);
+	const villageDom = await http.get(`/village/${params.village}`);
+
 	const data = [
 		{
+			nik_number: params?.nik_number || 0,
+			name: params?.name || '',
+			birth_place: params?.birth_place || '',
+			birth_date: formatDate || '',
+			gender: params?.gender || '',
+			address: params?.address || '',
+			country: 'Indonesia',
+			province: provinceDom.data.data.name || '',
+			city: cityDom.data.data.name || '',
+			village: villageDom.data.data.name || '',
 			mobile: params?.mobile || '',
 			email: params?.email || '',
-			staff_title: params?.staff_title || ''
+			religion: params?.religion || '',
+			staff_title: params?.staff_title || '',
+			is_staff: true
 		}
 	];
 

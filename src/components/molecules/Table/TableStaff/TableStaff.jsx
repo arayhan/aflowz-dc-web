@@ -6,7 +6,7 @@ import { SERVICE_PARTNER } from '@/services';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableStaff = () => {
-	const { isAdmin } = useAuthStore();
+	const { isSystem, isAdmin } = useAuthStore();
 	const { fetchingStaffList, staffList, getStaffList } = usePartnerStore();
 
 	const [data, setData] = useState([]);
@@ -33,7 +33,7 @@ export const TableStaff = () => {
 				minWidth: 100
 			},
 			{
-				Header: 'Nama Staff',
+				Header: 'Nama Tim Internal',
 				accessor: 'name',
 				minWidth: 175
 			},
@@ -66,7 +66,7 @@ export const TableStaff = () => {
 				minWidth: 180,
 				Cell: (row) => {
 					return (
-						isAdmin && (
+						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
@@ -101,7 +101,7 @@ export const TableStaff = () => {
 		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
 
 		if (success) {
-			toast.success('Berhasil Menghapus Staff', {
+			toast.success('Berhasil Menghapus Tim Internal', {
 				position: 'top-right',
 				autoClose: 1500,
 				hideProgressBar: false,
@@ -126,11 +126,11 @@ export const TableStaff = () => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title="Daftar Staff"
+					title="Daftar Tim Internal"
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isAdmin}
 					showButtonCreate={true}
-					feature={'New Staff'}
+					feature={'Tim Internal'}
 				/>
 			</div>
 			<div className="overflow-x-auto">

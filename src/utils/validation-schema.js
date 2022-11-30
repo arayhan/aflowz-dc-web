@@ -62,7 +62,7 @@ export const formStaffSchema = yup.object().shape({
 		.required('NIK wajib diisi'),
 	name: yup.string().required('Nama wajib diisi'),
 	birth_place: yup.string().required('Belum memiliih kota kelahiran'),
-	birth_date: yup.string().required('Belum mengisi tanggal lahir'),
+	birth_date: yup.date().nullable().required('Belum mengisi tanggal lahir'),
 	gender: yup.string().required('Belum memilih jenis kelamin'),
 	address: yup.string().required('Belum mengisi alamat domisili'),
 	province: yup.number().required('Belum memiliih provinsi'),

@@ -49,7 +49,6 @@ export const postKonstituenCreate = async (params) => {
 		pic_staff_id: params?.pic_staff_id || 0
 	};
 
-	console.log(request);
 	try {
 		const response = await http.post('/konstituen', request);
 		return { success: response.data.success, payload: response.data.data };
