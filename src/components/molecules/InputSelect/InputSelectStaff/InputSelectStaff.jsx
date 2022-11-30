@@ -24,7 +24,7 @@ export const InputSelectStaff = forwardRef(({ error, onChange, ...props }, ref) 
 
 	return (
 		<div className="space-y-1">
-			<InputLabel text="Pilih PIC Kementerian" name={props.name} />
+			<InputLabel text="Pilih Tim Internal" name={props.name} />
 			<InputSelect ref={ref} options={options} loading={fetchingPartnerList} onChange={onChange} {...props} />
 			{error && <InputError message={error.message} />}
 		</div>

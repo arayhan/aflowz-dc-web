@@ -97,8 +97,8 @@ export const FormMitra = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Staff Internal"
-							placeholder="Nama PIC Staff Internal"
+							label="Nama PIC Kementerian"
+							placeholder="Nama PIC Kementerian"
 							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
 							error={error}
 						/>
@@ -111,7 +111,7 @@ export const FormMitra = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nomor Telepon PIC Staff Internal"
+							label="Nomor Telepon PIC Kementerian"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
 							error={error}
