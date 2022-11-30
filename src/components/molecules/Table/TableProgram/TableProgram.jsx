@@ -1,9 +1,16 @@
-import { Table, ButtonAction, TableHeader, TableFooter } from '@/components/atoms';
+import { Table, ButtonAction, TableHeader, TableFooter, Button } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
-export const TableProgram = ({ selectedCategory }) => {
+export const TableProgram = ({
+	title,
+	selectedCategory,
+	displayedColumns,
+	isReadonly,
+	isShowFooter,
+	isShowButtonSeeAll
+}) => {
 	const { isSystem } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
@@ -17,31 +24,52 @@ export const TableProgram = ({ selectedCategory }) => {
 		() => [
 			{
 				Header: '#',
-				accessor: '',
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
+				hidden: displayedColumns && !displayedColumns.includes('#'),
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Name',
+				Header: 'Nama',
 				accessor: 'name',
-				minWidth: 215
+				minWidth: 215,
+				hidden: displayedColumns && !displayedColumns.includes('Nama')
 			},
 			{
 				Header: 'Category',
 				minWidth: 250,
+				hidden: displayedColumns && !displayedColumns.includes('Category'),
 				Cell: (row) => <div>{row.row.original.program_category.name}</div>
 			},
 			{
 				Header: 'Periode',
 				accessor: 'periode',
-				maxWidth: 50
+				maxWidth: 50,
+				hidden: displayedColumns && !displayedColumns.includes('Periode')
+			},
+			{
+				Header: 'PIC Internal',
+				width: 80,
+				maxWidth: 80,
+				hidden: displayedColumns && !displayedColumns.includes('PIC Internal'),
+				Cell: (row) => {
+					return row.row.original.pic_staff?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
+							text={row.row.original.pic_staff?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
 			},
 			{
 				Header: 'Detail',
 				minWidth: 50,
 				maxWidth: 50,
+				hidden: displayedColumns && !displayedColumns.includes('Detail'),
 				Cell: (row) => {
 					return (
 						<ButtonAction
@@ -55,7 +83,7 @@ export const TableProgram = ({ selectedCategory }) => {
 			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem,
+				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
 						isSystem && (
@@ -96,18 +124,28 @@ export const TableProgram = ({ selectedCategory }) => {
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
-					title={selectedCategory?.name || 'All Category'}
+					title={title || selectedCategory?.name || 'All Category'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isSystem}
+					mainRoute={'/program'}
+					isReadonly={!isSystem || isReadonly}
+					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadPartnerSheet
 				/>
 			</div>
+
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
 			</div>
-			<div className="p-6">
-				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
-			</div>
+
+			{isShowFooter && (
+				<div className="p-6">
+					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+				</div>
+			)}
 		</div>
 	);
+};
+
+TableProgram.defaultProps = {
+	isShowFooter: true
 };

@@ -1,6 +1,7 @@
-import { Card } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaMitra, ChartProgramByPeriode } from '@/components/molecules';
+import { ButtonAction, Card } from '@/components/atoms';
+import { BannerFeature, ChartPenerimaMitra, ChartProgramByPeriode, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
@@ -40,16 +41,20 @@ const MitraDetail = () => {
 
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Kementerian</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programCategoryDetail?.mitra_pic}{' '}
-											{programCategoryDetail?.mitra_pic_mobile && `(${programCategoryDetail?.mitra_pic_mobile})`}
+											{programCategoryDetail?.mitra_pic}
+											{programCategoryDetail?.mitra_pic} {`(${programCategoryDetail?.mitra_pic_mobile})`}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">
-											PIC Staff Internal
-										</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Tim Internal</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programCategoryDetail?.pic_staff.name}{' '}
-											{programCategoryDetail?.pic_staff.mobile && `(${programCategoryDetail?.pic_staff.mobile})`}
+											{!programCategoryDetail?.pic_staff.name && '-'}
+											{programCategoryDetail?.pic_staff.name && (
+												<ButtonAction
+													action={ACTION_TYPES.SEE_DETAIL}
+													linkTo={`/staff/${programCategoryDetail?.pic_staff.id}`}
+													text={`${programCategoryDetail?.pic_staff.name} ${programCategoryDetail?.pic_staff.mobile}`}
+												/>
+											)}
 										</div>
 									</div>
 								</div>
@@ -88,6 +93,15 @@ const MitraDetail = () => {
 											penerima={programCategoryDetail?.total_program_by_periode}
 										/>
 									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<TableProgram
+										title={`Program ${programCategoryDetail.mitra_name}`}
+										displayedColumns={['#', 'Nama', 'Periode', 'PIC Internal']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isReadonly
+									/>
 								</div>
 							</div>
 						</div>

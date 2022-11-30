@@ -119,7 +119,6 @@ export const FormProgram = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
-							text={'PIC Kementerian'}
 						/>
 					)}
 				/>
@@ -130,8 +129,8 @@ export const FormProgram = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Staff Internal"
-							placeholder="Nama PIC Staff Internal"
+							label="Nama PIC Kementerian"
+							placeholder="Nama PIC Kementerian"
 							disabled={programID || processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
@@ -143,7 +142,7 @@ export const FormProgram = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nomor Telepon PIC Eksternal"
+							label="Nomor Telepon PIC Kementerian"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={programID || processingCreateProgram || fetchingProgram}
 							error={error}
