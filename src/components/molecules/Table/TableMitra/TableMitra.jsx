@@ -27,10 +27,19 @@ export const TableMitra = () => {
 				}
 			},
 			{
-				Header: 'Name',
+				Header: 'Mitra',
 				accessor: 'name',
 				width: '100%',
 				minWidth: 300
+			},
+			{
+				Header: 'Nama PIC',
+				accessor: 'pic',
+				minWidth: 250
+			},
+			{
+				Header: 'Nomor PIC',
+				accessor: 'pic_mobile'
 			},
 			{
 				Header: 'Detail',
