@@ -39,7 +39,7 @@ export const formMitraSchema = yup.object().shape(
 export const formKonstituenSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama Institusi wajib diisi'),
-		konstituen_type: yup.string().required('Tipe konstitusi wajib dipilih'),
+		konstituen_type: yup.string().required('Tipe institusi wajib dipilih'),
 		address: yup.string().required('Belum mengisi alamat institusi'),
 		city: yup.number().required('Belum memilih kota asal institusi'),
 		pic: yup.string().required('Belum mengisi PIC institusi'),
@@ -48,7 +48,7 @@ export const formKonstituenSchema = yup.object().shape(
 			.required('Nomor PIC institusi wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka'),
-		pic_staff_id: yup.number().required('Belum memilih PIC Staff')
+		pic_staff_id: yup.number().required('Belum memilih PIC tim internal')
 	},
 	['pic_mobile', 'pic_mobile']
 );

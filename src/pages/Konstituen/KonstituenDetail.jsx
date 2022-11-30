@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useKonstituenStore } from '@/store';
+import { useAuthStore, useKonstituenStore } from '@/store';
 import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
@@ -8,8 +8,11 @@ import {
 } from '@/components/molecules';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { ButtonAction } from '@/components/atoms';
+import { ACTION_TYPES } from '@/utils/constants';
 
 const KonstituenDetail = () => {
+	const { isAdmin, isSystem } = useAuthStore();
 	const params = useParams();
 	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail, getPenerimaKonstituenDetail } =
 		useKonstituenStore();
@@ -34,11 +37,22 @@ const KonstituenDetail = () => {
 						<div className="space-y-6">
 							<div className="col-span-12 bg-gray-100 p-5">
 								<div className="bg-white shadow-lg rounded-md">
-									<div className="p-4">
-										<div className="font-light text-xl">Details</div>
-										<div className="text-sm text-gray-400">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									<div className="grid grid-cols-1 sm:grid-cols-2 justify-between items-center">
+										<div className="p-4">
+											<div className="font-light text-xl">Details</div>
+											<div className="text-sm text-gray-400">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+											</div>
 										</div>
+										{(isAdmin || isSystem) && (
+											<div className="p-4 h-full flex justify-start sm:justify-end">
+												<ButtonAction
+													action={ACTION_TYPES.UPDATE}
+													linkTo={`/institusi/update/${konstituenDetail?.konstituen_id}`}
+													className={'px-7 py-3'}
+												/>
+											</div>
+										)}
 									</div>
 									<hr />
 									<div className="p-5 rounded-md my-2">
@@ -53,14 +67,14 @@ const KonstituenDetail = () => {
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
 												Alamat {konstituenDetail?.konstituen_type || 'institusi'}
 											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 transform: capitalize">
 												{konstituenDetail.alamat_konstituen ? konstituenDetail.alamat_konstituen : 'Belum Ada Alamat'}
 											</div>
 
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
 												PIC {konstituenDetail?.konstituen_type || 'institusi'}
 											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 transform: capitalize">
 												{konstituenDetail?.konstituen_pic || 'Belum Ada Nama PIC Institusi'}{' '}
 												{konstituenDetail?.konstituen_pic_mobile
 													? `(${konstituenDetail?.konstituen_pic_mobile})`
