@@ -87,6 +87,7 @@ export const FormMitra = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							text={'PIC Kementerian'}
 						/>
 					)}
 				/>

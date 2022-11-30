@@ -36,11 +36,11 @@ export const FormKonstituen = () => {
 	const onHandleSubmit = (values) => {
 		if (konstituenID) {
 			updateKonstituen(konstituenID, values, ({ success }) => {
-				if (success) navigate(`/konstituen/${konstituenID}`);
+				if (success) navigate(`/institusi/${konstituenID}`);
 			});
 		} else {
 			postKonstituenCreate(values, ({ payload, success }) => {
-				if (success) navigate(`/konstituen/${payload.id}`);
+				if (success) navigate(`/institusi/${payload.id}`);
 			});
 		}
 	};
@@ -64,7 +64,7 @@ export const FormKonstituen = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{konstituenID ? 'Edit' : 'Create'} Konstituen</div>
+				<div className="font-light text-xl">{konstituenID ? 'Edit' : 'Create'} Institusi</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
@@ -77,7 +77,7 @@ export const FormKonstituen = () => {
 							{...field}
 							label="Nama Institusi"
 							placeholder="Nama Program"
-							disabled={konstituenID || processingCreateKonstituen || fetchingKonstituen}
+							disabled={processingCreateKonstituen || fetchingKonstituen}
 							error={error}
 						/>
 					)}
@@ -89,7 +89,7 @@ export const FormKonstituen = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectKonstituen
 							{...field}
-							disabled={konstituenID || processingCreateKonstituen || fetchingKonstituen}
+							disabled={processingCreateKonstituen || fetchingKonstituen}
 							onChange={({ value }) => {
 								setValue('konstituen_type', value);
 								setError('konstituen_type', null);
@@ -107,7 +107,7 @@ export const FormKonstituen = () => {
 							{...field}
 							label="Alamat Institusi"
 							placeholder="Alamat Institusi"
-							disabled={konstituenID || processingCreateKonstituen || fetchingKonstituen}
+							disabled={processingCreateKonstituen || fetchingKonstituen}
 							error={error}
 						/>
 					)}
@@ -119,7 +119,7 @@ export const FormKonstituen = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectCity
 							{...field}
-							disabled={konstituenID || processingCreateKonstituen || fetchingKonstituen}
+							disabled={processingCreateKonstituen || fetchingKonstituen}
 							onChange={({ value }) => {
 								setValue('city', value);
 								setError('city', null);
@@ -149,7 +149,7 @@ export const FormKonstituen = () => {
 						<InputText
 							{...field}
 							label="Kontak PIC Institusi"
-							placeholder="08"
+							placeholder="08xxxxxxxxxx"
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							error={error}
 						/>
@@ -168,6 +168,7 @@ export const FormKonstituen = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							text={'PIC Tim Internal'}
 						/>
 					)}
 				/>

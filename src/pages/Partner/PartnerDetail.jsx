@@ -55,7 +55,7 @@ const PartnerDetail = () => {
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 										<ButtonAction
 											action={ACTION_TYPES.SEE_DETAIL}
-											linkTo={`/konstituen/${partnerDetail?.konstituen.id}`}
+											linkTo={`/institusi/${partnerDetail?.konstituen.id}`}
 											text={partnerDetail?.konstituen.name}
 										/>
 									</div>

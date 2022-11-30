@@ -1,11 +1,12 @@
-import { Button, InputText } from '@/components/atoms';
+import { Button, InputLabel, InputText, InputError } from '@/components/atoms';
 import {
 	InputSelectProvince,
 	InputSelectCity,
 	InputSelectVillage,
 	InputSelectGender,
 	InputSelectStaffTitle,
-	InputSelectReligion
+	InputSelectReligion,
+	InputSelectDate
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +14,7 @@ import { formStaffSchema } from '@/utils/validation-schema';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePartnerStore } from '@/store';
 import { useEffect, useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormStaff = () => {
 	const { staffID } = useParams();
@@ -28,7 +30,7 @@ export const FormStaff = () => {
 			nik_number: '',
 			name: '',
 			birth_place: '',
-			birth_date: '',
+			birth_date: null,
 			gender: '',
 			address: '',
 			province: undefined,
@@ -62,7 +64,7 @@ export const FormStaff = () => {
 			setValue('nik_number', staff.nik_number || '');
 			setValue('name', staff.name || '');
 			setValue('birth_place', staff?.ttl.birth_place || '');
-			setValue('birth_date', staff?.ttl.birth_date || '');
+			setValue('birth_date', new Date(staff?.ttl.birth_date) || '');
 			setValue('gender', staff.gender || '');
 			setValue('address', staff.address || '');
 			setValue('province', staff.province?.id || null);
@@ -75,10 +77,12 @@ export const FormStaff = () => {
 		}
 	}, [staffID, staff]);
 
+	const [birthDate, setBirthDate] = useState(null);
+
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{staffID ? 'Edit' : 'Create'} Staff</div>
+				<div className="font-light text-xl">{staffID ? 'Edit' : 'Create'} Tim Internal</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
@@ -91,7 +95,7 @@ export const FormStaff = () => {
 							{...field}
 							label="NIK"
 							placeholder="NIK"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							error={error}
 						/>
 					)}
@@ -103,9 +107,9 @@ export const FormStaff = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama Staff"
-							placeholder="Nama Staff"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							label="Nama Tim Internal"
+							placeholder="Nama Tim Internal"
+							disabled={processingCreateStaff || fetchingStaff}
 							error={error}
 						/>
 					)}
@@ -119,7 +123,7 @@ export const FormStaff = () => {
 							{...field}
 							label="Kota Tempat Lahir"
 							placeholder="Kota Tempat Lahir"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							error={error}
 						/>
 					)}
@@ -129,13 +133,21 @@ export const FormStaff = () => {
 					name={'birth_date'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputText
-							{...field}
-							label="Tanggal Lahir"
-							placeholder="Tahun-Bulan-Tanggal (yyyy-MM-dd)"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
-							error={error}
-						/>
+						<div className="space-y-1">
+							<InputLabel text={'Tanggal Lahir'} />
+							<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
+								<InputSelectDate
+									selectedDate={staffID && staff ? new Date(staff?.ttl.birth_date) : birthDate}
+									onChange={(date) => {
+										field.birth_date = date;
+										setBirthDate(date);
+										setValue('birth_date', date);
+										setError('birth_date', null);
+									}}
+								/>
+							</div>
+							{error && <InputError message={error.message} />}
+						</div>
 					)}
 				/>
 
@@ -145,7 +157,7 @@ export const FormStaff = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectGender
 							{...field}
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('gender', value);
 								setError('gender', null);
@@ -174,13 +186,14 @@ export const FormStaff = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectProvince
 							{...field}
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('province', value);
 								setError('province', null);
 								setGetCity(value);
 							}}
 							error={error}
+							placeholder={staff ? staff.province?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -192,7 +205,7 @@ export const FormStaff = () => {
 						<InputSelectCity
 							{...field}
 							feature="Kota Domisili"
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('city', value);
 								setError('city', null);
@@ -200,6 +213,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							provinceID={getCity}
+							placeholder={staff ? staff.city?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -210,13 +224,14 @@ export const FormStaff = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectVillage
 							{...field}
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('village', value);
 								setError('village', null);
 							}}
 							error={error}
 							cityID={getVillage}
+							placeholder={staff ? staff.village?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -255,7 +270,7 @@ export const FormStaff = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectReligion
 							{...field}
-							disabled={staffID || processingCreateStaff || fetchingStaff}
+							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('religion', value);
 								setError('religion', null);

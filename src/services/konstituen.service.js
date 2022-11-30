@@ -68,6 +68,10 @@ export const deleteKonstituen = async (params) => {
 
 export const updateKonstituen = async (konstituenID, params) => {
 	const request = {
+		name: params?.name || '',
+		konstituen_type: params?.konstituen_type || '',
+		address: params?.address || '',
+		city_id: params?.city || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0

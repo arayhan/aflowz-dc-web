@@ -1,4 +1,4 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
@@ -33,7 +33,7 @@ export const TableKonstituen = ({ selectedType }) => {
 				minWidth: 175
 			},
 			{
-				Header: 'Konstitusi',
+				Header: 'Jenis Institusi',
 				minWidth: 125,
 				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
 			},
@@ -48,12 +48,12 @@ export const TableKonstituen = ({ selectedType }) => {
 				maxWidth: 100,
 				Cell: (row) => {
 					return (
-						<ButtonAction
-							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400"
-							action={ACTION_TYPES.SEE_DETAIL}
-							text="List Penerima"
-							linkTo={`/konstituen/${row.row.original.id}/partner`}
-						/>
+						<Button
+							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400 text-white px-3 py-2 rounded-sm text-xs"
+							linkTo={`/institusi/penerima/${row.row.original.id}`}
+						>
+							List Penerima
+						</Button>
 					);
 				}
 			},
@@ -66,7 +66,7 @@ export const TableKonstituen = ({ selectedType }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/konstituen/${row.row.original.id}`}
+							linkTo={`/institusi/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -78,7 +78,7 @@ export const TableKonstituen = ({ selectedType }) => {
 					return (
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/konstituen/update/${row.row.original.id}`} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/institusi/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
 							</div>
 						)
@@ -143,7 +143,7 @@ export const TableKonstituen = ({ selectedType }) => {
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
 					showButtonCreate={true}
-					feature={'Konstituen'}
+					feature={'Institusi'}
 				/>
 			</div>
 			<div className="overflow-x-auto">

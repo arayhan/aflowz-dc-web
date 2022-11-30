@@ -14,7 +14,7 @@ const KonstituenUpdate = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={konstituenDetail?.konstituen_name}
+				title={`Edit - ${konstituenDetail?.konstituen_name || 'Institusi'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 			/>
 

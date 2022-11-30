@@ -4,7 +4,10 @@ import React from 'react';
 const StaffUpdate = () => {
 	return (
 		<div>
-			<BannerFeature title="Staff - Update" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature
+				title="Edit - Tim Internal"
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+			/>
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

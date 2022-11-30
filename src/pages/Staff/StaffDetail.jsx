@@ -1,14 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { usePartnerStore } from '@/store';
+import { useAuthStore, usePartnerStore } from '@/store';
 import { BannerFeature } from '@/components/molecules';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import man from '../../images/icons/man.jpg';
 import woman from '../../images/icons/woman.jpg';
-import { ButtonAction } from '@/components/atoms';
+import { Button, ButtonAction, Table, TableHeader } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 
 const StaffDetail = () => {
+	const { isSystem } = useAuthStore();
 	const params = useParams();
 	const { staff, fetchingStaff, getStaff } = usePartnerStore();
 
@@ -16,9 +17,61 @@ const StaffDetail = () => {
 		getStaff(params.staffID);
 	}, [params]);
 
+	const columns = useMemo(
+		() => [
+			{
+				Header: '#',
+				accessor: '',
+				disableSortBy: true,
+				disableFilters: true,
+				maxWidth: 20,
+				Cell: (row) => {
+					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
+				}
+			},
+			{
+				Header: 'Nama Program',
+				minWidth: 300,
+				Cell: (row) => {
+					return <div>{row.row.original.name}</div>;
+				}
+			},
+			{
+				Header: 'Mitra',
+				minWidth: 300,
+				Cell: (row) => {
+					return <div>{row.row.original.program_category.name}</div>;
+				}
+			},
+			{
+				Header: 'Periode',
+				minWidth: 20,
+				Cell: (row) => {
+					return <div>{row.row.original.periode}</div>;
+				}
+			},
+			{
+				Header: 'Detail Program',
+				minWidth: 150,
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							className="bg-purple-500 hover:bg-purple-400 px-9"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/program/${row.row.original.id}`}
+						/>
+					);
+				}
+			}
+		],
+		[]
+	);
+
+	console.log(staff);
+
 	return (
 		<div>
-			<BannerFeature title={staff ? `${staff.name}` : 'Staff'} loading={fetchingStaff} />
+			<BannerFeature title={staff ? `${staff.name}` : 'Detail Tim Internal'} loading={fetchingStaff} />
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">
 					{fetchingStaff && <StaffDetailSkeleton />}
@@ -27,7 +80,7 @@ const StaffDetail = () => {
 							<div className="col-span-12 bg-gray-100 p-5">
 								<div className="bg-white shadow-lg rounded-md">
 									<div className="p-4">
-										<div className="font-light text-xl">Staff Details</div>
+										<div className="font-light text-xl">Detail Tim Internal</div>
 										<div className="text-sm text-gray-400">
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 										</div>
@@ -47,7 +100,7 @@ const StaffDetail = () => {
 												</div>
 
 												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Nama Staff
+													Nama Tim Internal
 												</div>
 												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 													{staff?.name || 'Belum Tercantum'}
@@ -79,33 +132,32 @@ const StaffDetail = () => {
 													{staff?.staff_title.name || 'Belum Mencantumkan'}
 												</div>
 												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Konstituen
+													PIC untuk institusi
 												</div>
 												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													<ButtonAction
-														key={staff?.konstituen.id}
-														className="bg-purple-500 hover:bg-purple-400"
-														action={ACTION_TYPES.SEE_DETAIL}
-														linkTo={`/konstituen/${staff?.konstituen.id}`}
-														text={staff?.konstituen.name}
-													/>
+													{staff?.konstituen.id && (
+														<ButtonAction
+															key={staff?.konstituen.id}
+															className="bg-purple-500 hover:bg-purple-400"
+															action={ACTION_TYPES.SEE_DETAIL}
+															linkTo={`/institusi/${staff?.konstituen.id}`}
+															text={staff?.konstituen.name}
+														/>
+													)}
 												</div>
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Program
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.programs.map((program) => {
-														return (
-															<ButtonAction
-																key={program.id}
-																className="bg-purple-500 hover:bg-purple-400 mx-0.5"
-																action={ACTION_TYPES.SEE_DETAIL}
-																linkTo={`/program/${program.id}`}
-																text={program.name}
-															/>
-														);
-													})}
-												</div>
+											</div>
+										</div>
+										<div className="my-5">
+											<div className="p-6">
+												<TableHeader
+													title={'Daftar Program'}
+													description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+													isReadonly={!isSystem}
+													showButtonCreate={false}
+												/>
+											</div>
+											<div className="overflow-x-auto">
+												<Table columns={columns} data={staff?.programs} loading={null} />
 											</div>
 										</div>
 									</div>

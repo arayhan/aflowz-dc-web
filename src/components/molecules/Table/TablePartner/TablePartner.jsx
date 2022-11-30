@@ -70,7 +70,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 									key={konstituen.id}
 									className="bg-purple-500 hover:bg-purple-400"
 									action={ACTION_TYPES.SEE_DETAIL}
-									linkTo={`/konstituen/${konstituen.id}`}
+									linkTo={`/institusi/${konstituen.id}`}
 									text={konstituen.name}
 								/>
 							</div>

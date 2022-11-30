@@ -5,7 +5,7 @@ const KonstituenCreate = () => {
 	return (
 		<div>
 			<BannerFeature
-				title="Konstituen - Create"
+				title="Create - Institusi"
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 			/>
 
