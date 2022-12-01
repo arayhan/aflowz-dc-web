@@ -18,11 +18,13 @@ export * from './Form/FormProgram/FormProgram';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
 export * from './Form/FormStaff/FormStaff';
+export * from './Form/FormVillage/FormVillage';
 
 export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
+export * from './Table/TableVillage/TableVillage';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 

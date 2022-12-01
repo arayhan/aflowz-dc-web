@@ -8,7 +8,7 @@ export const InputSelectVillage = forwardRef(({ error, onChange, cityID, ...prop
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		getVillageList(cityID);
+		getVillageList({ city_id: cityID });
 	}, [cityID]);
 
 	useEffect(() => {

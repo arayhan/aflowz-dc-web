@@ -50,7 +50,7 @@ const PenerimaDetail = () => {
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.gender}</div>
 
 									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
-										Konstituen
+										Institusi
 									</div>
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 										{!penerimaDetail?.konstituen.id && '-'}

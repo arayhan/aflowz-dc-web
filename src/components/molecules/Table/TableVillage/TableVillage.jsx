@@ -1,14 +1,14 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
-import { useAuthStore, useCityStore } from '@/store';
+import { useAuthStore, useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const TableCity = ({ enableClickRow }) => {
+export const TableVillage = ({ enableClickRow }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { cityList, fetchingCityList } = useCityStore();
-	const { getCityList, deleteCity } = useCityStore();
+	const { villageList, fetchingVillageList } = useVillageStore();
+	const { getVillageList, deleteVillage } = useVillageStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -25,12 +25,11 @@ export const TableCity = ({ enableClickRow }) => {
 				disableFilters: true,
 				maxWidth: 20,
 				Cell: (row) => {
-					const number = offset ? offset / perPage + Number(row.row.id) + 1 : Number(row.row.id) + 1;
-					return <div className="text-gray-400">{number}</div>;
+					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
 				}
 			},
 			{
-				Header: 'Nama Kota',
+				Header: 'Nama Desa',
 				accessor: 'name',
 				width: '100%',
 				minWidth: 300
@@ -43,7 +42,7 @@ export const TableCity = ({ enableClickRow }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/city/${row.row.original.id}`}
+							linkTo={`/village/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -55,8 +54,8 @@ export const TableCity = ({ enableClickRow }) => {
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/city/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteCity(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/village/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteVillage(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -68,29 +67,29 @@ export const TableCity = ({ enableClickRow }) => {
 	const offsetResult = (page - 1) * perPage;
 	const params = { limit: perPage, offset: offsetResult };
 
-	const handleClickRow = (rowData) => navigate(`/city/${rowData.id}`);
+	const handleClickRow = (rowData) => navigate(`/village/${rowData.id}`);
 
 	useEffect(() => {
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getCityList(params);
+			getVillageList(params);
 		}
 	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (cityList) {
-			setData(cityList.items);
-			setPageCount(Math.ceil(cityList.total / perPage));
+		if (villageList) {
+			setData(villageList.items);
+			setPageCount(Math.ceil(villageList.total / perPage));
 		}
-	}, [cityList]);
+	}, [villageList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
-					feature="Kota"
-					title={'List Kota'}
+					feature="Desa"
+					title={'List Desa'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
 				/>
@@ -100,7 +99,7 @@ export const TableCity = ({ enableClickRow }) => {
 					columns={columns}
 					data={data}
 					onClickRow={enableClickRow && handleClickRow}
-					loading={fetchingCityList || cityList === null}
+					loading={fetchingVillageList || villageList === null}
 				/>
 			</div>
 			<div className="p-6">

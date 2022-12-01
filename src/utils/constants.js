@@ -36,7 +36,8 @@ export const MENUS = [
 	{ title: 'Institusi', icon: require('@/images/icons/box.svg').default, path: '/institusi' },
 	{ title: 'Penerima', icon: require('@/images/icons/box.svg').default, path: '/penerima' },
 	{ title: 'Tim Internal', icon: require('@/images/icons/box.svg').default, path: '/staff' },
-	{ title: 'Kota', icon: require('@/images/icons/box.svg').default, path: '/city' }
+	{ title: 'Kota', icon: require('@/images/icons/box.svg').default, path: '/city' },
+	{ title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/village' }
 	// { title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },
 	// { title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/desa' },
 ];
