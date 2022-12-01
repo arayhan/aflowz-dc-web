@@ -134,7 +134,7 @@ export const TableProgram = ({
 					mainRoute={'/program'}
 					isReadonly={!isSystem || isReadonly}
 					showButtonSeeAll={isShowButtonSeeAll}
-					showButtonUploadPartnerSheet
+					showButtonUploadSheetPenerima
 				/>
 			</div>
 
