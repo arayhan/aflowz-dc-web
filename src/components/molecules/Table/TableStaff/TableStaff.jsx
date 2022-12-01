@@ -98,7 +98,7 @@ export const TableStaff = () => {
 	}, [staffList, pageCount]);
 
 	const handleDelete = async (staffID) => {
-		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
+		const { success, payload } = await SERVICE_PARTNER.deletePartner(staffID);
 
 		if (success) {
 			toast.success('Berhasil Menghapus Tim Internal', {

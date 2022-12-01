@@ -94,7 +94,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/partner/${row.row.original.id}`}
+							linkTo={`/penerima/${row.row.original.id}`}
 						/>
 					);
 				}

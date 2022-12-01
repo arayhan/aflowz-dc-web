@@ -36,7 +36,7 @@ export * from './InputSelect/InputSelectVillage/InputSelectVillage';
 export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
 
-export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
+export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
@@ -44,7 +44,7 @@ export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCatego
 export * from './Section/KonstituenType/KonstituenType';
 
 export * from './Table/TableMitra/TableMitra';
-export * from './Table/TablePartner/TablePartner';
+export * from './Table/TablePenerima/TablePenerima';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 

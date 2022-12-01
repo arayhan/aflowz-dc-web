@@ -14,10 +14,10 @@ import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
 import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
-import Partner from './pages/Partner/Partner';
+import Penerima from './pages/Penerima/Penerima';
+import PenerimaDetail from './pages/Penerima/PenerimaDetail';
 import StaffListPage from './pages/Staff/StaffListPage';
 import StaffCreate from './pages/Staff/StaffCreate';
-import PartnerDetail from './pages/Partner/PartnerDetail';
 import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
@@ -58,8 +58,8 @@ export const AppRoutes = () => {
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
-					<Route path="/partner/:partnerID" element={<PartnerDetail />} />
-					<Route path="/partner" element={<Partner />} />
+					<Route path="/penerima/:penerimaID" element={<PenerimaDetail />} />
+					<Route path="/penerima" element={<Penerima />} />
 					<Route path="/staff" element={<StaffListPage />} />
 					<Route path="/staff/create" element={<StaffCreate />} />
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />

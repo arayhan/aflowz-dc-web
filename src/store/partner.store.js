@@ -7,21 +7,22 @@ import { useAppStore } from './app.store';
 
 const { setPageLoading } = useAppStore.getState();
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingStaffList: false,
-	fetchingPartnerList: false,
+	fetchingPenerimaList: false,
 	fetchingStaffTitleList: false,
 	fetchingStaff: false,
-	fetchingPartnerDetail: false,
+	fetchingPenerimaDetail: false,
 
+	processingDeletePenerima: false,
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
 
 	staffList: null,
-	partnerList: null,
+	penerimaList: null,
 	staffTitleList: null,
-	partnerDetail: null,
+	penerimaDetail: null,
 	staff: null,
 
 	successStaffDelete: null,
@@ -35,16 +36,16 @@ const states = (set) => ({
 		set({ fetchingStaffList: false });
 	},
 
-	getPartnerList: async (params) => {
-		set({ fetchingPartnerList: true });
+	getPenerimaList: async (params) => {
+		set({ fetchingPenerimaList: true });
 
 		const defaultParams = { limit: 10, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
 
-		set({ partnerList: success ? payload : null });
-		set({ fetchingPartnerList: false });
+		set({ penerimaList: success ? payload : null });
+		set({ fetchingPenerimaList: false });
 	},
 
 	getStaffTitleList: async () => {
@@ -60,7 +61,7 @@ const states = (set) => ({
 		set({ fetchingStaff: true });
 		set({ staff: null });
 
-		const { success, payload } = await SERVICE_PARTNER.getPartner(staffID);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerItem(staffID);
 
 		set({ staff: success ? payload : null });
 		set({ fetchingStaff: false });
@@ -94,13 +95,13 @@ const states = (set) => ({
 		callback({ payload, success });
 	},
 
-	getPartnerDetail: async (partnerID) => {
-		set({ fetchingPartnerDetail: true });
+	getPenerimaDetail: async (penerimaID) => {
+		set({ fetchingPenerimaDetail: true });
 
-		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(partnerID);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(penerimaID);
 
-		set({ partnerDetail: success ? payload : null });
-		set({ fetchingPartnerDetail: false });
+		set({ penerimaDetail: success ? payload : null });
+		set({ fetchingPenerimaDetail: false });
 	},
 
 	bulkCreatePartner: async (params, callback) => {
@@ -109,16 +110,27 @@ const states = (set) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
 
-		toastRequestResult(loader, success, 'Partners Created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
 		set({ processingBulkCreatePartner: false });
 
 		callback({ payload, success });
 	},
 
 	deleteStaff: async (staffID) => {
-		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
+		const { success, payload } = await SERVICE_PARTNER.deletePartner(staffID);
 
 		set({ successStaffDelete: success ? payload : null });
+	},
+
+	deletePenerima: async (penerimaID) => {
+		set({ processingDeletePenerima: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.deletePartner(penerimaID);
+
+		toastRequestResult(loader, success, 'Penerima deleted', payload?.odoo_error || payload?.message);
+		get().getPenerimaList();
+		set({ processingDeletePenerima: false });
 	}
 });
 

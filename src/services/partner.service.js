@@ -59,7 +59,7 @@ export const getStaffTitleList = async () => {
 	}
 };
 
-export const getPartner = async (partnerID) => {
+export const getPartnerItem = async (partnerID) => {
 	try {
 		const response = await http.get(`/partner/${partnerID}`);
 		return { success: response.data.success, payload: response.data.data };
@@ -154,9 +154,9 @@ export const updateStaff = async (staffID, params) => {
 	}
 };
 
-export const deleteStaff = async (staffID) => {
+export const deletePartner = async (partnerID) => {
 	try {
-		const response = await http.delete(`/partner/${staffID}`);
+		const response = await http.delete(`/partner/${partnerID}`);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

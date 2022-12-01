@@ -34,7 +34,7 @@ export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
 	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' },
 	{ title: 'Institusi', icon: require('@/images/icons/box.svg').default, path: '/institusi' },
-	{ title: 'Partner', icon: require('@/images/icons/box.svg').default, path: '/partner' },
+	{ title: 'Penerima', icon: require('@/images/icons/box.svg').default, path: '/penerima' },
 	{ title: 'Tim Internal', icon: require('@/images/icons/box.svg').default, path: '/staff' }
 	// { title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },
 	// { title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/desa' },

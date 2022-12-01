@@ -123,7 +123,7 @@ const MitraDetail = () => {
 								<div className="col-span-12 bg-white rounded-md">
 									<TableProgram
 										title={`Program ${programCategoryDetail.mitra_name}`}
-										displayedColumns={['#', 'Nama', 'Periode', 'PIC Internal']}
+										displayedColumns={['#', 'Nama', 'PIC Internal']}
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isReadonly
