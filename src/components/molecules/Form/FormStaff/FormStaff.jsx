@@ -84,6 +84,16 @@ export const FormStaff = () => {
 		setGetDistrict(0);
 	}, [getCity, getProvince]);
 
+	useEffect(() => {
+		console.log('check', staffID, staff);
+		console.log(getProvince, getCity, getDistrict);
+		// if (staffID === undefined) {
+		// 	setGetProvince(0);
+		// 	setGetCity(0);
+		// 	setGetDistrict(0);
+		// }
+	});
+
 	const [birthDate, setBirthDate] = useState(null);
 
 	return (
@@ -201,7 +211,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							countryID={getProvince}
-							placeholder={staff ? staff.province?.name : 'Select...'}
+							placeholder={staff && staffID ? staff.province?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -221,7 +231,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							provinceID={getCity}
-							placeholder={staff ? staff.city?.name : 'Select...'}
+							placeholder={staff && staffID ? staff.city?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -239,7 +249,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							cityID={getDistrict}
-							placeholder={staff ? staff.district?.name : 'Select...'}
+							placeholder={staff && staffID ? staff.district?.name : 'Select...'}
 						/>
 					)}
 				/>
