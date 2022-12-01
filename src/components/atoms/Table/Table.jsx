@@ -4,12 +4,16 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useTable } from 'react-table';
 
-export const Table = ({ loading, columns, data, hiddenColumns }) => {
+export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
 		columns,
 		data,
 		initialState: { hiddenColumns: hiddenColumns || [] }
 	});
+
+	const handleClickRow = (row) => {
+		onClickRow(row.original);
+	};
 
 	return (
 		<table className="w-full" {...getTableProps()}>
@@ -39,16 +43,7 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 				))}
 			</thead>
 			<tbody {...getTableBodyProps()}>
-				{loading &&
-					[1, 2, 3].map((array) => (
-						<tr key={array} className="hover:bg-gray-50 border-b last:border-b-0">
-							{columns.map((column) => (
-								<td key={column.Header} className="px-5 md:px-6 py-2 md:py-3">
-									<Skeleton height={20} />
-								</td>
-							))}
-						</tr>
-					))}
+				{loading && <Table.Skeleton columns={columns} />}
 				{!loading && rows.length === 0 && (
 					<tr>
 						<td colSpan={columns.length}>
@@ -61,7 +56,12 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 					rows.map((row) => {
 						prepareRow(row);
 						return (
-							<tr key={row.id} className="hover:bg-gray-50 border-b last:border-b-0" {...row.getRowProps()}>
+							<tr
+								key={row.id}
+								className={`hover:bg-gray-50 border-b last:border-b-0 ${onClickRow ? 'cursor-pointer' : ''}`}
+								{...row.getRowProps()}
+								onClick={() => handleClickRow(row)}
+							>
 								{row.cells.map((cell) => {
 									return (
 										!cell.column.hidden && (
@@ -81,6 +81,18 @@ export const Table = ({ loading, columns, data, hiddenColumns }) => {
 			</tbody>
 		</table>
 	);
+};
+
+Table.Skeleton = ({ columns }) => {
+	return [1, 2, 3].map((array) => (
+		<tr key={array} className="hover:bg-gray-50 border-b last:border-b-0">
+			{columns.map((column) => (
+				<td key={column.Header} className="px-5 md:px-6 py-2 md:py-3">
+					<Skeleton height={20} />
+				</td>
+			))}
+		</tr>
+	));
 };
 
 Table.defaultProps = {
