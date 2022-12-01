@@ -6,10 +6,10 @@ const states = (set) => ({
 	fetchingProvinceList: false,
 	provinceList: null,
 
-	getProvinceList: async () => {
+	getProvinceList: async (params) => {
 		set({ fetchingProvinceList: true });
 
-		const { success, payload } = await SERVICE_PROVINCE.getProvinceList();
+		const { success, payload } = await SERVICE_PROVINCE.getProvinceList(params);
 
 		set({ provinceList: success ? payload : null });
 		set({ fetchingProvinceList: false });

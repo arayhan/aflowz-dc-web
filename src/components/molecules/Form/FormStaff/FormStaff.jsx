@@ -57,15 +57,12 @@ export const FormStaff = () => {
 	};
 
 	useEffect(() => {
-		setGetDistrict(0);
-	}, [getProvince]);
-
-	useEffect(() => {
 		if (staffID) getStaff(staffID);
 	}, [staffID]);
 
 	useEffect(() => {
 		if (staffID && staff) {
+			setGetProvince(100);
 			setBirthDate(new Date(staff?.ttl.birth_date));
 			setValue('nik_number', staff.nik_number || '');
 			setValue('name', staff.name || '');
@@ -82,6 +79,10 @@ export const FormStaff = () => {
 			setValue('staff_title', staff.staff_title?.name || '');
 		}
 	}, [staffID, staff]);
+
+	useEffect(() => {
+		setGetDistrict(0);
+	}, [getCity, getProvince]);
 
 	const [birthDate, setBirthDate] = useState(null);
 
@@ -197,9 +198,9 @@ export const FormStaff = () => {
 								setValue('province', value);
 								setError('province', null);
 								setGetCity(value);
-								setGetProvince(value);
 							}}
 							error={error}
+							countryID={getProvince}
 							placeholder={staff ? staff.province?.name : 'Select...'}
 						/>
 					)}

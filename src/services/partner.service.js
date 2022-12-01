@@ -75,7 +75,7 @@ export const postStaffCreate = async (params) => {
 
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
-	const districtDom = await http.get(`/village/${params.district}`);
+	const districtDom = await http.get(`/district/${params.district}`);
 
 	const data = [
 		{
@@ -93,7 +93,8 @@ export const postStaffCreate = async (params) => {
 			email: params?.email || '',
 			religion: params?.religion || '',
 			staff_title: params?.staff_title || '',
-			is_staff: true
+			is_staff: true,
+			village: ''
 		}
 	];
 
@@ -118,7 +119,7 @@ export const updateStaff = async (staffID, params) => {
 
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
-	const districtDom = await http.get(`/village/${params.district}`);
+	const districtDom = await http.get(`/district/${params.district}`);
 
 	const data = {
 		nik_number: params?.nik_number || 0,
@@ -135,8 +136,11 @@ export const updateStaff = async (staffID, params) => {
 		email: params?.email || '',
 		religion: params?.religion || '',
 		staff_title: params?.staff_title || '',
-		is_staff: true
+		is_staff: true,
+		village: ''
 	};
+
+	console.log(data);
 	try {
 		const response = await http.put(`/partner/${staffID}`, data);
 		console.log(response);

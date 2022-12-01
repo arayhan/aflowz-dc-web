@@ -8,6 +8,7 @@ export const InputSelectDistrict = forwardRef(({ error, onChange, cityID, ...pro
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
+		setOptions([]);
 		getDistrictList(cityID);
 	}, [cityID]);
 
