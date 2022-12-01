@@ -13,3 +13,4 @@ export * from './Table/Table';
 export * from './Table/TableFooter';
 export * from './Table/TableHeader';
 export * from './Toast/Toast';
+export * from './InputText/InputTextInfo';

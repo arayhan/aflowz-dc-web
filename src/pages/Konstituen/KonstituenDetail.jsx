@@ -8,7 +8,7 @@ import {
 } from '@/components/molecules';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { ButtonAction } from '@/components/atoms';
+import { ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 
 const KonstituenDetail = () => {
@@ -55,30 +55,19 @@ const KonstituenDetail = () => {
 									<hr />
 									<div className="p-5 rounded-md my-2">
 										<div className="grid grid-cols-12 gap-y-1 text-sm">
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												Nama {konstituenDetail?.konstituen_type || 'institusi'}
-											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-												{konstituenDetail?.konstituen_name || 'Belum Tercantum'}
-											</div>
-
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												Alamat {konstituenDetail?.konstituen_type || 'institusi'}
-											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 transform: capitalize">
-												{konstituenDetail.alamat_konstituen ? konstituenDetail.alamat_konstituen : 'Belum Ada Alamat'}
-											</div>
-
-											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-												PIC {konstituenDetail?.konstituen_type || 'institusi'}
-											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 transform: capitalize">
-												{konstituenDetail?.konstituen_pic || 'Belum Ada Nama PIC Institusi'}{' '}
-												{konstituenDetail?.konstituen_pic_mobile
-													? `(${konstituenDetail?.konstituen_pic_mobile})`
-													: '(Belum Ada No. Kontak)'}
-											</div>
-
+											<InputTextInfo
+												tag={`Nama ${konstituenDetail?.konstituen_type || 'institusi'}`}
+												value={konstituenDetail?.konstituen_name || 'Belum Tercantum'}
+											/>
+											<InputTextInfo
+												tag={`Alamat ${konstituenDetail?.konstituen_type || 'institusi'}`}
+												value={konstituenDetail?.alamat_konstituen || 'Belum Ada Alamat'}
+											/>
+											<InputTextInfo
+												tag={`PIC ${konstituenDetail?.konstituen_type || 'institusi'}`}
+												value={konstituenDetail?.konstituen_pic || 'Belum Ada Nama PIC Institusi'}
+												extraValue={konstituenDetail?.konstituen_pic_mobile || '(Belum Ada No. Kontak)'}
+											/>
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">
 												PIC Tim Internal
 											</div>

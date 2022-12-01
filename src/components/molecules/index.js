@@ -22,6 +22,8 @@ export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
