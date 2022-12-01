@@ -31,14 +31,14 @@ const StaffDetail = () => {
 			},
 			{
 				Header: 'Nama Program',
-				minWidth: 300,
+				minWidth: 150,
 				Cell: (row) => {
 					return <div>{row.row.original.name}</div>;
 				}
 			},
 			{
 				Header: 'Mitra',
-				minWidth: 300,
+				minWidth: 200,
 				Cell: (row) => {
 					return <div>{row.row.original.program_category.name}</div>;
 				}
@@ -52,7 +52,7 @@ const StaffDetail = () => {
 			},
 			{
 				Header: 'Detail Program',
-				minWidth: 150,
+				minWidth: 100,
 				Cell: (row) => {
 					return (
 						<ButtonAction
@@ -67,7 +67,55 @@ const StaffDetail = () => {
 		[]
 	);
 
-	console.log(staff);
+	const columns2 = useMemo(
+		() => [
+			{
+				Header: '#',
+				accessor: '',
+				disableSortBy: true,
+				disableFilters: true,
+				maxWidth: 20,
+				Cell: (row) => {
+					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
+				}
+			},
+			{
+				Header: 'Nama Institusi',
+				minWidth: 150,
+				Cell: (row) => {
+					return <div>{row.row.original.institusi_name}</div>;
+				}
+			},
+			{
+				Header: 'Jenis Institusi',
+				minWidth: 100,
+				Cell: (row) => {
+					return <div className="transform: capitalize">{row.row.original.institusi_type}</div>;
+				}
+			},
+			{
+				Header: 'PIC Institusi',
+				minWidth: 20,
+				Cell: (row) => {
+					return <div className="transform: capitalize">{row.row.original.institusi_pic_external}</div>;
+				}
+			},
+			{
+				Header: 'Detail Institusi',
+				minWidth: 100,
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							className="bg-purple-500 hover:bg-purple-400 px-9"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/institusi/${row.row.original.id}`}
+						/>
+					);
+				}
+			}
+		],
+		[]
+	);
 
 	return (
 		<div>
@@ -131,34 +179,35 @@ const StaffDetail = () => {
 												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 													{staff?.staff_title.name || 'Belum Mencantumkan'}
 												</div>
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													PIC untuk institusi
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.konstituen.id && (
-														<ButtonAction
-															key={staff?.konstituen.id}
-															className="bg-purple-500 hover:bg-purple-400"
-															action={ACTION_TYPES.SEE_DETAIL}
-															linkTo={`/institusi/${staff?.konstituen.id}`}
-															text={staff?.konstituen.name}
-														/>
-													)}
-												</div>
 											</div>
 										</div>
-										<div className="my-5">
-											<div className="p-6">
-												<TableHeader
-													title={'Daftar Program'}
-													description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-													isReadonly={!isSystem}
-													showButtonCreate={false}
-												/>
-											</div>
-											<div className="overflow-x-auto">
-												<Table columns={columns} data={staff?.programs} loading={null} />
-											</div>
+									</div>
+								</div>
+								<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto">
+										<div className="p-6">
+											<TableHeader
+												title={'Daftar Program'}
+												description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+												isReadonly={!isSystem}
+												showButtonCreate={false}
+											/>
+										</div>
+										<div className="h-fit overflow-y-auto">
+											<Table columns={columns} data={staff?.programs} loading={null} />
+										</div>
+									</div>
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<div className="p-6">
+											<TableHeader
+												title={'Daftar Institusi'}
+												description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+												isReadonly={!isSystem}
+												showButtonCreate={false}
+											/>
+										</div>
+										<div className="h-fit">
+											<Table columns={columns2} data={staff?.konstituens_pic} loading={null} />
 										</div>
 									</div>
 								</div>

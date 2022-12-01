@@ -120,34 +120,26 @@ export const updateStaff = async (staffID, params) => {
 	const cityDom = await http.get(`/city/${params.city}`);
 	const villageDom = await http.get(`/village/${params.village}`);
 
-	const data = [
-		{
-			nik_number: params?.nik_number || 0,
-			name: params?.name || '',
-			birth_place: params?.birth_place || '',
-			birth_date: formatDate || '',
-			gender: params?.gender || '',
-			address: params?.address || '',
-			country: 'Indonesia',
-			province: provinceDom.data.data.name || '',
-			city: cityDom.data.data.name || '',
-			village: villageDom.data.data.name || '',
-			mobile: params?.mobile || '',
-			email: params?.email || '',
-			religion: params?.religion || '',
-			staff_title: params?.staff_title || '',
-			is_staff: true
-		}
-	];
-
-	const { username } = useAuthStore.getState().profile;
-	const request = {
-		created_by: username,
-		datas: data
+	const data = {
+		nik_number: params?.nik_number || 0,
+		name: params?.name || '',
+		birth_place: params?.birth_place || '',
+		birth_date: formatDate || '',
+		gender: params?.gender || '',
+		address: params?.address || '',
+		country: 'Indonesia',
+		province: provinceDom.data.data.name || '',
+		city: cityDom.data.data.name || '',
+		village: villageDom.data.data.name || '',
+		mobile: params?.mobile || '',
+		email: params?.email || '',
+		religion: params?.religion || '',
+		staff_title: params?.staff_title || '',
+		is_staff: true
 	};
-
 	try {
-		const response = await http.put(`/partner/${staffID}`, request);
+		const response = await http.put(`/partner/${staffID}`, data);
+		console.log(response);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

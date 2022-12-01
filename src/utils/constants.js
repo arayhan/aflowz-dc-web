@@ -31,12 +31,11 @@ export const NEGATIVE_CASE_TYPES = {
 export const PER_PAGE_OPTIONS = [10, 20, 50, 100];
 
 export const MENUS = [
-	{ title: 'Mitra', icon: require('@/images/icons/box.svg').default, path: '/mitra' },
-	{ title: 'Program', icon: require('@/images/icons/box.svg').default, path: '/program' },
-	{ title: 'Institusi', icon: require('@/images/icons/box.svg').default, path: '/institusi' },
-	{ title: 'Partner', icon: require('@/images/icons/box.svg').default, path: '/partner' },
-	{ title: 'Tim Internal', icon: require('@/images/icons/box.svg').default, path: '/staff' }
-	// { title: 'Kampus', icon: require('@/images/icons/box.svg').default, path: '/kampus' },
-	// { title: 'Desa', icon: require('@/images/icons/box.svg').default, path: '/desa' },
-	// { title: 'Kota', icon: require('@/images/icons/box.svg').default, path: '/kota' },
+	{ title: 'Mitra', icon: require('@/images/icons/Icon_Home/Mitra.svg').default, path: '/mitra' },
+	{ title: 'Program', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program' },
+	{ title: 'Institusi', icon: require('@/images/icons/Icon_Home/Konstitusi.svg').default, path: '/institusi' },
+	{ title: 'Partner', icon: require('@/images/icons/Icon_Home/Penerima.svg').default, path: '/partner' },
+	{ title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' }
+	// { title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/desa' },
+	// { title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/kota' },
 ];

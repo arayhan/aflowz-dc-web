@@ -61,6 +61,7 @@ export const FormStaff = () => {
 
 	useEffect(() => {
 		if (staffID && staff) {
+			setBirthDate(new Date(staff?.ttl.birth_date));
 			setValue('nik_number', staff.nik_number || '');
 			setValue('name', staff.name || '');
 			setValue('birth_place', staff?.ttl.birth_place || '');
@@ -137,7 +138,7 @@ export const FormStaff = () => {
 							<InputLabel text={'Tanggal Lahir'} />
 							<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
 								<InputSelectDate
-									selectedDate={staffID && staff ? new Date(staff?.ttl.birth_date) : birthDate}
+									selectedDate={birthDate}
 									onChange={(date) => {
 										field.birth_date = date;
 										setBirthDate(date);
