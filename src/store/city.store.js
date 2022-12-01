@@ -3,9 +3,6 @@ import { toastRequestResult } from '@/utils/helpers';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { useAppStore } from './app.store';
-
-const { setPageLoading } = useAppStore.getState();
 
 const states = (set) => ({
 	fetchingCityItem: false,
@@ -20,11 +17,15 @@ const states = (set) => ({
 	cityList: null,
 	cityDetail: null,
 
+	errorsCity: null,
+
 	getCityItem: async (cityID) => {
 		set({ fetchingCity: true });
 		set({ city: null });
 
 		const { success, payload } = await SERVICE_CITY.getCityItem(cityID);
+
+		if (!success) set({ errorsCity: payload });
 
 		set({ city: success ? payload : null });
 		set({ fetchingCity: false });
@@ -52,35 +53,34 @@ const states = (set) => ({
 	},
 
 	createCity: async (params, callback) => {
-		setPageLoading(true);
 		set({ processingCreateCity: true });
 
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_CITY.createCity(params);
 
+		if (!success) set({ errorsCity: payload });
+
 		toastRequestResult(loader, success, 'City created', payload?.odoo_error || payload?.message);
 		set({ processingCreateCity: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	},
 
 	updateCity: async (cityID, params, callback) => {
-		setPageLoading(true);
 		set({ processingUpdateCity: true });
 
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_CITY.updateCity(cityID, params);
 
+		if (!success) set({ errorsCity: payload });
+
 		toastRequestResult(loader, success, 'City updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateCity: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	},
 
 	deleteCity: async (cityID) => {
-		setPageLoading(true);
 		set({ processingDeleteCity: true });
 
 		const loader = toast.loading('Processing...');
@@ -89,8 +89,12 @@ const states = (set) => ({
 		toastRequestResult(loader, success, 'Kota deleted', payload?.odoo_error || payload?.message);
 		get().getCityList();
 		set({ processingDeleteCity: false });
-		setPageLoading(false);
+	},
+
+	clearStateCity: () => {
+		set({ city: null });
+		set({ errorsCity: null });
 	}
 });
 
-export const useCityStore = create(devtools(states));
+export const useCityStore = create(devtools(states, { name: 'city-store', getStorage: () => localStorage }));

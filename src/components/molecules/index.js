@@ -13,6 +13,7 @@ export * from './Chart/ChartProgramByPeriode/ChartProgramByPeriode';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 
+export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';

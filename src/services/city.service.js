@@ -32,8 +32,7 @@ export const getCityDetail = async (cityID) => {
 export const createCity = async (params) => {
 	const request = {
 		name: params?.name || '',
-		periode: params?.periode.toString() || '',
-		city_category_id: params?.city_category_id || 0,
+		province: params?.province || '',
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0

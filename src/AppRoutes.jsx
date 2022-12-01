@@ -23,6 +23,7 @@ import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
 import StaffDetail from './pages/Staff/StaffDetail';
 import City from './pages/City/City';
+import CityForm from './pages/City/CityForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -54,6 +55,9 @@ export const AppRoutes = () => {
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
 					<Route path="/desa" element={<Program />} />
+					<Route path="/city/update/:cityID" element={<CityForm />} />
+					<Route path="/city/create" element={<CityForm />} />
+					<Route path="/city/:cityID" element={<City />} />
 					<Route path="/city" element={<City />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
