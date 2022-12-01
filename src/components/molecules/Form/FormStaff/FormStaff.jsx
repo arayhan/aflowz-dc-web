@@ -84,16 +84,6 @@ export const FormStaff = () => {
 		setGetDistrict(0);
 	}, [getCity, getProvince]);
 
-	useEffect(() => {
-		console.log('check', staffID, staff);
-		console.log(getProvince, getCity, getDistrict);
-		// if (staffID === undefined) {
-		// 	setGetProvince(0);
-		// 	setGetCity(0);
-		// 	setGetDistrict(0);
-		// }
-	});
-
 	const [birthDate, setBirthDate] = useState(null);
 
 	return (
