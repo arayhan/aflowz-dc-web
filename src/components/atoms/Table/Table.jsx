@@ -12,7 +12,7 @@ export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => 
 	});
 
 	const handleClickRow = (row) => {
-		onClickRow(row.original);
+		if (onClickRow) onClickRow(row.original);
 	};
 
 	return (
