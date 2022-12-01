@@ -127,6 +127,7 @@ const MitraDetail = () => {
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isReadonly
+										enableClickRow
 									/>
 								</div>
 							</div>

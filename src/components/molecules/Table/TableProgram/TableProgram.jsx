@@ -2,6 +2,7 @@ import { Table, ButtonAction, TableHeader, TableFooter, Button } from '@/compone
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const TableProgram = ({
 	title,
@@ -9,8 +10,10 @@ export const TableProgram = ({
 	displayedColumns,
 	isReadonly,
 	isShowFooter,
-	isShowButtonSeeAll
+	isShowButtonSeeAll,
+	enableClickRow
 }) => {
+	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
@@ -99,6 +102,8 @@ export const TableProgram = ({
 		[offset, perPage, page, isSystem]
 	);
 
+	const handleClickRow = (rowData) => navigate(`/program/${rowData.id}`);
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const params = { limit: perPage, offset: offsetResult };
@@ -134,7 +139,12 @@ export const TableProgram = ({
 			</div>
 
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingProgramList || programList === null} />
+				<Table
+					columns={columns}
+					data={data}
+					onClickRow={enableClickRow && handleClickRow}
+					loading={fetchingProgramList || programList === null}
+				/>
 			</div>
 
 			{isShowFooter && (

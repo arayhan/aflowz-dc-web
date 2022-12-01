@@ -2,8 +2,10 @@ import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atom
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const TableMitra = () => {
+export const TableMitra = ({ enableClickRow }) => {
+	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { programCategoryList, fetchingProgramCategoryList } = useProgramStore();
 	const { getProgramCategoryList, deleteProgramCategory } = useProgramStore();
@@ -74,6 +76,8 @@ export const TableMitra = () => {
 	const offsetResult = (page - 1) * perPage;
 	const params = { limit: perPage, offset: offsetResult };
 
+	const handleClickRow = (rowData) => navigate(`/mitra/${rowData.id}`);
+
 	useEffect(() => {
 		if (page > pageCount) setPage(pageCount);
 		else {
@@ -100,7 +104,12 @@ export const TableMitra = () => {
 				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingProgramCategoryList || programCategoryList === null} />
+				<Table
+					columns={columns}
+					data={data}
+					onClickRow={enableClickRow && handleClickRow}
+					loading={fetchingProgramCategoryList || programCategoryList === null}
+				/>
 			</div>
 			<div className="p-6">
 				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
