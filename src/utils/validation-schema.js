@@ -66,7 +66,7 @@ export const formStaffSchema = yup.object().shape({
 	address: yup.string().required('Belum mengisi alamat domisili'),
 	province: yup.number().required('Belum memiliih provinsi'),
 	city: yup.number().required('Belum memiliih kota domisili'),
-	village: yup.number().required('Belum memiliih kecamatan'),
+	district: yup.number().nullable(),
 	mobile: yup
 		.string()
 		.required('Nomor wajib diisi')

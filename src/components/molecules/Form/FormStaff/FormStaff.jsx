@@ -2,7 +2,7 @@ import { Button, InputLabel, InputText, InputError } from '@/components/atoms';
 import {
 	InputSelectProvince,
 	InputSelectCity,
-	InputSelectVillage,
+	InputSelectDistrict,
 	InputSelectGender,
 	InputSelectStaffTitle,
 	InputSelectReligion,
@@ -19,8 +19,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const FormStaff = () => {
 	const { staffID } = useParams();
 	const navigate = useNavigate();
+	const [getProvince, setGetProvince] = useState(0);
 	const [getCity, setGetCity] = useState(0);
-	const [getVillage, setGetVillage] = useState(0);
+	const [getDistrict, setGetDistrict] = useState(0);
 
 	const { staff, fetchingStaff, processingCreateStaff, getStaff, postStaffCreate, updateStaff } = usePartnerStore();
 
@@ -35,7 +36,7 @@ export const FormStaff = () => {
 			address: '',
 			province: undefined,
 			city: undefined,
-			village: undefined,
+			district: undefined,
 			mobile: '',
 			email: '',
 			religion: '',
@@ -56,6 +57,10 @@ export const FormStaff = () => {
 	};
 
 	useEffect(() => {
+		setGetDistrict(0);
+	}, [getProvince]);
+
+	useEffect(() => {
 		if (staffID) getStaff(staffID);
 	}, [staffID]);
 
@@ -70,7 +75,7 @@ export const FormStaff = () => {
 			setValue('address', staff.address || '');
 			setValue('province', staff.province?.id || null);
 			setValue('city', staff.city?.id || null);
-			setValue('village', staff.village?.id || null);
+			setValue('district', staff.district?.id || null);
 			setValue('mobile', staff.mobile || '');
 			setValue('email', staff.email || '');
 			setValue('religion', staff.religion || '');
@@ -192,6 +197,7 @@ export const FormStaff = () => {
 								setValue('province', value);
 								setError('province', null);
 								setGetCity(value);
+								setGetProvince(value);
 							}}
 							error={error}
 							placeholder={staff ? staff.province?.name : 'Select...'}
@@ -210,7 +216,7 @@ export const FormStaff = () => {
 							onChange={({ value }) => {
 								setValue('city', value);
 								setError('city', null);
-								setGetVillage(value);
+								setGetDistrict(value);
 							}}
 							error={error}
 							provinceID={getCity}
@@ -220,19 +226,19 @@ export const FormStaff = () => {
 				/>
 
 				<Controller
-					name={'village'}
+					name={'district'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectDistrict
 							{...field}
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
-								setValue('village', value);
-								setError('village', null);
+								setValue('district', value);
+								setError('district', null);
 							}}
 							error={error}
-							cityID={getVillage}
-							placeholder={staff ? staff.village?.name : 'Select...'}
+							cityID={getDistrict}
+							placeholder={staff ? staff.district?.name : 'Select...'}
 						/>
 					)}
 				/>

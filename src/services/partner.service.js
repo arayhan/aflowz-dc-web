@@ -75,7 +75,7 @@ export const postStaffCreate = async (params) => {
 
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
-	const villageDom = await http.get(`/village/${params.village}`);
+	const districtDom = await http.get(`/village/${params.district}`);
 
 	const data = [
 		{
@@ -88,7 +88,7 @@ export const postStaffCreate = async (params) => {
 			country: 'Indonesia',
 			province: provinceDom.data.data.name || '',
 			city: cityDom.data.data.name || '',
-			village: villageDom.data.data.name || '',
+			district: districtDom.data.data.name || '',
 			mobile: params?.mobile || '',
 			email: params?.email || '',
 			religion: params?.religion || '',
@@ -118,7 +118,7 @@ export const updateStaff = async (staffID, params) => {
 
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
-	const villageDom = await http.get(`/village/${params.village}`);
+	const districtDom = await http.get(`/village/${params.district}`);
 
 	const data = {
 		nik_number: params?.nik_number || 0,
@@ -130,7 +130,7 @@ export const updateStaff = async (staffID, params) => {
 		country: 'Indonesia',
 		province: provinceDom.data.data.name || '',
 		city: cityDom.data.data.name || '',
-		village: villageDom.data.data.name || '',
+		district: districtDom.data.data.name || '',
 		mobile: params?.mobile || '',
 		email: params?.email || '',
 		religion: params?.religion || '',

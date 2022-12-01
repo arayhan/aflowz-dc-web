@@ -36,6 +36,7 @@ export * from './InputSelect/InputSelectProvince/InputSelectProvince';
 export * from './InputSelect/InputSelectVillage/InputSelectVillage';
 export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
+export * from './InputSelect/InputSelectDistrict/InputSelectDistrict';
 
 export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
 
