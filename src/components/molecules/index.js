@@ -18,6 +18,7 @@ export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
 export * from './Form/FormStaff/FormStaff';
 
+export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';

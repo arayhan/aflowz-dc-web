@@ -22,6 +22,7 @@ import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
 import StaffDetail from './pages/Staff/StaffDetail';
+import City from './pages/City/City';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -53,7 +54,7 @@ export const AppRoutes = () => {
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
 					<Route path="/desa" element={<Program />} />
-					<Route path="/kota" element={<Program />} />
+					<Route path="/city" element={<City />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
