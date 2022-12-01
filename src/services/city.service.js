@@ -22,7 +22,7 @@ export const getCityList = async (params) => {
 
 export const getCityDetail = async (cityID) => {
 	try {
-		const response = await http.get('/page-detail/city/' + cityID);
+		const response = await http.get('/page-detail/kota/' + cityID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

@@ -24,6 +24,7 @@ import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstitue
 import StaffDetail from './pages/Staff/StaffDetail';
 import City from './pages/City/City';
 import CityForm from './pages/City/CityForm';
+import CityDetail from './pages/City/CityDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -57,7 +58,7 @@ export const AppRoutes = () => {
 					<Route path="/desa" element={<Program />} />
 					<Route path="/city/update/:cityID" element={<CityForm />} />
 					<Route path="/city/create" element={<CityForm />} />
-					<Route path="/city/:cityID" element={<City />} />
+					<Route path="/city/:cityID" element={<CityDetail />} />
 					<Route path="/city" element={<City />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
