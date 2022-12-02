@@ -84,6 +84,10 @@ export const FormStaff = () => {
 			setPlaceholderCity(staff.city?.name);
 			setPlaceholderDistrict(staff.district?.name);
 			setPlaceholderVillage(staff.village?.name);
+		} else {
+			setPlaceholderCity('Select...');
+			setPlaceholderDistrict('Select...');
+			setPlaceholderVillage('Select...');
 		}
 	}, [staffID, staff]);
 
