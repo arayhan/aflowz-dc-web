@@ -18,6 +18,7 @@ const ProgramDetail = () => {
 		getProgramDetail(params.programID);
 	}, [params]);
 
+	console.log();
 	return (
 		<div>
 			<BannerFeature
@@ -77,7 +78,14 @@ const ProgramDetail = () => {
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 md:col-span-6">
+								<div className="col-span-12 place-self-center">
+									<CardPenerimaProgramByGender
+										total={programDetail?.total_penerima_program || 0}
+										totalPria={programDetail?.total_pria}
+										totalWanita={programDetail?.total_wanita}
+									/>
+								</div>
+								<div className="col-span-12">
 									<TablePenerima
 										programID={programDetail?.program_id}
 										programName={programDetail?.program_name}
@@ -86,15 +94,8 @@ const ProgramDetail = () => {
 									/>
 								</div>
 								<div className="col-span-12 md:col-span-6">
-									<CardPenerimaProgramByGender
-										total={programDetail?.total_penerima_program || 0}
-										totalPria={programDetail?.total_pria}
-										totalWanita={programDetail?.total_wanita}
-									/>
-								</div>
-								<div className="col-span-12 md:col-span-6">
 									<Card
-										title={'Penerima Program PerVillage'}
+										title={'Penerima Program Per Desa'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
@@ -108,7 +109,7 @@ const ProgramDetail = () => {
 								</div>
 								<div className="col-span-12 md:col-span-6">
 									<Card
-										title={'Penerima Program PerCity'}
+										title={'Penerima Program Per Kota'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
