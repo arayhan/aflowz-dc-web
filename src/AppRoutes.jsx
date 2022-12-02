@@ -28,6 +28,7 @@ import CityDetail from './pages/City/CityDetail';
 import Village from './pages/Village/Village';
 import VillageForm from './pages/Village/VillageForm';
 import VillageDetail from './pages/Village/VillageDetail';
+import ListPenerimaByProgram from './pages/Program/ListPenerimaProgram';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -76,6 +77,7 @@ export const AppRoutes = () => {
 					<Route path="/staff/create" element={<StaffCreate />} />
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
 					<Route path="/staff/:staffID" element={<StaffDetail />} />
+					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
 				</Route>
 			</Route>
 		</Routes>

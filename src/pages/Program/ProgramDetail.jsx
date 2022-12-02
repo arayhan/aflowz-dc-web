@@ -63,12 +63,14 @@ const ProgramDetail = () => {
 
 							<div className="flex items-center justify-center gap-4">
 								<div className="bg-white rounded-md px-10 md:px-16 py-6">
-									<div className="flex flex-col items-center justify-center space-y-1 text-center">
-										<span className="text-2xl md:text-4xl font-extralight">
-											{programDetail?.total_penerima_program || 0}
-										</span>
-										<div className="font-light text-gray-400">Total Penerima</div>
-									</div>
+									<Link to={`/program/penerima/${programDetail?.program_id}`}>
+										<div className="flex flex-col items-center justify-center space-y-1 text-center">
+											<span className="text-2xl md:text-4xl font-extralight">
+												{programDetail?.total_penerima_program || 0}
+											</span>
+											<div className="font-light text-gray-400">Total Penerima</div>
+										</div>
+									</Link>
 								</div>
 							</div>
 

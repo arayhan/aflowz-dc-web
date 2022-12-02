@@ -15,7 +15,7 @@ const ListPenerimaByKonstituen = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Konstituen'}
+				title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Institusi'}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 			/>
 			<div className="bg-gray-100 py-6">

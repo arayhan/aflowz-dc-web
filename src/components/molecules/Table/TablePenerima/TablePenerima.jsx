@@ -134,6 +134,8 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
+					showButtonSeeAll
+					mainRoute={`/program/penerima/${programID}`}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
