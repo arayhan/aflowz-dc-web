@@ -7,7 +7,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { usePartnerStore } from '@/store';
 
 export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
-	const { fetchingPartnerList, partnerList, getPartnerList } = usePartnerStore();
+	const { fetchingPenerimaList, penerimaList, getPenerimaList } = usePartnerStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -20,16 +20,16 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 
 		if (page > pageCount) setPage(pageCount);
 		else {
-			getPartnerList(params);
+			getPenerimaList(params);
 		}
 	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (partnerList) {
-			setData(partnerList.items);
-			setPageCount(Math.ceil(partnerList.total / perPage));
+		if (penerimaList) {
+			setData(penerimaList.items);
+			setPageCount(Math.ceil(penerimaList.total / perPage));
 		}
-	}, [partnerList, pageCount]);
+	}, [penerimaList, pageCount]);
 
 	const columns = useMemo(
 		() => [
@@ -118,7 +118,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 			{data.length > 0 && (
 				<>
 					<div className="overflow-x-auto">
-						<Table columns={columns} data={data} loading={fetchingPartnerList} />
+						<Table columns={columns} data={data} loading={fetchingPenerimaList} />
 					</div>
 					{!isInDetail && (
 						<div className="p-6">

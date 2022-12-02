@@ -62,6 +62,7 @@ export const postStaffCreate = async (params) => {
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
 	const districtDom = await http.get(`/district/${params.district}`);
+	const villageDom = await http.get(`/village/${params.village}`);
 
 	const data = [
 		{
@@ -80,7 +81,7 @@ export const postStaffCreate = async (params) => {
 			religion: params?.religion || '',
 			staff_title: params?.staff_title || '',
 			is_staff: true,
-			village: ''
+			village: villageDom.data.data.name || ''
 		}
 	];
 
@@ -92,6 +93,7 @@ export const postStaffCreate = async (params) => {
 
 	try {
 		const response = await http.post('/partner', request);
+		console.log(response);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
@@ -106,6 +108,7 @@ export const updateStaff = async (staffID, params) => {
 	const provinceDom = await http.get(`/province/${params.province}`);
 	const cityDom = await http.get(`/city/${params.city}`);
 	const districtDom = await http.get(`/district/${params.district}`);
+	const villageDom = await http.get(`/village/${params.village}`);
 
 	const data = {
 		nik_number: params?.nik_number || 0,
@@ -123,7 +126,7 @@ export const updateStaff = async (staffID, params) => {
 		religion: params?.religion || '',
 		staff_title: params?.staff_title || '',
 		is_staff: true,
-		village: ''
+		village: villageDom.data.data.name || ''
 	};
 
 	try {

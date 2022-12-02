@@ -15,11 +15,11 @@ const KonstituenDetail = () => {
 	const { isAdmin, isSystem } = useAuthStore();
 	const params = useParams();
 	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
-	const { getPartnerList } = usePartnerStore();
+	const { getPenerimaList } = usePartnerStore();
 
 	useEffect(() => {
 		getKonstituenDetail(params.konstituenID);
-		getPartnerList({ konstituen_id: params.konstituenID, is_staff: false });
+		getPenerimaList({ konstituen_id: params.konstituenID, is_staff: false });
 	}, [params]);
 
 	return (

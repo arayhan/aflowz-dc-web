@@ -18,7 +18,6 @@ const states = (set, get) => ({
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
-	processingDeletePartner: false,
 
 	staffList: null,
 	penerimaList: null,
@@ -114,19 +113,6 @@ const states = (set, get) => ({
 		set({ processingBulkCreatePartner: false });
 
 		callback({ payload, success });
-	},
-
-	deletePartner: async (partnerID) => {
-		setPageLoading(true);
-		set({ processingDeletePartner: true });
-
-		const loader = toast.loading('Processing...');
-		const { success, payload } = await SERVICE_PARTNER.deletePartner(partnerID);
-
-		toastRequestResult(loader, success, 'Tim Internal deleted', payload?.odoo_error || payload?.message);
-		get().getStaffList();
-		set({ processingDeletePartner: false });
-		setPageLoading(false);
 	},
 
 	deletePenerima: async (penerimaID) => {
