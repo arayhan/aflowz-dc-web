@@ -93,7 +93,6 @@ export const postStaffCreate = async (params) => {
 
 	try {
 		const response = await http.post('/partner', request);
-		console.log(response);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

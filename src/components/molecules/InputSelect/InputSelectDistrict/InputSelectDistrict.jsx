@@ -8,7 +8,6 @@ export const InputSelectDistrict = forwardRef(({ error, onChange, cityID, cityQu
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		console.log(cityQuery);
 		if (isForm) {
 			if (cityQuery.city_id === 0) {
 				setOptions([]);

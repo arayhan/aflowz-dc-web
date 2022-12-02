@@ -84,22 +84,10 @@ export const FormStaff = () => {
 		}
 	}, [staffID, staff]);
 
-	// useEffect(() => {
-	// 	console.log('getprovince', getProvince);
-	// 	console.log('getcity', getCity);
-	// 	console.log('getdistrict', getDistrict);
-	// 	console.log('getvillage', getVillage);
-	// }, [getCity, getProvince, getDistrict, getVillage]);
-
 	useEffect(() => {
 		setGetDistrict(0);
 		setGetVillage(0);
 	}, [getCity]);
-
-	console.log('getprovince', getProvince);
-	console.log('getcity', getCity);
-	console.log('getdistrict', getDistrict);
-	console.log('getvillage', getVillage);
 
 	const [birthDate, setBirthDate] = useState(null);
 
