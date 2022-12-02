@@ -18,8 +18,6 @@ const ProgramDetail = () => {
 		getProgramDetail(params.programID);
 	}, [params]);
 
-	console.log(programDetail);
-
 	return (
 		<div>
 			<BannerFeature
