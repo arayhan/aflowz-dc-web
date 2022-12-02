@@ -38,7 +38,7 @@ export const formMitraSchema = yup.object().shape(
 export const formCitySchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama program wajib diisi'),
-		province: yup.string().required('Provinsi wajib diisi'),
+		province_id: yup.string().required('Provinsi wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
 		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
 		pic_mobile: yup

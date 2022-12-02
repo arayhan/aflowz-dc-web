@@ -48,7 +48,10 @@ export const createVillage = async (params) => {
 
 export const updateVillage = async (villageID, params) => {
 	const request = {
-		village_category_id: params?.village_category_id || 0,
+		name: params?.name || '',
+		district: params?.district || '',
+		pic: params?.pic || '',
+		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0
 	};
 

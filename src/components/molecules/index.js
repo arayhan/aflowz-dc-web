@@ -1,9 +1,12 @@
+export * from './Alert/AlertErrors';
+
 export * from './Banner/BannerFeature/BannerFeature';
 export * from './Banner/BannerHome/BannerHome';
 
 export * from './Button/ButtonBack/ButtonBack';
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 
+export * from './Card/CardDetailTotal/CardDetailTotal';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
 export * from './Chart/ChartPenerimaMitra/ChartPenerimaMitra';

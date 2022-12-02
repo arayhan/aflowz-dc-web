@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingVillageItem: false,
 	fetchingVillageList: false,
 	fetchingVillageDetail: false,
@@ -86,7 +86,7 @@ const states = (set) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_VILLAGE.deleteVillage(villageID);
 
-		toastRequestResult(loader, success, 'Kota deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Desa deleted', payload?.odoo_error || payload?.message);
 		get().getVillageList();
 		set({ processingDeleteVillage: false });
 	},
