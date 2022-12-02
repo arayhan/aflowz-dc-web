@@ -85,7 +85,7 @@ export const FormProgram = () => {
 							{...field}
 							label="Nama Program"
 							placeholder="Nama Program"
-							disabled={programID || processingCreateProgram || fetchingProgram}
+							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
 					)}
@@ -97,7 +97,7 @@ export const FormProgram = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectPeriode
 							{...field}
-							disabled={programID || processingCreateProgram || fetchingProgram}
+							disabled={processingCreateProgram || fetchingProgram}
 							onChange={({ value }) => {
 								setValue('periode', value);
 								setError('periode', null);
@@ -131,7 +131,7 @@ export const FormProgram = () => {
 							{...field}
 							label="Nama PIC Kementerian"
 							placeholder="Nama PIC Kementerian"
-							disabled={programID || processingCreateProgram || fetchingProgram}
+							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
 					)}
@@ -144,7 +144,7 @@ export const FormProgram = () => {
 							{...field}
 							label="Nomor Telepon PIC Kementerian"
 							placeholder="Contoh : 08xxxxxxxxxx"
-							disabled={programID || processingCreateProgram || fetchingProgram}
+							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
 					)}

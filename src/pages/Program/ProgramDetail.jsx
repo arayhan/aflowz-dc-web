@@ -18,6 +18,8 @@ const ProgramDetail = () => {
 		getProgramDetail(params.programID);
 	}, [params]);
 
+	console.log(programDetail);
+
 	return (
 		<div>
 			<BannerFeature
@@ -34,6 +36,8 @@ const ProgramDetail = () => {
 								title={'Details'}
 								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
+								linkRoute={`/program/update/${programDetail?.program_id}`}
+								isInDetail
 							>
 								<div className="grid grid-cols-12 gap-y-1 text-sm p-5">
 									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Program</div>
@@ -42,13 +46,13 @@ const ProgramDetail = () => {
 									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Periode</div>
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{programDetail?.program_periode}</div>
 
-									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Program PIC</div>
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Program</div>
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 										{programDetail?.program_pic}{' '}
 										{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
 									</div>
 
-									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
+									<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Tim Internal</div>
 									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 										<Link
 											to={`/staff/${programDetail?.pic_staff.id}`}
