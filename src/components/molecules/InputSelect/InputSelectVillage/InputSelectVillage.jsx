@@ -36,7 +36,7 @@ export const InputSelectVillage = forwardRef(({ error, onChange, cityID, distric
 
 	return (
 		<div className="space-y-1">
-			<InputLabel text="Pilih Kecamatan" name={props.name} />
+			<InputLabel text="Pilih Kelurahan/Desa" name={props.name} />
 			<InputSelect ref={ref} options={options} loading={fetchingVillageList} onChange={onChange} {...props} />
 			{error && <InputError message={error.message} />}
 		</div>
