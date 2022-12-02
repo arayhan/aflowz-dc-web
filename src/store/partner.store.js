@@ -25,12 +25,11 @@ const states = (set, get) => ({
 	partnerDetail: null,
 	staff: null,
 
-	successStaffDelete: null,
-
 	getStaffList: async (params) => {
 		set({ fetchingStaffList: true });
+		const reqParams = { ...params, is_staff: true };
 
-		const { success, payload } = await SERVICE_PARTNER.getStaffList(params);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(reqParams);
 
 		set({ staffList: success ? payload : null });
 		set({ fetchingStaffList: false });

@@ -10,7 +10,6 @@ const { setPageLoading } = useAppStore.getState();
 const states = (set, get) => ({
 	fetchingKonstituenList: false,
 	fetchingKonstituenDetail: false,
-	fetchingPenerimaKonstituenDetail: false,
 	fetchingKonstituen: false,
 
 	processingCreateKonstituen: false,
@@ -40,17 +39,6 @@ const states = (set, get) => ({
 
 		set({ konstituenDetail: success ? payload : null });
 		set({ fetchingKonstituenDetail: false });
-	},
-	getPenerimaKonstituenDetail: async (params) => {
-		set({ fetchingPenerimaKonstituenDetail: true });
-
-		const defaultParams = { limit: 10, offset: 0 };
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_KONSTITUEN.getPenerimaKonstituenDetail(requestParams);
-
-		set({ penerimaKonstituenDetail: success ? payload : null });
-		set({ fetchingPenerimaKonstituenDetail: false });
 	},
 	postKonstituenCreate: async (params, callback) => {
 		setPageLoading(true);

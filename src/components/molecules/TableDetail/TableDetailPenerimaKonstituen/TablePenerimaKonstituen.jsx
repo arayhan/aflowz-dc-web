@@ -4,35 +4,32 @@ import { NEGATIVE_CASE_TYPES } from '@/utils/constants';
 import { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ACTION_TYPES } from '@/utils/constants';
-import { useKonstituenStore } from '@/store';
+import { usePartnerStore } from '@/store';
 
 export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
-	const { fetchingPenerimaKonstituenDetail, penerimaKonstituenDetail, getPenerimaKonstituenDetail } =
-		useKonstituenStore();
+	const { fetchingPartnerList, partnerList, getPartnerList } = usePartnerStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID };
+		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_staff: false };
 
 		if (page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
-			getPenerimaKonstituenDetail(params);
+			getPartnerList(params);
 		}
 	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaKonstituenDetail) {
-			setData(penerimaKonstituenDetail.items);
-			setPageCount(Math.ceil(penerimaKonstituenDetail.total / perPage));
+		if (partnerList) {
+			setData(partnerList.items);
+			setPageCount(Math.ceil(partnerList.total / perPage));
 		}
-	}, [penerimaKonstituenDetail, pageCount]);
+	}, [partnerList, pageCount]);
 
 	const columns = useMemo(
 		() => [
@@ -121,7 +118,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 			{data.length > 0 && (
 				<>
 					<div className="overflow-x-auto">
-						<Table columns={columns} data={data} loading={fetchingPenerimaKonstituenDetail} />
+						<Table columns={columns} data={data} loading={fetchingPartnerList} />
 					</div>
 					{!isInDetail && (
 						<div className="p-6">

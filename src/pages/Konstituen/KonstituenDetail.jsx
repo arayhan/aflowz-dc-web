@@ -1,12 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
-import { useAuthStore, useKonstituenStore } from '@/store';
+import { useAuthStore, useKonstituenStore, usePartnerStore } from '@/store';
 import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
 	PieChartPenerimaKonstituenByGender,
 	TablePenerimaKonstituenDetail
 } from '@/components/molecules';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -14,12 +14,12 @@ import { ACTION_TYPES } from '@/utils/constants';
 const KonstituenDetail = () => {
 	const { isAdmin, isSystem } = useAuthStore();
 	const params = useParams();
-	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail, getPenerimaKonstituenDetail } =
-		useKonstituenStore();
+	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
+	const { getPartnerList } = usePartnerStore();
 
 	useEffect(() => {
 		getKonstituenDetail(params.konstituenID);
-		getPenerimaKonstituenDetail({ konstituen_id: params.konstituenID });
+		getPartnerList({ konstituen_id: params.konstituenID, is_staff: false });
 	}, [params]);
 
 	return (
