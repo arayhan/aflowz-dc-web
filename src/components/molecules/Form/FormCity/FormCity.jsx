@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
+import { InputSelectProvince } from '../../InputSelect/InputSelectProvince/InputSelectProvince';
 import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
 
 export const FormCity = () => {
@@ -18,7 +19,7 @@ export const FormCity = () => {
 		resolver: yupResolver(formCitySchema),
 		defaultValues: {
 			name: '',
-			province: '',
+			province_id: '',
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -44,7 +45,7 @@ export const FormCity = () => {
 	useEffect(() => {
 		if (cityID && city) {
 			setValue('name', city.name || '');
-			setValue('province', city.state.name || '');
+			setValue('province_id', city.state.id || 0);
 			setValue('pic_staff_id', city?.pic_staff?.id || 0);
 			setValue('pic', city.pic || '');
 			setValue('pic_mobile', city.pic_mobile || '');
@@ -77,14 +78,16 @@ export const FormCity = () => {
 
 				{/* TODO: set this field to InputSelectState */}
 				<Controller
-					name={'province'}
+					name={'province_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputText
+						<InputSelectProvince
 							{...field}
-							label="Provinsi"
-							placeholder="Provinsi"
 							disabled={processingCreateCity || fetchingCity || cityErrors}
+							onChange={({ value }) => {
+								setValue('province_id', value);
+								setError('province_id', null);
+							}}
 							error={error}
 						/>
 					)}

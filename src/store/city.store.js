@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingCityItem: false,
 	fetchingCityList: false,
 	fetchingCityDetail: false,

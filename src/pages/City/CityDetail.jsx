@@ -19,7 +19,7 @@ const CityDetail = () => {
 			<BannerFeature
 				backButtonLinkTo={'/city'}
 				backButtonText="Kembali ke List Kota"
-				title={cityDetail ? `${cityDetail.village_name}` : 'Kota'}
+				title={cityDetail ? `${cityDetail.city_name}` : 'Kota'}
 				loading={fetchingCityDetail}
 			/>
 
@@ -33,7 +33,7 @@ const CityDetail = () => {
 									action={ACTION_TYPES.UPDATE}
 									linkTo={`/city/update/${cityID}`}
 									className={'w-full sm:w-auto text-base px-5 py-3 rounded-md'}
-									text={`Update ${cityDetail.village_name}`}
+									text={`Update ${cityDetail.city_name}`}
 								/>
 							</div>
 							<div className="col-span-12 bg-white rounded-md">
@@ -45,9 +45,7 @@ const CityDetail = () => {
 								<div className="p-5">
 									<div className="grid grid-cols-12 gap-y-1 text-sm">
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Kota</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{cityDetail?.village_name || '-'}
-										</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{cityDetail?.city_name || '-'}</div>
 
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
