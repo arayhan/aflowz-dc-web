@@ -1,5 +1,12 @@
 import { Button, ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaCity, ChartProgramByPeriode, TableProgram } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartPenerimaCity,
+	ChartProgramByPeriode,
+	TablePenerima,
+	TableProgram
+} from '@/components/molecules';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect } from 'react';
@@ -47,6 +54,16 @@ const CityDetail = () => {
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Kota</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{cityDetail?.city_name || '-'}</div>
 
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Kota</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{!cityDetail?.city_pic && '-'}
+											{cityDetail?.city_pic && (
+												<div>
+													{cityDetail?.city_pic} {cityDetail?.city_pic_mobile && `(${cityDetail?.city_pic_mobile})`}
+												</div>
+											)}
+										</div>
+
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											{!cityDetail?.pic_staff.id && '-'}
@@ -64,23 +81,34 @@ const CityDetail = () => {
 								</div>
 							</div>
 							<div className="flex items-center justify-center gap-4">
-								<div className="bg-white rounded-md">
-									<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
-										<span className="text-2xl md:text-4xl font-extralight">
-											{cityDetail?.penerima_program_city?.length || 0}
-										</span>
-										<div className="font-light text-gray-400">Total Penerima</div>
-									</div>
-									<hr />
-									<div className="p-3">
-										<Button
-											className={'w-full px-5 py-2 rounded-sm text-sm'}
-											linkTo={`/penerima?city_id=${cityID}`}
-											variant={'info'}
-										>
-											Lihat Semua
-										</Button>
-									</div>
+								<CardDetailTotal
+									title={'Total Penerima'}
+									value={cityDetail?.penerima_program_city?.length || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+							</div>
+							<div className="grid grid-cols-12 gap-4">
+								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
+									<TableProgram
+										title={`Program ${cityDetail.city_name}`}
+										displayedColumns={['#', 'Nama', 'PIC Internal']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isReadonly
+										enableClickRow
+										cityID={cityID}
+									/>
+								</div>
+								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
+									<TablePenerima
+										title={`Penerima Program ${cityDetail.city_name}`}
+										displayedColumns={['#', 'Nama', 'PIC Internal']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isReadonly
+										enableClickRow
+										cityID={cityID}
+									/>
 								</div>
 							</div>
 						</div>
