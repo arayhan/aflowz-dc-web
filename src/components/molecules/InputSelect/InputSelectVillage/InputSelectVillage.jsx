@@ -20,7 +20,7 @@ export const InputSelectVillage = forwardRef(({ error, onChange, cityID, distric
 	}, [cityID, districtQuery, isForm]);
 
 	useEffect(() => {
-		if (isForm && districtQuery.district_id === 0) {
+		if (isForm && (villageList?.total === 0 || districtQuery.district_id === 0)) {
 			setOptions([]);
 		} else {
 			if (villageList?.total > 0) {
@@ -32,7 +32,7 @@ export const InputSelectVillage = forwardRef(({ error, onChange, cityID, distric
 				setOptions(mapVillage);
 			}
 		}
-	}, [villageList, districtQuery, isForm]);
+	}, [villageList, districtQuery]);
 
 	return (
 		<div className="space-y-1">

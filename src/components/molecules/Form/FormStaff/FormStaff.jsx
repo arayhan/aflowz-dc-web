@@ -81,15 +81,37 @@ export const FormStaff = () => {
 			setValue('email', staff.email || '');
 			setValue('religion', staff.religion || '');
 			setValue('staff_title', staff.staff_title?.name || '');
+			setPlaceholderCity(staff.city?.name);
+			setPlaceholderDistrict(staff.district?.name);
+			setPlaceholderVillage(staff.village?.name);
 		}
 	}, [staffID, staff]);
 
 	useEffect(() => {
 		setGetDistrict(0);
 		setGetVillage(0);
+		if (staffID) {
+			setPlaceholderCity('Select...');
+			setValue('city', null);
+			setPlaceholderDistrict('Select...');
+			setValue('district', null);
+			setPlaceholderVillage('Select...');
+			setValue('village', null);
+		}
 	}, [getCity]);
 
+	useEffect(() => {
+		setGetVillage(0);
+		if (staffID) {
+			setPlaceholderVillage('Select...');
+			setValue('village', null);
+		}
+	}, [getDistrict]);
+
 	const [birthDate, setBirthDate] = useState(null);
+	const [placeholderCity, setPlaceholderCity] = useState('');
+	const [placeholderDistrict, setPlaceholderDistrict] = useState('');
+	const [placeholderVillage, setPlaceholderVillage] = useState('');
 
 	return (
 		<div className="space-y-8">
@@ -226,7 +248,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							provinceQuery={{ province_id: getCity, limit: 0, offset: 0 }}
-							placeholder={staff && staffID ? staff.city?.name : 'Select...'}
+							placeholder={placeholderCity}
 							isForm
 						/>
 					)}
@@ -246,7 +268,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							cityQuery={{ city_id: getDistrict, limit: 0, offset: 0 }}
-							placeholder={staff && staffID ? staff.district?.name : 'Select...'}
+							placeholder={placeholderDistrict}
 							isForm
 						/>
 					)}
@@ -265,7 +287,7 @@ export const FormStaff = () => {
 							}}
 							error={error}
 							districtQuery={{ district_id: getVillage, limit: 0, offset: 0 }}
-							placeholder={staff && staffID ? staff.village?.name : 'Select...'}
+							placeholder={placeholderVillage}
 							isForm
 						/>
 					)}

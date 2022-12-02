@@ -17,8 +17,7 @@ const ProgramDetail = () => {
 	useEffect(() => {
 		getProgramDetail(params.programID);
 	}, [params]);
-
-	console.log();
+	
 	return (
 		<div>
 			<BannerFeature

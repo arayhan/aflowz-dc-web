@@ -95,8 +95,9 @@ export const formStaffSchema = yup.object().shape({
 	gender: yup.string().required('Belum memilih jenis kelamin'),
 	address: yup.string().required('Belum mengisi alamat domisili'),
 	province: yup.number().required('Belum memiliih provinsi'),
-	city: yup.number().required('Belum memiliih kota domisili'),
-	district: yup.number().nullable(),
+	city: yup.number().nullable().required('Belum memiliih kota/kabupate domisili'),
+	district: yup.number().nullable().required('Belum memiliih kecamatan domisili'),
+	village: yup.number().nullable().required('Belum memiliih kelurahan/desa domisili'),
 	mobile: yup
 		.string()
 		.required('Nomor wajib diisi')

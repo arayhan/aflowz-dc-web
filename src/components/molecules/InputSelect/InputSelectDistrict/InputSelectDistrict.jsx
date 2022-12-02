@@ -32,7 +32,7 @@ export const InputSelectDistrict = forwardRef(({ error, onChange, cityID, cityQu
 				setOptions(mapDistrict);
 			}
 		}
-	}, [districtList, cityQuery, isForm]);
+	}, [districtList]);
 
 	return (
 		<div className="space-y-1">
