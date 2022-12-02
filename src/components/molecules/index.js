@@ -1,3 +1,5 @@
+export * from './Alert/AlertErrors';
+
 export * from './Banner/BannerFeature/BannerFeature';
 export * from './Banner/BannerHome/BannerHome';
 
