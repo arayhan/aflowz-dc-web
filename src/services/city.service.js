@@ -1,18 +1,69 @@
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
 
+export const getCityItem = async (cityID) => {
+	try {
+		const response = await http.get(`/city/${cityID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getCityList = async (params) => {
 	try {
-		if (params === undefined) {
-			const response = await http.get('/city');
-			return { success: response.data.success, payload: response.data.data };
-		} else if (params === 0) {
-			return { success: true, payload: [] };
-		} else {
-			const queryParams = objectToQueryString({ province_id: params });
-			const response = await http.get('/city' + queryParams);
-			return { success: response.data.success, payload: response.data.data };
-		}
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/city' + queryParams);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getCityDetail = async (cityID) => {
+	try {
+		const response = await http.get('/page-detail/kota/' + cityID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const createCity = async (params) => {
+	const request = {
+		name: params?.name || '',
+		province: params?.province || '',
+		pic: params?.pic || '',
+		pic_mobile: params?.pic_mobile || '',
+		pic_staff_id: params?.pic_staff_id || 0
+	};
+
+	try {
+		const response = await http.post('/city', request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const updateCity = async (cityID, params) => {
+	const request = {
+		city_category_id: params?.city_category_id || 0,
+		pic_staff_id: params?.pic_staff_id || 0
+	};
+
+	try {
+		const response = await http.put(`/city/${cityID}`, request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteCity = async (cityID) => {
+	try {
+		const response = await http.delete(`/city/${cityID}`);
+		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
 	}

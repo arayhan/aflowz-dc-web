@@ -1,4 +1,4 @@
-import { ModalUploadPartnerSheet } from '@/components/molecules';
+import { ModalUploadSheetPenerima } from '@/components/molecules';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,15 +11,17 @@ export const TableHeader = ({
 	isReadonly,
 	showButtonCreate,
 	showButtonSeeAll,
-	showButtonUploadPartnerSheet
+	showButtonUploadSheetPenerima
 }) => {
 	const location = useLocation();
 
-	const [showModalUploadPartnerSheet, setShowModalUploadPartnerSheet] = useState(false);
+	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
 
 	return (
 		<div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-			{showModalUploadPartnerSheet && <ModalUploadPartnerSheet onClose={() => setShowModalUploadPartnerSheet(false)} />}
+			{showModalUploadSheetPenerima && (
+				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
+			)}
 			<div>
 				<div className="text-xl font-light transform: capitalize">{title}</div>
 				<div className="text-sm text-gray-400">{description}</div>
@@ -33,10 +35,10 @@ export const TableHeader = ({
 						<span>Lihat Semua</span>
 					</Link>
 				)}
-				{!isReadonly && showButtonUploadPartnerSheet && (
+				{!isReadonly && showButtonUploadSheetPenerima && (
 					<button
 						className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
-						onClick={() => setShowModalUploadPartnerSheet(true)}
+						onClick={() => setShowModalUploadSheetPenerima(true)}
 					>
 						<span className="w-4">
 							<SiGooglesheets size={16} />

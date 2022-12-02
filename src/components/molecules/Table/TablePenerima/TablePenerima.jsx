@@ -3,9 +3,9 @@ import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 
-export const TablePartner = ({ programID, programName, isInDetail, isReadonly }) => {
+export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }) => {
 	const { isSystem } = useAuthStore();
-	const { partnerList, fetchingPartnerList, getPartnerList } = usePartnerStore();
+	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -31,7 +31,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				minWidth: 70
 			},
 			{
-				Header: 'Name',
+				Header: 'Nama Penerima',
 				accessor: 'name',
 				minWidth: 175
 			},
@@ -64,8 +64,9 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Cell: (row) => {
 					const konstituen = row.row.original.konstituen;
 					return (
-						konstituen && (
-							<div>
+						<div>
+							{!konstituen.id && '-'}
+							{konstituen.id && (
 								<ButtonAction
 									key={konstituen.id}
 									className="bg-purple-500 hover:bg-purple-400"
@@ -73,8 +74,8 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 									linkTo={`/institusi/${konstituen.id}`}
 									text={konstituen.name}
 								/>
-							</div>
-						)
+							)}
+						</div>
 					);
 				}
 			},
@@ -83,7 +84,7 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				minWidth: 150,
 				maxWidth: 150,
 				Cell: (row) => {
-					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/partner/${row.row.original.id}`} />;
+					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />;
 				}
 			},
 			{
@@ -93,8 +94,8 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/partner/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDeletePartner(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/penerima/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deletePenerima(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -102,10 +103,6 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		],
 		[]
 	);
-
-	const handleDeletePartner = (partnerID) => {
-		console.log({ partnerID });
-	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
@@ -116,31 +113,31 @@ export const TablePartner = ({ programID, programName, isInDetail, isReadonly })
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getPartnerList(params);
+			getPenerimaList(params);
 		}
 	}, [programID, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (partnerList) {
-			setData(partnerList.items);
-			setPageCount(Math.ceil(partnerList.total / perPage));
+		if (penerimaList) {
+			setData(penerimaList.items);
+			setPageCount(Math.ceil(penerimaList.total / perPage));
 		}
-	}, [partnerList, pageCount]);
+	}, [penerimaList, pageCount]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					feature="Partner"
+					feature="Penerima"
 					title={`Penerima Program ${programName ? programName : ''}`}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
-					showButtonUploadPartnerSheet
+					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingPartnerList || partnerList === null} />
+				<Table columns={columns} data={data} loading={fetchingPenerimaList || penerimaList === null} />
 			</div>
 			<div className="p-6">
 				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />

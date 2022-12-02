@@ -8,7 +8,7 @@ import { usePartnerStore } from '@/store';
 import { useNavigate } from 'react-router';
 import { objectToQueryString } from '@/utils/helpers';
 
-export const ModalUploadPartnerSheet = ({ onClose }) => {
+export const ModalUploadSheetPenerima = ({ onClose }) => {
 	const navigate = useNavigate();
 	const { processingBulkCreatePartner, bulkCreatePartner } = usePartnerStore();
 
@@ -47,7 +47,7 @@ export const ModalUploadPartnerSheet = ({ onClose }) => {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
 							const queryString = objectToQueryString(queryParams);
 							setErrors(null);
-							navigate('/partner' + queryString);
+							navigate('/penerima' + queryString);
 						} else {
 							setErrors(payload);
 						}

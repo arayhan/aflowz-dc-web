@@ -1,6 +1,7 @@
 export * from './Banner/BannerFeature/BannerFeature';
 export * from './Banner/BannerHome/BannerHome';
 
+export * from './Button/ButtonBack/ButtonBack';
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
@@ -12,14 +13,18 @@ export * from './Chart/ChartProgramByPeriode/ChartProgramByPeriode';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 
+export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
 export * from './Form/FormStaff/FormStaff';
+export * from './Form/FormVillage/FormVillage';
 
+export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
+export * from './Table/TableVillage/TableVillage';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
@@ -38,7 +43,7 @@ export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
 export * from './InputSelect/InputSelectDistrict/InputSelectDistrict';
 
-export * from './Modal/ModalUploadPartnerSheet/ModalUploadPartnerSheet';
+export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
@@ -46,7 +51,7 @@ export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCatego
 export * from './Section/KonstituenType/KonstituenType';
 
 export * from './Table/TableMitra/TableMitra';
-export * from './Table/TablePartner/TablePartner';
+export * from './Table/TablePenerima/TablePenerima';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 

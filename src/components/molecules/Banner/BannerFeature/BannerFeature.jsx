@@ -1,10 +1,12 @@
+import { Button } from '@/components/atoms';
 import React from 'react';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 import Skeleton from 'react-loading-skeleton';
 
-export const BannerFeature = ({ title, description, loading }) => {
+export const BannerFeature = ({ title, description, loading, backButtonLinkTo, backButtonText }) => {
 	return (
 		<div className="bg-primary">
-			<div className="container py-20">
+			<div className={`container ${backButtonLinkTo ? 'pt-14 pb-20' : 'py-20'}`}>
 				{loading && (
 					<div className="space-y-2 flex flex-col opacity-30">
 						<Skeleton width={220} height={40} />
@@ -13,9 +15,22 @@ export const BannerFeature = ({ title, description, loading }) => {
 				)}
 
 				{!loading && (
-					<div className="space-y-6 text-white">
-						{title && <div className="font-extralight text-4xl md:text-5xl">{title}</div>}
-						{description && <div className="text-gray-400">{description}</div>}
+					<div className="space-y-10 text-white">
+						{backButtonLinkTo && (
+							<Button
+								className={
+									'flex items-center space-x-3 bg-white bg-opacity-5 hover:bg-opacity-10 opacity-60 px-5 py-2 rounded-md trans'
+								}
+								linkTo={backButtonLinkTo}
+							>
+								<IoIosArrowRoundBack size={24} />
+								<span>{backButtonText || 'Kembali'}</span>
+							</Button>
+						)}
+						<div className="space-y-6 ">
+							{title && <div className="font-extralight text-4xl md:text-5xl">{title}</div>}
+							{description && <div className="text-gray-400">{description}</div>}
+						</div>
 					</div>
 				)}
 			</div>

@@ -34,8 +34,8 @@ export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/Icon_Home/Mitra.svg').default, path: '/mitra' },
 	{ title: 'Program', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program' },
 	{ title: 'Institusi', icon: require('@/images/icons/Icon_Home/Konstitusi.svg').default, path: '/institusi' },
-	{ title: 'Partner', icon: require('@/images/icons/Icon_Home/Penerima.svg').default, path: '/partner' },
+	{ title: 'Penerima', icon: require('@/images/icons/Icon_Home/Penerima.svg').default, path: '/penerima' },
+	{ title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/village' },
+	{ title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/city' },
 	{ title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' }
-	// { title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/desa' },
-	// { title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/kota' },
 ];

@@ -1,5 +1,11 @@
 import { Button, ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaMitra, ChartProgramByPeriode, TableProgram } from '@/components/molecules';
+import {
+	BannerFeature,
+	ButtonBack,
+	ChartPenerimaMitra,
+	ChartProgramByPeriode,
+	TableProgram
+} from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect } from 'react';
@@ -17,6 +23,8 @@ const MitraDetail = () => {
 	return (
 		<div>
 			<BannerFeature
+				backButtonLinkTo={'/mitra'}
+				backButtonText="Kembali ke List Mitra"
 				title={programCategoryDetail ? `${programCategoryDetail.mitra_name}` : 'Mitra'}
 				loading={fetchingProgramCategoryDetail}
 			/>
@@ -26,6 +34,14 @@ const MitraDetail = () => {
 					{fetchingProgramCategoryDetail && <MitraDetailSkeleton />}
 					{!fetchingProgramCategoryDetail && programCategoryDetail && (
 						<div className="space-y-4">
+							<div className="flex flex-col sm:flex-row items-center justify-end gap-4">
+								<ButtonAction
+									action={ACTION_TYPES.UPDATE}
+									linkTo={`/mitra/update/${programCategoryID}`}
+									className={'w-full sm:w-auto text-base px-5 py-3 rounded-md'}
+									text={`Update ${programCategoryDetail.mitra_name}`}
+								/>
+							</div>
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
 									<div className="font-light text-xl">Details</div>
@@ -107,10 +123,11 @@ const MitraDetail = () => {
 								<div className="col-span-12 bg-white rounded-md">
 									<TableProgram
 										title={`Program ${programCategoryDetail.mitra_name}`}
-										displayedColumns={['#', 'Nama', 'Periode', 'PIC Internal']}
+										displayedColumns={['#', 'Nama', 'PIC Internal']}
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isReadonly
+										enableClickRow
 									/>
 								</div>
 							</div>

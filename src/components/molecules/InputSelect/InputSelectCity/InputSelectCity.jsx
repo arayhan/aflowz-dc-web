@@ -8,7 +8,7 @@ export const InputSelectCity = forwardRef(({ error, onChange, provinceID, featur
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		getCityList(provinceID);
+		getCityList({ province_id: provinceID });
 	}, [provinceID]);
 
 	useEffect(() => {

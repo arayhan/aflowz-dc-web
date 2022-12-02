@@ -14,14 +14,20 @@ import Konstituen from './pages/Konstituen/Konstituen';
 import KonstituenDetail from './pages/Konstituen/KonstituenDetail';
 import KonstituenCreate from './pages/Konstituen/KonstituenCreate';
 import KonstituenUpdate from './pages/Konstituen/KonstituenUpdate';
-import Partner from './pages/Partner/Partner';
+import Penerima from './pages/Penerima/Penerima';
+import PenerimaDetail from './pages/Penerima/PenerimaDetail';
 import StaffListPage from './pages/Staff/StaffListPage';
 import StaffCreate from './pages/Staff/StaffCreate';
-import PartnerDetail from './pages/Partner/PartnerDetail';
 import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
 import StaffDetail from './pages/Staff/StaffDetail';
+import City from './pages/City/City';
+import CityForm from './pages/City/CityForm';
+import CityDetail from './pages/City/CityDetail';
+import Village from './pages/Village/Village';
+import VillageForm from './pages/Village/VillageForm';
+import VillageDetail from './pages/Village/VillageDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -52,14 +58,20 @@ export const AppRoutes = () => {
 					<Route path="/institusi/create" element={<KonstituenCreate />} />
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
-					<Route path="/desa" element={<Program />} />
-					<Route path="/kota" element={<Program />} />
+					<Route path="/village/update/:villageID" element={<VillageForm />} />
+					<Route path="/village/create" element={<VillageForm />} />
+					<Route path="/village/:villageID" element={<VillageDetail />} />
+					<Route path="/village" element={<Village />} />
+					<Route path="/city/update/:cityID" element={<CityForm />} />
+					<Route path="/city/create" element={<CityForm />} />
+					<Route path="/city/:cityID" element={<CityDetail />} />
+					<Route path="/city" element={<City />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
 					<Route path="/program" element={<Program />} />
-					<Route path="/partner/:partnerID" element={<PartnerDetail />} />
-					<Route path="/partner" element={<Partner />} />
+					<Route path="/penerima/:penerimaID" element={<PenerimaDetail />} />
+					<Route path="/penerima" element={<Penerima />} />
 					<Route path="/staff" element={<StaffListPage />} />
 					<Route path="/staff/create" element={<StaffCreate />} />
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />

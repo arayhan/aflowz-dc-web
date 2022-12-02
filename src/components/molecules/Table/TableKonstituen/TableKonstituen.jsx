@@ -7,13 +7,11 @@ import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableKonstituen = ({ selectedType }) => {
 	const { isSystem } = useAuthStore();
-	const { fetchingKonstituenList, konstituenList, getKonstituenList } = useKonstituenStore();
+	const { fetchingKonstituenList, konstituenList, getKonstituenList, deleteKonstituen } = useKonstituenStore();
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
-	const [konstituen, setKonstituen] = useState(null);
 
 	const columns = useMemo(
 		() => [
@@ -79,7 +77,7 @@ export const TableKonstituen = ({ selectedType }) => {
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/institusi/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteKonstituen(row.row.original.id)} />
 							</div>
 						)
 					);
@@ -97,10 +95,9 @@ export const TableKonstituen = ({ selectedType }) => {
 
 		if (page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
 			getKonstituenList(params);
 		}
-	}, [selectedType, page, perPage, pageCount, konstituen]);
+	}, [selectedType, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (konstituenList) {
@@ -108,32 +105,6 @@ export const TableKonstituen = ({ selectedType }) => {
 			setPageCount(Math.ceil(konstituenList.total / perPage));
 		}
 	}, [konstituenList, pageCount]);
-
-	const handleDelete = async (konstituenID) => {
-		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(konstituenID);
-
-		if (success) {
-			toast.success('Berhasil Menghapus Konstituen', {
-				position: 'top-right',
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'light'
-			});
-
-			const defaultParams = { limit: 10, offset: 0 };
-			const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(defaultParams);
-
-			if (success) {
-				setKonstituen(null);
-				getKonstituenList();
-				setData(payload.items);
-			}
-		}
-	};
 
 	return (
 		<div className="bg-white rounded-md shadow-md">

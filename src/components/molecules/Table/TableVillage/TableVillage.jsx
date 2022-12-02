@@ -1,14 +1,14 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
-import { useAuthStore, useProgramStore } from '@/store';
+import { useAuthStore, useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const TableMitra = ({ enableClickRow }) => {
+export const TableVillage = ({ enableClickRow }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { programCategoryList, fetchingProgramCategoryList } = useProgramStore();
-	const { getProgramCategoryList, deleteProgramCategory } = useProgramStore();
+	const { villageList, fetchingVillageList } = useVillageStore();
+	const { getVillageList, deleteVillage } = useVillageStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -29,19 +29,10 @@ export const TableMitra = ({ enableClickRow }) => {
 				}
 			},
 			{
-				Header: 'Mitra',
+				Header: 'Nama Desa',
 				accessor: 'name',
 				width: '100%',
 				minWidth: 300
-			},
-			{
-				Header: 'Nama PIC',
-				accessor: 'pic',
-				minWidth: 250
-			},
-			{
-				Header: 'Nomor PIC',
-				accessor: 'pic_mobile'
 			},
 			{
 				Header: 'Detail',
@@ -51,7 +42,7 @@ export const TableMitra = ({ enableClickRow }) => {
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/mitra/${row.row.original.id}`}
+							linkTo={`/village/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -63,8 +54,8 @@ export const TableMitra = ({ enableClickRow }) => {
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgramCategory(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/village/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteVillage(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -76,29 +67,29 @@ export const TableMitra = ({ enableClickRow }) => {
 	const offsetResult = (page - 1) * perPage;
 	const params = { limit: perPage, offset: offsetResult };
 
-	const handleClickRow = (rowData) => navigate(`/mitra/${rowData.id}`);
+	const handleClickRow = (rowData) => navigate(`/village/${rowData.id}`);
 
 	useEffect(() => {
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getProgramCategoryList(params);
+			getVillageList(params);
 		}
 	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (programCategoryList) {
-			setData(programCategoryList.items);
-			setPageCount(Math.ceil(programCategoryList.total / perPage));
+		if (villageList) {
+			setData(villageList.items);
+			setPageCount(Math.ceil(villageList.total / perPage));
 		}
-	}, [programCategoryList]);
+	}, [villageList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
-					feature="Mitra"
-					title={'List Mitra'}
+					feature="Desa"
+					title={'List Desa'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
 				/>
@@ -108,7 +99,7 @@ export const TableMitra = ({ enableClickRow }) => {
 					columns={columns}
 					data={data}
 					onClickRow={enableClickRow && handleClickRow}
-					loading={fetchingProgramCategoryList || programCategoryList === null}
+					loading={fetchingVillageList || villageList === null}
 				/>
 			</div>
 			<div className="p-6">

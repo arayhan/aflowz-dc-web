@@ -3,7 +3,7 @@ import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
 	TableDetailPenerimaProgram,
-	TablePartner
+	TablePenerima
 } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
@@ -74,7 +74,7 @@ const ProgramDetail = () => {
 
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 md:col-span-6">
-									<TablePartner
+									<TablePenerima
 										programID={programDetail?.program_id}
 										programName={programDetail?.program_name}
 										isReadonly
