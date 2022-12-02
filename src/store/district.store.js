@@ -6,10 +6,13 @@ const states = (set) => ({
 	fetchingDistrictList: false,
 	districtList: null,
 
-	getDistrictList: async (cityID) => {
+	getDistrictList: async (params) => {
 		set({ fetchingDistrictList: true });
 
-		const { success, payload } = await SERVICE_DISTRICT.getDistrictList(cityID);
+		const defaultParams = { limit: 10, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_DISTRICT.getDistrictList(requestParams);
 
 		set({ districtList: success ? payload : null });
 		set({ fetchingDistrictList: false });

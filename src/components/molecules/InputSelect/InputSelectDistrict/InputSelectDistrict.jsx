@@ -2,26 +2,38 @@ import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useDistrictStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectDistrict = forwardRef(({ error, onChange, cityID, ...props }, ref) => {
+export const InputSelectDistrict = forwardRef(({ error, onChange, cityID, cityQuery, isForm, ...props }, ref) => {
 	const { districtList, fetchingDistrictList, getDistrictList } = useDistrictStore();
 
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		setOptions([]);
-		getDistrictList(cityID);
-	}, [cityID]);
+		console.log(cityQuery);
+		if (isForm) {
+			if (cityQuery.city_id === 0) {
+				setOptions([]);
+			} else {
+				getDistrictList(cityQuery);
+			}
+		} else {
+			getDistrictList({ city_id: cityID });
+		}
+	}, [cityID, cityQuery, isForm]);
 
 	useEffect(() => {
-		if (districtList?.total > 0) {
-			const mapDistrict = districtList.items.map((district) => ({
-				label: district.name,
-				value: district.id
-			}));
+		if (isForm && cityQuery.city_id === 0) {
+			setOptions([]);
+		} else {
+			if (districtList?.total > 0) {
+				const mapDistrict = districtList.items.map((district) => ({
+					label: district.name,
+					value: district.id
+				}));
 
-			setOptions(mapDistrict);
+				setOptions(mapDistrict);
+			}
 		}
-	}, [districtList]);
+	}, [districtList, cityQuery, isForm]);
 
 	return (
 		<div className="space-y-1">

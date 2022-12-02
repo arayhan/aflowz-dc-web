@@ -2,25 +2,37 @@ import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useVillageStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectVillage = forwardRef(({ error, onChange, cityID, ...props }, ref) => {
+export const InputSelectVillage = forwardRef(({ error, onChange, cityID, districtQuery, isForm, ...props }, ref) => {
 	const { villageList, fetchingVillageList, getVillageList } = useVillageStore();
 
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		getVillageList({ city_id: cityID });
-	}, [cityID]);
+		if (isForm) {
+			if (districtQuery.district_id === 0) {
+				setOptions([]);
+			} else {
+				getVillageList(districtQuery);
+			}
+		} else {
+			getVillageList({ city_id: cityID });
+		}
+	}, [cityID, districtQuery, isForm]);
 
 	useEffect(() => {
-		if (villageList?.total > 0) {
-			const mapVillage = villageList.items.map((village) => ({
-				label: village.name,
-				value: village.id
-			}));
+		if (isForm && districtQuery.district_id === 0) {
+			setOptions([]);
+		} else {
+			if (villageList?.total > 0) {
+				const mapVillage = villageList.items.map((village) => ({
+					label: village.name,
+					value: village.id
+				}));
 
-			setOptions(mapVillage);
+				setOptions(mapVillage);
+			}
 		}
-	}, [villageList]);
+	}, [villageList, districtQuery, isForm]);
 
 	return (
 		<div className="space-y-1">
