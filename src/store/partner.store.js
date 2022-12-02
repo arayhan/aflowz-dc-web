@@ -7,7 +7,7 @@ import { useAppStore } from './app.store';
 
 const { setPageLoading } = useAppStore.getState();
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingStaffList: false,
 	fetchingPartnerList: false,
 	fetchingStaffTitleList: false,
@@ -17,6 +17,7 @@ const states = (set) => ({
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
+	processingDeletePartner: false,
 
 	staffList: null,
 	partnerList: null,
@@ -115,10 +116,17 @@ const states = (set) => ({
 		callback({ payload, success });
 	},
 
-	deleteStaff: async (staffID) => {
-		const { success, payload } = await SERVICE_PARTNER.deleteStaff(staffID);
+	deletePartner: async (partnerID) => {
+		setPageLoading(true);
+		set({ processingDeletePartner: true });
 
-		set({ successStaffDelete: success ? payload : null });
+		const loader = toast.loading('Processing...');
+		const { success, payload } = await SERVICE_PARTNER.deletePartner(partnerID);
+
+		toastRequestResult(loader, success, 'Tim Internal deleted', payload?.odoo_error || payload?.message);
+		get().getStaffList();
+		set({ processingDeletePartner: false });
+		setPageLoading(false);
 	}
 });
 

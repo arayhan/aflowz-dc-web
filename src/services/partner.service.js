@@ -140,19 +140,17 @@ export const updateStaff = async (staffID, params) => {
 		village: ''
 	};
 
-	console.log(data);
 	try {
 		const response = await http.put(`/partner/${staffID}`, data);
-		console.log(response);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
 	}
 };
 
-export const deleteStaff = async (staffID) => {
+export const deletePartner = async (partnerID) => {
 	try {
-		const response = await http.delete(`/partner/${staffID}`);
+		const response = await http.delete(`/partner/${partnerID}`);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

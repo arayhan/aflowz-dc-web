@@ -2,7 +2,7 @@ import { ButtonAction, Table, TableHeader } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useMemo } from 'react';
 
-export const TableStaffDetailInstitusi = ({ fetchData, isSystem, titleHeader }) => {
+export const TableStaffDetailInstitusi = ({ fetchData, isReadonly, titleHeader }) => {
 	const columns = useMemo(
 		() => [
 			{
@@ -59,7 +59,7 @@ export const TableStaffDetailInstitusi = ({ fetchData, isSystem, titleHeader }) 
 				<TableHeader
 					title={titleHeader}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isSystem}
+					isReadonly={isReadonly}
 					showButtonCreate={false}
 				/>
 			</div>

@@ -53,15 +53,15 @@ const StaffDetail = () => {
 									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto">
 										<TableStaffDetailProgram
 											fetchData={staff?.programs}
-											isSystem={false}
+											isReadonly={!isSystem}
 											titleHeader={'List Program'}
 										/>
 									</div>
 									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailInstitusi
 											fetchData={staff?.konstituens_pic}
-											isSystem={false}
-											titleHeader={'List Program'}
+											isReadonly={!isSystem}
+											titleHeader={'List Institusi'}
 										/>
 									</div>
 								</div>
