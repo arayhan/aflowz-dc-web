@@ -54,6 +54,7 @@ export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
 export * from './Section/SectionSelectKonstituenType/SectionSelectKonstituenType';
+export * from './Section/SectionShortcutProgram/SectionShortcutProgram';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePenerima/TablePenerima';
