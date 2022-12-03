@@ -1,4 +1,4 @@
-import { BannerFeature, TableKonstituen, KonstituenType } from '@/components/molecules';
+import { BannerFeature, TableKonstituen, SectionSelectKonstituenType } from '@/components/molecules';
 import { useState } from 'react';
 
 const Konstituen = () => {
@@ -8,7 +8,10 @@ const Konstituen = () => {
 		<div>
 			<BannerFeature title="List Institusi" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<KonstituenType selectedType={selectedKonstituen} onSelectedType={(type) => setSelectedKonstituen(type)} />
+				<SectionSelectKonstituenType
+					selectedType={selectedKonstituen}
+					onSelectedType={(type) => setSelectedKonstituen(type)}
+				/>
 				<div className="py-6 container">
 					<TableKonstituen selectedType={selectedKonstituen} />
 				</div>

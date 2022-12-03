@@ -1,5 +1,5 @@
 import { Button, InputText } from '@/components/atoms';
-import { InputSelectCity, InputSelectKonstituen, InputSelectStaff } from '@/components/molecules';
+import { InputSelectCity, InputSelectInstitusiType, InputSelectStaff } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formKonstituenSchema } from '@/utils/validation-schema';
@@ -87,7 +87,7 @@ export const FormKonstituen = () => {
 					name={'konstituen_type'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectKonstituen
+						<InputSelectInstitusiType
 							{...field}
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							onChange={({ value }) => {

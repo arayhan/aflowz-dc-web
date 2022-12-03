@@ -1,9 +1,9 @@
 import { useKonstituenStore } from '@/store';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-export const KonstituenType = ({ selectedType, onSelectedType }) => {
-	const { konstituenList, getKonstituenList } = useKonstituenStore();
+export const SectionSelectKonstituenType = ({ onSelectedType }) => {
+	const { konstituenList } = useKonstituenStore();
 
 	const listTipe = [
 		{ id: 1, name: 'sekolah' },

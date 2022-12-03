@@ -1,7 +1,7 @@
 import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import React, { forwardRef } from 'react';
 
-export const InputSelectKonstituen = forwardRef(({ error, onChange, ...props }, ref) => {
+export const InputSelectInstitusiType = forwardRef(({ error, onChange, ...props }, ref) => {
 	const options = [
 		{ label: 'Sekolah', value: 'sekolah' },
 		{ label: 'Kampus', value: 'kampus' },
@@ -17,7 +17,7 @@ export const InputSelectKonstituen = forwardRef(({ error, onChange, ...props }, 
 	);
 });
 
-InputSelectKonstituen.displayName = 'InputSelectKonstituen';
-InputSelectKonstituen.defaultProps = {
+InputSelectInstitusiType.displayName = 'InputSelectInstitusiType';
+InputSelectInstitusiType.defaultProps = {
 	name: 'konstituen_type'
 };
