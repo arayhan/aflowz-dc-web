@@ -48,6 +48,7 @@ export * from './InputSelect/InputSelectProgram/InputSelectProgram';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
+export * from './Modal/ModalFilterProgram/ModalFilterProgram';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';

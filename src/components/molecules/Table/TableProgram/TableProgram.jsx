@@ -4,6 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ModalFilterProgam } from '../../Modal/ModalFilterProgram/ModalFilterProgram';
 
 export const TableProgram = ({
 	title,
@@ -24,6 +25,7 @@ export const TableProgram = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+	const [showModalFilter, setShowModalFilter] = useState(false);
 
 	const columns = useMemo(
 		() => [
@@ -126,6 +128,7 @@ export const TableProgram = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
+			{showModalFilter && <ModalFilterProgam onClose={() => setShowModalFilter(false)} />}
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
@@ -134,6 +137,8 @@ export const TableProgram = ({
 					mainRoute={'/program'}
 					isReadonly={!isSystem || isReadonly}
 					seeAllLink={'/program' + objectToQueryString(params)}
+					onClickButtonFilter={() => setShowModalFilter(true)}
+					showButtonFilter
 					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadSheetPenerima
 				/>
