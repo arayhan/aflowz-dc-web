@@ -251,9 +251,8 @@ export const FormStaff = () => {
 								setGetDistrict(value);
 							}}
 							error={error}
-							provinceQuery={{ province_id: getCity, limit: 0, offset: 0 }}
+							params={{ province_id: getCity, limit: 0, offset: 0 }}
 							placeholder={placeholderCity}
-							isForm
 						/>
 					)}
 				/>
@@ -271,9 +270,8 @@ export const FormStaff = () => {
 								setGetVillage(value);
 							}}
 							error={error}
-							cityQuery={{ city_id: getDistrict, limit: 0, offset: 0 }}
+							params={{ city_id: getDistrict, limit: 0, offset: 0 }}
 							placeholder={placeholderDistrict}
-							isForm
 						/>
 					)}
 				/>
