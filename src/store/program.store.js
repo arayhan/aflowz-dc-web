@@ -132,7 +132,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.createProgramCategory(params);
 
-		toastRequestResult(loader, success, 'Program Category created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Mitra created', payload?.odoo_error || payload?.message);
 		set({ processingCreateProgramCategory: false });
 		setPageLoading(false);
 
@@ -145,7 +145,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.updateProgramCategory(programCategoryID, params);
 
-		toastRequestResult(loader, success, 'Program Category updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Mitra updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateProgramCategory: false });
 		setPageLoading(false);
 
