@@ -13,7 +13,6 @@ export const TablePenerima = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
-	isShowButtonFilter,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -26,11 +25,6 @@ export const TablePenerima = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
-	const [showModalFilterPenerima, setShowModalFilterPenerima] = useState(false);
-
-	const handleSubmitFilter = (values) => {
-		console.log({ values });
-	};
 
 	const columns = useMemo(
 		() => [
@@ -40,9 +34,7 @@ export const TablePenerima = ({
 				disableFilters: true,
 				maxWidth: 20,
 				hidden: displayedColumns && !displayedColumns.includes('#'),
-				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
-				}
+				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'NIK',
@@ -133,6 +125,8 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
+		console.log({ offsetResult });
+
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
@@ -149,9 +143,6 @@ export const TablePenerima = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			{showModalFilterPenerima && (
-				<ModalFilterPenerima onClose={() => setShowModalFilterPenerima(false)} onSubmit={handleSubmitFilter} />
-			)}
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
@@ -160,10 +151,8 @@ export const TablePenerima = ({
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
-					showButtonFilter={isShowButtonFilter}
 					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={'/penerima' + objectToQueryString(params)}
-					onClickFilter={() => setShowModalFilterPenerima(true)}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
