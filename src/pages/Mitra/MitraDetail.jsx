@@ -1,9 +1,9 @@
 import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
-	ButtonBack,
 	ChartPenerimaMitra,
 	ChartProgramByPeriode,
+	TablePenerima,
 	TableProgram
 } from '@/components/molecules';
 import { useProgramStore } from '@/store';
@@ -120,7 +120,18 @@ const MitraDetail = () => {
 										/>
 									</Card>
 								</div>
-								<div className="col-span-12 bg-white rounded-md">
+								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
+									<TablePenerima
+										title={`Penerima Program ${programCategoryDetail.mitra_name}`}
+										displayedColumns={['#', 'Nama Penerima', 'Program']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isReadonly
+										params={{ program_category_id: Number(programCategoryID) }}
+										enableClickRow
+									/>
+								</div>
+								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
 									<TableProgram
 										title={`Program ${programCategoryDetail.mitra_name}`}
 										displayedColumns={['#', 'Nama', 'PIC Internal']}

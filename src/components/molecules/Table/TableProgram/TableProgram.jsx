@@ -40,9 +40,9 @@ export const TableProgram = ({
 				hidden: displayedColumns && !displayedColumns.includes('Nama')
 			},
 			{
-				Header: 'Category',
+				Header: 'Mitra',
 				minWidth: 250,
-				hidden: displayedColumns && !displayedColumns.includes('Category'),
+				hidden: displayedColumns && !displayedColumns.includes('Mitra'),
 				Cell: (row) => <div>{row.row.original.program_category.name}</div>
 			},
 			{

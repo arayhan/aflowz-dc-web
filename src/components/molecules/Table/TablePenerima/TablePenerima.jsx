@@ -4,7 +4,16 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
-export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) => {
+export const TablePenerima = ({
+	title,
+	displayedColumns,
+	params,
+	isReadonly,
+	isShowFooter,
+	isShowButtonSeeAll,
+	isShowButtonFilter,
+	seeAllLink
+}) => {
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
 
@@ -23,10 +32,10 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 		() => [
 			{
 				Header: '#',
-				accessor: '',
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
+				hidden: displayedColumns && !displayedColumns.includes('#'),
 				Cell: (row) => {
 					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
 				}
@@ -34,17 +43,19 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 			{
 				Header: 'NIK',
 				accessor: 'nik_number',
-				minWidth: 70
+				minWidth: 70,
+				hidden: displayedColumns && !displayedColumns.includes('NIK')
 			},
 			{
 				Header: 'Nama Penerima',
 				accessor: 'name',
-				minWidth: 175
+				minWidth: 175,
+				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
 				Header: 'Program',
-				hidden: isInDetail,
 				minWidth: 150,
+				hidden: displayedColumns && !displayedColumns.includes('Program'),
 				Cell: (row) => {
 					const programs = row.row.original.programs;
 					return (
@@ -67,6 +78,7 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 			{
 				Header: 'Konstituen',
 				minWidth: 200,
+				hidden: !displayedColumns?.includes('Konstituen'),
 				Cell: (row) => {
 					const konstituen = row.row.original.konstituen;
 					return (
@@ -89,6 +101,7 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 				Header: 'Detail',
 				minWidth: 150,
 				maxWidth: 150,
+				hidden: !displayedColumns?.includes('Detail'),
 				Cell: (row) => {
 					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />;
 				}
@@ -136,12 +149,13 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
-					title="Penerima Program"
+					title={title || 'Penerima Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
-					showButtonFilter
+					showButtonFilter={isShowButtonFilter}
+					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={seeAllLink}
 					onClickFilter={() => setShowModalFilterPenerima(true)}
 				/>
@@ -149,9 +163,16 @@ export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) =>
 			<div className="overflow-x-scroll">
 				<Table columns={columns} data={data} loading={fetchingPenerimaList || penerimaList === null} />
 			</div>
-			<div className="p-6">
-				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
-			</div>
+			{isShowFooter && (
+				<div className="p-6">
+					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+				</div>
+			)}
 		</div>
 	);
+};
+
+TablePenerima.defaultProps = {
+	params: {},
+	isShowFooter: true
 };
