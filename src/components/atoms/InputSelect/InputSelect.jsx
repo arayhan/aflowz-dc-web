@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import ReactSelect from 'react-select';
+import './InputSelect.css';
 
 export const InputSelect = forwardRef(
 	({ options, value, loading, multi, searchable, disabled, onChange, placeholder, ...props }, ref) => {
@@ -24,7 +25,8 @@ export const InputSelect = forwardRef(
 						'input:focus': {
 							boxShadow: 'none'
 						}
-					})
+					}),
+					menu: (styles) => ({ ...styles, zIndex: 20, position: 'relative' })
 				}}
 				options={options}
 			/>
