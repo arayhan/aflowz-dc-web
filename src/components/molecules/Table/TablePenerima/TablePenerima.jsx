@@ -4,7 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
-export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }) => {
+export const TablePenerima = ({ params, isInDetail, isReadonly, seeAllLink }) => {
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
 
@@ -112,16 +112,14 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult };
-
-		if (programID) Object.assign(params, { program_id: programID });
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getPenerimaList(params);
+			getPenerimaList({ ...defaultParams, ...params });
 		}
-	}, [programID, page, perPage, pageCount]);
+	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (penerimaList) {
@@ -138,14 +136,14 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
-					title={`Penerima Program ${programName ? programName : ''}`}
+					title="Penerima Program"
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonFilter
+					seeAllLink={seeAllLink}
 					onClickFilter={() => setShowModalFilterPenerima(true)}
-					mainRoute={`/program/penerima/${programID}`}
 				/>
 			</div>
 			<div className="overflow-x-scroll">

@@ -87,7 +87,7 @@ const MitraDetail = () => {
 									<div className="p-3">
 										<Button
 											className={'w-full px-5 py-2 rounded-sm text-sm'}
-											linkTo={`/penerima?mitra_id=${programCategoryID}`}
+											linkTo={`/penerima?program_category_id=${programCategoryID}`}
 											variant={'info'}
 										>
 											Lihat Semua
