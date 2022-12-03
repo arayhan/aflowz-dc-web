@@ -8,10 +8,6 @@ const Penerima = () => {
 		<div>
 			<BannerFeature title="Penerima" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<SectionSelectProgram
-					selectedProgram={selectedProgram}
-					onSelectProgram={(program) => setSelectedProgram(program)}
-				/>
 				<div className="py-6 container">
 					<TablePenerima programID={selectedProgram?.id} programName={selectedProgram?.name} />
 				</div>
