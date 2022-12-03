@@ -1,6 +1,7 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
@@ -11,8 +12,7 @@ export const TablePenerima = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
-	isShowButtonFilter,
-	seeAllLink
+	isShowButtonFilter
 }) => {
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
@@ -156,7 +156,7 @@ export const TablePenerima = ({
 					showButtonCreate={false}
 					showButtonFilter={isShowButtonFilter}
 					showButtonSeeAll={isShowButtonSeeAll}
-					seeAllLink={seeAllLink}
+					seeAllLink={'/penerima' + objectToQueryString(params)}
 					onClickFilter={() => setShowModalFilterPenerima(true)}
 				/>
 			</div>

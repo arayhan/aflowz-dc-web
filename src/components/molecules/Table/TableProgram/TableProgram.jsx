@@ -1,6 +1,7 @@
 import { Table, ButtonAction, TableHeader, TableFooter, Button } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -131,6 +132,7 @@ export const TableProgram = ({
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					mainRoute={'/program'}
 					isReadonly={!isSystem || isReadonly}
+					seeAllLink={'/program' + objectToQueryString(params)}
 					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadSheetPenerima
 				/>

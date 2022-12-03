@@ -10,7 +10,7 @@ export const TableHeader = ({
 	title,
 	description,
 	isReadonly,
-	onClickButtonSeeAll,
+	seeAllLink,
 	onClickButtonFilter,
 	showButtonFilter,
 	showButtonCreate,
@@ -40,13 +40,13 @@ export const TableHeader = ({
 						<span>Filter</span>
 					</Button>
 				)}
-				{showButtonSeeAll && (
-					<Button
-						onClick={onClickButtonSeeAll}
+				{showButtonSeeAll && seeAllLink && (
+					<Link
+						to={seeAllLink}
 						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<span>Lihat Semua</span>
-					</Button>
+					</Link>
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<button
