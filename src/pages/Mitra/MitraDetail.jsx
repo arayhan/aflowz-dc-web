@@ -127,6 +127,7 @@ const MitraDetail = () => {
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isReadonly
+										params={{ program_category_id: Number(programCategoryID) }}
 										enableClickRow
 									/>
 								</div>

@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const TableProgram = ({
 	title,
-	selectedCategory,
 	displayedColumns,
+	params,
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
@@ -106,16 +106,14 @@ export const TableProgram = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult };
-
-		if (selectedCategory) Object.assign(params, { program_category_id: selectedCategory.id });
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getProgramList(params);
+			getProgramList({ ...defaultParams, ...params });
 		}
-	}, [selectedCategory, page, perPage, pageCount]);
+	}, [page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (programList) {
@@ -129,7 +127,7 @@ export const TableProgram = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
-					title={title || selectedCategory?.name || 'All Category'}
+					title={title || 'Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					mainRoute={'/program'}
 					isReadonly={!isSystem || isReadonly}
@@ -157,5 +155,6 @@ export const TableProgram = ({
 };
 
 TableProgram.defaultProps = {
+	params: {},
 	isShowFooter: true
 };

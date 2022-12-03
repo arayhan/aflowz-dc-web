@@ -34,7 +34,7 @@ export const TableHeader = ({
 				{showButtonFilter && (
 					<Button
 						onClick={onClickFilter}
-						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						className="flex items-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<BiFilterAlt />
 						<span>Filter</span>
