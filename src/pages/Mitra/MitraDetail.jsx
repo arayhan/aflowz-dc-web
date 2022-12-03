@@ -2,13 +2,15 @@ import { ButtonAction, Card } from '@/components/atoms';
 import { BannerFeature, ChartPeriodeProgram, ChartPenerimaProgram, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
 const MitraDetail = () => {
 	const { programCategoryID } = useParams();
 	const { programCategoryDetail, fetchingProgramCategoryDetail, getProgramCategoryDetail } = useProgramStore();
+
+	const [tableProgramParams] = useState({ program_category_id: programCategoryID });
 
 	useEffect(() => {
 		if (programCategoryID) getProgramCategoryDetail(programCategoryID);
@@ -99,7 +101,7 @@ const MitraDetail = () => {
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isReadonly
-										params={{ program_category_id: Number(programCategoryID) }}
+										params={tableProgramParams}
 										enableClickRow
 									/>
 								</div>
