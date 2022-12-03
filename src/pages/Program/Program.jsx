@@ -1,5 +1,4 @@
 import { BannerFeature, TableProgram } from '@/components/molecules';
-import { queryStringToObject } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -7,7 +6,9 @@ const Program = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
-	useEffect(() => search && setParams(queryStringToObject(search)), [search]);
+	useEffect(() => {
+		if (search) setParams(queryStringToObject(search));
+	}, [search]);
 
 	return (
 		<div>
