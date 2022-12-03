@@ -49,6 +49,28 @@ export const TablePenerima = ({
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
+				Header: 'Institusi',
+				minWidth: 150,
+				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
+				Cell: (row) => {
+					const institusi = row.row.original.konstituen;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{!institusi?.id && '-'}
+							{institusi?.id && (
+								<ButtonAction
+									key={institusi.id}
+									className="bg-purple-500 hover:bg-purple-400"
+									action={ACTION_TYPES.SEE_DETAIL}
+									linkTo={`/institusi/${institusi.id}`}
+									text={institusi.name}
+								/>
+							)}
+						</div>
+					);
+				}
+			},
+			{
 				Header: 'Alamat',
 				accessor: 'address',
 				minWidth: 175,
