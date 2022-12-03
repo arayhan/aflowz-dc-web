@@ -46,10 +46,8 @@ export const addQueryParams = (url, params) => {
 
 export const removeQueryParams = (url, params) => {
 	const object = queryStringToObject(url);
-	console.log({ object });
 	if (params in object) delete object[params];
 	const result = objectToQueryString(object);
-	console.log({ result });
 	return result;
 };
 
