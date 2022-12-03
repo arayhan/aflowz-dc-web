@@ -1,39 +1,42 @@
-import { Button, ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, ChartPenerimaCity, ChartProgramByPeriode, TableProgram } from '@/components/molecules';
-import { useCityStore } from '@/store';
+import { ButtonAction, Card } from '@/components/atoms';
+import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
+import { useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
 const VillageDetail = () => {
-	const { cityID } = useParams();
-	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
+	const { villageID } = useParams();
+
+	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
+
+	const [tableParams] = useState({ village_id: villageID });
 
 	useEffect(() => {
-		if (cityID) getCityDetail(cityID);
-	}, [cityID]);
+		if (villageID) getVillageDetail(villageID);
+	}, [villageID]);
 
 	return (
 		<div>
 			<BannerFeature
-				backButtonLinkTo={'/city'}
-				backButtonText="Kembali ke List Kota"
-				title={cityDetail ? `${cityDetail.village_name}` : 'Kota'}
-				loading={fetchingCityDetail}
+				backButtonLinkTo={'/village'}
+				backButtonText="Kembali ke List Desa"
+				title={villageDetail ? `${villageDetail.village_name}` : 'Desa'}
+				loading={fetchingVillageDetail}
 			/>
 
 			<section className="bg-gray-100 py-12 md:py-20">
 				<div className="container">
-					{fetchingCityDetail && <CityDetailSkeleton />}
-					{!fetchingCityDetail && cityDetail && (
+					{fetchingVillageDetail && <VillageDetailSkeleton />}
+					{!fetchingVillageDetail && villageDetail && (
 						<div className="space-y-4">
 							<div className="flex flex-col sm:flex-row items-center justify-end gap-4">
 								<ButtonAction
 									action={ACTION_TYPES.UPDATE}
-									linkTo={`/city/update/${cityID}`}
+									linkTo={`/village/update/${villageID}`}
 									className={'w-full sm:w-auto text-base px-5 py-3 rounded-md'}
-									text={`Update ${cityDetail.village_name}`}
+									text={`Update ${villageDetail.village_name}`}
 								/>
 							</div>
 							<div className="col-span-12 bg-white rounded-md">
@@ -44,21 +47,37 @@ const VillageDetail = () => {
 								<hr />
 								<div className="p-5">
 									<div className="grid grid-cols-12 gap-y-1 text-sm">
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Kota</div>
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Desa</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{cityDetail?.village_name || '-'}
+											{villageDetail?.village_name || '-'}
+										</div>
+
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Kecamatan</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{villageDetail?.district?.name || '-'}
+										</div>
+
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Desa</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{!villageDetail?.village_pic && '-'}
+											{villageDetail?.village_pic && (
+												<div>
+													{villageDetail?.village_pic}{' '}
+													{villageDetail?.village_pic_mobile && `(${villageDetail?.village_pic_mobile})`}
+												</div>
+											)}
 										</div>
 
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{!cityDetail?.pic_staff.id && '-'}
-											{cityDetail?.pic_staff.id && (
+											{!villageDetail?.pic_staff.id && '-'}
+											{villageDetail?.pic_staff.id && (
 												<Link
-													to={`/staff/${cityDetail?.pic_staff.id}`}
+													to={`/staff/${villageDetail?.pic_staff.id}`}
 													className="text-primary underline hover:text-primary-400"
 												>
-													{cityDetail?.pic_staff.name}{' '}
-													{cityDetail?.pic_staff.mobile && `(${cityDetail?.pic_staff.mobile})`}
+													{villageDetail?.pic_staff.name}{' '}
+													{villageDetail?.pic_staff.mobile && `(${villageDetail?.pic_staff.mobile})`}
 												</Link>
 											)}
 										</div>
@@ -66,23 +85,42 @@ const VillageDetail = () => {
 								</div>
 							</div>
 							<div className="flex items-center justify-center gap-4">
-								<div className="bg-white rounded-md">
-									<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
-										<span className="text-2xl md:text-4xl font-extralight">
-											{cityDetail?.penerima_program_city?.length || 0}
-										</span>
-										<div className="font-light text-gray-400">Total Penerima</div>
-									</div>
-									<hr />
-									<div className="p-3">
-										<Button
-											className={'w-full px-5 py-2 rounded-sm text-sm'}
-											linkTo={`/penerima?city_id=${cityID}`}
-											variant={'info'}
-										>
-											Lihat Semua
-										</Button>
-									</div>
+								<CardDetailTotal
+									title={'Total Penerima'}
+									value={villageDetail?.penerima_program_village?.length || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+							</div>
+							<div className="grid grid-cols-12 gap-4">
+								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+									<Card
+										title={'Jumlah Program by Periode per Orang'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_orang} />
+									</Card>
+								</div>
+								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+									<Card
+										title={'Jumlah Program by Periode per Program'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_program} />
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<TablePenerima
+										title={`Penerima Program ${villageDetail.village_name}`}
+										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isShowFilter={false}
+										isReadonly
+										params={tableParams}
+										enableClickRow
+									/>
 								</div>
 							</div>
 						</div>
@@ -93,7 +131,7 @@ const VillageDetail = () => {
 	);
 };
 
-const CityDetailSkeleton = () => (
+const VillageDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
 			<div key={item} className="col-span-12 md:col-span-4 bg-white p-4 rounded-md">
