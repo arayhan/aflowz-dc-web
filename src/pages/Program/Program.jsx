@@ -1,21 +1,20 @@
-import { BannerFeature, SectionSelectProgramCategory, TableProgram } from '@/components/molecules';
-import { useState } from 'react';
+import { BannerFeature, TableProgram } from '@/components/molecules';
+import { queryStringToObject } from '@/utils/helpers';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Program = () => {
-	const [selectedCategory, setSelectedCategory] = useState(null);
+	const { search } = useLocation();
+	const [params, setParams] = useState({});
 
-	const handleSelectCategory = (category) => {
-		if (category.id === selectedCategory?.id) setSelectedCategory(null);
-		else setSelectedCategory(category);
-	};
+	useEffect(() => search && setParams(queryStringToObject(search)), [search]);
 
 	return (
 		<div>
 			<BannerFeature title="Program" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<SectionSelectProgramCategory selectedCategory={selectedCategory} onSelectCategory={handleSelectCategory} />
 				<div className="py-6 container">
-					<TableProgram selectedCategory={selectedCategory} />
+					<TableProgram params={params} />
 				</div>
 			</div>
 		</div>

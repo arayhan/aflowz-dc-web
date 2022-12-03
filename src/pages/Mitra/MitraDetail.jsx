@@ -79,7 +79,7 @@ const MitraDetail = () => {
 								<div className="bg-white rounded-md">
 									<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
 										<span className="text-2xl md:text-4xl font-extralight">
-											{programCategoryDetail?.total_penerima_program_mitra || 0}
+											{programCategoryDetail?.total_penerima_program || 0}
 										</span>
 										<div className="font-light text-gray-400">Total Penerima</div>
 									</div>

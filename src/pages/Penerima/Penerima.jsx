@@ -4,15 +4,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Penerima = () => {
-	const location = useLocation();
+	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
-	useEffect(() => {
-		if (location.search) {
-			const _params = queryStringToObject(location.search);
-			setParams(_params);
-		}
-	}, [location.search]);
+	useEffect(() => search && setParams(queryStringToObject(search)), [search]);
 
 	return (
 		<div>
