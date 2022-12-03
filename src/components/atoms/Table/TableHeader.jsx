@@ -9,9 +9,9 @@ export const TableHeader = ({
 	feature,
 	title,
 	description,
-	mainRoute,
 	isReadonly,
-	onClickFilter,
+	onClickButtonSeeAll,
+	onClickButtonFilter,
 	showButtonFilter,
 	showButtonCreate,
 	showButtonSeeAll,
@@ -33,20 +33,20 @@ export const TableHeader = ({
 			<div className="w-full xl:w-1/3 flex flex-col md:justify-end md:flex-row gap-3">
 				{showButtonFilter && (
 					<Button
-						onClick={onClickFilter}
-						className="flex items-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						onClick={onClickButtonFilter}
+						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<BiFilterAlt />
 						<span>Filter</span>
 					</Button>
 				)}
 				{showButtonSeeAll && (
-					<Link
-						to={`${mainRoute}`}
-						className="block bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+					<Button
+						onClick={onClickButtonSeeAll}
+						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<span>Lihat Semua</span>
-					</Link>
+					</Button>
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<button
@@ -75,5 +75,5 @@ export const TableHeader = ({
 TableHeader.defaultProps = {
 	showButtonCreate: true,
 	showButtonFilter: false,
-	onClickFilter: () => {}
+	onClickButtonFilter: () => {}
 };
