@@ -1,12 +1,5 @@
-import { Button, ButtonAction, Card } from '@/components/atoms';
-import {
-	BannerFeature,
-	CardDetailTotal,
-	ChartPenerimaCity,
-	ChartProgramByPeriode,
-	TablePenerima,
-	TableProgram
-} from '@/components/molecules';
+import { ButtonAction, Card } from '@/components/atoms';
+import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -18,7 +11,7 @@ const CityDetail = () => {
 
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
 
-	const [tableProgramParams] = useState({ city_id: cityID });
+	const [tableParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
 		if (cityID) getCityDetail(cityID);
@@ -91,27 +84,34 @@ const CityDetail = () => {
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
-									<TableProgram
-										title={`Program ${cityDetail.city_name}`}
-										displayedColumns={['#', 'Nama', 'PIC Internal']}
+								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+									<Card
+										title={'Jumlah Program by Periode per Orang'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_orang} />
+									</Card>
+								</div>
+								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+									<Card
+										title={'Jumlah Program by Periode per Program'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_program} />
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<TablePenerima
+										title={`Penerima Program ${cityDetail.city_name}`}
+										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
 										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
+										params={tableParams}
 										enableClickRow
-										params={tableProgramParams}
-									/>
-								</div>
-								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
-									<TablePenerima
-										title={`Penerima Program ${cityDetail.city_name}`}
-										displayedColumns={['#', 'Nama', 'PIC Internal']}
-										isShowButtonSeeAll
-										isShowFooter={false}
-										isReadonly
-										enableClickRow
-										cityID={cityID}
 									/>
 								</div>
 							</div>
