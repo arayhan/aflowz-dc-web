@@ -3,6 +3,7 @@ import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
 export const TablePenerima = ({
@@ -12,8 +13,11 @@ export const TablePenerima = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
-	isShowButtonFilter
+	isShowButtonFilter,
+	enableClickRow
 }) => {
+	const navigate = useNavigate();
+
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
 
@@ -123,6 +127,8 @@ export const TablePenerima = ({
 		[]
 	);
 
+	const handleClickRow = (rowData) => navigate(`/penerima/${rowData.id}`);
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -161,7 +167,12 @@ export const TablePenerima = ({
 				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingPenerimaList || penerimaList === null} />
+				<Table
+					columns={columns}
+					data={data}
+					loading={fetchingPenerimaList || penerimaList === null}
+					onClickRow={enableClickRow && handleClickRow}
+				/>
 			</div>
 			{isShowFooter && (
 				<div className="p-6">

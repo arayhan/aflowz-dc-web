@@ -15,6 +15,7 @@ export const TableProgram = ({
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
+
 	const { isSystem } = useAuthStore();
 	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
 
