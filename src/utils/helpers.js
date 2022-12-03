@@ -25,7 +25,9 @@ export const queryStringToObject = (queryString) => {
 		return parts;
 	});
 
-	return Object.fromEntries(array);
+	const isEmpty = array[0][0] === '';
+
+	return isEmpty ? '' : Object.fromEntries(array);
 };
 
 export const objectToQueryString = (obj, isEncodeURI = false) => {
@@ -44,8 +46,10 @@ export const addQueryParams = (url, params) => {
 
 export const removeQueryParams = (url, params) => {
 	const object = queryStringToObject(url);
+	console.log({ object });
 	if (params in object) delete object[params];
 	const result = objectToQueryString(object);
+	console.log({ result });
 	return result;
 };
 
