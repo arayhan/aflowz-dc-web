@@ -1,19 +1,16 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
-import { toast } from 'react-toastify';
-import { SERVICE_PARTNER } from '@/services';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableStaff = () => {
 	const { isSystem, isAdmin } = useAuthStore();
-	const { fetchingStaffList, staffList, getStaffList } = usePartnerStore();
+	const { fetchingStaffList, staffList, getStaffList, deletePartner } = usePartnerStore();
 
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
-	const [offset, setOffset] = useState(0);
 
 	const columns = useMemo(
 		() => [
@@ -69,7 +66,7 @@ export const TableStaff = () => {
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deletePartner(row.row.original.id)} />
 							</div>
 						)
 					);
@@ -85,7 +82,6 @@ export const TableStaff = () => {
 
 		if (page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
 			getStaffList(params);
 		}
 	}, [page, perPage, pageCount]);
@@ -96,31 +92,6 @@ export const TableStaff = () => {
 			setPageCount(Math.ceil(staffList.total / perPage));
 		}
 	}, [staffList, pageCount]);
-
-	const handleDelete = async (staffID) => {
-		const { success, payload } = await SERVICE_PARTNER.deletePartner(staffID);
-
-		if (success) {
-			toast.success('Berhasil Menghapus Tim Internal', {
-				position: 'top-right',
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'light'
-			});
-
-			const defaultParams = { limit: 10, offset: 0 };
-			const { success, payload } = await SERVICE_PARTNER.getStaffList(defaultParams);
-
-			if (success) {
-				getStaffList({ limit: 10, offset: 0 });
-				setData(payload.items);
-			}
-		}
-	};
 
 	return (
 		<div className="bg-white rounded-md shadow-md">

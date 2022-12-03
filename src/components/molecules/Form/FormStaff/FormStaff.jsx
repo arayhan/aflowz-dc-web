@@ -2,11 +2,12 @@ import { Button, InputLabel, InputText, InputError } from '@/components/atoms';
 import {
 	InputSelectProvince,
 	InputSelectCity,
-	InputSelectVillage,
+	InputSelectDistrict,
 	InputSelectGender,
 	InputSelectStaffTitle,
 	InputSelectReligion,
-	InputSelectDate
+	InputSelectDate,
+	InputSelectVillage
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,7 +20,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const FormStaff = () => {
 	const { staffID } = useParams();
 	const navigate = useNavigate();
+	const [getProvince, setGetProvince] = useState(0);
 	const [getCity, setGetCity] = useState(0);
+	const [getDistrict, setGetDistrict] = useState(0);
 	const [getVillage, setGetVillage] = useState(0);
 
 	const { staff, fetchingStaff, processingCreateStaff, getStaff, postStaffCreate, updateStaff } = usePartnerStore();
@@ -35,6 +38,7 @@ export const FormStaff = () => {
 			address: '',
 			province: undefined,
 			city: undefined,
+			district: undefined,
 			village: undefined,
 			mobile: '',
 			email: '',
@@ -61,6 +65,8 @@ export const FormStaff = () => {
 
 	useEffect(() => {
 		if (staffID && staff) {
+			setGetProvince(100);
+			setBirthDate(new Date(staff?.ttl.birth_date));
 			setValue('nik_number', staff.nik_number || '');
 			setValue('name', staff.name || '');
 			setValue('birth_place', staff?.ttl.birth_place || '');
@@ -69,15 +75,47 @@ export const FormStaff = () => {
 			setValue('address', staff.address || '');
 			setValue('province', staff.province?.id || null);
 			setValue('city', staff.city?.id || null);
+			setValue('district', staff.district?.id || null);
 			setValue('village', staff.village?.id || null);
 			setValue('mobile', staff.mobile || '');
 			setValue('email', staff.email || '');
 			setValue('religion', staff.religion || '');
 			setValue('staff_title', staff.staff_title?.name || '');
+			setPlaceholderCity(staff.city?.name);
+			setPlaceholderDistrict(staff.district?.name);
+			setPlaceholderVillage(staff.village?.name);
+		} else {
+			setPlaceholderCity('Select...');
+			setPlaceholderDistrict('Select...');
+			setPlaceholderVillage('Select...');
 		}
 	}, [staffID, staff]);
 
+	useEffect(() => {
+		setGetDistrict(0);
+		setGetVillage(0);
+		if (staffID) {
+			setPlaceholderCity('Select...');
+			setValue('city', null);
+			setPlaceholderDistrict('Select...');
+			setValue('district', null);
+			setPlaceholderVillage('Select...');
+			setValue('village', null);
+		}
+	}, [getCity]);
+
+	useEffect(() => {
+		setGetVillage(0);
+		if (staffID) {
+			setPlaceholderVillage('Select...');
+			setValue('village', null);
+		}
+	}, [getDistrict]);
+
 	const [birthDate, setBirthDate] = useState(null);
+	const [placeholderCity, setPlaceholderCity] = useState('');
+	const [placeholderDistrict, setPlaceholderDistrict] = useState('');
+	const [placeholderVillage, setPlaceholderVillage] = useState('');
 
 	return (
 		<div className="space-y-8">
@@ -137,7 +175,7 @@ export const FormStaff = () => {
 							<InputLabel text={'Tanggal Lahir'} />
 							<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
 								<InputSelectDate
-									selectedDate={staffID && staff ? new Date(staff?.ttl.birth_date) : birthDate}
+									selectedDate={birthDate}
 									onChange={(date) => {
 										field.birth_date = date;
 										setBirthDate(date);
@@ -193,7 +231,8 @@ export const FormStaff = () => {
 								setGetCity(value);
 							}}
 							error={error}
-							placeholder={staff ? staff.province?.name : 'Select...'}
+							countryID={getProvince}
+							placeholder={staff && staffID ? staff.province?.name : 'Select...'}
 						/>
 					)}
 				/>
@@ -209,11 +248,32 @@ export const FormStaff = () => {
 							onChange={({ value }) => {
 								setValue('city', value);
 								setError('city', null);
+								setGetDistrict(value);
+							}}
+							error={error}
+							provinceQuery={{ province_id: getCity, limit: 0, offset: 0 }}
+							placeholder={placeholderCity}
+							isForm
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'district'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectDistrict
+							{...field}
+							disabled={processingCreateStaff || fetchingStaff}
+							onChange={({ value }) => {
+								setValue('district', value);
+								setError('district', null);
 								setGetVillage(value);
 							}}
 							error={error}
-							provinceID={getCity}
-							placeholder={staff ? staff.city?.name : 'Select...'}
+							cityQuery={{ city_id: getDistrict, limit: 0, offset: 0 }}
+							placeholder={placeholderDistrict}
+							isForm
 						/>
 					)}
 				/>
@@ -230,8 +290,9 @@ export const FormStaff = () => {
 								setError('village', null);
 							}}
 							error={error}
-							cityID={getVillage}
-							placeholder={staff ? staff.village?.name : 'Select...'}
+							districtQuery={{ district_id: getVillage, limit: 0, offset: 0 }}
+							placeholder={placeholderVillage}
+							isForm
 						/>
 					)}
 				/>

@@ -85,9 +85,9 @@ export const formKonstituenSchema = yup.object().shape(
 export const formStaffSchema = yup.object().shape({
 	nik_number: yup
 		.string()
-		.matches(/^[0-9]*$/, 'NIK tidak valid')
-		.min(16, 'NIK tidak valid')
-		.max(16, 'NIK tidak valid')
+		.matches(/^[0-9]*$/, 'NIK tidak valid (Harus berupa angka)')
+		.min(16, 'NIK tidak valid (Harus 16 angka)')
+		.max(16, 'NIK tidak valid (Harus 16 angka)')
 		.required('NIK wajib diisi'),
 	name: yup.string().required('Nama wajib diisi'),
 	birth_place: yup.string().required('Belum memiliih kota kelahiran'),
@@ -95,12 +95,13 @@ export const formStaffSchema = yup.object().shape({
 	gender: yup.string().required('Belum memilih jenis kelamin'),
 	address: yup.string().required('Belum mengisi alamat domisili'),
 	province: yup.number().required('Belum memiliih provinsi'),
-	city: yup.number().required('Belum memiliih kota domisili'),
-	village: yup.number().required('Belum memiliih kecamatan'),
+	city: yup.number().nullable().required('Belum memiliih kota/kabupate domisili'),
+	district: yup.number().nullable().required('Belum memiliih kecamatan domisili'),
+	village: yup.number().nullable().required('Belum memiliih kelurahan/desa domisili'),
 	mobile: yup
 		.string()
 		.required('Nomor wajib diisi')
-		.matches(/^[0-9]*$/, 'Nomor tidak valid')
+		.matches(/^[0-9]*$/, 'Nomor tidak valid (Harus berupa angka)')
 		.min(8, 'Minimal 8 angka'),
 	email: yup.string().email().required('Belum mengisi email'),
 	religion: yup.string().required('Belum memilih agama'),

@@ -30,6 +30,8 @@ export * from './Table/TableKonstituen/TableKonstituen';
 export * from './Table/TableVillage/TableVillage';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
@@ -42,6 +44,7 @@ export * from './InputSelect/InputSelectProvince/InputSelectProvince';
 export * from './InputSelect/InputSelectVillage/InputSelectVillage';
 export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
+export * from './InputSelect/InputSelectDistrict/InputSelectDistrict';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 

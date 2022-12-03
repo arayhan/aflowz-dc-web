@@ -7,22 +7,19 @@ import { toast } from 'react-toastify';
 
 const { setPageLoading } = useAppStore.getState();
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingKonstituenList: false,
 	fetchingKonstituenDetail: false,
-	fetchingPenerimaKonstituenDetail: false,
 	fetchingKonstituen: false,
+
 	processingCreateKonstituen: false,
 	processingEditKonstituen: false,
+	processingDeleteKonstituen: false,
 
 	konstituenList: null,
 	konstituenDetail: null,
 	penerimaKonstituenDetail: null,
 	konstituen: null,
-
-	successKonstituenCreate: null,
-	successKonstituenDelete: null,
-	successKonstituenUpdate: null,
 
 	getKonstituenList: async (params) => {
 		set({ fetchingKonstituenList: true });
@@ -43,17 +40,6 @@ const states = (set) => ({
 		set({ konstituenDetail: success ? payload : null });
 		set({ fetchingKonstituenDetail: false });
 	},
-	getPenerimaKonstituenDetail: async (params) => {
-		set({ fetchingPenerimaKonstituenDetail: true });
-
-		const defaultParams = { limit: 10, offset: 0 };
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_KONSTITUEN.getPenerimaKonstituenDetail(requestParams);
-
-		set({ penerimaKonstituenDetail: success ? payload : null });
-		set({ fetchingPenerimaKonstituenDetail: false });
-	},
 	postKonstituenCreate: async (params, callback) => {
 		setPageLoading(true);
 		set({ processingCreateKonstituen: true });
@@ -67,10 +53,17 @@ const states = (set) => ({
 
 		callback({ payload, success });
 	},
-	deleteKonstituen: async (params) => {
-		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(params);
+	deleteKonstituen: async (konstituenID) => {
+		setPageLoading(true);
+		set({ processingDeleteKonstituen: true });
 
-		set({ successKonstituenDelete: success ? payload : null });
+		const loader = toast.loading('Processing...');
+		const { success, payload } = await SERVICE_KONSTITUEN.deleteKonstituen(konstituenID);
+
+		toastRequestResult(loader, success, 'Institusi deleted', payload?.odoo_error || payload?.message);
+		get().getKonstituenList();
+		set({ processingDeleteKonstituen: false });
+		setPageLoading(false);
 	},
 	updateKonstituen: async (konstituenID, params, callback) => {
 		setPageLoading(true);

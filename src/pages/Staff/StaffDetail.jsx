@@ -1,12 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
-import { BannerFeature } from '@/components/molecules';
-import { useEffect, useMemo } from 'react';
+import { BannerFeature, TableStaffDetailInstitusi, TableStaffDetailProgram } from '@/components/molecules';
+import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import man from '../../images/icons/man.jpg';
 import woman from '../../images/icons/woman.jpg';
-import { Button, ButtonAction, Table, TableHeader } from '@/components/atoms';
-import { ACTION_TYPES } from '@/utils/constants';
+import { InputTextInfo } from '@/components/atoms';
 
 const StaffDetail = () => {
 	const { isSystem } = useAuthStore();
@@ -16,58 +15,6 @@ const StaffDetail = () => {
 	useEffect(() => {
 		getStaff(params.staffID);
 	}, [params]);
-
-	const columns = useMemo(
-		() => [
-			{
-				Header: '#',
-				accessor: '',
-				disableSortBy: true,
-				disableFilters: true,
-				maxWidth: 20,
-				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
-				}
-			},
-			{
-				Header: 'Nama Program',
-				minWidth: 300,
-				Cell: (row) => {
-					return <div>{row.row.original.name}</div>;
-				}
-			},
-			{
-				Header: 'Mitra',
-				minWidth: 300,
-				Cell: (row) => {
-					return <div>{row.row.original.program_category.name}</div>;
-				}
-			},
-			{
-				Header: 'Periode',
-				minWidth: 20,
-				Cell: (row) => {
-					return <div>{row.row.original.periode}</div>;
-				}
-			},
-			{
-				Header: 'Detail Program',
-				minWidth: 150,
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="bg-purple-500 hover:bg-purple-400 px-9"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/program/${row.row.original.id}`}
-						/>
-					);
-				}
-			}
-		],
-		[]
-	);
-
-	console.log(staff);
 
 	return (
 		<div>
@@ -92,74 +39,30 @@ const StaffDetail = () => {
 										</div>
 										<div className="overflow-x-auto">
 											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													NIK
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.nik_number || 'Belum Tercantum'}
-												</div>
-
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Nama Tim Internal
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.name || 'Belum Tercantum'}
-												</div>
-
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Alamat Domisili
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.address || 'Belum Mencantumkan'}
-												</div>
-
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													No. HP/Telp
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.mobile || 'Belum Mencantumkan'}
-												</div>
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Email
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.email || 'Belum Mencantumkan'}
-												</div>
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													Role
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.staff_title.name || 'Belum Mencantumkan'}
-												</div>
-												<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2 transform: capitalize">
-													PIC untuk institusi
-												</div>
-												<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-													{staff?.konstituen.id && (
-														<ButtonAction
-															key={staff?.konstituen.id}
-															className="bg-purple-500 hover:bg-purple-400"
-															action={ACTION_TYPES.SEE_DETAIL}
-															linkTo={`/institusi/${staff?.konstituen.id}`}
-															text={staff?.konstituen.name}
-														/>
-													)}
-												</div>
+												<InputTextInfo tag={'NIK'} value={staff?.nik_number || 'Belum Tercantum'} />
+												<InputTextInfo tag={'Nama Tim Internal'} value={staff?.name || 'Belum Tercantum'} />
+												<InputTextInfo tag={'Alamat Domisili'} value={staff?.address || 'Belum Mencantumkan'} />
+												<InputTextInfo tag={'No. HP/Telp'} value={staff?.mobile || 'Belum Mencantumkan'} />
+												<InputTextInfo tag={'Email'} value={staff?.email || 'Belum Mencantumkan'} />
+												<InputTextInfo tag={'Role'} value={staff?.staff_title.name || 'Belum Mencantumkan'} />
 											</div>
 										</div>
-										<div className="my-5">
-											<div className="p-6">
-												<TableHeader
-													title={'Daftar Program'}
-													description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-													isReadonly={!isSystem}
-													showButtonCreate={false}
-												/>
-											</div>
-											<div className="overflow-x-auto">
-												<Table columns={columns} data={staff?.programs} loading={null} />
-											</div>
-										</div>
+									</div>
+								</div>
+								<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto">
+										<TableStaffDetailProgram
+											fetchData={staff?.programs}
+											isReadonly={!isSystem}
+											titleHeader={'List Program'}
+										/>
+									</div>
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<TableStaffDetailInstitusi
+											fetchData={staff?.konstituens_pic}
+											isReadonly={!isSystem}
+											titleHeader={'List Institusi'}
+										/>
 									</div>
 								</div>
 							</div>

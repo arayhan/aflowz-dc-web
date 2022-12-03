@@ -49,7 +49,11 @@ export const createProgram = async (params) => {
 
 export const updateProgram = async (programID, params) => {
 	const request = {
+		name: params?.name || '',
+		periode: params?.periode.toString() || '',
 		program_category_id: params?.program_category_id || 0,
+		pic: params?.pic || '',
+		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0
 	};
 

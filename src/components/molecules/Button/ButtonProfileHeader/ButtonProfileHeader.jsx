@@ -29,7 +29,7 @@ export const ButtonProfileHeader = () => {
 					src="https://static.wixstatic.com/media/0e8679_e83474054db34680800cb2c1bd81fb72~mv2.png/v1/fill/w_544,h_577,al_c,lg_1,q_85,enc_auto/avatars%20-%20Amanda.png"
 					alt=""
 				/>
-				<div className="text-white text-sm md:text-base">
+				<div className="text-primary-600 text-sm md:text-base">
 					<span>Welcome, </span> <span className="font-extralight">{profile.username}</span>
 				</div>
 			</button>

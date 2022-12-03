@@ -16,13 +16,19 @@ export const TableDetailPenerimaProgram = ({ dataPenerimaPerArea, isPerVillage, 
 				}
 			},
 			{
-				Header: `${isPerCity ? 'Kota' : isPerVillage ? 'Desa / Kelurahan' : ''}`,
+				Header: `${isPerCity ? 'Kota' : isPerVillage ? 'Desa/Kelurahan' : ''}`,
 				accessor: isPerCity ? 'city_name' : isPerVillage ? 'village_name' : '',
 				minWidth: 150
 			},
 			{
+				Header: `${isPerCity ? 'PIC Kota' : isPerVillage ? 'PIC Desa/Kelurahan' : ''}`,
+				accessor: isPerCity ? 'pic' : isPerVillage ? 'pic' : '',
+				minWidth: 150
+			},
+			{
 				Header: 'Total Penerima',
-				accessor: 'total_penerima'
+				accessor: 'total_penerima',
+				maxWidth: 100
 			},
 			{
 				Header: 'Action',

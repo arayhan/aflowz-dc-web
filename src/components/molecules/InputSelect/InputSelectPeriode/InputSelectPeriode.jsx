@@ -6,17 +6,21 @@ export const InputSelectPeriode = forwardRef(({ error, value, disabled, onChange
 
 	useEffect(() => {
 		const date = new Date();
-		const limitPeriode = 15;
+		const limitBawahPeriode = 15;
+		const limitAtasPeriode = 10;
 		const periode = [];
 
 		let year = date.getFullYear();
-		let limitYear = year - limitPeriode;
+		let limitBawahYear = year - limitBawahPeriode;
+		let limitAtasYear = year + limitAtasPeriode;
 
-		while (year >= limitYear) {
-			periode.push({ label: year, value: year });
-			year = year - 1;
+		for (let i = year; i < limitAtasYear; limitAtasYear--) {
+			periode.push({ label: limitAtasYear, value: limitAtasYear });
 		}
 
+		for (let i = limitBawahYear; i <= year; year--) {
+			periode.push({ label: year, value: year });
+		}
 		setOptions(periode);
 	}, []);
 

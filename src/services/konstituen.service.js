@@ -24,20 +24,6 @@ export const getKonstituenDetail = async (konstituenID) => {
 	}
 };
 
-export const getPenerimaKonstituenDetail = async (params) => {
-	try {
-		const defaultParams = { is_staff: false };
-		const requestParams = params ? { ...params, ...defaultParams } : defaultParams;
-		const queryParams = objectToQueryString(requestParams);
-
-		const response = await http.get('/partner' + queryParams);
-
-		return { success: response.data.success, payload: response.data.data };
-	} catch (error) {
-		return { success: false, payload: error };
-	}
-};
-
 export const postKonstituenCreate = async (params) => {
 	const request = {
 		name: params?.name || '',
