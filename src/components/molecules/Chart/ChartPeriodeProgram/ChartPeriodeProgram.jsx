@@ -6,19 +6,20 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const ChartPenerimaMitra = ({ total, penerima }) => {
+export const ChartPeriodeProgram = ({ data }) => {
+	const total = data.length;
 	return (
 		<>
 			{total === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{total > 0 && (
 				<Bar
 					data={{
-						labels: penerima.map((item) => item.program_name),
+						labels: data.map((item) => item.periode),
 						datasets: [
 							{
-								label: penerima.map((item) => item.program_name),
-								data: penerima.map((item) => item.total_penerima_program),
-								backgroundColor: penerima.map(getRandomColor),
+								label: 'Total Program',
+								data: data.map((item) => item.total_program),
+								backgroundColor: getRandomColor(),
 								borderWidth: 1
 							}
 						]
@@ -28,14 +29,14 @@ export const ChartPenerimaMitra = ({ total, penerima }) => {
 							x: {
 								title: {
 									display: true,
-									text: 'Nama Program',
+									text: 'Periode',
 									color: '#aaa'
 								}
 							},
 							y: {
 								title: {
 									display: true,
-									text: 'Jumlah Penerima',
+									text: 'Jumlah Program',
 									color: '#aaa'
 								},
 								ticks: {
@@ -48,4 +49,8 @@ export const ChartPenerimaMitra = ({ total, penerima }) => {
 			)}
 		</>
 	);
+};
+
+ChartPeriodeProgram.defaultProps = {
+	data: []
 };

@@ -1,11 +1,5 @@
-import { Button, ButtonAction, Card } from '@/components/atoms';
-import {
-	BannerFeature,
-	ChartPenerimaMitra,
-	ChartProgramByPeriode,
-	TablePenerima,
-	TableProgram
-} from '@/components/molecules';
+import { ButtonAction, Card } from '@/components/atoms';
+import { BannerFeature, ChartPeriodeProgram, ChartPenerimaProgram, TableProgram } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect } from 'react';
@@ -34,18 +28,22 @@ const MitraDetail = () => {
 					{fetchingProgramCategoryDetail && <MitraDetailSkeleton />}
 					{!fetchingProgramCategoryDetail && programCategoryDetail && (
 						<div className="space-y-4">
-							<div className="flex flex-col sm:flex-row items-center justify-end gap-4">
-								<ButtonAction
-									action={ACTION_TYPES.UPDATE}
-									linkTo={`/mitra/update/${programCategoryID}`}
-									className={'w-full sm:w-auto text-base px-5 py-3 rounded-md'}
-									text={`Update ${programCategoryDetail.mitra_name}`}
-								/>
-							</div>
 							<div className="col-span-12 bg-white rounded-md">
-								<div className="p-4 space-y-2">
-									<div className="font-light text-xl">Details</div>
-									<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+								<div className="p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+									<div className="w-full space-y-2">
+										<div className="font-light text-xl">Details</div>
+										<div className="text-sm text-gray-400">
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										</div>
+									</div>
+									<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+										<ButtonAction
+											action={ACTION_TYPES.UPDATE}
+											linkTo={`/mitra/update/${programCategoryID}`}
+											className={'w-full md:w-auto text-base px-5 py-3 rounded-md'}
+											text="Update"
+										/>
+									</div>
 								</div>
 								<hr />
 								<div className="p-5">
@@ -75,65 +73,28 @@ const MitraDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center justify-center gap-4">
-								<div className="bg-white rounded-md">
-									<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
-										<span className="text-2xl md:text-4xl font-extralight">
-											{programCategoryDetail?.total_penerima_program || 0}
-										</span>
-										<div className="font-light text-gray-400">Total Penerima</div>
-									</div>
-									<hr />
-									<div className="p-3">
-										<Button
-											className={'w-full px-5 py-2 rounded-sm text-sm'}
-											linkTo={`/penerima?program_category_id=${programCategoryID}`}
-											variant={'info'}
-										>
-											Lihat Semua
-										</Button>
-									</div>
-								</div>
-							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
 									<Card
-										title={'Penerima Mitra'}
+										title={'Jumlah Penerima Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPenerimaMitra
-											total={programCategoryDetail?.total_penerima_program_mitra}
-											penerima={programCategoryDetail?.penerima_program}
-										/>
+										<ChartPenerimaProgram data={programCategoryDetail?.penerima_program} />
 									</Card>
 								</div>
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
 									<Card
-										title={'Jumlah Program by Periode'}
+										title={'Jumlah Periode Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartProgramByPeriode
-											total={programCategoryDetail?.total_program_by_periode.length}
-											penerima={programCategoryDetail?.total_program_by_periode}
-										/>
+										<ChartPeriodeProgram data={programCategoryDetail?.total_program_by_periode} />
 									</Card>
 								</div>
-								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
-									<TablePenerima
-										title={`Penerima Program ${programCategoryDetail.mitra_name}`}
-										displayedColumns={['#', 'Nama Penerima', 'Program']}
-										isShowButtonSeeAll
-										isShowFooter={false}
-										isReadonly
-										params={{ program_category_id: Number(programCategoryID) }}
-										enableClickRow
-									/>
-								</div>
-								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md">
 									<TableProgram
-										title={`Program ${programCategoryDetail.mitra_name}`}
+										title={programCategoryDetail.mitra_name}
 										displayedColumns={['#', 'Nama', 'PIC Internal']}
 										isShowButtonSeeAll
 										isShowFooter={false}

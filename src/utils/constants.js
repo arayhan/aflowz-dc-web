@@ -28,7 +28,7 @@ export const NEGATIVE_CASE_TYPES = {
 	ERROR_CONNECTION: 'ERROR_CONNECTION'
 };
 
-export const PER_PAGE_OPTIONS = [10, 20, 50, 100];
+export const PER_PAGE_OPTIONS = [5, 10, 20, 50, 100];
 
 export const MENUS = [
 	{ title: 'Mitra', icon: require('@/images/icons/Icon_Home/Mitra.svg').default, path: '/mitra' },

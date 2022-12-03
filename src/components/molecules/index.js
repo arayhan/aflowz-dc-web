@@ -9,10 +9,9 @@ export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
 export * from './Card/CardDetailTotal/CardDetailTotal';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
-export * from './Chart/ChartPenerimaMitra/ChartPenerimaMitra';
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
 export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender';
-export * from './Chart/ChartProgramByPeriode/ChartProgramByPeriode';
+export * from './Chart/ChartPeriodeProgram/ChartPeriodeProgram';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 

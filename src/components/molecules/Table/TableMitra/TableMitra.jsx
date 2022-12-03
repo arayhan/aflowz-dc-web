@@ -4,7 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const TableMitra = ({ enableClickRow }) => {
+export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { programCategoryList, fetchingProgramCategoryList } = useProgramStore();
@@ -73,16 +73,16 @@ export const TableMitra = ({ enableClickRow }) => {
 		[offset, perPage, page, isSystem]
 	);
 
-	const offsetResult = (page - 1) * perPage;
-	const params = { limit: perPage, offset: offsetResult };
-
 	const handleClickRow = (rowData) => navigate(`/mitra/${rowData.id}`);
 
 	useEffect(() => {
+		const offsetResult = (page - 1) * perPage;
+		const defaultParams = { limit: perPage, offset: offsetResult };
+
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getProgramCategoryList(params);
+			getProgramCategoryList({ ...defaultParams, ...params });
 		}
 	}, [page, perPage, pageCount]);
 
@@ -91,7 +91,7 @@ export const TableMitra = ({ enableClickRow }) => {
 			setData(programCategoryList.items);
 			setPageCount(Math.ceil(programCategoryList.total / perPage));
 		}
-	}, [programCategoryList]);
+	}, [programCategoryList, pageCount]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -111,9 +111,16 @@ export const TableMitra = ({ enableClickRow }) => {
 					loading={fetchingProgramCategoryList || programCategoryList === null}
 				/>
 			</div>
-			<div className="p-6">
-				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
-			</div>
+			{isShowFooter && (
+				<div className="p-6">
+					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+				</div>
+			)}
 		</div>
 	);
+};
+
+TableMitra.defaultProps = {
+	params: {},
+	isShowFooter: true
 };
