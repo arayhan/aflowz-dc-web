@@ -49,6 +49,12 @@ export const TablePenerima = ({
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
+				Header: 'Alamat',
+				accessor: 'address',
+				minWidth: 175,
+				hidden: displayedColumns ? !displayedColumns.includes('Alamat') : true
+			},
+			{
 				Header: 'Program',
 				minWidth: 150,
 				hidden: displayedColumns && !displayedColumns.includes('Program'),
