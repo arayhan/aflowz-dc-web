@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 export const Button = ({ className, disabled, linkTo, onClick, variant, children, text }) => {
+	const navigate = useNavigate();
+
 	const variantClasses = classNames({
 		'bg-primary-500 hover:bg-primary-400 disabled:bg-primary-300 text-white': variant === 'primary',
 		'bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 text-white': variant === 'info',
@@ -10,11 +12,15 @@ export const Button = ({ className, disabled, linkTo, onClick, variant, children
 		'bg-red-500 hover:bg-red-400 disabled:bg-red-300 text-white': variant === 'danger'
 	});
 
-	const navigate = useNavigate();
+	const handleClick = (event) => {
+		event.stopPropagation();
+		return linkTo ? navigate(linkTo) : onClick();
+	};
+
 	return (
 		<button
 			className={`inline-block text-center transition-all ${className} ${variantClasses}`}
-			onClick={() => (linkTo ? navigate(linkTo) : onClick())}
+			onClick={handleClick}
 			disabled={disabled}
 		>
 			{children || text}
