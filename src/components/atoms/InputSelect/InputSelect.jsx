@@ -23,11 +23,14 @@ export const InputSelect = forwardRef(
 					input: (provided) => ({
 						...provided,
 						'input:focus': {
-							boxShadow: 'none'
+							boxShadow: 'none',
+							zIndex: 20
 						}
 					}),
-					menu: (styles) => ({ ...styles, zIndex: 20, position: 'relative' })
+					menu: (styles) => ({ ...styles, zIndex: 30 }),
+					menuPortal: (styles) => ({ ...styles, zIndex: 30 })
 				}}
+				menuPortalTarget={document.body}
 				options={options}
 			/>
 		);
