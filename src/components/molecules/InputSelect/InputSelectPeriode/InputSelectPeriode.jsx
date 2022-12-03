@@ -22,7 +22,7 @@ export const InputSelectPeriode = forwardRef(
 			for (let i = limitBawahYear; i <= year; year--) {
 				periode.push({ label: year.toString(), value: year });
 			}
-			console.log({ periode });
+
 			setOptions(periode);
 		}, []);
 

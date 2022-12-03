@@ -7,8 +7,6 @@ const VillageForm = () => {
 	const { villageID } = useParams();
 	const { errorsVillage } = useVillageStore();
 
-	console.log({ errorsVillage });
-
 	return (
 		<div>
 			<BannerFeature

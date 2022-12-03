@@ -6,8 +6,6 @@ const CityForm = () => {
 	const { cityID } = useParams();
 	const { errorsCity } = useCityStore();
 
-	console.log({ errorsCity });
-
 	return (
 		<div>
 			<BannerFeature

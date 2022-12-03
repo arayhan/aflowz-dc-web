@@ -131,8 +131,6 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		console.log({ offsetResult });
-
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
