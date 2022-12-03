@@ -4,6 +4,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { InputSelectPeriode } from '../../InputSelect/InputSelectPeriode/InputSelectPeriode';
 import { InputSelectProgramCategory } from '../../InputSelect/InputSelectProgramCategory/InputSelectProgramCategory';
 
 export const TableProgram = ({
@@ -149,7 +150,7 @@ export const TableProgram = ({
 			<hr />
 
 			<div className="px-6 py-3">
-				<div className="w-full flex justify-end text-sm">
+				<div className="w-full flex justify-end text-sm gap-4">
 					<InputSelectProgramCategory
 						containerClassName="w-60"
 						value={params.program_category_id ? Number(params.program_category_id) : undefined}
@@ -157,6 +158,12 @@ export const TableProgram = ({
 						onChange={(option) =>
 							handleSetFilter('program_category_id', option ? { program_category_id: option.value } : null)
 						}
+					/>
+					<InputSelectPeriode
+						containerClassName="w-60"
+						value={params.periode ? Number(params.periode) : undefined}
+						showLabel={false}
+						onChange={(option) => handleSetFilter('periode', option ? { periode: option.value } : null)}
 					/>
 				</div>
 			</div>
