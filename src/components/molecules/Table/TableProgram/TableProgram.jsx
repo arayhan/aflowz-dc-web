@@ -109,8 +109,8 @@ export const TableProgram = ({
 	const handleClickRow = (rowData) => navigate(`/program/${rowData.id}`);
 
 	const handleSetFilter = (key, params) => {
-		const _params = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		navigate('/program' + _params);
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		navigate('/program' + updatedParams);
 	};
 
 	useEffect(() => {
