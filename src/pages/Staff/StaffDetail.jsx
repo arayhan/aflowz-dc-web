@@ -35,7 +35,7 @@ const StaffDetail = () => {
 									<hr />
 									<div className="p-5 rounded-md my-2 flex-col">
 										<div className="w-full flex justify-center mb-5">
-											<img src={staff?.gender === 'Wanita' ? woman : man} className="w-52" />
+											<img src={staff?.image_url} className="w-52" />
 										</div>
 										<div className="overflow-x-auto">
 											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
