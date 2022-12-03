@@ -2,6 +2,7 @@ import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atom
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState, useMemo } from 'react';
+import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
 export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }) => {
 	const { isSystem } = useAuthStore();
@@ -12,6 +13,11 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+	const [showModalFilterPenerima, setShowModalFilterPenerima] = useState(false);
+
+	const handleSubmitFilter = (values) => {
+		console.log({ values });
+	};
 
 	const columns = useMemo(
 		() => [
@@ -126,6 +132,9 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
+			{showModalFilterPenerima && (
+				<ModalFilterPenerima onClose={() => setShowModalFilterPenerima(false)} onSubmit={handleSubmitFilter} />
+			)}
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
@@ -134,7 +143,8 @@ export const TablePenerima = ({ programID, programName, isInDetail, isReadonly }
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
-					showButtonSeeAll
+					showButtonFilter
+					onClickFilter={() => setShowModalFilterPenerima(true)}
 					mainRoute={`/program/penerima/${programID}`}
 				/>
 			</div>
