@@ -45,10 +45,10 @@ export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
 export * from './InputSelect/InputSelectDistrict/InputSelectDistrict';
 export * from './InputSelect/InputSelectProgram/InputSelectProgram';
+export * from './InputSelect/InputSelectProgramCategory/InputSelectProgramCategory';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
-export * from './Modal/ModalFilterProgram/ModalFilterProgram';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';

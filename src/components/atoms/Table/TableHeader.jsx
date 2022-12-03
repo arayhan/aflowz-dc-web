@@ -11,8 +11,6 @@ export const TableHeader = ({
 	description,
 	isReadonly,
 	seeAllLink,
-	onClickButtonFilter,
-	showButtonFilter,
 	showButtonCreate,
 	showButtonSeeAll,
 	showButtonUploadSheetPenerima
@@ -31,15 +29,6 @@ export const TableHeader = ({
 				<div className="text-sm text-gray-400">{description}</div>
 			</div>
 			<div className="w-full xl:w-1/2 flex flex-col md:justify-end md:flex-row gap-3">
-				{showButtonFilter && (
-					<Button
-						onClick={onClickButtonFilter}
-						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
-					>
-						<BiFilterAlt />
-						<span>Filter</span>
-					</Button>
-				)}
 				{showButtonSeeAll && seeAllLink && (
 					<Link
 						to={seeAllLink}

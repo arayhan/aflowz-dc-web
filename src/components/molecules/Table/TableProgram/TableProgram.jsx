@@ -1,10 +1,10 @@
 import { Table, ButtonAction, TableHeader, TableFooter, Button } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { objectToQueryString } from '@/utils/helpers';
+import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ModalFilterProgam } from '../../Modal/ModalFilterProgram/ModalFilterProgram';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { InputSelectProgramCategory } from '../../InputSelect/InputSelectProgramCategory/InputSelectProgramCategory';
 
 export const TableProgram = ({
 	title,
@@ -15,6 +15,7 @@ export const TableProgram = ({
 	isShowButtonSeeAll,
 	enableClickRow
 }) => {
+	const location = useLocation();
 	const navigate = useNavigate();
 
 	const { isSystem } = useAuthStore();
@@ -25,7 +26,6 @@ export const TableProgram = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
-	const [showModalFilter, setShowModalFilter] = useState(false);
 
 	const columns = useMemo(
 		() => [
@@ -108,6 +108,11 @@ export const TableProgram = ({
 
 	const handleClickRow = (rowData) => navigate(`/program/${rowData.id}`);
 
+	const handleSetFilter = (key, params) => {
+		const _params = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		navigate('/program' + _params);
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -117,7 +122,7 @@ export const TableProgram = ({
 			setOffset(offsetResult);
 			getProgramList({ ...defaultParams, ...params });
 		}
-	}, [page, perPage, pageCount]);
+	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (programList) {
@@ -128,7 +133,6 @@ export const TableProgram = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			{showModalFilter && <ModalFilterProgam onClose={() => setShowModalFilter(false)} />}
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
@@ -137,11 +141,24 @@ export const TableProgram = ({
 					mainRoute={'/program'}
 					isReadonly={!isSystem || isReadonly}
 					seeAllLink={'/program' + objectToQueryString(params)}
-					onClickButtonFilter={() => setShowModalFilter(true)}
-					showButtonFilter
 					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadSheetPenerima
 				/>
+			</div>
+
+			<hr />
+
+			<div className="px-6 py-3">
+				<div className="w-full flex justify-end text-sm">
+					<InputSelectProgramCategory
+						containerClassName="w-60"
+						value={params.program_category_id ? Number(params.program_category_id) : undefined}
+						showLabel={false}
+						onChange={(option) =>
+							handleSetFilter('program_category_id', option ? { program_category_id: option.value } : null)
+						}
+					/>
+				</div>
 			</div>
 
 			<div className="overflow-x-scroll">
