@@ -9,13 +9,16 @@ import {
 } from '@/components/molecules';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
 const CityDetail = () => {
 	const { cityID } = useParams();
+
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
+
+	const [tableProgramParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
 		if (cityID) getCityDetail(cityID);
@@ -94,9 +97,10 @@ const CityDetail = () => {
 										displayedColumns={['#', 'Nama', 'PIC Internal']}
 										isShowButtonSeeAll
 										isShowFooter={false}
+										isShowFilter={false}
 										isReadonly
 										enableClickRow
-										cityID={cityID}
+										params={tableProgramParams}
 									/>
 								</div>
 								<div className="col-span-12 lg:col-span-6 bg-white rounded-md">

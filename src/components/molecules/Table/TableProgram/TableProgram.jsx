@@ -13,6 +13,7 @@ export const TableProgram = ({
 	params,
 	isReadonly,
 	isShowFooter,
+	isShowFilter,
 	isShowButtonSeeAll,
 	enableClickRow
 }) => {
@@ -147,26 +148,30 @@ export const TableProgram = ({
 				/>
 			</div>
 
-			<hr />
+			{isShowFilter && (
+				<>
+					<hr />
 
-			<div className="px-6 py-3">
-				<div className="w-full flex justify-end text-sm gap-4">
-					<InputSelectProgramCategory
-						containerClassName="w-60"
-						value={params.program_category_id ? Number(params.program_category_id) : undefined}
-						showLabel={false}
-						onChange={(option) =>
-							handleSetFilter('program_category_id', option ? { program_category_id: option.value } : null)
-						}
-					/>
-					<InputSelectPeriode
-						containerClassName="w-60"
-						value={params.periode ? Number(params.periode) : undefined}
-						showLabel={false}
-						onChange={(option) => handleSetFilter('periode', option ? { periode: option.value } : null)}
-					/>
-				</div>
-			</div>
+					<div className="px-6 py-3">
+						<div className="w-full flex justify-end text-sm gap-4">
+							<InputSelectProgramCategory
+								containerClassName="w-60"
+								value={params.program_category_id ? Number(params.program_category_id) : undefined}
+								showLabel={false}
+								onChange={(option) =>
+									handleSetFilter('program_category_id', option ? { program_category_id: option.value } : null)
+								}
+							/>
+							<InputSelectPeriode
+								containerClassName="w-60"
+								value={params.periode ? Number(params.periode) : undefined}
+								showLabel={false}
+								onChange={(option) => handleSetFilter('periode', option ? { periode: option.value } : null)}
+							/>
+						</div>
+					</div>
+				</>
+			)}
 
 			<div className="overflow-x-scroll">
 				<Table
@@ -188,5 +193,6 @@ export const TableProgram = ({
 
 TableProgram.defaultProps = {
 	params: {},
+	isShowFilter: true,
 	isShowFooter: true
 };
