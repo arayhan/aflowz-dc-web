@@ -37,6 +37,11 @@ export const objectToQueryString = (obj, isEncodeURI = false) => {
 	}, '');
 };
 
+export const addQueryParams = (url, params) => {
+	const queryObject = queryStringToObject(url);
+	return objectToQueryString(url ? { ...queryObject, ...params } : params);
+};
+
 export const removeQueryParams = (url, params) => {
 	const object = queryStringToObject(url);
 	if (params in object) delete object[params];
