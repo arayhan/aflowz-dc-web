@@ -53,7 +53,7 @@ export const formCitySchema = yup.object().shape(
 export const formVillageSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama program wajib diisi'),
-		district: yup.string().required('District wajib diisi'),
+		district_id: yup.string().required('District wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
 		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
 		pic_mobile: yup

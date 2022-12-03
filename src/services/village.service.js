@@ -32,7 +32,7 @@ export const getVillageDetail = async (villageID) => {
 export const createVillage = async (params) => {
 	const request = {
 		name: params?.name || '',
-		district: params?.district || '',
+		district_id: params?.district_id || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0
@@ -49,7 +49,7 @@ export const createVillage = async (params) => {
 export const updateVillage = async (villageID, params) => {
 	const request = {
 		name: params?.name || '',
-		district: params?.district || '',
+		district_id: params?.district_id || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0

@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
+import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
 import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
 
 export const FormVillage = () => {
@@ -18,7 +19,7 @@ export const FormVillage = () => {
 		resolver: yupResolver(formVillageSchema),
 		defaultValues: {
 			name: '',
-			district: '',
+			district_id: '',
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -44,7 +45,7 @@ export const FormVillage = () => {
 	useEffect(() => {
 		if (villageID && village) {
 			setValue('name', village.name || '');
-			setValue('district', village.district.name || '');
+			setValue('district_id', village?.district?.id || 0);
 			setValue('pic_staff_id', village?.pic_staff?.id || 0);
 			setValue('pic', village.pic || '');
 			setValue('pic_mobile', village.pic_mobile || '');
@@ -75,16 +76,17 @@ export const FormVillage = () => {
 					)}
 				/>
 
-				{/* TODO: set this field to InputSelectDistrict */}
 				<Controller
-					name={'district'}
+					name={'district_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputText
+						<InputSelectDistrict
 							{...field}
-							label="District"
-							placeholder="Dictrict"
 							disabled={processingCreateVillage || fetchingVillage || villageErrors}
+							onChange={({ value }) => {
+								setValue('district_id', value);
+								setError('district_id', null);
+							}}
 							error={error}
 						/>
 					)}
