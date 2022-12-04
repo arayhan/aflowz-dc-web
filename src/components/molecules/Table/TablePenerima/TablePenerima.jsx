@@ -133,7 +133,7 @@ export const TablePenerima = ({
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		navigate('/penerima' + updatedParams);
+		navigate('/penerima' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {

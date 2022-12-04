@@ -112,7 +112,7 @@ export const TableProgram = ({
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		navigate('/program' + updatedParams);
+		navigate('/program' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
