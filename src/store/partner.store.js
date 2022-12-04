@@ -3,9 +3,6 @@ import { toastRequestResult } from '@/utils/helpers';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { useAppStore } from './app.store';
-
-const { setPageLoading } = useAppStore.getState();
 
 const states = (set, get) => ({
 	fetchingPenerimaItem: false,
@@ -74,7 +71,6 @@ const states = (set, get) => ({
 	},
 
 	updatePenerima: async (penerimaID, params, callback) => {
-		setPageLoading(true);
 		set({ processingSubmitPenerima: true });
 
 		const loader = toast.loading('Processing...');
@@ -82,7 +78,6 @@ const states = (set, get) => ({
 
 		toastRequestResult(loader, success, 'Penerima Updated', payload?.odoo_error || payload?.message);
 		set({ processingSubmitPenerima: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	},
@@ -131,7 +126,6 @@ const states = (set, get) => ({
 	},
 
 	postStaffCreate: async (params, callback) => {
-		setPageLoading(true);
 		set({ processingCreateStaff: true });
 
 		const loader = toast.loading('Processing...');
@@ -139,13 +133,11 @@ const states = (set, get) => ({
 
 		toastRequestResult(loader, success, 'Staff created', payload?.odoo_error || payload?.message);
 		set({ processingCreateStaff: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	},
 
 	updateStaff: async (staffID, params, callback) => {
-		setPageLoading(true);
 		set({ processingEditStaff: true });
 
 		const loader = toast.loading('Updating...');
@@ -153,7 +145,6 @@ const states = (set, get) => ({
 
 		toastRequestResult(loader, success, 'Staff updated', payload?.odoo_error || payload?.message);
 		set({ pprocessingEditStaff: false });
-		setPageLoading(false);
 
 		callback({ payload, success });
 	}

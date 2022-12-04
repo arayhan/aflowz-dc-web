@@ -135,6 +135,13 @@ const PenerimaDetail = () => {
 									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
 										{penerimaDetail?.programs.is_family ? 'Ya' : 'Tidak' || '-'}
 									</div>
+
+									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+										Is Staff
+									</div>
+									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
+										{penerimaDetail?.programs.is_staff ? 'Ya' : 'Tidak' || '-'}
+									</div>
 								</div>
 							</Card>
 

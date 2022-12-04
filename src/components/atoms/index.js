@@ -2,6 +2,7 @@ export * from './Alert/Alert';
 export * from './Button/Button';
 export * from './Button/ButtonAction';
 export * from './Card/Card';
+export * from './InputCheckbox/InputCheckbox';
 export * from './InputDate/InputDate';
 export * from './InputError/InputError';
 export * from './InputLabel/InputLabel';

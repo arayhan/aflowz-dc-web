@@ -1,4 +1,4 @@
-import { Button, InputDate, InputText, InputTextArea } from '@/components/atoms';
+import { Button, InputDate, InputText, InputTextArea, InputCheckbox } from '@/components/atoms';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -30,12 +30,16 @@ export const FormPenerima = () => {
 			city_id: '',
 			district_id: '',
 			village_id: '',
-			konstituen_id: ''
+			konstituen_id: '',
+			is_family: false,
+			is_staff: false
 		}
 	});
 
 	const onSubmitPenerima = (values) => {
 		if (penerimaID) {
+			Object.keys(values).forEach((key) => (values = { ...values, [key]: values[key]?.toString() }));
+			console.log(values);
 			updatePenerima(penerimaID, values, ({ success }) => {
 				if (success) navigate(`/partner/${penerimaID}`);
 			});
@@ -60,6 +64,8 @@ export const FormPenerima = () => {
 			setValue('district_id', penerimaItem.district?.id || undefined);
 			setValue('village_id', penerimaItem.village?.id || undefined);
 			setValue('konstituen_id', penerimaItem.konstituen?.id || undefined);
+			setValue('is_family', penerimaItem?.is_family || false);
+			setValue('is_staff', penerimaItem?.is_staff || false);
 		}
 	}, [penerimaID, penerimaItem]);
 
@@ -239,6 +245,30 @@ export const FormPenerima = () => {
 								setValue('konstituen_id', option?.value || null);
 								setError('konstituen_id', null);
 							}}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'is_family'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputCheckbox
+							{...field}
+							label="Is Family"
+							disabled={processingSubmitPenerima || fetchingPenerimaItem}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'is_staff'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputCheckbox
+							{...field}
+							label="Is Staff"
+							disabled={processingSubmitPenerima || fetchingPenerimaItem}
 							error={error}
 						/>
 					)}
