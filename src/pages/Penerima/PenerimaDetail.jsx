@@ -1,5 +1,5 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature } from '@/components/molecules';
+import { BannerFeature, TableFollowers } from '@/components/molecules';
 import { usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import React, { useEffect } from 'react';
@@ -126,8 +126,21 @@ const PenerimaDetail = () => {
 												/>
 											))}
 									</div>
+
+									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+										Is Family
+									</div>
+									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
+										{penerimaDetail?.programs.is_family ? 'Ya' : 'Tidak' || '-'}
+									</div>
 								</div>
 							</Card>
+
+							<div className="grid grid-cols-12 gap-4">
+								<div className="col-span-12 bg-white rounded-md">
+									<TableFollowers data={penerimaDetail?.followers} />
+								</div>
+							</div>
 						</div>
 					)}
 				</div>

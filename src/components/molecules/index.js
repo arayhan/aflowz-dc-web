@@ -61,6 +61,7 @@ export * from './Section/SectionShortcutProgram/SectionShortcutProgram';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePenerima/TablePenerima';
+export * from './Table/TableFollowers/TableFollowers';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 
