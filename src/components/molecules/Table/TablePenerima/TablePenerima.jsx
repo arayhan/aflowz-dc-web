@@ -4,8 +4,10 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
+import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 
 export const TablePenerima = ({
 	title,
@@ -172,18 +174,30 @@ export const TablePenerima = ({
 					<hr />
 
 					<div className="px-6 py-3">
-						<div className="w-full flex justify-end text-sm gap-4">
+						<div className="w-full grid grid-cols-2 lg:flex justify-end text-sm gap-4">
 							<InputSelectProgram
-								containerClassName="w-60"
+								containerClassName="w-full lg:w-60"
 								value={params.program_id ? Number(params.program_id) : undefined}
 								showLabel={false}
 								onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
 							/>
 							<InputSelectInstitusi
-								containerClassName="w-60"
+								containerClassName="w-full lg:w-60"
 								value={params.konstituen_id ? Number(params.konstituen_id) : undefined}
 								showLabel={false}
 								onChange={(option) => handleSetFilter('konstituen_id', option ? { konstituen_id: option.value } : null)}
+							/>
+							<InputSelectCity
+								containerClassName="w-full lg:w-60"
+								value={params.city_id ? Number(params.city_id) : undefined}
+								showLabel={false}
+								onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
+							/>
+							<InputSelectVillage
+								containerClassName="w-full lg:w-60"
+								value={params.village_id ? Number(params.village_id) : undefined}
+								showLabel={false}
+								onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
 							/>
 						</div>
 					</div>
