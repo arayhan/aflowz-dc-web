@@ -37,10 +37,8 @@ export const FormPenerima = () => {
 
 	const onSubmitPenerima = (values) => {
 		if (penerimaID) {
-			// Object.keys(values).forEach((key) => (values = { ...values, [key]: values[key]?.toString() }));
-			// console.log(values);
 			updatePenerima(penerimaID, values, ({ success }) => {
-				if (success) navigate(`/partner/${penerimaID}`);
+				if (success) navigate(`/penerima/${penerimaID}`);
 			});
 		}
 	};
