@@ -8,7 +8,7 @@ const Penerima = () => {
 	const [params, setParams] = useState({});
 
 	useEffect(() => {
-		if (search) setParams(queryStringToObject(search));
+		setParams(search ? queryStringToObject(search) : {});
 	}, [search]);
 
 	return (

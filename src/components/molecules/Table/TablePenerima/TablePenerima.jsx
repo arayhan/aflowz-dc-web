@@ -1,15 +1,18 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { objectToQueryString } from '@/utils/helpers';
+import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
+import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 
 export const TablePenerima = ({
 	title,
 	displayedColumns,
 	params,
 	isReadonly,
+	isShowFilter,
 	isShowFooter,
 	isShowButtonSeeAll,
 	enableClickRow
@@ -126,6 +129,11 @@ export const TablePenerima = ({
 
 	const handleClickRow = (rowData) => navigate(`/penerima/${rowData.id}`);
 
+	const handleSetFilter = (key, params) => {
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		navigate('/penerima' + updatedParams);
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -158,6 +166,30 @@ export const TablePenerima = ({
 					seeAllLink={'/penerima' + objectToQueryString(params)}
 				/>
 			</div>
+
+			{isShowFilter && (
+				<>
+					<hr />
+
+					<div className="px-6 py-3">
+						<div className="w-full flex justify-end text-sm gap-4">
+							<InputSelectProgram
+								containerClassName="w-60"
+								value={params.program_id ? Number(params.program_id) : undefined}
+								showLabel={false}
+								onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
+							/>
+							<InputSelectInstitusi
+								containerClassName="w-60"
+								value={params.konstituen_id ? Number(params.konstituen_id) : undefined}
+								showLabel={false}
+								onChange={(option) => handleSetFilter('konstituen_id', option ? { konstituen_id: option.value } : null)}
+							/>
+						</div>
+					</div>
+				</>
+			)}
+
 			<div className="overflow-x-scroll">
 				<Table
 					columns={columns}
@@ -177,5 +209,6 @@ export const TablePenerima = ({
 
 TablePenerima.defaultProps = {
 	params: {},
-	isShowFooter: true
+	isShowFooter: true,
+	isShowFilter: true
 };
