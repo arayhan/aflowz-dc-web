@@ -17,6 +17,7 @@ export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstitue
 
 export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
+export * from './Form/FormPenerima/FormPenerima';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
 export * from './Form/FormStaff/FormStaff';
@@ -34,6 +35,7 @@ export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
+export * from './InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 export * from './InputSelect/InputSelectInstitusiType/InputSelectInstitusiType';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
