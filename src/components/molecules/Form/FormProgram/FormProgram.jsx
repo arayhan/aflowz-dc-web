@@ -46,7 +46,7 @@ export const FormProgram = () => {
 		if (programID && program) {
 			setValue('program_category_id', program.program_category?.id || null);
 			setValue('name', program.name || '');
-			setValue('periode', program.periode || null);
+			setValue('periode', program.periode ? Number(program.periode) : null);
 			setValue('pic_staff_id', program.pic_staff?.id || null);
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
