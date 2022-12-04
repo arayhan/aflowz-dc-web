@@ -4,7 +4,6 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ModalFilterPenerima } from '../../Modal/ModalFilterPenerima/ModalFilterPenerima';
 
 export const TablePenerima = ({
 	title,
@@ -50,7 +49,7 @@ export const TablePenerima = ({
 			},
 			{
 				Header: 'Institusi',
-				minWidth: 150,
+				minWidth: 200,
 				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
 				Cell: (row) => {
 					const institusi = row.row.original.konstituen;
@@ -100,32 +99,10 @@ export const TablePenerima = ({
 				}
 			},
 			{
-				Header: 'Konstituen',
-				minWidth: 200,
-				hidden: !displayedColumns?.includes('Konstituen'),
-				Cell: (row) => {
-					const konstituen = row.row.original.konstituen;
-					return (
-						<div>
-							{!konstituen.id && '-'}
-							{konstituen.id && (
-								<ButtonAction
-									key={konstituen.id}
-									className="bg-purple-500 hover:bg-purple-400"
-									action={ACTION_TYPES.SEE_DETAIL}
-									linkTo={`/institusi/${konstituen.id}`}
-									text={konstituen.name}
-								/>
-							)}
-						</div>
-					);
-				}
-			},
-			{
 				Header: 'Detail',
 				minWidth: 150,
 				maxWidth: 150,
-				hidden: !displayedColumns?.includes('Detail'),
+				hidden: displayedColumns && !displayedColumns?.includes('Detail'),
 				Cell: (row) => {
 					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />;
 				}

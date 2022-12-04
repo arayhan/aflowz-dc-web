@@ -8,31 +8,36 @@ import { useAppStore } from './app.store';
 const { setPageLoading } = useAppStore.getState();
 
 const states = (set, get) => ({
-	fetchingStaffList: false,
+	fetchingPenerimaItem: false,
 	fetchingPenerimaList: false,
-	fetchingStaffTitleList: false,
-	fetchingStaff: false,
 	fetchingPenerimaDetail: false,
+	fetchingStaff: false,
+	fetchingStaffTitleList: false,
+	fetchingStaffList: false,
 
+	processingSubmitPenerima: false,
 	processingDeletePenerima: false,
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
 
-	staffList: null,
+	penerimaItem: null,
 	penerimaList: null,
-	staffTitleList: null,
 	penerimaDetail: null,
 	staff: null,
+	staffList: null,
+	staffTitleList: null,
 
-	getStaffList: async (params) => {
-		set({ fetchingStaffList: true });
-		const reqParams = { ...params, is_staff: true };
+	// =================================
+	// PENERIMA
+	// =================================
+	getPenerimaItem: async (penerimaID) => {
+		set({ fetchingPenerimaItem: true });
 
-		const { success, payload } = await SERVICE_PARTNER.getPartnerList(reqParams);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerItem(penerimaID);
 
-		set({ staffList: success ? payload : null });
-		set({ fetchingStaffList: false });
+		set({ penerimaItem: success ? payload : null });
+		set({ fetchingPenerimaItem: false });
 	},
 
 	getPenerimaList: async (params) => {
@@ -45,6 +50,65 @@ const states = (set, get) => ({
 
 		set({ penerimaList: success ? payload : null });
 		set({ fetchingPenerimaList: false });
+	},
+
+	getPenerimaDetail: async (penerimaID) => {
+		set({ fetchingPenerimaDetail: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(penerimaID);
+
+		set({ penerimaDetail: success ? payload : null });
+		set({ fetchingPenerimaDetail: false });
+	},
+
+	bulkCreatePartner: async (params, callback) => {
+		set({ processingBulkCreatePartner: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
+
+		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
+		set({ processingBulkCreatePartner: false });
+
+		callback({ payload, success });
+	},
+
+	updatePenerima: async (penerimaID, params, callback) => {
+		setPageLoading(true);
+		set({ processingSubmitPenerima: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.updatePartner(penerimaID, params);
+
+		toastRequestResult(loader, success, 'Penerima Updated', payload?.odoo_error || payload?.message);
+		set({ processingSubmitPenerima: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+
+	deletePenerima: async (penerimaID) => {
+		set({ processingDeletePenerima: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.deletePartner(penerimaID);
+
+		toastRequestResult(loader, success, 'Penerima deleted', payload?.odoo_error || payload?.message);
+		get().getPenerimaList();
+		set({ processingDeletePenerima: false });
+	},
+
+	// =================================
+	// STAFF
+	// =================================
+	getStaffList: async (params) => {
+		set({ fetchingStaffList: true });
+		const reqParams = { ...params, is_staff: true };
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(reqParams);
+
+		set({ staffList: success ? payload : null });
+		set({ fetchingStaffList: false });
 	},
 
 	getStaffTitleList: async () => {
@@ -92,38 +156,6 @@ const states = (set, get) => ({
 		setPageLoading(false);
 
 		callback({ payload, success });
-	},
-
-	getPenerimaDetail: async (penerimaID) => {
-		set({ fetchingPenerimaDetail: true });
-
-		const { success, payload } = await SERVICE_PARTNER.getPartnerDetail(penerimaID);
-
-		set({ penerimaDetail: success ? payload : null });
-		set({ fetchingPenerimaDetail: false });
-	},
-
-	bulkCreatePartner: async (params, callback) => {
-		set({ processingBulkCreatePartner: true });
-
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
-
-		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
-		set({ processingBulkCreatePartner: false });
-
-		callback({ payload, success });
-	},
-
-	deletePenerima: async (penerimaID) => {
-		set({ processingDeletePenerima: true });
-
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PARTNER.deletePartner(penerimaID);
-
-		toastRequestResult(loader, success, 'Penerima deleted', payload?.odoo_error || payload?.message);
-		get().getPenerimaList();
-		set({ processingDeletePenerima: false });
 	}
 });
 

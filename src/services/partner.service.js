@@ -2,6 +2,15 @@ import { useAuthStore } from '@/store';
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
 
+export const getPartnerItem = async (partnerID) => {
+	try {
+		const response = await http.get(`/partner/${partnerID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getPartnerList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);
@@ -36,18 +45,27 @@ export const bulkCreatePartner = async (params) => {
 	}
 };
 
-export const getStaffTitleList = async () => {
+export const updatePartner = async (partnerID, params) => {
 	try {
-		const response = await http.get('/partner/staff-title');
+		const response = await http.put('/partner/' + partnerID, params);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
 	}
 };
 
-export const getPartnerItem = async (partnerID) => {
+export const deletePartner = async (partnerID) => {
 	try {
-		const response = await http.get(`/partner/${partnerID}`);
+		const response = await http.delete(`/partner/${partnerID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getStaffTitleList = async () => {
+	try {
+		const response = await http.get('/partner/staff-title');
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
@@ -130,15 +148,6 @@ export const updateStaff = async (staffID, params) => {
 
 	try {
 		const response = await http.put(`/partner/${staffID}`, data);
-		return { success: response.data.success, payload: response.data.data };
-	} catch (error) {
-		return { success: false, payload: error };
-	}
-};
-
-export const deletePartner = async (partnerID) => {
-	try {
-		const response = await http.delete(`/partner/${partnerID}`);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
