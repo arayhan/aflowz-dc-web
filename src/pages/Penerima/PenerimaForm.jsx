@@ -9,6 +9,8 @@ const PenerimaForm = () => {
 			<BannerFeature
 				title={`Penerima - ${params.penerimaID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+				backButtonLinkTo={'/penerima'}
+				backButtonText="Kembali ke List Penerima"
 			/>
 
 			<section className="bg-gray-100">

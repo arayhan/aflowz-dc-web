@@ -12,6 +12,8 @@ const MitraForm = () => {
 			<BannerFeature
 				title={`Mitra - ${programCategoryID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+				backButtonLinkTo={'/mitra'}
+				backButtonText="Kembali ke List Mitra"
 			/>
 
 			<section className="bg-gray-100">

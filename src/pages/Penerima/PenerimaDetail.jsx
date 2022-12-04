@@ -16,7 +16,12 @@ const PenerimaDetail = () => {
 
 	return (
 		<div>
-			<BannerFeature title={penerimaDetail ? penerimaDetail.name : 'Penerima'} loading={fetchingPenerimaDetail} />
+			<BannerFeature
+				title={penerimaDetail ? penerimaDetail.name : 'Penerima'}
+				loading={fetchingPenerimaDetail}
+				backButtonLinkTo={'/penerima'}
+				backButtonText="Kembali ke List Penerima"
+			/>
 
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">

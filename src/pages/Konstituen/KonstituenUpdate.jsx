@@ -16,6 +16,8 @@ const KonstituenUpdate = () => {
 			<BannerFeature
 				title={`Edit - ${konstituenDetail?.konstituen_name || 'Institusi'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+				backButtonLinkTo={'/institusi'}
+				backButtonText="Kembali ke List Institusi"
 			/>
 
 			<section className="bg-gray-100">

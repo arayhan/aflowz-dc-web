@@ -7,6 +7,8 @@ const StaffUpdate = () => {
 			<BannerFeature
 				title="Edit - Tim Internal"
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+				backButtonLinkTo={'/staff'}
+				backButtonText="Kembali ke List Staff"
 			/>
 
 			<section className="bg-gray-100">
