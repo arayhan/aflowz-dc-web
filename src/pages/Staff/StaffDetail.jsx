@@ -3,9 +3,8 @@ import { useAuthStore, usePartnerStore } from '@/store';
 import { BannerFeature, TableStaffDetailInstitusi, TableStaffDetailProgram } from '@/components/molecules';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import man from '../../images/icons/man.jpg';
-import woman from '../../images/icons/woman.jpg';
-import { InputTextInfo } from '@/components/atoms';
+import { ButtonAction, InputTextInfo } from '@/components/atoms';
+import { ACTION_TYPES } from '@/utils/constants';
 
 const StaffDetail = () => {
 	const { isSystem } = useAuthStore();
@@ -26,16 +25,26 @@ const StaffDetail = () => {
 						<div className="space-y-6">
 							<div className="col-span-12 bg-gray-100 p-5">
 								<div className="bg-white shadow-lg rounded-md">
-									<div className="p-4">
-										<div className="font-light text-xl">Detail Tim Internal</div>
-										<div className="text-sm text-gray-400">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									<div className="p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+										<div className="w-full space-y-2">
+											<div className="font-light text-xl">Detail Tim Internal</div>
+											<div className="text-sm text-gray-400">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+											</div>
+										</div>
+										<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+											<ButtonAction
+												action={ACTION_TYPES.UPDATE}
+												linkTo={`/staff/update/${params.staffID}`}
+												className={'w-full md:w-auto text-base px-5 py-3 rounded-md'}
+												text="Update"
+											/>
 										</div>
 									</div>
 									<hr />
 									<div className="p-5 rounded-md my-2 flex-col">
 										<div className="w-full flex justify-center mb-5">
-											<img src={staff?.image_url} className="w-52" />
+											<img src={staff?.image_url || require('@/images/dummy-profile.webp')} className="w-52" />
 										</div>
 										<div className="overflow-x-auto">
 											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
