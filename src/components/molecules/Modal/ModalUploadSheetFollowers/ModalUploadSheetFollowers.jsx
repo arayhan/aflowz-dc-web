@@ -34,12 +34,18 @@ export const ModalUploadSheetFollowers = ({ onClose }) => {
 
 				if (json.length > 0) {
 					const params = json.map((data) => {
-						const allValuesToStringResult = data;
+						const stringValues = data;
+
 						Object.keys(data).forEach((key) => {
-							allValuesToStringResult[key] = data[key].toString();
-							allValuesToStringResult['programs'] = [];
+							stringValues[key] = data[key].toString();
+							stringValues['programs'] = [];
+							stringValues['is_recommendation'] =
+								stringValues?.inviter_nik_number !== null ||
+								stringValues.inviter_nik_number !== undefined ||
+								stringValues.inviter_nik_number !== '';
 						});
-						return allValuesToStringResult;
+
+						return stringValues;
 					});
 
 					bulkCreatePartner(params, ({ payload, success }) => {
