@@ -1,6 +1,5 @@
 import { Button, InputDate, InputText, InputTextArea, InputCheckbox } from '@/components/atoms';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePartnerStore } from '@/store';
 import { useEffect } from 'react';
@@ -38,8 +37,8 @@ export const FormPenerima = () => {
 
 	const onSubmitPenerima = (values) => {
 		if (penerimaID) {
-			Object.keys(values).forEach((key) => (values = { ...values, [key]: values[key]?.toString() }));
-			console.log(values);
+			// Object.keys(values).forEach((key) => (values = { ...values, [key]: values[key]?.toString() }));
+			// console.log(values);
 			updatePenerima(penerimaID, values, ({ success }) => {
 				if (success) navigate(`/partner/${penerimaID}`);
 			});
