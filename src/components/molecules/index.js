@@ -50,6 +50,7 @@ export * from './InputSelect/InputSelectProgram/InputSelectProgram';
 export * from './InputSelect/InputSelectProgramCategory/InputSelectProgramCategory';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
+export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';

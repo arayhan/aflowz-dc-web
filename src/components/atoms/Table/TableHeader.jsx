@@ -1,9 +1,7 @@
-import { ModalUploadSheetPenerima } from '@/components/molecules';
+import { ModalUploadSheetFollowers, ModalUploadSheetPenerima } from '@/components/molecules';
 import React, { useState } from 'react';
-import { BiFilterAlt } from 'react-icons/bi';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
-import { Button } from '../Button/Button';
 
 export const TableHeader = ({
 	feature,
@@ -13,14 +11,19 @@ export const TableHeader = ({
 	seeAllLink,
 	showButtonCreate,
 	showButtonSeeAll,
+	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima
 }) => {
 	const location = useLocation();
 
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
+	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 
 	return (
 		<div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+			{showModalUploadSheetFollowers && (
+				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
+			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
 			)}
@@ -37,6 +40,17 @@ export const TableHeader = ({
 						<span>Lihat Semua</span>
 					</Link>
 				)}
+				{!isReadonly && showButtonUploadSheetFollowers && (
+					<button
+						className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
+						onClick={() => setShowModalUploadSheetFollowers(true)}
+					>
+						<span className="w-4">
+							<SiGooglesheets size={16} />
+						</span>
+						<span className="text-sm">Upload Followers</span>
+					</button>
+				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<button
 						className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
@@ -45,7 +59,7 @@ export const TableHeader = ({
 						<span className="w-4">
 							<SiGooglesheets size={16} />
 						</span>
-						<span className="text-sm">Upload Sheet Penerima Program</span>
+						<span className="text-sm">Upload Penerima Program</span>
 					</button>
 				)}
 				{!isReadonly && showButtonCreate && (

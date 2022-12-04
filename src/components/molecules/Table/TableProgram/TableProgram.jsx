@@ -144,6 +144,7 @@ export const TableProgram = ({
 					isReadonly={!isSystem || isReadonly}
 					seeAllLink={'/program' + objectToQueryString(params)}
 					showButtonSeeAll={isShowButtonSeeAll}
+					showButtonUploadSheetFollowers
 					showButtonUploadSheetPenerima
 				/>
 			</div>
