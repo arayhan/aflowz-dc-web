@@ -1,9 +1,18 @@
-export const SectionShortcutProgram = ({ selectedShortcut, onSelectShortcut }) => {
+import { addQueryParams, removeQueryParams } from '@/utils/helpers';
+import { useNavigate } from 'react-router-dom';
+
+export const SectionShortcutProgram = ({ selectedShortcut }) => {
+	const navigate = useNavigate();
+
 	const SHORTCUTS = ['PIP', 'KIP'];
 
+	const handleSetFilter = (key, params) => {
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		navigate('/program' + updatedParams, { replace: true });
+	};
+
 	const handleSelectShortcut = (shortcut) => {
-		if (shortcut === selectedShortcut) onSelectShortcut(null);
-		else onSelectShortcut(shortcut);
+		handleSetFilter('keyword', selectedShortcut !== shortcut ? { keyword: shortcut } : null);
 	};
 
 	return (

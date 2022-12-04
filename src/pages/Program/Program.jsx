@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 const Program = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
-	const [selectedShortcut, setSelectedShortcut] = useState(null);
 
 	useEffect(() => {
 		setParams(search ? queryStringToObject(search) : {});
@@ -16,7 +15,7 @@ const Program = () => {
 		<div>
 			<BannerFeature title="Program" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
-				<SectionShortcutProgram selectedShortcut={selectedShortcut} onSelectShortcut={setSelectedShortcut} />
+				<SectionShortcutProgram params={params} selectedShortcut={params.keyword} />
 				<div className="py-6 container">
 					<TableProgram params={params} />
 				</div>
