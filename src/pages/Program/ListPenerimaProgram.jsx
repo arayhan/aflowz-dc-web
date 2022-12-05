@@ -24,6 +24,7 @@ const ListPenerimaByProgram = () => {
 						programName={programDetail?.program_name}
 						isReadonly
 						isInDetail
+						params={{ program_id: params.programID }}
 					/>
 				</div>
 			</div>

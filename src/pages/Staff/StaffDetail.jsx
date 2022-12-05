@@ -1,19 +1,75 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
-import { BannerFeature, TableStaffDetailInstitusi, TableStaffDetailProgram } from '@/components/molecules';
-import { useEffect } from 'react';
+import {
+	BannerFeature,
+	TableStaffDetailInstitusi,
+	TableStaffDetailProgram,
+	TableStaffDetailCity,
+	TableStaffDetailDistrict,
+	TableStaffDetailVillage
+} from '@/components/molecules';
+import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { ButtonAction, InputTextInfo } from '@/components/atoms';
+import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
+import { MdAddAPhoto } from 'react-icons/md';
 
 const StaffDetail = () => {
-	const { isSystem } = useAuthStore();
+	const { isSystem, isAdmin } = useAuthStore();
 	const params = useParams();
-	const { staff, fetchingStaff, getStaff } = usePartnerStore();
+	const { staff, fetchingStaff, getStaff, updatePicture } = usePartnerStore();
+
+	const [editPicture, setEditPicture] = useState('');
+	const [getFileSize, setGetFileSize] = useState('');
+	const [showError, setShowError] = useState('');
+	const [showButton, setShowButton] = useState(false);
 
 	useEffect(() => {
 		getStaff(params.staffID);
-	}, [params]);
+	}, [params, showButton]);
+
+	const fileRef = useRef();
+
+	const handleSavePicture = () => {
+		if (staff) {
+			if (getFileSize.size < 524288) {
+				let split = editPicture.split(',');
+				updatePicture(params.staffID, { picture: split[1] }, ({ success }) => {
+					if (success) {
+						setShowButton(false);
+					}
+				});
+			} else {
+				setShowError(true);
+				setTimeout(() => {
+					setShowError(false);
+					setShowButton(false);
+					setEditPicture('');
+				}, 1000);
+			}
+		}
+	};
+
+	const uploadImage = async (e) => {
+		const file = e.target.files[0];
+		const base64 = await convertBase64(file);
+		setEditPicture(base64);
+	};
+
+	const convertBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
+
+			fileReader.onload = () => {
+				resolve(fileReader.result);
+			};
+
+			fileReader.onerror = (error) => {
+				reject(error);
+			};
+		});
+	};
 
 	return (
 		<div>
@@ -48,8 +104,61 @@ const StaffDetail = () => {
 									</div>
 									<hr />
 									<div className="p-5 rounded-md my-2 flex-col">
-										<div className="w-full flex justify-center mb-5">
-											<img src={staff?.image_url || require('@/images/dummy-profile.webp')} className="w-52" />
+										<div className="w-full flex justify-center">
+											{staff?.image_url || editPicture !== '' ? (
+												<img src={editPicture ? editPicture : staff?.image_url} className="w-52" />
+											) : (
+												<img
+													src={editPicture ? editPicture : require('@/images/dummy-profile.webp')}
+													className="w-52"
+												/>
+											)}
+										</div>
+										<div className="w-full flex justify-center">
+											{showError && (
+												<p className="w-full flex justify-center mb-5 text-red-500">Max. Photo Size 500kb</p>
+											)}
+											{(isAdmin || isSystem) && editPicture !== '' && showButton ? (
+												<div className="w-52 flex justify-center mb-5 mt-2">
+													<div className="w-52 flex justify-evenly">
+														<Button variant={'success'} type="button" onClick={handleSavePicture} className="px-5 py-2">
+															Save
+														</Button>
+														<Button
+															type="button"
+															variant={'danger'}
+															className="px-3 py-2"
+															onClick={() => {
+																setEditPicture('');
+																setShowButton(false);
+															}}
+														>
+															Cancel
+														</Button>
+													</div>
+												</div>
+											) : (
+												<div className="w-52 flex justify-center mb-5 mt-2">
+													<Button
+														type="button"
+														onClick={() => fileRef.current.click()}
+														variant={'primary'}
+														className="p-4 rounded-full"
+													>
+														<MdAddAPhoto />
+														<input
+															type="file"
+															onChange={(e) => {
+																setGetFileSize(e.target.files[0]);
+																uploadImage(e);
+																setShowButton(true);
+															}}
+															ref={fileRef}
+															hidden
+														/>
+													</Button>
+												</div>
+											)}
 										</div>
 										<div className="overflow-x-auto">
 											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
@@ -64,7 +173,7 @@ const StaffDetail = () => {
 									</div>
 								</div>
 								<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto">
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailProgram
 											fetchData={staff?.programs}
 											isReadonly={!isSystem}
@@ -76,6 +185,27 @@ const StaffDetail = () => {
 											fetchData={staff?.konstituens_pic}
 											isReadonly={!isSystem}
 											titleHeader={'List Institusi'}
+										/>
+									</div>
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<TableStaffDetailCity
+											fetchData={staff?.citys_pic}
+											isReadonly={!isSystem}
+											titleHeader={'List Kota/Kabupaten'}
+										/>
+									</div>
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<TableStaffDetailDistrict
+											fetchData={staff?.districts_pic}
+											isReadonly={!isSystem}
+											titleHeader={'List Kecamatan'}
+										/>
+									</div>
+									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<TableStaffDetailVillage
+											fetchData={staff?.villages_pic}
+											isReadonly={!isSystem}
+											titleHeader={'List Kelurahan/Desa'}
 										/>
 									</div>
 								</div>

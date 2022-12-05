@@ -153,3 +153,16 @@ export const updateStaff = async (staffID, params) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const updatePicture = async (partnerID, params) => {
+	const data = {
+		base64_datas: params.picture || ''
+	};
+
+	try {
+		const response = await http.post(`/partner/photo/upload/${partnerID}`, data);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};

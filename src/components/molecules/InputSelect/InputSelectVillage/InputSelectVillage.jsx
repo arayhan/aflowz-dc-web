@@ -16,6 +16,8 @@ export const InputSelectVillage = forwardRef(
 			if (villageList?.total > 0) {
 				const villageMap = villageList.items.map((village) => ({ label: village.name, value: village.id }));
 				setOptions(villageMap);
+			} else {
+				setOptions([]);
 			}
 		}, [villageList]);
 

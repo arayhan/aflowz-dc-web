@@ -27,7 +27,7 @@ export const FormStaff = () => {
 
 	const { staff, fetchingStaff, processingCreateStaff, getStaff, postStaffCreate, updateStaff } = usePartnerStore();
 
-	const { control, setValue, setError, handleSubmit } = useForm({
+	const { watch, control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formStaffSchema),
 		defaultValues: {
 			nik_number: '',
@@ -227,6 +227,7 @@ export const FormStaff = () => {
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('province', value);
+								setValue('city', undefined);
 								setError('province', null);
 								setGetCity(value);
 							}}
@@ -247,11 +248,12 @@ export const FormStaff = () => {
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('city', value);
+								setValue('district', undefined);
 								setError('city', null);
 								setGetDistrict(value);
 							}}
 							error={error}
-							params={{ province_id: getCity, limit: 0, offset: 0 }}
+							params={watch('province') ? { province_id: watch('province'), limit: 0, offset: 0 } : null}
 							placeholder={placeholderCity}
 						/>
 					)}
@@ -266,11 +268,12 @@ export const FormStaff = () => {
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
 								setValue('district', value);
+								setValue('village', undefined);
 								setError('district', null);
 								setGetVillage(value);
 							}}
 							error={error}
-							params={{ city_id: getDistrict, limit: 0, offset: 0 }}
+							params={watch('city') ? { city_id: watch('city'), limit: 0, offset: 0 } : null}
 							placeholder={placeholderDistrict}
 						/>
 					)}
@@ -288,7 +291,7 @@ export const FormStaff = () => {
 								setError('village', null);
 							}}
 							error={error}
-							districtQuery={{ district_id: getVillage, limit: 0, offset: 0 }}
+							params={watch('district') ? { district_id: watch('district'), limit: 0, offset: 0 } : null}
 							placeholder={placeholderVillage}
 							isForm
 						/>
@@ -357,6 +360,14 @@ export const FormStaff = () => {
 			</div>
 			<hr />
 			<div className="flex justify-end">
+				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateStaff || fetchingStaff}
+					linkTo={staffID ? `/staff/${staffID}` : '/staff'}
+				>
+					Cancel
+				</Button>
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"

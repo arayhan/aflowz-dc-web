@@ -144,7 +144,19 @@ const states = (set, get) => ({
 		const { payload, success } = await SERVICE_PARTNER.updateStaff(staffID, params);
 
 		toastRequestResult(loader, success, 'Staff updated', payload?.odoo_error || payload?.message);
-		set({ pprocessingEditStaff: false });
+		set({ processingEditStaff: false });
+
+		callback({ payload, success });
+	},
+
+	updatePicture: async (partnerID, params, callback) => {
+		set({ processingEditStaff: true });
+
+		const loader = toast.loading('Updating...');
+		const { payload, success } = await SERVICE_PARTNER.updatePicture(partnerID, params);
+
+		toastRequestResult(loader, success, 'Picture updated', payload?.odoo_error || payload?.message);
+		set({ processingEditStaff: false });
 
 		callback({ payload, success });
 	}
