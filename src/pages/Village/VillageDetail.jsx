@@ -91,11 +91,14 @@ const VillageDetail = () => {
 								</div>
 							</div>
 							<div className="flex items-center justify-center gap-4">
-								<CardDetailTotal
-									title={'Total Penerima'}
-									value={villageDetail?.penerima_program?.length || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
-								/>
+								{villageDetail?.penerima_program.map((penerima_program) => (
+									<CardDetailTotal
+										key={penerima_program.program_id}
+										title={`Total Penerima Program ${penerima_program.program_name}`}
+										value={penerima_program.total_penerima_program || 0}
+										linkTo={`/penerima?village_id=${villageID}`}
+									/>
+								))}
 							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
