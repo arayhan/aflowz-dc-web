@@ -22,8 +22,6 @@ const StaffDetail = () => {
 		getStaff(params.staffID);
 	}, [params]);
 
-	console.log(staff);
-
 	return (
 		<div>
 			<BannerFeature
