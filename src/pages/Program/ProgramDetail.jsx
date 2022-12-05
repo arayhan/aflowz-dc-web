@@ -95,21 +95,7 @@ const ProgramDetail = () => {
 										params={{ program_id: params.programID }}
 									/>
 								</div>
-								<div className="col-span-12 md:col-span-6">
-									<Card
-										title={'Penerima Program Per Desa'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
-										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailPenerimaProgram
-												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
-												isPerVillage
-											/>
-										</div>
-									</Card>
-								</div>
-								<div className="col-span-12 md:col-span-6">
+								<div className="col-span-12">
 									<Card
 										title={'Penerima Program Per Kota'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
@@ -119,6 +105,20 @@ const ProgramDetail = () => {
 											<TableDetailPenerimaProgram
 												dataPenerimaPerArea={programDetail?.total_penerima_program_per_city}
 												isPerCity
+											/>
+										</div>
+									</Card>
+								</div>
+								<div className="col-span-12">
+									<Card
+										title={'Penerima Program Per Desa'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailPenerimaProgram
+												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
+												isPerVillage
 											/>
 										</div>
 									</Card>
