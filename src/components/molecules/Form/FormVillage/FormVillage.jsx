@@ -139,6 +139,14 @@ export const FormVillage = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateVillage || fetchingVillage || villageErrors}
+					linkTo={villageID ? `/village/${villageID}` : '/village'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateVillage || fetchingVillage || villageErrors}

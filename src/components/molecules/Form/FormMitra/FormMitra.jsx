@@ -122,6 +122,14 @@ export const FormMitra = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
+					linkTo={programCategoryID ? `/mitra/${programCategoryID}` : '/mitra'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}

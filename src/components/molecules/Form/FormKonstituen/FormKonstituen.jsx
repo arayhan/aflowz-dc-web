@@ -175,6 +175,14 @@ export const FormKonstituen = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateKonstituen || fetchingKonstituen}
+					linkTo={konstituenID ? `/institusi/${konstituenID}` : '/institusi'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateKonstituen || fetchingKonstituen}

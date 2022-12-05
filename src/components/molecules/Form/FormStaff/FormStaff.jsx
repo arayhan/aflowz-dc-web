@@ -358,6 +358,14 @@ export const FormStaff = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateStaff || fetchingStaff}
+					linkTo={staffID ? `/staff/${staffID}` : '/staff'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateStaff || fetchingStaff}

@@ -153,6 +153,14 @@ export const FormProgram = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateProgram || fetchingProgram}
+					linkTo={programID ? `/program/${programID}` : '/program'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateProgram || fetchingProgram}

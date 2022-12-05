@@ -140,6 +140,14 @@ export const FormCity = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingCreateCity || fetchingCity || cityErrors}
+					linkTo={cityID ? `/city/${cityID}` : '/city'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingCreateCity || fetchingCity || cityErrors}

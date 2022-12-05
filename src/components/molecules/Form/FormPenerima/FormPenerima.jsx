@@ -274,6 +274,14 @@ export const FormPenerima = () => {
 			<hr />
 			<div className="flex justify-end">
 				<Button
+					className={'px-7 py-3 rounded-sm mx-2'}
+					variant="warning"
+					disabled={processingSubmitPenerima || fetchingPenerimaItem}
+					linkTo={penerimaID ? `/penerima/${penerimaID}` : '/penerima'}
+				>
+					Cancel
+				</Button>
+				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
 					disabled={processingSubmitPenerima || fetchingPenerimaItem}
