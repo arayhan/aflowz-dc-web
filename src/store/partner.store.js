@@ -144,7 +144,7 @@ const states = (set, get) => ({
 		const { payload, success } = await SERVICE_PARTNER.updateStaff(staffID, params);
 
 		toastRequestResult(loader, success, 'Staff updated', payload?.odoo_error || payload?.message);
-		set({ pprocessingEditStaff: false });
+		set({ processingEditStaff: false });
 
 		callback({ payload, success });
 	}

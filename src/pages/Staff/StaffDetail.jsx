@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
 import {
 	BannerFeature,
@@ -8,19 +8,67 @@ import {
 	TableStaffDetailDistrict,
 	TableStaffDetailVillage
 } from '@/components/molecules';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { ButtonAction, InputTextInfo } from '@/components/atoms';
+import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 
 const StaffDetail = () => {
-	const { isSystem } = useAuthStore();
+	const { isSystem, isAdmin } = useAuthStore();
 	const params = useParams();
-	const { staff, fetchingStaff, getStaff } = usePartnerStore();
+	const { staff, fetchingStaff, getStaff, updateStaff } = usePartnerStore();
+
+	const [editPicture, setEditPicture] = useState('');
+	const [getFileSize, setGetFileSize] = useState('');
+	const [showError, setShowError] = useState('');
+	const [showButton, setShowButton] = useState(false);
 
 	useEffect(() => {
 		getStaff(params.staffID);
-	}, [params]);
+	}, [params, showButton]);
+
+	const fileRef = useRef();
+
+	const handleSavePicture = () => {
+		if (staff) {
+			if (getFileSize.size < 524288) {
+				let split = editPicture.split(',');
+				updateStaff(params.staffID, { picture: split[1] }, ({ success }) => {
+					if (success) {
+						setShowButton(false);
+					}
+				});
+			} else {
+				setShowError(true);
+				setTimeout(() => {
+					setShowError(false);
+					setShowButton(false);
+					setEditPicture('');
+				}, 1000);
+			}
+		}
+	};
+
+	const uploadImage = async (e) => {
+		const file = e.target.files[0];
+		const base64 = await convertBase64(file);
+		setEditPicture(base64);
+	};
+
+	const convertBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
+
+			fileReader.onload = () => {
+				resolve(fileReader.result);
+			};
+
+			fileReader.onerror = (error) => {
+				reject(error);
+			};
+		});
+	};
 
 	return (
 		<div>
@@ -56,8 +104,52 @@ const StaffDetail = () => {
 									<hr />
 									<div className="p-5 rounded-md my-2 flex-col">
 										<div className="w-full flex justify-center mb-5">
-											<img src={staff?.image_url || require('@/images/dummy-profile.webp')} className="w-52" />
+											{staff?.image_url || editPicture !== '' ? (
+												<img src={editPicture ? editPicture : staff?.image_url} className="w-52" />
+											) : (
+												<img
+													src={editPicture ? editPicture : require('@/images/dummy-profile.webp')}
+													className="w-52"
+												/>
+											)}
 										</div>
+										{showError && <p className="w-full flex justify-center mb-5 text-red-500">Max. Photo Size 500kb</p>}
+										{(isAdmin || isSystem) && editPicture !== '' && showButton ? (
+											<div className="w-full flex justify-center mb-5">
+												<div className="w-52 flex justify-evenly">
+													<Button variant={'success'} type="button" onClick={handleSavePicture} className="px-5 py-2">
+														Save
+													</Button>
+													<Button
+														type="button"
+														variant={'danger'}
+														className="px-3 py-2"
+														onClick={() => {
+															setEditPicture('');
+															setShowButton(false);
+														}}
+													>
+														Cancel
+													</Button>
+												</div>
+											</div>
+										) : (
+											<div className="w-full flex justify-center mb-5">
+												<button type="button" onClick={() => fileRef.current.click()}>
+													<span>Change Photo</span>
+													<input
+														type="file"
+														onChange={(e) => {
+															setGetFileSize(e.target.files[0]);
+															uploadImage(e);
+															setShowButton(true);
+														}}
+														ref={fileRef}
+														hidden
+													/>
+												</button>
+											</div>
+										)}
 										<div className="overflow-x-auto">
 											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
 												<InputTextInfo tag={'NIK'} value={staff?.nik_number || 'Belum Tercantum'} />
