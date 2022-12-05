@@ -138,7 +138,7 @@ export const TablePenerima = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
 
 		if (page > pageCount) setPage(pageCount);
 		else {

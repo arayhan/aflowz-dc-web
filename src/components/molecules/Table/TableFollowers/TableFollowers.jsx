@@ -16,18 +16,24 @@ export const TableFollowers = ({ data }) => {
 			},
 			{
 				Header: 'NIK',
-				accessor: 'name',
+				accessor: 'nik_number',
 				width: '100%',
-				minWidth: 300
+				minWidth: 200
 			},
 			{
 				Header: 'Nama',
-				accessor: 'pic',
+				accessor: 'name',
 				minWidth: 250
 			},
 			{
-				Header: 'Alamat',
-				accessor: 'pic_mobile'
+				Header: 'Email',
+				accessor: 'email',
+				minWidth: 300
+			},
+			{
+				Header: 'Nomor Telepon',
+				accessor: 'mobile',
+				minWidth: 250
 			}
 		],
 		[]

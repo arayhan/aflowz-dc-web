@@ -1,5 +1,11 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartPenerimaProgram,
+	ChartPeriodeProgram,
+	TablePenerima
+} from '@/components/molecules';
 import { useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -87,23 +93,23 @@ const VillageDetail = () => {
 							<div className="flex items-center justify-center gap-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
-									value={villageDetail?.penerima_program_village?.length || 0}
+									value={villageDetail?.total_penerima_program_village_per_program || 0}
 									linkTo={`/penerima?village_id=${villageID}`}
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
 									<Card
-										title={'Jumlah Program by Periode per Orang'}
+										title={'Jumlah Penerima Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_orang} />
+										<ChartPenerimaProgram data={villageDetail?.penerima_program} />
 									</Card>
 								</div>
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
 									<Card
-										title={'Jumlah Program by Periode per Program'}
+										title={'Jumlah Periode Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
