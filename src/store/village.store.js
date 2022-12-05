@@ -34,7 +34,7 @@ const states = (set, get) => ({
 	getVillageList: async (params) => {
 		set({ fetchingVillageList: true });
 
-		const defaultParams = { limit: 10, offset: 0 };
+		const defaultParams = { limit: 0, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_VILLAGE.getVillageList(requestParams);
