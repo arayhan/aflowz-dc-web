@@ -13,12 +13,7 @@ const Penerima = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Halaman Utama"
-				title="Penerima"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title="Penerima" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
 				<div className="py-6 container">
 					<TablePenerima params={params} />

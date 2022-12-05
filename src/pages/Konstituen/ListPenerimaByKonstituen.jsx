@@ -17,8 +17,6 @@ const ListPenerimaByKonstituen = () => {
 			<BannerFeature
 				title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Institusi'}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={`/institusi/${params.konstituenID}`}
-				backButtonText={`Kembali ke ${konstituenDetail?.konstituen_name}`}
 			/>
 			<div className="bg-gray-100 py-6">
 				<div className="py-6 container bg-white rounded-md">

@@ -13,12 +13,7 @@ const Program = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Halaman Utama"
-				title="Program"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title="Program" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
 				<SectionShortcutProgram params={params} selectedShortcut={params.keyword} />
 				<div className="py-6 container">
