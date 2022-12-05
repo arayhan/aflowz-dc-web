@@ -16,6 +16,8 @@ const ListPenerimaByProgram = () => {
 			<BannerFeature
 				title={'List Penerima' + ' ' + programDetail?.program_name || 'Program'}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+				backButtonLinkTo={`/program/${params.programID}`}
+				backButtonText={`Kembali ke ${programDetail?.program_name}`}
 			/>
 			<div className="bg-gray-100 py-6">
 				<div className="py-6 container bg-white rounded-md">
