@@ -17,7 +17,7 @@ import { MdAddAPhoto } from 'react-icons/md';
 const StaffDetail = () => {
 	const { isSystem, isAdmin } = useAuthStore();
 	const params = useParams();
-	const { staff, fetchingStaff, getStaff, updateStaff } = usePartnerStore();
+	const { staff, fetchingStaff, getStaff, updatePicture } = usePartnerStore();
 
 	const [editPicture, setEditPicture] = useState('');
 	const [getFileSize, setGetFileSize] = useState('');
@@ -34,7 +34,7 @@ const StaffDetail = () => {
 		if (staff) {
 			if (getFileSize.size < 524288) {
 				let split = editPicture.split(',');
-				updateStaff(params.staffID, { picture: split[1] }, ({ success }) => {
+				updatePicture(params.staffID, { picture: split[1] }, ({ success }) => {
 					if (success) {
 						setShowButton(false);
 					}
