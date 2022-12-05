@@ -24,9 +24,7 @@ export const TableVillage = ({ enableClickRow }) => {
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
-				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
-				}
+				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'Nama Desa',

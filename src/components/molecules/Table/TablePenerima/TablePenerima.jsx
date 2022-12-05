@@ -126,7 +126,7 @@ export const TablePenerima = ({
 				}
 			}
 		],
-		[]
+		[offset, perPage, page, isSystem]
 	);
 
 	const handleClickRow = (rowData) => navigate(`/penerima/${rowData.id}`);

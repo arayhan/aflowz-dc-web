@@ -24,10 +24,7 @@ export const TableCity = ({ enableClickRow }) => {
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
-				Cell: (row) => {
-					const number = offset ? offset / perPage + Number(row.row.id) + 1 : Number(row.row.id) + 1;
-					return <div className="text-gray-400">{number}</div>;
-				}
+				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'Nama Kota',
