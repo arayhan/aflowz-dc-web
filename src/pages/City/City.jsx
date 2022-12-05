@@ -4,7 +4,12 @@ import { TableCity } from '@/components/molecules';
 const City = () => {
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature title="Kota" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature
+				backButtonLinkTo={'/'}
+				backButtonText="Kembali ke Halaman Utama"
+				title="Kota"
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+			/>
 			<div className="container py-16">
 				<TableCity />
 			</div>
