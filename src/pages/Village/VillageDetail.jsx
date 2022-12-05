@@ -94,7 +94,7 @@ const VillageDetail = () => {
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
 									<Card
-										title={'Jumlah Program by Periode per Orang'}
+										title={'Jumlah Program per Periode'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
