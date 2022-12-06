@@ -1,13 +1,6 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
-import {
-	BannerFeature,
-	TableStaffDetailInstitusi,
-	TableStaffDetailProgram,
-	TableStaffDetailCity,
-	TableStaffDetailDistrict,
-	TableStaffDetailVillage
-} from '@/components/molecules';
+import { BannerFeature, TableStaffDetailInstitusi, TableStaffDetailProgram } from '@/components/molecules';
 import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
@@ -168,6 +161,18 @@ const StaffDetail = () => {
 												<InputTextInfo tag={'No. HP/Telp'} value={staff?.mobile || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'Email'} value={staff?.email || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'Role'} value={staff?.staff_title.name || 'Belum Mencantumkan'} />
+												<InputTextInfo
+													tag={'Kota/Kabupaten Domisili'}
+													value={staff?.city.name || 'Belum Mencantumkan'}
+												/>
+												<InputTextInfo
+													tag={'Kecamatan Domisili'}
+													value={staff?.district.name || 'Belum Mencantumkan'}
+												/>
+												<InputTextInfo
+													tag={'Kelurahan/Desa Domisili'}
+													value={staff?.village.name || 'Belum Mencantumkan'}
+												/>
 											</div>
 										</div>
 									</div>
@@ -185,27 +190,6 @@ const StaffDetail = () => {
 											fetchData={staff?.konstituens_pic}
 											isReadonly={!isSystem}
 											titleHeader={'List Institusi'}
-										/>
-									</div>
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
-										<TableStaffDetailCity
-											fetchData={staff?.citys_pic}
-											isReadonly={!isSystem}
-											titleHeader={'List Kota/Kabupaten'}
-										/>
-									</div>
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
-										<TableStaffDetailDistrict
-											fetchData={staff?.districts_pic}
-											isReadonly={!isSystem}
-											titleHeader={'List Kecamatan'}
-										/>
-									</div>
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
-										<TableStaffDetailVillage
-											fetchData={staff?.villages_pic}
-											isReadonly={!isSystem}
-											titleHeader={'List Kelurahan/Desa'}
 										/>
 									</div>
 								</div>

@@ -15,7 +15,7 @@ export const InputSelectStaffTitle = forwardRef(({ error, onChange, ...props }, 
 		if (staffTitleList?.total > 0) {
 			const mapStaffTitle = staffTitleList.items.map((title) => ({
 				label: title.name,
-				value: title.name
+				value: title.id
 			}));
 
 			setOptions(mapStaffTitle);
