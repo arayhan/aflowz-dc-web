@@ -77,29 +77,24 @@ export const postStaffCreate = async (params) => {
 	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
 	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
 
-	const provinceDom = await http.get(`/province/${params.province}`);
-	const cityDom = await http.get(`/city/${params.city}`);
-	const districtDom = await http.get(`/district/${params.district}`);
-	const villageDom = await http.get(`/village/${params.village}`);
-
 	const data = [
 		{
-			nik_number: params?.nik_number || 0,
+			nik_number: params?.nik_number || '',
 			name: params?.name || '',
 			birth_place: params?.birth_place || '',
 			birth_date: formatDate || '',
 			gender: params?.gender || '',
 			address: params?.address || '',
-			country: 'Indonesia',
-			province: provinceDom.data.data.name || '',
-			city: cityDom.data.data.name || '',
-			district: districtDom.data.data.name || '',
+			country_id: 100,
+			province_id: params?.province || 0,
+			city_id: params?.city || 0,
+			district_id: params?.district || 0,
+			village_id: params?.village || 0,
 			mobile: params?.mobile || '',
 			email: params?.email || '',
 			religion: params?.religion || '',
-			staff_title: params?.staff_title || '',
-			is_staff: true,
-			village: villageDom.data.data.name || ''
+			staff_title_id: Number(params?.staff_title) || 0,
+			is_staff: true
 		}
 	];
 
@@ -122,30 +117,24 @@ export const updateStaff = async (staffID, params) => {
 	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
 	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
 
-	const provinceDom = await http.get(`/province/${params.province}`);
-	const cityDom = await http.get(`/city/${params.city}`);
-	const districtDom = await http.get(`/district/${params.district}`);
-	const villageDom = await http.get(`/village/${params.village}`);
-
 	const data = {
-		nik_number: params?.nik_number || 0,
+		nik_number: params?.nik_number || '',
 		name: params?.name || '',
 		birth_place: params?.birth_place || '',
 		birth_date: formatDate || '',
 		gender: params?.gender || '',
 		address: params?.address || '',
-		country: 'Indonesia',
-		province: provinceDom.data.data.name || '',
-		city: cityDom.data.data.name || '',
-		district: districtDom.data.data.name || '',
+		country_id: 100,
+		province_id: params?.province || 0,
+		city_id: params?.city || 0,
+		district_id: params?.district || 0,
+		village_id: params?.village || 0,
 		mobile: params?.mobile || '',
 		email: params?.email || '',
 		religion: params?.religion || '',
-		staff_title: params?.staff_title || '',
-		is_staff: true,
-		village: villageDom.data.data.name || ''
+		staff_title_id: Number(params?.staff_title) || 0,
+		is_staff: true
 	};
-
 	try {
 		const response = await http.put(`/partner/${staffID}`, data);
 		return { success: response.data.success, payload: response.data.data };

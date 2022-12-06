@@ -64,8 +64,6 @@ const StaffDetail = () => {
 		});
 	};
 
-	console.log(staff);
-
 	return (
 		<div>
 			<BannerFeature

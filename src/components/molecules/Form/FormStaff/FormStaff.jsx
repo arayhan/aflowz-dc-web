@@ -43,7 +43,7 @@ export const FormStaff = () => {
 			mobile: '',
 			email: '',
 			religion: '',
-			staff_title: ''
+			staff_title: undefined
 		}
 	});
 
@@ -80,7 +80,7 @@ export const FormStaff = () => {
 			setValue('mobile', staff.mobile || '');
 			setValue('email', staff.email || '');
 			setValue('religion', staff.religion || '');
-			setValue('staff_title', staff.staff_title?.name || '');
+			setValue('staff_title', staff.staff_title?.id || null);
 			setPlaceholderCity(staff.city?.name);
 			setPlaceholderDistrict(staff.district?.name);
 			setPlaceholderVillage(staff.village?.name);
@@ -353,7 +353,7 @@ export const FormStaff = () => {
 							{...field}
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
-								setValue('staff_title', value);
+								setValue('staff_title', Number(value));
 								setError('staff_title', null);
 							}}
 							error={error}
