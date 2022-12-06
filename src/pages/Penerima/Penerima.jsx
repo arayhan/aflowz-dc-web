@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const Penerima = () => {
 	const { search } = useLocation();
-	const [params, setParams] = useState({});
+	const [params, setParams] = useState({ is_staff: false });
 
 	useEffect(() => {
 		setParams(search ? queryStringToObject(search) : {});

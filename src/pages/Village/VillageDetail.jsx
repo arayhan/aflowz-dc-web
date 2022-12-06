@@ -17,7 +17,7 @@ const VillageDetail = () => {
 
 	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
 
-	const [tableParams] = useState({ village_id: villageID, is_staff: true });
+	const [tableParams] = useState({ village_id: villageID });
 
 	useEffect(() => {
 		if (villageID) getVillageDetail(villageID);
