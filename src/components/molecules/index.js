@@ -32,9 +32,6 @@ export * from './Table/TableVillage/TableVillage';
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
-export * from './TableDetail/TableStaffDetail/TableStaffDetailCity';
-export * from './TableDetail/TableStaffDetail/TableStaffDetailDistrict';
-export * from './TableDetail/TableStaffDetail/TableStaffDetailVillage';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
