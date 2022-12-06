@@ -54,7 +54,7 @@ export const FormStaff = () => {
 			});
 		} else {
 			postStaffCreate(values, ({ payload, success }) => {
-				if (success) navigate(`/staff/${payload.datas[0].id}`);
+				if (success) navigate(`/staff`);
 			});
 		}
 	};
