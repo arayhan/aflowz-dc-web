@@ -228,6 +228,8 @@ export const FormStaff = () => {
 							onChange={({ value }) => {
 								setValue('province', value);
 								setValue('city', undefined);
+								setValue('district', undefined);
+								setValue('village', undefined);
 								setError('province', null);
 								setGetCity(value);
 							}}
@@ -249,6 +251,7 @@ export const FormStaff = () => {
 							onChange={({ value }) => {
 								setValue('city', value);
 								setValue('district', undefined);
+								setValue('village', undefined);
 								setError('city', null);
 								setGetDistrict(value);
 							}}

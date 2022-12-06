@@ -10,6 +10,7 @@ export const InputSelectDistrict = forwardRef(
 
 		useEffect(() => {
 			if (params) getDistrictList({ ...params });
+			if (params === null) setOptions([]);
 		}, [params]);
 
 		useEffect(() => {
