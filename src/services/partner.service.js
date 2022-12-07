@@ -77,12 +77,13 @@ export const postStaffCreate = async (params) => {
 	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
 	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
 
-	const provinceDom = await http.get(`/province/${params.province}`);
-	const cityDom = await http.get(`/city/${params.city}`);
-	const districtDom = await http.get(`/district/${params.district}`);
-	const villageDom = await http.get(`/village/${params.village}`);
-	const getStaffTitle = await http.get('partner/staff-title');
-	const findTitle = getStaffTitle.data.data.items.find((val) => val.id === Number(params.staff_title));
+	const provinceDom = http.get(`/province/${params.province}`);
+	const cityDom = http.get(`/city/${params.city}`);
+	const districtDom = http.get(`/district/${params.district}`);
+	const villageDom = http.get(`/village/${params.village}`);
+	const getStaffTitle = http.get('partner/staff-title');
+	const getData = await Promise.all([provinceDom, cityDom, districtDom, villageDom, getStaffTitle]);
+	const findTitle = getData[4].data.data.items.find((val) => val.id === Number(params.staff_title));
 
 	const data = [
 		{
@@ -93,15 +94,15 @@ export const postStaffCreate = async (params) => {
 			gender: params?.gender || '',
 			address: params?.address || '',
 			country: 'Indonesia',
-			province: provinceDom.data.data.name || '',
-			city: cityDom.data.data.name || '',
-			district: districtDom.data.data.name || '',
+			province: getData[0].data.data.name || '',
+			city: getData[1].data.data.name || '',
+			district: getData[2].data.data.name || '',
 			mobile: params?.mobile || '',
 			email: params?.email || '',
 			religion: params?.religion || '',
 			staff_title: findTitle?.name || '',
 			is_staff: true,
-			village: villageDom.data.data.name || ''
+			village: getData[3].data.data.name || ''
 		}
 	];
 
