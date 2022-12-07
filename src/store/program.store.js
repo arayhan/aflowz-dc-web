@@ -98,16 +98,14 @@ const states = (set, get) => ({
 		setPageLoading(false);
 	},
 	getProgramCategory: async (programCategoryID) => {
-		if (get().programCategory === null) {
-			set({ fetchingProgramCategory: true });
+		set({ fetchingProgramCategory: true });
 
-			const { success, payload } = await SERVICE_PROGRAM.getProgramCategory(programCategoryID);
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategory(programCategoryID);
 
-			if (!success) set({ programCategoryErrors: payload });
+		if (!success) set({ programCategoryErrors: payload });
 
-			set({ programCategory: success ? payload : null });
-			set({ fetchingProgramCategory: false });
-		}
+		set({ programCategory: success ? payload : null });
+		set({ fetchingProgramCategory: false });
 	},
 	getProgramCategoryList: async () => {
 		set({ fetchingProgramCategoryList: true });
