@@ -5,7 +5,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableStaff = () => {
 	const { isSystem, isAdmin } = useAuthStore();
-	const { fetchingStaffList, staffList, getStaffList, deletePartner } = usePartnerStore();
+	const { fetchingStaffList, staffList, getStaffList, deleteStaff } = usePartnerStore();
 
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
@@ -66,7 +66,7 @@ export const TableStaff = () => {
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deletePartner(row.row.original.id)} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteStaff(row.row.original.id)} />
 							</div>
 						)
 					);
