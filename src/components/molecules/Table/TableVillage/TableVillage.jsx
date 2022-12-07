@@ -1,10 +1,20 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const TableVillage = ({ enableClickRow }) => {
+export const TableVillage = ({
+	title,
+	displayedColumns,
+	params,
+	isReadonly,
+	isShowFooter,
+	isShowFilter,
+	isShowButtonSeeAll,
+	enableClickRow
+}) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { villageList, fetchingVillageList } = useVillageStore();
@@ -24,17 +34,20 @@ export const TableVillage = ({ enableClickRow }) => {
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
+				hidden: displayedColumns && !displayedColumns.includes('#'),
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'Nama Desa',
 				accessor: 'name',
 				width: '100%',
-				minWidth: 300
+				minWidth: 300,
+				hidden: displayedColumns && !displayedColumns.includes('Nama Desa')
 			},
 			{
 				Header: 'Detail',
 				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('Detail'),
 				Cell: (row) => {
 					return (
 						<ButtonAction
@@ -48,7 +61,7 @@ export const TableVillage = ({ enableClickRow }) => {
 			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem,
+				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
@@ -62,18 +75,18 @@ export const TableVillage = ({ enableClickRow }) => {
 		[offset, perPage, page, isSystem]
 	);
 
-	const offsetResult = (page - 1) * perPage;
-	const params = { limit: perPage, offset: offsetResult };
-
 	const handleClickRow = (rowData) => navigate(`/village/${rowData.id}`);
 
 	useEffect(() => {
+		const offsetResult = (page - 1) * perPage;
+		const defaultParams = { limit: perPage, offset: offsetResult };
+
 		if (page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getVillageList(params);
+			getVillageList({ ...defaultParams, ...params });
 		}
-	}, [page, perPage, pageCount]);
+	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (villageList) {
@@ -87,9 +100,12 @@ export const TableVillage = ({ enableClickRow }) => {
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Desa"
-					title={'List Desa'}
+					title={title || 'List Desa'}
+					mainRoute={'/village'}
+					seeAllLink={'/village' + objectToQueryString(params)}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isSystem}
+					isReadonly={!isSystem || isReadonly}
+					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>
 			<div className="overflow-x-scroll">
@@ -100,9 +116,17 @@ export const TableVillage = ({ enableClickRow }) => {
 					loading={fetchingVillageList || villageList === null}
 				/>
 			</div>
-			<div className="p-6">
-				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
-			</div>
+			{isShowFooter && (
+				<div className="p-6">
+					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+				</div>
+			)}
 		</div>
 	);
+};
+
+TableVillage.defaultProps = {
+	params: {},
+	isShowFilter: true,
+	isShowFooter: true
 };
