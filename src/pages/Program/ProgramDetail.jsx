@@ -3,7 +3,8 @@ import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
 	TableDetailPenerimaProgram,
-	TablePenerima
+	TablePenerima,
+	TableVillage
 } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import React, { useEffect } from 'react';
@@ -110,18 +111,13 @@ const ProgramDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12">
-									<Card
+									<TableVillage
 										title={'Penerima Program Per Desa'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
-										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailPenerimaProgram
-												dataPenerimaPerArea={programDetail?.total_penerima_program_per_village}
-												isPerVillage
-											/>
-										</div>
-									</Card>
+										params={{ program_id: params.programID }}
+										isReadonly
+										enableClickRow
+										isShowButtonSeeAll
+									/>
 								</div>
 							</div>
 						</div>
