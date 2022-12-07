@@ -152,7 +152,7 @@ const PenerimaDetail = () => {
 
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md">
-									<TableFollowers data={penerimaDetail?.followers} />
+									<TableFollowers data={penerimaDetail?.followers} enableClickRow />
 								</div>
 							</div>
 						</div>

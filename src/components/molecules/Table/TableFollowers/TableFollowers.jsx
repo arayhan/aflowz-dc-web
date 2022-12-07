@@ -1,7 +1,10 @@
 import { Table, TableHeader } from '@/components/atoms';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const TableFollowers = ({ data }) => {
+export const TableFollowers = ({ data, enableClickRow }) => {
+	const navigate = useNavigate();
+
 	const columns = useMemo(
 		() => [
 			{
@@ -39,6 +42,8 @@ export const TableFollowers = ({ data }) => {
 		[]
 	);
 
+	const handleClickRow = (rowData) => navigate(`/penerima/${rowData.id}`);
+
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex items-center justify-between">
@@ -50,13 +55,12 @@ export const TableFollowers = ({ data }) => {
 				/>
 			</div>
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} />
+				<Table columns={columns} data={data} onClickRow={enableClickRow && handleClickRow} />
 			</div>
 		</div>
 	);
 };
 
 TableFollowers.defaultProps = {
-	params: {},
-	isShowFooter: true
+	data: []
 };
