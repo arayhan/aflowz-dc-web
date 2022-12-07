@@ -159,6 +159,17 @@ const states = (set, get) => ({
 		set({ processingEditStaff: false });
 
 		callback({ payload, success });
+	},
+
+	deleteStaff: async (staffID) => {
+		set({ processingDeletePenerima: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.deletePartner(staffID);
+
+		toastRequestResult(loader, success, 'Tim Internal deleted', payload?.odoo_error || payload?.message);
+		get().getStaffList();
+		set({ processingDeletePenerima: false });
 	}
 });
 

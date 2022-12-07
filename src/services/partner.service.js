@@ -77,6 +77,14 @@ export const postStaffCreate = async (params) => {
 	const setMonth = new Date(Date.parse(params?.birth_date)).getMonth() + 1;
 	const formatDate = `${splitDate[3]}-${setMonth}-${splitDate[2]}`;
 
+	const provinceDom = http.get(`/province/${params.province}`);
+	const cityDom = http.get(`/city/${params.city}`);
+	const districtDom = http.get(`/district/${params.district}`);
+	const villageDom = http.get(`/village/${params.village}`);
+	const getStaffTitle = http.get('partner/staff-title');
+	const getData = await Promise.all([provinceDom, cityDom, districtDom, villageDom, getStaffTitle]);
+	const findTitle = getData[4].data.data.items.find((val) => val.id === Number(params.staff_title));
+
 	const data = [
 		{
 			nik_number: params?.nik_number || '',
@@ -85,16 +93,16 @@ export const postStaffCreate = async (params) => {
 			birth_date: formatDate || '',
 			gender: params?.gender || '',
 			address: params?.address || '',
-			country_id: 100,
-			province_id: params?.province || 0,
-			city_id: params?.city || 0,
-			district_id: params?.district || 0,
-			village_id: params?.village || 0,
+			country: 'Indonesia',
+			province: getData[0].data.data.name || '',
+			city: getData[1].data.data.name || '',
+			district: getData[2].data.data.name || '',
 			mobile: params?.mobile || '',
 			email: params?.email || '',
 			religion: params?.religion || '',
-			staff_title_id: Number(params?.staff_title) || 0,
-			is_staff: true
+			staff_title: findTitle?.name || '',
+			is_staff: true,
+			village: getData[3].data.data.name || ''
 		}
 	];
 
