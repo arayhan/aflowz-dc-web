@@ -31,6 +31,7 @@ import VillageDetail from './pages/Village/VillageDetail';
 import ListPenerimaByProgram from './pages/Program/ListPenerimaProgram';
 import PenerimaForm from './pages/Penerima/PenerimaForm';
 import Dapil from './pages/Dapil/Dapil';
+import District from './pages/District/District';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -69,6 +70,7 @@ export const AppRoutes = () => {
 					<Route path="/city/create" element={<CityForm />} />
 					<Route path="/city/:cityID" element={<CityDetail />} />
 					<Route path="/city" element={<City />} />
+					<Route path="/district" element={<District />} />
 					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
