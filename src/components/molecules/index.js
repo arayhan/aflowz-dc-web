@@ -22,6 +22,7 @@ export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormKonstituen/FormKonstituen';
 export * from './Form/FormStaff/FormStaff';
 export * from './Form/FormVillage/FormVillage';
+export * from './Form/FormDistrict/FormDistrict';
 
 export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';

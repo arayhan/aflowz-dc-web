@@ -65,6 +65,21 @@ export const formVillageSchema = yup.object().shape(
 	['pic_mobile', 'pic_mobile']
 );
 
+export const formDistrictSchema = yup.object().shape(
+	{
+		name: yup.string().required('Nama program wajib diisi'),
+		city_id: yup.string().required('Kota wajib diisi'),
+		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
+		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
+		pic_mobile: yup
+			.string()
+			.required('Nomor PIC Kementerian wajib diisi')
+			.matches(/^[0-9]*$/, 'Nomor tidak valid')
+			.min(8, 'Minimal 8 angka')
+	},
+	['pic_mobile', 'pic_mobile']
+);
+
 export const formKonstituenSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama Institusi wajib diisi'),
