@@ -102,6 +102,7 @@ export const TableStaff = () => {
 					isReadonly={!isAdmin}
 					showButtonCreate={true}
 					feature={'Tim Internal'}
+					featurePath="/staff"
 				/>
 			</div>
 			<div className="overflow-x-auto">

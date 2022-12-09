@@ -102,6 +102,7 @@ export const TableCity = ({
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Kota"
+					featurePath="/city"
 					title={title || 'List Kota'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}

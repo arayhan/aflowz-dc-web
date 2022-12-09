@@ -159,6 +159,7 @@ export const TablePenerima = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
+					featurePath="/penerima"
 					title={title || 'Penerima Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
