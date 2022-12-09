@@ -103,6 +103,7 @@ export const TableDistrict = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Kecamatan"
+					featurePath="/district"
 					title={title || 'List Kecamatan'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
