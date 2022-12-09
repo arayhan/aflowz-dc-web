@@ -80,7 +80,7 @@ export const TableStaff = () => {
 		const offsetResult = (page - 1) * perPage;
 		const params = { limit: perPage, offset: offsetResult };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			getStaffList(params);
 		}

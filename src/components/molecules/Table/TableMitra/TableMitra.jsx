@@ -77,7 +77,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getProgramCategoryList({ ...defaultParams, ...params });

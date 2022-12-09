@@ -18,7 +18,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 		const offsetResult = (page - 1) * perPage;
 		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_staff: false };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			getPenerimaList(params);
 		}

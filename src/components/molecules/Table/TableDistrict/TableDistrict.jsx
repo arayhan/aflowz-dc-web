@@ -12,6 +12,7 @@ export const TableDistrict = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
+	onClickRow,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -74,13 +75,16 @@ export const TableDistrict = ({
 		[offset, perPage, page, isSystem]
 	);
 
-	const handleClickRow = (rowData) => navigate(`/district/${rowData.id}`);
+	const handleClickRow = (rowData) => {
+		if (onClickRow) onClickRow(rowData);
+		else navigate(`/district/${rowData.id}`);
+	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getDistrictList({ ...defaultParams, ...params });

@@ -93,7 +93,7 @@ export const TableKonstituen = ({ selectedType }) => {
 
 		if (selectedType) Object.assign(params, { konstituen_type: selectedType.konstituen_type });
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			getKonstituenList(params);
 		}
