@@ -102,7 +102,6 @@ export const TableDistrict = ({
 					title={title || 'List Kecamatan'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
-					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={'/district' + objectToQueryString(params)}
 				/>

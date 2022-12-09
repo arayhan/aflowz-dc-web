@@ -22,7 +22,7 @@ export const getDistrictList = async (params) => {
 
 export const getDistrictDetail = async (districtID) => {
 	try {
-		const response = await http.get('/page-detail/desa/' + districtID);
+		const response = await http.get('/page-detail/kecamatan/' + districtID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
