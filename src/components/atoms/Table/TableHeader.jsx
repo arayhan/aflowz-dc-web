@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 export const TableHeader = ({
 	feature,
+	featurePath,
 	title,
 	description,
 	isReadonly,
@@ -64,7 +65,7 @@ export const TableHeader = ({
 				)}
 				{!isReadonly && showButtonCreate && (
 					<Link
-						to={`${location.pathname}/create`}
+						to={`${featurePath || location.pathname}/create`}
 						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<span>Create {feature}</span>

@@ -33,6 +33,10 @@ import PenerimaForm from './pages/Penerima/PenerimaForm';
 import Attendance from './pages/Attendance/AttendanceList';
 import AttendanceCreateUpdate from './pages/Attendance/AttendanceCreateUpdate';
 import AttendanceDetail from './pages/Attendance/AttendanceDetail';
+import Dapil from './pages/Dapil/Dapil';
+import District from './pages/District/District';
+import DistrictDetail from './pages/District/DistrictDetail';
+import DistrictForm from './pages/District/DistrictForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -71,6 +75,11 @@ export const AppRoutes = () => {
 					<Route path="/city/create" element={<CityForm />} />
 					<Route path="/city/:cityID" element={<CityDetail />} />
 					<Route path="/city" element={<City />} />
+					<Route path="/district/update/:districtID" element={<DistrictForm />} />
+					<Route path="/district/create" element={<DistrictForm />} />
+					<Route path="/district/:districtID" element={<DistrictDetail />} />
+					<Route path="/district" element={<District />} />
+					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
 					<Route path="/program/:programID" element={<ProgramDetail />} />
@@ -88,6 +97,7 @@ export const AppRoutes = () => {
 					<Route path="/absensi/:attendanceID" element={<AttendanceDetail />} />
 					<Route path="/absensi/create" element={<AttendanceCreateUpdate />} />
 					<Route path="/absensi/update/:attendanceID" element={<AttendanceCreateUpdate />} />
+					<Route path="/dapil" element={<Dapil />} />
 				</Route>
 			</Route>
 		</Routes>

@@ -119,7 +119,7 @@ export const TableProgram = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getProgramList({ ...defaultParams, ...params });
@@ -138,6 +138,7 @@ export const TableProgram = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
+					featurePath="/program"
 					title={title || 'Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					mainRoute={'/program'}

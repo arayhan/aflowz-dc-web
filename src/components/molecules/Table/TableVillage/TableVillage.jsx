@@ -11,8 +11,8 @@ export const TableVillage = ({
 	params,
 	isReadonly,
 	isShowFooter,
-	isShowFilter,
 	isShowButtonSeeAll,
+	onClickRow,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -75,15 +75,18 @@ export const TableVillage = ({
 		[offset, perPage, page, isSystem]
 	);
 
-	const handleClickRow = (rowData) => navigate(`/village/${rowData.id}`);
+	const handleClickRow = (rowData) => {
+		if (onClickRow) onClickRow(rowData);
+		else navigate(`/village/${rowData.id}`);
+	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
+			setOffset(Math.abs(offsetResult));
 			getVillageList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount]);
@@ -101,7 +104,7 @@ export const TableVillage = ({
 				<TableHeader
 					feature="Desa"
 					title={title || 'List Desa'}
-					mainRoute={'/village'}
+					featurePath="/village"
 					seeAllLink={'/village' + objectToQueryString(params)}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}

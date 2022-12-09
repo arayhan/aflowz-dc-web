@@ -1,10 +1,11 @@
 import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
-import { useAuthStore, useCityStore } from '@/store';
+import { useAuthStore, useDistrictStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { objectToQueryString } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const TableCity = ({
+export const TableDistrict = ({
 	title,
 	displayedColumns,
 	params,
@@ -15,9 +16,9 @@ export const TableCity = ({
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
+
 	const { isSystem } = useAuthStore();
-	const { cityList, fetchingCityList } = useCityStore();
-	const { getCityList, deleteCity } = useCityStore();
+	const { districtList, fetchingDistrictList, getDistrictList, deleteDistrict } = useDistrictStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -37,11 +38,11 @@ export const TableCity = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama Kota',
+				Header: 'Nama Kecamatan',
 				accessor: 'name',
 				width: '100%',
 				minWidth: 300,
-				hidden: displayedColumns && !displayedColumns.includes('Nama Kota')
+				hidden: displayedColumns && !displayedColumns.includes('Nama Kecamatan')
 			},
 			{
 				Header: 'Detail',
@@ -52,7 +53,7 @@ export const TableCity = ({
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/city/${row.row.original.id}`}
+							linkTo={`/district/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -64,8 +65,8 @@ export const TableCity = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/city/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteCity(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/district/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteDistrict(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -76,45 +77,47 @@ export const TableCity = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/city/${rowData.id}`);
+		else navigate(`/district/${rowData.id}`);
 	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getCityList({ ...defaultParams, ...params });
+			getDistrictList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (cityList) {
-			setData(cityList.items);
-			setPageCount(Math.ceil(cityList.total / perPage));
+		if (districtList) {
+			setData(districtList.items);
+			setPageCount(Math.ceil(districtList.total / perPage));
 		}
-	}, [cityList]);
+	}, [districtList, pageCount]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="p-6">
 				<TableHeader
-					feature="Kota"
-					featurePath="/city"
-					title={title || 'List Kota'}
+					feature="Kecamatan"
+					featurePath="/district"
+					title={title || 'List Kecamatan'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonSeeAll={isShowButtonSeeAll}
+					seeAllLink={'/district' + objectToQueryString(params)}
 				/>
 			</div>
+
 			<div className="overflow-x-scroll">
 				<Table
 					columns={columns}
 					data={data}
+					loading={fetchingDistrictList || districtList === null}
 					onClickRow={enableClickRow && handleClickRow}
-					loading={fetchingCityList || cityList === null}
 				/>
 			</div>
 			{isShowFooter && (
@@ -126,9 +129,8 @@ export const TableCity = ({
 	);
 };
 
-TableCity.defaultProps = {
+TableDistrict.defaultProps = {
 	params: {},
-	onClickRow: null,
-	isShowFilter: true,
-	isShowFooter: true
+	isShowFooter: true,
+	isShowFilter: true
 };

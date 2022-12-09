@@ -140,7 +140,7 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getPenerimaList({ ...defaultParams, ...params });
@@ -159,6 +159,7 @@ export const TablePenerima = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Penerima"
+					featurePath="/penerima"
 					title={title || 'Penerima Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
@@ -179,6 +180,7 @@ export const TablePenerima = ({
 								containerClassName="w-full lg:w-60"
 								value={params.program_id ? Number(params.program_id) : undefined}
 								showLabel={false}
+								showPeriodeOnLabel
 								onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
 							/>
 							<InputSelectInstitusi

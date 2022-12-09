@@ -10,6 +10,7 @@ export const InputSelectCity = forwardRef(
 
 		useEffect(() => {
 			if (params) getCityList({ ...params });
+			else getCityList();
 		}, [params]);
 
 		useEffect(() => {

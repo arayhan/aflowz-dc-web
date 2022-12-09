@@ -1,9 +1,9 @@
-import { BannerFeature, TableVillage } from '@/components/molecules';
+import { BannerFeature, TableDistrict } from '@/components/molecules';
 import { queryStringToObject } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const Village = () => {
+const District = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
@@ -14,16 +14,16 @@ const Village = () => {
 	return (
 		<div className="bg-gray-100">
 			<BannerFeature
-				title="Desa"
+				title="Kecamatan"
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 				backButtonLinkTo={'/'}
 				backButtonText="Kembali ke Home"
 			/>
 			<div className="container py-16">
-				<TableVillage params={params} />
+				<TableDistrict params={params} />
 			</div>
 		</div>
 	);
 };
 
-export default Village;
+export default District;

@@ -77,7 +77,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		if (page > pageCount) setPage(pageCount);
+		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getProgramCategoryList({ ...defaultParams, ...params });
@@ -96,6 +96,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Mitra"
+					featurePath="/mitra"
 					title={'List Mitra'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
