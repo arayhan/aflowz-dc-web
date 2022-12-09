@@ -179,6 +179,7 @@ export const TablePenerima = ({
 								containerClassName="w-full lg:w-60"
 								value={params.program_id ? Number(params.program_id) : undefined}
 								showLabel={false}
+								showPeriodeOnLabel
 								onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
 							/>
 							<InputSelectInstitusi

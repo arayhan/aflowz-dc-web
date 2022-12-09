@@ -3,14 +3,15 @@ import { useKonstituenStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectInstitusi = forwardRef(
-	({ containerClassName, error, onChange, placeholder, showLabel, ...props }, ref) => {
+	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
 		const { konstituenList, fetchingKonstituenList, getKonstituenList } = useKonstituenStore();
 
 		const [options, setOptions] = useState([]);
 
 		useEffect(() => {
-			getKonstituenList();
-		}, []);
+			if (params) getKonstituenList({ limit: 10, offset: 0, ...params });
+			else getKonstituenList();
+		}, [params]);
 
 		useEffect(() => {
 			if (konstituenList?.total > 0) {
@@ -30,7 +31,7 @@ export const InputSelectInstitusi = forwardRef(
 					options={options}
 					loading={fetchingKonstituenList}
 					onChange={onChange}
-					placeholder="Pilih Institusi"
+					placeholder={placeholder || 'Pilih Institusi'}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}

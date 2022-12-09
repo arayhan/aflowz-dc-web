@@ -33,7 +33,7 @@ const states = (set, get) => ({
 		set({ fetchingCity: false });
 	},
 
-	getCityList: async (params) => {
+	getCityList: async (params = {}) => {
 		set({ fetchingCityList: true });
 
 		const defaultParams = { limit: 0, offset: 0 };
