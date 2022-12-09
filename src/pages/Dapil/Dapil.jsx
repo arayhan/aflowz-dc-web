@@ -51,23 +51,15 @@ const Dapil = () => {
 
 				<div>
 					{!selectedCity && (
-						<TableCity
-							title="Pilih Kota"
-							onClickRow={(rowData) => setSelectedCity(rowData)}
-							displayedColumns={['#', 'Nama Kota']}
-							enableClickRow
-							isReadonly
-						/>
+						<TableCity title="Pilih Kota" onClickRow={(rowData) => setSelectedCity(rowData)} enableClickRow />
 					)}
 
 					{selectedCity && !selectedDistrict && (
 						<TableDistrict
 							title="Pilih Kecamatan"
 							onClickRow={(rowData) => setSelectedDistrict(rowData)}
-							displayedColumns={['#', 'Nama Kecamatan']}
 							enableClickRow
 							params={{ city_id: selectedCity.id }}
-							isReadonly
 						/>
 					)}
 
@@ -75,10 +67,8 @@ const Dapil = () => {
 						<TableVillage
 							title="Pilih Desa/Kelurahan"
 							onClickRow={(rowData) => setSelectedVillage(rowData)}
-							displayedColumns={['#', 'Desa/Kelurahan']}
 							enableClickRow
 							params={{ district_id: selectedDistrict.id }}
-							isReadonly
 						/>
 					)}
 				</div>
