@@ -104,7 +104,7 @@ export const TableVillage = ({
 				<TableHeader
 					feature="Desa"
 					title={title || 'List Desa'}
-					mainRoute={'/village'}
+					featurePath="/village"
 					seeAllLink={'/village' + objectToQueryString(params)}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}

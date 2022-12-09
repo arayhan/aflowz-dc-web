@@ -96,6 +96,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Mitra"
+					featurePath="/mitra"
 					title={'List Mitra'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}

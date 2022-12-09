@@ -138,6 +138,7 @@ export const TableProgram = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Program"
+					featurePath="/program"
 					title={title || 'Program'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					mainRoute={'/program'}

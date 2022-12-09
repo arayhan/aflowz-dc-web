@@ -115,6 +115,7 @@ export const TableKonstituen = ({ selectedType }) => {
 					isReadonly={!isSystem}
 					showButtonCreate={true}
 					feature={'Institusi'}
+					featurePath="/institusi"
 				/>
 			</div>
 			<div className="overflow-x-auto">
