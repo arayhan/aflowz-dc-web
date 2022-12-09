@@ -33,6 +33,8 @@ export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstitu
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
+export * from './Search/SearchGlobal/SearchGlobal';
+
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
 export * from './InputSelect/InputSelectInstitusi/InputSelectInstitusi';

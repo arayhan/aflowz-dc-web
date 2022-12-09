@@ -2,10 +2,10 @@ import { forwardRef } from 'react';
 import { InputError } from '../InputError/InputError';
 import { InputLabel } from '../InputLabel/InputLabel';
 
-export const InputText = forwardRef(({ label, placeholder, error, ...props }, ref) => {
+export const InputText = forwardRef(({ label, placeholder, error, showLabel, ...props }, ref) => {
 	return (
 		<div className="space-y-2 flex flex-col justify-start">
-			<InputLabel text={label} name={props.name} />
+			{showLabel && <InputLabel text={label} name={props.name} />}
 			<input
 				{...props}
 				ref={ref}
@@ -21,3 +21,6 @@ export const InputText = forwardRef(({ label, placeholder, error, ...props }, re
 });
 
 InputText.displayName = 'InputText';
+InputText.defaultProps = {
+	showLabel: true
+};

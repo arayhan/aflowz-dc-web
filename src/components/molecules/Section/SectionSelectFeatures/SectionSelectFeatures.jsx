@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MENUS } from '@/utils/constants';
+import { SearchGlobal } from '../../Search/SearchGlobal/SearchGlobal';
 
 export const SectionSelectFeatures = () => {
 	return (
@@ -12,6 +13,9 @@ export const SectionSelectFeatures = () => {
 						eveniet tempora iusto hic obcaecati repellendus voluptatem. Natus porro assumenda, saepe quis dolorum
 						perferendis?
 					</div>
+				</div>
+				<div className="max-w-screen-lg mx-auto">
+					<SearchGlobal />
 				</div>
 				<div className="flex justify-center">
 					<div className="max-w-screen-2xl w-full flex flex-wrap justify-center gap-3 md:gap-5">
