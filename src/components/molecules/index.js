@@ -28,6 +28,7 @@ export * from './Table/TableMitra/TableMitra';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 export * from './Table/TableVillage/TableVillage';
+export * from './Table/TableDistrict/TableDistrict';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';

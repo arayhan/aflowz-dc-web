@@ -1,4 +1,4 @@
-import { BannerFeature } from '@/components/molecules';
+import { BannerFeature, TableDistrict } from '@/components/molecules';
 import { queryStringToObject } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -19,7 +19,9 @@ const District = () => {
 				backButtonLinkTo={'/'}
 				backButtonText="Kembali ke Home"
 			/>
-			<div className="container py-16">{/* <TableDistrict params={params} /> */}</div>
+			<div className="container py-16">
+				<TableDistrict params={params} />
+			</div>
 		</div>
 	);
 };
