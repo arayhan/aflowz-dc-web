@@ -7,3 +7,4 @@ export * from './partner.store';
 export * from './province.store';
 export * from './village.store';
 export * from './district.store';
+export * from './attendance.store';
