@@ -21,7 +21,6 @@ const Dapil = () => {
 						<DapilBadge
 							title={'Kota : '}
 							dataText={selectedCity.name}
-							dataLinkTo={`/city/${selectedCity.id}`}
 							onRemove={() => {
 								setSelectedCity(null);
 								setSelectedDistrict(null);
@@ -33,7 +32,6 @@ const Dapil = () => {
 							<DapilBadge
 								title={'Kecamatan : '}
 								dataText={selectedDistrict.name}
-								dataLinkTo={`/district/${selectedDistrict.id}`}
 								onRemove={() => {
 									setSelectedDistrict(null);
 									setSelectedVillage(null);
@@ -45,7 +43,6 @@ const Dapil = () => {
 							<DapilBadge
 								title={'Desa/Kelurahan : '}
 								dataText={selectedVillage.name}
-								dataLinkTo={`/village/${selectedVillage.id}`}
 								onRemove={() => setSelectedVillage(null)}
 							/>
 						)}

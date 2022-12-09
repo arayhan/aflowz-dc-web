@@ -1,12 +1,11 @@
-import { Button, ButtonAction } from '@/components/atoms';
-import { ACTION_TYPES } from '@/utils/constants';
+import { Button } from '@/components/atoms';
 import React from 'react';
 
-export const DapilBadge = ({ title, dataText, dataLinkTo, onRemove }) => {
+export const DapilBadge = ({ title, dataText, onRemove }) => {
 	return (
-		<div className="inline-flex items-center border p-3 space-x-2 rounded-md">
+		<div className="inline-flex items-center border p-2 space-x-2 rounded-md text-sm">
 			<div>{title}</div>
-			<ButtonAction text={dataText} action={ACTION_TYPES.SEE_DETAIL} linkTo={dataLinkTo} />
+			<div className="font-semibold">{dataText}</div>
 			<Button variant={'danger'} className="text-xs px-3 py-2 rounded-sm" onClick={onRemove}>
 				Hapus
 			</Button>
