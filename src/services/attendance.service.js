@@ -47,12 +47,22 @@ export const createAttendance = async (params) => {
 
 export const updateAttendance = async (attendanceID, params) => {
 	try {
-		const data = {
-			attendance_staff_ids: params?.attendance || [], // [19, 8]
-			abscene_staff_ids: params?.abscene || [] // [19, 8]
+		let att = [];
+		let abs = [];
+		params?.data.forEach((val) => {
+			if (val.desc === 2) {
+				att.push(val.id);
+			} else {
+				abs.push(val.id);
+			}
+		});
+
+		const request = {
+			attendance_staff_ids: att || [], // [19, 8]
+			abscene_staff_ids: abs || [] // [19, 8]
 		};
 
-		const response = await http.put(`/attendance/${attendanceID}`, data);
+		const response = await http.put(`/attendance/${attendanceID}`, request);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

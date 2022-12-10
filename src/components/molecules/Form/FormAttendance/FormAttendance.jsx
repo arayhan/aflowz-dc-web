@@ -28,7 +28,7 @@ export const FormAttendance = () => {
 				Header: 'NIK',
 				minWidth: 175,
 				Cell: (row) => {
-					return <div className="text-gray-400">{row.row.original.nik_number}</div>;
+					return <div>{row.row.original.nik_number}</div>;
 				}
 			},
 			{
@@ -59,7 +59,7 @@ export const FormAttendance = () => {
 				}
 			}
 		],
-		[]
+		[dataTable]
 	);
 
 	const { attendanceID } = useParams();
@@ -75,10 +75,25 @@ export const FormAttendance = () => {
 		clearStateAttendance
 	} = useAttendanceStore();
 
+	useEffect(() => {
+		if (attendanceID) getAttendance(attendanceID);
+	}, [attendanceID]);
+
+	useEffect(() => {
+		if (attendanceID && attendance) {
+			setDate(new Date(attendance?.date));
+			let newAtt = [];
+			let newAbs = [];
+			attendance?.list_attendance.forEach((val) => newAtt.push({ ...val, desc: 2, desc_name: 'Hadir' }));
+			attendance?.list_abscene.forEach((val) => newAbs.push({ ...val, desc: 1, desc_name: 'Tidak Hadir' }));
+			setDataTable([...newAtt, ...newAbs]);
+		}
+	}, [attendanceID, attendance]);
+
 	const onSubmitAttendance = () => {
 		if (attendanceID) {
-			updateAttendance(attendanceID, values, ({ success }) => {
-				if (success) navigate(`/absensi`);
+			updateAttendance(attendanceID, { data: dataTable }, ({ payload, success }) => {
+				if (success) navigate(`/absensi/${payload.id}`);
 			});
 		} else {
 			createAttendance({ date: date, data: dataTable }, ({ payload, success }) => {
@@ -88,7 +103,7 @@ export const FormAttendance = () => {
 	};
 
 	const onAdded = (pers, desc) => {
-		let exist = dataTable.find((val) => val.value === pers.value);
+		let exist = dataTable.find((val) => val.id === pers.value);
 		let data = {
 			id: pers.value,
 			name: pers.label?.split(' - ')[1],
@@ -98,14 +113,13 @@ export const FormAttendance = () => {
 		if (exist === undefined) {
 			if (desc === 1) {
 				setDataTable([...dataTable, { ...data, desc_name: 'Tidak Hadir' }]);
-				setPerson(null);
-				setDescription(0);
+				reset();
 			} else {
 				setDataTable([...dataTable, { ...data, desc_name: 'Hadir' }]);
-				setPerson(null);
-				setDescription(0);
+				reset();
 			}
 		} else {
+			reset();
 			setShowError(true);
 			setTimeout(() => {
 				setShowError(false);
@@ -113,51 +127,39 @@ export const FormAttendance = () => {
 		}
 	};
 
-	useEffect(() => {
-		console.log('useeffect', dataTable);
-	}, [dataTable]);
+	const reset = () => {
+		setPerson(null);
+		setDescription(0);
+	};
 
 	const onDelete = (val) => {
-		console.log('ondelete', dataTable);
-		alert('Still on Progress');
-		// let filteredArray = dataTable.filter((item) => item !== val);
-		// setDataTable(filteredArray);
+		let temp = [...dataTable];
+		let index = temp.findIndex((value) => value.id === val.id);
+		temp.splice(index, 1);
+		setDataTable(temp);
 	};
-
-	window.onbeforeunload = function () {
-		return 'Data will be lost if you leave the page, are you sure?';
-	};
-
-	useEffect(() => {
-		if (attendanceID) getAttendance(attendanceID);
-	}, [attendanceID]);
-
-	useEffect(() => {
-		if (attendanceID && attendance) {
-			setDate(new Date(attendance?.date));
-			setValue('date', attendance.date || null);
-			setValue('attendance', attendance?.list_attendance || []);
-			setValue('abscene', attendance?.list_abscene || []);
-		}
-	}, [attendanceID, attendanceID]);
 
 	useEffect(() => () => clearStateAttendance(), []);
 
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{attendanceID ? 'Edit' : 'Tambah'} Absensi</div>
+				<div className="font-light text-xl">
+					{attendanceID ? 'Edit' : 'Tambah'} Absensi {attendanceID && `Tanggal ${date.toLocaleDateString('id-ID')}`}
+				</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
-			<div className="grid md:grid-cols-3 gap-x-8 gap-y-6">
-				<div className="space-y-1">
-					<InputLabel text={'Tanggal Input Absensi'} />
-					<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
-						<InputSelectDate selectedDate={date} disabled={false} />
+			{!attendanceID && (
+				<div className="grid md:grid-cols-3 gap-x-8 gap-y-6">
+					<div className="space-y-1">
+						<InputLabel text={'Tanggal Absensi'} />
+						<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
+							<InputSelectDate selectedDate={date} disabled={attendanceID ? true : false} />
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 			<div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6 items-end">
 				<div className="md:col-span-2">
 					<InputSelectStaff

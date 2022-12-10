@@ -61,7 +61,7 @@ export const TableAttendance = () => {
 					return (
 						isSystem && (
 							<div className="grid grid-cols-2 gap-2">
-								{/* <ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/absensi/update/${row.row.original.id}`} /> */}
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/absensi/update/${row.row.original.id}`} />
 								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteAttendance(row.row.original.id)} />
 							</div>
 						)

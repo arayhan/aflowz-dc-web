@@ -40,14 +40,14 @@ const AttendanceDetail = () => {
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 											</div>
 										</div>
-										{/* <div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+										<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
 											<ButtonAction
 												action={ACTION_TYPES.UPDATE}
 												linkTo={`/absensi/update/${params.attendanceID}`}
 												className={'w-full md:w-auto text-base px-5 py-3 rounded-md'}
 												text="Update"
 											/>
-										</div> */}
+										</div>
 									</div>
 									<hr />
 								</div>
