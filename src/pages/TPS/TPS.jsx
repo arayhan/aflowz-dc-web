@@ -19,7 +19,9 @@ const TPS = () => {
 				backButtonLinkTo={'/'}
 				backButtonText="Kembali ke Home"
 			/>
-			<div className="container py-16">{/* <TableTPS params={params} /> */}</div>
+			<div className="container py-16">
+				<TableTPS params={params} />
+			</div>
 		</div>
 	);
 };
