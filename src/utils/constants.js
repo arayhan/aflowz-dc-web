@@ -38,5 +38,6 @@ export const MENUS = [
 	{ title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/village' },
 	{ title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/city' },
 	{ title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' },
-	{ title: 'Dapil', icon: require('@/images/icons/box.svg').default, path: '/dapil' }
+	{ title: 'Dapil', icon: require('@/images/icons/box.svg').default, path: '/dapil' },
+	{ title: 'Absensi', icon: require('@/images/icons/box.svg').default, path: '/absensi' }
 ];

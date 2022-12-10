@@ -2,19 +2,21 @@ import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { usePartnerStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectStaff = forwardRef(({ error, onChange, text, ...props }, ref) => {
+export const InputSelectStaff = forwardRef(({ error, onChange, text, params, ...props }, ref) => {
 	const { staffList, fetchingStaffList, getStaffList } = usePartnerStore();
 
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		getStaffList({ is_staff: true, limit: 10, offset: 0 });
-	}, []);
+		const defaultParams = { is_staff: true, limit: 10, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+		getStaffList(requestParams);
+	}, [params]);
 
 	useEffect(() => {
 		if (staffList?.total > 0) {
 			const mapStaff = staffList.items.map((staff) => ({
-				label: staff.name,
+				label: `${staff.nik_number} - ${staff.name}`,
 				value: staff.id
 			}));
 

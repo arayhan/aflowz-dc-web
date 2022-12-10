@@ -167,6 +167,7 @@ export const FormKonstituen = () => {
 								setValue('pic_staff_id', value);
 								setError('pic_staff_id', null);
 							}}
+							params={{ limit: 0, offset: 0 }}
 							error={error}
 						/>
 					)}

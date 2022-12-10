@@ -5,7 +5,7 @@ import range from 'lodash/range';
 import { BsCalendar2Event } from 'react-icons/bs';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const InputSelectDate = ({ selectedDate, onChange }) => {
+export const InputSelectDate = ({ selectedDate, onChange, disabled }) => {
 	const years = range(1950, getYear(new Date()) + 1, 1);
 	const months = [
 		'January',
@@ -63,13 +63,14 @@ export const InputSelectDate = ({ selectedDate, onChange }) => {
 			)}
 			selected={selectedDate}
 			onChange={onChange}
+			disabled={disabled}
 		/>
 	);
 };
 
 const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
 	<button type="button" className="flex justify-between items-center w-full" onClick={onClick} ref={ref}>
-		{value || <p className="text-gray-400">{'Pilih Tanggal Lahir'}</p>}
+		{value || <p className="text-gray-400">{'Pilih Tanggal'}</p>}
 		<BsCalendar2Event />
 	</button>
 ));

@@ -1,8 +1,6 @@
 import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
-import { toast } from 'react-toastify';
-import { SERVICE_KONSTITUEN } from '@/services';
 import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableKonstituen = ({ selectedType }) => {

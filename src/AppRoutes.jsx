@@ -30,6 +30,9 @@ import VillageForm from './pages/Village/VillageForm';
 import VillageDetail from './pages/Village/VillageDetail';
 import ListPenerimaByProgram from './pages/Program/ListPenerimaProgram';
 import PenerimaForm from './pages/Penerima/PenerimaForm';
+import Attendance from './pages/Attendance/AttendanceList';
+import AttendanceCreateUpdate from './pages/Attendance/AttendanceCreateUpdate';
+import AttendanceDetail from './pages/Attendance/AttendanceDetail';
 import Dapil from './pages/Dapil/Dapil';
 import District from './pages/District/District';
 import DistrictDetail from './pages/District/DistrictDetail';
@@ -91,6 +94,11 @@ export const AppRoutes = () => {
 					<Route path="/staff/create" element={<StaffCreate />} />
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
 					<Route path="/staff/:staffID" element={<StaffDetail />} />
+					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
+					<Route path="/absensi" element={<Attendance />} />
+					<Route path="/absensi/:attendanceID" element={<AttendanceDetail />} />
+					<Route path="/absensi/create" element={<AttendanceCreateUpdate />} />
+					<Route path="/absensi/update/:attendanceID" element={<AttendanceCreateUpdate />} />
 					<Route path="/dapil" element={<Dapil />} />
 					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
 					<Route path="/TPS/create" element={<TPSForm />} />
