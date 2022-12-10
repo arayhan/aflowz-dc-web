@@ -72,8 +72,10 @@ const Dapil = () => {
 								setAreaData({ ...areaData, district: rowData, village: null, tps: null });
 								setActiveArea(DAPIL_AREA_BREADCRUMB_ITEMS.VILLAGE);
 							}}
-							enableClickRow
 							params={{ ...tableParams, city_id: areaData.city.id }}
+							setParams={setTableParams}
+							displayedColumns={['#', 'Nama Kecamatan', 'Nama PIC', 'Pilih']}
+							enableClickRow
 						/>
 					)}
 
@@ -84,8 +86,10 @@ const Dapil = () => {
 								setAreaData({ ...areaData, village: rowData, tps: null });
 								setActiveArea(DAPIL_AREA_BREADCRUMB_ITEMS.TPS);
 							}}
-							enableClickRow
 							params={{ ...tableParams, district_id: areaData.district.id }}
+							setParams={setTableParams}
+							displayedColumns={['#', 'Nama Desa', 'Nama PIC', 'Pilih']}
+							enableClickRow
 						/>
 					)}
 
