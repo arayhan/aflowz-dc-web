@@ -1,5 +1,5 @@
 import { Breadcrumb } from '@/components/atoms';
-import { BannerFeature, TableCity, TableDistrict, TableVillage } from '@/components/molecules';
+import { BannerFeature, TableCity, TableDistrict, TableTPS, TableVillage } from '@/components/molecules';
 import { useState, useEffect } from 'react';
 import { DapilBadge } from './components/DapilBadge';
 
@@ -16,8 +16,7 @@ const Dapil = () => {
 	const [areaData, setAreaData] = useState({
 		city: null,
 		district: null,
-		village: null,
-		tps: null
+		village: null
 	});
 
 	useEffect(() => {
@@ -41,12 +40,12 @@ const Dapil = () => {
 				/>
 
 				{areaData.city && (
-					<div className="flex bg-white shadow-md p-3 rounded-md gap-2">
+					<div className="grid grid-cols-2 md:flex bg-white shadow-md p-3 rounded-md gap-2">
 						<DapilBadge title={'Kota : '} dataText={areaData.city.name} />
 
 						{areaData.district && <DapilBadge title={'Kecamatan : '} dataText={areaData.district.name} />}
-
 						{areaData.village && <DapilBadge title={'Desa/Kelurahan : '} dataText={areaData.village.name} />}
+						{areaData.tps && <DapilBadge title={'TPS : '} dataText={areaData.tps.name} />}
 					</div>
 				)}
 
@@ -93,7 +92,14 @@ const Dapil = () => {
 						/>
 					)}
 
-					{activeArea.value === DAPIL_AREA_BREADCRUMB_ITEMS.TPS.value && <div>Table TPS : Coming Soon</div>}
+					{activeArea.value === DAPIL_AREA_BREADCRUMB_ITEMS.TPS.value && (
+						<TableTPS
+							title="Pilih TPS"
+							params={{ ...tableParams, village_id: areaData.village.id }}
+							setParams={setTableParams}
+							displayedColumns={['#', 'Nama TPS', 'Nama PIC', 'Pilih']}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

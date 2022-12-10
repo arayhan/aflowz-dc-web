@@ -161,7 +161,7 @@ export const TableVillage = ({
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}
-								placeholder="Cari nama kecamatan"
+								placeholder="Cari nama desa/kelurahan"
 								onChange={(event) => {
 									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
 								}}
