@@ -80,20 +80,6 @@ export const TableTPS = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 180,
-				hidden: displayedColumns && !displayedColumns.includes('Detail'),
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/tps/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
 				hidden: !isSystem || isReadonly,
@@ -161,7 +147,7 @@ export const TableTPS = ({
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}
-								placeholder="Cari nama tPS"
+								placeholder="Cari nama TPS"
 								onChange={(event) => {
 									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
 								}}
