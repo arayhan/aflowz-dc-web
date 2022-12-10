@@ -1,4 +1,4 @@
-import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
@@ -45,6 +45,39 @@ export const TableCity = ({
 				width: '100%',
 				minWidth: 300,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kota')
+			},
+			{
+				Header: 'Nama PIC',
+				width: '100%',
+				minWidth: 300,
+				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				Cell: (row) => {
+					return row.row.original.pic_staff?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
+							text={row.row.original.pic_staff?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'Pilih',
+				minWidth: 180,
+				hidden: !onClickRow || (displayedColumns && !displayedColumns.includes('Pilih')),
+				Cell: (row) => {
+					return (
+						<Button
+							className="min-w-[100px] w-full py-2 text-xs rounded-sm"
+							variant="info"
+							onClick={() => handleClickRow(row.row.original)}
+						>
+							Pilih Kota
+						</Button>
+					);
+				}
 			},
 			{
 				Header: 'Detail',
@@ -123,9 +156,8 @@ export const TableCity = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end text-sm gap-4">
+						<div className="w-full flex justify-end gap-4">
 							<InputText
-								containerClassName="w-60"
 								value={params?.keyword || ''}
 								showLabel={false}
 								placeholder="Cari nama kota"
