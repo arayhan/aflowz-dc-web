@@ -1,6 +1,7 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,10 +9,12 @@ export const TableCity = ({
 	title,
 	displayedColumns,
 	params,
+	setParams,
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
 	onClickRow,
+	isShowFilter,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -79,6 +82,12 @@ export const TableCity = ({
 		else navigate(`/city/${rowData.id}`);
 	};
 
+	const handleSetFilter = (key, params) => {
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		if (setParams) setParams(queryStringToObject(updatedParams));
+		else navigate('/city' + updatedParams, { replace: true });
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -109,6 +118,25 @@ export const TableCity = ({
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>
+			{isShowFilter && (
+				<>
+					<hr />
+
+					<div className="px-6 py-4">
+						<div className="w-full flex justify-end text-sm gap-4">
+							<InputText
+								containerClassName="w-60"
+								value={params?.keyword || ''}
+								showLabel={false}
+								placeholder="Cari nama kota"
+								onChange={(event) => {
+									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+								}}
+							/>
+						</div>
+					</div>
+				</>
+			)}
 			<div className="overflow-x-scroll">
 				<Table
 					columns={columns}
