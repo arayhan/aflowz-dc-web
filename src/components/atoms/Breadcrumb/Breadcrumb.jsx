@@ -20,10 +20,10 @@ export const Breadcrumb = ({ items, activeItem, completedItemCount, onClickItem 
 						<Fragment key={item.value}>
 							<button
 								className={`inline-flex items-center px-6 py-2 bg-white rounded-md space-x-3 whitespace-nowrap
-									${!isCompleted && !isActive ? 'opacity-60 text-gray-500' : ''}
-									${item.value === activeItem.value ? 'border border-primary-500' : ''}
+									${!isCompleted && !isActive ? 'opacity-60 text-gray-500 cursor-default' : ''}
+									${item.value === activeItem.value ? 'border-2 border-primary-500' : ''}
 								`}
-								onClick={() => handleClickItem(item, index, isCompleted, isActive)}
+								onClick={() => handleClickItem(item, isCompleted, isActive)}
 							>
 								<span>{item.label}</span>
 							</button>
