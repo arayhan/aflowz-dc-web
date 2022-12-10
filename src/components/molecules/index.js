@@ -24,6 +24,7 @@ export * from './Form/FormStaff/FormStaff';
 export * from './Form/FormVillage/FormVillage';
 export * from './Form/FormAttendance/FormAttendance';
 export * from './Form/FormDistrict/FormDistrict';
+export * from './Form/FormTPS/FormTPS';
 
 export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';
@@ -31,6 +32,7 @@ export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 export * from './Table/TableVillage/TableVillage';
 export * from './Table/TableDistrict/TableDistrict';
+export * from './Table/TableTPS/TableTPS';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';

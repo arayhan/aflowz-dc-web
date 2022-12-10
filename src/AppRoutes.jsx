@@ -37,6 +37,8 @@ import Dapil from './pages/Dapil/Dapil';
 import District from './pages/District/District';
 import DistrictDetail from './pages/District/DistrictDetail';
 import DistrictForm from './pages/District/DistrictForm';
+import TPS from './pages/TPS/TPS';
+import TPSForm from './pages/TPS/TPSForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -98,6 +100,9 @@ export const AppRoutes = () => {
 					<Route path="/absensi/create" element={<AttendanceCreateUpdate />} />
 					<Route path="/absensi/update/:attendanceID" element={<AttendanceCreateUpdate />} />
 					<Route path="/dapil" element={<Dapil />} />
+					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
+					<Route path="/TPS/create" element={<TPSForm />} />
+					<Route path="/tps" element={<TPS />} />
 				</Route>
 			</Route>
 		</Routes>

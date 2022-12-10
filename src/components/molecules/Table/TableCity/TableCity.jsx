@@ -1,6 +1,7 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
+import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,10 +9,12 @@ export const TableCity = ({
 	title,
 	displayedColumns,
 	params,
+	setParams,
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
 	onClickRow,
+	isShowFilter,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -42,6 +45,39 @@ export const TableCity = ({
 				width: '100%',
 				minWidth: 300,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kota')
+			},
+			{
+				Header: 'Nama PIC',
+				width: '100%',
+				minWidth: 300,
+				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				Cell: (row) => {
+					return row.row.original.pic_staff?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
+							text={row.row.original.pic_staff?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'Pilih',
+				minWidth: 180,
+				hidden: !onClickRow || (displayedColumns && !displayedColumns.includes('Pilih')),
+				Cell: (row) => {
+					return (
+						<Button
+							className="min-w-[100px] w-full py-2 text-xs rounded-sm"
+							variant="info"
+							onClick={() => handleClickRow(row.row.original)}
+						>
+							Pilih Kota
+						</Button>
+					);
+				}
 			},
 			{
 				Header: 'Detail',
@@ -79,6 +115,12 @@ export const TableCity = ({
 		else navigate(`/city/${rowData.id}`);
 	};
 
+	const handleSetFilter = (key, params) => {
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		if (setParams) setParams(queryStringToObject(updatedParams));
+		else navigate('/city' + updatedParams, { replace: true });
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -109,6 +151,24 @@ export const TableCity = ({
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>
+			{isShowFilter && (
+				<>
+					<hr />
+
+					<div className="px-6 py-4">
+						<div className="w-full flex justify-end gap-4">
+							<InputText
+								value={params?.keyword || ''}
+								showLabel={false}
+								placeholder="Cari nama kota"
+								onChange={(event) => {
+									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+								}}
+							/>
+						</div>
+					</div>
+				</>
+			)}
 			<div className="overflow-x-scroll">
 				<Table
 					columns={columns}
