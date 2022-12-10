@@ -1,8 +1,10 @@
 import { SERVICE_TPS } from '@/services';
+import { toastRequestResult } from '@/utils/helpers';
+import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const states = (set) => ({
+const states = (set, get) => ({
 	fetchingTPSItem: false,
 	fetchingTPSList: false,
 	fetchingTPSDetail: false,
@@ -75,7 +77,7 @@ const states = (set) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_TPS.deleteTPS(TPSID);
 
-		toastRequestResult(loader, success, 'Desa deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'TPS deleted', payload?.odoo_error || payload?.message);
 		get().getTPSList();
 		set({ processingDeleteTPS: false });
 	},

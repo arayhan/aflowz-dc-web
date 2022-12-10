@@ -35,6 +35,7 @@ import District from './pages/District/District';
 import DistrictDetail from './pages/District/DistrictDetail';
 import DistrictForm from './pages/District/DistrictForm';
 import TPS from './pages/TPS/TPS';
+import TPSForm from './pages/TPS/TPSForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -91,6 +92,8 @@ export const AppRoutes = () => {
 					<Route path="/staff/update/:staffID" element={<StaffUpdate />} />
 					<Route path="/staff/:staffID" element={<StaffDetail />} />
 					<Route path="/dapil" element={<Dapil />} />
+					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
+					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
 				</Route>
 			</Route>
