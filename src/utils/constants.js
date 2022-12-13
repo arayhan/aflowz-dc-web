@@ -41,4 +41,5 @@ export const MENUS = [
 	{ title: 'Dapil', icon: require('@/images/icons/box.svg').default, path: '/dapil' },
 	{ title: 'Absensi', icon: require('@/images/icons/box.svg').default, path: '/absensi' },
 	{ title: 'Inventory', icon: require('@/images/icons/box.svg').default, path: '/stockiest' }
+	{ title: 'Kegiatan', icon: require('@/images/icons/box.svg').default, path: '/activity' }
 ];

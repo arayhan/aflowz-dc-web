@@ -9,8 +9,6 @@ const ProgramForm = () => {
 			<BannerFeature
 				title={`Program - ${params.programID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/program'}
-				backButtonText="Kembali ke List Program"
 			/>
 
 			<section className="bg-gray-100">

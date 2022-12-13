@@ -29,11 +29,11 @@ export const FormMitra = () => {
 	const onSubmitProgramCategory = (values) => {
 		if (programCategoryID) {
 			updateProgramCategory(programCategoryID, values, ({ success }) => {
-				if (success) navigate(`/mitra/${programCategoryID}`);
+				if (success) navigate(`/mitra/${programCategoryID}`, { replace: true });
 			});
 		} else {
 			createProgramCategory(values, ({ payload, success }) => {
-				if (success) navigate(`/mitra/${payload.id}`);
+				if (success) navigate(`/mitra/${payload.id}`, { replace: true });
 			});
 		}
 	};

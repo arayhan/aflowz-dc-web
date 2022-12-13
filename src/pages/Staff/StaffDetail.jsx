@@ -66,12 +66,7 @@ const StaffDetail = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={staff ? `${staff.name}` : 'Detail Tim Internal'}
-				loading={fetchingStaff}
-				backButtonLinkTo={'/staff'}
-				backButtonText="Kembali ke List Staff"
-			/>
+			<BannerFeature title={staff ? `${staff.name}` : 'Detail Tim Internal'} loading={fetchingStaff} />
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">
 					{fetchingStaff && <StaffDetailSkeleton />}

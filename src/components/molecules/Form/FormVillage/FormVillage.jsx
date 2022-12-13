@@ -29,11 +29,11 @@ export const FormVillage = () => {
 	const onSubmitVillage = (values) => {
 		if (villageID) {
 			updateVillage(villageID, values, ({ success }) => {
-				if (success) navigate(`/village/${villageID}`);
+				if (success) navigate(`/village/${villageID}`, { replace: true });
 			});
 		} else {
 			createVillage(values, ({ payload, success }) => {
-				if (success) navigate(`/village/${payload.id}`);
+				if (success) navigate(`/village/${payload.id}`, { replace: true });
 			});
 		}
 	};

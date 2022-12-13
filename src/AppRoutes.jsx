@@ -43,6 +43,7 @@ import Stockiest from './pages/Stockiest/Stockiest';
 import StockiestCreateUpdate from './pages/Stockiest/StockiestCreateUpdate';
 import StockiestMove from './pages/Stockiest/StockiestMove';
 import StockiestDetail from './pages/Stockiest/StockiestDetail';
+import Activity from './pages/Activity/Activity';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -112,6 +113,7 @@ export const AppRoutes = () => {
 					<Route path="/stockiest/update/:stockiestID" element={<StockiestCreateUpdate />} />
 					<Route path="/stockiest/move" element={<StockiestMove />} />
 					<Route path="/stockiest/:stockiestID" element={<StockiestDetail />} />
+					<Route path="/activity" element={<Activity />} />
 				</Route>
 			</Route>
 		</Routes>

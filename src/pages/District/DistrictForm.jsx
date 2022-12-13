@@ -12,8 +12,6 @@ const DistrictForm = () => {
 			<BannerFeature
 				title={`Kecamatan - ${districtID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/district'}
-				backButtonText="Kembali ke List Kecamatan"
 			/>
 
 			<section className="bg-gray-100">

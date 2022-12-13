@@ -93,11 +93,11 @@ export const FormAttendance = () => {
 	const onSubmitAttendance = () => {
 		if (attendanceID) {
 			updateAttendance(attendanceID, { data: dataTable }, ({ payload, success }) => {
-				if (success) navigate(`/absensi/${payload.id}`);
+				if (success) navigate(`/absensi/${payload.id}`, { replace: true });
 			});
 		} else {
 			createAttendance({ date: date, data: dataTable }, ({ payload, success }) => {
-				if (success) navigate(`/absensi/${payload.id}`);
+				if (success) navigate(`/absensi/${payload.id}`, { replace: true });
 			});
 		}
 	};
