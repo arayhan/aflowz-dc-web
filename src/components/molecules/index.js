@@ -73,5 +73,6 @@ export * from './Table/TableFollowers/TableFollowers';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
 export * from './Table/TableAttendance/TableAttendance';
+export * from './Table/TableActivity/TableActivity';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
