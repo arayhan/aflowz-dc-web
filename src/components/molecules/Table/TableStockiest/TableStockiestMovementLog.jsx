@@ -105,12 +105,18 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'Jumlah',
 				minWidth: 50,
-				Cell: (row) => <div>{row.row.original.quantity}</div>
+				Cell: (row) => {
+					if (row.row.original.reference.includes('OUT')) {
+						return <div>- {row.row.original.quantity}</div>;
+					} else {
+						return <div>+ {row.row.original.quantity}</div>;
+					}
+				}
 			},
 			{
 				Header: 'Deskripsi',
-				minWidth: 150,
-				Cell: (row) => <div>{row.row.original.description}</div>
+				minWidth: 200,
+				Cell: (row) => <div>{row.row.original.description ? row.row.original.description : 'Stock Updated'}</div>
 			}
 		],
 		[offset, perPage, page, isSystem]
