@@ -57,7 +57,7 @@ export const FormDistrict = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{districtID ? 'Edit' : 'Tambah'} Desa</div>
+				<div className="font-light text-xl">{districtID ? 'Edit' : 'Tambah'} Kecamatan</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />
