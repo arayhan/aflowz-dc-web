@@ -12,8 +12,6 @@ const TPSForm = () => {
 			<BannerFeature
 				title={`TPS - ${TPSID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/TPS'}
-				backButtonText="Kembali ke List TPS"
 			/>
 
 			<section className="bg-gray-100">

@@ -6,12 +6,7 @@ const Konstituen = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title="List Institusi"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Home"
-			/>
+			<BannerFeature title="List Institusi" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="bg-gray-100">
 				<SectionSelectKonstituenType
 					selectedType={selectedKonstituen}

@@ -14,12 +14,7 @@ const City = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature
-				title="Kota"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Home"
-			/>
+			<BannerFeature title="Kota" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="container py-16">
 				<TableCity params={params} />
 			</div>

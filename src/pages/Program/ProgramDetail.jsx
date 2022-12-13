@@ -24,8 +24,6 @@ const ProgramDetail = () => {
 			<BannerFeature
 				title={programDetail ? `Program ${programDetail.program_name}` : 'Program'}
 				loading={fetchingProgramDetail}
-				backButtonLinkTo={'/program'}
-				backButtonText="Kembali ke List Program"
 			/>
 
 			<section className="bg-gray-100 py-12 md:py-12">

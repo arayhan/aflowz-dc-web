@@ -7,8 +7,6 @@ const StaffCreate = () => {
 			<BannerFeature
 				title="Create - Tim Internal"
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/staff'}
-				backButtonText="Kembali ke List Staff"
 			/>
 
 			<section className="bg-gray-100">

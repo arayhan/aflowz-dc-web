@@ -7,8 +7,6 @@ const KonstituenCreate = () => {
 			<BannerFeature
 				title="Create - Institusi"
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/institusi'}
-				backButtonText="Kembali ke List Institusi"
 			/>
 
 			<section className="bg-gray-100">

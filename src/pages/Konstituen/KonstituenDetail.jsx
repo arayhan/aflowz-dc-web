@@ -27,8 +27,6 @@ const KonstituenDetail = () => {
 			<BannerFeature
 				title={konstituenDetail ? `${konstituenDetail.konstituen_name}` : 'Institusi'}
 				loading={fetchingKonstituenDetail}
-				backButtonLinkTo={'/institusi'}
-				backButtonText="Kembali ke List Institusi"
 			/>
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">

@@ -11,8 +11,6 @@ const CityForm = () => {
 			<BannerFeature
 				title={`Kota - ${cityID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/city'}
-				backButtonText="Kembali ke List Kota"
 			/>
 
 			<section className="bg-gray-100">

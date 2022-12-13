@@ -10,8 +10,6 @@ const AttendanceCreateUpdate = () => {
 			<BannerFeature
 				title={`${attendanceID ? 'Edit' : 'Create'} - Absensi`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/absensi'}
-				backButtonText="Kembali ke Daftar Absensi"
 			/>
 
 			<section className="bg-gray-100">
