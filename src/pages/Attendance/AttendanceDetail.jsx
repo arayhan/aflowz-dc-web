@@ -18,12 +18,7 @@ const AttendanceDetail = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={'Detail Absensi'}
-				loading={fetchingAttendance}
-				backButtonLinkTo={'/absensi'}
-				backButtonText="Kembali ke Daftar Absensi"
-			/>
+			<BannerFeature title={'Detail Absensi'} loading={fetchingAttendance} />
 			<section className="bg-gray-100 py-12 md:py-12">
 				<div className="container">
 					{fetchingAttendance && <AttendanceDetailSkeleton />}

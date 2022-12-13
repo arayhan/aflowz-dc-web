@@ -38,7 +38,7 @@ export const FormPenerima = () => {
 	const onSubmitPenerima = (values) => {
 		if (penerimaID) {
 			updatePenerima(penerimaID, values, ({ success }) => {
-				if (success) navigate(`/penerima/${penerimaID}`);
+				if (success) navigate(`/penerima/${penerimaID}`, { replace: true });
 			});
 		}
 	};

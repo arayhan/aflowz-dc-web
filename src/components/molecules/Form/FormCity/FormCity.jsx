@@ -29,11 +29,11 @@ export const FormCity = () => {
 	const onSubmitCity = (values) => {
 		if (cityID) {
 			updateCity(cityID, values, ({ success }) => {
-				if (success) navigate(`/city/${cityID}`);
+				if (success) navigate(`/city/${cityID}`, { replace: true });
 			});
 		} else {
 			createCity(values, ({ payload, success }) => {
-				if (success) navigate(`/city/${payload.id}`);
+				if (success) navigate(`/city/${payload.id}`, { replace: true });
 			});
 		}
 	};

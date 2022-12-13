@@ -12,8 +12,6 @@ const VillageForm = () => {
 			<BannerFeature
 				title={`Desa - ${villageID ? 'Update' : 'Create'}`}
 				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/village'}
-				backButtonText="Kembali ke List Desa"
 			/>
 
 			<section className="bg-gray-100">

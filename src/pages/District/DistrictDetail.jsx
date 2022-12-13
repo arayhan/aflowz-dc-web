@@ -28,8 +28,6 @@ const DistrictDetail = () => {
 			<BannerFeature
 				title={districtDetail ? `${districtDetail.district_name}` : 'Kecamatan'}
 				loading={fetchingDistrictDetail}
-				backButtonLinkTo={'/district'}
-				backButtonText="Kembali ke List Kecamatan"
 			/>
 
 			<section className="bg-gray-100 py-12 md:py-20">

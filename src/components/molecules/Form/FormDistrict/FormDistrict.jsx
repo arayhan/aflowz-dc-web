@@ -29,11 +29,11 @@ export const FormDistrict = () => {
 	const onSubmitDistrict = (values) => {
 		if (districtID) {
 			updateDistrict(districtID, values, ({ success }) => {
-				if (success) navigate(`/district/${districtID}`);
+				if (success) navigate(`/district/${districtID}`, { replace: true });
 			});
 		} else {
 			createDistrict(values, ({ payload, success }) => {
-				if (success) navigate(`/district/${payload.id}`);
+				if (success) navigate(`/district/${payload.id}`, { replace: true });
 			});
 		}
 	};
@@ -57,7 +57,7 @@ export const FormDistrict = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{districtID ? 'Edit' : 'Tambah'} Desa</div>
+				<div className="font-light text-xl">{districtID ? 'Edit' : 'Tambah'} Kecamatan</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			<hr />

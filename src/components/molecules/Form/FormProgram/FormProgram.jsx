@@ -29,11 +29,11 @@ export const FormProgram = () => {
 	const onSubmitProgram = (values) => {
 		if (programID) {
 			updateProgram(programID, values, ({ success }) => {
-				if (success) navigate(`/program/${programID}`);
+				if (success) navigate(`/program/${programID}`, { replace: true });
 			});
 		} else {
 			createProgram(values, ({ payload, success }) => {
-				if (success) navigate(`/program/${payload.id}`);
+				if (success) navigate(`/program/${payload.id}`, { replace: true });
 			});
 		}
 	};

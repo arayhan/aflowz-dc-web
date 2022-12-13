@@ -19,12 +19,7 @@ const CityDetail = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={cityDetail ? `${cityDetail.city_name}` : 'Kota'}
-				loading={fetchingCityDetail}
-				backButtonLinkTo={'/city'}
-				backButtonText="Kembali ke List Kota"
-			/>
+			<BannerFeature title={cityDetail ? `${cityDetail.city_name}` : 'Kota'} loading={fetchingCityDetail} />
 
 			<section className="bg-gray-100 py-12 md:py-20">
 				<div className="container">

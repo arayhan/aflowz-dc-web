@@ -19,8 +19,6 @@ const MitraDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				backButtonLinkTo={'/mitra'}
-				backButtonText="Kembali ke List Mitra"
 				title={programCategoryDetail ? `${programCategoryDetail.mitra_name}` : 'Mitra'}
 				loading={fetchingProgramCategoryDetail}
 			/>

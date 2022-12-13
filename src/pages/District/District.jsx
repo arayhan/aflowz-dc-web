@@ -13,12 +13,7 @@ const District = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature
-				title="Kecamatan"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Home"
-			/>
+			<BannerFeature title="Kecamatan" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 			<div className="container py-16">
 				<TableDistrict params={params} />
 			</div>
