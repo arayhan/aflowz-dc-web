@@ -256,7 +256,11 @@ export const FormStaff = () => {
 								setGetDistrict(value);
 							}}
 							error={error}
-							params={watch('province') ? { province_id: watch('province'), limit: 0, offset: 0 } : null}
+							params={
+								watch('province')
+									? { province_id: watch('province'), limit: 0, offset: 0 }
+									: { province_id: 1000, limit: 0, offset: 0 }
+							}
 							placeholder={placeholderCity}
 						/>
 					)}

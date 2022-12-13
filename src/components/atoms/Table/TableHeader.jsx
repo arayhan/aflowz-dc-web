@@ -74,10 +74,10 @@ export const TableHeader = ({
 				)}
 				{!isReadonly && showButtonCheckout && (
 					<Link
-						to={`${featurePath || location.pathname}/checkout`}
+						to={`${featurePath || location.pathname}/move`}
 						className="flex items-center justify-center bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
-						<span>Checkout {feature}</span>
+						<span>Checkin / Checkout {feature}</span>
 					</Link>
 				)}
 			</div>

@@ -5,7 +5,7 @@ import range from 'lodash/range';
 import { BsCalendar2Event } from 'react-icons/bs';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const InputSelectDate = ({ selectedDate, onChange, disabled }) => {
+export const InputSelectDate = ({ selectedDate, onChange, disabled, selectsStart, selectsEnd, startDate, endDate }) => {
 	const years = range(1950, getYear(new Date()) + 1, 1);
 	const months = [
 		'January',
@@ -64,6 +64,11 @@ export const InputSelectDate = ({ selectedDate, onChange, disabled }) => {
 			selected={selectedDate}
 			onChange={onChange}
 			disabled={disabled}
+			selectsStart={selectsStart}
+			selectsEnd={selectsEnd}
+			startDate={startDate}
+			endDate={endDate}
+			minDate={startDate}
 		/>
 	);
 };
