@@ -29,11 +29,11 @@ export const FormDistrict = () => {
 	const onSubmitDistrict = (values) => {
 		if (districtID) {
 			updateDistrict(districtID, values, ({ success }) => {
-				if (success) navigate(`/district/${districtID}`);
+				if (success) navigate(`/district/${districtID}`, { replace: true });
 			});
 		} else {
 			createDistrict(values, ({ payload, success }) => {
-				if (success) navigate(`/district/${payload.id}`);
+				if (success) navigate(`/district/${payload.id}`, { replace: true });
 			});
 		}
 	};

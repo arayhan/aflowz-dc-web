@@ -50,11 +50,11 @@ export const FormStaff = () => {
 	const onHandleSubmit = (values) => {
 		if (staffID) {
 			updateStaff(staffID, values, ({ success }) => {
-				if (success) navigate(`/staff/${staffID}`);
+				if (success) navigate(`/staff/${staffID}`, { replace: true });
 			});
 		} else {
 			postStaffCreate(values, ({ payload, success }) => {
-				if (success) navigate(`/staff`);
+				if (success) navigate(`/staff`, { replace: true });
 			});
 		}
 	};

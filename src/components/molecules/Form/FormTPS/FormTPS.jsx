@@ -29,11 +29,11 @@ export const FormTPS = () => {
 	const onSubmitTPS = (values) => {
 		if (TPSID) {
 			updateTPS(TPSID, values, ({ success }) => {
-				if (success) navigate('/tps');
+				if (success) navigate('/tps', { replace: true });
 			});
 		} else {
 			createTPS(values, ({ success }) => {
-				if (success) navigate('/tps');
+				if (success) navigate('/tps', { replace: true });
 			});
 		}
 	};
