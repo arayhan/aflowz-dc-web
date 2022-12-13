@@ -81,5 +81,6 @@ export * from './Table/TableKonstituen/TableKonstituen';
 export * from './Table/TableAttendance/TableAttendance';
 export * from './Table/TableStockiest/TableStockiest';
 export * from './Table/TableStockiest/TableStockiestMovementLog';
+export * from './Table/TableActivity/TableActivity';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

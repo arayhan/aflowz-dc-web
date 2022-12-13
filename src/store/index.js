@@ -11,3 +11,4 @@ export * from './attendance.store';
 export * from './tps.store';
 export * from './stockiest.store';
 export * from './dapil.store';
+export * from './activity.store';
