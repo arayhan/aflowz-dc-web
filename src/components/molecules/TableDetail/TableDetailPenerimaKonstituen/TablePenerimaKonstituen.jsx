@@ -16,7 +16,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_staff: false };
+		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_receiver: true };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
