@@ -7,7 +7,7 @@ import { InputSelectAttendance } from '../../InputSelect/InputSelectAttendance/I
 import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
 
 export const FormAttendance = () => {
-	const [date, setDate] = useState(new Date());
+	const [date, setDate] = useState(null);
 	const [dataTable, setDataTable] = useState([]);
 	const [person, setPerson] = useState(null);
 	const [description, setDescription] = useState(0);
@@ -145,7 +145,7 @@ export const FormAttendance = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="font-light text-xl">
-					{attendanceID ? 'Edit' : 'Tambah'} Absensi {attendanceID && `Tanggal ${date.toLocaleDateString('id-ID')}`}
+					{attendanceID ? 'Edit' : 'Tambah'} Absensi {attendanceID && `Tanggal ${date?.toLocaleDateString('id-ID')}`}
 				</div>
 				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
@@ -155,7 +155,13 @@ export const FormAttendance = () => {
 					<div className="space-y-1">
 						<InputLabel text={'Tanggal Absensi'} />
 						<div className={`border border-gray-300 rounded-[4px] px-3 py-[6px]`}>
-							<InputSelectDate selectedDate={date} disabled={attendanceID ? true : false} />
+							<InputSelectDate
+								selectedDate={date}
+								disabled={attendanceID ? true : false}
+								onChange={(date) => {
+									setDate(date);
+								}}
+							/>
 						</div>
 					</div>
 				</div>
