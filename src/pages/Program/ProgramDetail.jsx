@@ -7,13 +7,15 @@ import {
 	TableVillage
 } from '@/components/molecules';
 import { useProgramStore } from '@/store';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
 const ProgramDetail = () => {
 	const params = useParams();
 	const { programDetail, fetchingProgramDetail, getProgramDetail } = useProgramStore();
+	const [tableParams, setTableParams] = useState({ program_id: params.programID });
+	const [searchParams, setSearchParams] = useState({});
 
 	useEffect(() => {
 		getProgramDetail(params.programID);
@@ -111,7 +113,8 @@ const ProgramDetail = () => {
 								<div className="col-span-12">
 									<TableVillage
 										title={'Penerima Program Per Desa'}
-										params={{ program_id: params.programID }}
+										params={searchParams ? { ...searchParams, ...tableParams } : { ...tableParams }}
+										setParams={setSearchParams}
 										isReadonly
 										enableClickRow
 										isShowButtonSeeAll
