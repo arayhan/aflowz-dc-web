@@ -29,6 +29,15 @@ export const getActivityDetailItem = async (activityID) => {
 	}
 };
 
+export const getActivityDetail = async (activityID) => {
+	try {
+		const response = await http.get('/activity/detail/' + activityID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const createActivity = async (params) => {
 	const request = {
 		description: params?.description || '',

@@ -45,6 +45,7 @@ import StockiestMove from './pages/Stockiest/StockiestMove';
 import StockiestDetail from './pages/Stockiest/StockiestDetail';
 import Activity from './pages/Activity/Activity';
 import ActivityForm from './pages/Activity/ActivityForm';
+import ActivityDetail from './pages/Activity/ActivityDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -109,6 +110,7 @@ export const AppRoutes = () => {
 					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
 					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
+					<Route path="/activity/:activityID" element={<ActivityDetail />} />
 					<Route path="/activity/update/:activityID" element={<ActivityForm />} />
 					<Route path="/activity/create" element={<ActivityForm />} />
 					<Route path="/activity" element={<Activity />} />
