@@ -66,8 +66,8 @@ const ProgramDetail = () => {
 								</div>
 							</Card>
 
-							<div className="grid grid-cols-5 gap-4">
-								<div className="col-start-2 bg-white rounded-md py-40">
+							<div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+								<div className="md:col-start-2 bg-white rounded-md py-10 md:py-40">
 									<Link to={`/program/penerima/${programDetail?.program_id}`}>
 										<div className="flex flex-col items-center justify-center space-y-1 text-center">
 											<span className="text-2xl md:text-4xl font-extralight">
