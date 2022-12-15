@@ -31,11 +31,12 @@ export const getActivityDetailItem = async (activityID) => {
 
 export const createActivity = async (params) => {
 	const request = {
-		name: params?.name || '',
-		province_id: params?.province_id || 0,
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0
+		description: params?.description || '',
+		konstituen_id: params?.konstituen_id || 0,
+		village_id: params?.village_id || 0,
+		district_id: params?.district_id || 0,
+		city_id: params?.city_id || 0,
+		program_id: params?.program_id || 0
 	};
 
 	try {
@@ -48,11 +49,12 @@ export const createActivity = async (params) => {
 
 export const updateActivity = async (activityID, params) => {
 	const request = {
-		name: params?.name || '',
-		province_id: params?.province_id || 0,
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0
+		description: params?.description || '',
+		konstituen_id: params?.konstituen_id || 0,
+		village_id: params?.village_id || 0,
+		district_id: params?.district_id || 0,
+		city_id: params?.city_id || 0,
+		program_id: params?.program_id || 0
 	};
 
 	try {

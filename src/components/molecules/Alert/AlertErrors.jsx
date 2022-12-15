@@ -8,8 +8,8 @@ export const AlertErrors = ({ errors }) => {
 			message={
 				<ul className="space-y-2">
 					{errors &&
-						Object.values(errors).map((message) => (
-							<li key={message} className="list-disc list-outside ml-6">
+						Object.values(errors).map((message, index) => (
+							<li key={index} className="list-disc list-outside ml-6">
 								{message}
 							</li>
 						))}

@@ -25,6 +25,7 @@ export * from './Form/FormVillage/FormVillage';
 export * from './Form/FormAttendance/FormAttendance';
 export * from './Form/FormDistrict/FormDistrict';
 export * from './Form/FormTPS/FormTPS';
+export * from './Form/FormActivity/FormActivity';
 
 export * from './Table/TableCity/TableCity';
 export * from './Table/TableMitra/TableMitra';

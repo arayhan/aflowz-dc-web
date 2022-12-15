@@ -137,3 +137,7 @@ export const formStaffSchema = yup.object().shape({
 	religion: yup.string().required('Belum memilih agama'),
 	staff_title: yup.string().required('Belum memiliih role')
 });
+
+export const formActivitySchema = yup.object().shape({
+	description: yup.string().required('Deskripsi wajib diisi')
+});

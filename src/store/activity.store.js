@@ -60,7 +60,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsActivity: payload });
 
-		toastRequestResult(loader, success, 'Activity created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Kegiatan created', payload?.odoo_error || payload?.message);
 		set({ processingCreateActivity: false });
 
 		callback({ payload, success });
@@ -74,7 +74,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsActivity: payload });
 
-		toastRequestResult(loader, success, 'Activity updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Kegiatan updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateActivity: false });
 
 		callback({ payload, success });
