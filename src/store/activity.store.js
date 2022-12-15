@@ -52,6 +52,23 @@ const states = (set, get) => ({
 		set({ fetchingActivityDetail: false });
 	},
 
+	getActivityDetail: async (activityID) => {
+		set({ fetchingActivityDetail: true });
+
+		const loader = toast.loading('Processing...');
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetail(activityID);
+
+		toastRequestResult(
+			loader,
+			success,
+			'Kegiatan detail fetched',
+			payload?.odoo_error || payload?.params || payload?.message
+		);
+
+		set({ activityDetail: success ? payload : null });
+		set({ fetchingActivityDetail: false });
+	},
+
 	createActivity: async (params, callback) => {
 		set({ processingCreateActivity: true });
 
@@ -60,7 +77,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsActivity: payload });
 
-		toastRequestResult(loader, success, 'Activity created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Kegiatan created', payload?.odoo_error || payload?.message);
 		set({ processingCreateActivity: false });
 
 		callback({ payload, success });
@@ -74,7 +91,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsActivity: payload });
 
-		toastRequestResult(loader, success, 'Activity updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Kegiatan updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateActivity: false });
 
 		callback({ payload, success });

@@ -41,7 +41,7 @@ export const TableActivity = ({
 			},
 			{
 				Header: 'Nama Kegiatan',
-				accessor: 'name',
+				accessor: 'description',
 				width: '100%',
 				minWidth: 300,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kegiatan')

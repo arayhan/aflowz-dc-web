@@ -138,6 +138,15 @@ export const formStaffSchema = yup.object().shape({
 	staff_title: yup.string().required('Belum memiliih role')
 });
 
+export const formActivitySchema = yup.object().shape({
+	description: yup.string().required('Deskripsi wajib diisi'),
+	konstituen_id: yup.number().required('Institusi wajib diisi'),
+	village_id: yup.number().required('Desa wajib diisi'),
+	district_id: yup.number().required('Kecamatan wajib diisi'),
+	city_id: yup.number().required('Kota wajib diisi'),
+	program_id: yup.number().required('Program wajib diisi')
+});
+
 export const formProductSchema = yup.object().shape({
 	name: yup.string().required('Nama wajib diisi'),
 	sku_code: yup.string().required('SKU wajib diisi'),
