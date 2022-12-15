@@ -28,7 +28,7 @@ export const getProductCategoryList = async (params) => {
 		const response = await http.get(stockProduct + '/category' + queryParams);
 
 		const sort = response.data.data.items.sort((a, b) => (a.id < b.id ? -1 : Number(a.id > b.id)));
-		sort.shift();
+		sort.splice(0, 3);
 		const dataResponse = {
 			items: sort,
 			total: sort.length
