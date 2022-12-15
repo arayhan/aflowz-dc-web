@@ -24,11 +24,11 @@ export const FormActivity = () => {
 		resolver: yupResolver(formActivitySchema),
 		defaultValues: {
 			description: '',
-			konstituen_id: '',
-			village_id: '',
-			district_id: '',
-			city_id: '',
-			program_id: ''
+			konstituen_id: undefined,
+			village_id: undefined,
+			district_id: undefined,
+			city_id: undefined,
+			program_id: undefined
 		}
 	});
 

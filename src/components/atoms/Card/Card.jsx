@@ -7,7 +7,7 @@ export const Card = ({ title, description, className, bodyClassName, children, i
 			<div className="md:flex items-center justify-between p-4">
 				<div className="space-y-2">
 					{title && <div className="font-light text-xl">{title}</div>}
-					{description && <div className="text-sm text-gray-400">{description}</div>}
+					{/* {description && <div className="text-sm text-gray-400">{description}</div>} */}
 				</div>
 				{isInDetail && (
 					<div>

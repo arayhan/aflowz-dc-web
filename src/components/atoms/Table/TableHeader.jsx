@@ -13,7 +13,8 @@ export const TableHeader = ({
 	showButtonCreate,
 	showButtonSeeAll,
 	showButtonUploadSheetFollowers,
-	showButtonUploadSheetPenerima
+	showButtonUploadSheetPenerima,
+	showButtonCheckout
 }) => {
 	const location = useLocation();
 
@@ -30,7 +31,7 @@ export const TableHeader = ({
 			)}
 			<div>
 				<div className="text-xl font-light transform: capitalize">{title}</div>
-				<div className="text-sm text-gray-400">{description}</div>
+				{/* <div className="text-sm text-gray-400">{description}</div> */}
 			</div>
 			<div className="w-full xl:w-1/2 flex flex-col md:justify-end md:flex-row gap-3">
 				{showButtonSeeAll && seeAllLink && (
@@ -69,6 +70,14 @@ export const TableHeader = ({
 						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
 					>
 						<span>Create {feature}</span>
+					</Link>
+				)}
+				{!isReadonly && showButtonCheckout && (
+					<Link
+						to={`${featurePath || location.pathname}/move`}
+						className="flex items-center justify-center bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+					>
+						<span>Checkin / Checkout {feature}</span>
 					</Link>
 				)}
 			</div>

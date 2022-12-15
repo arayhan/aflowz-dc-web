@@ -125,7 +125,7 @@ export const formStaffSchema = yup.object().shape({
 	gender: yup.string().required('Belum memilih jenis kelamin'),
 	address: yup.string().required('Belum mengisi alamat domisili'),
 	province: yup.number().required('Belum memiliih provinsi'),
-	city: yup.number().nullable().required('Belum memiliih kota/kabupate domisili'),
+	city: yup.number().nullable().required('Belum memiliih kota/kabupaten domisili'),
 	district: yup.number().nullable().required('Belum memiliih kecamatan domisili'),
 	village: yup.number().nullable().required('Belum memiliih kelurahan/desa domisili'),
 	mobile: yup
@@ -139,5 +139,30 @@ export const formStaffSchema = yup.object().shape({
 });
 
 export const formActivitySchema = yup.object().shape({
-	description: yup.string().required('Deskripsi wajib diisi')
+	description: yup.string().required('Deskripsi wajib diisi'),
+	konstituen_id: yup.number().required('Institusi wajib diisi'),
+	village_id: yup.number().required('Desa wajib diisi'),
+	district_id: yup.number().required('Kecamatan wajib diisi'),
+	city_id: yup.number().required('Kota wajib diisi'),
+	program_id: yup.number().required('Program wajib diisi')
+});
+
+export const formProductSchema = yup.object().shape({
+	name: yup.string().required('Nama wajib diisi'),
+	sku_code: yup.string().required('SKU wajib diisi'),
+	product_category_id: yup.number().required('Kategori Prodcuk wajib dipilih'),
+	description: yup.string().required('Deskripsi wajib diisi'),
+	quantity: yup.number().required('Jumlah kuantitas wajib diisi')
+});
+
+export const formProductMovementSchema = yup.object().shape({
+	province: yup.number().nullable().required('Belum memiliih provinsi'),
+	city: yup.number().nullable().required('Belum memiliih kota/kabupaten'),
+	district: yup.number().nullable().required('Belum memiliih kecamatan'),
+	village: yup.number().nullable().required('Belum memiliih kelurahan/desa'),
+	konstituen: yup.number().nullable().required('Belum memiliih institusi'),
+	program: yup.number().nullable().required('Belum memiliih program'),
+	pic_staff_id: yup.number().nullable().required('Belum memiliih PIC tim internal'),
+	description: yup.string().required('Deskripsi wajib diisi'),
+	method: yup.string().required('Belum memilih metode')
 });

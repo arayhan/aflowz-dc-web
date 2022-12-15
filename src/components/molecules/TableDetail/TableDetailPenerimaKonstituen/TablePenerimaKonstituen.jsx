@@ -16,7 +16,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_staff: false };
+		const params = { limit: perPage, offset: offsetResult, konstituen_id: konstituenID, is_receiver: true };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
@@ -111,7 +111,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 						</Link>
 					)}
 				</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{data.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
