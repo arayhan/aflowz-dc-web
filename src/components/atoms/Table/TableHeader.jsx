@@ -31,7 +31,7 @@ export const TableHeader = ({
 			)}
 			<div>
 				<div className="text-xl font-light transform: capitalize">{title}</div>
-				<div className="text-sm text-gray-400">{description}</div>
+				{/* <div className="text-sm text-gray-400">{description}</div> */}
 			</div>
 			<div className="w-full xl:w-1/2 flex flex-col md:justify-end md:flex-row gap-3">
 				{showButtonSeeAll && seeAllLink && (

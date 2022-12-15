@@ -20,7 +20,7 @@ export const PieChartPenerimaKonstituenByGender = ({ totalPria, totalWanita }) =
 		<div>
 			<div className="p-4 space-y-2">
 				<div className="font-light text-xl">Penerima Program by Gender</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{totalPria + totalWanita === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}

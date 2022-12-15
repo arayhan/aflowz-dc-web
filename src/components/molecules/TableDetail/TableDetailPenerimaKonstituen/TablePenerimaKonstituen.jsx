@@ -111,7 +111,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 						</Link>
 					)}
 				</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{data.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}

@@ -20,7 +20,7 @@ export const BarChartPenerimaKonstituenPerTahun = ({ totalPenerima }) => {
 		<div>
 			<div className="p-4 space-y-2">
 				<div className="font-light text-xl">Penerima Program per Periode</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{totalPenerima.length === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}

@@ -147,7 +147,7 @@ export const FormAttendance = () => {
 				<div className="font-light text-xl">
 					{attendanceID ? 'Edit' : 'Tambah'} Absensi {attendanceID && `Tanggal ${date?.toLocaleDateString('id-ID')}`}
 				</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{!attendanceID && (

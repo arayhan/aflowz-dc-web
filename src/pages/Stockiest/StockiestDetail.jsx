@@ -34,9 +34,9 @@ const StockiestDetail = () => {
 									<div className="p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
 										<div className="w-full space-y-2">
 											<div className="font-light text-xl tranform: capitalize">Detail {product?.name}</div>
-											<div className="text-sm text-gray-400">
+											{/* <div className="text-sm text-gray-400">
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											</div>
+											</div> */}
 										</div>
 										<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
 											<ButtonAction

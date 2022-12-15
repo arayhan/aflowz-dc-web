@@ -115,7 +115,7 @@ export const FormStockiest = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="font-light text-xl">{stockiestID ? 'Edit' : 'Tambah'} Barang</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{stockiestID && product && (

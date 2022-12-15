@@ -38,9 +38,9 @@ const KonstituenDetail = () => {
 									<div className="grid grid-cols-1 sm:grid-cols-2 justify-between items-center">
 										<div className="p-4">
 											<div className="font-light text-xl">Details</div>
-											<div className="text-sm text-gray-400">
+											{/* <div className="text-sm text-gray-400">
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											</div>
+											</div> */}
 										</div>
 										{(isAdmin || isSystem) && (
 											<div className="p-4 h-full flex justify-start sm:justify-end">
