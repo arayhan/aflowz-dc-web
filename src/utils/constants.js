@@ -38,8 +38,8 @@ export const MENUS = [
 	{ title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/village' },
 	{ title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/city' },
 	{ title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' },
-	{ title: 'Dapil', icon: require('@/images/icons/box.svg').default, path: '/dapil' },
+	{ title: 'Dapil', icon: require('@/images/icons/Icon_Home/Dapil.svg').default, path: '/dapil' },
 	{ title: 'Absensi', icon: require('@/images/icons/Icon_Home/Absensi.svg').default, path: '/absensi' },
-	{ title: 'Inventory', icon: require('@/images/icons/box.svg').default, path: '/stockiest' },
+	{ title: 'Inventory', icon: require('@/images/icons/Icon_Home/Inventory.svg').default, path: '/stockiest' },
 	{ title: 'Kegiatan', icon: require('@/images/icons/Icon_Home/Activity.svg').default, path: '/activity' }
 ];
