@@ -66,8 +66,8 @@ const ProgramDetail = () => {
 								</div>
 							</Card>
 
-							<div className="flex items-center justify-center gap-4">
-								<div className="bg-white rounded-md px-10 md:px-16 py-6">
+							<div className="grid grid-cols-5 gap-4">
+								<div className="col-start-2 bg-white rounded-md py-40">
 									<Link to={`/program/penerima/${programDetail?.program_id}`}>
 										<div className="flex flex-col items-center justify-center space-y-1 text-center">
 											<span className="text-2xl md:text-4xl font-extralight">
@@ -77,16 +77,16 @@ const ProgramDetail = () => {
 										</div>
 									</Link>
 								</div>
-							</div>
-
-							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 place-self-center">
+								<div className="col-span-2">
 									<CardPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
 										totalPria={programDetail?.total_pria}
 										totalWanita={programDetail?.total_wanita}
 									/>
 								</div>
+							</div>
+
+							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12">
 									<TablePenerima
 										programID={programDetail?.program_id}
