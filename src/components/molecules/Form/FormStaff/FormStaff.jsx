@@ -121,7 +121,7 @@ export const FormStaff = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="font-light text-xl">{staffID ? 'Edit' : 'Create'} Tim Internal</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -256,7 +256,11 @@ export const FormStaff = () => {
 								setGetDistrict(value);
 							}}
 							error={error}
-							params={watch('province') ? { province_id: watch('province'), limit: 0, offset: 0 } : null}
+							params={
+								watch('province')
+									? { province_id: watch('province'), limit: 0, offset: 0 }
+									: { province_id: 1000, limit: 0, offset: 0 }
+							}
 							placeholder={placeholderCity}
 						/>
 					)}

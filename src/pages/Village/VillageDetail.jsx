@@ -43,7 +43,7 @@ const VillageDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
 									<div className="font-light text-xl">Details</div>
-									<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+									{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 								</div>
 								<hr />
 								<div className="p-5">

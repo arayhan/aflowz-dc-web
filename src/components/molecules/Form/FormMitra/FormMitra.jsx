@@ -57,7 +57,7 @@ export const FormMitra = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="font-light text-xl">{programCategoryID ? 'Edit' : 'Tambah'} Mitra</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -87,6 +87,7 @@ export const FormMitra = () => {
 								setError('pic_staff_id', null);
 							}}
 							error={error}
+							params={{ limit: 5000, offset: 0 }}
 						/>
 					)}
 				/>

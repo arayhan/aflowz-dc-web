@@ -23,7 +23,7 @@ const Login = () => {
 				<form className="w-full max-w-md bg-white rounded-md shadow-md" onSubmit={handleLogin}>
 					<div className="px-8 py-8 border-b text-center space-y-3">
 						<div className="text-3xl text-primary font-extralight">{APP_NAME}</div>
-						<div className="text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+						{/* <div className="text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div> */}
 					</div>
 					<div className="px-8 py-6 border-b space-y-4">
 						<div className="flex flex-col space-y-2">

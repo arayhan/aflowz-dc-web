@@ -3,6 +3,7 @@ import { useAuthStore, useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
+import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
 export const TableVillage = ({
@@ -21,6 +22,7 @@ export const TableVillage = ({
 	const { isSystem } = useAuthStore();
 	const { villageList, fetchingVillageList } = useVillageStore();
 	const { getVillageList, deleteVillage } = useVillageStore();
+	const location = useLocation();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);

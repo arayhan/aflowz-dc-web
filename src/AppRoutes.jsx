@@ -39,6 +39,10 @@ import DistrictDetail from './pages/District/DistrictDetail';
 import DistrictForm from './pages/District/DistrictForm';
 import TPS from './pages/TPS/TPS';
 import TPSForm from './pages/TPS/TPSForm';
+import Stockiest from './pages/Stockiest/Stockiest';
+import StockiestCreateUpdate from './pages/Stockiest/StockiestCreateUpdate';
+import StockiestMove from './pages/Stockiest/StockiestMove';
+import StockiestDetail from './pages/Stockiest/StockiestDetail';
 import Activity from './pages/Activity/Activity';
 
 export const AppRoutes = () => {
@@ -104,6 +108,11 @@ export const AppRoutes = () => {
 					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
 					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
+					<Route path="/stockiest" element={<Stockiest />} />
+					<Route path="/stockiest/create" element={<StockiestCreateUpdate />} />
+					<Route path="/stockiest/update/:stockiestID" element={<StockiestCreateUpdate />} />
+					<Route path="/stockiest/move" element={<StockiestMove />} />
+					<Route path="/stockiest/:stockiestID" element={<StockiestDetail />} />
 					<Route path="/activity" element={<Activity />} />
 				</Route>
 			</Route>

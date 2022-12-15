@@ -9,7 +9,7 @@ export const SiteHeader = () => {
 			<div className="container">
 				<div className="flex items-center justify-between">
 					<Link to={'/'} className="text-white font-extralight text-lg md:text-xl">
-						<img src={siteHeaderLogo} className="max-w-[7rem]" />
+						<img src={siteHeaderLogo} className="max-w-[5rem]" />
 					</Link>
 					<ButtonProfileHeader />
 				</div>

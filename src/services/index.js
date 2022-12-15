@@ -8,4 +8,5 @@ export * as SERVICE_VILLAGE from './village.service';
 export * as SERVICE_DISTRICT from './district.service';
 export * as SERVICE_ATTENDANCE from './attendance.service';
 export * as SERVICE_TPS from './tps.service';
+export * as SERVICE_STOCKIEST from './stockiest.service';
 export * as SERVICE_ACTIVITY from './activity.service';
