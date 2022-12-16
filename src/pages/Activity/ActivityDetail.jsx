@@ -1,5 +1,11 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartPeriodeProgram,
+	TableActivityDetail,
+	TablePenerima
+} from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -12,7 +18,7 @@ const ActivityDetail = () => {
 	const { activityItem, fetchingActivityItem } = useActivityStore();
 	const { getActivityItem, getActivityDetailList } = useActivityStore();
 
-	const [tableParams] = useState({ activity_id: activityID });
+	const [tableActivityDetailListParams] = useState({ activity_id: activityID });
 
 	useEffect(() => {
 		if (activityID) {
@@ -123,6 +129,12 @@ const ActivityDetail = () => {
 										<span className="text-2xl md:text-4xl font-extralight">{activityItem?.total_activity || 0}</span>
 										<div className="font-light text-gray-400">Total Kegiatan </div>
 									</div>
+								</div>
+							</div>
+
+							<div className="grid grid-cols-12 gap-4 w-full">
+								<div className="col-span-12 bg-white rounded-md shadow-lg">
+									<TableActivityDetail activityID={activityID} params={tableActivityDetailListParams} />
 								</div>
 							</div>
 						</div>

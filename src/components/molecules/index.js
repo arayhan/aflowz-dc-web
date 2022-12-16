@@ -28,6 +28,7 @@ export * from './Form/FormAttendance/FormAttendance';
 export * from './Form/FormDistrict/FormDistrict';
 export * from './Form/FormTPS/FormTPS';
 export * from './Form/FormActivity/FormActivity';
+export * from './Form/FormActivityDetail/FormActivityDetail';
 export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
 
@@ -85,5 +86,6 @@ export * from './Table/TableAttendance/TableAttendance';
 export * from './Table/TableStockiest/TableStockiest';
 export * from './Table/TableStockiest/TableStockiestMovementLog';
 export * from './Table/TableActivity/TableActivity';
+export * from './Table/TableActivityDetail/TableActivityDetail';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

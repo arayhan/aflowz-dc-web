@@ -20,6 +20,7 @@ const states = (set, get) => ({
 	activityDetailList: null,
 
 	errorsActivity: null,
+	errorsActivityDetail: null,
 
 	getActivityItem: async (activityID) => {
 		set({ fetchingActivityItem: true });
@@ -108,6 +109,11 @@ const states = (set, get) => ({
 	clearStateActivity: () => {
 		set({ activity: null });
 		set({ errorsActivity: null });
+	},
+
+	clearStateActivityDetail: () => {
+		set({ activity: null });
+		set({ errorsActivityDetail: null });
 	}
 });
 
