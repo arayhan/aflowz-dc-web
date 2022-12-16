@@ -17,7 +17,7 @@ export const FormActivity = () => {
 	const { activityID } = useParams();
 	const navigate = useNavigate();
 
-	const { activity, fetchingActivity, processingCreateActivity, activityErrors } = useActivityStore();
+	const { activityItem, fetchingActivity, processingCreateActivity, activityErrors } = useActivityStore();
 	const { getActivityItem, createActivity, updateActivity, clearStateActivity } = useActivityStore();
 
 	const { control, setValue, setError, handleSubmit, watch } = useForm({
@@ -49,15 +49,15 @@ export const FormActivity = () => {
 	}, [activityID]);
 
 	useEffect(() => {
-		if (activityID && activity) {
-			setValue('description', activity.description || '');
-			setValue('konstituen_id', activity.konstituen.id || 0);
-			setValue('village_id', activity.village.id || 0);
-			setValue('district_id', activity.district.id || 0);
-			setValue('city_id', activity.city.id || 0);
-			setValue('program_id', activity.program.id || 0);
+		if (activityID && activityItem) {
+			setValue('description', activityItem.description || '');
+			setValue('konstituen_id', activityItem.konstituen.id || 0);
+			setValue('village_id', activityItem.village.id || 0);
+			setValue('district_id', activityItem.district.id || 0);
+			setValue('city_id', activityItem.city.id || 0);
+			setValue('program_id', activityItem.program.id || 0);
 		}
-	}, [activityID, activity]);
+	}, [activityID, activityItem]);
 
 	useEffect(() => () => clearStateActivity(), []);
 
