@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom';
 
 const ActivityDetailForm = () => {
 	const { activityDetailID } = useParams();
-	const { errorsActivityDetail } = useActivityStore();
+	const { activityItem, errorsActivityDetail } = useActivityStore();
 
 	return (
 		<div>
-			<BannerFeature title={`Detail Kegiatan - ${activityDetailID ? 'Update' : 'Create'}`} />
+			<BannerFeature
+				title={`Detail Kegiatan - ${activityDetailID ? 'Update' : 'Create'}`}
+				description={activityItem.description}
+			/>
 
 			<section className="bg-gray-100">
 				<div className="container py-16">
