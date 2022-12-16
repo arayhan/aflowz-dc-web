@@ -13,7 +13,7 @@ const Penerima = () => {
 
 	return (
 		<div>
-			<BannerFeature title="Penerima" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="Penerima" />
 			<div className="bg-gray-100">
 				<div className="py-6 container">
 					<TablePenerima

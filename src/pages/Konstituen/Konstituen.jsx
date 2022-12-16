@@ -6,7 +6,7 @@ const Konstituen = () => {
 
 	return (
 		<div>
-			<BannerFeature title="List Institusi" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="List Institusi" />
 			<div className="bg-gray-100">
 				<SectionSelectKonstituenType
 					selectedType={selectedKonstituen}

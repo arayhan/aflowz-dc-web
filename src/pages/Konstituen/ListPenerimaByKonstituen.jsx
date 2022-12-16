@@ -14,10 +14,7 @@ const ListPenerimaByKonstituen = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Institusi'}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={'List Penerima' + ' ' + konstituenDetail?.konstituen_name || 'Institusi'} />
 			<div className="bg-gray-100 py-6">
 				<div className="py-6 container bg-white rounded-md">
 					<TablePenerimaKonstituenDetail konstituenID={parseInt(params.konstituenID)} />

@@ -9,10 +9,7 @@ const MitraForm = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`Mitra - ${programCategoryID ? 'Update' : 'Create'}`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`Mitra - ${programCategoryID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

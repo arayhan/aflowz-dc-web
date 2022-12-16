@@ -28,6 +28,7 @@ export * from './Form/FormAttendance/FormAttendance';
 export * from './Form/FormDistrict/FormDistrict';
 export * from './Form/FormTPS/FormTPS';
 export * from './Form/FormActivity/FormActivity';
+export * from './Form/FormActivityDetail/FormActivityDetail';
 export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
 
@@ -64,6 +65,7 @@ export * from './InputSelect/InputSelectAttendance/InputSelectAttendance';
 export * from './InputSelect/InputSelectProductCategory/InputSelectProductCategory';
 export * from './InputSelect/InputSelectProduct/InputSelectProduct';
 export * from './InputSelect/InputSelectProductMovement/InputSelectProductMovement';
+export * from './InputSelect/InputSelectActivityPromise/InputSelectActivityPromise';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
@@ -85,5 +87,6 @@ export * from './Table/TableAttendance/TableAttendance';
 export * from './Table/TableStockiest/TableStockiest';
 export * from './Table/TableStockiest/TableStockiestMovementLog';
 export * from './Table/TableActivity/TableActivity';
+export * from './Table/TableActivityDetail/TableActivityDetail';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

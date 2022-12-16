@@ -6,10 +6,7 @@ const ProgramForm = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`Program - ${params.programID ? 'Update' : 'Create'}`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`Program - ${params.programID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

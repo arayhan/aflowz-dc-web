@@ -8,10 +8,7 @@ const ActivityForm = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`Kegiatan - ${activityID ? 'Update' : 'Create'}`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`Kegiatan - ${activityID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

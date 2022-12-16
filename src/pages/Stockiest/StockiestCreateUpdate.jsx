@@ -8,7 +8,6 @@ const StockiestCreateUpdate = () => {
 		<div>
 			<BannerFeature
 				title={`${params.stockiestID ? 'Update' : 'Create'} - Barang`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 				backButtonLinkTo={'/stockiest'}
 				backButtonText="Kembali ke Daftar Barang"
 			/>

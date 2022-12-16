@@ -7,28 +7,41 @@ import { devtools } from 'zustand/middleware';
 const states = (set, get) => ({
 	fetchingActivityItem: false,
 	fetchingActivityList: false,
-	fetchingActivityDetail: false,
+	fetchingActivityDetailItem: false,
+	fetchingActivityDetailList: false,
+	fetchingPromiseItem: false,
+	fetchingPromiseList: false,
 
 	processingCreateActivity: false,
 	processingUpdateActivity: false,
 	processingDeleteActivity: false,
+	processingCreateActivityDetail: false,
+	processingUpdateActivityDetail: false,
+	processingDeleteActivityDetail: false,
+	processingCreatePromise: false,
+	processingUpdatePromise: false,
+	processingDeletePromise: false,
 
 	activityItem: null,
 	activityList: null,
-	activityDetail: null,
+	activityDetailItem: null,
+	activityDetailList: null,
+	promiseItem: null,
+	promiseList: null,
 
 	errorsActivity: null,
+	errorsActivityDetail: null,
 
 	getActivityItem: async (activityID) => {
-		set({ fetchingActivity: true });
-		set({ activity: null });
+		set({ fetchingActivityItem: true });
+		set({ activityItem: null });
 
 		const { success, payload } = await SERVICE_ACTIVITY.getActivityItem(activityID);
 
 		if (!success) set({ errorsActivity: payload });
 
-		set({ activity: success ? payload : null });
-		set({ fetchingActivity: false });
+		set({ activityItem: success ? payload : null });
+		set({ fetchingActivityItem: false });
 	},
 
 	getActivityList: async (params = {}) => {
@@ -44,29 +57,36 @@ const states = (set, get) => ({
 	},
 
 	getActivityDetailItem: async (activityID) => {
-		set({ fetchingActivityDetail: true });
+		set({ fetchingActivityDetailItem: true });
 
 		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailItem(activityID);
 
-		set({ activityDetail: success ? payload : null });
-		set({ fetchingActivityDetail: false });
+		set({ activityDetailItem: success ? payload : null });
+		set({ fetchingActivityDetailItem: false });
 	},
 
-	getActivityDetail: async (activityID) => {
-		set({ fetchingActivityDetail: true });
+	getActivityDetailList: async (params = {}) => {
+		set({ fetchingActivityDetailList: true });
 
-		const loader = toast.loading('Processing...');
-		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetail(activityID);
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
-		toastRequestResult(
-			loader,
-			success,
-			'Kegiatan detail fetched',
-			payload?.odoo_error || payload?.params || payload?.message
-		);
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailList(requestParams);
 
-		set({ activityDetail: success ? payload : null });
-		set({ fetchingActivityDetail: false });
+		set({ activityDetailList: success ? payload : null });
+		set({ fetchingActivityDetailList: false });
+	},
+
+	getPromiseList: async (params = {}) => {
+		set({ fetchingPromiseList: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_ACTIVITY.getPromiseList(requestParams);
+
+		set({ promiseList: success ? payload : null });
+		set({ fetchingPromiseList: false });
 	},
 
 	createActivity: async (params, callback) => {
@@ -111,6 +131,11 @@ const states = (set, get) => ({
 	clearStateActivity: () => {
 		set({ activity: null });
 		set({ errorsActivity: null });
+	},
+
+	clearStateActivityDetail: () => {
+		set({ activity: null });
+		set({ errorsActivityDetail: null });
 	}
 });
 

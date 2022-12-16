@@ -20,6 +20,16 @@ export const getActivityList = async (params) => {
 	}
 };
 
+export const getPromiseList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('activity/promise' + queryParams);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getActivityDetailItem = async (activityID) => {
 	try {
 		const response = await http.get('/activity/detail/' + activityID);
@@ -29,9 +39,10 @@ export const getActivityDetailItem = async (activityID) => {
 	}
 };
 
-export const getActivityDetail = async (activityID) => {
+export const getActivityDetailList = async (params) => {
 	try {
-		const response = await http.get('/activity/detail/' + activityID);
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/activity/detail/' + queryParams);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

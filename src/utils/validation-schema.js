@@ -147,6 +147,19 @@ export const formActivitySchema = yup.object().shape({
 	program_id: yup.number().required('Program wajib diisi')
 });
 
+export const formActivityDetailSchema = yup.object().shape({
+	description: yup.string().required('Deskripsi wajib diisi'),
+	activity_date: yup.string().required('Tanggal kegiatan wajib diisi'),
+	pic: yup.string().required('Belum mengisi PIC kegiatan'),
+	pic_mobile: yup
+		.string()
+		.required('Nomor PIC kegiatan wajib diisi')
+		.matches(/^[0-9]*$/, 'Nomor tidak valid')
+		.min(8, 'Minimal 8 angka'),
+	pic_staff_id: yup.number().required('PIC tim internal wajib diisi'),
+	promise_datas: yup.array().min(1, 'Janji wajib diisi')
+});
+
 export const formProductSchema = yup.object().shape({
 	name: yup.string().required('Nama wajib diisi'),
 	sku_code: yup.string().required('SKU wajib diisi'),

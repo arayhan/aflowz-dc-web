@@ -7,10 +7,7 @@ const AttendanceCreateUpdate = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`${attendanceID ? 'Edit' : 'Create'} - Absensi`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`${attendanceID ? 'Edit' : 'Create'} - Absensi`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

@@ -13,7 +13,7 @@ const TPS = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature title="TPS" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="TPS" />
 			<div className="container py-16">
 				<TableTPS params={params} />
 			</div>

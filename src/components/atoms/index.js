@@ -8,6 +8,7 @@ export * from './InputDate/InputDate';
 export * from './InputError/InputError';
 export * from './InputLabel/InputLabel';
 export * from './InputSelect/InputSelect';
+export * from './InputSelect/InputSelectCreatable';
 export * from './InputText/InputText';
 export * from './InputTextArea/InputTextArea';
 export * from './Modal/Modal';

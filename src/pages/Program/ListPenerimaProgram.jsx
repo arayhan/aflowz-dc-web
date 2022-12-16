@@ -13,10 +13,7 @@ const ListPenerimaByProgram = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={'List Penerima' + ' ' + programDetail?.program_name || 'Program'}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={'List Penerima' + ' ' + programDetail?.program_name || 'Program'} />
 			<div className="bg-gray-100 py-6">
 				<div className="py-6 container bg-white rounded-md">
 					<TablePenerima
