@@ -7,7 +7,8 @@ import { devtools } from 'zustand/middleware';
 const states = (set, get) => ({
 	fetchingActivityItem: false,
 	fetchingActivityList: false,
-	fetchingActivityDetail: false,
+	fetchingActivityDetailItem: false,
+	fetchingActivityDetailList: false,
 
 	processingCreateActivity: false,
 	processingUpdateActivity: false,
@@ -15,20 +16,21 @@ const states = (set, get) => ({
 
 	activityItem: null,
 	activityList: null,
-	activityDetail: null,
+	activityDetailItem: null,
+	activityDetailList: null,
 
 	errorsActivity: null,
 
 	getActivityItem: async (activityID) => {
-		set({ fetchingActivity: true });
-		set({ activity: null });
+		set({ fetchingActivityItem: true });
+		set({ activityItem: null });
 
 		const { success, payload } = await SERVICE_ACTIVITY.getActivityItem(activityID);
 
 		if (!success) set({ errorsActivity: payload });
 
-		set({ activity: success ? payload : null });
-		set({ fetchingActivity: false });
+		set({ activityItem: success ? payload : null });
+		set({ fetchingActivityItem: false });
 	},
 
 	getActivityList: async (params = {}) => {
@@ -44,29 +46,24 @@ const states = (set, get) => ({
 	},
 
 	getActivityDetailItem: async (activityID) => {
-		set({ fetchingActivityDetail: true });
+		set({ fetchingActivityDetailItem: true });
 
 		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailItem(activityID);
 
-		set({ activityDetail: success ? payload : null });
-		set({ fetchingActivityDetail: false });
+		set({ activityDetailItem: success ? payload : null });
+		set({ fetchingActivityDetailItem: false });
 	},
 
-	getActivityDetail: async (activityID) => {
-		set({ fetchingActivityDetail: true });
+	getActivityDetailList: async (params = {}) => {
+		set({ fetchingActivityDetailList: true });
 
-		const loader = toast.loading('Processing...');
-		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetail(activityID);
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
-		toastRequestResult(
-			loader,
-			success,
-			'Kegiatan detail fetched',
-			payload?.odoo_error || payload?.params || payload?.message
-		);
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailList(requestParams);
 
-		set({ activityDetail: success ? payload : null });
-		set({ fetchingActivityDetail: false });
+		set({ activityDetailList: success ? payload : null });
+		set({ fetchingActivityDetailList: false });
 	},
 
 	createActivity: async (params, callback) => {
