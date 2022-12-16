@@ -13,10 +13,7 @@ const KonstituenUpdate = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`Edit - ${konstituenDetail?.konstituen_name || 'Institusi'}`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`Edit - ${konstituenDetail?.konstituen_name || 'Institusi'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

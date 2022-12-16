@@ -8,7 +8,6 @@ const StockiestMove = () => {
 		<div>
 			<BannerFeature
 				title={`Checkin / Checkout Barang`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
 				backButtonLinkTo={'/stockiest'}
 				backButtonText="Kembali ke Daftar Barang"
 			/>

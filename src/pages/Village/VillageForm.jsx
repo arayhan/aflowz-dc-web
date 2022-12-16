@@ -9,10 +9,7 @@ const VillageForm = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title={`Desa - ${villageID ? 'Update' : 'Create'}`}
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-			/>
+			<BannerFeature title={`Desa - ${villageID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">

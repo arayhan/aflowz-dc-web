@@ -6,12 +6,7 @@ const Stockiest = () => {
 
 	return (
 		<div>
-			<BannerFeature
-				title="Daftar Barang"
-				description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-				backButtonLinkTo={'/'}
-				backButtonText="Kembali ke Home"
-			/>
+			<BannerFeature title="Daftar Barang" backButtonLinkTo={'/'} backButtonText="Kembali ke Home" />
 			<div className="bg-gray-100">
 				<SectionSelectProductCategory
 					selectedCategory={selectedCategory}

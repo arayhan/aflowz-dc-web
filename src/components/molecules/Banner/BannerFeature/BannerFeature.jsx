@@ -30,7 +30,7 @@ export const BannerFeature = ({ title, description, loading, backButtonLinkTo })
 						</Button>
 						<div className="space-y-6 ">
 							{title && <div className="font-extralight text-4xl md:text-5xl">{title}</div>}
-							{/* {description && <div className="text-gray-400">{description}</div>} */}
+							{description && <div className="text-gray-400">{description}</div>}
 						</div>
 					</div>
 				)}

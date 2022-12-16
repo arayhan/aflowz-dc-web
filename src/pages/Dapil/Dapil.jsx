@@ -33,7 +33,7 @@ const Dapil = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature title="Dapil" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="Dapil" />
 			<div className="container py-16 space-y-8">
 				<Breadcrumb
 					items={Object.values(DAPIL_AREA_BREADCRUMB_ITEMS)}

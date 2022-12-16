@@ -3,7 +3,7 @@ import { BannerFeature, TableAttendance } from '@/components/molecules';
 const Attendance = () => {
 	return (
 		<div>
-			<BannerFeature title="Daftar Absensi" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="Daftar Absensi" />
 			<div className="bg-gray-100">
 				<div className="py-6 container">
 					<TableAttendance />

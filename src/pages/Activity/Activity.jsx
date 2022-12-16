@@ -13,7 +13,7 @@ const Activity = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature title="Kegiatan" description="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+			<BannerFeature title="Kegiatan" />
 			<div className="container py-16">
 				<TableActivity params={params} />
 			</div>
