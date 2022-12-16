@@ -9,15 +9,14 @@ export const CarouselComp = () => {
 	const settings = {
 		dots: true,
 		className: 'center',
-		centerMode: true,
+		centerMode: false,
 		infinite: true,
 		autoplay: true,
 		speed: 1000,
 		autoplaySpeed: 5000,
 		cssEase: 'linear',
 		adaptiveHeight: false,
-		focusOnSelect: true,
-		slidesToShow: 2,
+		slidesToShow: 1,
 		slidesToScroll: 1,
 		responsive: [
 			{
@@ -25,14 +24,13 @@ export const CarouselComp = () => {
 				settings: {
 					dots: true,
 					className: 'center',
-					centerMode: true,
+					centerMode: false,
 					infinite: true,
 					autoplay: true,
 					speed: 1000,
 					autoplaySpeed: 5000,
 					cssEase: 'linear',
 					adaptiveHeight: false,
-					focusOnSelect: true,
 					slidesToShow: 1,
 					slidesToScroll: 1
 				}
@@ -41,7 +39,7 @@ export const CarouselComp = () => {
 	};
 
 	return (
-		<div className="py-10 h-fit">
+		<div className="py-10 h-fit container px-10">
 			<Slider {...settings}>
 				{CarouselData.length > 0
 					? CarouselData.map((data, index) => (
