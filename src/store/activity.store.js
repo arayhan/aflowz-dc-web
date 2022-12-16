@@ -9,15 +9,25 @@ const states = (set, get) => ({
 	fetchingActivityList: false,
 	fetchingActivityDetailItem: false,
 	fetchingActivityDetailList: false,
+	fetchingPromiseItem: false,
+	fetchingPromiseList: false,
 
 	processingCreateActivity: false,
 	processingUpdateActivity: false,
 	processingDeleteActivity: false,
+	processingCreateActivityDetail: false,
+	processingUpdateActivityDetail: false,
+	processingDeleteActivityDetail: false,
+	processingCreatePromise: false,
+	processingUpdatePromise: false,
+	processingDeletePromise: false,
 
 	activityItem: null,
 	activityList: null,
 	activityDetailItem: null,
 	activityDetailList: null,
+	promiseItem: null,
+	promiseList: null,
 
 	errorsActivity: null,
 	errorsActivityDetail: null,
@@ -65,6 +75,18 @@ const states = (set, get) => ({
 
 		set({ activityDetailList: success ? payload : null });
 		set({ fetchingActivityDetailList: false });
+	},
+
+	getPromiseList: async (params = {}) => {
+		set({ fetchingPromiseList: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_ACTIVITY.getPromiseList(requestParams);
+
+		set({ promiseList: success ? payload : null });
+		set({ fetchingPromiseList: false });
 	},
 
 	createActivity: async (params, callback) => {

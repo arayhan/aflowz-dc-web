@@ -1,12 +1,5 @@
 import { Button, InputDate, InputText } from '@/components/atoms';
-import {
-	InputSelectCity,
-	InputSelectDistrict,
-	InputSelectInstitusi,
-	InputSelectProgram,
-	InputSelectStaff,
-	InputSelectVillage
-} from '@/components/molecules';
+import { InputSelectActivityPromise, InputSelectStaff } from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { formActivityDetailSchema } from '@/utils/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,10 +11,11 @@ export const FormActivityDetail = () => {
 	const { activityID, activityDetailID } = useParams();
 	const navigate = useNavigate();
 
-	const { activityDetailItem, fetchingActivity, processingCreateActivity, activityErrors } = useActivityStore();
+	const { activityItem, activityDetailItem, fetchingActivity, processingCreateActivity, activityErrors } =
+		useActivityStore();
 	const { getActivityDetailItem, createActivity, updateActivity, clearStateActivity } = useActivityStore();
 
-	const { control, setValue, setError, handleSubmit, watch } = useForm({
+	const { control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formActivityDetailSchema),
 		defaultValues: {
 			activity_id: activityID,
@@ -35,6 +29,7 @@ export const FormActivityDetail = () => {
 	});
 
 	const onSubmitActivity = (values) => {
+		console.log({ values });
 		if (activityDetailID) {
 			updateActivity(activityID, values, ({ success }) => {
 				if (success) navigate(`/activity/${activityID}/detail/${activityDetailID}`, { replace: true });
@@ -67,7 +62,7 @@ export const FormActivityDetail = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="font-light text-xl">{activityDetailID ? 'Edit' : 'Tambah'} Detail Kegiatan</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+				<div className="text-sm text-gray-400">{activityItem?.description}</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -128,6 +123,7 @@ export const FormActivityDetail = () => {
 						/>
 					)}
 				/>
+
 				<Controller
 					name={'pic_mobile'}
 					control={control}
@@ -137,6 +133,23 @@ export const FormActivityDetail = () => {
 							label="Nomor Telepon PIC Kegiatan"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'promise_datas'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectActivityPromise
+							{...field}
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							onChange={(option) => {
+								console.log({ option });
+								// setValue('promise_datas', value);
+								// setError('promise_datas', null);
+							}}
 							error={error}
 						/>
 					)}

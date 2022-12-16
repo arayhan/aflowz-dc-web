@@ -1,16 +1,22 @@
 import { AlertErrors, BannerFeature, FormActivityDetail } from '@/components/molecules';
 import { useActivityStore } from '@/store';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ActivityDetailForm = () => {
-	const { activityDetailID } = useParams();
-	const { activityItem, errorsActivityDetail } = useActivityStore();
+	const { activityID, activityDetailID } = useParams();
+	const { activityItem, errorsActivityDetail, fetchingActivityItem, getActivityItem } = useActivityStore();
+
+	useEffect(() => {
+		if (!activityItem) getActivityItem(activityID);
+	}, [activityItem]);
 
 	return (
 		<div>
 			<BannerFeature
 				title={`Detail Kegiatan - ${activityDetailID ? 'Update' : 'Create'}`}
-				description={activityItem.description}
+				loading={fetchingActivityItem}
+				description={activityItem?.description}
 			/>
 
 			<section className="bg-gray-100">
