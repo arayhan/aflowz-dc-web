@@ -17,7 +17,6 @@ export const FormActivityDetail = () => {
 		fetchingActivityDetailItem,
 		processingCreateActivityDetail,
 		processingUpdateActivityDetail,
-		errorsActivityDetail,
 		getActivityDetailItem,
 		createActivityDetail,
 		updateActivityDetail,
@@ -172,7 +171,7 @@ export const FormActivityDetail = () => {
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
 					disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
-					linkTo={activityID ? `/activity/${activityID}` : '/activity'}
+					onClick={() => navigate(-1, { replace: true })}
 				>
 					Cancel
 				</Button>

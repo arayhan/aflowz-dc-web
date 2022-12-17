@@ -171,8 +171,7 @@ export const FormActivity = () => {
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
 					disabled={processingCreateActivity || fetchingActivity || activityErrors}
-					linkTo={'/activity'}
-					isReplaceLink
+					onClick={() => navigate(-1, { replace: true })}
 				>
 					Cancel
 				</Button>
