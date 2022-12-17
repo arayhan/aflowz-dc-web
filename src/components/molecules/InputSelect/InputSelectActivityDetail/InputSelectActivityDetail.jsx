@@ -1,11 +1,9 @@
 import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { useActivityStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
 
 export const InputSelectActivityDetail = forwardRef(
 	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
-		const { activityID } = useParams();
 		const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 		const [options, setOptions] = useState([]);
@@ -18,7 +16,7 @@ export const InputSelectActivityDetail = forwardRef(
 		useEffect(() => {
 			if (activityDetailList?.total > 0) {
 				const mapPromise = activityDetailList.items.map((promise) => ({
-					label: promise.name,
+					label: promise.description,
 					value: promise.id
 				}));
 				setOptions(mapPromise);
@@ -34,7 +32,6 @@ export const InputSelectActivityDetail = forwardRef(
 					loading={fetchingActivityDetailList}
 					placeholder={placeholder || 'Pilih Detail Kegiatan'}
 					onChange={onChange}
-					multi={true}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}

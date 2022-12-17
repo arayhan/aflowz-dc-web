@@ -8,16 +8,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 
 export const FormActivityPromise = () => {
-	const { activityID, activityPromiseID } = useParams();
+	const { activityDetailID, activityPromiseID } = useParams();
 	const navigate = useNavigate();
 
 	const {
-		activityItem,
 		activityPromise,
 		processingCreateActivityPromise,
 		fetchingActivityPromiseItem,
 		errorsActivityPromise,
-		getActivityItem,
 		getActivityPromiseItem,
 		createActivityPromise,
 		updateActivityPromise,
@@ -52,7 +50,6 @@ export const FormActivityPromise = () => {
 	useEffect(() => {
 		if (activityPromiseID && activityPromise) {
 			setValue('name', activityPromise.name || '');
-			setValue('activity_detail_id', activityPromise.activity_detail.id || 0);
 			setValue('realization', activityPromise.realization || false);
 		}
 	}, [activityPromiseID, activityPromise]);
@@ -81,7 +78,7 @@ export const FormActivityPromise = () => {
 					)}
 				/>
 
-				{activityPromiseID && (
+				{activityDetailID && (
 					<Controller
 						name={'activity_detail_id'}
 						control={control}

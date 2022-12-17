@@ -53,27 +53,10 @@ export const TableActivityPromise = ({
 			},
 			{
 				Header: 'Janji',
-				accessor: 'description',
+				accessor: 'name',
 				width: '100%',
 				minWidth: 200,
 				hidden: displayedColumns && !displayedColumns.includes('Janji')
-			},
-			{
-				Header: 'PIC Internal',
-				width: 200,
-				maxWidth: 200,
-				hidden: displayedColumns && !displayedColumns.includes('PIC Internal'),
-				Cell: (row) => {
-					return row.row.original.pic_staff_id?.id ? (
-						<Button
-							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/staff/${row.row.original.pic_staff_id?.id}`}
-							text={row.row.original.pic_staff_id?.name}
-						/>
-					) : (
-						'-'
-					);
-				}
 			},
 			{
 				Header: 'Actions',

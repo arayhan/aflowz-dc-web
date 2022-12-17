@@ -1,14 +1,6 @@
-import { ButtonAction, Card } from '@/components/atoms';
-import {
-	BannerFeature,
-	CardDetailTotal,
-	ChartPeriodeProgram,
-	TableActivityDetail,
-	TableActivityPromise,
-	TablePenerima
-} from '@/components/molecules';
+import { Card } from '@/components/atoms';
+import { BannerFeature, TableActivityPromise } from '@/components/molecules';
 import { useActivityStore } from '@/store';
-import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
