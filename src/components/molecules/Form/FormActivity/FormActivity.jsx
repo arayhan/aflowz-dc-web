@@ -171,7 +171,8 @@ export const FormActivity = () => {
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
 					disabled={processingCreateActivity || fetchingActivity || activityErrors}
-					linkTo={activityID ? `/activity/${activityID}` : '/activity'}
+					linkTo={'/activity'}
+					isReplaceLink
 				>
 					Cancel
 				</Button>
