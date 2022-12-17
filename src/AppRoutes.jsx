@@ -47,6 +47,7 @@ import Activity from './pages/Activity/Activity';
 import ActivityForm from './pages/Activity/ActivityForm';
 import ActivityDetail from './pages/Activity/ActivityDetail';
 import ActivityDetailForm from './pages/Activity/ActivityDetailForm';
+import ActivityPromiseForm from './pages/Activity/ActivityPromiseForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -111,6 +112,11 @@ export const AppRoutes = () => {
 					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
 					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
+					<Route
+						path="/activity/:activityID/detail/promise/update/:activityPromiseID"
+						element={<ActivityPromiseForm />}
+					/>
+					<Route path="/activity/:activityID/detail/promise/create" element={<ActivityPromiseForm />} />
 					<Route path="/activity/:activityID/detail/create" element={<ActivityDetailForm />} />
 					<Route path="/activity/:activityID" element={<ActivityDetail />} />
 					<Route path="/activity/update/:activityID" element={<ActivityForm />} />

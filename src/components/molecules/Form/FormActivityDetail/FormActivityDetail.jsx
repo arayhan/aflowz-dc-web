@@ -11,9 +11,17 @@ export const FormActivityDetail = () => {
 	const { activityID, activityDetailID } = useParams();
 	const navigate = useNavigate();
 
-	const { activityItem, activityDetailItem, fetchingActivity, processingCreateActivity, activityErrors } =
-		useActivityStore();
-	const { getActivityDetailItem, createActivity, updateActivity, clearStateActivity } = useActivityStore();
+	const {
+		activityItem,
+		activityDetailItem,
+		fetchingActivity,
+		processingCreateActivity,
+		activityErrors,
+		getActivityDetailItem,
+		createActivityDetail,
+		updateActivityDetail,
+		clearStateActivity
+	} = useActivityStore();
 
 	const { control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formActivityDetailSchema),
@@ -29,13 +37,12 @@ export const FormActivityDetail = () => {
 	});
 
 	const onSubmitActivity = (values) => {
-		console.log({ values });
 		if (activityDetailID) {
-			updateActivity(activityID, values, ({ success }) => {
+			updateActivityDetail(activityID, values, ({ success }) => {
 				if (success) navigate(`/activity/${activityID}/detail/${activityDetailID}`, { replace: true });
 			});
 		} else {
-			createActivity(values, ({ payload, success }) => {
+			createActivityDetail(values, ({ payload, success }) => {
 				if (success) navigate(`/activity/${activityID}/detail/${payload.id}`, { replace: true });
 			});
 		}
@@ -146,9 +153,8 @@ export const FormActivityDetail = () => {
 							{...field}
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
 							onChange={(option) => {
-								console.log({ option });
-								// setValue('promise_datas', value);
-								// setError('promise_datas', null);
+								setValue('promise_datas', [...field.value, ...option]);
+								setError('promise_datas', null);
 							}}
 							error={error}
 						/>
