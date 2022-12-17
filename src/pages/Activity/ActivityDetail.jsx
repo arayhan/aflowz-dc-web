@@ -54,7 +54,7 @@ const ActivityDetail = () => {
 										{activityItem?.konstituen && (
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
-												linkTo={`/konstituen/${activityItem?.konstituen.id}`}
+												linkTo={`/institusi/${activityItem?.konstituen.id}`}
 												text={activityItem?.konstituen.name}
 											/>
 										)}
