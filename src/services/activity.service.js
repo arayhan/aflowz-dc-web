@@ -84,7 +84,7 @@ export const getActivityDetailItem = async (activityID) => {
 export const getActivityDetailList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);
-		const response = await http.get('/activity/detail/' + queryParams);
+		const response = await http.get('/activity/detail' + queryParams);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
