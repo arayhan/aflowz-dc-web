@@ -175,8 +175,6 @@ export const createActivityPromise = async (params) => {
 
 export const updateActivityPromise = async (activityPromiseID, params) => {
 	const request = {
-		activity_detail_id: params?.activity_detail_id || 0,
-		name: params?.name || '',
 		realization: params?.realization || false
 	};
 

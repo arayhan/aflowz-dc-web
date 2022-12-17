@@ -12,10 +12,10 @@ export const FormActivityPromise = () => {
 	const navigate = useNavigate();
 
 	const {
-		activityPromise,
+		activityItem,
+		activityPromiseItem,
 		processingCreateActivityPromise,
 		fetchingActivityPromiseItem,
-		errorsActivityPromise,
 		getActivityPromiseItem,
 		createActivityPromise,
 		updateActivityPromise,
@@ -26,7 +26,7 @@ export const FormActivityPromise = () => {
 		resolver: yupResolver(formActivityPromiseSchema),
 		defaultValues: {
 			name: '',
-			activity_detail_id: undefined,
+			activity_detail_id: Number(activityDetailID),
 			realization: false
 		}
 	});
@@ -48,11 +48,11 @@ export const FormActivityPromise = () => {
 	}, [activityPromiseID]);
 
 	useEffect(() => {
-		if (activityPromiseID && activityPromise) {
-			setValue('name', activityPromise.name || '');
-			setValue('realization', activityPromise.realization || false);
+		if (activityPromiseID && activityPromiseItem) {
+			setValue('name', activityPromiseItem.name || '');
+			setValue('realization', activityPromiseItem.realization || false);
 		}
-	}, [activityPromiseID, activityPromise]);
+	}, [activityPromiseID, activityPromiseItem]);
 
 	useEffect(() => () => clearStateActivityPromise(), []);
 
@@ -64,19 +64,7 @@ export const FormActivityPromise = () => {
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
-				<Controller
-					name={'name'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputText
-							{...field}
-							label="Janji"
-							placeholder="Janji"
-							disabled={processingCreateActivityPromise || fetchingActivityPromiseItem || errorsActivityPromise}
-							error={error}
-						/>
-					)}
-				/>
+				{activityItem && activityDetailID && <InputText label="Kegiatan" value={activityItem.description} disabled />}
 
 				{activityDetailID && (
 					<Controller
@@ -85,7 +73,7 @@ export const FormActivityPromise = () => {
 						render={({ field, fieldState: { error } }) => (
 							<InputSelectActivityDetail
 								{...field}
-								disabled={processingCreateActivityPromise || fetchingActivityPromiseItem || errorsActivityPromise}
+								disabled
 								onChange={({ value }) => {
 									setValue('activity_detail_id', value);
 									setError('activity_detail_id', null);
@@ -97,13 +85,27 @@ export const FormActivityPromise = () => {
 				)}
 
 				<Controller
+					name={'name'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Janji"
+							placeholder="Janji"
+							disabled={activityPromiseID || processingCreateActivityPromise || fetchingActivityPromiseItem}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
 					name={'realization'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputCheckbox
 							{...field}
 							label="Realized?"
-							disabled={processingCreateActivityPromise || fetchingActivityPromiseItem || errorsActivityPromise}
+							disabled={processingCreateActivityPromise || fetchingActivityPromiseItem}
 							error={error}
 						/>
 					)}
@@ -114,7 +116,7 @@ export const FormActivityPromise = () => {
 				<Button
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
-					disabled={processingCreateActivityPromise || fetchingActivityPromiseItem || errorsActivityPromise}
+					disabled={processingCreateActivityPromise || fetchingActivityPromiseItem}
 					onClick={() => navigate(-1)}
 				>
 					Cancel
@@ -122,7 +124,7 @@ export const FormActivityPromise = () => {
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
-					disabled={processingCreateActivityPromise || fetchingActivityPromiseItem || errorsActivityPromise}
+					disabled={processingCreateActivityPromise || fetchingActivityPromiseItem}
 					onClick={handleSubmit(onSubmitActivity)}
 				>
 					Submit

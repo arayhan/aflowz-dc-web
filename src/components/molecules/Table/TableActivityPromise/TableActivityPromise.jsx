@@ -47,7 +47,12 @@ export const TableActivityPromise = ({
 				Cell: (row) => {
 					const isRealized = row.row.original.realization;
 					return (
-						<input type="checkbox" checked={isRealized} onChange={() => handleChangeRealization(row.row.original)} />
+						<input
+							className="p-3 rounded-md"
+							type="checkbox"
+							checked={isRealized}
+							onChange={() => handleChangeRealization(row.row.original)}
+						/>
 					);
 				}
 			},
@@ -65,10 +70,6 @@ export const TableActivityPromise = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction
-								action={ACTION_TYPES.UPDATE}
-								linkTo={`/activity/${activityID}/detail/${activityDetailID}/promise/update/${row.row.original.id}`}
-							/>
 							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityPromise(row.row.original.id)} />
 						</div>
 					);
