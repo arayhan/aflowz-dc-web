@@ -48,6 +48,7 @@ import ActivityForm from './pages/Activity/ActivityForm';
 import ActivityDetail from './pages/Activity/ActivityDetail';
 import ActivityDetailForm from './pages/Activity/ActivityDetailForm';
 import ActivityPromiseForm from './pages/Activity/ActivityPromiseForm';
+import ActivityDetailDetail from './pages/Activity/ActivityDetailDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -117,7 +118,9 @@ export const AppRoutes = () => {
 						element={<ActivityPromiseForm />}
 					/>
 					<Route path="/activity/:activityID/detail/promise/create" element={<ActivityPromiseForm />} />
+					<Route path="/activity/:activityID/detail/update/:activityDetailID" element={<ActivityDetailForm />} />
 					<Route path="/activity/:activityID/detail/create" element={<ActivityDetailForm />} />
+					<Route path="/activity/:activityID/detail/:activityDetailID" element={<ActivityDetailDetail />} />
 					<Route path="/activity/:activityID" element={<ActivityDetail />} />
 					<Route path="/activity/update/:activityID" element={<ActivityForm />} />
 					<Route path="/activity/create" element={<ActivityForm />} />

@@ -41,22 +41,23 @@ export const TableActivityDetail = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama Kegiatan',
+				Header: 'Nama Detail Kegiatan',
+				accessor: 'description',
 				width: '100%',
-				minWidth: 300,
-				hidden: displayedColumns && !displayedColumns.includes('Nama Kegiatan')
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Nama Detail Kegiatan')
 			},
 			{
-				Header: 'Nama PIC',
-				width: '100%',
-				minWidth: 300,
-				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				Header: 'PIC Internal',
+				width: 200,
+				maxWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('PIC Internal'),
 				Cell: (row) => {
-					return row.row.original.pic_staff?.id ? (
+					return row.row.original.pic_staff_id?.id ? (
 						<Button
 							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
-							text={row.row.original.pic_staff?.name}
+							linkTo={`/staff/${row.row.original.pic_staff_id?.id}`}
+							text={row.row.original.pic_staff_id?.name}
 						/>
 					) : (
 						'-'
@@ -88,7 +89,7 @@ export const TableActivityDetail = ({
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/activity/${row.row.original.id}`}
+							linkTo={`/activity/${activityID}/detail/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -100,7 +101,10 @@ export const TableActivityDetail = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/activity/update/${row.row.original.id}`} />
+							<ButtonAction
+								action={ACTION_TYPES.UPDATE}
+								linkTo={`/activity/${activityID}/detail/update/${row.row.original.id}`}
+							/>
 							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivity(row.row.original.id)} />
 						</div>
 					);
@@ -112,13 +116,12 @@ export const TableActivityDetail = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/activity/${rowData.id}`);
+		else navigate(`/activity/${activityID}/detail/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/activity' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {

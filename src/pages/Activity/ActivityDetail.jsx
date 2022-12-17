@@ -1,16 +1,10 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import {
-	BannerFeature,
-	CardDetailTotal,
-	ChartPeriodeProgram,
-	TableActivityDetail,
-	TablePenerima
-} from '@/components/molecules';
+import { BannerFeature, TableActivityDetail } from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ActivityDetail = () => {
 	const { activityID } = useParams();
@@ -18,7 +12,7 @@ const ActivityDetail = () => {
 	const { activityItem, fetchingActivityItem } = useActivityStore();
 	const { getActivityItem, getActivityDetailList } = useActivityStore();
 
-	const [tableActivityDetailListParams] = useState({ activity_id: activityID });
+	const [tableActivityDetailListParams, setTableActivityDetailListParams] = useState({ activity_id: activityID });
 
 	useEffect(() => {
 		if (activityID) {
@@ -134,7 +128,11 @@ const ActivityDetail = () => {
 
 							<div className="grid grid-cols-12 gap-4 w-full">
 								<div className="col-span-12 bg-white rounded-md shadow-lg">
-									<TableActivityDetail activityID={activityID} params={tableActivityDetailListParams} />
+									<TableActivityDetail
+										activityID={activityID}
+										params={tableActivityDetailListParams}
+										setParams={setTableActivityDetailListParams}
+									/>
 								</div>
 							</div>
 						</div>
