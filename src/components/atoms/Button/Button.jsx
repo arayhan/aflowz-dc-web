@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-export const Button = ({ className, disabled, linkTo, onClick, variant, children, text }) => {
+export const Button = ({ className, disabled, linkTo, isReplaceLink, onClick, variant, children, text }) => {
 	const navigate = useNavigate();
 
 	const variantClasses = classNames({
@@ -14,7 +14,7 @@ export const Button = ({ className, disabled, linkTo, onClick, variant, children
 
 	const handleClick = (event) => {
 		event.stopPropagation();
-		return linkTo ? navigate(linkTo) : onClick();
+		return linkTo ? navigate(linkTo, { replace: isReplaceLink }) : onClick();
 	};
 
 	return (
@@ -29,5 +29,6 @@ export const Button = ({ className, disabled, linkTo, onClick, variant, children
 };
 
 Button.defaultProps = {
-	onClick: () => {}
+	onClick: () => {},
+	isReplaceLink: false
 };
