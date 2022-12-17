@@ -4,6 +4,7 @@ import {
 	CardDetailTotal,
 	ChartPeriodeProgram,
 	TableActivityDetail,
+	TableActivityPromise,
 	TablePenerima
 } from '@/components/molecules';
 import { useActivityStore } from '@/store';
@@ -18,7 +19,14 @@ const ActivityDetailDetail = () => {
 	const { activityDetailItem, fetchingActivityDetailItem } = useActivityStore();
 	const { getActivityDetailItem } = useActivityStore();
 
-	// const [tableActivityDetailListParams] = useState({ activity_id: activityID });
+	const tableActivityPromiseListFixedParams = {
+		activity_id: activityID,
+		activity_detail_id: activityDetailID
+	};
+
+	const [tableActivityPromiseListParams, setTableActivityPromiseListParams] = useState({
+		...tableActivityPromiseListFixedParams
+	});
 
 	useEffect(() => {
 		if (activityDetailID) {
@@ -83,20 +91,32 @@ const ActivityDetailDetail = () => {
 								</div>
 							</Card>
 
-							{/* <div className="flex flex-col items-center justify-center">
+							<div className="flex flex-col items-center justify-center">
 								<div className="bg-white rounded-md px-8 md:px-10 py-6 mb-2 shadow-lg">
 									<div className="flex flex-col items-center justify-center space-y-1 text-center">
-										<span className="text-2xl md:text-4xl font-extralight">{activityItem?.total_activity || 0}</span>
-										<div className="font-light text-gray-400">Total Kegiatan </div>
+										<span className="text-2xl md:text-4xl font-extralight">
+											{activityDetailItem?.total_promise || 0}
+										</span>
+										<div className="font-light text-gray-400">Total Janji </div>
 									</div>
 								</div>
-							</div> */}
+							</div>
 
-							{/* <div className="grid grid-cols-12 gap-4 w-full">
+							<div className="grid grid-cols-12 gap-4 w-full">
 								<div className="col-span-12 bg-white rounded-md shadow-lg">
-									<TableActivityDetail activityID={activityID} params={tableActivityDetailListParams} />
+									<TableActivityPromise
+										activityID={activityID}
+										activityDetailID={activityDetailID}
+										params={tableActivityPromiseListParams}
+										setParams={(params) =>
+											setTableActivityPromiseListParams({
+												...tableActivityPromiseListFixedParams,
+												...params
+											})
+										}
+									/>
 								</div>
-							</div> */}
+							</div>
 						</div>
 					)}
 				</div>

@@ -90,5 +90,6 @@ export * from './Table/TableStockiest/TableStockiest';
 export * from './Table/TableStockiest/TableStockiestMovementLog';
 export * from './Table/TableActivity/TableActivity';
 export * from './Table/TableActivityDetail/TableActivityDetail';
+export * from './Table/TableActivityPromise/TableActivityPromise';
 
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
