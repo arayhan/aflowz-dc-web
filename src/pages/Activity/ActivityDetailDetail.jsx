@@ -50,8 +50,7 @@ const ActivityDetailDetail = () => {
 								title={'Details'}
 								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
-								linkRoute={`/activity/${activityID}/update/${activityDetailItem?.id}`}
-								isInDetail
+								linkRoute={`/activity/${activityID}/detail/update/${activityDetailItem?.id}`}
 							>
 								<div className="grid grid-cols-12 gap-y-1 text-sm p-5">
 									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
