@@ -156,8 +156,11 @@ export const formActivityDetailSchema = yup.object().shape({
 		.required('Nomor PIC kegiatan wajib diisi')
 		.matches(/^[0-9]*$/, 'Nomor tidak valid')
 		.min(8, 'Minimal 8 angka'),
-	pic_staff_id: yup.number().required('PIC tim internal wajib diisi'),
-	promise_datas: yup.array().min(1, 'Janji wajib diisi')
+	pic_staff_id: yup.number().required('PIC tim internal wajib diisi')
+});
+
+export const formActivityPromiseSchema = yup.object().shape({
+	name: yup.string().required('Janji wajib diisi')
 });
 
 export const formProductSchema = yup.object().shape({
