@@ -14,9 +14,10 @@ export const FormActivityDetail = () => {
 	const {
 		activityItem,
 		activityDetailItem,
-		fetchingActivity,
-		processingCreateActivity,
-		activityErrors,
+		fetchingActivityDetailItem,
+		processingCreateActivityDetail,
+		processingUpdateActivityDetail,
+		errorsActivityDetail,
 		getActivityDetailItem,
 		createActivityDetail,
 		updateActivityDetail,
@@ -81,7 +82,7 @@ export const FormActivityDetail = () => {
 							{...field}
 							label="Deskripsi"
 							placeholder="Deskripsi"
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							error={error}
 						/>
 					)}
@@ -95,7 +96,7 @@ export const FormActivityDetail = () => {
 							{...field}
 							label="Tanggal Kegiatan"
 							placeholder="Tanggal Kegiatan"
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							error={error}
 						/>
 					)}
@@ -107,7 +108,7 @@ export const FormActivityDetail = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectStaff
 							{...field}
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							onChange={({ value }) => {
 								setValue('pic_staff_id', value);
 								setError('pic_staff_id', null);
@@ -125,7 +126,7 @@ export const FormActivityDetail = () => {
 							{...field}
 							label="Nama PIC Kegiatan"
 							placeholder="Nama PIC Kegiatan"
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							error={error}
 						/>
 					)}
@@ -139,34 +140,38 @@ export const FormActivityDetail = () => {
 							{...field}
 							label="Nomor Telepon PIC Kegiatan"
 							placeholder="Contoh : 08xxxxxxxxxx"
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							error={error}
 						/>
 					)}
 				/>
 
-				<Controller
-					name={'promise_datas'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputSelectActivityPromise
-							{...field}
-							disabled={processingCreateActivity || fetchingActivity || activityErrors}
-							onChange={(option) => {
-								setValue('promise_datas', [...field.value, ...option]);
-								setError('promise_datas', null);
-							}}
-							error={error}
-						/>
-					)}
-				/>
+				{!activityDetailID && (
+					<Controller
+						name={'promise_datas'}
+						control={control}
+						render={({ field, fieldState: { error } }) => (
+							<InputSelectActivityPromise
+								{...field}
+								disabled={
+									processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem
+								}
+								onChange={(option) => {
+									setValue('promise_datas', [...field.value, ...option]);
+									setError('promise_datas', null);
+								}}
+								error={error}
+							/>
+						)}
+					/>
+				)}
 			</div>
 			<hr />
 			<div className="flex justify-end">
 				<Button
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
-					disabled={processingCreateActivity || fetchingActivity || activityErrors}
+					disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 					linkTo={activityID ? `/activity/${activityID}` : '/activity'}
 				>
 					Cancel
@@ -174,7 +179,7 @@ export const FormActivityDetail = () => {
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
-					disabled={processingCreateActivity || fetchingActivity || activityErrors}
+					disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 					onClick={handleSubmit(onSubmitActivity)}
 				>
 					Submit

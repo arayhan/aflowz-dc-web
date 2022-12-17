@@ -112,13 +112,11 @@ export const createActivityDetail = async (params) => {
 
 export const updateActivityDetail = async (activityDetailID, params) => {
 	const request = {
-		activity_id: params?.activity_id || 0,
 		description: params?.description || '',
 		activity_date: params?.activity_date || '',
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0,
-		promise_datas: params?.promise_datas || []
+		pic_staff_id: params?.pic_staff_id || 0
 	};
 
 	try {

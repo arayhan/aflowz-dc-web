@@ -157,7 +157,12 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_ACTIVITY.deleteActivityDetail(activityDetailID);
 
-		toastRequestResult(loader, success, 'Kegiatan Detail deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(
+			loader,
+			success,
+			'Kegiatan Detail deleted',
+			payload?.odoo_error || payload?.status || payload?.message
+		);
 		get().getActivityDetailList();
 		set({ processingDeleteActivityDetail: false });
 	},
@@ -220,7 +225,12 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_ACTIVITY.deleteActivityPromise(activityPromiseID);
 
-		toastRequestResult(loader, success, 'Janji Kegiatan deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(
+			loader,
+			success,
+			'Janji Kegiatan deleted',
+			payload?.status || payload?.odoo_error || payload?.message
+		);
 		get().getActivityPromiseList();
 		set({ processingDeleteActivityPromise: false });
 	},

@@ -21,7 +21,7 @@ export const TableActivityDetail = ({
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { activityDetailList, fetchingActivityDetailList } = useActivityStore();
-	const { getActivityDetailList, deleteActivity } = useActivityStore();
+	const { getActivityDetailList, deleteActivityDetail } = useActivityStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -105,7 +105,7 @@ export const TableActivityDetail = ({
 								action={ACTION_TYPES.UPDATE}
 								linkTo={`/activity/${activityID}/detail/update/${row.row.original.id}`}
 							/>
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivity(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityDetail(row.row.original.id)} />
 						</div>
 					);
 				}
