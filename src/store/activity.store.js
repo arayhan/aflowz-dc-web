@@ -9,8 +9,8 @@ const states = (set, get) => ({
 	fetchingActivityList: false,
 	fetchingActivityDetailItem: false,
 	fetchingActivityDetailList: false,
-	fetchingPromiseItem: false,
-	fetchingPromiseList: false,
+	fetchingActivityPromiseItem: false,
+	fetchingActivityPromiseList: false,
 
 	processingCreateActivity: false,
 	processingUpdateActivity: false,
@@ -18,20 +18,24 @@ const states = (set, get) => ({
 	processingCreateActivityDetail: false,
 	processingUpdateActivityDetail: false,
 	processingDeleteActivityDetail: false,
-	processingCreatePromise: false,
-	processingUpdatePromise: false,
-	processingDeletePromise: false,
+	processingCreateActivityPromise: false,
+	processingUpdateActivityPromise: false,
+	processingDeleteActivityPromise: false,
 
 	activityItem: null,
 	activityList: null,
 	activityDetailItem: null,
 	activityDetailList: null,
-	promiseItem: null,
-	promiseList: null,
+	activityPromiseItem: null,
+	activityPromiseList: null,
 
 	errorsActivity: null,
 	errorsActivityDetail: null,
+	errorsActivityPromise: null,
 
+	// ==================================
+	// Activity
+	// ==================================
 	getActivityItem: async (activityID) => {
 		set({ fetchingActivityItem: true });
 		set({ activityItem: null });
@@ -54,39 +58,6 @@ const states = (set, get) => ({
 
 		set({ activityList: success ? payload : null });
 		set({ fetchingActivityList: false });
-	},
-
-	getActivityDetailItem: async (activityID) => {
-		set({ fetchingActivityDetailItem: true });
-
-		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailItem(activityID);
-
-		set({ activityDetailItem: success ? payload : null });
-		set({ fetchingActivityDetailItem: false });
-	},
-
-	getActivityDetailList: async (params = {}) => {
-		set({ fetchingActivityDetailList: true });
-
-		const defaultParams = { limit: 0, offset: 0 };
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailList(requestParams);
-
-		set({ activityDetailList: success ? payload : null });
-		set({ fetchingActivityDetailList: false });
-	},
-
-	getPromiseList: async (params = {}) => {
-		set({ fetchingPromiseList: true });
-
-		const defaultParams = { limit: 0, offset: 0 };
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_ACTIVITY.getPromiseList(requestParams);
-
-		set({ promiseList: success ? payload : null });
-		set({ fetchingPromiseList: false });
 	},
 
 	createActivity: async (params, callback) => {
@@ -128,14 +99,148 @@ const states = (set, get) => ({
 		set({ processingDeleteActivity: false });
 	},
 
+	// ==================================
+	// Activity Detail
+	// ==================================
+	getActivityDetailItem: async (activityID) => {
+		set({ fetchingActivityDetailItem: true });
+
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailItem(activityID);
+
+		set({ activityDetailItem: success ? payload : null });
+		set({ fetchingActivityDetailItem: false });
+	},
+
+	getActivityDetailList: async (params = {}) => {
+		set({ fetchingActivityDetailList: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailList(requestParams);
+
+		set({ activityDetailList: success ? payload : null });
+		set({ fetchingActivityDetailList: false });
+	},
+
+	createActivityDetail: async (params, callback) => {
+		set({ processingCreateActivity: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.createActivityDetail(params);
+
+		if (!success) set({ errorsActivityDetail: payload });
+
+		toastRequestResult(loader, success, 'Detail Kegiatan created', payload?.odoo_error || payload?.message);
+		set({ processingCreateActivityDetail: false });
+
+		callback({ payload, success });
+	},
+
+	updateActivityDetail: async (activityDetailID, params, callback) => {
+		set({ processingUpdateActivityDetail: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.updateActivityDetail(activityDetailID, params);
+
+		if (!success) set({ errorsActivityDetail: payload });
+
+		toastRequestResult(loader, success, 'Kegiatan Detail updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateActivityDetail: false });
+
+		callback({ payload, success });
+	},
+
+	deleteActivityDetail: async (activityDetailID) => {
+		set({ processingDeleteActivityDetail: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.deleteActivityDetail(activityDetailID);
+
+		toastRequestResult(loader, success, 'Kegiatan Detail deleted', payload?.odoo_error || payload?.message);
+		get().getActivityDetailList();
+		set({ processingDeleteActivityDetail: false });
+	},
+
+	// ==================================
+	// ActivityPromise
+	// ==================================
+	getActivityPromiseItem: async (activityPromiseID) => {
+		set({ fetchingActivityPromiseItem: true });
+
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityPromiseItem(activityPromiseID);
+
+		set({ activityPromiseItem: success ? payload : null });
+		set({ fetchingActivityPromiseItem: false });
+	},
+
+	getActivityPromiseList: async (params = {}) => {
+		set({ fetchingActivityPromiseList: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityPromiseList(requestParams);
+
+		set({ activityPromiseList: success ? payload : null });
+		set({ fetchingActivityPromiseList: false });
+	},
+
+	createActivityPromise: async (params, callback) => {
+		set({ processingCreateActivity: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.createActivityPromise(params);
+
+		if (!success) set({ errorsActivityPromise: payload });
+
+		toastRequestResult(loader, success, 'Janji Kegiatan created', payload?.odoo_error || payload?.message);
+		set({ processingCreateActivityPromise: false });
+
+		callback({ payload, success });
+	},
+
+	updateActivityPromise: async (activityPromiseID, params, callback) => {
+		set({ processingUpdateActivityPromise: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.updateActivityPromise(activityPromiseID, params);
+
+		if (!success) set({ errorsActivityPromise: payload });
+
+		toastRequestResult(loader, success, 'Detail Kegiatan updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateActivityPromise: false });
+
+		callback({ payload, success });
+	},
+
+	deleteActivityPromise: async (activityPromiseID) => {
+		set({ processingDeleteActivityPromise: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_ACTIVITY.deleteActivityPromise(activityPromiseID);
+
+		toastRequestResult(loader, success, 'Janji Kegiatan deleted', payload?.odoo_error || payload?.message);
+		get().getActivityPromiseList();
+		set({ processingDeleteActivityPromise: false });
+	},
+
+	// ==================================
+	// Clear State
+	// ==================================
 	clearStateActivity: () => {
-		set({ activity: null });
+		set({ fetchingActivityList: null });
 		set({ errorsActivity: null });
 	},
 
 	clearStateActivityDetail: () => {
-		set({ activity: null });
+		set({ activityDetailList: null });
 		set({ errorsActivityDetail: null });
+	},
+
+	clearStateActivityPromise: () => {
+		set({ activityPromiseList: null });
+		set({ errorsActivityPromise: null });
 	}
 });
 
