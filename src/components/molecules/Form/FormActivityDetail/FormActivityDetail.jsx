@@ -58,7 +58,7 @@ export const FormActivityDetail = () => {
 			setValue('activity_date', activityDetailItem.activity_date || '');
 			setValue('pic', activityDetailItem.pic || '');
 			setValue('pic_mobile', activityDetailItem.pic_mobile || '');
-			setValue('pic_staff_id', activityDetailItem.pic_staff.id || 0);
+			setValue('pic_staff_id', activityDetailItem.pic_staff_id.id || 0);
 			setValue('promise_datas', activityDetailItem.promise_datas);
 		}
 	}, [activityDetailID, activityDetailItem]);

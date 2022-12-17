@@ -19,8 +19,8 @@ export const TableActivityPromise = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { activityDetailList, fetchingActivityDetailList } = useActivityStore();
-	const { getActivityDetailList, deleteActivity } = useActivityStore();
+	const { activityPromiseList, fetchingActivityPromiseList } = useActivityStore();
+	const { getActivityPromiseList, deleteActivityPromise } = useActivityStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -40,11 +40,23 @@ export const TableActivityPromise = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama Detail Kegiatan',
+				Header: 'Terealisasi',
+				width: 200,
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Terealisasi'),
+				Cell: (row) => {
+					const isRealized = row.row.original.realization;
+					return (
+						<input type="checkbox" checked={isRealized} onChange={() => handleChangeRealization(row.row.original)} />
+					);
+				}
+			},
+			{
+				Header: 'Janji',
 				accessor: 'description',
 				width: '100%',
 				minWidth: 200,
-				hidden: displayedColumns && !displayedColumns.includes('Nama Detail Kegiatan')
+				hidden: displayedColumns && !displayedColumns.includes('Janji')
 			},
 			{
 				Header: 'PIC Internal',
@@ -72,9 +84,9 @@ export const TableActivityPromise = ({
 						<div className="grid grid-cols-2 gap-2">
 							<ButtonAction
 								action={ACTION_TYPES.UPDATE}
-								linkTo={`/activity/${activityID}/detail/update/${row.row.original.id}`}
+								linkTo={`/activity/${activityID}/detail/${activityDetailID}/promise/update/${row.row.original.id}`}
 							/>
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivity(row.row.original.id)} />
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityPromise(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -82,6 +94,10 @@ export const TableActivityPromise = ({
 		],
 		[offset, perPage, page, isSystem]
 	);
+
+	const handleChangeRealization = (rowData) => {
+		console.log({ rowData });
+	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
@@ -95,23 +111,23 @@ export const TableActivityPromise = ({
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getActivityDetailList({ ...defaultParams, ...params });
+			getActivityPromiseList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (activityDetailList) {
-			setData(activityDetailList.items);
-			setPageCount(Math.ceil(activityDetailList.total / perPage));
+		if (activityPromiseList) {
+			setData(activityPromiseList.items);
+			setPageCount(Math.ceil(activityPromiseList.total / perPage));
 		}
-	}, [activityDetailList]);
+	}, [activityPromiseList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Janji"
-					featurePath={`/activity/${activityID}/detail/${activityDetailID}`}
+					featurePath={`/activity/${activityID}/detail/${activityDetailID}/promise`}
 					title={title || 'List Janji'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
@@ -136,7 +152,7 @@ export const TableActivityPromise = ({
 				</>
 			)}
 			<div className="overflow-x-scroll">
-				<Table columns={columns} data={data} loading={fetchingActivityDetailList || activityDetailList === null} />
+				<Table columns={columns} data={data} loading={fetchingActivityPromiseList || activityPromiseList === null} />
 			</div>
 			{isShowFooter && (
 				<div className="p-6">

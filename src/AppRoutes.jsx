@@ -114,10 +114,13 @@ export const AppRoutes = () => {
 					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
 					<Route
-						path="/activity/:activityID/detail/promise/update/:activityPromiseID"
+						path="/activity/:activityID/detail/:activityDetailID/promise/update/:activityPromiseID"
 						element={<ActivityPromiseForm />}
 					/>
-					<Route path="/activity/:activityID/detail/promise/create" element={<ActivityPromiseForm />} />
+					<Route
+						path="/activity/:activityID/detail/:activityDetailID/promise/create"
+						element={<ActivityPromiseForm />}
+					/>
 					<Route path="/activity/:activityID/detail/update/:activityDetailID" element={<ActivityDetailForm />} />
 					<Route path="/activity/:activityID/detail/create" element={<ActivityDetailForm />} />
 					<Route path="/activity/:activityID/detail/:activityDetailID" element={<ActivityDetailDetail />} />
