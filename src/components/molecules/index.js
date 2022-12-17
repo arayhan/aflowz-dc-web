@@ -29,6 +29,7 @@ export * from './Form/FormDistrict/FormDistrict';
 export * from './Form/FormTPS/FormTPS';
 export * from './Form/FormActivity/FormActivity';
 export * from './Form/FormActivityDetail/FormActivityDetail';
+export * from './Form/FormActivityPromise/FormActivityPromise';
 export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
 
@@ -66,6 +67,7 @@ export * from './InputSelect/InputSelectProductCategory/InputSelectProductCatego
 export * from './InputSelect/InputSelectProduct/InputSelectProduct';
 export * from './InputSelect/InputSelectProductMovement/InputSelectProductMovement';
 export * from './InputSelect/InputSelectActivityPromise/InputSelectActivityPromise';
+export * from './InputSelect/InputSelectActivityDetail/InputSelectActivityDetail';
 
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
