@@ -3,10 +3,8 @@ import { CarouselComp } from '../../index';
 
 export const BannerHome = () => {
 	return (
-		<div className="w-full flex items-center justify-center bg-primary pt-8 pb-20">
-			<div className="container max-w-screen-lg">
-				<CarouselComp />
-			</div>
+		<div className="bg-gray-100">
+			<CarouselComp />
 		</div>
 	);
 };

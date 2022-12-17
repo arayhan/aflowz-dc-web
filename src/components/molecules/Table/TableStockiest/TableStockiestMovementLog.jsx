@@ -75,27 +75,27 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'Kota',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name || '-'}</div>
 			},
 			{
 				Header: 'Kecamatan',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.district.name}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.district.name || '-'}</div>
 			},
 			{
 				Header: 'Kelurahan/Desa',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.village.name}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.village.name || '-'}</div>
 			},
 			{
 				Header: 'Institusi',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen.name}</div>
+				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen.name || '-'}</div>
 			},
 			{
 				Header: 'Program',
 				minWidth: 150,
-				Cell: (row) => <div>{row.row.original.program.name}</div>
+				Cell: (row) => <div>{row.row.original.program.name || '-'}</div>
 			},
 			{
 				Header: 'PIC Tim Internal',

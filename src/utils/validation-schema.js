@@ -172,12 +172,12 @@ export const formProductSchema = yup.object().shape({
 });
 
 export const formProductMovementSchema = yup.object().shape({
-	province: yup.number().nullable().required('Belum memiliih provinsi'),
-	city: yup.number().nullable().required('Belum memiliih kota/kabupaten'),
-	district: yup.number().nullable().required('Belum memiliih kecamatan'),
-	village: yup.number().nullable().required('Belum memiliih kelurahan/desa'),
-	konstituen: yup.number().nullable().required('Belum memiliih institusi'),
-	program: yup.number().nullable().required('Belum memiliih program'),
+	province: yup.number().nullable(),
+	city: yup.number().nullable(),
+	district: yup.number().nullable(),
+	village: yup.number().nullable(),
+	konstituen: yup.number().nullable(),
+	program: yup.number().nullable(),
 	pic_staff_id: yup.number().nullable().required('Belum memiliih PIC tim internal'),
 	description: yup.string().required('Deskripsi wajib diisi'),
 	method: yup.string().required('Belum memilih metode')

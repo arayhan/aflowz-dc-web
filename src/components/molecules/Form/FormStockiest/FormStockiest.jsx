@@ -194,8 +194,8 @@ export const FormStockiest = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="SKU Barang"
-							placeholder="SKU Barang"
+							label="Kode Unik Barang"
+							placeholder="Kode Unik Barang"
 							disabled={processingCreateProduct || processingUpdateProduct || fetchingProduct}
 							error={error}
 						/>

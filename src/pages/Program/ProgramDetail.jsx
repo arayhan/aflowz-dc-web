@@ -66,9 +66,15 @@ const ProgramDetail = () => {
 								</div>
 							</Card>
 
-							<div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-								<div className="md:col-start-2 bg-white rounded-md py-10 md:py-40">
+							<div className="grid grid-cols-1 md:grid-cols-5 gap-x-0 md:gap-x-4 gap-y-4">
+								<div className="md:col-start-1 md:col-span-2 xl:col-span-1 xl:col-start-2 bg-white rounded-md py-5 md:py-auto grid">
 									<Link to={`/program/penerima/${programDetail?.program_id}`}>
+										<div className="w-full flex justify-center items-center">
+											<img
+												src={require('@/images/icons/Icon_Home/Penerima.svg').default}
+												className="w-1/2 sm:w-1/3 md:w-2/3"
+											/>
+										</div>
 										<div className="flex flex-col items-center justify-center space-y-1 text-center">
 											<span className="text-2xl md:text-4xl font-extralight">
 												{programDetail?.total_penerima_program || 0}
@@ -77,7 +83,7 @@ const ProgramDetail = () => {
 										</div>
 									</Link>
 								</div>
-								<div className="col-span-2">
+								<div className="md:col-span-3 xl:col-span-2">
 									<CardPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
 										totalPria={programDetail?.total_pria}
