@@ -4,7 +4,7 @@ import React, { useEffect, useState, forwardRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 export const InputSelectActivityPromise = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
+	({ containerClassName, error, onChange, params, placeholder, disabled, showLabel, ...props }, ref) => {
 		const { activityID } = useParams();
 		const { activityPromiseList, fetchingActivityPromiseList, getActivityPromiseList } = useActivityStore();
 
@@ -32,6 +32,7 @@ export const InputSelectActivityPromise = forwardRef(
 					ref={ref}
 					options={options}
 					loading={fetchingActivityPromiseList}
+					disabled={disabled || fetchingActivityPromiseList}
 					placeholder={placeholder || 'Pilih Janji'}
 					onChange={onChange}
 					multi={true}
