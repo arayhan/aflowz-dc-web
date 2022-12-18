@@ -20,7 +20,7 @@ export const TableActivityPromise = ({
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { activityPromiseList, fetchingActivityPromiseList } = useActivityStore();
-	const { getActivityPromiseList, deleteActivityPromise } = useActivityStore();
+	const { getActivityPromiseList, updateActivityPromise, deleteActivityPromise } = useActivityStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -48,7 +48,7 @@ export const TableActivityPromise = ({
 					const isRealized = row.row.original.realization;
 					return (
 						<input
-							className="p-3 rounded-md"
+							className="p-3 rounded-md hover:cursor-pointer"
 							type="checkbox"
 							checked={isRealized}
 							onChange={() => handleChangeRealization(row.row.original)}
@@ -80,7 +80,9 @@ export const TableActivityPromise = ({
 	);
 
 	const handleChangeRealization = (rowData) => {
-		console.log({ rowData });
+		updateActivityPromise(rowData.id, { ...rowData, realization: !rowData.realization }, ({ success }) => {
+			if (success) getActivityPromiseList({ limit: perPage, offset: offset, ...params }, false);
+		});
 	};
 
 	const handleSetFilter = (key, params) => {

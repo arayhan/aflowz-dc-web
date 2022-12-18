@@ -1,11 +1,9 @@
-import { InputError, InputLabel, InputSelect } from '@/components/atoms';
+import { InputError, InputLabel, InputSelectCreatable } from '@/components/atoms';
 import { useActivityStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
 
 export const InputSelectActivityPromise = forwardRef(
 	({ containerClassName, error, onChange, params, placeholder, disabled, showLabel, ...props }, ref) => {
-		const { activityID } = useParams();
 		const { activityPromiseList, fetchingActivityPromiseList, getActivityPromiseList } = useActivityStore();
 
 		const [options, setOptions] = useState([]);
@@ -19,7 +17,7 @@ export const InputSelectActivityPromise = forwardRef(
 			if (activityPromiseList?.total > 0) {
 				const mapPromise = activityPromiseList.items.map((promise) => ({
 					label: promise.name,
-					value: promise.id
+					value: promise.name
 				}));
 				setOptions(mapPromise);
 			}
@@ -28,7 +26,7 @@ export const InputSelectActivityPromise = forwardRef(
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
 				{showLabel && <InputLabel text="Pilih Janji" name={props.name} />}
-				<InputSelect
+				<InputSelectCreatable
 					ref={ref}
 					options={options}
 					loading={fetchingActivityPromiseList}
@@ -39,12 +37,6 @@ export const InputSelectActivityPromise = forwardRef(
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}
-				<div className="text-xs text-right text-gray-400">
-					Tidak menemukan janji pada list?{' '}
-					<Link to={`/activity/${activityID}/detail/promise/create`} className="text-blue-500 hover:text-blue-700">
-						Buat janji baru
-					</Link>
-				</div>
 			</div>
 		);
 	}

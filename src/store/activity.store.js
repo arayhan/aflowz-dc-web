@@ -179,8 +179,8 @@ const states = (set, get) => ({
 		set({ fetchingActivityPromiseItem: false });
 	},
 
-	getActivityPromiseList: async (params = {}) => {
-		set({ fetchingActivityPromiseList: true });
+	getActivityPromiseList: async (params = {}, isSetLoading = true) => {
+		if (isSetLoading) set({ fetchingActivityPromiseList: true });
 
 		const defaultParams = { limit: 0, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
@@ -208,12 +208,12 @@ const states = (set, get) => ({
 	updateActivityPromise: async (activityPromiseID, params, callback) => {
 		set({ processingUpdateActivityPromise: true });
 
-		const loader = toast.loading('Processing...');
+		const loader = toast.loading(`Updating Janji : ${params.name}`);
 		const { payload, success } = await SERVICE_ACTIVITY.updateActivityPromise(activityPromiseID, params);
 
 		if (!success) set({ errorsActivityPromise: payload });
 
-		toastRequestResult(loader, success, 'Detail Kegiatan updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, `Janji ${params.name} updated`, payload?.odoo_error || payload?.message);
 		set({ processingUpdateActivityPromise: false });
 
 		callback({ payload, success });
