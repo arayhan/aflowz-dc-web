@@ -38,7 +38,7 @@ export const FormActivityDetail = () => {
 
 	const onSubmitActivity = (values) => {
 		if (activityDetailID) {
-			updateActivityDetail(activityID, values, ({ success }) => {
+			updateActivityDetail(activityDetailID, values, ({ success }) => {
 				if (success) navigate(`/activity/${activityID}/detail/${activityDetailID}`, { replace: true });
 			});
 		} else {

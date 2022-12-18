@@ -23,8 +23,6 @@ export const InputSelectActivityDetail = forwardRef(
 			}
 		}, [activityDetailList]);
 
-		console.log({ props });
-
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
 				{showLabel && <InputLabel text="Pilih Detail Kegiatan" name={props.name} />}
