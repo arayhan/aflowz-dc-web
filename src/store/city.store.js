@@ -36,7 +36,7 @@ const states = (set, get) => ({
 	getCityList: async (params = {}) => {
 		set({ fetchingCityList: true });
 
-		const defaultParams = { limit: 0, offset: 0 };
+		const defaultParams = { limit: 0, offset: 0, province_id: 617 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_CITY.getCityList(requestParams);
