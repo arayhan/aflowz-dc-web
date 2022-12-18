@@ -106,6 +106,7 @@ export const FormActivity = () => {
 						<InputSelectProgram
 							{...field}
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							showPeriodeOnLabel
 							onChange={({ value }) => {
 								setValue('program_id', value);
 								setError('program_id', null);

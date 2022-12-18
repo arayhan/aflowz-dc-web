@@ -9,14 +9,14 @@ export const InputSelectProgram = forwardRef(
 		const [options, setOptions] = useState([]);
 
 		useEffect(() => {
-			if (params) getProgramList({ limit: 10, offset: 0, ...params });
+			if (params) getProgramList({ limit: 1000, offset: 0, ...params });
 			else getProgramList();
 		}, [params]);
 
 		useEffect(() => {
 			if (programList?.total > 0) {
 				const mapProgram = programList.items.map((program) => ({
-					label: showPeriodeOnLabel ? `${program.name} - ${program.periode}` : program.name,
+					label: showPeriodeOnLabel ? `${program.name} (${program.periode})` : program.name,
 					value: program.id
 				}));
 				setOptions(mapProgram);

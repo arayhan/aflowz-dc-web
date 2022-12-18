@@ -219,7 +219,7 @@ const states = (set, get) => ({
 		callback({ payload, success });
 	},
 
-	deleteActivityPromise: async (activityPromiseID) => {
+	deleteActivityPromise: async (activityPromiseID, callback) => {
 		set({ processingDeleteActivityPromise: true });
 
 		const loader = toast.loading('Processing...');
@@ -231,7 +231,7 @@ const states = (set, get) => ({
 			'Janji Kegiatan deleted',
 			payload?.status || payload?.odoo_error || payload?.message
 		);
-		get().getActivityPromiseList();
+		callback({ payload, success });
 		set({ processingDeleteActivityPromise: false });
 	},
 

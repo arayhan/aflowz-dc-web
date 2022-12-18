@@ -1,9 +1,8 @@
-import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const TableActivityPromise = ({
 	title,
@@ -17,10 +16,10 @@ export const TableActivityPromise = ({
 	isShowButtonSeeAll,
 	isShowFilter
 }) => {
-	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
 	const { activityPromiseList, fetchingActivityPromiseList } = useActivityStore();
-	const { getActivityPromiseList, updateActivityPromise, deleteActivityPromise } = useActivityStore();
+	const { getActivityDetailItem, getActivityPromiseList, updateActivityPromise, deleteActivityPromise } =
+		useActivityStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -70,7 +69,15 @@ export const TableActivityPromise = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityPromise(row.row.original.id)} />
+							<ButtonAction
+								action={ACTION_TYPES.DELETE}
+								onClick={() =>
+									deleteActivityPromise(row.row.original.id, () => {
+										getActivityDetailItem(activityID);
+										getActivityPromiseList({ limit: perPage, offset: offset, ...params }, false);
+									})
+								}
+							/>
 						</div>
 					);
 				}

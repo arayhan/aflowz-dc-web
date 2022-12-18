@@ -144,26 +144,6 @@ export const FormActivityDetail = () => {
 						/>
 					)}
 				/>
-
-				{!activityDetailID && (
-					<Controller
-						name={'promise_datas'}
-						control={control}
-						render={({ field, fieldState: { error } }) => (
-							<InputSelectActivityPromise
-								{...field}
-								disabled={
-									processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem
-								}
-								onChange={(option) => {
-									setValue('promise_datas', [...field.value, ...option]);
-									setError('promise_datas', null);
-								}}
-								error={error}
-							/>
-						)}
-					/>
-				)}
 			</div>
 			<hr />
 			<div className="flex justify-end">
