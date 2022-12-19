@@ -258,8 +258,8 @@ export const FormStaff = () => {
 							error={error}
 							params={
 								watch('province')
-									? { province_id: watch('province'), limit: 0, offset: 0 }
-									: { province_id: 1000, limit: 0, offset: 0 }
+									? { province_id: watch('province'), limit: 1000, offset: 0 }
+									: { province_id: 1000, limit: 1000, offset: 0 }
 							}
 							placeholder={placeholderCity}
 						/>
@@ -280,7 +280,7 @@ export const FormStaff = () => {
 								setGetVillage(value);
 							}}
 							error={error}
-							params={watch('city') ? { city_id: watch('city'), limit: 0, offset: 0 } : null}
+							params={watch('city') ? { city_id: watch('city'), limit: 1000, offset: 0 } : null}
 							placeholder={placeholderDistrict}
 						/>
 					)}
@@ -298,7 +298,7 @@ export const FormStaff = () => {
 								setError('village', null);
 							}}
 							error={error}
-							params={watch('district') ? { district_id: watch('district'), limit: 0, offset: 0 } : null}
+							params={watch('district') ? { district_id: watch('district'), limit: 1000, offset: 0 } : null}
 							placeholder={placeholderVillage}
 							isForm
 						/>
