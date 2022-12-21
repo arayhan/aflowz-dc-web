@@ -16,7 +16,8 @@ export const formProgramSchema = yup.object().shape(
 			.string()
 			.required('Nomor PIC Kementerian wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
-			.min(8, 'Minimal 8 angka')
+			.min(8, 'Minimal 8 angka'),
+		description: yup.string().required('Deskripsi wajib diisi')
 	},
 	['pic_mobile', 'pic_mobile']
 );
