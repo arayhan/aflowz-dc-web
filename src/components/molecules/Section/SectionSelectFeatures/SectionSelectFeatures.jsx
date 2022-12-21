@@ -27,7 +27,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />
@@ -48,7 +48,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />
@@ -69,7 +69,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />
