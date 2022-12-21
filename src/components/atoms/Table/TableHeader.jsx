@@ -29,7 +29,7 @@ export const TableHeader = ({
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
 			)}
-			<div className="w-1/3">
+			<div className="w-full xl:w-1/3">
 				<div className="text-xl font-light transform: capitalize">{title}</div>
 				{/* <div className="text-sm text-gray-400">{description}</div> */}
 			</div>
