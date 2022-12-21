@@ -4,7 +4,10 @@ import React, { forwardRef } from 'react';
 export const InputSelectInstitusiType = forwardRef(({ error, onChange, ...props }, ref) => {
 	const options = [
 		{ label: 'Sekolah', value: 'sekolah' },
-		{ label: 'Kampus', value: 'kampus' },
+		{ label: 'Perguruan Tinggi', value: 'kampus' },
+		{ label: 'Sektor Pariwisata dan Ekonomi Kreatif', value: 'parekraf' },
+		{ label: 'Sektor Olahraga dan Seni', value: 'olahragaseni' },
+		{ label: 'Perangkat KOKADES', value: 'kokades' },
 		{ label: 'Lainnya', value: 'lainnya' }
 	];
 

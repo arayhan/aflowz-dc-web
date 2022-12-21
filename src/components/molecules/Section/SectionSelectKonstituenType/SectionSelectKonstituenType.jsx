@@ -1,14 +1,18 @@
 import { useKonstituenStore } from '@/store';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { InputSelectInstitusiType } from '../../index';
 
 export const SectionSelectKonstituenType = ({ onSelectedType }) => {
 	const { konstituenList } = useKonstituenStore();
 
 	const listTipe = [
-		{ id: 1, name: 'sekolah' },
-		{ id: 2, name: 'kampus' },
-		{ id: 3, name: 'lainnya' }
+		{ id: 1, name: 'Sekolah', value: 'sekolah' },
+		{ id: 2, name: 'Perguruan Tinggi', value: 'kampus' },
+		{ id: 3, name: 'Sektor Pariwisata dan Ekonomi Kreatif', value: 'parekraf' },
+		{ id: 4, name: 'Sektor Olahraga dan Seni', value: 'olahragaseni' },
+		{ id: 5, name: 'Perangkat KOKADES', value: 'kokades' },
+		{ id: 6, name: 'Lainnya', value: 'lainnya' }
 	];
 
 	const [selectedKonstituen, setSelectedKonstituen] = useState('');
@@ -24,8 +28,31 @@ export const SectionSelectKonstituenType = ({ onSelectedType }) => {
 						<Skeleton inline containerClassName="grid grid-cols-3 gap-3" height={50} count={3} />
 					</div>
 				)}
+				<div className="container block md:hidden">
+					<div className="flex items-end">
+						<div className="w-full sm:w-1/2">
+							<InputSelectInstitusiType
+								value={selectedKonstituen}
+								onChange={({ label, value }) => {
+									onSelectedType({ konstituen_type: value, label: label });
+									setSelectedKonstituen(value);
+								}}
+							/>
+						</div>
+						<button
+							type="button"
+							className="px-3 hover:underline"
+							onClick={() => {
+								onSelectedType(null);
+								setSelectedKonstituen('');
+							}}
+						>
+							Reset
+						</button>
+					</div>
+				</div>
 				{listTipe.length > 0 && (
-					<div className="container">
+					<div className="hidden px-[5rem] 2xl:px-0 md:block">
 						<div className="overflow-x-auto pb-4 md:pb-6 flex 2xl:justify-center gap-3">
 							{listTipe.map((tipe, idx) => {
 								return (
@@ -43,7 +70,7 @@ export const SectionSelectKonstituenType = ({ onSelectedType }) => {
 														setSelectedKonstituen('');
 												  }
 												: () => {
-														onSelectedType({ konstituen_type: tipe.name });
+														onSelectedType({ konstituen_type: tipe.value, label: tipe.name });
 														setSelectedKonstituen(tipe.name);
 												  }
 										}

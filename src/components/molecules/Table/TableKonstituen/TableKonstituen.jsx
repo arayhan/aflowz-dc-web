@@ -108,7 +108,7 @@ export const TableKonstituen = ({ selectedType }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={selectedType?.konstituen_type || 'Semua Institusi'}
+					title={selectedType?.label || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
 					showButtonCreate={true}
