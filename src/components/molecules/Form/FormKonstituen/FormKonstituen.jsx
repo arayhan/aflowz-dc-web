@@ -76,7 +76,7 @@ export const FormKonstituen = () => {
 						<InputText
 							{...field}
 							label="Nama Institusi"
-							placeholder="Nama Program"
+							placeholder="Nama Institusi"
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							error={error}
 						/>
