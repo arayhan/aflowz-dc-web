@@ -110,7 +110,7 @@ export const createProgramCategory = async (params) => {
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0,
-		address_detail: params?.address_detail || ''
+		address: params?.address || ''
 	};
 
 	try {
@@ -128,7 +128,7 @@ export const updateProgramCategory = async (programID, params) => {
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0,
-		address_detail: params?.address_detail || ''
+		address: params?.address || ''
 	};
 
 	try {

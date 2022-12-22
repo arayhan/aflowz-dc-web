@@ -23,7 +23,7 @@ export const FormMitra = () => {
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined,
-			address_detail: ''
+			address: ''
 		}
 	});
 
@@ -49,7 +49,7 @@ export const FormMitra = () => {
 			setValue('pic_staff_id', programCategory?.pic_staff?.id || 0);
 			setValue('pic', programCategory.pic || '');
 			setValue('pic_mobile', programCategory.pic_mobile || '');
-			setValue('address_detail', programCategory.address_detail || '');
+			setValue('address', programCategory.address || '');
 		}
 	}, [programCategoryID, programCategory]);
 
@@ -123,7 +123,7 @@ export const FormMitra = () => {
 				/>
 
 				<Controller
-					name={'address_detail'}
+					name={'address'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText

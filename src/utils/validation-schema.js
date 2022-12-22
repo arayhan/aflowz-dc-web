@@ -32,7 +32,7 @@ export const formMitraSchema = yup.object().shape(
 			.required('Nomor PIC Kementerian wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka'),
-		address_detail: yup.string().required('Alamat wajib diisi')
+		address: yup.string().required('Alamat wajib diisi')
 	},
 	['pic_mobile', 'pic_mobile']
 );
