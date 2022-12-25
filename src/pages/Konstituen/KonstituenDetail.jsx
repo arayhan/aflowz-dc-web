@@ -19,7 +19,7 @@ const KonstituenDetail = () => {
 
 	useEffect(() => {
 		getKonstituenDetail(params.konstituenID);
-		getPenerimaList({ konstituen_id: params.konstituenID, is_staff: false });
+		getPenerimaList({ konstituen_id: params.konstituenID, is_receiver: true });
 	}, [params]);
 
 	return (
