@@ -1,9 +1,10 @@
-import { Button, ButtonAction, Table, TableFooter, TableHeader, InputText } from '@/components/atoms';
+import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { queryStringToObject } from '@/utils/helpers';
+import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
 
 export const TableKonstituen = ({ selectedType }) => {
 	const { isSystem } = useAuthStore();
@@ -130,8 +131,7 @@ export const TableKonstituen = ({ selectedType }) => {
 				/>
 			</div>
 			<div className="container flex justify-start items-center my-2">
-				<InputText
-					showLabel={false}
+				<SearchOnTable
 					onChange={(e) => setSearchInstitusi(e.target.value)}
 					placeholder={
 						queryStringToObject(location.search).keyword !== '' && location.search !== ''
@@ -139,26 +139,12 @@ export const TableKonstituen = ({ selectedType }) => {
 							: 'Cari Institusi'
 					}
 					value={searchInstitusi}
-				/>
-				<Button
-					className="mx-2 px-5 py-1 rounded-lg"
-					variant={'primary'}
-					type="button"
-					onClick={() => handleSearch(searchInstitusi)}
-				>
-					Cari
-				</Button>
-				<Button
-					className="mx-2 px-5 py-1 rounded-lg"
-					variant={'warning'}
-					type="button"
-					onClick={() => {
+					search={() => handleSearch(searchInstitusi)}
+					clear={() => {
 						setSearchInstitusi('');
-						navigate('/institusi');
+						navigate(location.pathname);
 					}}
-				>
-					Clear
-				</Button>
+				/>
 			</div>
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />

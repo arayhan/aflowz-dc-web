@@ -1,4 +1,4 @@
-import { ButtonAction, Table, TableFooter, TableHeader, InputText, Button } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
@@ -8,6 +8,7 @@ import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCi
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
 
 export const TablePenerima = ({
 	title,
@@ -186,8 +187,7 @@ export const TablePenerima = ({
 
 					<div className="px-6 py-3">
 						<div className="w-full grid grid-cols-2 lg:flex justify-end text-sm gap-4 items-center">
-							<InputText
-								showLabel={false}
+							<SearchOnTable
 								onChange={(e) => setSearchPenerima(e.target.value)}
 								placeholder={
 									queryStringToObject(location.search).keyword !== '' && location.search !== ''
@@ -195,26 +195,12 @@ export const TablePenerima = ({
 										: 'Cari Penerima'
 								}
 								value={searchPenerima}
-							/>
-							<Button
-								className="mx-1 px-5 py-1 rounded-lg"
-								variant={'primary'}
-								type="button"
-								onClick={() => handleSearch(searchPenerima)}
-							>
-								Cari
-							</Button>
-							<Button
-								className="px-5 py-1 rounded-lg"
-								variant={'warning'}
-								type="button"
-								onClick={() => {
+								search={() => handleSearch(searchPenerima)}
+								clear={() => {
 									setSearchPenerima('');
 									navigate(location.pathname);
 								}}
-							>
-								Clear
-							</Button>
+							/>
 							<InputSelectProgram
 								containerClassName="w-full lg:w-60"
 								value={params.program_id ? Number(params.program_id) : undefined}
