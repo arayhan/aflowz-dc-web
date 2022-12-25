@@ -1,9 +1,9 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader, InputText, Button } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
+import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
@@ -20,6 +20,7 @@ export const TablePenerima = ({
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
@@ -136,16 +137,25 @@ export const TablePenerima = ({
 		navigate('/penerima' + updatedParams, { replace: true });
 	};
 
+	const [searchPenerima, setSearchPenerima] = useState('');
+
+	const handleSearch = (inputSearch) => {
+		const search = `?keyword=${inputSearch}`;
+		navigate(location.pathname + search);
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
+
+		if (location.search) Object.assign(defaultParams, queryStringToObject(location.search));
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
 			getPenerimaList({ ...defaultParams, ...params });
 		}
-	}, [params, page, perPage, pageCount]);
+	}, [params, page, perPage, pageCount, location]);
 
 	useEffect(() => {
 		if (penerimaList) {
@@ -175,7 +185,36 @@ export const TablePenerima = ({
 					<hr />
 
 					<div className="px-6 py-3">
-						<div className="w-full grid grid-cols-2 lg:flex justify-end text-sm gap-4">
+						<div className="w-full grid grid-cols-2 lg:flex justify-end text-sm gap-4 items-center">
+							<InputText
+								showLabel={false}
+								onChange={(e) => setSearchPenerima(e.target.value)}
+								placeholder={
+									queryStringToObject(location.search).keyword !== '' && location.search !== ''
+										? queryStringToObject(location.search).keyword
+										: 'Cari Penerima'
+								}
+								value={searchPenerima}
+							/>
+							<Button
+								className="mx-1 px-5 py-1 rounded-lg"
+								variant={'primary'}
+								type="button"
+								onClick={() => handleSearch(searchPenerima)}
+							>
+								Cari
+							</Button>
+							<Button
+								className="px-5 py-1 rounded-lg"
+								variant={'warning'}
+								type="button"
+								onClick={() => {
+									setSearchPenerima('');
+									navigate(location.pathname);
+								}}
+							>
+								Clear
+							</Button>
 							<InputSelectProgram
 								containerClassName="w-full lg:w-60"
 								value={params.program_id ? Number(params.program_id) : undefined}
