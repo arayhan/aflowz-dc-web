@@ -2,6 +2,7 @@ import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from
 import { useAuthStore, useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
+import moment from 'moment';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,11 +42,20 @@ export const TableActivityDetail = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama Detail Kegiatan',
+				Header: 'Tanggal Kegiatan',
+				width: '100%',
+				minWidth: 300,
+				hidden: displayedColumns && !displayedColumns.includes('Tanggal Kegiatan'),
+				Cell: (row) => {
+					return <div>{moment(row.row.original.activity_date).format('DD MMMM yyyy')}</div>;
+				}
+			},
+			{
+				Header: 'Nama Kegiatan',
 				accessor: 'description',
 				width: '100%',
 				minWidth: 200,
-				hidden: displayedColumns && !displayedColumns.includes('Nama Detail Kegiatan')
+				hidden: displayedColumns && !displayedColumns.includes('Nama Kegiatan')
 			},
 			{
 				Header: 'PIC Internal',
