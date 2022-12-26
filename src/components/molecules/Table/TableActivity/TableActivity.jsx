@@ -58,7 +58,7 @@ export const TableActivity = ({
 			{
 				Header: 'Tempat Kegiatan',
 				width: '100%',
-				minWidth: 300,
+				minWidth: 225,
 				hidden: displayedColumns && !displayedColumns.includes('Tempat Kegiatan'),
 				Cell: (row) => {
 					return row.row.original.pic_staff_id?.id ? (
@@ -135,7 +135,7 @@ export const TableActivity = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult, order_by: 'activity_date', order_by_type: 'desc' };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
