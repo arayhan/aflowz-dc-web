@@ -73,7 +73,7 @@ const MitraDetail = () => {
 
 										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Alamat Mitra</div>
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
-											{programCategoryDetail?.mitra_address_detail}
+											{programCategoryDetail?.mitra_address}
 										</div>
 									</div>
 								</div>
