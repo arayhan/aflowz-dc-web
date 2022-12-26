@@ -32,7 +32,7 @@ export const TableHeader = ({
 			)}
 			<div className="w-full xl:w-1/3">
 				<div className="text-xl font-light transform: capitalize">{title}</div>
-				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'text-sm text-gray-400'}>
+				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'hidden text-sm text-gray-400'}>
 					{description}
 				</div>
 			</div>
