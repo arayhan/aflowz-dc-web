@@ -23,7 +23,9 @@ export const BannerFeature = ({ title, description, loading, backButtonLinkTo })
 							className={
 								'flex items-center space-x-3 bg-white bg-opacity-5 hover:bg-opacity-10 opacity-60 px-5 py-2 rounded-md trans'
 							}
-							onClick={title.includes('Institusi' || 'Penerima') ? () => navigate('/') : () => navigate(-1)}
+							onClick={
+								title.includes('Institusi') || title.includes('Penerima') ? () => navigate('/') : () => navigate(-1)
+							}
 						>
 							<IoIosArrowRoundBack size={24} />
 							<span>Kembali</span>
