@@ -13,7 +13,9 @@ const ActivityDetailDetail = () => {
 
 	const tableActivityPromiseListFixedParams = {
 		activity_id: activityID,
-		activity_detail_id: activityDetailID
+		activity_detail_id: activityDetailID,
+		order_by: 'activity_date',
+		order_by_type: 'desc'
 	};
 
 	const [tableActivityPromiseListParams, setTableActivityPromiseListParams] = useState({
@@ -29,7 +31,7 @@ const ActivityDetailDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={activityDetailItem ? `${activityDetailItem.description}` : 'Detail Kegiatan'}
+				title={activityDetailItem ? `Detail Kegiatan : ${activityDetailItem.description}` : 'Detail Kegiatan'}
 				loading={fetchingActivityDetailItem}
 			/>
 

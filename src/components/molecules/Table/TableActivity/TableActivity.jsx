@@ -2,6 +2,7 @@ import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from
 import { useAuthStore, useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
+import moment from 'moment/moment';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,8 +20,8 @@ export const TableActivity = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { activityList, fetchingActivityList } = useActivityStore();
-	const { getActivityList, deleteActivity } = useActivityStore();
+	const { activityDetailList, fetchingActivityDetailList } = useActivityStore();
+	const { getActivityDetailList, deleteActivityDetail } = useActivityStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -40,23 +41,31 @@ export const TableActivity = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
+				Header: 'Tanggal Kegiatan',
+				width: '100%',
+				hidden: displayedColumns && !displayedColumns.includes('Tanggal Kegiatan'),
+				Cell: (row) => {
+					return <div className="text-sm">{moment(row.row.original.activity_date).format('DD MMMM yyyy')}</div>;
+				}
+			},
+			{
 				Header: 'Nama Kegiatan',
 				accessor: 'description',
 				width: '100%',
-				minWidth: 300,
+				minWidth: 200,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kegiatan')
 			},
 			{
-				Header: 'Nama PIC',
+				Header: 'Tempat Kegiatan',
 				width: '100%',
-				minWidth: 300,
-				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				minWidth: 225,
+				hidden: displayedColumns && !displayedColumns.includes('Tempat Kegiatan'),
 				Cell: (row) => {
-					return row.row.original.pic_staff?.id ? (
+					return row.row.original.pic_staff_id?.id ? (
 						<Button
 							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
-							text={row.row.original.pic_staff?.name}
+							linkTo={`/activity/${row.row.original.activity?.id}`}
+							text={row.row.original.activity?.name}
 						/>
 					) : (
 						'-'
@@ -88,7 +97,7 @@ export const TableActivity = ({
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/activity/${row.row.original.id}`}
+							linkTo={`/activity/${row.row.original.activity.id}/detail/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -100,8 +109,11 @@ export const TableActivity = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/activity/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivity(row.row.original.id)} />
+							<ButtonAction
+								action={ACTION_TYPES.UPDATE}
+								linkTo={`/activity/${row.row.original.activity.id}/detail/update/${row.row.original.id}`}
+							/>
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityDetail(row.row.original.id)} />
 						</div>
 					);
 				}
@@ -123,21 +135,21 @@ export const TableActivity = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult, order_by: 'activity_date', order_by_type: 'desc' };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getActivityList({ ...defaultParams, ...params });
+			getActivityDetailList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (activityList) {
-			setData(activityList.items);
-			setPageCount(Math.ceil(activityList.total / perPage));
+		if (activityDetailList) {
+			setData(activityDetailList.items);
+			setPageCount(Math.ceil(activityDetailList.total / perPage));
 		}
-	}, [activityList]);
+	}, [activityDetailList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -174,7 +186,7 @@ export const TableActivity = ({
 					columns={columns}
 					data={data}
 					onClickRow={enableClickRow && handleClickRow}
-					loading={fetchingActivityList || activityList === null}
+					loading={fetchingActivityDetailList || activityDetailList === null}
 				/>
 			</div>
 			{isShowFooter && (
