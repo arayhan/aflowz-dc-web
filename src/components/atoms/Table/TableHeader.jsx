@@ -14,7 +14,8 @@ export const TableHeader = ({
 	showButtonSeeAll,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
-	showButtonCheckout
+	showButtonCheckout,
+	showCounter
 }) => {
 	const location = useLocation();
 
@@ -31,7 +32,9 @@ export const TableHeader = ({
 			)}
 			<div className="w-full xl:w-1/3">
 				<div className="text-xl font-light transform: capitalize">{title}</div>
-				{/* <div className="text-sm text-gray-400">{description}</div> */}
+				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'text-sm text-gray-400'}>
+					{description}
+				</div>
 			</div>
 			<div className="w-full xl:w-1/2 flex flex-col md:justify-end md:flex-row gap-3">
 				{showButtonSeeAll && seeAllLink && (

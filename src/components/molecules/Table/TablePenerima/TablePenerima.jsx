@@ -172,12 +172,13 @@ export const TablePenerima = ({
 					feature="Penerima"
 					featurePath="/penerima"
 					title={title || 'Penerima Program'}
-					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={'/penerima' + objectToQueryString(params)}
+					showCounter={true}
+					description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
 				/>
 			</div>
 
@@ -186,7 +187,7 @@ export const TablePenerima = ({
 					<hr />
 
 					<div className="px-6 py-3">
-						<div className="w-full grid grid-cols-2 lg:flex justify-end text-sm gap-4 items-center">
+						<div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:flex justify-end text-sm gap-4 items-center">
 							<SearchOnTable
 								onChange={(e) => setSearchPenerima(e.target.value)}
 								placeholder={
