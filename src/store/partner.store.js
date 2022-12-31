@@ -24,6 +24,7 @@ const states = (set, get) => ({
 	staff: null,
 	staffList: null,
 	staffTitleList: null,
+	penerimaAllCity: null,
 
 	// =================================
 	// PENERIMA
@@ -91,6 +92,15 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'Penerima deleted', payload?.odoo_error || payload?.message);
 		get().getPenerimaList();
 		set({ processingDeletePenerima: false });
+	},
+
+	getPenerimaAllCity: async () => {
+		set({ fetchingPenerimaList: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerAllCity();
+
+		set({ penerimaAllCity: success ? payload : null });
+		set({ fetchingPenerimaList: false });
 	},
 
 	// =================================

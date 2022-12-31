@@ -5,7 +5,7 @@ import { SearchGlobal } from '../../Search/SearchGlobal/SearchGlobal';
 export const SectionSelectFeatures = () => {
 	return (
 		<div className="bg-gray-100">
-			<div className="container py-20 space-y-10">
+			<div className="container pt-10 pb-20 space-y-10">
 				<div className="text-center space-y-3">
 					<div className="text-3xl font-extralight">Pilih Fitur</div>
 					{/* <div className="text-gray-500">

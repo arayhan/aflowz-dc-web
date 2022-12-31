@@ -163,3 +163,42 @@ export const updatePicture = async (partnerID, params) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getPartnerAllCity = async () => {
+	try {
+		const reqQueryParams = objectToQueryString({ province_id: 617 }); // kota bengkulu
+		const getCity = await http.get(`/city${reqQueryParams}`);
+
+		// let city = [
+		// 	{ id: 567, name: 'Kab. Bengkulu Selatan' },
+		// 	{ id: 568, name: 'Kab. Bengkulu Tengah' },
+		// 	{ id: 569, name: 'Kab. Bengkulu Utara' },
+		// 	{ id: 659, name: 'Kab. Kaur' },
+		// 	{ id: 665, name: 'Kab. Kepahiang' },
+		// 	{ id: 715, name: 'Kab. Lebong' },
+		// 	{ id: 770, name: 'Kab. Muko Muko' },
+		// 	{ id: 839, name: 'Kab. Rejang Lebong' },
+		// 	{ id: 852, name: 'Kab. Seluma' },
+		// 	{ id: 945, name: 'Kota Bengkulu' }
+		// ];
+
+		let result = getCity.data.data.items.map(async (val) => {
+			let total = await http.get(`/partner?is_receiver=true&city_id=${val.id}`);
+			return {
+				id: val.id,
+				name: val.name,
+				total_penerima: total.data.data.total
+			};
+		});
+
+		const response = await Promise.all(result);
+
+		const sort = response.sort((a, b) =>
+			a.total_penerima > b.total_penerima ? -1 : Number(a.total_penerima < b.total_penerima)
+		);
+
+		return { success: getCity.data.success, payload: sort };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
