@@ -28,6 +28,8 @@ const PenerimaDetail = () => {
 								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
 								linkRoute={`/penerima/update/${penerimaDetail?.id}`}
+								printName={penerimaDetail?.name}
+								isPrintCertif
 								isInDetail
 							>
 								<div className="grid grid-cols-12 gap-y-1 text-sm p-5">

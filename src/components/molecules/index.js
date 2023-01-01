@@ -5,6 +5,7 @@ export * from './Banner/BannerHome/BannerHome';
 
 export * from './Button/ButtonBack/ButtonBack';
 export * from './Button/ButtonProfileHeader/ButtonProfileHeader';
+export * from './Button/ButtonPrintCertificate/ButtonPrintCertificate';
 
 export * from './Carousel/Carousel';
 
