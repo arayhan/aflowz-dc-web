@@ -9,6 +9,7 @@ export * from './Button/ButtonPrintCertificate/ButtonPrintCertificate';
 export * from './Button/ButtonPrintCertificate/ButtonPrintCertificateMulti';
 
 export * from './Carousel/Carousel';
+export * from './Carousel/NewCarousel';
 
 export * from './Card/CardDetailTotal/CardDetailTotal';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
