@@ -1,4 +1,5 @@
 import { ModalUploadSheetFollowers, ModalUploadSheetPenerima } from '@/components/molecules';
+import { ButtonPrintCertificateMulti } from '@/components/molecules/index';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
@@ -15,7 +16,8 @@ export const TableHeader = ({
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
 	showButtonCheckout,
-	showCounter
+	showCounter,
+	listPenerima
 }) => {
 	const location = useLocation();
 
@@ -57,15 +59,20 @@ export const TableHeader = ({
 					</button>
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
-					<button
-						className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
-						onClick={() => setShowModalUploadSheetPenerima(true)}
-					>
-						<span className="w-4">
-							<SiGooglesheets size={16} />
-						</span>
-						<span className="text-sm">Upload Penerima Program</span>
-					</button>
+					<>
+						<div className="mx-2">
+							<ButtonPrintCertificateMulti names={listPenerima} />
+						</div>
+						<button
+							className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
+							onClick={() => setShowModalUploadSheetPenerima(true)}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Upload Penerima Program</span>
+						</button>
+					</>
 				)}
 				{!isReadonly && showButtonCreate && (
 					<Link

@@ -179,6 +179,7 @@ export const TablePenerima = ({
 					seeAllLink={'/penerima' + objectToQueryString(params)}
 					showCounter={true}
 					description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
+					listPenerima={penerimaList?.items.map((val) => val.name)}
 				/>
 			</div>
 
