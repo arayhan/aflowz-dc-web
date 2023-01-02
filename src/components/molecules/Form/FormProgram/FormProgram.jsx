@@ -22,7 +22,8 @@ export const FormProgram = () => {
 			program_category_id: undefined,
 			pic: '',
 			pic_mobile: '',
-			pic_staff_id: undefined
+			pic_staff_id: undefined,
+			description: ''
 		}
 	});
 
@@ -50,6 +51,7 @@ export const FormProgram = () => {
 			setValue('pic_staff_id', program.pic_staff?.id || null);
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
+			setValue('description', program.description || '');
 		}
 	}, [programID, program]);
 
@@ -144,6 +146,20 @@ export const FormProgram = () => {
 							{...field}
 							label="Nomor Telepon PIC Mitra"
 							placeholder="Contoh : 08xxxxxxxxxx"
+							disabled={processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'description'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Deskripsi Program"
+							placeholder="Deskripsi Program"
 							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>

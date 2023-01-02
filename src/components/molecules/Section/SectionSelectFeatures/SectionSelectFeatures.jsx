@@ -5,7 +5,7 @@ import { SearchGlobal } from '../../Search/SearchGlobal/SearchGlobal';
 export const SectionSelectFeatures = () => {
 	return (
 		<div className="bg-gray-100">
-			<div className="container py-20 space-y-10">
+			<div className="container pt-10 pb-20 space-y-10">
 				<div className="text-center space-y-3">
 					<div className="text-3xl font-extralight">Pilih Fitur</div>
 					{/* <div className="text-gray-500">
@@ -27,7 +27,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />
@@ -48,7 +48,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />
@@ -69,7 +69,7 @@ export const SectionSelectFeatures = () => {
 										<Link
 											key={menu.path}
 											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-opacity-20 cursor-pointer text-opacity-50 transition-all"
+											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
 										>
 											<div className="px-5">
 												<img className="w-full" src={menu.icon} alt="" />

@@ -1,7 +1,18 @@
 import { ACTION_TYPES } from '@/utils/constants';
 import { ButtonAction } from '../Button/ButtonAction';
+import { ButtonPrintCertificate } from '@/components/molecules/index';
 
-export const Card = ({ title, description, className, bodyClassName, children, isInDetail, linkRoute }) => {
+export const Card = ({
+	title,
+	description,
+	className,
+	bodyClassName,
+	children,
+	isInDetail,
+	linkRoute,
+	isPrintCertif,
+	printName
+}) => {
 	return (
 		<div className={className}>
 			<div className="md:flex items-center justify-between p-4">
@@ -10,14 +21,21 @@ export const Card = ({ title, description, className, bodyClassName, children, i
 					{/* {description && <div className="text-sm text-gray-400">{description}</div>} */}
 				</div>
 				{isInDetail && (
-					<div>
-						<ButtonAction
-							action={ACTION_TYPES.UPDATE}
-							linkTo={linkRoute}
-							className={'w-full md:w-auto text-base px-5 py-3 rounded-md'}
-							text="Update"
-						/>
-					</div>
+					<>
+						<div className="flex justify-center items-center">
+							{isPrintCertif && (
+								<div className="mx-2">
+									<ButtonPrintCertificate name={printName} />
+								</div>
+							)}
+							<ButtonAction
+								action={ACTION_TYPES.UPDATE}
+								linkTo={linkRoute}
+								className={'w-full md:w-auto text-base px-5 py-3'}
+								text="Update"
+							/>
+						</div>
+					</>
 				)}
 			</div>
 			<hr />

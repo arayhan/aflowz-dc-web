@@ -2,6 +2,9 @@ import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/compone
 import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { queryStringToObject } from '@/utils/helpers';
+import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
 
 export const TableKonstituen = ({ selectedType }) => {
 	const { isSystem } = useAuthStore();
@@ -10,6 +13,9 @@ export const TableKonstituen = ({ selectedType }) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 	const [data, setData] = useState([]);
+
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	const columns = useMemo(
 		() => [
@@ -85,17 +91,25 @@ export const TableKonstituen = ({ selectedType }) => {
 		[]
 	);
 
+	const [searchInstitusi, setSearchInstitusi] = useState('');
+
+	const handleSearch = (inputSearch) => {
+		const search = `?keyword=${inputSearch}`;
+		navigate(location.pathname + search);
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const params = { limit: perPage, offset: offsetResult };
 
 		if (selectedType) Object.assign(params, { konstituen_type: selectedType.konstituen_type });
+		if (location.search) Object.assign(params, queryStringToObject(location.search));
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			getKonstituenList(params);
 		}
-	}, [selectedType, page, perPage, pageCount]);
+	}, [selectedType, page, perPage, pageCount, location]);
 
 	useEffect(() => {
 		if (konstituenList) {
@@ -108,12 +122,28 @@ export const TableKonstituen = ({ selectedType }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={selectedType?.konstituen_type || 'Semua Institusi'}
+					title={selectedType?.label || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
 					showButtonCreate={true}
 					feature={'Institusi'}
 					featurePath="/institusi"
+				/>
+			</div>
+			<div className="container flex justify-start items-center my-2">
+				<SearchOnTable
+					onChange={(e) => setSearchInstitusi(e.target.value)}
+					placeholder={
+						queryStringToObject(location.search).keyword !== '' && location.search !== ''
+							? queryStringToObject(location.search).keyword
+							: 'Cari Institusi'
+					}
+					value={searchInstitusi}
+					search={() => handleSearch(searchInstitusi)}
+					clear={() => {
+						setSearchInstitusi('');
+						navigate(location.pathname);
+					}}
 				/>
 			</div>
 			<div className="overflow-x-auto">

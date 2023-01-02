@@ -76,7 +76,7 @@ export const FormKonstituen = () => {
 						<InputText
 							{...field}
 							label="Nama Institusi"
-							placeholder="Nama Program"
+							placeholder="Nama Institusi"
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							error={error}
 						/>
@@ -125,6 +125,7 @@ export const FormKonstituen = () => {
 								setError('city', null);
 							}}
 							error={error}
+							params={{ limit: 1000, offset: 0 }}
 						/>
 					)}
 				/>
@@ -167,7 +168,7 @@ export const FormKonstituen = () => {
 								setValue('pic_staff_id', value);
 								setError('pic_staff_id', null);
 							}}
-							params={{ limit: 0, offset: 0 }}
+							params={{ limit: 1000, offset: 0 }}
 							error={error}
 						/>
 					)}

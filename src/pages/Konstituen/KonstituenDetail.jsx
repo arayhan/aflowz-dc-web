@@ -19,7 +19,7 @@ const KonstituenDetail = () => {
 
 	useEffect(() => {
 		getKonstituenDetail(params.konstituenID);
-		getPenerimaList({ konstituen_id: params.konstituenID, is_staff: false });
+		getPenerimaList({ konstituen_id: params.konstituenID, is_receiver: true });
 	}, [params]);
 
 	return (
@@ -60,7 +60,11 @@ const KonstituenDetail = () => {
 												value={konstituenDetail?.konstituen_name || 'Belum Tercantum'}
 											/>
 											<InputTextInfo
-												tag={`Alamat ${konstituenDetail?.konstituen_type || 'institusi'}`}
+												tag={`Domisili ${konstituenDetail?.konstituen_type || 'institusi'}`}
+												value={konstituenDetail?.city.name || 'Belum Ada Alamat'}
+											/>
+											<InputTextInfo
+												tag={`Alamat Lengkap ${konstituenDetail?.konstituen_type || 'institusi'}`}
 												value={konstituenDetail?.alamat_konstituen || 'Belum Ada Alamat'}
 											/>
 											<InputTextInfo

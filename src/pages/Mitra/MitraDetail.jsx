@@ -4,7 +4,7 @@ import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const MitraDetail = () => {
 	const { programCategoryID } = useParams();
@@ -70,6 +70,21 @@ const MitraDetail = () => {
 												/>
 											)}
 										</div>
+
+										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Alamat Mitra</div>
+										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											{programCategoryDetail?.mitra_address}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
+								<div className="sm:col-start-2 md:col-start-3 bg-white rounded-md px-8 md:px-10 py-6 mb-2 shadow-lg">
+									<div className="flex flex-col items-center justify-center space-y-1 text-center">
+										<span className="text-2xl md:text-4xl font-extralight">
+											{programCategoryDetail?.total_penerima_program_mitra || 0}
+										</span>
+										<div className="font-light text-gray-400">Total Penerima</div>
 									</div>
 								</div>
 							</div>
