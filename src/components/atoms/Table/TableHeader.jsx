@@ -60,9 +60,9 @@ export const TableHeader = ({
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<>
-						<div className="mx-2">
+						{/* <div className="mx-2">
 							<ButtonPrintCertificateMulti names={listPenerima} />
-						</div>
+						</div> */}
 						<button
 							className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
 							onClick={() => setShowModalUploadSheetPenerima(true)}

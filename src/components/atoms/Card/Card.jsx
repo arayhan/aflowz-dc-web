@@ -11,7 +11,7 @@ export const Card = ({
 	isInDetail,
 	linkRoute,
 	isPrintCertif,
-	printName
+	penerima
 }) => {
 	return (
 		<div className={className}>
@@ -25,7 +25,7 @@ export const Card = ({
 						<div className="flex justify-center items-center">
 							{isPrintCertif && (
 								<div className="mx-2">
-									<ButtonPrintCertificate name={printName} />
+									<ButtonPrintCertificate penerima={penerima} />
 								</div>
 							)}
 							<ButtonAction

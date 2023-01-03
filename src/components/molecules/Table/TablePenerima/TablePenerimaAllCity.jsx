@@ -17,7 +17,7 @@ export const TablePenerimaAllCity = () => {
 
 	return (
 		<div className="bg-gray-100 py-5">
-			<div className="container">
+			<div className="container px-14">
 				<div className="overflow-y-auto container flex-col border py-5 rounded-lg bg-white shadow-lg">
 					<p className="text-xl lg:text-3xl font-extralight text-center pb-5">Daftar Penerima di Provinsi Bengkulu</p>
 					<div className="h-44 sm:h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 pb-5">

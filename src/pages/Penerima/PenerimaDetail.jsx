@@ -28,7 +28,7 @@ const PenerimaDetail = () => {
 								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
 								linkRoute={`/penerima/update/${penerimaDetail?.id}`}
-								printName={penerimaDetail?.name}
+								penerima={penerimaDetail}
 								isPrintCertif
 								isInDetail
 							>

@@ -5,8 +5,8 @@ const Home = () => {
 	return (
 		<div>
 			<BannerHome />
-			<TablePenerimaAllCity />
 			<SectionSelectFeatures />
+			<TablePenerimaAllCity />
 		</div>
 	);
 };
