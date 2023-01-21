@@ -49,6 +49,7 @@ import ActivityDetail from './pages/Activity/ActivityDetail';
 import ActivityDetailForm from './pages/Activity/ActivityDetailForm';
 import ActivityPromiseForm from './pages/Activity/ActivityPromiseForm';
 import ActivityDetailDetail from './pages/Activity/ActivityDetailDetail';
+import KonstituenDetailExportPDF from './pages/Konstituen/KonstituenDetailExportPDF';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -75,6 +76,7 @@ export const AppRoutes = () => {
 					<Route path="/mitra/:programCategoryID" element={<MitraDetail />} />
 					<Route path="/mitra" element={<Mitra />} />
 					<Route path="/institusi" element={<Konstituen />} />
+					<Route path="/institusi/:konstituenID/report" element={<KonstituenDetailExportPDF />} />
 					<Route path="/institusi/:konstituenID" element={<KonstituenDetail />} />
 					<Route path="/institusi/create" element={<KonstituenCreate />} />
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />

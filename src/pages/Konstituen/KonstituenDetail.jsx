@@ -8,7 +8,7 @@ import {
 } from '@/components/molecules';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { ButtonAction, InputTextInfo } from '@/components/atoms';
+import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 
 const KonstituenDetail = () => {
@@ -28,22 +28,26 @@ const KonstituenDetail = () => {
 				title={konstituenDetail ? `${konstituenDetail.konstituen_name}` : 'Institusi'}
 				loading={fetchingKonstituenDetail}
 			/>
-			<section className="bg-gray-100 py-12 md:py-12">
+			<section className="py-12 bg-gray-100 md:py-12">
 				<div className="container">
 					{fetchingKonstituenDetail && <KonstituenDetailSkeleton />}
 					{!fetchingKonstituenDetail && konstituenDetail && (
 						<div className="space-y-6">
-							<div className="col-span-12 bg-gray-100 p-5">
-								<div className="bg-white shadow-lg rounded-md">
-									<div className="grid grid-cols-1 sm:grid-cols-2 justify-between items-center">
+							<div className="col-span-12 p-5 bg-gray-100">
+								<div className="bg-white rounded-md shadow-lg">
+									<div className="grid items-center justify-between grid-cols-1 sm:grid-cols-2">
 										<div className="p-4">
-											<div className="font-light text-xl">Details</div>
-											{/* <div className="text-sm text-gray-400">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											</div> */}
+											<div className="text-xl font-light">Details</div>
 										</div>
 										{(isAdmin || isSystem) && (
-											<div className="p-4 h-full flex justify-start sm:justify-end">
+											<div className="flex justify-start h-full gap-4 p-4 sm:justify-end">
+												<Button
+													className="px-6 text-xs rounded-sm"
+													variant={'primary'}
+													linkTo={`/institusi/${konstituenDetail?.konstituen_id}/report`}
+												>
+													Preview Report
+												</Button>
 												<ButtonAction
 													action={ACTION_TYPES.UPDATE}
 													linkTo={`/institusi/update/${konstituenDetail?.konstituen_id}`}
@@ -53,8 +57,8 @@ const KonstituenDetail = () => {
 										)}
 									</div>
 									<hr />
-									<div className="p-5 rounded-md my-2">
-										<div className="grid grid-cols-12 gap-y-1 text-sm">
+									<div className="p-5 my-2 rounded-md">
+										<div className="grid grid-cols-12 text-sm gap-y-1">
 											<InputTextInfo
 												tag={`Nama ${konstituenDetail?.konstituen_type || 'institusi'}`}
 												value={konstituenDetail?.konstituen_name || 'Belum Tercantum'}
@@ -75,10 +79,10 @@ const KonstituenDetail = () => {
 											<div className="col-span-4 lg:col-span-3 text-gray-500 bg-[#e9edf6] px-3 py-2">
 												PIC Tim Internal
 											</div>
-											<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+											<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 												<Link
 													to={`/staff/${konstituenDetail?.pic_staff.id}`}
-													className="text-primary underline hover:text-primary-400"
+													className="underline text-primary hover:text-primary-400"
 												>
 													{konstituenDetail?.pic_staff.name || 'Belum Ada Nama PIC Tim Internal'}{' '}
 													{konstituenDetail?.pic_staff.mobile
@@ -90,7 +94,7 @@ const KonstituenDetail = () => {
 									</div>
 								</div>
 								<div className="flex flex-col items-center justify-center">
-									<div className="bg-white rounded-md px-8 md:px-10 py-6 mb-2 shadow-lg cursor-pointer">
+									<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
 										<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
 												<span className="text-2xl md:text-4xl font-extralight">
@@ -100,13 +104,13 @@ const KonstituenDetail = () => {
 											</div>
 										</Link>
 									</div>
-									<div className="grid grid-cols-12 gap-4 w-full">
-										<div className="col-span-12 md:col-span-6 bg-white rounded-md shadow-lg">
+									<div className="grid w-full grid-cols-12 gap-4">
+										<div className="col-span-12 bg-white rounded-md shadow-lg md:col-span-6">
 											<BarChartPenerimaKonstituenPerTahun
 												totalPenerima={konstituenDetail?.total_penerima_program_konstituen_by_periode_per_orang || 0}
 											/>
 										</div>
-										<div className="col-span-12 md:col-span-6 bg-white rounded-md shadow-lg">
+										<div className="col-span-12 bg-white rounded-md shadow-lg md:col-span-6">
 											<PieChartPenerimaKonstituenByGender
 												totalPria={konstituenDetail?.total_pria || 0}
 												totalWanita={konstituenDetail?.total_wanita || 0}
@@ -128,7 +132,7 @@ const KonstituenDetail = () => {
 
 const KonstituenDetailSkeleton = () => {
 	return (
-		<div className="space-y-6 bg-white rounded-md p-5">
+		<div className="p-5 space-y-6 bg-white rounded-md">
 			<div className="col-span-12">
 				<Skeleton height={250} />
 			</div>
