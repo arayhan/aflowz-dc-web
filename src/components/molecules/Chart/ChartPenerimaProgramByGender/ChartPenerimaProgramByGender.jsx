@@ -5,12 +5,12 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const ChartPenerimaProgramByGender = ({ totalPria, totalWanita }) => {
+export const ChartPenerimaProgramByGender = ({ id, totalPria, totalWanita }) => {
 	return (
 		<>
 			{totalPria === 0 && totalWanita === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{(totalPria > 0 || totalWanita > 0) && (
-				<div className="flex justify-center">
+				<div id={id} className="flex justify-center">
 					<Pie
 						data={{
 							labels: ['Pria', 'Wanita'],
