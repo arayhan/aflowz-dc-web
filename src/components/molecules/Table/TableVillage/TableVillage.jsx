@@ -90,7 +90,7 @@ export const TableVillage = ({
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/village/${row.row.original.id}`}
+							linkTo={`/dapil/village/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -102,7 +102,7 @@ export const TableVillage = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/village/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/dapil/village/update/${row.row.original.id}`} />
 							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteVillage(row.row.original.id)} />
 						</div>
 					);
@@ -114,7 +114,7 @@ export const TableVillage = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/village/${rowData.id}`);
+		else navigate(`/dapil/village/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
@@ -143,11 +143,11 @@ export const TableVillage = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Desa"
 					title={title || 'List Desa'}
-					featurePath="/village"
+					featurePath="/dapil/village"
 					seeAllLink={'/village' + objectToQueryString(params)}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
@@ -159,7 +159,7 @@ export const TableVillage = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}

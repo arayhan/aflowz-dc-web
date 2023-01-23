@@ -29,11 +29,11 @@ export const FormVillage = () => {
 	const onSubmitVillage = (values) => {
 		if (villageID) {
 			updateVillage(villageID, values, ({ success }) => {
-				if (success) navigate(`/village/${villageID}`, { replace: true });
+				if (success) navigate(`/dapil/village/${villageID}`, { replace: true });
 			});
 		} else {
 			createVillage(values, ({ payload, success }) => {
-				if (success) navigate(`/village/${payload.id}`, { replace: true });
+				if (success) navigate(`/dapil/village/${payload.id}`, { replace: true });
 			});
 		}
 	};
@@ -57,7 +57,7 @@ export const FormVillage = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{villageID ? 'Edit' : 'Tambah'} Desa</div>
+				<div className="text-xl font-light">{villageID ? 'Edit' : 'Tambah'} Desa</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />

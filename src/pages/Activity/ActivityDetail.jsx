@@ -68,7 +68,7 @@ const ActivityDetail = () => {
 										{activityItem?.city && (
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
-												linkTo={`/city/${activityItem?.city.id}`}
+												linkTo={`/dapil/city/${activityItem?.city.id}`}
 												text={activityItem?.city.name}
 											/>
 										)}
@@ -95,7 +95,7 @@ const ActivityDetail = () => {
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
-												linkTo={`/village/${activityItem?.village.id}`}
+												linkTo={`/dapil/village/${activityItem?.village.id}`}
 												text={activityItem?.village.name}
 											/>
 										</div>

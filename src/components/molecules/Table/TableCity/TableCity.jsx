@@ -88,7 +88,7 @@ export const TableCity = ({
 						<ButtonAction
 							className="min-w-[100px] w-full"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/city/${row.row.original.id}`}
+							linkTo={`/dapil/city/${row.row.original.id}`}
 						/>
 					);
 				}
@@ -100,7 +100,7 @@ export const TableCity = ({
 				Cell: (row) => {
 					return (
 						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/city/update/${row.row.original.id}`} />
+							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/dapil/city/update/${row.row.original.id}`} />
 							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteCity(row.row.original.id)} />
 						</div>
 					);
@@ -112,7 +112,7 @@ export const TableCity = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/city/${rowData.id}`);
+		else navigate(`/dapil/city/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
@@ -144,7 +144,7 @@ export const TableCity = ({
 			<div className="p-6 flex items-center justify-between">
 				<TableHeader
 					feature="Kota"
-					featurePath="/city"
+					featurePath="/dapil/city"
 					title={title || 'List Kota'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}

@@ -91,7 +91,7 @@ const PenerimaDetail = () => {
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
-												linkTo={`/city/${penerimaDetail?.city.id}`}
+												linkTo={`/dapil/city/${penerimaDetail?.city.id}`}
 												text={penerimaDetail?.city.name}
 											/>
 										</div>
@@ -104,7 +104,7 @@ const PenerimaDetail = () => {
 										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
-												linkTo={`/village/${penerimaDetail?.village.id}`}
+												linkTo={`/dapil/village/${penerimaDetail?.village.id}`}
 												text={penerimaDetail?.village.name}
 											/>
 										</div>

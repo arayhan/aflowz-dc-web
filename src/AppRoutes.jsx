@@ -22,21 +22,21 @@ import MitraForm from './pages/Mitra/MitraForm';
 import StaffUpdate from './pages/Staff/StaffUpdate';
 import ListPenerimaByKonstituen from './pages/Konstituen/ListPenerimaByKonstituen';
 import StaffDetail from './pages/Staff/StaffDetail';
-import City from './pages/City/City';
-import CityForm from './pages/City/CityForm';
-import CityDetail from './pages/City/CityDetail';
-import Village from './pages/Village/Village';
-import VillageForm from './pages/Village/VillageForm';
-import VillageDetail from './pages/Village/VillageDetail';
+import City from './pages/Dapil/City/City';
+import CityForm from './pages/Dapil/City/CityForm';
+import CityDetail from './pages/Dapil/City/CityDetail';
+import District from './pages/Dapil/District/District';
+import DistrictForm from './pages/Dapil/District/DistrictForm';
+import DistrictDetail from './pages/Dapil/District/DistrictDetail';
+import Village from './pages/Dapil/Village/Village';
+import VillageForm from './pages/Dapil/Village/VillageForm';
+import VillageDetail from './pages/Dapil/Village/VillageDetail';
 import ListPenerimaByProgram from './pages/Program/ListPenerimaProgram';
 import PenerimaForm from './pages/Penerima/PenerimaForm';
 import Attendance from './pages/Attendance/AttendanceList';
 import AttendanceCreateUpdate from './pages/Attendance/AttendanceCreateUpdate';
 import AttendanceDetail from './pages/Attendance/AttendanceDetail';
 import Dapil from './pages/Dapil/Dapil';
-import District from './pages/District/District';
-import DistrictDetail from './pages/District/DistrictDetail';
-import DistrictForm from './pages/District/DistrictForm';
 import TPS from './pages/TPS/TPS';
 import TPSForm from './pages/TPS/TPSForm';
 import Stockiest from './pages/Stockiest/Stockiest';
@@ -81,14 +81,19 @@ export const AppRoutes = () => {
 					<Route path="/institusi/create" element={<KonstituenCreate />} />
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
-					<Route path="/village/update/:villageID" element={<VillageForm />} />
-					<Route path="/village/create" element={<VillageForm />} />
-					<Route path="/village/:villageID" element={<VillageDetail />} />
-					<Route path="/village" element={<Village />} />
-					<Route path="/city/update/:cityID" element={<CityForm />} />
-					<Route path="/city/create" element={<CityForm />} />
-					<Route path="/city/:cityID" element={<CityDetail />} />
-					<Route path="/city" element={<City />} />
+					<Route path="/dapil" element={<Dapil />} />
+					<Route path="/dapil/city/update/:cityID" element={<CityForm />} />
+					<Route path="/dapil/city/create" element={<CityForm />} />
+					<Route path="/dapil/city/:cityID" element={<CityDetail />} />
+					<Route path="/dapil/city" element={<City />} />
+					<Route path="/dapil/district/update/:districtID" element={<DistrictForm />} />
+					<Route path="/dapil/district/create" element={<DistrictForm />} />
+					<Route path="/dapil/district/:districtID" element={<DistrictDetail />} />
+					<Route path="/dapil/district" element={<District />} />
+					<Route path="/dapil/village/update/:villageID" element={<VillageForm />} />
+					<Route path="/dapil/village/create" element={<VillageForm />} />
+					<Route path="/dapil/village/:villageID" element={<VillageDetail />} />
+					<Route path="/dapil/village" element={<Village />} />
 					<Route path="/district/update/:districtID" element={<DistrictForm />} />
 					<Route path="/district/create" element={<DistrictForm />} />
 					<Route path="/district/:districtID" element={<DistrictDetail />} />
@@ -111,7 +116,6 @@ export const AppRoutes = () => {
 					<Route path="/absensi/:attendanceID" element={<AttendanceDetail />} />
 					<Route path="/absensi/create" element={<AttendanceCreateUpdate />} />
 					<Route path="/absensi/update/:attendanceID" element={<AttendanceCreateUpdate />} />
-					<Route path="/dapil" element={<Dapil />} />
 					<Route path="/TPS/update/:TPSID" element={<TPSForm />} />
 					<Route path="/TPS/create" element={<TPSForm />} />
 					<Route path="/tps" element={<TPS />} />
