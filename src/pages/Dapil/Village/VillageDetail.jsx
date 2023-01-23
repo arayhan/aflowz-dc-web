@@ -1,4 +1,4 @@
-import { ButtonAction, Card } from '@/components/atoms';
+import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
@@ -27,12 +27,19 @@ const VillageDetail = () => {
 		<div>
 			<BannerFeature title={villageDetail ? `${villageDetail.village_name}` : 'Desa'} loading={fetchingVillageDetail} />
 
-			<section className="bg-gray-100 py-12 md:py-20">
+			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
 					{fetchingVillageDetail && <VillageDetailSkeleton />}
 					{!fetchingVillageDetail && villageDetail && (
 						<div className="space-y-4">
-							<div className="flex flex-col sm:flex-row items-center justify-end gap-4">
+							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
+								<Button
+									className="px-6 py-3 text-xs rounded-sm"
+									variant={'primary'}
+									linkTo={`/dapil/village/${villageDetail?.village_id}/report`}
+								>
+									Preview Database Report
+								</Button>
 								<ButtonAction
 									action={ACTION_TYPES.UPDATE}
 									linkTo={`/dapil/village/update/${villageID}`}
@@ -42,24 +49,24 @@ const VillageDetail = () => {
 							</div>
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
-									<div className="font-light text-xl">Details</div>
+									<div className="text-xl font-light">Details</div>
 									{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 								</div>
 								<hr />
 								<div className="p-5">
-									<div className="grid grid-cols-12 gap-y-1 text-sm">
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Desa</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+									<div className="grid grid-cols-12 text-sm gap-y-1">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Desa</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{villageDetail?.village_name || '-'}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Kecamatan</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Kecamatan</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{villageDetail?.district?.name || '-'}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Desa</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Desa</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!villageDetail?.village_pic && '-'}
 											{villageDetail?.village_pic && (
 												<div>
@@ -69,13 +76,13 @@ const VillageDetail = () => {
 											)}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Staff</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Staff</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!villageDetail?.pic_staff.id && '-'}
 											{villageDetail?.pic_staff.id && (
 												<Link
 													to={`/staff/${villageDetail?.pic_staff.id}`}
-													className="text-primary underline hover:text-primary-400"
+													className="underline text-primary hover:text-primary-400"
 												>
 													{villageDetail?.pic_staff.name}{' '}
 													{villageDetail?.pic_staff.mobile && `(${villageDetail?.pic_staff.mobile})`}
@@ -93,7 +100,7 @@ const VillageDetail = () => {
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
@@ -102,7 +109,7 @@ const VillageDetail = () => {
 										<ChartPenerimaProgram data={villageDetail?.penerima_program} />
 									</Card>
 								</div>
-								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Periode Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
@@ -135,17 +142,17 @@ const VillageDetail = () => {
 const VillageDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
-			<div key={item} className="col-span-12 md:col-span-4 bg-white p-4 rounded-md">
-				<div className="space-y-3 flex flex-col">
+			<div key={item} className="col-span-12 p-4 bg-white rounded-md md:col-span-4">
+				<div className="flex flex-col space-y-3">
 					<Skeleton width={200} height={20} />
 					<hr />
 					<div className="flex items-center justify-center">
-						<Skeleton className="w-48 h-48 md:w-52 md:h-52 rounded-full" />
+						<Skeleton className="w-48 h-48 rounded-full md:w-52 md:h-52" />
 					</div>
 				</div>
 			</div>
 		))}
-		<div className="col-span-12 bg-white p-5 md:p-8 rounded-md">
+		<div className="col-span-12 p-5 bg-white rounded-md md:p-8">
 			<div className="grid grid-cols-12 gap-x-4 gap-y-2">
 				<Skeleton inline containerClassName="col-span-4 md:col-span-3 lg:col-span-2" />
 				<Skeleton inline containerClassName="col-span-8 md:col-span-9 lg:col-span-10" />
