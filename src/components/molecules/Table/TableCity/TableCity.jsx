@@ -40,17 +40,17 @@ export const TableCity = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama Kota',
+				Header: 'Nama Kabupaten/Kota',
 				accessor: 'name',
 				width: '100%',
 				minWidth: 300,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kota')
 			},
 			{
-				Header: 'Nama PIC',
+				Header: 'PIC Tim Internal',
 				width: '100%',
 				minWidth: 300,
-				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				hidden: displayedColumns && !displayedColumns.includes('PIC Tim Internal'),
 				Cell: (row) => {
 					return row.row.original.pic_staff?.id ? (
 						<Button
@@ -141,7 +141,7 @@ export const TableCity = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Kota"
 					featurePath="/dapil/city"
@@ -156,7 +156,7 @@ export const TableCity = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}

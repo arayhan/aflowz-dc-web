@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 	justifyBetween: { justifyContent: 'space-between' }
 });
 
-export const PDFDatabaseReport = () => {
+export const PDFDatabaseReport = ({ title }) => {
 	const handleGenerateChartPenerimaByGender = () => {
 		return 'Test';
 	};
@@ -50,7 +50,7 @@ export const PDFDatabaseReport = () => {
 						</View>
 					</View>
 					<View style={[styles.flexRow, styles.itemsCenter]}>
-						<Text style={{ fontFamily: 'RobotoBold', fontSize: 32 }}>INSTITUSI</Text>
+						<Text style={{ fontFamily: 'RobotoBold', fontSize: 32 }}>{title}</Text>
 					</View>
 				</View>
 

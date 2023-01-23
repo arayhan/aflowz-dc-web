@@ -50,6 +50,8 @@ import ActivityDetailForm from './pages/Activity/ActivityDetailForm';
 import ActivityPromiseForm from './pages/Activity/ActivityPromiseForm';
 import ActivityDetailDetail from './pages/Activity/ActivityDetailDetail';
 import KonstituenDetailExportPDF from './pages/Konstituen/KonstituenDetailExportPDF';
+import CityDatabaseReport from './pages/Dapil/City/CityDatabaseReport';
+import VillageDatabaseReport from './pages/Dapil/Village/VillageDatabaseReport';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -84,6 +86,7 @@ export const AppRoutes = () => {
 					<Route path="/dapil" element={<Dapil />} />
 					<Route path="/dapil/city/update/:cityID" element={<CityForm />} />
 					<Route path="/dapil/city/create" element={<CityForm />} />
+					<Route path="/dapil/city/:cityID/report" element={<CityDatabaseReport />} />
 					<Route path="/dapil/city/:cityID" element={<CityDetail />} />
 					<Route path="/dapil/city" element={<City />} />
 					<Route path="/dapil/district/update/:districtID" element={<DistrictForm />} />
@@ -92,6 +95,7 @@ export const AppRoutes = () => {
 					<Route path="/dapil/district" element={<District />} />
 					<Route path="/dapil/village/update/:villageID" element={<VillageForm />} />
 					<Route path="/dapil/village/create" element={<VillageForm />} />
+					<Route path="/dapil/village/:villageID/report" element={<VillageDatabaseReport />} />
 					<Route path="/dapil/village/:villageID" element={<VillageDetail />} />
 					<Route path="/dapil/village" element={<Village />} />
 					<Route path="/district/update/:districtID" element={<DistrictForm />} />
