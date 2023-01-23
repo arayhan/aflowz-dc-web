@@ -6,8 +6,8 @@ const Dapil = () => {
 	return (
 		<div className="bg-gray-100">
 			<BannerFeature title="Dapil" />
-			<div className="py-40">
-				<div className="flex flex-wrap justify-center w-full gap-3 max-w-screen-2xl md:gap-5">
+			<div className="container py-40">
+				<div className="flex flex-wrap items-center justify-center w-full gap-3 max-w-screen-2xl md:gap-5">
 					{DAPIL_MENUS.map((menu) => {
 						return (
 							<Link
