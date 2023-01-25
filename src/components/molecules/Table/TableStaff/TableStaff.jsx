@@ -37,12 +37,23 @@ export const TableStaff = () => {
 			{
 				Header: 'Role',
 				minWidth: 100,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.staff_title.name}</div>
+				Cell: (row) => {
+					const data = row.row.original;
+					return data.staff_titles.length > 0 ? (
+						<>
+							{data.staff_titles.map((title) => {
+								<div className="capitalize">{title.name}</div>;
+							})}
+						</>
+					) : (
+						'-'
+					);
+				}
 			},
 			{
 				Header: 'Kota / Kabupaten',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name}</div>
 			},
 			{
 				Header: 'Detail',
