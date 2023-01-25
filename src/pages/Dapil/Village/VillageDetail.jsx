@@ -2,8 +2,8 @@ import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
-	ChartPenerimaProgram,
 	ChartPeriodeProgram,
+	TableDetailTotalPenerimaByProgram,
 	TablePenerima
 } from '@/components/molecules';
 import { useVillageStore } from '@/store';
@@ -17,7 +17,7 @@ const VillageDetail = () => {
 
 	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
 
-	const [tableParams] = useState({ village_id: villageID });
+	const [tablePenerimaParams] = useState({ village_id: villageID });
 
 	useEffect(() => {
 		if (villageID) getVillageDetail(villageID);
@@ -55,17 +55,12 @@ const VillageDetail = () => {
 								<hr />
 								<div className="p-5">
 									<div className="grid grid-cols-12 text-sm gap-y-1">
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Desa</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kota</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{villageDetail?.village_name || '-'}
 										</div>
 
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Kecamatan</div>
-										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
-											{villageDetail?.district?.name || '-'}
-										</div>
-
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Desa</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Kota</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!villageDetail?.village_pic && '-'}
 											{villageDetail?.village_pic && (
@@ -92,30 +87,71 @@ const VillageDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center justify-center gap-4">
+							<div className="grid items-center justify-center grid-cols-4 gap-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
-									value={villageDetail?.total_penerima_program_village_per_program || 0}
+									value={villageDetail?.penerima_program_village?.length || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={villageDetail?.total_penerima_multiple_program_village_per_orang || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima PIP'}
+									value={villageDetail?.total_institusi_penerima_program_village_pip || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima PIP'}
+									value={villageDetail?.total_penerima_program_village_pip || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima KIP'}
+									value={villageDetail?.total_institusi_penerima_program_village_kip || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima KIP'}
+									value={villageDetail?.total_penerima_program_village_kip || 0}
+									linkTo={`/penerima?village_id=${villageID}`}
+								/>
+								<CardDetailTotal
+									title={'Potensi Pemilih'}
+									value={villageDetail?.total_potensi_pemilih_village_per_orang || 0}
 									linkTo={`/penerima?village_id=${villageID}`}
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Penerima Program'}
+										title={'Jumlah Program by Periode per Orang'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPenerimaProgram data={villageDetail?.penerima_program} />
+										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_orang} />
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Periode Program'}
+										title={'Jumlah Program by Periode per Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_program} />
+									</Card>
+								</div>
+								<div className="col-span-12">
+									<Card
+										title={`Penerima Program di ${villageDetail.village_name}`}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailTotalPenerimaByProgram dataPenerima={villageDetail?.penerima_program_village} />
+										</div>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
@@ -126,7 +162,7 @@ const VillageDetail = () => {
 										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
-										params={tableParams}
+										params={tablePenerimaParams}
 										enableClickRow
 									/>
 								</div>
