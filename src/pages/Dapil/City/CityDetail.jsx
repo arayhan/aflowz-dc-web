@@ -1,5 +1,14 @@
 import { Button, ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartPeriodeProgram,
+	TableDetailPenerimaProgram,
+	TableDetailTotalPenerimaByProgram,
+	TableDistrict,
+	TablePenerima,
+	TableProgram
+} from '@/components/molecules';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -11,7 +20,9 @@ const CityDetail = () => {
 
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
 
-	const [tableParams] = useState({ city_id: cityID });
+	const [tablePenerimaParams] = useState({ city_id: cityID });
+	const [tableProgramParams, setTableProgramParams] = useState({ city_id: cityID });
+	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
 		if (cityID) getCityDetail(cityID);
@@ -78,10 +89,40 @@ const CityDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center justify-center gap-4">
+							<div className="grid items-center justify-center grid-cols-4 gap-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={cityDetail?.penerima_program_city?.length || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={cityDetail?.total_penerima_multiple_program_city_per_orang || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima PIP'}
+									value={cityDetail?.total_institusi_penerima_program_city_pip || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima PIP'}
+									value={cityDetail?.total_penerima_program_city_pip || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima KIP'}
+									value={cityDetail?.total_institusi_penerima_program_city_kip || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima KIP'}
+									value={cityDetail?.total_penerima_program_city_kip || 0}
+									linkTo={`/penerima?city_id=${cityID}`}
+								/>
+								<CardDetailTotal
+									title={'Potensi Pemilih'}
+									value={cityDetail?.total_potensi_pemilih_city_per_orang || 0}
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 							</div>
@@ -105,6 +146,28 @@ const CityDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
+									<TableDistrict
+										title={`List Kecamatan di ${cityDetail.city_name}`}
+										params={{ ...tableDistrictParams, city_id: cityID }}
+										setParams={setTableDistrictParams}
+										displayedColumns={['#', 'Nama Kecamatan', 'Nama PIC']}
+										isReadonly
+										isShowButtonSeeAll
+										enableClickRow
+									/>
+								</div>
+								<div className="col-span-12">
+									<Card
+										title={'Penerima Program Per Kota'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailTotalPenerimaByProgram dataPenerima={cityDetail?.penerima_program_city} />
+										</div>
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
 									<TablePenerima
 										title={`Penerima Program ${cityDetail.city_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
@@ -112,7 +175,7 @@ const CityDetail = () => {
 										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
-										params={tableParams}
+										params={tablePenerimaParams}
 										enableClickRow
 									/>
 								</div>

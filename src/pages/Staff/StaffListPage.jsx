@@ -6,7 +6,7 @@ const StaffListPage = () => {
 		<div>
 			<BannerFeature title="List Tim Internal" />
 			<div className="bg-gray-100">
-				<div className="py-6 container">
+				<div className="container py-6">
 					<TableStaff />
 				</div>
 			</div>

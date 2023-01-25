@@ -4,7 +4,7 @@ import React from 'react';
 export const CardDetailTotal = ({ value, title, buttonText, linkTo }) => {
 	return (
 		<div className="bg-white rounded-md">
-			<div className="flex flex-col items-center justify-center space-y-1 text-center px-10 md:px-16 py-6">
+			<div className="flex flex-col items-center justify-center px-3 py-6 space-y-1 text-center">
 				<span className="text-2xl md:text-4xl font-extralight">{value}</span>
 				<div className="font-light text-gray-400">{title}</div>
 			</div>
