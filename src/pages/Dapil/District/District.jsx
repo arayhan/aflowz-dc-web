@@ -14,7 +14,7 @@ const District = () => {
 
 	return (
 		<div className="bg-gray-100">
-			<BannerFeature title="Kota" />
+			<BannerFeature title="Kecamatan" />
 			<div className="container py-16">
 				<TableDistrict params={params} />
 			</div>
