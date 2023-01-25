@@ -21,7 +21,6 @@ const CityDetail = () => {
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
 
 	const [tablePenerimaParams] = useState({ city_id: cityID });
-	const [tableProgramParams, setTableProgramParams] = useState({ city_id: cityID });
 	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
@@ -158,7 +157,7 @@ const CityDetail = () => {
 								</div>
 								<div className="col-span-12">
 									<Card
-										title={'Penerima Program Per Kota'}
+										title={`Penerima Program di ${cityDetail.city_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>

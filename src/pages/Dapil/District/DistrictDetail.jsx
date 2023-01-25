@@ -1,5 +1,12 @@
-import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, ChartPeriodeProgram, TablePenerima } from '@/components/molecules';
+import { Button, ButtonAction, Card } from '@/components/atoms';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartPeriodeProgram,
+	TableDetailTotalPenerimaByProgram,
+	TablePenerima,
+	TableVillage
+} from '@/components/molecules';
 import { useDistrictStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -11,7 +18,8 @@ const DistrictDetail = () => {
 
 	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
 
-	const [tableParams] = useState({ district_id: districtID });
+	const [tablePenerimaParams] = useState({ district_id: districtID });
+	const [tableVillageParams, setTableVillageParams] = useState({ district_id: districtID });
 
 	useEffect(() => {
 		if (districtID) getDistrictDetail(districtID);
@@ -20,7 +28,7 @@ const DistrictDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={districtDetail ? `${districtDetail.district_name}` : 'Kota'}
+				title={districtDetail ? `${districtDetail.district_name}` : 'Kecamatan'}
 				loading={fetchingDistrictDetail}
 			/>
 
@@ -30,6 +38,13 @@ const DistrictDetail = () => {
 					{!fetchingDistrictDetail && districtDetail && (
 						<div className="space-y-4">
 							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
+								<Button
+									className="px-6 py-3 text-xs rounded-sm"
+									variant={'primary'}
+									linkTo={`/dapil/district/${districtDetail?.district_id}/report`}
+								>
+									Preview Database Report
+								</Button>
 								<ButtonAction
 									action={ACTION_TYPES.UPDATE}
 									linkTo={`/dapil/district/update/${districtID}`}
@@ -45,12 +60,12 @@ const DistrictDetail = () => {
 								<hr />
 								<div className="p-5">
 									<div className="grid grid-cols-12 text-sm gap-y-1">
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kota</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kecamatan</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{districtDetail?.district_name || '-'}
 										</div>
 
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Kota</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Kecamatan</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!districtDetail?.district_pic && '-'}
 											{districtDetail?.district_pic && (
@@ -77,10 +92,40 @@ const DistrictDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center justify-center gap-4">
+							<div className="grid items-center justify-center grid-cols-4 gap-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={districtDetail?.penerima_program_district?.length || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={districtDetail?.total_penerima_multiple_program_district_per_orang || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima PIP'}
+									value={districtDetail?.total_institusi_penerima_program_district_pip || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima PIP'}
+									value={districtDetail?.total_penerima_program_district_pip || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima KIP'}
+									value={districtDetail?.total_institusi_penerima_program_district_kip || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Total Siswa Penerima KIP'}
+									value={districtDetail?.total_penerima_program_district_kip || 0}
+									linkTo={`/penerima?district_id=${districtID}`}
+								/>
+								<CardDetailTotal
+									title={'Potensi Pemilih'}
+									value={districtDetail?.total_potensi_pemilih_district_per_orang || 0}
 									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 							</div>
@@ -106,6 +151,28 @@ const DistrictDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
+									<TableVillage
+										title={`List Desa di ${districtDetail.district_name}`}
+										params={{ ...tableVillageParams, district_id: districtID }}
+										setParams={setTableVillageParams}
+										displayedColumns={['#', 'Nama Desa', 'Nama PIC']}
+										isReadonly
+										isShowButtonSeeAll
+										enableClickRow
+									/>
+								</div>
+								<div className="col-span-12">
+									<Card
+										title={`Penerima Program di ${districtDetail.district_name}`}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										className={'bg-white rounded-md'}
+									>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailTotalPenerimaByProgram dataPenerima={districtDetail?.penerima_program_district} />
+										</div>
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
 									<TablePenerima
 										title={`Penerima Program ${districtDetail.district_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
@@ -113,7 +180,7 @@ const DistrictDetail = () => {
 										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
-										params={tableParams}
+										params={tablePenerimaParams}
 										enableClickRow
 									/>
 								</div>
