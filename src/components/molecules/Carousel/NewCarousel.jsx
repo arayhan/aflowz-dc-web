@@ -33,7 +33,7 @@ export const NewCarousel = () => {
 	return (
 		<>
 			{/* < sm */}
-			<div className="lg:hidden h-full py-20">
+			<div className="relative h-full py-20 lg:hidden">
 				<Carousel
 					additionalTransfrom={0}
 					arrows
@@ -70,7 +70,7 @@ export const NewCarousel = () => {
 			</div>
 
 			{/* < sm */}
-			<div className="hidden lg:block h-full py-20">
+			<div className="relative hidden h-full py-20 lg:block">
 				<Carousel
 					additionalTransfrom={0}
 					arrows
