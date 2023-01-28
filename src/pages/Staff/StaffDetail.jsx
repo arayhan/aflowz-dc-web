@@ -66,22 +66,22 @@ const StaffDetail = () => {
 
 	return (
 		<div>
-			<BannerFeature title={staff ? `${staff.name}` : 'Detail Tim Internal'} loading={fetchingStaff} />
-			<section className="bg-gray-100 py-12 md:py-12">
+			<BannerFeature title={staff ? `${staff?.name}` : 'Detail Tim Internal'} loading={fetchingStaff} />
+			<section className="py-12 bg-gray-100 md:py-12">
 				<div className="container">
 					{fetchingStaff && <StaffDetailSkeleton />}
 					{!fetchingStaff && staff && (
 						<div className="space-y-6">
-							<div className="col-span-12 bg-gray-100 p-5">
-								<div className="bg-white shadow-lg rounded-md">
-									<div className="p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+							<div className="col-span-12 p-5 bg-gray-100">
+								<div className="bg-white rounded-md shadow-lg">
+									<div className="flex flex-col items-start justify-between gap-4 p-4 md:flex-row md:items-center">
 										<div className="w-full space-y-2">
-											<div className="font-light text-xl">Detail Tim Internal</div>
+											<div className="text-xl font-light">Detail Tim Internal</div>
 											{/* <div className="text-sm text-gray-400">
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 											</div> */}
 										</div>
-										<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+										<div className="flex flex-col items-center justify-end w-full gap-4 md:flex-row">
 											<ButtonAction
 												action={ACTION_TYPES.UPDATE}
 												linkTo={`/staff/update/${params.staffID}`}
@@ -91,8 +91,8 @@ const StaffDetail = () => {
 										</div>
 									</div>
 									<hr />
-									<div className="p-5 rounded-md my-2 flex-col">
-										<div className="w-full flex justify-center">
+									<div className="flex-col p-5 my-2 rounded-md">
+										<div className="flex justify-center w-full">
 											{staff?.image_url || editPicture !== '' ? (
 												<img src={editPicture ? editPicture : staff?.image_url} className="w-52" />
 											) : (
@@ -102,13 +102,13 @@ const StaffDetail = () => {
 												/>
 											)}
 										</div>
-										<div className="w-full flex justify-center">
+										<div className="flex justify-center w-full">
 											{showError && (
-												<p className="w-full flex justify-center mb-5 text-red-500">Max. Photo Size 500kb</p>
+												<p className="flex justify-center w-full mb-5 text-red-500">Max. Photo Size 500kb</p>
 											)}
 											{(isAdmin || isSystem) && editPicture !== '' && showButton ? (
-												<div className="w-52 flex justify-center mb-5 mt-2">
-													<div className="w-52 flex justify-evenly">
+												<div className="flex justify-center mt-2 mb-5 w-52">
+													<div className="flex w-52 justify-evenly">
 														<Button variant={'success'} type="button" onClick={handleSavePicture} className="px-5 py-2">
 															Save
 														</Button>
@@ -126,7 +126,7 @@ const StaffDetail = () => {
 													</div>
 												</div>
 											) : (
-												<div className="w-52 flex justify-center mb-5 mt-2">
+												<div className="flex justify-center mt-2 mb-5 w-52">
 													<Button
 														type="button"
 														onClick={() => fileRef.current.click()}
@@ -149,20 +149,20 @@ const StaffDetail = () => {
 											)}
 										</div>
 										<div className="overflow-x-auto">
-											<div className="grid grid-cols-12 w-full gap-y-1 text-sm">
+											<div className="grid w-full grid-cols-12 text-sm gap-y-1">
 												<InputTextInfo tag={'NIK'} value={staff?.nik_number || 'Belum Tercantum'} />
 												<InputTextInfo tag={'Nama Tim Internal'} value={staff?.name || 'Belum Tercantum'} />
 												<InputTextInfo tag={'Alamat Domisili'} value={staff?.address || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'No. HP/Telp'} value={staff?.mobile || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'Email'} value={staff?.email || 'Belum Mencantumkan'} />
-												<InputTextInfo tag={'Role'} value={staff?.staff_title.name || 'Belum Mencantumkan'} />
+												<InputTextInfo tag={'Role'} value={staff?.staff_title?.name || 'Belum Mencantumkan'} />
 												<InputTextInfo
 													tag={'Kota/Kabupaten Domisili'}
-													value={staff?.city.name || 'Belum Mencantumkan'}
+													value={staff?.city?.name || 'Belum Mencantumkan'}
 												/>
 												<InputTextInfo
 													tag={'Kecamatan Domisili'}
-													value={staff?.district.name || 'Belum Mencantumkan'}
+													value={staff?.district?.name || 'Belum Mencantumkan'}
 												/>
 												<InputTextInfo
 													tag={'Kelurahan/Desa Domisili'}
@@ -172,7 +172,7 @@ const StaffDetail = () => {
 										</div>
 									</div>
 								</div>
-								<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+								<div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
 									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailProgram
 											fetchData={staff?.programs}
@@ -199,7 +199,7 @@ const StaffDetail = () => {
 
 const StaffDetailSkeleton = () => {
 	return (
-		<div className="space-y-6 bg-white rounded-md p-5">
+		<div className="p-5 space-y-6 bg-white rounded-md">
 			<div className="col-span-12">
 				<Skeleton height={250} />
 			</div>
