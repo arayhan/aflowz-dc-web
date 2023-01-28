@@ -2,12 +2,11 @@ import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
+	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
-	TableDetailPenerimaProgram,
 	TableDetailTotalPenerimaByProgram,
 	TableDistrict,
-	TablePenerima,
-	TableProgram
+	TablePenerima
 } from '@/components/molecules';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -38,7 +37,7 @@ const CityDetail = () => {
 						<div className="space-y-4">
 							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
 								<Button
-									className="px-6 py-3 text-xs rounded-sm"
+									className="w-full px-6 py-3 text-xs rounded-sm sm:w-auto"
 									variant={'primary'}
 									linkTo={`/dapil/city/${cityDetail?.city_id}/report`}
 								>
@@ -88,7 +87,7 @@ const CityDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="grid items-center justify-center grid-cols-4 gap-4">
+							<div className="grid items-center justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={cityDetail?.penerima_program_city?.length || 0}
@@ -115,7 +114,7 @@ const CityDetail = () => {
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Siswa Penerima KIP'}
+									title={'Total Mahasiswa Penerima KIP'}
 									value={cityDetail?.total_penerima_program_city_kip || 0}
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
@@ -125,7 +124,7 @@ const CityDetail = () => {
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 							</div>
-							<div className="grid grid-cols-12 gap-4">
+							<div className="grid items-start grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Program by Periode per Orang'}
@@ -144,7 +143,15 @@ const CityDetail = () => {
 										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_program} />
 									</Card>
 								</div>
-								<div className="col-span-12 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
+									<Card
+										title={'Potensi Pemilih By Gender'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
+									</Card>
+								</div>
+								<div className="col-span-6 bg-white rounded-md">
 									<TableDistrict
 										title={`List Kecamatan di ${cityDetail.city_name}`}
 										params={{ ...tableDistrictParams, city_id: cityID }}
