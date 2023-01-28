@@ -61,12 +61,12 @@ const VillageDatabaseReport = () => {
 												Database <br /> Report
 											</span>
 										</div>
-										<div className="text-3xl font-bold">KECAMATAN</div>
+										<div className="text-3xl font-bold">DESA/KELURAHAN</div>
 									</div>
 									<hr className="my-4" />
 									<div className="flex items-start justify-between">
 										<div className="space-y-1">
-											<div className="text-sm">KECAMATAN :</div>
+											<div className="text-sm">DESA/KELURAHAN :</div>
 											<div className="px-2 py-1 text-lg font-semibold bg-primary-200">
 												{villageDetail?.village_name}
 											</div>
