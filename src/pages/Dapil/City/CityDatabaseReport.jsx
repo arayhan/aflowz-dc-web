@@ -28,21 +28,14 @@ const CityDatabaseReport = () => {
 	};
 
 	const handleExportToPDF = async () => {
-		const doc = new jsPDF({
-			orientation: 'p',
-			unit: 'mm',
-			format: 'a4',
-			putOnlyUsedFonts: true
-		});
+		const doc = new jsPDF({ orientation: 'portrait' });
 
 		const imagePageOne = await handleGenerateImage(pageOneRef.current);
 		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
 
-		window.open(imagePageOne);
-
-		doc.addImage(imagePageOne, 'JPEG', 0, 0);
+		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
 		doc.addPage();
-		doc.addImage(imagePageTwo, 'JPEG', 0, 0);
+		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
 		doc.save('City Database Report.pdf');
 	};
 

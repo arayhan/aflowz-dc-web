@@ -9,8 +9,12 @@
 	body {
 		@apply font-primary;
 	}
+
+	canvas {
+		display: inline-block;
+	}
 }
 
 .react-datepicker-popper {
-    z-index: 100 !important;
+	z-index: 100 !important;
 }
