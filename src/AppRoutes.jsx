@@ -52,6 +52,7 @@ import ActivityDetailDetail from './pages/Activity/ActivityDetailDetail';
 import KonstituenDetailExportPDF from './pages/Konstituen/KonstituenDetailExportPDF';
 import CityDatabaseReport from './pages/Dapil/City/CityDatabaseReport';
 import VillageDatabaseReport from './pages/Dapil/Village/VillageDatabaseReport';
+import DistrictDatabaseReport from './pages/Dapil/District/DistrictDatabaseReport';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -91,6 +92,7 @@ export const AppRoutes = () => {
 					<Route path="/dapil/city" element={<City />} />
 					<Route path="/dapil/district/update/:districtID" element={<DistrictForm />} />
 					<Route path="/dapil/district/create" element={<DistrictForm />} />
+					<Route path="/dapil/district/:districtID/report" element={<DistrictDatabaseReport />} />
 					<Route path="/dapil/district/:districtID" element={<DistrictDetail />} />
 					<Route path="/dapil/district" element={<District />} />
 					<Route path="/dapil/village/update/:villageID" element={<VillageForm />} />

@@ -4,15 +4,15 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { ChartPenerimaKIPPerYear, ChartPenerimaPIPPerYear, ChartPenerimaProgramByGender } from '@/components/molecules';
 import Skeleton from 'react-loading-skeleton';
-import { useCityStore } from '@/store';
+import { useDistrictStore } from '@/store';
 import { useParams } from 'react-router-dom';
 
-const CityDatabaseReport = () => {
-	const { cityID } = useParams();
+const DistrictDatabaseReport = () => {
+	const { districtID } = useParams();
 	const pageOneRef = useRef();
 	const pageTwoRef = useRef();
 
-	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
+	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
 
 	const [theMostTotalPenerima, setTheMostTotalPenerima] = useState(null);
 	const [theLeastTotalPenerima, setTheLeastTotalPenerima] = useState(null);
@@ -36,16 +36,16 @@ const CityDatabaseReport = () => {
 		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
 		doc.addPage();
 		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
-		doc.save('City Database Report.pdf');
+		doc.save('District Database Report.pdf');
 	};
 
 	useEffect(() => {
-		if (cityID && !cityDetail) getCityDetail(cityID);
-	}, [cityID, cityDetail]);
+		if (districtID && !districtDetail) getDistrictDetail(districtID);
+	}, [districtID, districtDetail]);
 
 	useEffect(() => {
-		if (cityDetail) {
-			const sortedPenerima = cityDetail.penerima_program_city_district?.sort((a, b) => {
+		if (districtDetail) {
+			const sortedPenerima = districtDetail.penerima_program_district_district?.sort((a, b) => {
 				return b.total_penerima - a.total_penerima;
 			});
 
@@ -54,7 +54,7 @@ const CityDatabaseReport = () => {
 				setTheLeastTotalPenerima(sortedPenerima[sortedPenerima.length - 1]);
 			}
 		}
-	}, [cityDetail]);
+	}, [districtDetail]);
 
 	return (
 		<div className="bg-gray-100">
@@ -66,8 +66,8 @@ const CityDatabaseReport = () => {
 				</div>
 				<div className="overflow-hidden rounded-md">
 					<div className={`flex flex-col lg:items-center bg-[#525659] h-[1123px] p-8 overflow-y-scroll gap-8`}>
-						{fetchingCityDetail && <Skeleton height={1123} />}
-						{!fetchingCityDetail && cityDetail && (
+						{fetchingDistrictDetail && <Skeleton height={1123} />}
+						{!fetchingDistrictDetail && districtDetail && (
 							<>
 								<div ref={pageOneRef} className={`relative w-[794px] min-h-[1123px] bg-white p-8`}>
 									<div className="flex items-center justify-between">
@@ -77,22 +77,24 @@ const CityDatabaseReport = () => {
 												Database <br /> Report
 											</span>
 										</div>
-										<div className="text-3xl font-bold">KOTA/KAB</div>
+										<div className="text-3xl font-bold">KECAMATAN</div>
 									</div>
 									<hr className="my-4" />
 									<div className="flex items-start justify-between">
 										<div className="space-y-1">
-											<div className="text-sm">KOTA / KAB :</div>
-											<div className="px-2 py-1 text-lg font-semibold bg-primary-200">{cityDetail?.city_name}</div>
+											<div className="text-sm">KECAMATAN :</div>
+											<div className="px-2 py-1 text-lg font-semibold bg-primary-200">
+												{districtDetail?.district_name}
+											</div>
 										</div>
 										<div className="space-y-1">
 											<div className="text-sm">
-												KORWIL : {cityDetail?.city_pic || '-'}
-												{cityDetail?.city_pic_mobile ? `(${cityDetail?.city_pic_mobile})` : ''}
+												KORWIL : {districtDetail?.district_pic || '-'}
+												{districtDetail?.district_pic_mobile ? `(${districtDetail?.district_pic_mobile})` : ''}
 											</div>
 											<div className="text-sm">
-												PIC TEMPAT : {cityDetail?.pic_staff?.name || '-'}
-												{cityDetail?.pic_staff?.mobile ? `(${cityDetail?.pic_staff?.mobile})` : ''}
+												PIC TEMPAT : {districtDetail?.pic_staff?.name || '-'}
+												{districtDetail?.pic_staff?.mobile ? `(${districtDetail?.pic_staff?.mobile})` : ''}
 											</div>
 										</div>
 									</div>
@@ -104,14 +106,14 @@ const CityDatabaseReport = () => {
 													<div className="px-10 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
 														<div className="text-2xl font-semibold text-white">
-															{cityDetail?.total_penerima_program_city_per_program}
+															{districtDetail?.total_penerima_program_district_per_program}
 														</div>
 													</div>
 													<div className="space-y-1 text-center">
 														<div className="px-10 py-2 bg-primary">
 															<div className="font-semibold text-secondary">Total</div>
 															<div className="text-2xl font-semibold text-white">
-																{cityDetail?.total_penerima_multiple_program_city_per_orang}
+																{districtDetail?.total_penerima_multiple_program_district_per_orang}
 															</div>
 														</div>
 														<div className="text-sm">2 ATAU LEBIH</div>
@@ -123,7 +125,7 @@ const CityDatabaseReport = () => {
 												</div>
 
 												<div className="space-y-2">
-													{cityDetail?.total_penerima_program_city_by_periode_per_program?.map((program) => (
+													{districtDetail?.total_penerima_program_district_by_periode_per_program?.map((program) => (
 														<div key={program.periode} className="px-6 py-1 text-center bg-primary">
 															<div className="text-sm font-semibold text-secondary">{program.periode}</div>
 															<div className="text-lg font-semibold text-white">{program.total_program}</div>
@@ -139,7 +141,11 @@ const CityDatabaseReport = () => {
 															<td className="w-2/3">KECAMATAN PALING BANYAK MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
-																<div className="w-full px-3 py-1 font-semibold bg-primary-200">
+																<div
+																	className={`w-full px-3 ${
+																		theMostTotalPenerima?.district_name ? 'py-1' : 'py-4'
+																	}  font-semibold bg-primary-200`}
+																>
 																	{theMostTotalPenerima?.district_name}
 																</div>
 															</td>
@@ -148,7 +154,11 @@ const CityDatabaseReport = () => {
 															<td className="w-2/3">KECAMATAN PALING SEDIKIT MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
-																<div className="w-full px-3 py-1 font-semibold bg-primary-200">
+																<div
+																	className={`w-full px-3 ${
+																		theMostTotalPenerima?.district_name ? 'py-1' : 'py-4'
+																	}  font-semibold bg-primary-200`}
+																>
 																	{theLeastTotalPenerima?.district_name}
 																</div>
 															</td>
@@ -199,7 +209,7 @@ const CityDatabaseReport = () => {
 													<div className="px-8 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
 														<div className="text-2xl font-semibold text-white">
-															{cityDetail?.total_institusi_penerima_program_city_kip}
+															{districtDetail?.total_institusi_penerima_program_district_kip}
 														</div>
 													</div>
 												</div>
@@ -219,7 +229,7 @@ const CityDatabaseReport = () => {
 													</tr>
 												</thead>
 												<tbody>
-													{cityDetail?.penerima_program_city.map((program) => (
+													{districtDetail?.penerima_program_district?.map((program) => (
 														<tr key={program?.program_id} className="odd:bg-gray-100">
 															<td className="px-6 py-3 text-sm font-semibold">{program.program_name}</td>
 															<td className="px-6 py-3 text-sm font-semibold text-center">
@@ -242,4 +252,4 @@ const CityDatabaseReport = () => {
 	);
 };
 
-export default CityDatabaseReport;
+export default DistrictDatabaseReport;
