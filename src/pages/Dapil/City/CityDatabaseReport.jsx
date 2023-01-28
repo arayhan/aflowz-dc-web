@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/atoms';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
-import { ChartPenerimaProgramByGender } from '@/components/molecules';
+import { ChartPenerimaKIPPerYear, ChartPenerimaPIPPerYear } from '@/components/molecules';
 import Skeleton from 'react-loading-skeleton';
 import { useCityStore } from '@/store';
 import { useParams } from 'react-router-dom';
@@ -14,8 +14,8 @@ const CityDatabaseReport = () => {
 
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
 
-	const [tablePenerimaParams] = useState({ city_id: cityID });
-	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
+	const [theMostTotalPenerima, setTheMostTotalPenerima] = useState(null);
+	const [theLeastTotalPenerima, setTheLeastTotalPenerima] = useState(null);
 
 	const handleGenerateImage = async (ref) => {
 		const style = document.createElement('style');
@@ -28,10 +28,17 @@ const CityDatabaseReport = () => {
 	};
 
 	const handleExportToPDF = async () => {
-		const doc = new jsPDF();
+		const doc = new jsPDF({
+			orientation: 'p',
+			unit: 'mm',
+			format: 'a4',
+			putOnlyUsedFonts: true
+		});
 
 		const imagePageOne = await handleGenerateImage(pageOneRef.current);
 		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
+
+		window.open(imagePageOne);
 
 		doc.addImage(imagePageOne, 'JPEG', 0, 0);
 		doc.addPage();
@@ -42,6 +49,17 @@ const CityDatabaseReport = () => {
 	useEffect(() => {
 		if (cityID && !cityDetail) getCityDetail(cityID);
 	}, [cityID, cityDetail]);
+
+	useEffect(() => {
+		if (cityDetail) {
+			const sortedPenerima = cityDetail.penerima_program_city_district?.sort((a, b) => {
+				return b.total_penerima - a.total_penerima;
+			});
+
+			setTheMostTotalPenerima(sortedPenerima[0]);
+			setTheLeastTotalPenerima(sortedPenerima[sortedPenerima.length - 1]);
+		}
+	}, [cityDetail]);
 
 	return (
 		<div className="bg-gray-100">
@@ -70,12 +88,17 @@ const CityDatabaseReport = () => {
 									<div className="flex items-start justify-between">
 										<div className="space-y-1">
 											<div className="text-sm">KOTA / KAB :</div>
-											<div className="px-2 py-1 text-lg font-semibold bg-primary-200">Bengkulu</div>
+											<div className="px-2 py-1 text-lg font-semibold bg-primary-200">{cityDetail?.city_name}</div>
 										</div>
 										<div className="space-y-1">
-											<div className="text-sm">KORWIL : MAS AKSA</div>
-											<div className="text-sm">PIC TEMPAT : MAS ARIF</div>
-											<div className="text-sm">082993123124</div>
+											<div className="text-sm">
+												KORWIL : {cityDetail?.city_pic || '-'}
+												{cityDetail?.city_pic_mobile ? `(${cityDetail?.city_pic_mobile})` : ''}
+											</div>
+											<div className="text-sm">
+												PIC TEMPAT : {cityDetail?.pic_staff?.name || '-'}
+												{cityDetail?.pic_staff?.mobile ? `(${cityDetail?.pic_staff?.mobile})` : ''}
+											</div>
 										</div>
 									</div>
 									<div className="py-8 space-y-4">
@@ -85,42 +108,32 @@ const CityDatabaseReport = () => {
 												<div className="space-y-8">
 													<div className="px-10 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
-														<div className="text-2xl font-semibold text-white">8025</div>
+														<div className="text-2xl font-semibold text-white">
+															{cityDetail?.total_penerima_program_city_per_program}
+														</div>
 													</div>
 													<div className="space-y-1 text-center">
 														<div className="px-10 py-2 bg-primary">
 															<div className="font-semibold text-secondary">Total</div>
-															<div className="text-2xl font-semibold text-white">1233</div>
+															<div className="text-2xl font-semibold text-white">
+																{cityDetail?.total_penerima_multiple_program_city_per_orang}
+															</div>
 														</div>
 														<div className="text-sm">2 ATAU LEBIH</div>
 													</div>
 												</div>
 
 												<div>
-													<ChartPenerimaProgramByGender totalPria={1200} totalWanita={700} />
+													<ChartPenerimaPIPPerYear />
 												</div>
 
 												<div className="space-y-2">
-													<div className="px-6 py-1 text-center bg-primary">
-														<div className="text-sm font-semibold text-secondary">2019</div>
-														<div className="text-lg font-semibold text-white">1233</div>
-													</div>
-													<div className="px-6 py-1 text-center bg-primary">
-														<div className="text-sm font-semibold text-secondary">2019</div>
-														<div className="text-lg font-semibold text-white">1233</div>
-													</div>
-													<div className="px-6 py-1 text-center bg-primary">
-														<div className="text-sm font-semibold text-secondary">2019</div>
-														<div className="text-lg font-semibold text-white">1233</div>
-													</div>
-													<div className="px-6 py-1 text-center bg-primary">
-														<div className="text-sm font-semibold text-secondary">2019</div>
-														<div className="text-lg font-semibold text-white">1233</div>
-													</div>
-													<div className="px-6 py-1 text-center bg-primary">
-														<div className="text-sm font-semibold text-secondary">2019</div>
-														<div className="text-lg font-semibold text-white">1233</div>
-													</div>
+													{cityDetail?.total_penerima_program_city_by_periode_per_program?.map((program) => (
+														<div key={program.periode} className="px-6 py-1 text-center bg-primary">
+															<div className="text-sm font-semibold text-secondary">{program.periode}</div>
+															<div className="text-lg font-semibold text-white">{program.total_program}</div>
+														</div>
+													))}
 												</div>
 											</div>
 
@@ -131,14 +144,18 @@ const CityDatabaseReport = () => {
 															<td className="w-2/3">KECAMATAN PALING BANYAK MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
-																<div className="w-full px-3 py-1 font-semibold bg-primary-200">Tapos</div>
+																<div className="w-full px-3 py-1 font-semibold bg-primary-200">
+																	{theMostTotalPenerima?.district_name}
+																</div>
 															</td>
 														</tr>
 														<tr>
 															<td className="w-2/3">KECAMATAN PALING SEDIKIT MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
-																<div className="w-full px-3 py-1 font-semibold bg-primary-200">Tapos</div>
+																<div className="w-full px-3 py-1 font-semibold bg-primary-200">
+																	{theLeastTotalPenerima?.district_name}
+																</div>
 															</td>
 														</tr>
 													</tbody>
@@ -146,30 +163,30 @@ const CityDatabaseReport = () => {
 											</div>
 
 											<div className="relative space-y-6">
-												<div className="font-semibold text-center">DATA JUMLAH PENERIMA SEMUA PROGRAM :</div>
+												<div className="font-semibold text-center">TOTAL PENERIMA PROGRAM PIP :</div>
 												<div className="flex items-center gap-4">
 													<div className="space-y-2">
 														<div className="text-sm text-center">INSTITUSI</div>
 														<div className="px-6 py-1 text-center bg-primary">
 															<div className="text-sm font-semibold text-secondary">SD</div>
-															<div className="text-lg font-semibold text-white">1233</div>
+															<div className="text-lg font-semibold text-white">0</div>
 														</div>
 														<div className="px-6 py-1 text-center bg-primary">
 															<div className="text-sm font-semibold text-secondary">SMP</div>
-															<div className="text-lg font-semibold text-white">1233</div>
+															<div className="text-lg font-semibold text-white">0</div>
 														</div>
 														<div className="px-6 py-1 text-center bg-primary">
 															<div className="text-sm font-semibold text-secondary">SMP</div>
-															<div className="text-lg font-semibold text-white">1233</div>
+															<div className="text-lg font-semibold text-white">0</div>
 														</div>
 														<div className="px-6 py-1 text-center bg-primary">
 															<div className="text-sm font-semibold text-secondary">SMK</div>
-															<div className="text-lg font-semibold text-white">1233</div>
+															<div className="text-lg font-semibold text-white">0</div>
 														</div>
 													</div>
 
-													<div>
-														<ChartPenerimaProgramByGender totalPria={1200} totalWanita={700} />
+													<div className="w-full">
+														<ChartPenerimaPIPPerYear />
 													</div>
 												</div>
 											</div>
@@ -186,12 +203,14 @@ const CityDatabaseReport = () => {
 												<div className="space-y-2">
 													<div className="px-8 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
-														<div className="text-2xl font-semibold text-white">8025</div>
+														<div className="text-2xl font-semibold text-white">
+															{cityDetail?.total_institusi_penerima_program_city_kip}
+														</div>
 													</div>
 												</div>
 
-												<div>
-													<ChartPenerimaProgramByGender totalPria={1200} totalWanita={700} />
+												<div className="w-full">
+													<ChartPenerimaKIPPerYear />
 												</div>
 											</div>
 										</div>
@@ -200,27 +219,19 @@ const CityDatabaseReport = () => {
 											<table className="w-full">
 												<thead className="bg-primary">
 													<tr>
-														<th className="px-6 py-3 text-lg text-left text-white">Nama Program</th>
-														<th className="px-6 py-3 text-lg text-white">Qty</th>
+														<th className="px-6 py-3 text-left text-white">Nama Program</th>
+														<th className="px-6 py-3 text-white">Qty</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr className="odd:bg-gray-100">
-														<td className="px-6 py-3 font-semibold">PIP</td>
-														<td className="px-6 py-3 font-semibold text-center">1200</td>
-													</tr>
-													<tr className="odd:bg-gray-100">
-														<td className="px-6 py-3 font-semibold">KIP</td>
-														<td className="px-6 py-3 font-semibold text-center">1200</td>
-													</tr>
-													<tr className="odd:bg-gray-100">
-														<td className="px-6 py-3 font-semibold">Bedah Tulisan</td>
-														<td className="px-6 py-3 font-semibold text-center">1200</td>
-													</tr>
-													<tr className="odd:bg-gray-100">
-														<td className="px-6 py-3 font-semibold">Desa Sejahtera</td>
-														<td className="px-6 py-3 font-semibold text-center">1200</td>
-													</tr>
+													{cityDetail?.penerima_program_city.map((program) => (
+														<tr key={program?.program_id} className="odd:bg-gray-100">
+															<td className="px-6 py-3 text-sm font-semibold">{program.program_name}</td>
+															<td className="px-6 py-3 text-sm font-semibold text-center">
+																{program?.total_penerima_program}
+															</td>
+														</tr>
+													))}
 												</tbody>
 											</table>
 										</div>

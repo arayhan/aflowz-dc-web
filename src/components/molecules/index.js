@@ -15,6 +15,8 @@ export * from './Card/CardDetailTotal/CardDetailTotal';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
+export * from './Chart/ChartPenerimaPIPPerYear/ChartPenerimaPIPPerYear';
+export * from './Chart/ChartPenerimaKIPPerYear/ChartPenerimaKIPPerYear';
 export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender';
 export * from './Chart/ChartPeriodeProgram/ChartPeriodeProgram';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
