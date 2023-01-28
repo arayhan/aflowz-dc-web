@@ -76,8 +76,6 @@ export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
 
-export * from './PDF/PDFDatabaseReport';
-
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
