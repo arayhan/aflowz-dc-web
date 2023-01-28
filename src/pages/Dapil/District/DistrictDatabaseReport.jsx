@@ -45,7 +45,7 @@ const DistrictDatabaseReport = () => {
 
 	useEffect(() => {
 		if (districtDetail) {
-			const sortedPenerima = districtDetail.penerima_program_district_district?.sort((a, b) => {
+			const sortedPenerima = districtDetail.penerima_program_district_village?.sort((a, b) => {
 				return b.total_penerima - a.total_penerima;
 			});
 
@@ -138,28 +138,28 @@ const DistrictDatabaseReport = () => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr>
-															<td className="w-2/3">KECAMATAN PALING BANYAK MENERIMA PROGRAM</td>
+															<td className="w-2/3">DESA/KELURAHAN PALING BANYAK MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
 																<div
 																	className={`w-full px-3 ${
-																		theMostTotalPenerima?.district_name ? 'py-1' : 'py-4'
+																		theMostTotalPenerima?.village_name ? 'py-1' : 'py-4'
 																	}  font-semibold bg-primary-200`}
 																>
-																	{theMostTotalPenerima?.district_name}
+																	{theMostTotalPenerima?.village_name}
 																</div>
 															</td>
 														</tr>
 														<tr>
-															<td className="w-2/3">KECAMATAN PALING SEDIKIT MENERIMA PROGRAM</td>
+															<td className="w-2/3">DESA/KELURAHAN PALING SEDIKIT MENERIMA PROGRAM</td>
 															<td className="px-2">:</td>
 															<td className="w-full py-1">
 																<div
 																	className={`w-full px-3 ${
-																		theMostTotalPenerima?.district_name ? 'py-1' : 'py-4'
+																		theMostTotalPenerima?.village_name ? 'py-1' : 'py-4'
 																	}  font-semibold bg-primary-200`}
 																>
-																	{theLeastTotalPenerima?.district_name}
+																	{theLeastTotalPenerima?.village_name}
 																</div>
 															</td>
 														</tr>
