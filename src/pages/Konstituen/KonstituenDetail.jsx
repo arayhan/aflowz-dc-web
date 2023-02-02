@@ -94,15 +94,27 @@ const KonstituenDetail = () => {
 									</div>
 								</div>
 								<div className="flex flex-col items-center justify-center">
-									<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
-										<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
-											<div className="flex flex-col items-center justify-center space-y-1 text-center">
-												<span className="text-2xl md:text-4xl font-extralight">
-													{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}
-												</span>
-												<div className="font-light text-gray-400">Total Penerima Program </div>
+									<div className="flex items-center justify-center gap-4">
+										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
+											<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
+												<div className="flex flex-col items-center justify-center space-y-1 text-center">
+													<span className="text-2xl md:text-4xl font-extralight">
+														{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}
+													</span>
+													<div className="font-light text-gray-400">Total Penerima Program </div>
+												</div>
+											</Link>
+										</div>
+										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg md:px-10">
+											<div>
+												<div className="flex flex-col items-center justify-center space-y-1 text-center">
+													<span className="text-2xl md:text-4xl font-extralight">
+														{konstituenDetail?.total_konstituen_activity_detail || 0}
+													</span>
+													<div className="font-light text-gray-400">Total Kegiatan </div>
+												</div>
 											</div>
-										</Link>
+										</div>
 									</div>
 									<div className="grid w-full grid-cols-12 gap-4">
 										<div className="col-span-12 bg-white rounded-md shadow-lg md:col-span-6">
