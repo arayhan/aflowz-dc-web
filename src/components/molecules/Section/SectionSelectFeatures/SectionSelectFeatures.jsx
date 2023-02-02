@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { MENUS } from '@/utils/constants';
+import { AKTIVITAS_MENUS, KANTOR_MENUS, MENUS, MITRA_MENUS } from '@/utils/constants';
 import { SearchGlobal } from '../../Search/SearchGlobal/SearchGlobal';
 
 export const SectionSelectFeatures = () => {
 	return (
 		<div className="bg-gray-100">
 			<div className="container pt-10 pb-20 space-y-10">
-				<div className="text-center space-y-3">
+				<div className="space-y-3 text-center">
 					<div className="text-3xl font-extralight">Pilih Fitur</div>
 					{/* <div className="text-gray-500">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. A quos ipsum iste inventore est, maxime impedit
@@ -17,67 +17,70 @@ export const SectionSelectFeatures = () => {
 				<div className="max-w-screen-lg mx-auto">
 					<SearchGlobal />
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-y-10">
-					<div className="border-2 flex-col justify-center bg-white py-5 mx-8 rounded-xl shadow-lg">
-						<p className="text-center text-2xl font-extralight pb-3">MITRA</p>
-						<div className="max-w-screen-2xl w-full flex flex-wrap justify-center gap-3 md:gap-5">
-							{MENUS.map((menu) => {
-								if (menu.id <= 3) {
-									return (
-										<Link
-											key={menu.path}
-											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
-										>
-											<div className="px-5">
-												<img className="w-full" src={menu.icon} alt="" />
-											</div>
-											<div className="text-center text-sm lg:text-lg font-extralight">{menu.title}</div>
-										</Link>
-									);
-								}
+				<div className="grid w-full gap-5 md:gap-8 md:grid-cols-2">
+					<div className="w-full bg-white shadow-md rounded-xl">
+						<div className="p-4 text-2xl text-center font-extralight">
+							<div>MITRA</div>
+						</div>
+						<hr />
+						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+							{MITRA_MENUS.map((menu) => {
+								return (
+									<Link
+										key={menu.path}
+										to={menu.path}
+										className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
+									>
+										<div className="px-5">
+											<img className="w-full" src={menu.icon} alt="" />
+										</div>
+										<div className="text-sm text-center lg:text-lg font-extralight">{menu.title}</div>
+									</Link>
+								);
 							})}
 						</div>
 					</div>
-					<div className="border-2 flex-col justify-center bg-white py-5 mx-8 rounded-xl shadow-lg">
-						<p className="text-center text-2xl font-extralight pb-3">KANTOR</p>
-						<div className="max-w-screen-2xl w-full flex flex-wrap justify-center gap-3 md:gap-5">
-							{MENUS.map((menu) => {
-								if (menu.id > 3 && menu.id <= 5) {
-									return (
-										<Link
-											key={menu.path}
-											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
-										>
-											<div className="px-5">
-												<img className="w-full" src={menu.icon} alt="" />
-											</div>
-											<div className="text-center text-sm lg:text-lg font-extralight">{menu.title}</div>
-										</Link>
-									);
-								}
+					<div className="w-full bg-white shadow-md rounded-xl">
+						<div className="p-4 text-2xl text-center font-extralight">
+							<div>KANTOR</div>
+						</div>
+						<hr />
+						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+							{KANTOR_MENUS.map((menu) => {
+								return (
+									<Link
+										key={menu.path}
+										to={menu.path}
+										className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
+									>
+										<div className="px-5">
+											<img className="w-full" src={menu.icon} alt="" />
+										</div>
+										<div className="text-sm text-center lg:text-lg font-extralight">{menu.title}</div>
+									</Link>
+								);
 							})}
 						</div>
 					</div>
-					<div className="sm:col-span-12 border-2 flex-col justify-center bg-white py-5 mx-8 rounded-xl shadow-lg">
-						<p className="text-center text-2xl font-extralight pb-3">AKTIVITAS</p>
-						<div className="max-w-screen-2xl w-full flex flex-wrap justify-center gap-3 md:gap-5">
-							{MENUS.map((menu) => {
-								if (menu.id > 5 && menu.id <= 11) {
-									return (
-										<Link
-											key={menu.path}
-											to={menu.path}
-											className="w-24 sm:w-28 md:w-32 bg-white border-2 py-2 shadow-lg rounded-md hover:bg-gray-100 cursor-pointer text-opacity-50 transition-all"
-										>
-											<div className="px-5">
-												<img className="w-full" src={menu.icon} alt="" />
-											</div>
-											<div className="text-center text-sm lg:text-lg font-extralight">{menu.title}</div>
-										</Link>
-									);
-								}
+					<div className="w-full bg-white shadow-md rounded-xl md:col-span-2">
+						<div className="p-4 text-2xl text-center font-extralight">
+							<div>AKTIVITAS</div>
+						</div>
+						<hr />
+						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+							{AKTIVITAS_MENUS.map((menu) => {
+								return (
+									<Link
+										key={menu.path}
+										to={menu.path}
+										className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
+									>
+										<div className="px-5">
+											<img className="w-full" src={menu.icon} alt="" />
+										</div>
+										<div className="text-sm text-center lg:text-lg font-extralight">{menu.title}</div>
+									</Link>
+								);
 							})}
 						</div>
 					</div>
