@@ -12,7 +12,7 @@ export * from './Carousel/Carousel';
 export * from './Carousel/NewCarousel';
 
 export * from './Card/CardDetailTotal/CardDetailTotal';
-// export * from './Card/CardOrganizationStructure/CardOrganizationStructure';
+export * from './Card/CardOrganizationStructure/CardOrganizationStructure';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
