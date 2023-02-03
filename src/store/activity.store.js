@@ -6,8 +6,10 @@ import { devtools } from 'zustand/middleware';
 
 const states = (set, get) => ({
 	fetchingActivityItem: false,
+	fetchingActivityCategory: false,
 	fetchingActivityList: false,
 	fetchingActivityDetailItem: false,
+	fetchingActivityDetailCategory: false,
 	fetchingActivityDetailList: false,
 	fetchingActivityPromiseItem: false,
 	fetchingActivityPromiseList: false,
@@ -23,8 +25,10 @@ const states = (set, get) => ({
 	processingDeleteActivityPromise: false,
 
 	activityItem: null,
+	activityCategory: null,
 	activityList: null,
 	activityDetailItem: null,
+	activityDetailCategory: null,
 	activityDetailList: null,
 	activityPromiseItem: null,
 	activityPromiseList: null,
@@ -46,6 +50,18 @@ const states = (set, get) => ({
 
 		set({ activityItem: success ? payload : null });
 		set({ fetchingActivityItem: false });
+	},
+
+	getActivityCategory: async () => {
+		set({ fetchingActivityCategory: true });
+		set({ activityCategory: null });
+
+		const { success, payload } = await SERVICE_ACTIVITY.getActivityCategory();
+
+		if (!success) set({ errorsActivity: payload });
+
+		set({ activityCategory: success ? payload : null });
+		set({ fetchingActivityCategory: false });
 	},
 
 	getActivityList: async (params = {}) => {

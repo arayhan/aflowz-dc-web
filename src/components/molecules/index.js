@@ -12,6 +12,7 @@ export * from './Carousel/Carousel';
 export * from './Carousel/NewCarousel';
 
 export * from './Card/CardDetailTotal/CardDetailTotal';
+// export * from './Card/CardOrganizationStructure/CardOrganizationStructure';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
@@ -84,6 +85,7 @@ export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCatego
 export * from './Section/SectionSelectKonstituenType/SectionSelectKonstituenType';
 export * from './Section/SectionShortcutProgram/SectionShortcutProgram';
 export * from './Section/SectionSelectProductCategory/SectionSelectProductCategory';
+export * from './Section/SectionSelectCategoryActivity/SectionSelectCategoryActivity';
 
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePenerima/TablePenerima';

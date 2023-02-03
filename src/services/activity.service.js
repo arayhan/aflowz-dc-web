@@ -13,6 +13,15 @@ export const getActivityItem = async (activityID) => {
 	}
 };
 
+export const getActivityCategory = async () => {
+	try {
+		const response = await http.get(`/activity/category`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getActivityList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);

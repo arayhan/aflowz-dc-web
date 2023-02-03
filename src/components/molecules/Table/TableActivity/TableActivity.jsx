@@ -61,7 +61,7 @@ export const TableActivity = ({
 				minWidth: 225,
 				hidden: displayedColumns && !displayedColumns.includes('Tempat Kegiatan'),
 				Cell: (row) => {
-					return row.row.original.pic_staff_id?.id ? (
+					return row.row.original.activity?.id ? (
 						<Button
 							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
 							linkTo={`/activity/${row.row.original.activity?.id}`}
@@ -70,6 +70,15 @@ export const TableActivity = ({
 					) : (
 						'-'
 					);
+				}
+			},
+			{
+				Header: 'Status',
+				width: '100%',
+				minWidth: 175,
+				hidden: displayedColumns && !displayedColumns.includes('Status'),
+				Cell: (row) => {
+					return row.row.original.status ? <div className="capitalize">{row.row.original.status}</div> : '-';
 				}
 			},
 			{
@@ -153,7 +162,7 @@ export const TableActivity = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Kegiatan"
 					featurePath="/activity"
@@ -168,7 +177,7 @@ export const TableActivity = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}
