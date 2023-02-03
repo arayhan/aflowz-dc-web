@@ -14,7 +14,7 @@ export const SectionSelectCategoryActivity = ({ selectedCategoryID }) => {
 	};
 
 	const handleSelectCategoryID = (categoryID) => {
-		handleSetFilter('category_id', selectedCategoryID !== `${categoryID}` ? { category_id: category } : null);
+		handleSetFilter('category_id', selectedCategoryID !== `${categoryID}` ? { category_id: categoryID } : null);
 	};
 
 	useEffect(() => {

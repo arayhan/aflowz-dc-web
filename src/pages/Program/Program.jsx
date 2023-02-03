@@ -1,4 +1,9 @@
-import { BannerFeature, SectionShortcutProgram, TableProgram } from '@/components/molecules';
+import {
+	BannerFeature,
+	SectionSelectProgramCategory,
+	SectionShortcutProgram,
+	TableProgram
+} from '@/components/molecules';
 import { queryStringToObject } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -15,10 +20,13 @@ const Program = () => {
 		<div>
 			<BannerFeature title="Program" />
 			<div className="bg-gray-100">
-				<SectionShortcutProgram params={params} selectedShortcut={params.keyword} />
-				<div className="py-6 container">
-					<TableProgram params={params} />
-				</div>
+				<SectionShortcutProgram selectedShortcut={params.keyword} />
+				<SectionSelectProgramCategory selectedCategoryID={params.category_id} />
+				{params.category_id && (
+					<div className="container py-6">
+						<TableProgram params={params} />
+					</div>
+				)}
 			</div>
 		</div>
 	);
