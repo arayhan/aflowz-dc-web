@@ -23,7 +23,7 @@ export const SectionSelectFeatures = () => {
 							<div>MITRA</div>
 						</div>
 						<hr />
-						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+						<div className="flex flex-wrap justify-center w-full gap-3 px-4 py-8 max-w-screen-2xl md:gap-5">
 							{MITRA_MENUS.map((menu) => {
 								return (
 									<Link
@@ -45,7 +45,7 @@ export const SectionSelectFeatures = () => {
 							<div>KANTOR</div>
 						</div>
 						<hr />
-						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+						<div className="flex flex-wrap justify-center w-full gap-3 px-4 py-8 max-w-screen-2xl md:gap-5">
 							{KANTOR_MENUS.map((menu) => {
 								return (
 									<Link
@@ -67,7 +67,7 @@ export const SectionSelectFeatures = () => {
 							<div>AKTIVITAS</div>
 						</div>
 						<hr />
-						<div className="flex flex-wrap justify-center w-full gap-3 p-4 max-w-screen-2xl md:gap-5">
+						<div className="flex flex-wrap justify-center w-full gap-3 px-4 py-8 max-w-screen-2xl md:gap-5">
 							{AKTIVITAS_MENUS.map((menu) => {
 								return (
 									<Link
