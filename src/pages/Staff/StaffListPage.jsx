@@ -7,7 +7,7 @@ const StaffListPage = () => {
 		<div>
 			<BannerFeature title="List Tim Internal" />
 			<div className="bg-gray-100">
-				<div className="container py-6 space-y-4">
+				<div className="container flex flex-col items-center gap-6 py-6">
 					<CardOrganizationStructure type={ORGANIZATION_TYPE.TIM_INTERNAL} />
 					<TableStaff />
 				</div>

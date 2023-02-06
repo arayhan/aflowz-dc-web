@@ -1,7 +1,9 @@
+import { ButtonAction } from '@/components/atoms';
 import { useAuthStore } from '@/store';
+import { ACTION_TYPES } from '@/utils/constants';
 import { useState } from 'react';
 import { FiUsers } from 'react-icons/fi';
-import { ModalUploadSheetPenerima } from '../../Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
+import { ModalUploadImage } from '../../Modal/ModalUploadImage/ModalUploadImage';
 
 export const CardOrganizationStructure = ({ title, description, type }) => {
 	const { isAdmin } = useAuthStore();
@@ -9,9 +11,9 @@ export const CardOrganizationStructure = ({ title, description, type }) => {
 	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
 
 	return (
-		<div className="bg-white rounded-md shadow-md">
+		<div className="max-w-screen-lg bg-white rounded-md shadow-md">
 			{showModalUploadOrganizationStructure && (
-				<ModalUploadSheetPenerima onClose={() => setShowModalUploadOrganizationStructure(false)} />
+				<ModalUploadImage onClose={() => setShowModalUploadOrganizationStructure(false)} />
 			)}
 			<div className="flex flex-col items-start justify-between w-full gap-4 px-6 py-4 lg:flex-row lg:items-center">
 				<div className="w-full xl:w-1/3">
@@ -35,7 +37,24 @@ export const CardOrganizationStructure = ({ title, description, type }) => {
 
 			<hr />
 
-			<div className="px-6 py-4">test</div>
+			<div className="px-6 py-4 space-y-4">
+				<div>
+					<img
+						className="rounded-md"
+						src="https://slidemodel.com/wp-content/uploads/01-organizational-structures-charts-cover-1.png"
+						alt=""
+					/>
+				</div>
+				<div className="flex flex-col text-sm">
+					<div className="grid items-center w-full grid-cols-3 hover:md:bg-gray-50">
+						<div className="font-semibold sm:border-r sm:px-3 sm:py-1">PIC</div>
+						<div className="flex items-center col-span-2 gap-4 sm:py-3 sm:px-6">
+							<div>John Doe</div>
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/staff/1`} />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

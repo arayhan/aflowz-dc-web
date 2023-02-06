@@ -105,7 +105,7 @@ export const TableStaff = () => {
 	}, [staffList, pageCount]);
 
 	return (
-		<div className="bg-white rounded-md shadow-md">
+		<div className="w-full bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
 					title="Daftar Tim Internal"

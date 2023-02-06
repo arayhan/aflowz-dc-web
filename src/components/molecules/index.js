@@ -75,6 +75,7 @@ export * from './InputSelect/InputSelectProductMovement/InputSelectProductMoveme
 export * from './InputSelect/InputSelectActivityPromise/InputSelectActivityPromise';
 export * from './InputSelect/InputSelectActivityDetail/InputSelectActivityDetail';
 
+export * from './Modal/ModalUploadImage/ModalUploadImage';
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
