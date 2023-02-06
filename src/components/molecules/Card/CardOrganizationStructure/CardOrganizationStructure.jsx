@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { FiUsers } from 'react-icons/fi';
 import { ModalUploadImage } from '../../Modal/ModalUploadImage/ModalUploadImage';
 
-export const CardOrganizationStructure = ({ title, description, type }) => {
+export const CardOrganizationStructure = ({ title, description, type, handleDelete }) => {
 	const { isAdmin } = useAuthStore();
 
 	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
@@ -48,9 +48,13 @@ export const CardOrganizationStructure = ({ title, description, type }) => {
 				<div className="flex flex-col text-sm">
 					<div className="grid items-center w-full grid-cols-3 hover:md:bg-gray-50">
 						<div className="font-semibold sm:border-r sm:px-3 sm:py-1">PIC</div>
-						<div className="flex items-center col-span-2 gap-4 sm:py-3 sm:px-6">
+						<div className="flex items-center justify-between col-span-2 gap-4 sm:py-3 sm:px-6">
 							<div>John Doe</div>
-							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/staff/1`} />
+							<div className="flex gap-2">
+								<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/staff/1`} />
+								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/staff/update/1`} />
+								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => handleDelete(row.row.original.id)} />
+							</div>
 						</div>
 					</div>
 				</div>
