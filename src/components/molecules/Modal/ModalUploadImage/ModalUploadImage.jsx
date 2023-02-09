@@ -1,17 +1,10 @@
 import { Modal } from '@/components/atoms';
 import { useState } from 'react';
-import { SiImagej } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import { usePartnerStore } from '@/store';
-import { useNavigate } from 'react-router';
-import { objectToQueryString } from '@/utils/helpers';
 import { BiImage } from 'react-icons/bi';
 
-export const ModalUploadImage = ({ onClose }) => {
-	const navigate = useNavigate();
-	const { processingBulkCreatePartner, bulkCreatePartner } = usePartnerStore();
-
+export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 	const ALLOWED_IMAGE_EXTENSIONS = ['.jpeg', '.jpg', '.png', '.gif', '.bmp', '.tiff', '.svg'];
 	const MAXIMUM_FILE_SIZE = {
 		text: '10MB',
@@ -22,9 +15,7 @@ export const ModalUploadImage = ({ onClose }) => {
 	const [file, setFile] = useState(null);
 
 	const handleUpload = () => {
-		if (file) {
-			console.log({ file });
-		}
+		if (file) onSubmit(file);
 	};
 
 	const handleChangeFile = (event) => {
@@ -67,7 +58,7 @@ export const ModalUploadImage = ({ onClose }) => {
 			title={`Upload Struktur Organisasi`}
 			description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
 			submitButtonText={'Upload'}
-			isLoading={processingBulkCreatePartner}
+			isLoading={isLoading}
 			onSubmit={handleUpload}
 			onClose={handleClose}
 		>
@@ -97,26 +88,28 @@ export const ModalUploadImage = ({ onClose }) => {
 				)}
 
 				{file && (
-					<div className="flex flex-col items-center justify-center space-y-6">
-						<div className="overflow-y-scroll h-96">
+					<div className="flex flex-col items-center justify-center space-y-4">
+						<div className="overflow-y-scroll h-[350px]">
 							<img src={URL.createObjectURL(file)} alt="struktur organisasi" />
 						</div>
-						<div className="flex items-center justify-center space-x-2 text-gray-400">
-							<BiImage size={20} /> <span>{file.name}</span>
+						<div className="flex items-center gap-4">
+							<div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
+								<BiImage size={20} /> <span>{file.name}</span>
+							</div>
+							<label
+								htmlFor="updateImageFile"
+								className="px-5 py-2 text-sm text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400"
+							>
+								<div>Ubah File</div>
+								<input
+									type="file"
+									id="updateImageFile"
+									accept={ALLOWED_IMAGE_EXTENSIONS.join(', ')}
+									onChange={handleChangeFile}
+									className="hidden"
+								/>
+							</label>
 						</div>
-						<label
-							htmlFor="updateImageFile"
-							className="px-5 py-2 text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400"
-						>
-							<div>Ubah File</div>
-							<input
-								type="file"
-								id="updateImageFile"
-								accept={ALLOWED_IMAGE_EXTENSIONS.join(', ')}
-								onChange={handleChangeFile}
-								className="hidden"
-							/>
-						</label>
 					</div>
 				)}
 				{!file && (

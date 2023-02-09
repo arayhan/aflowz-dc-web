@@ -11,12 +11,15 @@ const states = (set, get) => ({
 	fetchingStaff: false,
 	fetchingStaffTitleList: false,
 	fetchingStaffList: false,
+	fetchingStaffOrganizationStructureImage: false,
 
 	processingSubmitPenerima: false,
 	processingDeletePenerima: false,
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
+	processingUploadStaffOrganizationStructureImage: false,
+	processingDeleteStaffOrganizationStructureImage: false,
 
 	penerimaItem: null,
 	penerimaList: null,
@@ -25,6 +28,7 @@ const states = (set, get) => ({
 	staffList: null,
 	staffTitleList: null,
 	penerimaAllCity: null,
+	staffOrganizationStructureImage: null,
 
 	// =================================
 	// PENERIMA
@@ -180,6 +184,38 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'Tim Internal deleted', payload?.odoo_error || payload?.message);
 		get().getStaffList();
 		set({ processingDeletePenerima: false });
+	},
+
+	getStaffOrganizationStructureImage: async (callback) => {
+		set({ fetchingStaffOrganizationStructureImage: true });
+
+		const { payload, success } = await SERVICE_PARTNER.getStaffOrganizationStructureImage();
+		set({ fetchingStaffOrganizationStructureImage: false });
+
+		if (callback) callback({ payload, success });
+	},
+
+	uploadStaffOrganizationStructureImage: async (params, callback) => {
+		set({ processingUploadStaffOrganizationStructureImage: true });
+
+		const loader = toast.loading('Uploading...');
+		const { payload, success } = await SERVICE_PARTNER.uploadStaffOrganizationStructureImage(params);
+
+		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+		set({ processingUploadStaffOrganizationStructureImage: false });
+
+		callback({ payload, success });
+	},
+
+	deleteStaffOrganizationStructureImage: async (staffID) => {
+		set({ processingDeleteStaffOrganizationStructureImage: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.deleteStaffOrganizationStructureImage(staffID);
+
+		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
+		get().getStaffOrganizationStructureImage();
+		set({ processingDeleteStaffOrganizationStructureImage: false });
 	}
 });
 

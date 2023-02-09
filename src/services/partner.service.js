@@ -164,6 +164,37 @@ export const updatePicture = async (partnerID, params) => {
 	}
 };
 
+export const getStaffOrganizationStructureImage = async () => {
+	try {
+		const response = await http.get('/user/upload/structure');
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteStaffOrganizationStructureImage = async () => {
+	try {
+		const response = await http.delete('/user/upload/structure');
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const uploadStaffOrganizationStructureImage = async (params) => {
+	const data = {
+		base64_datas: params.picture || ''
+	};
+
+	try {
+		const response = await http.post('/user/upload/structure', data);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getPartnerAllCity = async () => {
 	try {
 		const reqQueryParams = objectToQueryString({ province_id: 617 }); // kota bengkulu
