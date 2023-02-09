@@ -207,11 +207,11 @@ const states = (set, get) => ({
 		callback({ payload, success });
 	},
 
-	deleteStaffOrganizationStructureImage: async (staffID) => {
+	deleteStaffOrganizationStructureImage: async () => {
 		set({ processingDeleteStaffOrganizationStructureImage: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PARTNER.deleteStaffOrganizationStructureImage(staffID);
+		const { payload, success } = await SERVICE_PARTNER.deleteStaffOrganizationStructureImage();
 
 		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
 		get().getStaffOrganizationStructureImage();

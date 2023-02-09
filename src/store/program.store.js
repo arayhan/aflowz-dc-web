@@ -14,6 +14,7 @@ const states = (set, get) => ({
 	fetchingProgramCategory: false,
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
+	fetchingProgramCategoryOrganizationStructureImage: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
@@ -21,6 +22,8 @@ const states = (set, get) => ({
 	processingCreateProgramCategory: false,
 	processingUpdateProgramCategory: false,
 	processingDeleteProgramCategory: false,
+	processingUploadProgramCategoryOrganizationStructureImage: false,
+	processingDeleteProgramCategoryOrganizationStructureImage: false,
 
 	program: null,
 	programList: null,
@@ -30,6 +33,7 @@ const states = (set, get) => ({
 	programCategoryDetail: null,
 
 	programCategoryErrors: null,
+	programCategoryOrganizationStructureImage: false,
 
 	getProgram: async (programID) => {
 		set({ fetchingProgram: true });
@@ -161,6 +165,39 @@ const states = (set, get) => ({
 		set({ processingDeleteProgramCategory: false });
 		setPageLoading(false);
 	},
+
+	// getProgramCategoryOrganizationStructureImage: async (callback) => {
+	// 	set({ fetchingStaffOrganizationStructureImage: true });
+
+	// 	const { payload, success } = await SERVICE_PROGRAM.getStaffOrganizationStructureImage();
+	// 	set({ fetchingStaffOrganizationStructureImage: false });
+
+	// 	if (callback) callback({ payload, success });
+	// },
+
+	// uploadProgramCategoryOrganizationStructureImage: async (params, callback) => {
+	// 	set({ processingUploadStaffOrganizationStructureImage: true });
+
+	// 	const loader = toast.loading('Uploading...');
+	// 	const { payload, success } = await SERVICE_PROGRAM.uploadStaffOrganizationStructureImage(params);
+
+	// 	toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+	// 	set({ processingUploadStaffOrganizationStructureImage: false });
+
+	// 	callback({ payload, success });
+	// },
+
+	// deleteProgramCategoryOrganizationStructureImage: async () => {
+	// 	set({ processingDeleteStaffOrganizationStructureImage: true });
+
+	// 	const loader = toast.loading('Processing...');
+	// 	const { payload, success } = await SERVICE_PROGRAM.deleteStaffOrganizationStructureImage();
+
+	// 	toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
+	// 	get().getStaffOrganizationStructureImage();
+	// 	set({ processingDeleteStaffOrganizationStructureImage: false });
+	// },
+
 	clearStateProgramCategory: () => {
 		set({ programCategory: null });
 		set({ programCategoryErrors: null });
