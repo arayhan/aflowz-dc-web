@@ -96,32 +96,30 @@ const VillageDetail = () => {
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}
 									value={villageDetail?.total_penerima_multiple_program_village_per_orang || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_pip || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
+									linkTo={`/institusi?village_id=${villageID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={villageDetail?.total_penerima_program_village_pip || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
+									linkTo={`/penerima?village_id=${villageID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima KIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_kip || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
+									linkTo={`/institusi?village_id=${villageID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima KIP'}
 									value={villageDetail?.total_penerima_program_village_kip || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
+									linkTo={`/penerima?village_id=${villageID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
 									value={villageDetail?.total_potensi_pemilih_village_per_orang || 0}
-									linkTo={`/penerima?village_id=${villageID}`}
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">

@@ -87,7 +87,7 @@ const CityDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="grid items-center justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={cityDetail?.penerima_program_city?.length || 0}
@@ -96,32 +96,30 @@ const CityDetail = () => {
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}
 									value={cityDetail?.total_penerima_multiple_program_city_per_orang || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={cityDetail?.total_institusi_penerima_program_city_pip || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
+									linkTo={`/institusi?city_id=${cityID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={cityDetail?.total_penerima_program_city_pip || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
+									linkTo={`/penerima?city_id=${cityID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima KIP'}
 									value={cityDetail?.total_institusi_penerima_program_city_kip || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
+									linkTo={`/institusi?city_id=${cityID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Total Mahasiswa Penerima KIP'}
 									value={cityDetail?.total_penerima_program_city_kip || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
+									linkTo={`/penerima?city_id=${cityID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
 									value={cityDetail?.total_potensi_pemilih_city_per_orang || 0}
-									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 							</div>
 							<div className="grid items-start grid-cols-12 gap-4">

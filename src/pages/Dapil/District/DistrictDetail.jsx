@@ -101,32 +101,30 @@ const DistrictDetail = () => {
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}
 									value={districtDetail?.total_penerima_multiple_program_district_per_orang || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={districtDetail?.total_institusi_penerima_program_district_pip || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
+									linkTo={`/institusi?district_id=${districtID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={districtDetail?.total_penerima_program_district_pip || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
+									linkTo={`/penerima?district_id=${districtID}&program_name=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima KIP'}
 									value={districtDetail?.total_institusi_penerima_program_district_kip || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
+									linkTo={`/institusi?district_id=${districtID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima KIP'}
 									value={districtDetail?.total_penerima_program_district_kip || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
+									linkTo={`/penerima?district_id=${districtID}&program_name=kip`}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
 									value={districtDetail?.total_potensi_pemilih_district_per_orang || 0}
-									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 							</div>
 							<div className="grid grid-cols-12 gap-4">
