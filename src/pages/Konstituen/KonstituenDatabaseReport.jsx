@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { INSTITUSI_TYPES } from '@/utils/constants';
 import moment from 'moment';
 import { createArrayWithRange } from '@/utils/helpers';
+import { toast } from 'react-toastify';
 
 const KonstituenDatabaseReport = () => {
 	const { konstituenID } = useParams();
@@ -47,6 +48,8 @@ const KonstituenDatabaseReport = () => {
 			doc.addPage();
 			doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
 			doc.save('Institusi Database Report.pdf');
+		} else {
+			toast('Masukkan jumlah usulan terlebih dahulu', { type: 'warning' });
 		}
 	};
 
