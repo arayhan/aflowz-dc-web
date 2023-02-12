@@ -22,6 +22,15 @@ export const ACTION_TYPES = {
 	DELETE: 'delete'
 };
 
+export const INSTITUSI_TYPES = {
+	SEKOLAH: 'sekolah',
+	KAMPUS: 'kampus',
+	PAREKRAF: 'parekraf',
+	OLAHRAGASENI: 'olahragaseni',
+	KOKADES: 'kokades',
+	LAINNYA: 'lainnya'
+};
+
 export const NEGATIVE_CASE_TYPES = {
 	EMPTY_RESULT: 'EMPTY_RESULT',
 	EMPTY_SEARCH: 'EMPTY_SEARCH',

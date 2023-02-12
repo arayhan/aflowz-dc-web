@@ -74,3 +74,13 @@ export const convertFileToBase64 = (file) => {
 		};
 	});
 };
+
+export const createArrayWithRange = (min, max) => {
+	const rangeRec = (min, max, vals) => {
+		if (min > max) return vals;
+		vals.push(min);
+		return rangeRec(min + 1, max, vals);
+	};
+
+	return rangeRec(min, max, []);
+};
