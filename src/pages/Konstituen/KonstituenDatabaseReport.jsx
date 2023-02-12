@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/atoms';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
@@ -24,6 +24,8 @@ const KonstituenDatabaseReport = () => {
 		TOTAL_PENERIMA_PROGRAM_LAIN_YEAR_MAX
 	).reverse();
 
+	const [jumlahUsulan, setJumlahUsulan] = useState(false);
+
 	const handleGenerateImage = async (ref) => {
 		const style = document.createElement('style');
 		document.head.appendChild(style);
@@ -35,15 +37,17 @@ const KonstituenDatabaseReport = () => {
 	};
 
 	const handleExportToPDF = async () => {
-		const doc = new jsPDF({ orientation: 'portrait' });
+		if (jumlahUsulan) {
+			const doc = new jsPDF({ orientation: 'portrait' });
 
-		const imagePageOne = await handleGenerateImage(pageOneRef.current);
-		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
+			const imagePageOne = await handleGenerateImage(pageOneRef.current);
+			const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
 
-		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
-		doc.addPage();
-		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
-		doc.save('Institusi Database Report.pdf');
+			doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
+			doc.addPage();
+			doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
+			doc.save('Institusi Database Report.pdf');
+		}
 	};
 
 	useEffect(() => {
@@ -106,7 +110,16 @@ const KonstituenDatabaseReport = () => {
 												<span className="capitalize">{konstituenDetail?.alamat_konstituen || '-'}</span>
 											</div>
 											<div className="text-sm">
-												JUMLAH USULAN : <br />-
+												JUMLAH USULAN : <br />
+												<input
+													type="number"
+													className={`text-sm border ${
+														!jumlahUsulan ? 'border-red-500 border-2' : 'border-gray-400'
+													}  rounded-md`}
+													placeholder="Masukkan jumlah usulan"
+													onChange={(event) => setJumlahUsulan(event.target.value)}
+												/>
+												{!jumlahUsulan && <div className="mt-1 text-xs italic text-red-500">Wajib diisi</div>}
 											</div>
 										</div>
 									</div>
