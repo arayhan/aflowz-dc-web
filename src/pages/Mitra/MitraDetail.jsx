@@ -1,10 +1,17 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, ChartPeriodeProgram, ChartPenerimaProgram, TableProgram } from '@/components/molecules';
+import {
+	BannerFeature,
+	ChartPeriodeProgram,
+	ChartPenerimaProgram,
+	TableProgram,
+	CardStaffOrganizationStructure,
+	CardProgramCategoryOrganizationStructure
+} from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const MitraDetail = () => {
 	const { programCategoryID } = useParams();
@@ -23,20 +30,20 @@ const MitraDetail = () => {
 				loading={fetchingProgramCategoryDetail}
 			/>
 
-			<section className="bg-gray-100 py-12 md:py-20">
+			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
 					{fetchingProgramCategoryDetail && <MitraDetailSkeleton />}
 					{!fetchingProgramCategoryDetail && programCategoryDetail && (
 						<div className="space-y-4">
 							<div className="col-span-12 bg-white rounded-md">
-								<div className="p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+								<div className="flex flex-col items-start justify-between gap-4 p-4 md:flex-row md:items-center">
 									<div className="w-full space-y-2">
-										<div className="font-light text-xl">Details</div>
+										<div className="text-xl font-light">Details</div>
 										{/* <div className="text-sm text-gray-400">
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 										</div> */}
 									</div>
-									<div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+									<div className="flex flex-col items-center justify-end w-full gap-4 md:flex-row">
 										<ButtonAction
 											action={ACTION_TYPES.UPDATE}
 											linkTo={`/mitra/update/${programCategoryID}`}
@@ -47,20 +54,20 @@ const MitraDetail = () => {
 								</div>
 								<hr />
 								<div className="p-5">
-									<div className="grid grid-cols-12 gap-y-1 text-sm">
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Nama Mitra</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+									<div className="grid grid-cols-12 text-sm gap-y-1">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Mitra</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{programCategoryDetail?.mitra_name}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Kementerian</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Kementerian</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{programCategoryDetail?.mitra_pic}
 											{programCategoryDetail?.mitra_pic} {`(${programCategoryDetail?.mitra_pic_mobile})`}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">PIC Tim Internal</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Tim Internal</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!programCategoryDetail?.pic_staff.name && '-'}
 											{programCategoryDetail?.pic_staff.name && (
 												<ButtonAction
@@ -71,15 +78,15 @@ const MitraDetail = () => {
 											)}
 										</div>
 
-										<div className="col-span-4 lg:col-span-3 text-gray-500 bg-gray-100 px-3 py-2">Alamat Mitra</div>
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Alamat Mitra</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{programCategoryDetail?.mitra_address}
 										</div>
 									</div>
 								</div>
 							</div>
 							<div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
-								<div className="sm:col-start-2 md:col-start-3 bg-white rounded-md px-8 md:px-10 py-6 mb-2 shadow-lg">
+								<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg sm:col-start-2 md:col-start-3 md:px-10">
 									<div className="flex flex-col items-center justify-center space-y-1 text-center">
 										<span className="text-2xl md:text-4xl font-extralight">
 											{programCategoryDetail?.total_penerima_program_mitra || 0}
@@ -88,8 +95,11 @@ const MitraDetail = () => {
 									</div>
 								</div>
 							</div>
+
+							<CardProgramCategoryOrganizationStructure />
+
 							<div className="grid grid-cols-12 gap-4">
-								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
@@ -98,7 +108,7 @@ const MitraDetail = () => {
 										<ChartPenerimaProgram data={programCategoryDetail?.penerima_program} />
 									</Card>
 								</div>
-								<div className="col-span-12 sm:col-span-6 bg-white rounded-md">
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Periode Program'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
@@ -130,17 +140,17 @@ const MitraDetail = () => {
 const MitraDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
-			<div key={item} className="col-span-12 md:col-span-4 bg-white p-4 rounded-md">
-				<div className="space-y-3 flex flex-col">
+			<div key={item} className="col-span-12 p-4 bg-white rounded-md md:col-span-4">
+				<div className="flex flex-col space-y-3">
 					<Skeleton width={200} height={20} />
 					<hr />
 					<div className="flex items-center justify-center">
-						<Skeleton className="w-48 h-48 md:w-52 md:h-52 rounded-full" />
+						<Skeleton className="w-48 h-48 rounded-full md:w-52 md:h-52" />
 					</div>
 				</div>
 			</div>
 		))}
-		<div className="col-span-12 bg-white p-5 md:p-8 rounded-md">
+		<div className="col-span-12 p-5 bg-white rounded-md md:p-8">
 			<div className="grid grid-cols-12 gap-x-4 gap-y-2">
 				<Skeleton inline containerClassName="col-span-4 md:col-span-3 lg:col-span-2" />
 				<Skeleton inline containerClassName="col-span-8 md:col-span-9 lg:col-span-10" />

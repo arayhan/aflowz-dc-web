@@ -147,3 +147,55 @@ export const deleteProgramCategory = async (programCategoryID) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getProgramCategoryOrganizationStructure = async (programCategoryID) => {
+	try {
+		const response = await http.get('/program/organization/' + programCategoryID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const createProgramCategoryOrganizationStructure = async (programCategoryID, params) => {
+	const data = {
+		program_id: params?.program_id,
+		partner_id: params?.partner_id,
+		position_id: params?.position_id,
+		city_id: params?.city_id,
+		konstituen_id: params?.konstituen_id
+	};
+
+	try {
+		const response = await http.post('/program/organization', data);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const updateProgramCategoryOrganizationStructure = async (programCategoryID, params) => {
+	const data = {
+		program_id: params?.program_id,
+		partner_id: params?.partner_id,
+		position_id: params?.position_id,
+		city_id: params?.city_id,
+		konstituen_id: params?.konstituen_id
+	};
+
+	try {
+		const response = await http.put('/program/organization/' + programCategoryID, data);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteProgramCategoryOrganizationStructure = async (programCategoryID) => {
+	try {
+		const response = await http.delete('/program/organization/' + programCategoryID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};

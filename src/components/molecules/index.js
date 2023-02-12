@@ -13,6 +13,7 @@ export * from './Carousel/NewCarousel';
 
 export * from './Card/CardDetailTotal/CardDetailTotal';
 export * from './Card/CardStaffOrganizationStructure/CardStaffOrganizationStructure';
+export * from './Card/CardProgramCategoryOrganizationStructure/CardProgramCategoryOrganizationStructure';
 export * from './Card/CardPenerimaProgramByGender/CardPenerimaProgramByGender';
 
 export * from './Chart/ChartPenerimaProgram/ChartPenerimaProgram';
