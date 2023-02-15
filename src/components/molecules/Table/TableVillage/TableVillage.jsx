@@ -120,7 +120,7 @@ export const TableVillage = ({
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/village' + updatedParams, { replace: true });
+		else navigate('/dapil/village' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
@@ -148,7 +148,7 @@ export const TableVillage = ({
 					feature="Desa"
 					title={title || 'List Desa'}
 					featurePath="/dapil/village"
-					seeAllLink={'/village' + objectToQueryString(params)}
+					seeAllLink={'/dapil/village' + objectToQueryString(params)}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonSeeAll={isShowButtonSeeAll}

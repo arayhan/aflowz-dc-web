@@ -1,4 +1,4 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
@@ -8,23 +8,24 @@ import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCi
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
-import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
 
 export const TablePenerima = ({
 	title,
 	displayedColumns,
+	displayedFilters,
 	params,
+	setParams,
 	isReadonly,
-	isShowFilter,
 	isShowFooter,
 	isShowButtonSeeAll,
+	onClickRow,
+	isShowFilter,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
-	const location = useLocation();
-
 	const { isSystem } = useAuthStore();
 	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
+	const location = useLocation();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -131,39 +132,34 @@ export const TablePenerima = ({
 		[offset, perPage, page, isSystem]
 	);
 
-	const handleClickRow = (rowData) => navigate(`/penerima/${rowData.id}`);
+	const handleClickRow = (rowData) => {
+		if (onClickRow) onClickRow(rowData);
+		else navigate(`/penerima/${rowData.id}`);
+	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		navigate('/penerima' + updatedParams, { replace: true });
-	};
-
-	const [searchPenerima, setSearchPenerima] = useState('');
-
-	const handleSearch = (inputSearch) => {
-		const search = `?keyword=${inputSearch}`;
-		navigate(location.pathname + search);
+		if (setParams) setParams(queryStringToObject(updatedParams));
+		else navigate('/penerima' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
-
-		if (location.search) Object.assign(defaultParams, queryStringToObject(location.search));
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
+			setOffset(Math.abs(offsetResult));
 			getPenerimaList({ ...defaultParams, ...params });
 		}
-	}, [params, page, perPage, pageCount, location]);
+	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (penerimaList) {
 			setData(penerimaList.items);
 			setPageCount(Math.ceil(penerimaList.total / perPage));
 		}
-	}, [penerimaList, pageCount]);
+	}, [penerimaList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -179,7 +175,6 @@ export const TablePenerima = ({
 					seeAllLink={'/penerima' + objectToQueryString(params)}
 					showCounter={true}
 					description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
-					// listPenerima={penerimaList?.items.map((val) => val.name)}
 				/>
 			</div>
 
@@ -188,46 +183,53 @@ export const TablePenerima = ({
 					<hr />
 
 					<div className="px-6 py-3">
-						<div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:flex justify-end text-sm gap-4 items-center">
-							<SearchOnTable
-								onChange={(e) => setSearchPenerima(e.target.value)}
-								placeholder={
-									queryStringToObject(location.search).keyword !== '' && location.search !== ''
-										? queryStringToObject(location.search).keyword
-										: 'Cari Penerima'
-								}
-								value={searchPenerima}
-								search={() => handleSearch(searchPenerima)}
-								clear={() => {
-									setSearchPenerima('');
-									navigate(location.pathname);
-								}}
-							/>
-							<InputSelectProgram
-								containerClassName="w-full lg:w-60"
-								value={params.program_id ? Number(params.program_id) : undefined}
-								showLabel={false}
-								showPeriodeOnLabel
-								onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
-							/>
-							<InputSelectInstitusi
-								containerClassName="w-full lg:w-60"
-								value={params.konstituen_id ? Number(params.konstituen_id) : undefined}
-								showLabel={false}
-								onChange={(option) => handleSetFilter('konstituen_id', option ? { konstituen_id: option.value } : null)}
-							/>
-							<InputSelectCity
-								containerClassName="w-full lg:w-60"
-								value={params.city_id ? Number(params.city_id) : undefined}
-								showLabel={false}
-								onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
-							/>
-							<InputSelectVillage
-								containerClassName="w-full lg:w-60"
-								value={params.village_id ? Number(params.village_id) : undefined}
-								showLabel={false}
-								onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
-							/>
+						<div className="grid items-center justify-end w-full grid-cols-1 gap-4 text-sm sm:grid-cols-2 lg:flex">
+							{(!displayedFilters || displayedFilters.includes('keyword')) && (
+								<InputText
+									value={params?.keyword || ''}
+									showLabel={false}
+									placeholder="Cari penerima"
+									onChange={(event) => {
+										handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+									}}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('program_id')) && (
+								<InputSelectProgram
+									containerClassName="w-full lg:w-60"
+									value={params.program_id ? Number(params.program_id) : undefined}
+									showLabel={false}
+									showPeriodeOnLabel
+									onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
+								/>
+							)}
+
+							{(!displayedFilters || displayedFilters.includes('konstituen_id')) && (
+								<InputSelectInstitusi
+									containerClassName="w-full lg:w-60"
+									value={params.konstituen_id ? Number(params.konstituen_id) : undefined}
+									showLabel={false}
+									onChange={(option) =>
+										handleSetFilter('konstituen_id', option ? { konstituen_id: option.value } : null)
+									}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('city_id')) && (
+								<InputSelectCity
+									containerClassName="w-full lg:w-60"
+									value={params.city_id ? Number(params.city_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('village_id')) && (
+								<InputSelectVillage
+									containerClassName="w-full lg:w-60"
+									value={params.village_id ? Number(params.village_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
+								/>
+							)}
 						</div>
 					</div>
 				</>

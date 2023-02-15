@@ -46,19 +46,19 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 			{
 				Header: 'Nama Penerima',
 				minWidth: 100,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.name}</div>
 			},
 			{
 				Header: 'NIK',
 				minWidth: 50,
 				maxWidth: 50,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.nik_number}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.nik_number}</div>
 			},
 			{
 				Header: 'Alamat',
 				minWidth: 300,
 				maxWidth: 300,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.address}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.address}</div>
 			},
 			{
 				Header: 'Program',
@@ -103,10 +103,13 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 	return (
 		<div>
 			<div className="p-4 space-y-2">
-				<div className="flex justify-between">
-					<div className="font-light text-xl">Tabel Penerima</div>
+				<div className="flex items-center justify-between">
+					<div className="text-xl font-light">Tabel Penerima</div>
 					{isInDetail && (
-						<Link to={`/institusi/penerima/${konstituenID}`} className="text-primary underline hover:text-primary-400">
+						<Link
+							to={`/institusi/penerima/${konstituenID}`}
+							className="flex items-center justify-center w-auto px-5 py-3 space-x-2 text-sm text-center text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600"
+						>
 							Lihat Semua
 						</Link>
 					)}
