@@ -1,6 +1,6 @@
-import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, InputCheckbox, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
-import { ACTION_TYPES } from '@/utils/constants';
+import { ACTION_TYPES, INSTITUSI_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +20,8 @@ export const TablePenerima = ({
 	isShowButtonSeeAll,
 	onClickRow,
 	isShowFilter,
-	enableClickRow
+	enableClickRow,
+	konstituenType
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
@@ -228,6 +229,29 @@ export const TablePenerima = ({
 									value={params.village_id ? Number(params.village_id) : undefined}
 									showLabel={false}
 									onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
+								/>
+							)}
+							{konstituenType && konstituenType === INSTITUSI_TYPES.SEKOLAH && displayedFilters.includes('is_pip') && (
+								<InputCheckbox
+									label="PIP Only"
+									name="pip_only"
+									value={params.program !== undefined}
+									onChange={(event) => {
+										const checked = event.target.value === 'true';
+										handleSetFilter('program', checked ? null : { program: 'PIP' });
+									}}
+								/>
+							)}
+
+							{konstituenType && konstituenType === INSTITUSI_TYPES.KAMPUS && displayedFilters.includes('is_kip') && (
+								<InputCheckbox
+									label="KIP Only"
+									name="kip_only"
+									value={params.program !== undefined}
+									onChange={(event) => {
+										const checked = event.target.value === 'true';
+										handleSetFilter('program', checked ? null : { program: 'KIP' });
+									}}
 								/>
 							)}
 						</div>

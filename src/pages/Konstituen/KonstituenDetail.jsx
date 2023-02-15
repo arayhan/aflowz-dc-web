@@ -1,26 +1,28 @@
 import { Link, useParams } from 'react-router-dom';
-import { useAuthStore, useKonstituenStore, usePartnerStore } from '@/store';
+import { useKonstituenStore } from '@/store';
 import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
 	PieChartPenerimaKonstituenByGender,
-	TablePenerimaKonstituenDetail
+	TablePenerima
 } from '@/components/molecules';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 
 const KonstituenDetail = () => {
-	const { isAdmin, isSystem } = useAuthStore();
 	const params = useParams();
 	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
-	const { getPenerimaList } = usePartnerStore();
+
+	const konstituenID = params.konstituenID;
+
+	const [tablePenerima] = useState({ konstituen_id: konstituenID, is_receiver: true });
+	const [searchPenerima, setSearchPenerima] = useState({});
 
 	useEffect(() => {
-		getKonstituenDetail(params.konstituenID);
-		getPenerimaList({ konstituen_id: params.konstituenID, is_receiver: true });
-	}, [params]);
+		getKonstituenDetail(konstituenID);
+	}, [konstituenID]);
 
 	return (
 		<div>
@@ -39,22 +41,20 @@ const KonstituenDetail = () => {
 										<div className="p-4">
 											<div className="text-xl font-light">Details</div>
 										</div>
-										{(isAdmin || isSystem) && (
-											<div className="flex justify-start h-full gap-4 p-4 sm:justify-end">
-												<Button
-													className="px-6 text-xs rounded-sm"
-													variant={'primary'}
-													linkTo={`/institusi/${konstituenDetail?.konstituen_id}/report`}
-												>
-													Preview Report
-												</Button>
-												<ButtonAction
-													action={ACTION_TYPES.UPDATE}
-													linkTo={`/institusi/update/${konstituenDetail?.konstituen_id}`}
-													className={'px-7 py-3'}
-												/>
-											</div>
-										)}
+										<div className="flex justify-start h-full gap-4 p-4 sm:justify-end">
+											<Button
+												className="px-6 text-xs rounded-sm"
+												variant={'primary'}
+												linkTo={`/institusi/${konstituenDetail?.konstituen_id}/report`}
+											>
+												Preview Report
+											</Button>
+											<ButtonAction
+												action={ACTION_TYPES.UPDATE}
+												linkTo={`/institusi/update/${konstituenDetail?.konstituen_id}`}
+												className={'px-7 py-3'}
+											/>
+										</div>
 									</div>
 									<hr />
 									<div className="p-5 my-2 rounded-md">
@@ -128,8 +128,17 @@ const KonstituenDetail = () => {
 												totalWanita={konstituenDetail?.total_wanita || 0}
 											/>
 										</div>
-										<div className="col-span-12 bg-white rounded-md shadow-lg">
-											<TablePenerimaKonstituenDetail konstituenID={konstituenDetail?.konstituen_id} isInDetail />
+										<div className="col-span-12">
+											<TablePenerima
+												title="Penerima Program"
+												konstituenType={konstituenDetail?.konstituen_type}
+												params={searchPenerima ? { ...searchPenerima, ...tablePenerima } : { ...tablePenerima }}
+												setParams={setSearchPenerima}
+												isReadonly
+												enableClickRow
+												displayedFilters={['keyword', 'is_kip']}
+												displayedColumns={['#', 'NIK', 'Nama Penerima', 'Program', 'Alamat', 'Detail']}
+											/>
 										</div>
 									</div>
 								</div>

@@ -4,7 +4,7 @@ import { InputLabel } from '../InputLabel/InputLabel';
 
 export const InputCheckbox = forwardRef(({ label, placeholder, error, ...props }, ref) => {
 	return (
-		<div className="space-x-2 flex items-center justify-start">
+		<div className="flex items-center justify-start space-x-2">
 			<input
 				{...props}
 				type="checkbox"
