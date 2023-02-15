@@ -2,6 +2,7 @@ import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
+	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
 	TableDetailTotalPenerimaByProgram,
 	TablePenerima
@@ -87,7 +88,7 @@ const VillageDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="grid items-center justify-center grid-cols-4 gap-4">
+							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={villageDetail?.penerima_program_village?.length || 0}
@@ -125,31 +126,35 @@ const VillageDetail = () => {
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Program by Periode per Orang'}
+										title={'Jumlah Penerima Program By Gender'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_orang} />
+										<ChartPenerimaProgramByGender
+											totalPria={villageDetail?.total_penerima_program_village_per_orang_pria}
+											totalWanita={villageDetail?.total_penerima_program_village_per_orang_wanita}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Program by Periode per Program'}
+										title={'Jumlah Potensi Pemilih By Gender'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgramByGender
+											totalPria={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_pria}
+											totalWanita={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_wanita}
+										/>
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
+									<Card
+										title={'Jumlah Penerima Program per Periode'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_program} />
-									</Card>
-								</div>
-								<div className="col-span-12">
-									<Card
-										title={`Penerima Program di ${villageDetail.village_name}`}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
-										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailTotalPenerimaByProgram dataPenerima={villageDetail?.penerima_program_village} />
-										</div>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
