@@ -86,6 +86,7 @@ export * from './Section/SectionSelectProgram/SectionSelectProgram';
 export * from './Section/SectionSelectProgramCategory/SectionSelectProgramCategory';
 export * from './Section/SectionSelectKonstituenType/SectionSelectKonstituenType';
 export * from './Section/SectionShortcutProgram/SectionShortcutProgram';
+export * from './Section/SectionShortcutStaffTitle/SectionShortcutStaffTitle';
 export * from './Section/SectionSelectProductCategory/SectionSelectProductCategory';
 export * from './Section/SectionSelectCategoryActivity/SectionSelectCategoryActivity';
 

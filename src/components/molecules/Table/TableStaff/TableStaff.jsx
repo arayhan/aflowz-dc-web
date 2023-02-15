@@ -3,7 +3,7 @@ import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
 
-export const TableStaff = () => {
+export const TableStaff = ({ params }) => {
 	const { isSystem, isAdmin } = useAuthStore();
 	const { fetchingStaffList, staffList, getStaffList, deleteStaff } = usePartnerStore();
 
@@ -89,13 +89,13 @@ export const TableStaff = () => {
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
-			getStaffList(params);
+			getStaffList({ ...defaultParams, ...params });
 		}
-	}, [page, perPage, pageCount]);
+	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (staffList) {
