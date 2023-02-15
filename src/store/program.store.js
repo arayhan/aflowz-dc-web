@@ -14,6 +14,7 @@ const states = (set, get) => ({
 	fetchingProgramCategory: false,
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
+	fetchingProgramCategoryTimeline: false,
 	fetchingProgramCategoryOrganizationStructure: false,
 
 	processingCreateProgram: false,
@@ -22,6 +23,9 @@ const states = (set, get) => ({
 	processingCreateProgramCategory: false,
 	processingUpdateProgramCategory: false,
 	processingDeleteProgramCategory: false,
+	processingCreateProgramCategoryTimeline: false,
+	processingUpdateProgramCategoryTimeline: false,
+	processingDeleteProgramCategoryTimeline: false,
 	processingCreateProgramCategoryOrganizationStructure: false,
 	processingUpdateProgramCategoryOrganizationStructure: false,
 	processingDeleteProgramCategoryOrganizationStructure: false,
@@ -32,9 +36,11 @@ const states = (set, get) => ({
 	programCategory: null,
 	programCategoryList: null,
 	programCategoryDetail: null,
+	programCategoryTimeline: null,
+	programCategoryOrganizationStructure: false,
 
 	programCategoryErrors: null,
-	programCategoryOrganizationStructure: false,
+	programCategoryTimelineErrors: null,
 
 	getProgram: async (programID) => {
 		set({ fetchingProgram: true });
@@ -211,9 +217,63 @@ const states = (set, get) => ({
 		set({ processingDeleteStaffOrganizationStructure: false });
 	},
 
+	getProgramCategoryTimeline: async (programCategoryID) => {
+		set({ fetchingProgramCategory: true });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryTimeline(programCategoryTimelineID);
+
+		if (!success) set({ programCategoryTimelineErrors: payload });
+
+		set({ programCategoryTimeline: success ? payload : null });
+		set({ fetchingProgramCategoryTimeline: false });
+	},
+	createProgramCategoryTimeline: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProgramCategoryTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.createProgramCategoryTimeline(params);
+
+		toastRequestResult(loader, success, 'Mitra created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProgramCategoryTimeline: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	updateProgramCategoryTimeline: async (programCategoryTimelineID, params, callback) => {
+		setPageLoading(true);
+		set({ processingUpdateProgramCategoryTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.updateProgramCategoryTimeline(programCategoryTimelineID, params);
+
+		toastRequestResult(loader, success, 'Mitra updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateProgramCategoryTimeline: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	deleteProgramCategoryTimeline: async (programCategoryTimelineID) => {
+		setPageLoading(true);
+		set({ processingDeleteProgramCategoryTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryTimeline(programCategoryTimelineID);
+
+		toastRequestResult(loader, success, 'Mitra deleted', payload?.odoo_error || payload?.message);
+		get().getProgramList();
+		set({ processingDeleteProgramCategoryTimeline: false });
+		setPageLoading(false);
+	},
+
 	clearStateProgramCategory: () => {
 		set({ programCategory: null });
 		set({ programCategoryErrors: null });
+	},
+
+	clearStateProgramCategoryTimeline: () => {
+		set({ programCategoryTimeline: null });
+		set({ programCategoryTimelineErrors: null });
 	}
 });
 

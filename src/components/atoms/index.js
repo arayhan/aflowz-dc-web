@@ -18,5 +18,6 @@ export * from './Tab/Tab';
 export * from './Table/Table';
 export * from './Table/TableFooter';
 export * from './Table/TableHeader';
+export * from './Timeline/Timeline';
 export * from './Toast/Toast';
 export * from './InputText/InputTextInfo';

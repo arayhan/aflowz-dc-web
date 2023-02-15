@@ -148,6 +148,54 @@ export const deleteProgramCategory = async (programCategoryID) => {
 	}
 };
 
+export const getProgramCategoryTimeline = async (programCategoryTimelineID) => {
+	try {
+		const response = await http.get('/program/plan/' + programCategoryTimelineID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const createProgramCategoryTimeline = async (params) => {
+	const request = {
+		name: params?.name || '',
+		date: params?.date || '',
+		program_category_id: params?.program_category_id || 0
+	};
+
+	try {
+		const response = await http.post('/program/plan', request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const updateProgramCategoryTimeline = async (programID, params) => {
+	const request = {
+		name: params?.name || '',
+		date: params?.date || '',
+		program_category_id: params?.program_category_id || 0
+	};
+
+	try {
+		const response = await http.put('/program/plan/' + programID, request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteProgramCategoryTimeline = async (programCategoryTimelineID) => {
+	try {
+		const response = await http.delete(`/program/plan/${programCategoryTimelineID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getProgramCategoryOrganizationStructure = async (programCategoryID) => {
 	try {
 		const response = await http.get('/program/organization/' + programCategoryID);

@@ -37,6 +37,12 @@ export const formMitraSchema = yup.object().shape(
 	['pic_mobile', 'pic_mobile']
 );
 
+export const formMitraTimelineSchema = yup.object().shape({
+	name: yup.string().required('Nama timeline wajib diisi'),
+	date: yup.string().required('Tanggal timeline wajib diisi'),
+	program_category_id: yup.number().required('PIC Tim Internal wajib diisi')
+});
+
 export const formCitySchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama program wajib diisi'),

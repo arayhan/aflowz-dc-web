@@ -53,6 +53,7 @@ import CityDatabaseReport from './pages/Dapil/City/CityDatabaseReport';
 import VillageDatabaseReport from './pages/Dapil/Village/VillageDatabaseReport';
 import DistrictDatabaseReport from './pages/Dapil/District/DistrictDatabaseReport';
 import KonstituenDatabaseReport from './pages/Konstituen/KonstituenDatabaseReport';
+import MitraDetailTimelineForm from './pages/Mitra/MitraDetailTimelineForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -74,6 +75,11 @@ export const AppRoutes = () => {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route
+						path="/mitra/:programCategoryID/timeline/update/:programCategoryTimelineID"
+						element={<MitraDetailTimelineForm />}
+					/>
+					<Route path="/mitra/:programCategoryID/timeline/create" element={<MitraDetailTimelineForm />} />
 					<Route path="/mitra/update/:programCategoryID" element={<MitraForm />} />
 					<Route path="/mitra/create" element={<MitraForm />} />
 					<Route path="/mitra/:programCategoryID" element={<MitraDetail />} />

@@ -1,4 +1,4 @@
-import { ButtonAction, Card } from '@/components/atoms';
+import { Button, ButtonAction, Card, Timeline } from '@/components/atoms';
 import {
 	BannerFeature,
 	ChartPeriodeProgram,
@@ -96,7 +96,27 @@ const MitraDetail = () => {
 								</div>
 							</div>
 
-							<CardProgramCategoryOrganizationStructure />
+							<div className="flex items-center justify-center">
+								<CardProgramCategoryOrganizationStructure />
+							</div>
+
+							<div className="bg-white rounded-md">
+								<Card
+									title="Timeline"
+									bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									rightComponent={
+										<Button
+											className={'w-full md:w-auto px-5 py-2 rounded-sm text-sm'}
+											variant="primary"
+											linkTo={`/mitra/${programCategoryID}/timeline/create`}
+										>
+											Create
+										</Button>
+									}
+								>
+									On Development
+								</Card>
+							</div>
 
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">

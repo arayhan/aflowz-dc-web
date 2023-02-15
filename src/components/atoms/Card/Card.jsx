@@ -11,18 +11,20 @@ export const Card = ({
 	isInDetail,
 	linkRoute,
 	isPrintCertif,
-	penerima
+	penerima,
+	rightComponent
 }) => {
 	return (
 		<div className={className}>
-			<div className="md:flex items-center justify-between p-4">
+			<div className="flex flex-col justify-between gap-3 p-4 md:items-center md:flex-row">
 				<div className="space-y-2">
-					{title && <div className="font-light text-xl">{title}</div>}
+					{title && <div className="text-xl font-light">{title}</div>}
 					{/* {description && <div className="text-sm text-gray-400">{description}</div>} */}
 				</div>
+				{rightComponent && <div className="flex items-center justify-center">{rightComponent}</div>}
 				{isInDetail && (
 					<>
-						<div className="flex justify-center items-center">
+						<div className="flex items-center justify-center">
 							{isPrintCertif && (
 								<div className="mx-2">
 									<ButtonPrintCertificate penerima={penerima} />
