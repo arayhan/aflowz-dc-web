@@ -2,6 +2,7 @@ import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
+	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
 	TableDetailTotalPenerimaByProgram,
 	TablePenerima,
@@ -92,7 +93,7 @@ const DistrictDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="grid items-center justify-center grid-cols-4 gap-4">
+							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
 									value={districtDetail?.penerima_program_district?.length || 0}
@@ -130,16 +131,31 @@ const DistrictDetail = () => {
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Program by Periode per Orang'}
+										title={'Jumlah Penerima Program By Gender'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={districtDetail?.total_penerima_program_district_by_periode_per_orang} />
+										<ChartPenerimaProgramByGender
+											totalPria={districtDetail?.total_penerima_program_district_per_orang_pria}
+											totalWanita={districtDetail?.total_penerima_program_district_per_orang_wanita}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Program by Periode per Program'}
+										title={'Jumlah Potensi Pemilih By Gender'}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<ChartPenerimaProgramByGender
+											totalPria={districtDetail?.total_potensi_pemilih_district_per_orang_penerima_pria}
+											totalWanita={districtDetail?.total_potensi_pemilih_district_per_orang_penerima_wanita}
+										/>
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
+									<Card
+										title={'Jumlah Penerima Program per Periode'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>

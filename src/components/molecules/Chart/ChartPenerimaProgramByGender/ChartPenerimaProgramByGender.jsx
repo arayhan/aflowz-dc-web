@@ -10,7 +10,20 @@ export const ChartPenerimaProgramByGender = ({ id, totalPria, totalWanita }) => 
 		<>
 			{totalPria === 0 && totalWanita === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
 			{(totalPria > 0 || totalWanita > 0) && (
-				<div id={id} className="flex justify-center">
+				<div id={id} className="flex flex-col items-center justify-center gap-3 text-center">
+					<div className="space-y-2">
+						<div className="p-2 text-sm bg-gray-100 rounded-md">
+							Total : <span className="font-semibold">{totalPria + totalWanita}</span>
+						</div>
+						<div className="flex items-center justify-center gap-2">
+							<div className="p-2 text-sm text-center bg-gray-100 rounded-md">
+								Total Pria : <span className="font-semibold">{totalPria}</span>
+							</div>
+							<div className="p-2 text-sm text-center bg-gray-100 rounded-md">
+								Total Wanita : <span className="font-semibold">{totalWanita}</span>
+							</div>
+						</div>
+					</div>
 					<Pie
 						data={{
 							labels: ['Pria', 'Wanita'],
