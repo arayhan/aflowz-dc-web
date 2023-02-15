@@ -136,7 +136,7 @@ const KonstituenDetail = () => {
 												setParams={setSearchPenerima}
 												isReadonly
 												enableClickRow
-												displayedFilters={['keyword', 'is_kip']}
+												displayedFilters={['keyword', 'is_kip', 'is_pip']}
 												displayedColumns={['#', 'NIK', 'Nama Penerima', 'Program', 'Alamat', 'Detail']}
 											/>
 										</div>
