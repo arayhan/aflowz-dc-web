@@ -16,7 +16,12 @@ import { useParams } from 'react-router-dom';
 
 const MitraDetail = () => {
 	const { programCategoryID } = useParams();
-	const { programCategoryDetail, fetchingProgramCategoryDetail, getProgramCategoryDetail } = useProgramStore();
+	const {
+		programCategoryDetail,
+		fetchingProgramCategoryDetail,
+		getProgramCategoryDetail,
+		deleteProgramCategoryTimeline
+	} = useProgramStore();
 
 	const [tableProgramParams] = useState({ program_category_id: programCategoryID });
 
@@ -140,7 +145,7 @@ const MitraDetail = () => {
 													<div className="p-4 mx-3 rounded-md shadow-md">
 														<div className="text-xs md:text-sm">{timeline.program_name}</div>
 													</div>
-													<div className="px-3">
+													<div className="flex items-center gap-2 px-3">
 														<Button
 															className={'w-full px-4 py-2 rounded-sm text-xs md:text-sm'}
 															variant="success"
@@ -148,6 +153,13 @@ const MitraDetail = () => {
 														>
 															Update
 														</Button>
+														<ButtonAction
+															action={ACTION_TYPES.DELETE}
+															className={'w-full px-4 py-2 rounded-sm text-xs md:text-sm'}
+															onClick={() => deleteProgramCategoryTimeline(timeline.id)}
+														>
+															Delete
+														</ButtonAction>
 													</div>
 												</div>
 											))}
