@@ -4,6 +4,7 @@ import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
 	PieChartPenerimaKonstituenByGender,
+	TableDetailStructureOrganization,
 	TableDetailTotalPenerimaByProgram,
 	TablePenerima
 } from '@/components/molecules';
@@ -132,6 +133,15 @@ const KonstituenDetail = () => {
 												totalPria={konstituenDetail?.total_pria || 0}
 												totalWanita={konstituenDetail?.total_wanita || 0}
 											/>
+										</div>
+										<div className="col-span-12">
+											<Card title={`Struktur Organisasi`} className={'bg-white rounded-md'}>
+												<div className="flex p-4 overflow-scroll max-h-96">
+													<TableDetailStructureOrganization
+														dataOrganization={konstituenDetail?.program_organizations}
+													/>
+												</div>
+											</Card>
 										</div>
 										{isSekolahOrKampus && (
 											<div className="col-span-12 md:col-span-6">
