@@ -102,10 +102,6 @@ const MitraDetail = () => {
 								</div>
 							</div>
 
-							<div className="flex items-center justify-center">
-								<CardProgramCategoryOrganizationStructure />
-							</div>
-
 							<div className="bg-white rounded-md">
 								<Card
 									title="Timeline"

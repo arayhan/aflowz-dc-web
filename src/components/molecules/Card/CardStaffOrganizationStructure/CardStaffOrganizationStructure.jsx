@@ -1,4 +1,4 @@
-import { CardOrganizationStructure } from '@/components/atoms';
+import { CardOrganizationStructureImage } from '@/components/atoms';
 import { usePartnerStore } from '@/store';
 import { useEffect, useState } from 'react';
 
@@ -23,7 +23,7 @@ export const CardStaffOrganizationStructure = () => {
 	}, []);
 
 	return (
-		<CardOrganizationStructure
+		<CardOrganizationStructureImage
 			image={staffOrganizationStructureImage}
 			showModal={showModalUploadOrganizationStructure}
 			setShowModal={setShowModalUploadOrganizationStructure}

@@ -15,7 +15,7 @@ const states = (set, get) => ({
 	fetchingProgramCategoryList: false,
 	fetchingProgramCategoryDetail: false,
 	fetchingProgramCategoryTimeline: false,
-	fetchingProgramCategoryOrganizationStructure: false,
+	fetchingProgramOrganizationStructure: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
@@ -26,9 +26,9 @@ const states = (set, get) => ({
 	processingCreateProgramCategoryTimeline: false,
 	processingUpdateProgramCategoryTimeline: false,
 	processingDeleteProgramCategoryTimeline: false,
-	processingCreateProgramCategoryOrganizationStructure: false,
-	processingUpdateProgramCategoryOrganizationStructure: false,
-	processingDeleteProgramCategoryOrganizationStructure: false,
+	processingCreateProgramOrganizationStructure: false,
+	processingUpdateProgramOrganizationStructure: false,
+	processingDeleteProgramOrganizationStructure: false,
 
 	program: null,
 	programList: null,
@@ -37,7 +37,7 @@ const states = (set, get) => ({
 	programCategoryList: null,
 	programCategoryDetail: null,
 	programCategoryTimeline: null,
-	programCategoryOrganizationStructure: false,
+	programOrganizationStructure: false,
 
 	programCategoryErrors: null,
 	programCategoryTimelineErrors: null,
@@ -173,49 +173,49 @@ const states = (set, get) => ({
 		setPageLoading(false);
 	},
 
-	getProgramCategoryOrganizationStructure: async (callback) => {
-		set({ fetchingStaffOrganizationStructure: true });
+	// getProgramOrganizationStructure: async (callback) => {
+	// 	set({ fetchingStaffOrganizationStructure: true });
 
-		const { payload, success } = await SERVICE_PROGRAM.getProgramCategoryOrganizationStructure();
-		set({ fetchingStaffOrganizationStructure: false });
+	// 	const { payload, success } = await SERVICE_PROGRAM.getProgramOrganizationStructure();
+	// 	set({ fetchingStaffOrganizationStructure: false });
 
-		if (callback) callback({ payload, success });
-	},
+	// 	if (callback) callback({ payload, success });
+	// },
 
-	createProgramCategoryOrganizationStructure: async (params, callback) => {
-		set({ processingUploadStaffOrganizationStructure: true });
+	// createProgramOrganizationStructure: async (params, callback) => {
+	// 	set({ processingUploadStaffOrganizationStructure: true });
 
-		const loader = toast.loading('Uploading...');
-		const { payload, success } = await SERVICE_PROGRAM.createProgramCategoryOrganizationStructure(params);
+	// 	const loader = toast.loading('Uploading...');
+	// 	const { payload, success } = await SERVICE_PROGRAM.createProgramOrganizationStructure(params);
 
-		toastRequestResult(loader, success, 'Organization Structure created', payload?.odoo_error || payload?.message);
-		set({ processingUploadStaffOrganizationStructure: false });
+	// 	toastRequestResult(loader, success, 'Organization Structure created', payload?.odoo_error || payload?.message);
+	// 	set({ processingUploadStaffOrganizationStructure: false });
 
-		callback({ payload, success });
-	},
+	// 	callback({ payload, success });
+	// },
 
-	updateProgramCategoryOrganizationStructure: async (params, callback) => {
-		set({ processingUploadStaffOrganizationStructure: true });
+	// updateProgramOrganizationStructure: async (params, callback) => {
+	// 	set({ processingUploadStaffOrganizationStructure: true });
 
-		const loader = toast.loading('Uploading...');
-		const { payload, success } = await SERVICE_PROGRAM.updateProgramCategoryOrganizationStructure(params);
+	// 	const loader = toast.loading('Uploading...');
+	// 	const { payload, success } = await SERVICE_PROGRAM.updateProgramOrganizationStructure(params);
 
-		toastRequestResult(loader, success, 'Organization Structure updated', payload?.odoo_error || payload?.message);
-		set({ processingUploadStaffOrganizationStructure: false });
+	// 	toastRequestResult(loader, success, 'Organization Structure updated', payload?.odoo_error || payload?.message);
+	// 	set({ processingUploadStaffOrganizationStructure: false });
 
-		callback({ payload, success });
-	},
+	// 	callback({ payload, success });
+	// },
 
-	deleteProgramCategoryOrganizationStructure: async () => {
-		set({ processingDeleteStaffOrganizationStructure: true });
+	// deleteProgramOrganizationStructure: async () => {
+	// 	set({ processingDeleteStaffOrganizationStructure: true });
 
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryOrganizationStructure();
+	// 	const loader = toast.loading('Processing...');
+	// 	const { payload, success } = await SERVICE_PROGRAM.deleteProgramOrganizationStructure();
 
-		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
-		get().getStaffOrganizationStructure();
-		set({ processingDeleteStaffOrganizationStructure: false });
-	},
+	// 	toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
+	// 	get().getStaffOrganizationStructure();
+	// 	set({ processingDeleteStaffOrganizationStructure: false });
+	// },
 
 	getProgramCategoryTimeline: async (programCategoryTimelineID) => {
 		set({ fetchingProgramCategoryTimeline: true });

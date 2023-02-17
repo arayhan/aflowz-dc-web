@@ -6,7 +6,7 @@ import { FiUsers } from 'react-icons/fi';
 import Skeleton from 'react-loading-skeleton';
 import { ButtonAction } from '../Button/ButtonAction';
 
-export const CardOrganizationStructure = ({
+export const CardOrganizationStructureImage = ({
 	title,
 	description,
 	image,
@@ -71,6 +71,6 @@ export const CardOrganizationStructure = ({
 	);
 };
 
-CardOrganizationStructure.defaultProps = {
+CardOrganizationStructureImage.defaultProps = {
 	title: 'Struktur Organisasi'
 };
