@@ -234,7 +234,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.createProgramCategoryTimeline(params);
 
-		toastRequestResult(loader, success, 'Mitra created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Timeline Mitra created', payload?.odoo_error || payload?.message);
 		set({ processingCreateProgramCategoryTimeline: false });
 		setPageLoading(false);
 
@@ -247,7 +247,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.updateProgramCategoryTimeline(programCategoryTimelineID, params);
 
-		toastRequestResult(loader, success, 'Mitra updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Timeline Mitra updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateProgramCategoryTimeline: false });
 		setPageLoading(false);
 
@@ -260,7 +260,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryTimeline(programCategoryTimelineID);
 
-		toastRequestResult(loader, success, 'Mitra deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Timeline Mitra deleted', payload?.odoo_error || payload?.message);
 		get().getProgramList();
 		set({ processingDeleteProgramCategoryTimeline: false });
 		setPageLoading(false);
