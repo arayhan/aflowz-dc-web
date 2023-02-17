@@ -196,16 +196,36 @@ export const deleteProgramCategoryTimeline = async (programCategoryTimelineID) =
 	}
 };
 
-export const getProgramCategoryOrganizationStructure = async (programCategoryID) => {
+export const getProgramOrganizationPositionList = async (params) => {
 	try {
-		const response = await http.get('/program/organization/' + programCategoryID);
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/program/organization/position' + queryParams);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
 	}
 };
 
-export const createProgramCategoryOrganizationStructure = async (programCategoryID, params) => {
+export const getProgramOrganizationList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/program/organization' + queryParams);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getProgramOrganization = async (programOrganizationID) => {
+	try {
+		const response = await http.get('/program/organization/' + programOrganizationID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const createProgramOrganization = async (params) => {
 	const data = {
 		program_id: params?.program_id,
 		partner_id: params?.partner_id,
@@ -222,7 +242,7 @@ export const createProgramCategoryOrganizationStructure = async (programCategory
 	}
 };
 
-export const updateProgramCategoryOrganizationStructure = async (programCategoryID, params) => {
+export const updateProgramOrganization = async (programOrganizationID, params) => {
 	const data = {
 		program_id: params?.program_id,
 		partner_id: params?.partner_id,
@@ -232,16 +252,16 @@ export const updateProgramCategoryOrganizationStructure = async (programCategory
 	};
 
 	try {
-		const response = await http.put('/program/organization/' + programCategoryID, data);
+		const response = await http.put('/program/organization/' + programOrganizationID, data);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
 	}
 };
 
-export const deleteProgramCategoryOrganizationStructure = async (programCategoryID) => {
+export const deleteProgramOrganization = async (programOrganizationID) => {
 	try {
-		const response = await http.delete('/program/organization/' + programCategoryID);
+		const response = await http.delete('/program/organization/' + programOrganizationID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

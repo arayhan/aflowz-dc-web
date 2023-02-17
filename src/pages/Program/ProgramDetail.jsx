@@ -121,10 +121,18 @@ const ProgramDetail = () => {
 										totalWanita={programDetail?.total_wanita}
 									/>
 								</div>
-								<div></div>
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
+								<div className="col-span-12">
+									<TablePenerima
+										programID={programDetail?.program_id}
+										programName={programDetail?.program_name}
+										isReadonly
+										isInDetail
+										params={{ program_id: params.programID }}
+									/>
+								</div>
 								<div className="col-span-12">
 									<TablePenerima
 										programID={programDetail?.program_id}

@@ -54,6 +54,7 @@ import VillageDatabaseReport from './pages/Dapil/Village/VillageDatabaseReport';
 import DistrictDatabaseReport from './pages/Dapil/District/DistrictDatabaseReport';
 import KonstituenDatabaseReport from './pages/Konstituen/KonstituenDatabaseReport';
 import MitraDetailTimelineForm from './pages/Mitra/MitraDetailTimelineForm';
+import ProgramOrganization from './pages/ProgramOrganization/ProgramOrganization';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -110,6 +111,9 @@ export const AppRoutes = () => {
 					<Route path="/district/create" element={<DistrictForm />} />
 					<Route path="/district/:districtID" element={<DistrictDetail />} />
 					<Route path="/district" element={<District />} />
+					{/* <Route path="/program/organization/update/:programOrganizationID" element={<ProgramOrganizationForm />} />
+					<Route path="/program/organization/create" element={<ProgramOrganizationForm />} /> */}
+					<Route path="/program/organization" element={<ProgramOrganization />} />
 					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />
