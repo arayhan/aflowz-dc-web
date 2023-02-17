@@ -192,7 +192,7 @@ const states = (set, get) => ({
 	getProgramOrganizationList: async (params) => {
 		set({ fetchingProgramOrganizationList: true });
 
-		const defaultParams = { limit: 1000, offset: 0 };
+		const defaultParams = {};
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_PROGRAM.getProgramOrganizationList(requestParams);

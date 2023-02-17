@@ -112,9 +112,12 @@ export const AppRoutes = () => {
 					<Route path="/district/create" element={<DistrictForm />} />
 					<Route path="/district/:districtID" element={<DistrictDetail />} />
 					<Route path="/district" element={<District />} />
-					<Route path="/program/organization/update/:programOrganizationID" element={<ProgramOrganizationForm />} />
-					<Route path="/program/organization/create" element={<ProgramOrganizationForm />} />
-					<Route path="/program/organization" element={<ProgramOrganization />} />
+					<Route
+						path="/program/:programID/organization/update/:programOrganizationID"
+						element={<ProgramOrganizationForm />}
+					/>
+					<Route path="/program/:programID/organization/create" element={<ProgramOrganizationForm />} />
+					<Route path="/program/:programID/organization" element={<ProgramOrganization />} />
 					<Route path="/program/penerima/:programID" element={<ListPenerimaByProgram />} />
 					<Route path="/program/update/:programID" element={<ProgramForm />} />
 					<Route path="/program/create" element={<ProgramForm />} />

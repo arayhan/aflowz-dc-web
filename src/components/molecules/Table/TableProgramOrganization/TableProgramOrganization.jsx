@@ -1,7 +1,7 @@
 import { Table, ButtonAction, TableHeader, TableFooter, Button, InputText } from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { addQueryParams, objectToQueryString, removeQueryParams } from '@/utils/helpers';
+import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
@@ -13,6 +13,8 @@ export const TableProgramOrganization = ({
 	displayedColumns,
 	displayedFilters,
 	params,
+	mainRoute,
+	setParams,
 	isReadonly,
 	isShowFooter,
 	isShowFilter,
@@ -81,6 +83,23 @@ export const TableProgramOrganization = ({
 				}
 			},
 			{
+				Header: 'Institusi',
+				minWidth: 215,
+				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return data.konstituen?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/institusi/${data.konstituen?.id}`}
+							text={data.konstituen?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
 				Header: 'Kota',
 				minWidth: 215,
 				hidden: displayedColumns && !displayedColumns.includes('Kota'),
@@ -116,7 +135,11 @@ export const TableProgramOrganization = ({
 							<div className="grid grid-cols-2 gap-2">
 								<ButtonAction
 									action={ACTION_TYPES.UPDATE}
-									linkTo={`/program/organization/update/${row.row.original.id}`}
+									linkTo={
+										mainRoute
+											? `${mainRoute}/update/${row.row.original.id}`
+											: `/program/organization/update/${row.row.original.id}`
+									}
 								/>
 								<ButtonAction
 									action={ACTION_TYPES.DELETE}
@@ -131,11 +154,15 @@ export const TableProgramOrganization = ({
 		[offset, perPage, page, isSystem]
 	);
 
-	const handleClickRow = (rowData) => navigate(`/programOrganization/${rowData.id}`);
+	const handleClickRow = (rowData) => {
+		if (onClickRow) onClickRow(rowData);
+		else navigate(`/program/organization/${rowData.id}`);
+	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		navigate('/program/organization' + updatedParams, { replace: true });
+		if (setParams) setParams(queryStringToObject(updatedParams));
+		else navigate('/program/organization' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
@@ -144,7 +171,7 @@ export const TableProgramOrganization = ({
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
-			setOffset(offsetResult);
+			setOffset(Math.abs(offsetResult));
 			getProgramOrganizationList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount]);
@@ -154,17 +181,17 @@ export const TableProgramOrganization = ({
 			setData(programOrganizationList.items);
 			setPageCount(Math.ceil(programOrganizationList.total / perPage));
 		}
-	}, [programOrganizationList, pageCount]);
+	}, [programOrganizationList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
 					feature="Program Organization"
-					featurePath="/program/organization"
+					featurePath={mainRoute || '/program/organization'}
 					title={title || 'Program Organization'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					mainRoute={'/program/organization'}
+					mainRoute={mainRoute || '/program/organization'}
 					isReadonly={!isSystem || isReadonly}
 					seeAllLink={'/program/organization' + objectToQueryString(params)}
 					showButtonSeeAll={isShowButtonSeeAll}

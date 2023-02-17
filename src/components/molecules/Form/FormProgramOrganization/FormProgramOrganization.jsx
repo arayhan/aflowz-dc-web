@@ -14,7 +14,7 @@ import { useProgramStore } from '@/store';
 import { useEffect } from 'react';
 
 export const FormProgramOrganization = () => {
-	const { programOrganizationID } = useParams();
+	const { programID, programOrganizationID } = useParams();
 	const navigate = useNavigate();
 
 	const {
@@ -30,7 +30,7 @@ export const FormProgramOrganization = () => {
 	const { control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formProgramOrganizationSchema),
 		defaultValues: {
-			program_id: undefined,
+			program_id: programID || undefined,
 			partner_id: undefined,
 			position_id: undefined,
 			city_id: undefined,
@@ -41,11 +41,11 @@ export const FormProgramOrganization = () => {
 	const onSubmitProgram = (values) => {
 		if (programOrganizationID) {
 			updateProgramOrganization(programOrganizationID, values, ({ success }) => {
-				if (success) navigate(`/program/organization`, { replace: true });
+				if (success) navigate(programID ? `/program/${programID}` : `/program/organization`, { replace: true });
 			});
 		} else {
 			createProgramOrganization(values, ({ success }) => {
-				if (success) navigate(`/program/organization`, { replace: true });
+				if (success) navigate(programID ? `/program/${programID}` : `/program/organization`, { replace: true });
 			});
 		}
 	};
@@ -55,15 +55,15 @@ export const FormProgramOrganization = () => {
 	}, [programOrganizationID]);
 
 	useEffect(() => {
-		console.log({ programOrganizationID, programOrganization });
-		if (programOrganizationID && programOrganization) {
-			setValue('program_id', programOrganization.program?.id || null);
+		setValue('program_id', programID ? Number(programID) : programOrganization.program?.id || null);
+
+		if (programOrganization) {
 			setValue('partner_id', programOrganization.partner?.id || null);
 			setValue('position_id', programOrganization.position?.id || null);
 			setValue('city_id', programOrganization.city?.id || null);
 			setValue('konstituen_id', programOrganization.konstituen?.id || null);
 		}
-	}, [programOrganizationID, programOrganization]);
+	}, [programID, programOrganizationID, programOrganization]);
 
 	return (
 		<div className="space-y-8">
@@ -120,6 +120,7 @@ export const FormProgramOrganization = () => {
 						<InputSelectProgram
 							{...field}
 							disabled={
+								programID ||
 								processingCreateProgramOrganization ||
 								processingUpdateProgramOrganization ||
 								fetchingProgramOrganization
@@ -181,7 +182,7 @@ export const FormProgramOrganization = () => {
 					disabled={
 						processingCreateProgramOrganization || processingUpdateProgramOrganization || fetchingProgramOrganization
 					}
-					linkTo={programOrganizationID ? `/program/${programOrganizationID}` : '/program'}
+					linkTo={programID ? `/program/${programID}` : '/program'}
 				>
 					Cancel
 				</Button>

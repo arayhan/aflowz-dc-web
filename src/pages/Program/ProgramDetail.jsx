@@ -4,6 +4,7 @@ import {
 	CardPenerimaProgramByGender,
 	TableDetailPenerimaProgram,
 	TablePenerima,
+	TableProgramOrganization,
 	TableVillage
 } from '@/components/molecules';
 import { useActivityStore, useProgramStore } from '@/store';
@@ -15,15 +16,24 @@ const ProgramDetail = () => {
 	const params = useParams();
 	const { programDetail, fetchingProgramDetail, getProgramDetail } = useProgramStore();
 	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
-	const [tableParams] = useState({ program_id: params.programID });
+
+	const tableDefaultParams = { program_id: params.programID };
+
+	const [tablePenerimaParams] = useState(tableDefaultParams);
+	const [tableVillageParams] = useState(tableDefaultParams);
+	const [tableOrganizationParams] = useState(tableDefaultParams);
 	const [searchParams, setSearchParams] = useState({});
+
+	const isPIP = programDetail?.program_name === 'PIP';
+	const isKIP = programDetail?.program_name === 'KIP';
+	const isPIPorKIP = isPIP || isKIP;
 
 	useEffect(() => {
 		getProgramDetail(params.programID);
 	}, [params]);
 
 	useEffect(() => {
-		if (params.programID && (programDetail?.program_name === 'PIP' || programDetail?.program_name === 'KIP')) {
+		if (params.programID && isPIPorKIP) {
 			getActivityDetailList({ activity_program_id: params.programID });
 		}
 	}, [params, programDetail]);
@@ -95,7 +105,7 @@ const ProgramDetail = () => {
 										</div>
 									</Link>
 								</div>
-								{(programDetail?.program_name === 'PIP' || programDetail?.program_name === 'KIP') && (
+								{isPIPorKIP && (
 									<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
 										<Link to={`/activity?activity_program_id=${params.programID}`}>
 											<div className="flex items-center justify-center w-full">
@@ -124,22 +134,24 @@ const ProgramDetail = () => {
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
+								{isPIPorKIP && (
+									<div className="col-span-12">
+										<TableProgramOrganization
+											mainRoute={`/program/${programDetail?.program_id}/organization`}
+											params={tableOrganizationParams}
+											isShowButtonSeeAll
+											isShowFilter={false}
+										/>
+									</div>
+								)}
 								<div className="col-span-12">
 									<TablePenerima
 										programID={programDetail?.program_id}
 										programName={programDetail?.program_name}
 										isReadonly
 										isInDetail
-										params={{ program_id: params.programID }}
-									/>
-								</div>
-								<div className="col-span-12">
-									<TablePenerima
-										programID={programDetail?.program_id}
-										programName={programDetail?.program_name}
-										isReadonly
-										isInDetail
-										params={{ program_id: params.programID }}
+										isShowFilter={false}
+										params={tablePenerimaParams}
 									/>
 								</div>
 								<div className="col-span-12">
@@ -159,7 +171,7 @@ const ProgramDetail = () => {
 								<div className="col-span-12">
 									<TableVillage
 										title={'Penerima Program Per Desa'}
-										params={searchParams ? { ...searchParams, ...tableParams } : { ...tableParams }}
+										params={searchParams ? { ...searchParams, ...tableVillageParams } : { ...tableVillageParams }}
 										setParams={setSearchParams}
 										isReadonly
 										enableClickRow
