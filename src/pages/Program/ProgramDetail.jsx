@@ -23,7 +23,7 @@ const ProgramDetail = () => {
 	}, [params]);
 
 	useEffect(() => {
-		if (params.programID && programDetail?.program_name === 'PIP') {
+		if (params.programID && (programDetail?.program_name === 'PIP' || programDetail?.program_name === 'KIP')) {
 			getActivityDetailList({ activity_program_id: params.programID });
 		}
 	}, [params, programDetail]);
@@ -95,23 +95,25 @@ const ProgramDetail = () => {
 										</div>
 									</Link>
 								</div>
-								<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
-									<Link to={`/activity?activity_program_id=${params.programID}`}>
-										<div className="flex items-center justify-center w-full">
-											<img
-												src={require('@/images/icons/Icon_Home/Activity.svg').default}
-												className="w-1/2 sm:w-1/3 md:w-2/3"
-											/>
-										</div>
-										<div className="flex flex-col items-center justify-center space-y-1 text-center">
-											{fetchingActivityDetailList && <Skeleton width={80} height={30} />}
-											{!fetchingActivityDetailList && activityDetailList && (
-												<span className="text-2xl md:text-4xl font-extralight">{activityDetailList?.total || 0}</span>
-											)}
-											<div className="font-light text-gray-400">Total Kegiatan</div>
-										</div>
-									</Link>
-								</div>
+								{(programDetail?.program_name === 'PIP' || programDetail?.program_name === 'KIP') && (
+									<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
+										<Link to={`/activity?activity_program_id=${params.programID}`}>
+											<div className="flex items-center justify-center w-full">
+												<img
+													src={require('@/images/icons/Icon_Home/Activity.svg').default}
+													className="w-1/2 sm:w-1/3 md:w-2/3"
+												/>
+											</div>
+											<div className="flex flex-col items-center justify-center space-y-1 text-center">
+												{fetchingActivityDetailList && <Skeleton width={80} height={30} />}
+												{!fetchingActivityDetailList && activityDetailList && (
+													<span className="text-2xl md:text-4xl font-extralight">{activityDetailList?.total || 0}</span>
+												)}
+												<div className="font-light text-gray-400">Total Kegiatan</div>
+											</div>
+										</Link>
+									</div>
+								)}
 								<div className="col-span-2 md:col-span-3">
 									<CardPenerimaProgramByGender
 										total={programDetail?.total_penerima_program || 0}
