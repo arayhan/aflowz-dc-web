@@ -27,8 +27,11 @@ export const TableDetailTotalPenerimaByProgram = ({ dataPenerima }) => {
 			},
 			{
 				Header: 'Total Penerima',
-				accessor: 'total_penerima_program',
-				maxWidth: 100
+				maxWidth: 100,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.total_penerima_program || data?.total_penerima || '-'}</div>;
+				}
 			},
 			{
 				Header: 'Action',

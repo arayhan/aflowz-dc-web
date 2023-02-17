@@ -4,18 +4,23 @@ import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
 	PieChartPenerimaKonstituenByGender,
+	TableDetailTotalPenerimaByProgram,
 	TablePenerima
 } from '@/components/molecules';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
-import { ACTION_TYPES } from '@/utils/constants';
+import { Button, ButtonAction, Card, InputTextInfo } from '@/components/atoms';
+import { ACTION_TYPES, INSTITUSI_TYPES } from '@/utils/constants';
 
 const KonstituenDetail = () => {
 	const params = useParams();
 	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
 
 	const konstituenID = params.konstituenID;
+
+	const isSekolahOrKampus =
+		konstituenDetail?.konstituen_type === INSTITUSI_TYPES.KAMPUS ||
+		konstituenDetail?.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
 
 	const [tablePenerima] = useState({ konstituen_id: konstituenID, is_receiver: true });
 	const [searchPenerima, setSearchPenerima] = useState({});
@@ -127,6 +132,35 @@ const KonstituenDetail = () => {
 												totalPria={konstituenDetail?.total_pria || 0}
 												totalWanita={konstituenDetail?.total_wanita || 0}
 											/>
+										</div>
+										{isSekolahOrKampus && (
+											<div className="col-span-12 md:col-span-6">
+												<Card
+													title={`Total Penerima Program ${
+														konstituenDetail?.konstituen_type === INSTITUSI_TYPES.KAMPUS ? 'KIP' : 'PIP'
+													}`}
+													className={'bg-white rounded-md'}
+												>
+													<div className="flex p-4 overflow-scroll max-h-96">
+														<TableDetailTotalPenerimaByProgram
+															dataPenerima={
+																konstituenDetail?.konstituen_type === INSTITUSI_TYPES.KAMPUS
+																	? konstituenDetail?.list_program_periode_kip_dan_penerima_by_konstituen
+																	: konstituenDetail?.list_program_periode_pip_dan_penerima_by_konstituen
+															}
+														/>
+													</div>
+												</Card>
+											</div>
+										)}
+										<div className={isSekolahOrKampus ? 'col-span-12 md:col-span-6' : 'col-span-12'}>
+											<Card title={`Total Penerima Program - Lainnya`} className={'bg-white rounded-md'}>
+												<div className="flex p-4 overflow-scroll max-h-96">
+													<TableDetailTotalPenerimaByProgram
+														dataPenerima={konstituenDetail?.list_program_periode_no_pip_kip_dan_penerima_by_konstituen}
+													/>
+												</div>
+											</Card>
 										</div>
 										<div className="col-span-12">
 											<TablePenerima
