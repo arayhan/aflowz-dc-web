@@ -14,12 +14,11 @@ export const FormMitraTimeline = () => {
 		getProgramCategoryTimeline,
 		createProgramCategoryTimeline,
 		updateProgramCategoryTimeline,
-		deleteProgramCategoryTimeline,
 		clearStateProgramCategoryTimeline
 	} = useProgramStore();
 	const navigate = useNavigate();
 
-	const { control, handleSubmit } = useForm({
+	const { control, setValue, handleSubmit } = useForm({
 		resolver: yupResolver(formMitraTimelineSchema),
 		defaultValues: {
 			name: '',
@@ -48,8 +47,8 @@ export const FormMitraTimeline = () => {
 	}, [programCategoryTimelineID, programCategoryTimeline]);
 
 	useEffect(() => {
-		if (!programCategoryTimelineID) getProgramCategoryTimeline(programCategoryTimelineID);
-	}, [programCategoryTimelineID]);
+		if (!programCategoryTimeline) getProgramCategoryTimeline(programCategoryTimelineID);
+	}, [programCategoryTimelineID, programCategoryTimeline]);
 
 	useEffect(() => () => clearStateProgramCategoryTimeline(), []);
 

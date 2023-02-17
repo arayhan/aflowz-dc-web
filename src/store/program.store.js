@@ -217,8 +217,8 @@ const states = (set, get) => ({
 		set({ processingDeleteStaffOrganizationStructure: false });
 	},
 
-	getProgramCategoryTimeline: async (programCategoryID) => {
-		set({ fetchingProgramCategory: true });
+	getProgramCategoryTimeline: async (programCategoryTimelineID) => {
+		set({ fetchingProgramCategoryTimeline: true });
 
 		const { success, payload } = await SERVICE_PROGRAM.getProgramCategoryTimeline(programCategoryTimelineID);
 
