@@ -25,6 +25,7 @@ export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstitue
 
 export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
+export * from './Form/FormProgramOrganization/FormProgramOrganization';
 export * from './Form/FormPenerima/FormPenerima';
 export * from './Form/FormMitra/FormMitra';
 export * from './Form/FormMitraTimeline/FormMitraTimeline';

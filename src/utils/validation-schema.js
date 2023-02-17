@@ -22,6 +22,14 @@ export const formProgramSchema = yup.object().shape(
 	['pic_mobile', 'pic_mobile']
 );
 
+export const formProgramOrganizationSchema = yup.object().shape({
+	program_id: yup.number().required('Program wajib diisi'),
+	partner_id: yup.number().required('Staff wajib diisi'),
+	position_id: yup.number().required('Posisi wajib diisi'),
+	city_id: yup.number().required('Kota wajib diisi'),
+	konstituen_id: yup.number().required('Institusi wajib diisi')
+});
+
 export const formMitraSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama program wajib diisi'),

@@ -13,7 +13,7 @@ const ProgramOrganization = () => {
 
 	return (
 		<div>
-			<BannerFeature title="Program Organization" />
+			<BannerFeature title="Program Organization Structure" />
 			<div className="bg-gray-100">
 				<div className="container py-6">
 					<TableProgramOrganization params={params} />
