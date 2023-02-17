@@ -130,7 +130,7 @@ const states = (set, get) => ({
 	getActivityDetailList: async (params = {}) => {
 		set({ fetchingActivityDetailList: true });
 
-		const defaultParams = { limit: 0, offset: 0 };
+		const defaultParams = {};
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_ACTIVITY.getActivityDetailList(requestParams);
