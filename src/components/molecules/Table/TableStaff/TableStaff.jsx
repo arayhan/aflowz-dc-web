@@ -36,15 +36,18 @@ export const TableStaff = ({ params }) => {
 			},
 			{
 				Header: 'Role',
-				minWidth: 100,
+				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
 					return data.staff_titles.length > 0 ? (
-						<>
-							{data.staff_titles.map((title) => {
-								<div className="capitalize">{title.name}</div>;
-							})}
-						</>
+						<div className="flex flex-wrap gap-1">
+							{data.staff_titles.map((title) => (
+								<div key={title.id} className="px-2 py-[2px] text-xs capitalize border border-gray-200 rounded-md">
+									{title?.parent ? `${title.parent.name} - ` : ''}
+									{title.name}
+								</div>
+							))}
+						</div>
 					) : (
 						'-'
 					);
