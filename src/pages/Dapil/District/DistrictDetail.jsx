@@ -5,8 +5,8 @@ import {
 	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
 	TableDetailTotalPenerimaByProgram,
-	TablePenerima,
-	TableVillage
+	TableDetailVillageInDistrict,
+	TablePenerima
 } from '@/components/molecules';
 import { useDistrictStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -20,7 +20,6 @@ const DistrictDetail = () => {
 	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
 
 	const [tablePenerimaParams] = useState({ district_id: districtID });
-	const [tableVillageParams, setTableVillageParams] = useState({ district_id: districtID });
 
 	useEffect(() => {
 		if (districtID) getDistrictDetail(districtID);
@@ -29,7 +28,7 @@ const DistrictDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={districtDetail ? `${districtDetail.district_name}` : 'Kecamatan'}
+				title={districtDetail ? `Kecamatan ${districtDetail.district_name}` : 'Kecamatan'}
 				loading={fetchingDistrictDetail}
 			/>
 
@@ -100,10 +99,6 @@ const DistrictDetail = () => {
 									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Penerima Program Lebih Dari Satu'}
-									value={districtDetail?.total_penerima_multiple_program_district_per_orang || 0}
-								/>
-								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={districtDetail?.total_institusi_penerima_program_district_pip || 0}
 									linkTo={`/institusi?district_id=${districtID}&program_name=pip`}
@@ -122,6 +117,10 @@ const DistrictDetail = () => {
 									title={'Total Siswa Penerima KIP'}
 									value={districtDetail?.total_penerima_program_district_kip || 0}
 									linkTo={`/penerima?district_id=${districtID}&program_name=kip`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={districtDetail?.total_penerima_multiple_program_district_per_orang || 0}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
@@ -165,15 +164,13 @@ const DistrictDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<TableVillage
-										title={`List Desa di ${districtDetail.district_name}`}
-										params={{ ...tableVillageParams, district_id: districtID }}
-										setParams={setTableVillageParams}
-										displayedColumns={['#', 'Nama Desa', 'Nama PIC']}
-										isReadonly
-										isShowButtonSeeAll
-										enableClickRow
-									/>
+									<Card
+										title={`List Desa di Kecamatan ${districtDetail.district_name}`}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<TableDetailVillageInDistrict villageData={districtDetail.penerima_program_district_village} />
+									</Card>
 								</div>
 								<div className="col-span-12">
 									<Card

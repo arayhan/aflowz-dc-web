@@ -110,3 +110,4 @@ export * from './Table/TableActivityPromise/TableActivityPromise';
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
 export * from './TableDetail/TableDetailTotalPenerimaByProgram/TableDetailTotalPenerimaByProgram';
 export * from './TableDetail/TableDetailStructureOrganization/TableDetailStructureOrganization';
+export * from './TableDetail/TableDetailVillageInDistrict/TableDetailVillageInDistrict';
