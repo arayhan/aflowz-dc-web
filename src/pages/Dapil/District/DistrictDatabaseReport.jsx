@@ -224,17 +224,15 @@ const DistrictDatabaseReport = () => {
 											<table className="w-full">
 												<thead className="bg-primary">
 													<tr>
-														<th className="px-6 py-3 text-left text-white">Nama Program</th>
+														<th className="px-6 py-3 text-left text-white">Nama Desa</th>
 														<th className="px-6 py-3 text-white">Qty</th>
 													</tr>
 												</thead>
 												<tbody>
-													{districtDetail?.penerima_program_district?.map((program) => (
+													{districtDetail?.penerima_program_district_village?.map((program) => (
 														<tr key={program?.program_id} className="odd:bg-gray-100">
-															<td className="px-6 py-3 text-sm font-semibold">{program.program_name}</td>
-															<td className="px-6 py-3 text-sm font-semibold text-center">
-																{program?.total_penerima_program}
-															</td>
+															<td className="px-6 py-3 text-sm font-semibold">{program.village_name}</td>
+															<td className="px-6 py-3 text-sm font-semibold text-center">{program?.total_penerima}</td>
 														</tr>
 													))}
 												</tbody>
