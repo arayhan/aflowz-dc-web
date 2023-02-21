@@ -140,6 +140,7 @@ const ProgramDetail = () => {
 											mainRoute={`/program/${programDetail?.program_id}/organization`}
 											params={tableOrganizationParams}
 											isShowButtonSeeAll
+											seeAllLink={`/program/${programDetail?.program_id}/organization`}
 											isShowFilter={false}
 										/>
 									</div>

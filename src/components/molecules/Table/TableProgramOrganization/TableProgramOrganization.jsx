@@ -3,7 +3,7 @@ import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectOrganizationPosition } from '../../InputSelect/InputSelectOrganizationPosition/InputSelectOrganizationPosition';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
@@ -18,11 +18,13 @@ export const TableProgramOrganization = ({
 	isReadonly,
 	isShowFooter,
 	isShowFilter,
+	seeAllLink,
 	isShowButtonSeeAll,
 	enableClickRow
 }) => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { programID } = useParams();
 
 	const { isSystem } = useAuthStore();
 	const {
@@ -161,13 +163,16 @@ export const TableProgramOrganization = ({
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		const navigation = programID ? `/program/${programID}/organization` : '/program/organization';
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/program/organization' + updatedParams, { replace: true });
+		else navigate(navigation + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
+
+		if (programID) defaultParams.program_id = programID;
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
@@ -181,19 +186,23 @@ export const TableProgramOrganization = ({
 			setData(programOrganizationList.items);
 			setPageCount(Math.ceil(programOrganizationList.total / perPage));
 		}
-	}, [programOrganizationList]);
+	}, [programID, programOrganizationList]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
 					feature="Program Organization"
-					featurePath={mainRoute || '/program/organization'}
+					featurePath={mainRoute || programID ? `/program/${programID}/organization` : '/program/organization'}
 					title={title || 'Program Organization'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					mainRoute={mainRoute || '/program/organization'}
+					mainRoute={mainRoute || programID ? `/program/${programID}/organization` : '/program/organization'}
 					isReadonly={!isSystem || isReadonly}
-					seeAllLink={'/program/organization' + objectToQueryString(params)}
+					seeAllLink={
+						seeAllLink || programID
+							? `/program/${programID}/organization`
+							: '/program/organization' + objectToQueryString(params)
+					}
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>
@@ -204,7 +213,7 @@ export const TableProgramOrganization = ({
 
 					<div className="px-6 py-4">
 						<div className="flex justify-end w-full gap-4">
-							{(!displayedFilters || displayedFilters.includes('program_id')) && (
+							{(!displayedFilters || displayedFilters.includes('program_id')) && !programID && (
 								<InputSelectProgram
 									containerClassName="w-full lg:w-60"
 									value={params.program_id ? Number(params.program_id) : undefined}
