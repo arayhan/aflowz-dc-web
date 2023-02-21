@@ -151,7 +151,7 @@ export const formStaffSchema = yup.object().shape({
 		.min(8, 'Minimal 8 angka'),
 	email: yup.string().email().required('Belum mengisi email'),
 	religion: yup.string().required('Belum memilih agama'),
-	staff_title: yup.string().required('Belum memiliih role')
+	staff_titles: yup.array().min(1, 'Role wajib diisi')
 });
 
 export const formActivitySchema = yup.object().shape({

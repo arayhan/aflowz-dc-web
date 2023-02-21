@@ -1,13 +1,13 @@
-import { Button, InputLabel, InputText, InputError } from '@/components/atoms';
+import { Button, InputLabel, InputText, InputError, Alert } from '@/components/atoms';
 import {
 	InputSelectProvince,
 	InputSelectCity,
 	InputSelectDistrict,
 	InputSelectGender,
-	InputSelectStaffTitle,
 	InputSelectReligion,
 	InputSelectDate,
-	InputSelectVillage
+	InputSelectVillage,
+	TableSelectRole
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,7 +43,7 @@ export const FormStaff = () => {
 			mobile: '',
 			email: '',
 			religion: '',
-			staff_title: undefined
+			staff_titles: []
 		}
 	});
 
@@ -53,7 +53,7 @@ export const FormStaff = () => {
 				if (success) navigate(`/staff/${staffID}`, { replace: true });
 			});
 		} else {
-			postStaffCreate(values, ({ payload, success }) => {
+			postStaffCreate(values, ({ success }) => {
 				if (success) navigate(`/staff`, { replace: true });
 			});
 		}
@@ -80,7 +80,12 @@ export const FormStaff = () => {
 			setValue('mobile', staff.mobile || '');
 			setValue('email', staff.email || '');
 			setValue('religion', staff.religion || '');
-			setValue('staff_title', staff.staff_title?.id || null);
+			setValue(
+				'staff_titles',
+				staff.staff_titles
+					? staff.staff_titles.map((role) => ({ staff_title_id: role.parent.id, branch_title: role.name }))
+					: []
+			);
 			setPlaceholderCity(staff.city?.name);
 			setPlaceholderDistrict(staff.district?.name);
 			setPlaceholderVillage(staff.village?.name);
@@ -120,7 +125,7 @@ export const FormStaff = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{staffID ? 'Edit' : 'Create'} Tim Internal</div>
+				<div className="text-xl font-light">{staffID ? 'Edit' : 'Create'} Tim Internal</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
@@ -348,23 +353,34 @@ export const FormStaff = () => {
 						/>
 					)}
 				/>
-
-				<Controller
-					name={'staff_title'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaffTitle
-							{...field}
-							disabled={processingCreateStaff || fetchingStaff}
-							onChange={({ value }) => {
-								setValue('staff_title', Number(value));
-								setError('staff_title', null);
-							}}
-							error={error}
-						/>
-					)}
-				/>
 			</div>
+			<hr />
+
+			<Controller
+				name={'staff_titles'}
+				control={control}
+				render={({ field: { value }, fieldState: { error } }) => (
+					<>
+						{(error || value.length === 0) && <Alert type="danger" message={error?.message || 'Harus diisi'} />}
+						<TableSelectRole
+							selectedRoles={value}
+							onRemoveRole={(roleIndex) => {
+								const filteredRole = value.filter((roles, index) => index !== roleIndex);
+								setValue('staff_titles', filteredRole);
+							}}
+							onUpdateRole={(selectedRole, selectedRoleIndex) => {
+								const updatedRole = value.map((role, index) => {
+									return index === selectedRoleIndex ? { ...role, ...selectedRole } : role;
+								});
+								setValue('staff_titles', updatedRole);
+							}}
+							onAddRole={(role) => setValue('staff_titles', [...value, role])}
+							disabled={processingCreateStaff || fetchingStaff}
+						/>
+					</>
+				)}
+			/>
+
 			<hr />
 			<div className="flex justify-end">
 				<Button

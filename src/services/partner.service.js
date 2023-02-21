@@ -81,9 +81,7 @@ export const postStaffCreate = async (params) => {
 	const cityDom = http.get(`/city/${params.city}`);
 	const districtDom = http.get(`/district/${params.district}`);
 	const villageDom = http.get(`/village/${params.village}`);
-	const getStaffTitle = http.get('partner/staff-title');
-	const getData = await Promise.all([provinceDom, cityDom, districtDom, villageDom, getStaffTitle]);
-	const findTitle = getData[4].data.data.items.find((val) => val.id === Number(params.staff_title));
+	const getData = await Promise.all([provinceDom, cityDom, districtDom, villageDom]);
 
 	const data = [
 		{
@@ -100,8 +98,8 @@ export const postStaffCreate = async (params) => {
 			mobile: params?.mobile || '',
 			email: params?.email || '',
 			religion: params?.religion || '',
-			staff_title: findTitle?.name || '',
 			is_staff: true,
+			staff_titles: params?.staff_titles || [],
 			village: getData[3].data.data.name || ''
 		}
 	];
@@ -140,7 +138,7 @@ export const updateStaff = async (staffID, params) => {
 		mobile: params?.mobile || '',
 		email: params?.email || '',
 		religion: params?.religion || '',
-		staff_title_id: Number(params?.staff_title) || 0,
+		staff_title_ids: params?.staff_titles || [],
 		is_staff: true
 	};
 	try {

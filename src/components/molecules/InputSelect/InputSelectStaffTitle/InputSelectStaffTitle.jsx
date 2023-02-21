@@ -2,7 +2,7 @@ import { InputError, InputLabel, InputSelect } from '@/components/atoms';
 import { usePartnerStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
-export const InputSelectStaffTitle = forwardRef(({ error, onChange, ...props }, ref) => {
+export const InputSelectStaffTitle = forwardRef(({ showLabel, label, clearable, error, onChange, ...props }, ref) => {
 	const { staffTitleList, fetchingStaffTitleList, getStaffTitleList } = usePartnerStore();
 
 	const [options, setOptions] = useState([]);
@@ -24,8 +24,15 @@ export const InputSelectStaffTitle = forwardRef(({ error, onChange, ...props }, 
 
 	return (
 		<div className="space-y-1">
-			<InputLabel text="Pilih Role" name={props.name} />
-			<InputSelect ref={ref} options={options} loading={fetchingStaffTitleList} onChange={onChange} {...props} />
+			{showLabel && <InputLabel text={label || 'Pilih Role'} name={props.name} />}
+			<InputSelect
+				ref={ref}
+				options={options}
+				loading={fetchingStaffTitleList}
+				clearable={clearable}
+				onChange={onChange}
+				{...props}
+			/>
 			{error && <InputError message={error.message} />}
 		</div>
 	);
@@ -33,5 +40,6 @@ export const InputSelectStaffTitle = forwardRef(({ error, onChange, ...props }, 
 
 InputSelectStaffTitle.displayName = 'InputSelectStaffTitle';
 InputSelectStaffTitle.defaultProps = {
+	showLabel: true,
 	name: 'staff_title'
 };

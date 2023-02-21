@@ -54,6 +54,8 @@ export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstitu
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
+export * from './TableSelect/TableSelectRole/TableSelectRole';
+
 export * from './Search/SearchGlobal/SearchGlobal';
 
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
