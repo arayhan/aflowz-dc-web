@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { BiImage } from 'react-icons/bi';
+import { convertFileToBase64 } from '@/utils/helpers';
 
 export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 	const ALLOWED_IMAGE_EXTENSIONS = ['.jpeg', '.jpg', '.png', '.gif', '.bmp', '.tiff', '.svg'];
@@ -12,15 +13,17 @@ export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 	};
 
 	const [errors, setErrors] = useState(null);
+	const [base64File, setBase64File] = useState(null);
 	const [file, setFile] = useState(null);
 
 	const handleUpload = () => {
 		if (file) onSubmit(file);
 	};
 
-	const handleChangeFile = (event) => {
+	const handleChangeFile = async (event) => {
 		const file = event.target.files[0];
 		const ext = file.name.split('.').pop();
+		const base64 = await convertFileToBase64(file);
 
 		if (file && !ALLOWED_IMAGE_EXTENSIONS.includes(`.${ext}`)) {
 			toast.warning('File harus format gambar');
@@ -34,6 +37,7 @@ export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 
 		setErrors(null);
 		setFile(file);
+		setBase64File(base64);
 	};
 
 	const handleClose = () => {
@@ -93,12 +97,13 @@ export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 							<img src={URL.createObjectURL(file)} alt="struktur organisasi" />
 						</div>
 						<div className="flex items-center gap-4">
-							<div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
-								<BiImage size={20} /> <span>{file.name}</span>
+							<div className="text-gray-400">
+								<BiImage size={20} />
 							</div>
+							<div className="text-sm text-gray-400 break-all">{file.name}</div>
 							<label
 								htmlFor="updateImageFile"
-								className="px-5 py-2 text-sm text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400"
+								className="px-5 py-2 text-sm text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400 min-w-[100px] text-center"
 							>
 								<div>Ubah File</div>
 								<input

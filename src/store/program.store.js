@@ -18,6 +18,7 @@ const states = (set, get) => ({
 	fetchingProgramOrganization: false,
 	fetchingProgramOrganizationList: false,
 	fetchingProgramOrganizationPositionList: false,
+	fetchingProgramCategoryOrganizationStructureImage: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
@@ -31,6 +32,8 @@ const states = (set, get) => ({
 	processingCreateProgramOrganization: false,
 	processingUpdateProgramOrganization: false,
 	processingDeleteProgramOrganization: false,
+	processingUploadProgramCategoryOrganizationStructureImage: false,
+	processingDeleteProgramCategoryOrganizationStructureImage: false,
 
 	program: null,
 	programList: null,
@@ -42,6 +45,7 @@ const states = (set, get) => ({
 	programOrganization: false,
 	programOrganizationList: false,
 	programOrganizationPositionList: false,
+	programCategoryOrganizationStructureImage: null,
 
 	programCategoryErrors: null,
 	programCategoryTimelineErrors: null,
@@ -216,7 +220,7 @@ const states = (set, get) => ({
 	createProgramOrganization: async (params, callback) => {
 		set({ processingCreateProgramOrganization: true });
 
-		const loader = toast.loading('Uploading...');
+		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.createProgramOrganization(params);
 
 		toastRequestResult(loader, success, 'Organization Structure created', payload?.odoo_error || payload?.message);
@@ -228,7 +232,7 @@ const states = (set, get) => ({
 	updateProgramOrganization: async (programOrganizationID, params, callback) => {
 		set({ processingUpdateProgramOrganization: true });
 
-		const loader = toast.loading('Uploading...');
+		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_PROGRAM.updateProgramOrganization(programOrganizationID, params);
 
 		toastRequestResult(loader, success, 'Organization Structure updated', payload?.odoo_error || payload?.message);
@@ -295,6 +299,41 @@ const states = (set, get) => ({
 		get().getProgramList();
 		set({ processingDeleteProgramCategoryTimeline: false });
 		setPageLoading(false);
+	},
+
+	getProgramCategoryOrganizationStructureImage: async (callback) => {
+		set({ fetchingProgramCategoryOrganizationStructureImage: true });
+
+		const { payload, success } = await SERVICE_PROGRAM.getProgramCategoryOrganizationStructureImage();
+		set({ fetchingProgramCategoryOrganizationStructureImage: false });
+
+		if (callback) callback({ payload, success });
+	},
+
+	uploadProgramCategoryOrganizationStructureImage: async (programCategoryID, params, callback) => {
+		set({ processingUploadProgramCategoryOrganizationStructureImage: true });
+
+		const loader = toast.loading('Uploading...');
+		const { payload, success } = await SERVICE_PROGRAM.uploadProgramCategoryOrganizationStructureImage(
+			programCategoryID,
+			params
+		);
+
+		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+		set({ processingUploadProgramCategoryOrganizationStructureImage: false });
+
+		callback({ payload, success });
+	},
+
+	deleteProgramCategoryOrganizationStructureImage: async () => {
+		set({ processingDeleteProgramCategoryOrganizationStructureImage: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryOrganizationStructureImage();
+
+		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
+		get().getProgramCategoryOrganizationStructureImage();
+		set({ processingDeleteProgramCategoryOrganizationStructureImage: false });
 	},
 
 	clearStateProgramCategory: () => {

@@ -1,12 +1,6 @@
-import { Button, ButtonAction, Card, Timeline } from '@/components/atoms';
-import {
-	BannerFeature,
-	ChartPeriodeProgram,
-	ChartPenerimaProgram,
-	TableProgram,
-	CardStaffOrganizationStructure,
-	CardProgramCategoryOrganizationStructure
-} from '@/components/molecules';
+import { Button, ButtonAction, Card } from '@/components/atoms';
+import { BannerFeature, ChartPeriodeProgram, ChartPenerimaProgram, TableProgram } from '@/components/molecules';
+import { CardProgramCategoryOrganizationStructure } from '@/components/molecules/Card/CardProgramCategoryOrganizationStructure/CardProgramCategoryOrganizationStructure';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import moment from 'moment';
@@ -100,6 +94,10 @@ const MitraDetail = () => {
 										<div className="font-light text-gray-400">Total Penerima</div>
 									</div>
 								</div>
+							</div>
+
+							<div className="flex items-center justify-center">
+								<CardProgramCategoryOrganizationStructure programCategoryID={programCategoryID} />
 							</div>
 
 							<div className="bg-white rounded-md">

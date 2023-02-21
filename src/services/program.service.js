@@ -267,3 +267,34 @@ export const deleteProgramOrganization = async (programOrganizationID) => {
 		return { success: false, payload: error };
 	}
 };
+
+export const getProgramCategoryOrganizationStructureImage = async () => {
+	try {
+		const response = await http.get('/program/category/photo/upload');
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteProgramCategoryOrganizationStructureImage = async () => {
+	try {
+		const response = await http.delete('/program/category/photo/upload');
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const uploadProgramCategoryOrganizationStructureImage = async (programCategoryID, params) => {
+	const data = {
+		base64_datas: params.picture || ''
+	};
+
+	try {
+		const response = await http.post('/program/category/photo/upload/' + programCategoryID, data);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
