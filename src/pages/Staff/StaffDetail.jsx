@@ -155,7 +155,28 @@ const StaffDetail = () => {
 												<InputTextInfo tag={'Alamat Domisili'} value={staff?.address || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'No. HP/Telp'} value={staff?.mobile || 'Belum Mencantumkan'} />
 												<InputTextInfo tag={'Email'} value={staff?.email || 'Belum Mencantumkan'} />
-												<InputTextInfo tag={'Role'} value={staff?.staff_title?.name || 'Belum Mencantumkan'} />
+												<InputTextInfo
+													tag={'Role'}
+													value={
+														<div>
+															{staff?.staff_titles.length === 0 && (
+																<div className="text-gray-500">Belum Mencantumkan</div>
+															)}
+															{staff?.staff_titles.length > 0 && (
+																<ul className="space-y-2 list-disc list-inside">
+																	{staff?.staff_titles.map((title) => {
+																		return (
+																			<li key={title.id}>
+																				<span>{title.parent ? `${title.parent.name}` : ''}</span>
+																				<span>({title.name})</span>
+																			</li>
+																		);
+																	})}
+																</ul>
+															)}
+														</div>
+													}
+												/>
 												<InputTextInfo
 													tag={'Kota/Kabupaten Domisili'}
 													value={staff?.city?.name || 'Belum Mencantumkan'}
