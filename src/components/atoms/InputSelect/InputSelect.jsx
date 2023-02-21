@@ -3,7 +3,7 @@ import ReactSelect from 'react-select';
 import './InputSelect.css';
 
 export const InputSelect = forwardRef(
-	({ options, value, loading, multi, searchable, disabled, onChange, placeholder, ...props }, ref) => {
+	({ options, value, loading, multi, searchable, clearable, disabled, onChange, placeholder, ...props }, ref) => {
 		return (
 			<ReactSelect
 				{...props}
@@ -18,7 +18,7 @@ export const InputSelect = forwardRef(
 				isSearchable={searchable}
 				isLoading={loading}
 				isDisabled={disabled}
-				isClearable
+				isClearable={clearable}
 				styles={{
 					input: (provided) => ({
 						...provided,
@@ -38,3 +38,6 @@ export const InputSelect = forwardRef(
 );
 
 InputSelect.displayName = 'InputSelect';
+InputSelect.defaultProps = {
+	clearable: true
+};
