@@ -17,7 +17,17 @@ export const TableDetailVillageInDistrict = ({ villageData }) => {
 			{
 				Header: 'Nama Desa',
 				accessor: 'village_name',
-				minWidth: 150
+				minWidth: 150,
+				Cell: (row) => {
+					const data = row.row.original;
+					return (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/dapil/village/${data.village_id}`}
+							text={data.village_name}
+						/>
+					);
+				}
 			},
 			{
 				Header: 'PIC Desa',
