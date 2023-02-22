@@ -31,13 +31,19 @@ export const TableDetailVillageInDistrict = ({ villageData }) => {
 			},
 			{
 				Header: 'PIC Desa',
-				accessor: 'village_pic',
-				minWidth: 150
+				minWidth: 150,
+				Cell: (row) => {
+					const data = row.row.original;
+					return data.village_pic || '-';
+				}
 			},
 			{
 				Header: 'PIC Mobile',
-				accessor: 'village_pic_mobile',
-				minWidth: 150
+				minWidth: 150,
+				Cell: (row) => {
+					const data = row.row.original;
+					return data.village_pic_mobile || '-';
+				}
 			},
 			{
 				Header: 'PIC Internal',
