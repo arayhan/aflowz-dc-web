@@ -60,6 +60,18 @@ const DistrictDetail = () => {
 								<hr />
 								<div className="p-5">
 									<div className="grid grid-cols-12 text-sm gap-y-1">
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kota</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+											{!districtDetail?.city?.id && '-'}
+											{districtDetail?.city?.id && (
+												<Link
+													to={`/dapil/city/${districtDetail?.city?.id}`}
+													className="underline text-primary hover:text-primary-400"
+												>
+													{districtDetail?.city?.name}
+												</Link>
+											)}
+										</div>
 										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kecamatan</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{districtDetail?.district_name || '-'}
