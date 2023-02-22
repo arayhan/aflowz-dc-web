@@ -47,7 +47,7 @@ export const FormMitraTimeline = () => {
 	}, [programCategoryTimelineID, programCategoryTimeline]);
 
 	useEffect(() => {
-		if (!programCategoryTimeline) getProgramCategoryTimeline(programCategoryTimelineID);
+		if (programCategoryTimelineID && !programCategoryTimeline) getProgramCategoryTimeline(programCategoryTimelineID);
 	}, [programCategoryTimelineID, programCategoryTimeline]);
 
 	useEffect(() => () => clearStateProgramCategoryTimeline(), []);
