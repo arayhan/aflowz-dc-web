@@ -27,6 +27,7 @@ const states = (set, get) => ({
 	staff: null,
 	staffList: null,
 	staffTitleList: null,
+	staffTitleParentList: null,
 	penerimaAllCity: null,
 	staffOrganizationStructureImage: null,
 
@@ -126,6 +127,17 @@ const states = (set, get) => ({
 		const { success, payload } = await SERVICE_PARTNER.getStaffTitleList();
 
 		set({ staffTitleList: success ? payload : null });
+
+		if (success && payload?.total > 0) {
+			const filteredRoles = payload?.items.filter((role) => role?.parent?.name).map((role) => role.parent);
+			const filteredRolesUnique = filteredRoles?.reduce((acc, role) => {
+				const isDuplicate = acc?.find((item) => item.id === role.id);
+				return isDuplicate ? acc : [...acc, role];
+			}, []);
+
+			set({ staffTitleParentList: filteredRolesUnique });
+		}
+
 		set({ fetchingStaffTitleList: false });
 	},
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const SectionShortcutStaffTitle = ({ selectedShortcut }) => {
 	const navigate = useNavigate();
 
-	const { fetchingStaffTitleList, staffTitleList, getStaffTitleList } = usePartnerStore();
+	const { fetchingStaffTitleList, staffTitleParentList, getStaffTitleList } = usePartnerStore();
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
@@ -21,12 +21,6 @@ export const SectionShortcutStaffTitle = ({ selectedShortcut }) => {
 		getStaffTitleList();
 	}, []);
 
-	const filteredRoles = staffTitleList?.items.filter((role) => role?.parent?.name).map((role) => role.parent);
-	const filteredRolesUnique = filteredRoles?.reduce((acc, role) => {
-		const isDuplicate = acc?.find((item) => item.id === role.id);
-		return isDuplicate ? acc : [...acc, role];
-	}, []);
-
 	return (
 		<section className="w-full bg-white rounded-md shadow-md">
 			<div>
@@ -34,9 +28,9 @@ export const SectionShortcutStaffTitle = ({ selectedShortcut }) => {
 					<div className="text-xl md:text-2xl font-extralight">Pilih Role</div>
 				</div>
 				<div className="container">
-					{!fetchingStaffTitleList && filteredRolesUnique?.length > 0 && (
+					{!fetchingStaffTitleList && staffTitleParentList?.length > 0 && (
 						<div className="flex gap-3 pb-4 overflow-x-scroll md:pb-6 2xl:justify-center">
-							{filteredRolesUnique.map((shortcut) => (
+							{staffTitleParentList.map((shortcut) => (
 								<button
 									key={shortcut.id}
 									className={`w-[200px] min-w-[200px] lg:w-[250px] lg:min-w-[250px] flex items-center text-left border px-2 py-2 rounded-md cursor-pointer space-x-2 ${

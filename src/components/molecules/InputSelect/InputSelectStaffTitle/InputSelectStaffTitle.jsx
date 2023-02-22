@@ -3,7 +3,7 @@ import { usePartnerStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectStaffTitle = forwardRef(({ showLabel, label, clearable, error, onChange, ...props }, ref) => {
-	const { staffTitleList, fetchingStaffTitleList, getStaffTitleList } = usePartnerStore();
+	const { staffTitleParentList, fetchingStaffTitleList, getStaffTitleList } = usePartnerStore();
 
 	const [options, setOptions] = useState([]);
 
@@ -12,15 +12,15 @@ export const InputSelectStaffTitle = forwardRef(({ showLabel, label, clearable, 
 	}, []);
 
 	useEffect(() => {
-		if (staffTitleList?.total > 0) {
-			const mapStaffTitle = staffTitleList.items.map((title) => ({
+		if (staffTitleParentList?.length > 0) {
+			const mapStaffTitle = staffTitleParentList?.map((title) => ({
 				label: title.name,
 				value: title.id
 			}));
 
 			setOptions(mapStaffTitle);
 		}
-	}, [staffTitleList]);
+	}, [staffTitleParentList]);
 
 	return (
 		<div className="space-y-1">
