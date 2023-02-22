@@ -13,7 +13,6 @@ export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 	};
 
 	const [errors, setErrors] = useState(null);
-	const [base64File, setBase64File] = useState(null);
 	const [file, setFile] = useState(null);
 
 	const handleUpload = () => {
@@ -37,7 +36,6 @@ export const ModalUploadImage = ({ isLoading, onClose, onSubmit }) => {
 
 		setErrors(null);
 		setFile(file);
-		setBase64File(base64);
 	};
 
 	const handleClose = () => {
