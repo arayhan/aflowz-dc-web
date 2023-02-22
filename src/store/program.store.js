@@ -18,7 +18,6 @@ const states = (set, get) => ({
 	fetchingProgramOrganization: false,
 	fetchingProgramOrganizationList: false,
 	fetchingProgramOrganizationPositionList: false,
-	fetchingProgramCategoryOrganizationStructureImage: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
@@ -45,7 +44,6 @@ const states = (set, get) => ({
 	programOrganization: false,
 	programOrganizationList: false,
 	programOrganizationPositionList: false,
-	programCategoryOrganizationStructureImage: null,
 
 	programCategoryErrors: null,
 	programCategoryTimelineErrors: null,
@@ -301,16 +299,6 @@ const states = (set, get) => ({
 		setPageLoading(false);
 	},
 
-	getProgramCategoryOrganizationStructureImage: async (programCategoryID, callback) => {
-		set({ fetchingProgramCategoryOrganizationStructureImage: true });
-
-		const { payload, success } = await SERVICE_PROGRAM.getProgramCategoryOrganizationStructureImage(programCategoryID);
-		set({ programCategoryOrganizationStructureImage: success ? payload : null });
-		set({ fetchingProgramCategoryOrganizationStructureImage: false });
-
-		if (callback) callback({ payload, success });
-	},
-
 	uploadProgramCategoryOrganizationStructureImage: async (programCategoryID, params, callback) => {
 		set({ processingUploadProgramCategoryOrganizationStructureImage: true });
 
@@ -321,20 +309,22 @@ const states = (set, get) => ({
 		);
 
 		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
-		get().getProgramCategoryOrganizationStructureImage(payload.prgoram_category_id);
+		get().getProgramCategoryDetail(programCategoryID);
 		set({ processingUploadProgramCategoryOrganizationStructureImage: false });
 
 		callback({ payload, success });
 	},
 
-	deleteProgramCategoryOrganizationStructureImage: async () => {
+	deleteProgramCategoryOrganizationStructureImage: async (programCategoryID) => {
 		set({ processingDeleteProgramCategoryOrganizationStructureImage: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryOrganizationStructureImage();
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgramCategoryOrganizationStructureImage(
+			programCategoryID
+		);
 
 		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
-		get().getProgramCategoryOrganizationStructureImage();
+		get().getProgramCategoryDetail(programCategoryID);
 		set({ processingDeleteProgramCategoryOrganizationStructureImage: false });
 	},
 

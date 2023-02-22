@@ -1,13 +1,12 @@
 import { CardOrganizationStructureImage } from '@/components/atoms';
 import { useProgramStore } from '@/store';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const CardProgramCategoryOrganizationStructure = ({ programCategoryID }) => {
 	const {
-		programCategoryOrganizationStructureImage,
+		programCategoryDetail,
 		fetchingProgramCategoryOrganizationStructureImage,
 		processingUploadProgramCategoryOrganizationStructureImage,
-		getProgramCategoryOrganizationStructureImage,
 		uploadProgramCategoryOrganizationStructureImage,
 		deleteProgramCategoryOrganizationStructureImage
 	} = useProgramStore();
@@ -21,19 +20,16 @@ export const CardProgramCategoryOrganizationStructure = ({ programCategoryID }) 
 		);
 	};
 
-	useEffect(() => {
-		getProgramCategoryOrganizationStructureImage(programCategoryID);
-	}, []);
-
 	return (
 		<CardOrganizationStructureImage
-			image={programCategoryOrganizationStructureImage}
+			image={programCategoryDetail?.image_url}
 			showModal={showModalUploadOrganizationStructure}
 			setShowModal={setShowModalUploadOrganizationStructure}
 			isLoading={
 				fetchingProgramCategoryOrganizationStructureImage || processingUploadProgramCategoryOrganizationStructureImage
 			}
-			onDelete={deleteProgramCategoryOrganizationStructureImage}
+			hideDeleteButton
+			onDelete={() => deleteProgramCategoryOrganizationStructureImage(programCategoryID)}
 			onSubmit={handleUpload}
 		/>
 	);

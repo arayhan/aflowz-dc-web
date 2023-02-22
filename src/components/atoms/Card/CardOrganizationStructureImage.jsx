@@ -14,7 +14,8 @@ export const CardOrganizationStructureImage = ({
 	setShowModal,
 	onSubmit,
 	isLoading,
-	onDelete
+	onDelete,
+	hideDeleteButton
 }) => {
 	const { isAdmin } = useAuthStore();
 
@@ -63,7 +64,7 @@ export const CardOrganizationStructureImage = ({
 				{isAdmin && !isLoading && image && (
 					<div className="flex items-center justify-center gap-3 text-sm">
 						<ButtonAction action={ACTION_TYPES.UPDATE} onClick={() => setShowModal(true)} />
-						<ButtonAction action={ACTION_TYPES.DELETE} onClick={onDelete} />
+						{!hideDeleteButton && <ButtonAction action={ACTION_TYPES.DELETE} onClick={onDelete} />}
 					</div>
 				)}
 			</div>

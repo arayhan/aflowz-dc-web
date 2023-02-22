@@ -268,24 +268,9 @@ export const deleteProgramOrganization = async (programOrganizationID) => {
 	}
 };
 
-export const getProgramCategoryOrganizationStructureImage = async (programCategoryID) => {
+export const deleteProgramCategoryOrganizationStructureImage = async (programCategoryID) => {
 	try {
-		const response = await http.get('/program/category/photo/upload/' + programCategoryID);
-
-		const failed = response.data.code === 400;
-
-		return {
-			success: !failed,
-			payload: failed ? null : baseURL + '/program/category/photo/upload/' + programCategoryID
-		};
-	} catch (error) {
-		return { success: false, payload: error };
-	}
-};
-
-export const deleteProgramCategoryOrganizationStructureImage = async () => {
-	try {
-		const response = await http.delete('/program/category/photo/upload');
+		const response = await http.delete('/program/category/photo/upload/' + programCategoryID);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
