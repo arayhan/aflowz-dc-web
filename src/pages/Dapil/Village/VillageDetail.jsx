@@ -56,12 +56,24 @@ const VillageDetail = () => {
 								<hr />
 								<div className="p-5">
 									<div className="grid grid-cols-12 text-sm gap-y-1">
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kota</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Kecamatan</div>
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+											{!villageDetail?.district?.id && '-'}
+											{villageDetail?.district?.id && (
+												<Link
+													to={`/dapil/district/${villageDetail?.district?.id}`}
+													className="underline text-primary hover:text-primary-400"
+												>
+													{villageDetail?.district?.name}
+												</Link>
+											)}
+										</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nama Desa</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{villageDetail?.village_name || '-'}
 										</div>
 
-										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Kota</div>
+										<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Desa</div>
 										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											{!villageDetail?.village_pic && '-'}
 											{villageDetail?.village_pic && (
@@ -95,10 +107,6 @@ const VillageDetail = () => {
 									linkTo={`/penerima?village_id=${villageID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Penerima Program Lebih Dari Satu'}
-									value={villageDetail?.total_penerima_multiple_program_village_per_orang || 0}
-								/>
-								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_pip || 0}
 									linkTo={`/institusi?village_id=${villageID}&program_name=pip`}
@@ -117,6 +125,10 @@ const VillageDetail = () => {
 									title={'Total Siswa Penerima KIP'}
 									value={villageDetail?.total_penerima_program_village_kip || 0}
 									linkTo={`/penerima?village_id=${villageID}&program_name=kip`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={villageDetail?.total_penerima_multiple_program_village_per_orang || 0}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
