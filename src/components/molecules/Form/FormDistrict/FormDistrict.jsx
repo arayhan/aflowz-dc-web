@@ -19,7 +19,7 @@ export const FormDistrict = () => {
 		resolver: yupResolver(formDistrictSchema),
 		defaultValues: {
 			name: '',
-			city_id: '',
+			city_id: undefined,
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -57,7 +57,7 @@ export const FormDistrict = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{districtID ? 'Edit' : 'Tambah'} Kecamatan</div>
+				<div className="text-xl font-light">{districtID ? 'Edit' : 'Tambah'} Kecamatan</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />

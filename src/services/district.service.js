@@ -32,6 +32,7 @@ export const getDistrictDetail = async (districtID) => {
 export const createDistrict = async (params) => {
 	const request = {
 		name: params?.name || '',
+		city_id: params?.city_id || 0,
 		district_id: params?.district_id || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
@@ -49,6 +50,7 @@ export const createDistrict = async (params) => {
 export const updateDistrict = async (districtID, params) => {
 	const request = {
 		name: params?.name || '',
+		city_id: params?.city_id || 0,
 		district_id: params?.district_id || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',

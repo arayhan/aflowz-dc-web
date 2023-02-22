@@ -99,7 +99,7 @@ export const formTPSSchema = yup.object().shape(
 export const formDistrictSchema = yup.object().shape(
 	{
 		name: yup.string().required('Nama program wajib diisi'),
-		city_id: yup.string().required('Kota wajib diisi'),
+		city_id: yup.number().required('Kota wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
 		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
 		pic_mobile: yup
