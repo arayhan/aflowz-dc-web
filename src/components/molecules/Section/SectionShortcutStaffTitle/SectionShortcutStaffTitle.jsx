@@ -31,22 +31,23 @@ export const SectionShortcutStaffTitle = ({ selectedShortcut }) => {
 					<div className="flex gap-3 pb-4 overflow-x-scroll md:pb-6 2xl:justify-center">
 						{!fetchingStaffTitleList &&
 							staffTitleList?.items.length > 0 &&
-							staffTitleList?.items
-								.filter((role) => role.parent?.name === undefined)
-								.map((shortcut) => (
-									<button
-										key={shortcut.id}
-										className={`w-[200px] min-w-[200px] lg:w-[250px] lg:min-w-[250px] flex items-center text-left border px-2 py-2 rounded-md cursor-pointer space-x-2 ${
-											selectedShortcut && decodeURI(selectedShortcut) === shortcut.name
-												? 'bg-primary-500  border-primary-500 hover:bg-primary-500 text-white'
-												: 'text-gray-400 hover:bg-gray-100'
-										}`}
-										onClick={() => handleSelectShortcut(shortcut.name)}
-									>
-										<img className="w-10" src={require('@/images/icons/box.svg').default} alt="" />
-										<div className="text-xs">{shortcut.name}</div>
-									</button>
-								))}
+							staffTitleList?.items.map((shortcut) => (
+								<button
+									key={shortcut.id}
+									className={`w-[200px] min-w-[200px] lg:w-[250px] lg:min-w-[250px] flex items-center text-left border px-2 py-2 rounded-md cursor-pointer space-x-2 ${
+										selectedShortcut && decodeURI(selectedShortcut) === shortcut.name
+											? 'bg-primary-500  border-primary-500 hover:bg-primary-500 text-white'
+											: 'text-gray-400 hover:bg-gray-100'
+									}`}
+									onClick={() => handleSelectShortcut(shortcut.name)}
+								>
+									<img className="w-10" src={require('@/images/icons/box.svg').default} alt="" />
+									<div className="text-xs">
+										{shortcut.parent && <span>{shortcut.parent.name} - </span>}
+										<span>{shortcut.name}</span>
+									</div>
+								</button>
+							))}
 					</div>
 				</div>
 			</div>
