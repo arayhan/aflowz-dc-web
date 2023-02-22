@@ -15,13 +15,14 @@ export const CardProgramCategoryOrganizationStructure = ({ programCategoryID }) 
 	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
 
 	const handleUpload = (picture) => {
-		uploadProgramCategoryOrganizationStructureImage(programCategoryID, { picture }, () =>
+		const base64Data = picture.split(',')[1];
+		uploadProgramCategoryOrganizationStructureImage(programCategoryID, { picture: base64Data }, () =>
 			setShowModalUploadOrganizationStructure(false)
 		);
 	};
 
 	useEffect(() => {
-		getProgramCategoryOrganizationStructureImage();
+		getProgramCategoryOrganizationStructureImage(programCategoryID);
 	}, []);
 
 	return (

@@ -301,10 +301,11 @@ const states = (set, get) => ({
 		setPageLoading(false);
 	},
 
-	getProgramCategoryOrganizationStructureImage: async (callback) => {
+	getProgramCategoryOrganizationStructureImage: async (programCategoryID, callback) => {
 		set({ fetchingProgramCategoryOrganizationStructureImage: true });
 
-		const { payload, success } = await SERVICE_PROGRAM.getProgramCategoryOrganizationStructureImage();
+		const { payload, success } = await SERVICE_PROGRAM.getProgramCategoryOrganizationStructureImage(programCategoryID);
+		set({ programCategoryOrganizationStructureImage: success ? payload : null });
 		set({ fetchingProgramCategoryOrganizationStructureImage: false });
 
 		if (callback) callback({ payload, success });
@@ -320,6 +321,7 @@ const states = (set, get) => ({
 		);
 
 		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+		get().getProgramCategoryOrganizationStructureImage(payload.prgoram_category_id);
 		set({ processingUploadProgramCategoryOrganizationStructureImage: false });
 
 		callback({ payload, success });

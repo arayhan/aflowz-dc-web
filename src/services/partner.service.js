@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/store';
 import { objectToQueryString } from '@/utils/helpers';
-import { http } from './http';
+import { http, baseURL } from './http';
 
 export const getPartnerItem = async (partnerID) => {
 	try {
@@ -165,7 +165,8 @@ export const updatePicture = async (partnerID, params) => {
 export const getStaffOrganizationStructureImage = async () => {
 	try {
 		const response = await http.get('/user/upload/structure');
-		return { success: response.data.success, payload: response.data.data };
+		const failed = response.data.code === 400;
+		return { success: !failed, payload: failed ? null : baseURL + '/user/upload/structure' };
 	} catch (error) {
 		return { success: false, payload: error };
 	}

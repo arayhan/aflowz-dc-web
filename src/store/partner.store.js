@@ -190,6 +190,7 @@ const states = (set, get) => ({
 		set({ fetchingStaffOrganizationStructureImage: true });
 
 		const { payload, success } = await SERVICE_PARTNER.getStaffOrganizationStructureImage();
+		set({ staffOrganizationStructureImage: success ? payload : null });
 		set({ fetchingStaffOrganizationStructureImage: false });
 
 		if (callback) callback({ payload, success });
@@ -202,8 +203,10 @@ const states = (set, get) => ({
 		const { payload, success } = await SERVICE_PARTNER.uploadStaffOrganizationStructureImage(params);
 
 		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+
 		set({ processingUploadStaffOrganizationStructureImage: false });
 
+		get().getStaffOrganizationStructureImage();
 		callback({ payload, success });
 	},
 

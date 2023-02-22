@@ -15,7 +15,10 @@ export const CardStaffOrganizationStructure = () => {
 	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
 
 	const handleUpload = (picture) => {
-		uploadStaffOrganizationStructureImage({ picture }, () => setShowModalUploadOrganizationStructure(false));
+		const base64Data = picture.split(',')[1];
+		uploadStaffOrganizationStructureImage({ picture: base64Data }, () =>
+			setShowModalUploadOrganizationStructure(false)
+		);
 	};
 
 	useEffect(() => {

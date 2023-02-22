@@ -51,10 +51,10 @@ export const CardOrganizationStructureImage = ({
 			<hr />
 
 			<div className="px-6 py-4 space-y-4">
-				<div>
+				<div className="flex items-center justify-center">
 					{isLoading && <Skeleton height={200} />}
 					{!isLoading && !image && (
-						<div className="px-4 py-16 text-sm text-center text-gray-400 bg-gray-100 rounded-md">
+						<div className="w-full px-4 py-16 text-sm text-center text-gray-400 bg-gray-100 rounded-md">
 							No Image Uploaded Yet
 						</div>
 					)}

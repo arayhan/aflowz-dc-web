@@ -20,6 +20,7 @@ export const ButtonAction = ({ text, className, linkTo, action, targetID, showAl
 	const handleAction = () => {
 		if (action === ACTION_TYPES.SEE_DETAIL || action === ACTION_TYPES.CREATE || action === ACTION_TYPES.UPDATE) {
 			if (linkTo) navigate(linkTo);
+			else if (onClick) onClick();
 			else if (!linkTo && action === ACTION_TYPES.SEE_DETAIL) navigate(`${location.pathname}/${targetID}`);
 			else if (!linkTo && action === ACTION_TYPES.UPDATE) navigate(`${location.pathname}/update/${targetID}`);
 		} else if (action === ACTION_TYPES.DELETE) {

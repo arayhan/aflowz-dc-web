@@ -1,5 +1,5 @@
 import { objectToQueryString } from '@/utils/helpers';
-import { http } from './http';
+import { http, baseURL } from './http';
 
 export const getProgram = async (programID) => {
 	try {
@@ -268,10 +268,16 @@ export const deleteProgramOrganization = async (programOrganizationID) => {
 	}
 };
 
-export const getProgramCategoryOrganizationStructureImage = async () => {
+export const getProgramCategoryOrganizationStructureImage = async (programCategoryID) => {
 	try {
-		const response = await http.get('/program/category/photo/upload');
-		return { success: response.data.success, payload: response.data.data };
+		const response = await http.get('/program/category/photo/upload/' + programCategoryID);
+
+		const failed = response.data.code === 400;
+
+		return {
+			success: !failed,
+			payload: failed ? null : baseURL + '/program/category/photo/upload/' + programCategoryID
+		};
 	} catch (error) {
 		return { success: false, payload: error };
 	}
