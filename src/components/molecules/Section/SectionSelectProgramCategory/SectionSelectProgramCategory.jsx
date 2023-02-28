@@ -15,7 +15,10 @@ export const SectionSelectProgramCategory = ({ selectedCategoryID }) => {
 	};
 
 	const handleSelectCategoryID = (categoryID) => {
-		handleSetFilter('category_id', Number(selectedCategoryID) !== categoryID ? { category_id: categoryID } : null);
+		handleSetFilter(
+			'program_category_id',
+			Number(selectedCategoryID) !== categoryID ? { program_category_id: categoryID } : null
+		);
 	};
 
 	useEffect(() => {

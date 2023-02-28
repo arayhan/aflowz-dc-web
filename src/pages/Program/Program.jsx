@@ -13,7 +13,6 @@ const Program = () => {
 	const [params, setParams] = useState({});
 
 	const isPIP = params?.keyword === 'PIP';
-	const isKIP = params?.keyword === 'KIP';
 	const isPIPorKIP = params?.keyword === 'PIP' || params?.keyword === 'KIP';
 
 	useEffect(() => {
@@ -24,8 +23,8 @@ const Program = () => {
 		<div>
 			<BannerFeature title={`Program ${isPIPorKIP ? (isPIP ? 'PIP' : 'KIP') : ''}`} />
 			<div className="bg-gray-100">
-				{!isPIPorKIP && <SectionSelectProgramCategory selectedCategoryID={params.category_id} />}
-				{(isPIPorKIP || params.category_id) && (
+				{!isPIPorKIP && <SectionSelectProgramCategory selectedCategoryID={params.program_category_id} />}
+				{(isPIPorKIP || params.program_category_id) && (
 					<div className="container py-6">
 						<TableProgram params={params} />
 					</div>
