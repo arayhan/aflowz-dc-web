@@ -1,4 +1,4 @@
-import { Button, InputText } from '@/components/atoms';
+import { Button, InputCheckbox, InputText } from '@/components/atoms';
 import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,7 +23,8 @@ export const FormProgram = () => {
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined,
-			description: ''
+			description: '',
+			is_special_program: false
 		}
 	});
 
@@ -52,13 +53,14 @@ export const FormProgram = () => {
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
 			setValue('description', program.description || '');
+			setValue('is_special_program', program.is_special_program || '');
 		}
 	}, [programID, program]);
 
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{programID ? 'Edit' : 'Tambah'} Program</div>
+				<div className="text-xl font-light">{programID ? 'Edit' : 'Tambah'} Program</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
@@ -160,6 +162,19 @@ export const FormProgram = () => {
 							{...field}
 							label="Deskripsi Program"
 							placeholder="Deskripsi Program"
+							disabled={processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'is_special_program'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputCheckbox
+							{...field}
+							label="Special Program?"
 							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
