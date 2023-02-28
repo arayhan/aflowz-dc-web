@@ -111,15 +111,16 @@ const KonstituenDetail = () => {
 												</div>
 											</Link>
 										</div>
+
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg md:px-10">
-											<div>
+											<Link to={`/activity?activity_konstituen_id=${konstituenDetail?.konstituen_id}`}>
 												<div className="flex flex-col items-center justify-center space-y-1 text-center">
 													<span className="text-2xl md:text-4xl font-extralight">
 														{konstituenDetail?.total_konstituen_activity_detail || 0}
 													</span>
 													<div className="font-light text-gray-400">Total Kegiatan </div>
 												</div>
-											</div>
+											</Link>
 										</div>
 									</div>
 									<div className="grid w-full grid-cols-12 gap-4">
