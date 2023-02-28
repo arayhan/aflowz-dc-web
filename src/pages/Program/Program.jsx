@@ -20,7 +20,6 @@ const Program = () => {
 		<div>
 			<BannerFeature title="Program" />
 			<div className="bg-gray-100">
-				<SectionShortcutProgram selectedShortcut={params.keyword} />
 				<SectionSelectProgramCategory selectedCategoryID={params.category_id} />
 				{params.category_id && (
 					<div className="container py-6">

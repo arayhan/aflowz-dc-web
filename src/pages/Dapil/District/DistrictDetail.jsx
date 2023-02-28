@@ -107,7 +107,7 @@ const DistrictDetail = () => {
 							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
-									value={districtDetail?.penerima_program_district?.length || 0}
+									value={districtDetail?.total_program_district_per_orang?.length || 0}
 									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 								<CardDetailTotal

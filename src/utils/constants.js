@@ -47,6 +47,8 @@ export const PER_PAGE_OPTIONS = [5, 10, 20, 50, 100];
 export const MITRA_MENUS = [
 	{ id: 1, title: 'Mitra', icon: require('@/images/icons/Icon_Home/Mitra.svg').default, path: '/mitra' },
 	{ id: 2, title: 'Program', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program' },
+	{ id: 2, title: 'PIP', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program?keyword=PIP' },
+	{ id: 2, title: 'KIP', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program?keyword=KIP' },
 	{ id: 3, title: 'Institusi', icon: require('@/images/icons/Icon_Home/Konstitusi.svg').default, path: '/institusi' }
 ];
 
