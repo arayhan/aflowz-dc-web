@@ -5,7 +5,6 @@ import {
 	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
 	TableDetailTotalPenerimaByProgram,
-	TableDistrict,
 	TablePenerima
 } from '@/components/molecules';
 import { TableDetailDistrictInCity } from '@/components/molecules/TableDetail/TableDetailDistrictInCity/TableDetailDistrictInCity';
@@ -95,10 +94,6 @@ const CityDetail = () => {
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Penerima Program Lebih Dari Satu'}
-									value={cityDetail?.total_penerima_multiple_program_city_per_orang || 0}
-								/>
-								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={cityDetail?.total_institusi_penerima_program_city_pip || 0}
 									linkTo={`/institusi?city_id=${cityID}&program_name=pip`}
@@ -117,6 +112,10 @@ const CityDetail = () => {
 									title={'Total Mahasiswa Penerima KIP'}
 									value={cityDetail?.total_penerima_program_city_kip || 0}
 									linkTo={`/penerima?city_id=${cityID}&program_name=kip`}
+								/>
+								<CardDetailTotal
+									title={'Total Penerima Program Lebih Dari Satu'}
+									value={cityDetail?.total_penerima_multiple_program_city_per_orang || 0}
 								/>
 								<CardDetailTotal
 									title={'Potensi Pemilih'}
@@ -142,24 +141,13 @@ const CityDetail = () => {
 										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_program} />
 									</Card>
 								</div>
-								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
+								<div className="col-span-12 bg-white rounded-md">
 									<Card
 										title={'Potensi Pemilih By Gender'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
 									</Card>
-								</div>
-								<div className="col-span-6 bg-white rounded-md">
-									<TableDistrict
-										title={`List Kecamatan di ${cityDetail.city_name}`}
-										params={{ ...tableDistrictParams, city_id: cityID }}
-										setParams={setTableDistrictParams}
-										displayedColumns={['#', 'Nama Kecamatan', 'Nama PIC']}
-										isReadonly
-										isShowButtonSeeAll
-										enableClickRow
-									/>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
 									<Card
