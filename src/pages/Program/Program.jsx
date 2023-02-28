@@ -12,6 +12,8 @@ const Program = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
+	const isPIPorKIP = params?.keyword === 'PIP' || params?.keyword === 'KIP';
+
 	useEffect(() => {
 		setParams(search ? queryStringToObject(search) : {});
 	}, [search]);
@@ -20,8 +22,8 @@ const Program = () => {
 		<div>
 			<BannerFeature title="Program" />
 			<div className="bg-gray-100">
-				<SectionSelectProgramCategory selectedCategoryID={params.category_id} />
-				{params.category_id && (
+				{!isPIPorKIP && <SectionSelectProgramCategory selectedCategoryID={params.category_id} />}
+				{(isPIPorKIP || params.category_id) && (
 					<div className="container py-6">
 						<TableProgram params={params} />
 					</div>
