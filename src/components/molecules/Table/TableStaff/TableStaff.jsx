@@ -1,9 +1,12 @@
-import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
+import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
+import { useNavigate } from 'react-router-dom';
 
-export const TableStaff = ({ params }) => {
+export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }) => {
+	const navigate = useNavigate();
 	const { isSystem, isAdmin } = useAuthStore();
 	const { fetchingStaffList, staffList, getStaffList, deleteStaff } = usePartnerStore();
 
@@ -90,6 +93,12 @@ export const TableStaff = ({ params }) => {
 		[]
 	);
 
+	const handleSetFilter = (key, params) => {
+		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		if (setParams) setParams(queryStringToObject(updatedParams));
+		else navigate('/staff' + updatedParams, { replace: true });
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -119,6 +128,26 @@ export const TableStaff = ({ params }) => {
 					featurePath="/staff"
 				/>
 			</div>
+			{isShowFilter && (
+				<>
+					<hr />
+
+					<div className="px-6 py-3">
+						<div className="grid items-center justify-end w-full grid-cols-1 gap-4 text-sm sm:grid-cols-2 lg:flex">
+							{(!displayedFilters || displayedFilters.includes('keyword')) && (
+								<InputText
+									value={params?.keyword || ''}
+									showLabel={false}
+									placeholder="Cari nama staff"
+									onChange={(event) => {
+										handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+									}}
+								/>
+							)}
+						</div>
+					</div>
+				</>
+			)}
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingStaffList || staffList === null} />
 			</div>
@@ -127,4 +156,8 @@ export const TableStaff = ({ params }) => {
 			</div>
 		</div>
 	);
+};
+
+TableStaff.defaultProps = {
+	isShowFilter: true
 };
