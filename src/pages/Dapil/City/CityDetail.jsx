@@ -8,6 +8,7 @@ import {
 	TableDistrict,
 	TablePenerima
 } from '@/components/molecules';
+import { TableDetailDistrictInCity } from '@/components/molecules/TableDetail/TableDetailDistrictInCity/TableDetailDistrictInCity';
 import { useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
@@ -160,9 +161,18 @@ const CityDetail = () => {
 										enableClickRow
 									/>
 								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<Card
+										title={`List Kecamatan di Kota ${cityDetail.city_name}`}
+										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<TableDetailDistrictInCity districtData={cityDetail.penerima_program_city_district} />
+									</Card>
+								</div>
 								<div className="col-span-12">
 									<Card
-										title={`Penerima Program di ${cityDetail.city_name}`}
+										title={`Total Penerima Setiap Program di Kota ${cityDetail.city_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
@@ -173,7 +183,7 @@ const CityDetail = () => {
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
 									<TablePenerima
-										title={`Penerima Program ${cityDetail.city_name}`}
+										title={`Penerima Program Kota ${cityDetail.city_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
 										isShowFooter={false}

@@ -186,7 +186,7 @@ const DistrictDetail = () => {
 								</div>
 								<div className="col-span-12">
 									<Card
-										title={`Penerima Program di ${districtDetail.district_name}`}
+										title={`Total Penerima Setiap Program di Kecamatan ${districtDetail.district_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
@@ -197,7 +197,7 @@ const DistrictDetail = () => {
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
 									<TablePenerima
-										title={`Penerima Program ${districtDetail.district_name}`}
+										title={`Penerima Program di Kecamatan ${districtDetail.district_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
 										isShowFooter={false}
