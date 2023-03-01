@@ -6,7 +6,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const ChartPeriodeProgram = ({ data }) => {
+export const ChartPeriodeProgram = ({ data, dataLabels }) => {
 	const total = data.length;
 	return (
 		<>
@@ -17,8 +17,8 @@ export const ChartPeriodeProgram = ({ data }) => {
 						labels: data.map((item) => item.periode),
 						datasets: [
 							{
-								label: 'Total Program',
-								data: data.map((item) => item.total_program),
+								label: dataLabels.map((item) => `Total ${item}`),
+								data: data.map((item) => item.total_penerima),
 								backgroundColor: getRandomColor(),
 								borderWidth: 1
 							}
@@ -36,7 +36,7 @@ export const ChartPeriodeProgram = ({ data }) => {
 							y: {
 								title: {
 									display: true,
-									text: 'Jumlah Program',
+									text: dataLabels.map((item) => `Jumlah ${item}`),
 									color: '#aaa'
 								},
 								ticks: {

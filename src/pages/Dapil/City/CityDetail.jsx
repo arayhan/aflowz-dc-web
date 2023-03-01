@@ -129,7 +129,10 @@ const CityDetail = () => {
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_orang} />
+										<ChartPeriodeProgram
+											dataLabels={['Penerima']}
+											data={cityDetail?.total_penerima_program_city_by_periode_per_orang}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
@@ -138,7 +141,10 @@ const CityDetail = () => {
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={cityDetail?.total_penerima_program_city_by_periode_per_program} />
+										<ChartPeriodeProgram
+											dataLabels={['Program']}
+											data={cityDetail?.total_penerima_program_city_by_periode_per_program}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
