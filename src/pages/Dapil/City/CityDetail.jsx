@@ -90,7 +90,7 @@ const CityDetail = () => {
 							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
-									value={cityDetail?.penerima_program_city?.length || 0}
+									value={cityDetail?.total_penerima_program_city_per_orang || 0}
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 								<CardDetailTotal
