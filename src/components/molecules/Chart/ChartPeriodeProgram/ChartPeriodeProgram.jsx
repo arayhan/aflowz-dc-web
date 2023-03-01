@@ -17,7 +17,7 @@ export const ChartPeriodeProgram = ({ data, dataLabels }) => {
 						labels: data.map((item) => item.periode),
 						datasets: [
 							{
-								label: dataLabels.map((item) => `Total ${item}`),
+								label: dataLabels?.map((item) => `Total ${item}`) || 'Total',
 								data: data.map((item) => item.total_penerima),
 								backgroundColor: getRandomColor(),
 								borderWidth: 1
@@ -36,7 +36,7 @@ export const ChartPeriodeProgram = ({ data, dataLabels }) => {
 							y: {
 								title: {
 									display: true,
-									text: dataLabels.map((item) => `Jumlah ${item}`),
+									text: dataLabels?.map((item) => `Jumlah ${item}`) || 'Total',
 									color: '#aaa'
 								},
 								ticks: {

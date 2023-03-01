@@ -154,18 +154,6 @@ const DistrictDetail = () => {
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Potensi Pemilih By Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
-									>
-										<ChartPenerimaProgramByGender
-											totalPria={districtDetail?.total_potensi_pemilih_district_per_orang_penerima_pria}
-											totalWanita={districtDetail?.total_potensi_pemilih_district_per_orang_penerima_wanita}
-										/>
-									</Card>
-								</div>
-								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
-									<Card
 										title={'Jumlah Penerima Program per Periode'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
