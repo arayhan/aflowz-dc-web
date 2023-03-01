@@ -150,23 +150,14 @@ const VillageDetail = () => {
 								</div>
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
-										title={'Jumlah Potensi Pemilih By Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
-									>
-										<ChartPenerimaProgramByGender
-											totalPria={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_pria}
-											totalWanita={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_wanita}
-										/>
-									</Card>
-								</div>
-								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
-									<Card
 										title={'Jumlah Penerima Program per Periode'}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPeriodeProgram data={villageDetail?.total_penerima_program_village_by_periode_per_program} />
+										<ChartPeriodeProgram
+											dataLabels={['Program']}
+											data={villageDetail?.total_penerima_program_village_by_periode_per_program}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
