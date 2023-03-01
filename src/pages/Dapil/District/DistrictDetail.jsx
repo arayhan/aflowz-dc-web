@@ -107,7 +107,7 @@ const DistrictDetail = () => {
 							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-4">
 								<CardDetailTotal
 									title={'Total Penerima'}
-									value={districtDetail?.total_program_district_per_orang?.length || 0}
+									value={districtDetail?.total_penerima_program_district_per_orang || 0}
 									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 								<CardDetailTotal
@@ -159,6 +159,7 @@ const DistrictDetail = () => {
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram
+											dataLabels={['Program']}
 											data={districtDetail?.total_penerima_program_district_by_periode_per_program}
 										/>
 									</Card>
@@ -174,12 +175,12 @@ const DistrictDetail = () => {
 								</div>
 								<div className="col-span-12">
 									<Card
-										title={`Total Penerima Setiap Program di Kecamatan ${districtDetail.district_name}`}
+										title={`List Program di Kecamatan ${districtDetail.district_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										className={'bg-white rounded-md'}
 									>
 										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailTotalPenerimaByProgram dataPenerima={districtDetail?.penerima_program_district} />
+											<TableDetailTotalPenerimaByProgram dataPenerima={districtDetail?.penerima_program} />
 										</div>
 									</Card>
 								</div>
