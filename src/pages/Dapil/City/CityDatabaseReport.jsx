@@ -119,7 +119,10 @@ const CityDatabaseReport = () => {
 												</div>
 
 												<div>
-													<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
+													<ChartPenerimaProgramByGender
+														totalPria={cityDetail?.total_penerima_program_city_per_orang_pria}
+														totalWanita={cityDetail?.total_penerima_program_city_per_orang_wanita}
+													/>
 												</div>
 
 												<div className="space-y-2">
