@@ -15,18 +15,10 @@ export const ChartPenerimaProgramByGender = ({ id, totalPria, totalWanita }) => 
 						<div className="p-2 text-sm bg-gray-100 rounded-md">
 							Total : <span className="font-semibold">{totalPria + totalWanita}</span>
 						</div>
-						<div className="flex items-center justify-center gap-2">
-							<div className="p-2 text-sm text-center bg-gray-100 rounded-md">
-								Total Pria : <span className="font-semibold">{totalPria}</span>
-							</div>
-							<div className="p-2 text-sm text-center bg-gray-100 rounded-md">
-								Total Wanita : <span className="font-semibold">{totalWanita}</span>
-							</div>
-						</div>
 					</div>
 					<Pie
 						data={{
-							labels: ['Pria', 'Wanita'],
+							labels: [`Pria (${totalPria})`, `Wanita (${totalWanita})`],
 							datasets: [
 								{
 									label: 'Total',

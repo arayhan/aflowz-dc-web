@@ -146,7 +146,10 @@ const CityDetail = () => {
 										title={'Potensi Pemilih By Gender'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
+										<ChartPenerimaProgramByGender
+											totalPria={cityDetail?.total_penerima_program_city_per_orang_pria}
+											totalWanita={cityDetail?.total_penerima_program_city_per_orang_wanita}
+										/>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
