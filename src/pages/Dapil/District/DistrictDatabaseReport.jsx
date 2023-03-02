@@ -11,6 +11,8 @@ const DistrictDatabaseReport = () => {
 	const { districtID } = useParams();
 	const pageOneRef = useRef();
 	const pageTwoRef = useRef();
+	const pageThreeRef = useRef();
+	const pageFourRef = useRef();
 
 	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
 
@@ -32,10 +34,16 @@ const DistrictDatabaseReport = () => {
 
 		const imagePageOne = await handleGenerateImage(pageOneRef.current);
 		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
+		const imagePageThree = await handleGenerateImage(pageThreeRef.current);
+		const imagePageFour = await handleGenerateImage(pageFourRef.current);
 
 		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
 		doc.addPage();
 		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
+		doc.addPage();
+		doc.addImage(imagePageThree, 'JPEG', 0, 0, 210, 297);
+		doc.addPage();
+		doc.addImage(imagePageFour, 'JPEG', 0, 0, 210, 297);
 		doc.save('District Database Report.pdf');
 	};
 
@@ -79,7 +87,9 @@ const DistrictDatabaseReport = () => {
 										</div>
 										<div className="text-3xl font-bold">KECAMATAN</div>
 									</div>
-									<hr className="my-4" />
+
+									<hr className="my-8" />
+
 									<div className="flex items-start justify-between">
 										<div className="space-y-1">
 											<div className="text-sm">KECAMATAN :</div>
@@ -98,7 +108,8 @@ const DistrictDatabaseReport = () => {
 											</div>
 										</div>
 									</div>
-									<div className="py-8 space-y-4">
+
+									<div className="py-12 space-y-6">
 										<div className="relative space-y-6">
 											<div className="font-semibold text-center">DATA JUMLAH PENERIMA SEMUA PROGRAM :</div>
 											<div className="flex items-center justify-between gap-4">
@@ -121,7 +132,10 @@ const DistrictDatabaseReport = () => {
 												</div>
 
 												<div>
-													<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
+													<ChartPenerimaProgramByGender
+														totalPria={districtDetail?.total_penerima_program_district_per_orang_pria}
+														totalWanita={districtDetail?.total_penerima_program_district_per_orang_wanita}
+													/>
 												</div>
 
 												<div className="space-y-2">
@@ -134,7 +148,7 @@ const DistrictDatabaseReport = () => {
 												</div>
 											</div>
 
-											<div className="space-y-4">
+											<div className="py-8 space-y-4">
 												<table className="w-full text-sm">
 													<tbody>
 														<tr>
@@ -166,35 +180,6 @@ const DistrictDatabaseReport = () => {
 													</tbody>
 												</table>
 											</div>
-
-											<div className="relative space-y-6">
-												<div className="font-semibold text-center">TOTAL PENERIMA PROGRAM PIP :</div>
-												<div className="flex items-center gap-4">
-													<div className="space-y-2">
-														<div className="text-sm text-center">INSTITUSI</div>
-														<div className="px-6 py-1 text-center bg-primary">
-															<div className="text-sm font-semibold text-secondary">SD</div>
-															<div className="text-lg font-semibold text-white">0</div>
-														</div>
-														<div className="px-6 py-1 text-center bg-primary">
-															<div className="text-sm font-semibold text-secondary">SMP</div>
-															<div className="text-lg font-semibold text-white">0</div>
-														</div>
-														<div className="px-6 py-1 text-center bg-primary">
-															<div className="text-sm font-semibold text-secondary">SMP</div>
-															<div className="text-lg font-semibold text-white">0</div>
-														</div>
-														<div className="px-6 py-1 text-center bg-primary">
-															<div className="text-sm font-semibold text-secondary">SMK</div>
-															<div className="text-lg font-semibold text-white">0</div>
-														</div>
-													</div>
-
-													<div className="w-full">
-														<ChartPenerimaPIPPerYear />
-													</div>
-												</div>
-											</div>
 										</div>
 									</div>
 									<div className="absolute left-0 w-full text-center bottom-8">1</div>
@@ -202,6 +187,35 @@ const DistrictDatabaseReport = () => {
 
 								<div ref={pageTwoRef} className={`relative w-[794px] min-h-[1123px] bg-white p-8`}>
 									<div className="py-10 space-y-16">
+										<div className="relative space-y-6">
+											<div className="font-semibold text-center">TOTAL PENERIMA PROGRAM PIP :</div>
+											<div className="flex items-center gap-4">
+												<div className="space-y-2">
+													<div className="text-sm text-center">INSTITUSI</div>
+													<div className="px-6 py-1 text-center bg-primary">
+														<div className="text-sm font-semibold text-secondary">SD</div>
+														<div className="text-lg font-semibold text-white">0</div>
+													</div>
+													<div className="px-6 py-1 text-center bg-primary">
+														<div className="text-sm font-semibold text-secondary">SMP</div>
+														<div className="text-lg font-semibold text-white">0</div>
+													</div>
+													<div className="px-6 py-1 text-center bg-primary">
+														<div className="text-sm font-semibold text-secondary">SMP</div>
+														<div className="text-lg font-semibold text-white">0</div>
+													</div>
+													<div className="px-6 py-1 text-center bg-primary">
+														<div className="text-sm font-semibold text-secondary">SMK</div>
+														<div className="text-lg font-semibold text-white">0</div>
+													</div>
+												</div>
+
+												<div className="w-full">
+													<ChartPenerimaPIPPerYear />
+												</div>
+											</div>
+										</div>
+
 										<div className="relative space-y-6">
 											<div className="font-semibold text-center">TOTAL PENERIMA PROGRAM KIP :</div>
 											<div className="flex items-center gap-4">
@@ -219,6 +233,12 @@ const DistrictDatabaseReport = () => {
 												</div>
 											</div>
 										</div>
+									</div>
+									<div className="absolute left-0 w-full text-center bottom-8">2</div>
+								</div>
+
+								<div ref={pageThreeRef} className={`relative w-[794px] min-h-[1123px] bg-white p-8`}>
+									<div className="relative mt-8 space-y-6">
 										<div className="relative space-y-6">
 											<div className="font-semibold text-center">TOTAL MASYARAKAT PENERIMA PROGRAM :</div>
 											<table className="w-full">
@@ -238,8 +258,51 @@ const DistrictDatabaseReport = () => {
 												</tbody>
 											</table>
 										</div>
+
+										<div className="font-semibold text-center">TOTAL MASYARAKAT PENERIMA PROGRAM PER DESA:</div>
+										<table className="w-full">
+											<thead className="bg-primary">
+												<tr>
+													<th className="px-6 py-3 text-left text-white">Nama Desa</th>
+													<th className="px-6 py-3 text-white">Qty</th>
+												</tr>
+											</thead>
+											<tbody>
+												{districtDetail?.penerima_program_district_village.map((program) => (
+													<tr key={program?.program_id} className="odd:bg-gray-100">
+														<td className="px-6 py-3 text-sm font-semibold">{program.village_name}</td>
+														<td className="px-6 py-3 text-sm font-semibold text-center">{program?.total_penerima}</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
 									</div>
-									<div className="absolute left-0 w-full text-center bottom-8">2</div>
+									<div className="absolute left-0 w-full text-center bottom-8">3</div>
+								</div>
+
+								<div ref={pageFourRef} className={`relative w-[794px] min-h-[1123px] bg-white p-8`}>
+									<div className="relative mt-8 space-y-6">
+										<div className="font-semibold text-center">TOTAL MASYARAKAT PENERIMA PROGRAM PER INSTITUSI:</div>
+										<table className="w-full">
+											<thead className="bg-primary">
+												<tr>
+													<th className="px-6 py-3 text-left text-white">Nama Institusi</th>
+													<th className="px-6 py-3 text-left text-white">Tipe Institusi</th>
+													<th className="px-6 py-3 text-white">Qty</th>
+												</tr>
+											</thead>
+											<tbody>
+												{districtDetail?.penerima_program_district_konstituen.map((program) => (
+													<tr key={program?.program_id} className="odd:bg-gray-100">
+														<td className="px-6 py-3 text-sm font-semibold">{program?.konstituen_name}</td>
+														<td className="px-6 py-3 text-sm font-semibold capitalize">{program?.konstituen_type}</td>
+														<td className="px-6 py-3 text-sm font-semibold text-center">{program?.total_penerima}</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+									<div className="absolute left-0 w-full text-center bottom-8">4</div>
 								</div>
 							</>
 						)}
