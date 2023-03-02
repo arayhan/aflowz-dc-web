@@ -29,7 +29,7 @@ export const SectionShortcutStaffTitle = ({ selectedShortcut }) => {
 				</div>
 				<div className="container">
 					{!fetchingStaffTitleList && staffTitleParentList?.length > 0 && (
-						<div className="flex gap-3 pb-4 overflow-x-scroll md:pb-6 2xl:justify-center">
+						<div className="flex flex-wrap gap-3 pb-4 overflow-x-scroll md:pb-6 2xl:justify-center">
 							{staffTitleParentList.map((shortcut) => (
 								<button
 									key={shortcut.id}
