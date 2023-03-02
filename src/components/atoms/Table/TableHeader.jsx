@@ -1,7 +1,7 @@
 import { ModalUploadSheetFollowers, ModalUploadSheetPenerima } from '@/components/molecules';
 import { ButtonPrintCertificateMulti } from '@/components/molecules/index';
 import React, { useState } from 'react';
-import { SiGooglesheets } from 'react-icons/si';
+import { SiGooglesheets, SiGroupon } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
 
 export const TableHeader = ({
@@ -15,9 +15,10 @@ export const TableHeader = ({
 	showButtonSeeAll,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
+	showButtonUploadOrganizationStructure,
 	showButtonCheckout,
 	showCounter,
-	listPenerima
+	setShowModalUploadOrganizationStructure
 }) => {
 	const location = useLocation();
 
@@ -25,7 +26,7 @@ export const TableHeader = ({
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 
 	return (
-		<div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+		<div className="flex flex-col items-start justify-between w-full gap-4 lg:flex-row lg:items-center">
 			{showModalUploadSheetFollowers && (
 				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
 			)}
@@ -33,23 +34,23 @@ export const TableHeader = ({
 				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
 			)}
 			<div className="w-full xl:w-1/3">
-				<div className="text-xl font-light transform: capitalize">{title}</div>
+				<div className="text-xl font-light capitalize transform:">{title}</div>
 				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'hidden text-sm text-gray-400'}>
 					{description}
 				</div>
 			</div>
-			<div className="w-full xl:w-1/2 flex flex-col md:justify-end md:flex-row gap-3">
+			<div className="flex flex-col w-full gap-3 xl:w-1/2 md:justify-end md:flex-row">
 				{showButtonSeeAll && seeAllLink && (
 					<Link
 						to={seeAllLink}
-						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-sm text-center text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
 					>
 						<span>Lihat Semua</span>
 					</Link>
 				)}
 				{!isReadonly && showButtonUploadSheetFollowers && (
 					<button
-						className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
+						className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
 						onClick={() => setShowModalUploadSheetFollowers(true)}
 					>
 						<span className="w-4">
@@ -58,13 +59,21 @@ export const TableHeader = ({
 						<span className="text-sm">Upload Followers</span>
 					</button>
 				)}
+				{!isReadonly && showButtonUploadOrganizationStructure && (
+					<button
+						className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+						onClick={() => setShowModalUploadOrganizationStructure(true)}
+					>
+						<span className="text-sm">Upload Struktur Organisasi</span>
+					</button>
+				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<>
 						{/* <div className="mx-2">
 							<ButtonPrintCertificateMulti names={listPenerima} />
 						</div> */}
 						<button
-							className="bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 flex items-center justify-center rounded-sm transition-all"
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
 							onClick={() => setShowModalUploadSheetPenerima(true)}
 						>
 							<span className="w-4">
@@ -77,7 +86,7 @@ export const TableHeader = ({
 				{!isReadonly && showButtonCreate && (
 					<Link
 						to={`${featurePath || location.pathname}/create`}
-						className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-sm text-center text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
 					>
 						<span>Create {feature}</span>
 					</Link>
@@ -85,7 +94,7 @@ export const TableHeader = ({
 				{!isReadonly && showButtonCheckout && (
 					<Link
 						to={`${featurePath || location.pathname}/move`}
-						className="flex items-center justify-center bg-green-500 hover:bg-green-600 w-full lg:w-auto space-x-2 text-white px-5 py-3 rounded-sm transition-all text-center text-sm"
+						className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-sm text-center text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
 					>
 						<span>Checkin / Checkout {feature}</span>
 					</Link>

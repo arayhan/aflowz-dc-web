@@ -1,5 +1,5 @@
 import { objectToQueryString } from '@/utils/helpers';
-import { http, baseURL } from './http';
+import { http } from './http';
 
 export const getProgram = async (programID) => {
 	try {
@@ -264,6 +264,19 @@ export const updateProgramOrganization = async (programOrganizationID, params) =
 export const deleteProgramOrganization = async (programOrganizationID) => {
 	try {
 		const response = await http.delete('/program/organization/' + programOrganizationID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const uploadProgramOrganizationStructureImage = async (programID, params) => {
+	const data = {
+		base64_datas: params.picture || ''
+	};
+
+	try {
+		const response = await http.post('/program/photo/upload/' + programID, data);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

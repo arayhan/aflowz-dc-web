@@ -1,4 +1,11 @@
-import { Table, ButtonAction, TableHeader, TableFooter, Button, InputText } from '@/components/atoms';
+import {
+	Table,
+	ButtonAction,
+	TableHeader,
+	TableFooter,
+	Button,
+	CardOrganizationStructureImage
+} from '@/components/atoms';
 import { useAuthStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
@@ -20,6 +27,8 @@ export const TableProgramOrganization = ({
 	isShowFilter,
 	seeAllLink,
 	isShowButtonSeeAll,
+	isShowUploadOrganizationStructure,
+	isShowButtonUploadOrganizationStructure,
 	enableClickRow
 }) => {
 	const location = useLocation();
@@ -28,10 +37,15 @@ export const TableProgramOrganization = ({
 
 	const { isSystem } = useAuthStore();
 	const {
+		programDetail,
 		programOrganizationList,
+		fetchingProgramDetail,
 		fetchingProgramOrganizationList,
+		processingUploadProgramOrganizationStructureImage,
+		getProgramDetail,
 		getProgramOrganizationList,
-		deleteProgramOrganization
+		deleteProgramOrganization,
+		uploadProgramOrganizationStructureImage
 	} = useProgramStore();
 
 	const [page, setPage] = useState(1);
@@ -39,6 +53,15 @@ export const TableProgramOrganization = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+
+	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
+
+	const handleUpload = (picture) => {
+		const base64Data = picture.split(',')[1];
+		uploadProgramOrganizationStructureImage(programID, { picture: base64Data }, () =>
+			setShowModalUploadOrganizationStructure(false)
+		);
+	};
 
 	const columns = useMemo(
 		() => [
@@ -188,6 +211,10 @@ export const TableProgramOrganization = ({
 		}
 	}, [programID, programOrganizationList]);
 
+	useEffect(() => {
+		if (programID && !programDetail) getProgramDetail(programID);
+	}, [programID, programDetail]);
+
 	return (
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
@@ -203,9 +230,28 @@ export const TableProgramOrganization = ({
 							? `/program/${programID}/organization`
 							: '/program/organization' + objectToQueryString(params)
 					}
+					showButtonUploadOrganizationStructure={isShowButtonUploadOrganizationStructure && !programDetail?.image_url}
+					setShowModalUploadOrganizationStructure={setShowModalUploadOrganizationStructure}
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>
+
+			{isShowUploadOrganizationStructure && (
+				<>
+					<hr />
+					<div className="p-3">
+						<CardOrganizationStructureImage
+							image={programDetail?.image_url}
+							showHeader={false}
+							showModal={showModalUploadOrganizationStructure}
+							setShowModal={setShowModalUploadOrganizationStructure}
+							isLoading={fetchingProgramDetail || processingUploadProgramOrganizationStructureImage}
+							hideDeleteButton
+							onSubmit={handleUpload}
+						/>
+					</div>
+				</>
+			)}
 
 			{isShowFilter && (
 				<>
@@ -264,5 +310,7 @@ export const TableProgramOrganization = ({
 TableProgramOrganization.defaultProps = {
 	params: {},
 	isShowFilter: true,
-	isShowFooter: true
+	isShowFooter: true,
+	isShowUploadOrganizationStructure: true,
+	isShowButtonUploadOrganizationStructure: true
 };

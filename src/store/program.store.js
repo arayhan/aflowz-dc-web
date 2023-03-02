@@ -31,6 +31,7 @@ const states = (set, get) => ({
 	processingCreateProgramOrganization: false,
 	processingUpdateProgramOrganization: false,
 	processingDeleteProgramOrganization: false,
+	processingUploadProgramOrganizationStructureImage: false,
 	processingUploadProgramCategoryOrganizationStructureImage: false,
 	processingDeleteProgramCategoryOrganizationStructureImage: false,
 
@@ -297,6 +298,19 @@ const states = (set, get) => ({
 		get().getProgramList();
 		set({ processingDeleteProgramCategoryTimeline: false });
 		setPageLoading(false);
+	},
+
+	uploadProgramOrganizationStructureImage: async (programID, params, callback) => {
+		set({ processingUploadProgramOrganizationStructureImage: true });
+
+		const loader = toast.loading('Uploading...');
+		const { payload, success } = await SERVICE_PROGRAM.uploadProgramOrganizationStructureImage(programID, params);
+
+		toastRequestResult(loader, success, 'Organization Structure uploaded', payload?.odoo_error || payload?.message);
+		set({ processingUploadProgramOrganizationStructureImage: false });
+		window.location.reload();
+
+		callback({ payload, success });
 	},
 
 	uploadProgramCategoryOrganizationStructureImage: async (programCategoryID, params, callback) => {
