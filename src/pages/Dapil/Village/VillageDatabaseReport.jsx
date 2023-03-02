@@ -11,6 +11,7 @@ const VillageDatabaseReport = () => {
 	const { villageID } = useParams();
 	const pageOneRef = useRef();
 	const pageTwoRef = useRef();
+	const pageThreeRef = useRef();
 
 	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
 
@@ -29,10 +30,13 @@ const VillageDatabaseReport = () => {
 
 		const imagePageOne = await handleGenerateImage(pageOneRef.current);
 		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
+		const imagePageThree = await handleGenerateImage(pageThreeRef.current);
 
 		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
 		doc.addPage();
 		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
+		doc.addPage();
+		doc.addImage(imagePageThree, 'JPEG', 0, 0, 210, 297);
 		doc.save('Village Database Report.pdf');
 	};
 
@@ -83,7 +87,7 @@ const VillageDatabaseReport = () => {
 										</div>
 									</div>
 									<div className="py-8 space-y-4">
-										<div className="relative space-y-6">
+										<div className="relative space-y-8">
 											<div className="font-semibold text-center">DATA JUMLAH PENERIMA SEMUA PROGRAM :</div>
 											<div className="flex items-center justify-between gap-4">
 												<div className="space-y-8">
@@ -170,6 +174,7 @@ const VillageDatabaseReport = () => {
 												</div>
 											</div>
 										</div>
+
 										<div className="relative space-y-6">
 											<div className="font-semibold text-center">TOTAL MASYARAKAT PENERIMA PROGRAM :</div>
 											<table className="w-full">
@@ -193,6 +198,33 @@ const VillageDatabaseReport = () => {
 										</div>
 									</div>
 									<div className="absolute left-0 w-full text-center bottom-8">2</div>
+								</div>
+
+								<div ref={pageThreeRef} className={`relative w-[794px] min-h-[1123px] bg-white p-8`}>
+									<div className="py-10 space-y-16">
+										<div className="relative mt-8 space-y-6">
+											<div className="font-semibold text-center">TOTAL MASYARAKAT PENERIMA PROGRAM PER INSTITUSI:</div>
+											<table className="w-full">
+												<thead className="bg-primary">
+													<tr>
+														<th className="px-6 py-3 text-left text-white">Nama Institusi</th>
+														<th className="px-6 py-3 text-left text-white">Tipe Institusi</th>
+														<th className="px-6 py-3 text-white">Qty</th>
+													</tr>
+												</thead>
+												<tbody>
+													{villageDetail?.penerima_program_village_konstituen.map((program) => (
+														<tr key={program?.program_id} className="odd:bg-gray-100">
+															<td className="px-6 py-3 text-sm font-semibold">{program?.konstituen_name}</td>
+															<td className="px-6 py-3 text-sm font-semibold capitalize">{program?.konstituen_type}</td>
+															<td className="px-6 py-3 text-sm font-semibold text-center">{program?.total_penerima}</td>
+														</tr>
+													))}
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div className="absolute left-0 w-full text-center bottom-8">3</div>
 								</div>
 							</>
 						)}
