@@ -31,6 +31,15 @@ export const INSTITUSI_TYPES = {
 	LAINNYA: 'lainnya'
 };
 
+export const INSTITUSI_TYPE_ARRAY = [
+	{ label: 'Sekolah', value: INSTITUSI_TYPES.SEKOLAH },
+	{ label: 'Perguruan Tinggi', value: INSTITUSI_TYPES.KAMPUS },
+	{ label: 'Sektor Pariwisata dan Ekonomi Kreatif', value: INSTITUSI_TYPES.PAREKRAF },
+	{ label: 'Sektor Olahraga dan Seni', value: INSTITUSI_TYPES.OLAHRAGASENI },
+	{ label: 'Perangkat KOKADES', value: INSTITUSI_TYPES.KOKADES },
+	{ label: 'Lainnya', value: INSTITUSI_TYPES.LAINNYA }
+];
+
 export const NEGATIVE_CASE_TYPES = {
 	EMPTY_RESULT: 'EMPTY_RESULT',
 	EMPTY_SEARCH: 'EMPTY_SEARCH',

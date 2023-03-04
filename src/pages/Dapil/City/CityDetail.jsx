@@ -94,24 +94,24 @@ const CityDetail = () => {
 									linkTo={`/penerima?city_id=${cityID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Institusi Penerima PIP'}
-									value={cityDetail?.total_institusi_penerima_program_city_pip || 0}
-									linkTo={`/institusi?city_id=${cityID}&program_name=pip`}
-								/>
-								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={cityDetail?.total_penerima_program_city_pip || 0}
 									linkTo={`/penerima?city_id=${cityID}&program_name=pip`}
 								/>
 								<CardDetailTotal
-									title={'Total Institusi Penerima KIP'}
-									value={cityDetail?.total_institusi_penerima_program_city_kip || 0}
-									linkTo={`/institusi?city_id=${cityID}&program_name=kip`}
-								/>
-								<CardDetailTotal
 									title={'Total Mahasiswa Penerima KIP'}
 									value={cityDetail?.total_penerima_program_city_kip || 0}
 									linkTo={`/penerima?city_id=${cityID}&program_name=kip`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima PIP'}
+									value={cityDetail?.total_institusi_penerima_program_city_pip || 0}
+									linkTo={`/institusi?city_id=${cityID}&program_name=pip&konstituen_type=sekolah`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima KIP'}
+									value={cityDetail?.total_institusi_penerima_program_city_kip || 0}
+									linkTo={`/institusi?city_id=${cityID}&program_name=kip&konstituen_type=kampus`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}

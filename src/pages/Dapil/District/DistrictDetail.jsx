@@ -111,24 +111,24 @@ const DistrictDetail = () => {
 									linkTo={`/penerima?district_id=${districtID}`}
 								/>
 								<CardDetailTotal
-									title={'Total Institusi Penerima PIP'}
-									value={districtDetail?.total_institusi_penerima_program_district_pip || 0}
-									linkTo={`/institusi?district_id=${districtID}&program_name=pip`}
-								/>
-								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={districtDetail?.total_penerima_program_district_pip || 0}
 									linkTo={`/penerima?district_id=${districtID}&program_name=pip`}
 								/>
 								<CardDetailTotal
-									title={'Total Institusi Penerima KIP'}
-									value={districtDetail?.total_institusi_penerima_program_district_kip || 0}
-									linkTo={`/institusi?district_id=${districtID}&program_name=kip`}
-								/>
-								<CardDetailTotal
 									title={'Total Siswa Penerima KIP'}
 									value={districtDetail?.total_penerima_program_district_kip || 0}
 									linkTo={`/penerima?district_id=${districtID}&program_name=kip`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima PIP'}
+									value={districtDetail?.total_institusi_penerima_program_district_pip || 0}
+									linkTo={`/institusi?district_id=${districtID}&program_name=pip&konstituen_type=sekolah`}
+								/>
+								<CardDetailTotal
+									title={'Total Institusi Penerima KIP'}
+									value={districtDetail?.total_institusi_penerima_program_district_kip || 0}
+									linkTo={`/institusi?district_id=${districtID}&program_name=kip&konstituen_type=kampus`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}

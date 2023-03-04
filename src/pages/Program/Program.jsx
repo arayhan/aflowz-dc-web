@@ -1,9 +1,4 @@
-import {
-	BannerFeature,
-	SectionSelectProgramCategory,
-	SectionShortcutProgram,
-	TableProgram
-} from '@/components/molecules';
+import { BannerFeature, SectionSelectProgramCategory, TableProgram } from '@/components/molecules';
 import { queryStringToObject } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';

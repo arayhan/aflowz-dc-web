@@ -14,7 +14,10 @@ export const SectionSelectCategoryActivity = ({ selectedCategoryID }) => {
 	};
 
 	const handleSelectCategoryID = (categoryID) => {
-		handleSetFilter('category_id', selectedCategoryID !== `${categoryID}` ? { category_id: categoryID } : null);
+		handleSetFilter(
+			'activity_category_id',
+			selectedCategoryID !== `${categoryID}` ? { activity_category_id: categoryID } : null
+		);
 	};
 
 	useEffect(() => {

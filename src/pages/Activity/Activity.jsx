@@ -14,8 +14,8 @@ const Activity = () => {
 	return (
 		<div className="bg-gray-100">
 			<BannerFeature title="List Kegiatan" />
-			<SectionSelectCategoryActivity params={params} selectedCategoryID={params.category_id} />
-			{params.category_id && (
+			<SectionSelectCategoryActivity params={params} selectedCategoryID={params.activity_category_id} />
+			{params && (
 				<div className="container py-16">
 					<TableActivity params={params} />
 				</div>

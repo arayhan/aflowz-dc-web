@@ -1,19 +1,23 @@
 import { BannerFeature, TableKonstituen, SectionSelectKonstituenType } from '@/components/molecules';
-import { useState } from 'react';
+import { queryStringToObject } from '@/utils/helpers';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Konstituen = () => {
-	const [selectedKonstituen, setSelectedKonstituen] = useState(null);
+	const { search } = useLocation();
+	const [params, setParams] = useState({});
+
+	useEffect(() => {
+		setParams(search ? queryStringToObject(search) : {});
+	}, [search]);
 
 	return (
 		<div>
 			<BannerFeature title="List Institusi" />
 			<div className="bg-gray-100">
-				<SectionSelectKonstituenType
-					selectedType={selectedKonstituen}
-					onSelectedType={(type) => setSelectedKonstituen(type)}
-				/>
-				<div className="py-6 container">
-					<TableKonstituen selectedType={selectedKonstituen} />
+				<SectionSelectKonstituenType selectedKonstituen={params?.konstituen_type} />
+				<div className="container py-6">
+					<TableKonstituen params={params} />
 				</div>
 			</div>
 		</div>
