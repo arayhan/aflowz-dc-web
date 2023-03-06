@@ -80,28 +80,56 @@ const states = (set, get) => ({
 		set({ processingCreateActivity: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_ACTIVITY.createActivity(params);
+		const { payload: payloadActivity, success: successActivitiy } = await SERVICE_ACTIVITY.createActivity(params);
+		const { payload: payloadDetail, success: successDetail } = await SERVICE_ACTIVITY.createActivityDetail(
+			payloadActivity?.id,
+			params
+		);
 
-		if (!success) set({ errorsActivity: payload });
+		if (!successActivitiy || !successDetail) {
+			set({ errorsActivity: payloadActivity, errorsActivityDetail: payloadDetail });
+		}
 
-		toastRequestResult(loader, success, 'Kegiatan created', payload?.odoo_error || payload?.message);
+		toastRequestResult(
+			loader,
+			successActivitiy && successDetail,
+			'Kegiatan created',
+			payloadActivity?.odoo_error || payloadActivity?.message || payloadDetail?.odoo_error || payloadDetail?.message
+		);
 		set({ processingCreateActivity: false });
 
-		callback({ payload, success });
+		callback({
+			payload: { activity: payloadActivity, activity_detail: payloadDetail },
+			success: successActivitiy && successDetail
+		});
 	},
 
 	updateActivity: async (activityID, params, callback) => {
 		set({ processingUpdateActivity: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_ACTIVITY.updateActivity(activityID, params);
+		const { payload: payloadActivity, success: successActivitiy } = await SERVICE_ACTIVITY.updateActivity(params);
+		const { payload: payloadDetail, success: successDetail } = await SERVICE_ACTIVITY.updateActivityDetail(
+			activityID,
+			params
+		);
 
-		if (!success) set({ errorsActivity: payload });
+		if (!successActivitiy || !successDetail) {
+			set({ errorsActivity: payloadActivity, errorsActivityDetail: payloadDetail });
+		}
 
-		toastRequestResult(loader, success, 'Kegiatan updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(
+			loader,
+			successActivitiy && successDetail,
+			'Kegiatan updated',
+			payloadActivity?.odoo_error || payloadActivity?.message || payloadDetail?.odoo_error || payloadDetail?.message
+		);
 		set({ processingUpdateActivity: false });
 
-		callback({ payload, success });
+		callback({
+			payload: { activity: payloadActivity, activity_detail: payloadDetail },
+			success: successActivitiy && successDetail
+		});
 	},
 
 	deleteActivity: async (activityID) => {
@@ -143,7 +171,7 @@ const states = (set, get) => ({
 		set({ processingCreateActivity: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_ACTIVITY.createActivityDetail(params);
+		const { payload, success } = await SERVICE_ACTIVITY.createActivityDetail(params?.activity_id, params);
 
 		if (!success) set({ errorsActivityDetail: payload });
 

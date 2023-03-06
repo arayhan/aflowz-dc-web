@@ -3,7 +3,7 @@ import { useActivityStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectActivityDetail = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
+	({ containerClassName, error, onChange, params, label, placeholder, showLabel, helper, ...props }, ref) => {
 		const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 		const [options, setOptions] = useState([]);
@@ -25,12 +25,12 @@ export const InputSelectActivityDetail = forwardRef(
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Detail Kegiatan" name={props.name} />}
+				{showLabel && <InputLabel text={label || 'Pilih Kegiatan'} name={props.name} helper={helper} />}
 				<InputSelect
 					ref={ref}
 					options={options}
 					loading={fetchingActivityDetailList}
-					placeholder={placeholder || 'Pilih Detail Kegiatan'}
+					placeholder={placeholder || 'Pilih Kegiatan'}
 					onChange={onChange}
 					{...props}
 				/>

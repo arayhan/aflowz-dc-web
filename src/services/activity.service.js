@@ -34,12 +34,13 @@ export const getActivityList = async (params) => {
 
 export const createActivity = async (params) => {
 	const request = {
-		description: params?.description || '',
+		description: params?.description_activity || params?.description || '',
 		konstituen_id: params?.konstituen_id || 0,
 		village_id: params?.village_id || 0,
 		district_id: params?.district_id || 0,
 		city_id: params?.city_id || 0,
-		program_id: params?.program_id || 0
+		program_id: params?.program_id || 0,
+		category_id: params?.category_id || 0
 	};
 
 	try {
@@ -100,10 +101,10 @@ export const getActivityDetailList = async (params) => {
 	}
 };
 
-export const createActivityDetail = async (params) => {
+export const createActivityDetail = async (activityID, params) => {
 	const request = {
-		activity_id: params?.activity_id || 0,
-		description: params?.description || '',
+		activity_id: activityID || 0,
+		description: params?.description_activity_detail || params?.description || '',
 		activity_date: params?.activity_date || '',
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
@@ -121,7 +122,7 @@ export const createActivityDetail = async (params) => {
 
 export const updateActivityDetail = async (activityDetailID, params) => {
 	const request = {
-		description: params?.description || '',
+		description: params?.description_activity_detail || '',
 		activity_date: params?.activity_date || '',
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',

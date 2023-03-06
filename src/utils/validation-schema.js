@@ -155,11 +155,26 @@ export const formStaffSchema = yup.object().shape({
 });
 
 export const formActivitySchema = yup.object().shape({
-	description: yup.string().required('Deskripsi wajib diisi')
+	description_activity: yup.string().required('Nama Kegiatan wajib diisi'),
+	description_activity_detail: yup.string().required('Nama Detail Kegiatan wajib diisi'),
+	konstituen_id: yup.number().required('Institusi wajib diisi'),
+	village_id: yup.number().required('Kelurahan/Desa wajib diisi'),
+	district_id: yup.string().required('Kecamatan wajib diisi'),
+	city_id: yup.number().required('Kota wajib diisi'),
+	program_id: yup.number().required('Program wajib diisi'),
+	category_id: yup.number().required('Kategori kegiatan wajib diisi'),
+	activity_date: yup.string().required('Tanggal kegiatan wajib diisi'),
+	pic: yup.string().required('PIC kegiatan wajib diisi'),
+	pic_mobile: yup
+		.string()
+		.required('Nomor PIC kegiatan wajib diisi')
+		.matches(/^[0-9]*$/, 'Nomor tidak valid')
+		.min(8, 'Minimal 8 angka'),
+	pic_staff_id: yup.number().required('PIC tim internal wajib diisi')
 });
 
 export const formActivityDetailSchema = yup.object().shape({
-	description: yup.string().required('Deskripsi wajib diisi'),
+	description_activity_detail: yup.string().required('Nama Detail Kegiatan wajib diisi'),
 	activity_date: yup.string().required('Tanggal kegiatan wajib diisi'),
 	pic: yup.string().required('Belum mengisi PIC kegiatan'),
 	pic_mobile: yup

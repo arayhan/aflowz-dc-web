@@ -27,7 +27,7 @@ export const FormActivityDetail = () => {
 		resolver: yupResolver(formActivityDetailSchema),
 		defaultValues: {
 			activity_id: activityID,
-			description: '',
+			description_activity_detail: '',
 			activity_date: '',
 			pic: '',
 			pic_mobile: '',
@@ -54,7 +54,7 @@ export const FormActivityDetail = () => {
 
 	useEffect(() => {
 		if (activityDetailID && activityDetailItem) {
-			setValue('description', activityDetailItem.description || '');
+			setValue('description_activity_detail', activityDetailItem.description || '');
 			setValue('activity_date', activityDetailItem.activity_date || '');
 			setValue('pic', activityDetailItem.pic || '');
 			setValue('pic_mobile', activityDetailItem.pic_mobile || '');
@@ -68,13 +68,13 @@ export const FormActivityDetail = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{activityDetailID ? 'Edit' : 'Tambah'} Detail Kegiatan</div>
+				<div className="text-xl font-light">{activityDetailID ? 'Edit' : 'Tambah'} Detail Kegiatan</div>
 				<div className="text-sm text-gray-400">{activityItem?.description}</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
 				<Controller
-					name={'description'}
+					name={'description_activity_detail'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText

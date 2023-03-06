@@ -56,6 +56,15 @@ export const TableActivity = ({
 				hidden: displayedColumns && !displayedColumns.includes('Nama Kegiatan')
 			},
 			{
+				Header: 'Kategori Kegiatan',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Kategori Kegiatan'),
+				Cell: (row) => {
+					return row.row.original.category?.id ? row.row.original.category?.name : '-';
+				}
+			},
+			{
 				Header: 'Tempat Kegiatan',
 				width: '100%',
 				minWidth: 225,
