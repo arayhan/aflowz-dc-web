@@ -115,7 +115,7 @@ const CityDatabaseReport = () => {
 													<div className="px-10 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
 														<div className="text-2xl font-semibold text-white">
-															{cityDetail?.total_penerima_program_city_per_program}
+															{cityDetail?.total_penerima_program_city_per_orang}
 														</div>
 													</div>
 													<div className="space-y-1 text-center">
