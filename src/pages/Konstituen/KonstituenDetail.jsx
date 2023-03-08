@@ -35,8 +35,10 @@ const KonstituenDetail = () => {
 	const [searchPenerima, setSearchPenerima] = useState({});
 
 	const handleGoToReport = () => {
-		if (konstituenDetailTotalUsulan) {
+		if (konstituenDetailTotalUsulan && konstituenDetailTotalUsulan >= 0) {
 			navigate(`/institusi/${konstituenDetail?.konstituen_id}/report`);
+		} else if (konstituenDetailTotalUsulan < 0) {
+			toast('Usulan tidak valid', { type: 'warning' });
 		} else {
 			toast('Masukkan jumlah usulan terlebih dahulu', { type: 'warning' });
 		}
