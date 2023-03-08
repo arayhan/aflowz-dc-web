@@ -137,10 +137,10 @@ const CityDatabaseReport = () => {
 												</div>
 
 												<div className="space-y-2">
-													{cityDetail?.total_penerima_program_city_by_periode_per_program?.map((program) => (
-														<div key={program.periode} className="px-6 py-1 text-center bg-primary">
-															<div className="text-sm font-semibold text-secondary">{program.periode}</div>
-															<div className="text-lg font-semibold text-white">{program.total_program}</div>
+													{cityDetail?.total_penerima_program_city_by_periode_per_orang?.map((penerima) => (
+														<div key={penerima.periode} className="px-6 py-1 text-center bg-primary">
+															<div className="text-sm font-semibold text-secondary">{penerima.periode}</div>
+															<div className="text-lg font-semibold text-white">{penerima.total_penerima}</div>
 														</div>
 													))}
 												</div>
