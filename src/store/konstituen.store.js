@@ -21,6 +21,8 @@ const states = (set, get) => ({
 	penerimaKonstituenDetail: null,
 	konstituen: null,
 
+	konstituenDetailTotalUsulan: null,
+
 	getKonstituenList: async (params) => {
 		set({ fetchingKonstituenList: true });
 
@@ -86,6 +88,9 @@ const states = (set, get) => ({
 
 		set({ konstituen: success ? payload : null });
 		set({ fetchingKonstituen: false });
+	},
+	setKonstituenDetailTotalUsulan: (total) => {
+		set({ konstituenDetailTotalUsulan: total });
 	}
 });
 

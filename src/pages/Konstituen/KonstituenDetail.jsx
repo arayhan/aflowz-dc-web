@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useKonstituenStore } from '@/store';
 import {
 	BannerFeature,
@@ -12,10 +12,18 @@ import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Button, ButtonAction, Card, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES, INSTITUSI_TYPES } from '@/utils/constants';
+import { toast } from 'react-toastify';
 
 const KonstituenDetail = () => {
 	const params = useParams();
-	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
+	const navigate = useNavigate();
+	const {
+		konstituenDetail,
+		fetchingKonstituenDetail,
+		getKonstituenDetail,
+		konstituenDetailTotalUsulan,
+		setKonstituenDetailTotalUsulan
+	} = useKonstituenStore();
 
 	const konstituenID = params.konstituenID;
 
@@ -26,9 +34,21 @@ const KonstituenDetail = () => {
 	const [tablePenerima] = useState({ konstituen_id: konstituenID, is_receiver: true });
 	const [searchPenerima, setSearchPenerima] = useState({});
 
+	const handleGoToReport = () => {
+		if (konstituenDetailTotalUsulan) {
+			navigate(`/institusi/${konstituenDetail?.konstituen_id}/report`);
+		} else {
+			toast('Masukkan jumlah usulan terlebih dahulu', { type: 'warning' });
+		}
+	};
+
 	useEffect(() => {
 		getKonstituenDetail(konstituenID);
 	}, [konstituenID]);
+
+	useEffect(() => {
+		setKonstituenDetailTotalUsulan(null);
+	}, []);
 
 	return (
 		<div>
@@ -51,7 +71,7 @@ const KonstituenDetail = () => {
 											<Button
 												className="px-6 text-xs rounded-sm"
 												variant={'primary'}
-												linkTo={`/institusi/${konstituenDetail?.konstituen_id}/report`}
+												onClick={() => handleGoToReport()}
 											>
 												Preview Report
 											</Button>
@@ -101,6 +121,25 @@ const KonstituenDetail = () => {
 								</div>
 								<div className="flex flex-col items-center justify-center">
 									<div className="flex items-center justify-center gap-4">
+										<div
+											className={`px-8 py-6 mb-2 bg-white rounded-md shadow-lg md:px-10 ${
+												!konstituenDetailTotalUsulan ? 'border border-red-500' : ''
+											}`}
+										>
+											<div className="flex flex-col items-center justify-center space-y-1 text-center">
+												<input
+													type="number"
+													onChange={(event) => setKonstituenDetailTotalUsulan(event.target.value)}
+													className={`w-20 text-2xl border-0 border-b md:text-4xl font-extralight ${
+														!konstituenDetailTotalUsulan ? 'border-red-500' : ''
+													}`}
+												/>
+												<div className="font-light text-gray-400">Total Usulan</div>
+												{!konstituenDetailTotalUsulan && (
+													<div className="mt-1 text-xs italic text-red-500">Wajib diisi</div>
+												)}
+											</div>
+										</div>
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
 											<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
 												<div className="flex flex-col items-center justify-center space-y-1 text-center">

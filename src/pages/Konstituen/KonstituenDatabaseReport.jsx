@@ -15,7 +15,8 @@ const KonstituenDatabaseReport = () => {
 	const pageOneRef = useRef();
 	const pageTwoRef = useRef();
 
-	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
+	const { konstituenDetail, fetchingKonstituenDetail, konstituenDetailTotalUsulan, getKonstituenDetail } =
+		useKonstituenStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
 	const TOTAL_PENERIMA_PROGRAM_LAIN_YEAR_MAX = moment().format('YYYY');
@@ -24,8 +25,6 @@ const KonstituenDatabaseReport = () => {
 		TOTAL_PENERIMA_PROGRAM_LAIN_YEAR_MIN,
 		TOTAL_PENERIMA_PROGRAM_LAIN_YEAR_MAX
 	).reverse();
-
-	const [jumlahUsulan, setJumlahUsulan] = useState(false);
 
 	const handleGenerateImage = async (ref) => {
 		const style = document.createElement('style');
@@ -38,19 +37,15 @@ const KonstituenDatabaseReport = () => {
 	};
 
 	const handleExportToPDF = async () => {
-		if (jumlahUsulan) {
-			const doc = new jsPDF({ orientation: 'portrait' });
+		const doc = new jsPDF({ orientation: 'portrait' });
 
-			const imagePageOne = await handleGenerateImage(pageOneRef.current);
-			const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
+		const imagePageOne = await handleGenerateImage(pageOneRef.current);
+		const imagePageTwo = await handleGenerateImage(pageTwoRef.current);
 
-			doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
-			doc.addPage();
-			doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
-			doc.save('Institusi Database Report.pdf');
-		} else {
-			toast('Masukkan jumlah usulan terlebih dahulu', { type: 'warning' });
-		}
+		doc.addImage(imagePageOne, 'JPEG', 0, 0, 210, 297);
+		doc.addPage();
+		doc.addImage(imagePageTwo, 'JPEG', 0, 0, 210, 297);
+		doc.save('Institusi Database Report.pdf');
 	};
 
 	useEffect(() => {
@@ -114,15 +109,7 @@ const KonstituenDatabaseReport = () => {
 											</div>
 											<div className="text-sm">
 												JUMLAH USULAN : <br />
-												<input
-													type="number"
-													className={`text-sm border ${
-														!jumlahUsulan ? 'border-red-500 border-2' : 'border-gray-400'
-													}  rounded-md`}
-													placeholder="Masukkan jumlah usulan"
-													onChange={(event) => setJumlahUsulan(event.target.value)}
-												/>
-												{!jumlahUsulan && <div className="mt-1 text-xs italic text-red-500">Wajib diisi</div>}
+												<span className="capitalize">{konstituenDetailTotalUsulan || '-'}</span>
 											</div>
 										</div>
 									</div>
