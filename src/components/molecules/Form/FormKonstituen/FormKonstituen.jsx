@@ -1,5 +1,11 @@
 import { Button, InputText } from '@/components/atoms';
-import { InputSelectCity, InputSelectInstitusiType, InputSelectStaff } from '@/components/molecules';
+import {
+	InputSelectCity,
+	InputSelectDistrict,
+	InputSelectInstitusiType,
+	InputSelectStaff,
+	InputSelectVillage
+} from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formKonstituenSchema } from '@/utils/validation-schema';
@@ -20,13 +26,13 @@ export const FormKonstituen = () => {
 		updateKonstituen
 	} = useKonstituenStore();
 
-	const { control, setValue, setError, handleSubmit } = useForm({
+	const { control, setValue, setError, handleSubmit, watch } = useForm({
 		resolver: yupResolver(formKonstituenSchema),
 		defaultValues: {
 			name: '',
 			konstituen_type: '',
 			address: '',
-			city: undefined,
+			city_id: undefined,
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -54,7 +60,9 @@ export const FormKonstituen = () => {
 			setValue('name', konstituen.name || '');
 			setValue('konstituen_type', konstituen.konstituen_type || '');
 			setValue('address', konstituen.address || '');
-			setValue('city', konstituen.city?.id || null);
+			setValue('city_id', konstituen.city?.id || null);
+			setValue('district_id', konstituen.district?.id || null);
+			setValue('village_id', konstituen.village?.id || null);
 			setValue('pic', konstituen.pic || '');
 			setValue('pic_mobile', konstituen.pic_mobile || '');
 			setValue('pic_staff_id', konstituen.pic_staff?.id || null);
@@ -64,7 +72,7 @@ export const FormKonstituen = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{konstituenID ? 'Edit' : 'Create'} Institusi</div>
+				<div className="text-xl font-light">{konstituenID ? 'Edit' : 'Create'} Institusi</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
@@ -114,18 +122,51 @@ export const FormKonstituen = () => {
 				/>
 
 				<Controller
-					name={'city'}
+					name={'city_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectCity
 							{...field}
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							onChange={({ value }) => {
-								setValue('city', value);
-								setError('city', null);
+								setValue('city_id', value);
+								setError('city_id', null);
 							}}
 							error={error}
-							params={{ limit: 1000, offset: 0 }}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'district_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectDistrict
+							{...field}
+							disabled={!watch('city_id') || processingCreateKonstituen || fetchingKonstituen}
+							params={watch('city_id') ? { city_id: watch('city_id') } : null}
+							onChange={({ value }) => {
+								setValue('district_id', value);
+								setError('district_id', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'village_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectVillage
+							{...field}
+							disabled={!watch('district_id') || processingCreateKonstituen || fetchingKonstituen}
+							params={watch('district_id') ? { district_id: watch('district_id') } : null}
+							onChange={({ value }) => {
+								setValue('village_id', value);
+								setError('village_id', null);
+							}}
+							error={error}
 						/>
 					)}
 				/>

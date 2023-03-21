@@ -29,7 +29,7 @@ export const postKonstituenCreate = async (params) => {
 		name: params?.name || '',
 		konstituen_type: params?.konstituen_type || '',
 		address: params?.address || '',
-		city_id: params?.city || 0,
+		city_id: params?.city_id || 0,
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0
