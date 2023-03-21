@@ -123,24 +123,15 @@ const KonstituenDetail = () => {
 								</div>
 								<div className="flex flex-col items-center justify-center">
 									<div className="flex items-center justify-center gap-4">
-										<div
-											className={`px-8 py-6 mb-2 bg-white rounded-md shadow-lg md:px-10 ${
-												!konstituenDetailTotalUsulan ? 'border border-red-500' : ''
-											}`}
-										>
+										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
+											{/* <Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}> */}
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
-												<input
-													type="number"
-													onChange={(event) => setKonstituenDetailTotalUsulan(event.target.value)}
-													className={`w-20 text-2xl border-0 border-b md:text-4xl font-extralight ${
-														!konstituenDetailTotalUsulan ? 'border-red-500' : ''
-													}`}
-												/>
-												<div className="font-light text-gray-400">Total Usulan</div>
-												{!konstituenDetailTotalUsulan && (
-													<div className="mt-1 text-xs italic text-red-500">Wajib diisi</div>
-												)}
+												<span className="text-2xl md:text-4xl font-extralight">
+													{konstituenDetail?.total_konstituen_proposal || 0}
+												</span>
+												<div className="font-light text-gray-400">Total Usulan </div>
 											</div>
+											{/* </Link> */}
 										</div>
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
 											<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
