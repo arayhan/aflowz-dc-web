@@ -6,7 +6,8 @@ import {
 	PieChartPenerimaKonstituenByGender,
 	TableDetailStructureOrganization,
 	TableDetailTotalPenerimaByProgram,
-	TablePenerima
+	TablePenerima,
+	TableProposalKonstituen
 } from '@/components/molecules';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -17,13 +18,7 @@ import { toast } from 'react-toastify';
 const KonstituenDetail = () => {
 	const params = useParams();
 	const navigate = useNavigate();
-	const {
-		konstituenDetail,
-		fetchingKonstituenDetail,
-		getKonstituenDetail,
-		konstituenDetailTotalUsulan,
-		setKonstituenDetailTotalUsulan
-	} = useKonstituenStore();
+	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
 
 	const konstituenID = params.konstituenID;
 
@@ -34,23 +29,15 @@ const KonstituenDetail = () => {
 	const [tablePenerima] = useState({ konstituen_id: konstituenID, is_receiver: true });
 	const [searchPenerima, setSearchPenerima] = useState({});
 
+	const [tableProposal] = useState({ limit: 5 });
+
 	const handleGoToReport = () => {
-		if (konstituenDetailTotalUsulan && konstituenDetailTotalUsulan >= 0) {
-			navigate(`/institusi/${konstituenDetail?.konstituen_id}/report`);
-		} else if (konstituenDetailTotalUsulan < 0) {
-			toast('Usulan tidak valid', { type: 'warning' });
-		} else {
-			toast('Masukkan jumlah usulan terlebih dahulu', { type: 'warning' });
-		}
+		navigate(`/institusi/${konstituenDetail?.konstituen_id}/report`);
 	};
 
 	useEffect(() => {
 		getKonstituenDetail(konstituenID);
 	}, [konstituenID]);
-
-	useEffect(() => {
-		setKonstituenDetailTotalUsulan(null);
-	}, []);
 
 	return (
 		<div>
@@ -124,14 +111,14 @@ const KonstituenDetail = () => {
 								<div className="flex flex-col items-center justify-center">
 									<div className="flex items-center justify-center gap-4">
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
-											{/* <Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}> */}
-											<div className="flex flex-col items-center justify-center space-y-1 text-center">
-												<span className="text-2xl md:text-4xl font-extralight">
-													{konstituenDetail?.total_konstituen_proposal || 0}
-												</span>
-												<div className="font-light text-gray-400">Total Usulan </div>
-											</div>
-											{/* </Link> */}
+											<Link to={`/institusi/${konstituenDetail?.konstituen_id}/proposal`}>
+												<div className="flex flex-col items-center justify-center space-y-1 text-center">
+													<span className="text-2xl md:text-4xl font-extralight">
+														{konstituenDetail?.total_konstituen_proposal || 0}
+													</span>
+													<div className="font-light text-gray-400">Total Usulan </div>
+												</div>
+											</Link>
 										</div>
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
 											<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
@@ -167,7 +154,7 @@ const KonstituenDetail = () => {
 												totalWanita={konstituenDetail?.total_wanita || 0}
 											/>
 										</div>
-										<div className="col-span-12">
+										<div className="col-span-12 md:col-span-6">
 											<Card title={`Struktur Organisasi`} className={'bg-white rounded-md'}>
 												<div className="flex p-4 overflow-scroll max-h-96">
 													<TableDetailStructureOrganization
@@ -176,6 +163,14 @@ const KonstituenDetail = () => {
 												</div>
 											</Card>
 										</div>
+										<div className="col-span-12 md:col-span-6">
+											<TableProposalKonstituen
+												title="Usulan"
+												konstituenID={konstituenDetail?.konstituen_id}
+												params={tableProposal}
+											/>
+										</div>
+
 										{isSekolahOrKampus && (
 											<div className="col-span-12 md:col-span-6">
 												<Card

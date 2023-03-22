@@ -80,3 +80,64 @@ export const getKonstituen = async (konstituenID) => {
 		return { success: false, payload: error };
 	}
 };
+
+// PROPOSAL
+
+export const getProposalList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+
+		const response = await http.get('/konstituen/proposal' + queryParams);
+
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getProposal = async (proposalID) => {
+	try {
+		const response = await http.get(`/konstituen/proposal/${proposalID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const postProposalCreate = async (params) => {
+	const request = {
+		name: params?.name || '',
+		konstituen_id: params?.konstituen_id || 0
+	};
+
+	try {
+		const response = await http.post('/konstituen/proposal', request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteProposal = async (proposalID) => {
+	try {
+		const response = await http.delete(`/konstituen/proposal/${proposalID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const updateProposal = async (proposalID, params) => {
+	const request = {
+		name: params?.name || '',
+		konstituen_id: params?.konstituen_id || 0
+	};
+
+	try {
+		const response = await http.put('/konstituen/proposal' + `/${proposalID}`, request);
+
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};

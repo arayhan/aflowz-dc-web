@@ -11,17 +11,22 @@ const states = (set, get) => ({
 	fetchingKonstituenList: false,
 	fetchingKonstituenDetail: false,
 	fetchingKonstituen: false,
+	fetchingProposal: false,
+	fetchingProposalList: false,
 
 	processingCreateKonstituen: false,
 	processingEditKonstituen: false,
 	processingDeleteKonstituen: false,
+	processingCreateProposal: false,
+	processingEditProposal: false,
+	processingDeleteProposal: false,
 
 	konstituenList: null,
 	konstituenDetail: null,
 	penerimaKonstituenDetail: null,
 	konstituen: null,
-
-	konstituenDetailTotalUsulan: null,
+	proposal: null,
+	proposalList: null,
 
 	getKonstituenList: async (params) => {
 		set({ fetchingKonstituenList: true });
@@ -89,8 +94,64 @@ const states = (set, get) => ({
 		set({ konstituen: success ? payload : null });
 		set({ fetchingKonstituen: false });
 	},
-	setKonstituenDetailTotalUsulan: (total) => {
-		set({ konstituenDetailTotalUsulan: total });
+
+	getProposalList: async (params) => {
+		set({ fetchingProposalList: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_KONSTITUEN.getProposalList(requestParams);
+
+		set({ proposalList: success ? payload : null });
+		set({ fetchingProposalList: false });
+	},
+	getProposal: async (proposalID) => {
+		set({ fetchingProposal: true });
+		set({ proposal: null });
+
+		const { success, payload } = await SERVICE_KONSTITUEN.getProposal(proposalID);
+
+		set({ proposal: success ? payload : null });
+		set({ fetchingProposal: false });
+	},
+	postProposalCreate: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProposal: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_KONSTITUEN.postProposalCreate(params);
+
+		toastRequestResult(loader, success, 'Proposal created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProposal: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	deleteProposal: async (proposalID) => {
+		setPageLoading(true);
+		set({ processingDeleteProposal: true });
+
+		const loader = toast.loading('Processing...');
+		const { success, payload } = await SERVICE_KONSTITUEN.deleteProposal(proposalID);
+
+		toastRequestResult(loader, success, 'Institusi deleted', payload?.odoo_error || payload?.message);
+		get().getProposalList();
+		set({ processingDeleteProposal: false });
+		setPageLoading(false);
+	},
+	updateProposal: async (proposalID, params, callback) => {
+		setPageLoading(true);
+		set({ processingEditProposal: true });
+
+		const loader = toast.loading('Updating...');
+		const { payload, success } = await SERVICE_KONSTITUEN.updateProposal(proposalID, params);
+
+		toastRequestResult(loader, success, 'Proposal updated', payload?.odoo_error || payload?.message);
+		set({ processingEditProposal: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
 	}
 });
 
