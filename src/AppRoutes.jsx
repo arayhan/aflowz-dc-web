@@ -56,6 +56,8 @@ import KonstituenDatabaseReport from './pages/Konstituen/KonstituenDatabaseRepor
 import MitraDetailTimelineForm from './pages/Mitra/MitraDetailTimelineForm';
 import ProgramOrganization from './pages/ProgramOrganization/ProgramOrganization';
 import ProgramOrganizationForm from './pages/ProgramOrganization/ProgramOrganizationForm';
+import Proposal from './pages/Konstituen/Proposal';
+import ProposalForm from './pages/Konstituen/ProposalForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -92,6 +94,10 @@ export const AppRoutes = () => {
 					<Route path="/institusi/create" element={<KonstituenCreate />} />
 					<Route path="/institusi/update/:konstituenID" element={<KonstituenUpdate />} />
 					<Route path="/institusi/penerima/:konstituenID" element={<ListPenerimaByKonstituen />} />
+					<Route path="/institusi" element={<Konstituen />} />
+					<Route path="/institusi/:konstituenID/proposal" element={<Proposal />} />
+					<Route path="/institusi/:konstituenID/proposal/create" element={<ProposalForm />} />
+					<Route path="/institusi/:konstituenID/proposal/update/:proposalID" element={<ProposalForm />} />
 					<Route path="/dapil" element={<Dapil />} />
 					<Route path="/dapil/city/update/:cityID" element={<CityForm />} />
 					<Route path="/dapil/city/create" element={<CityForm />} />
