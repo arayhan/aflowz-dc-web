@@ -155,7 +155,7 @@ export const TableProgram = ({
 					<hr />
 
 					<div className="px-6 py-3">
-						<div className="w-full flex justify-end text-sm gap-4">
+						<div className="flex justify-end w-full gap-4 text-sm">
 							<InputSelectProgramCategory
 								containerClassName="w-60"
 								value={params.program_category_id ? Number(params.program_category_id) : undefined}
