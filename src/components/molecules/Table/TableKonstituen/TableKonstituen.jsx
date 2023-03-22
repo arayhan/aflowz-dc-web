@@ -37,12 +37,12 @@ export const TableKonstituen = ({ selectedType }) => {
 			{
 				Header: 'Jenis Institusi',
 				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen_type}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.konstituen_type}</div>
 			},
 			{
 				Header: 'Kota / Kabupaten',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name}</div>
 			},
 			{
 				Header: 'List Penerima',
@@ -125,12 +125,13 @@ export const TableKonstituen = ({ selectedType }) => {
 					title={selectedType?.label || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem}
+					// showButtonUploadSheetKonstituen
 					showButtonCreate={true}
 					feature={'Institusi'}
 					featurePath="/institusi"
 				/>
 			</div>
-			<div className="container flex justify-start items-center my-2">
+			<div className="container flex items-center justify-start my-2">
 				<SearchOnTable
 					onChange={(e) => setSearchInstitusi(e.target.value)}
 					placeholder={

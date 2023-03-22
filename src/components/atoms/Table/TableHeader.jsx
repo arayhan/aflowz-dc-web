@@ -1,7 +1,10 @@
-import { ModalUploadSheetFollowers, ModalUploadSheetPenerima } from '@/components/molecules';
-import { ButtonPrintCertificateMulti } from '@/components/molecules/index';
+import {
+	ModalUploadSheetFollowers,
+	ModalUploadSheetKonstituen,
+	ModalUploadSheetPenerima
+} from '@/components/molecules';
 import React, { useState } from 'react';
-import { SiGooglesheets, SiGroupon } from 'react-icons/si';
+import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
 
 export const TableHeader = ({
@@ -15,6 +18,7 @@ export const TableHeader = ({
 	showButtonSeeAll,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
+	showButtonUploadSheetKonstituen,
 	showButtonUploadOrganizationStructure,
 	showButtonCheckout,
 	showCounter,
@@ -22,6 +26,7 @@ export const TableHeader = ({
 }) => {
 	const location = useLocation();
 
+	const [showModalUploadSheetKonstituen, setShowModalUploadSheetKonstituen] = useState(false);
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 
@@ -32,6 +37,9 @@ export const TableHeader = ({
 			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
+			)}
+			{showModalUploadSheetKonstituen && (
+				<ModalUploadSheetKonstituen onClose={() => setShowModalUploadSheetKonstituen(false)} />
 			)}
 			<div className="w-full xl:w-1/3">
 				<div className="text-xl font-light capitalize transform:">{title}</div>
@@ -80,6 +88,19 @@ export const TableHeader = ({
 								<SiGooglesheets size={16} />
 							</span>
 							<span className="text-sm">Upload Penerima Program</span>
+						</button>
+					</>
+				)}
+				{!isReadonly && showButtonUploadSheetKonstituen && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+							onClick={() => setShowModalUploadSheetKonstituen(true)}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Upload Konstituen Program</span>
 						</button>
 					</>
 				)}
