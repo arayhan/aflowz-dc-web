@@ -31,7 +31,7 @@ export const InputSelectOrganizationPosition = forwardRef(
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Kota" name={props.name} />}
+				{showLabel && <InputLabel text="Pilih Posisi" name={props.name} />}
 				<InputSelect
 					ref={ref}
 					options={options}
