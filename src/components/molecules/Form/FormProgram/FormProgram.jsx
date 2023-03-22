@@ -53,7 +53,10 @@ export const FormProgram = () => {
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
 			setValue('description', program.description || '');
-			setValue('is_special_program', program.is_special_program || '');
+			setValue(
+				'is_special_program',
+				program.name.toLowerCase().includes('pip') || program.name.toLowerCase().includes('kip') || false
+			);
 		}
 	}, [programID, program]);
 
@@ -61,7 +64,6 @@ export const FormProgram = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="text-xl font-light">{programID ? 'Edit' : 'Tambah'} Program</div>
-				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -91,6 +93,14 @@ export const FormProgram = () => {
 							placeholder="Nama Program"
 							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
+							onChange={(event) => {
+								const { value } = event.target;
+								setValue('name', value);
+								setValue(
+									'is_special_program',
+									value?.toLowerCase().includes('pip') || value?.toLowerCase().includes('kip') || false
+								);
+							}}
 						/>
 					)}
 				/>
@@ -162,19 +172,6 @@ export const FormProgram = () => {
 							{...field}
 							label="Deskripsi Program"
 							placeholder="Deskripsi Program"
-							disabled={processingCreateProgram || fetchingProgram}
-							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
-					name={'is_special_program'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputCheckbox
-							{...field}
-							label="Special Program?"
 							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>
