@@ -11,7 +11,7 @@ const states = (set, get) => ({
 	fetchingKonstituenList: false,
 	fetchingKonstituenDetail: false,
 	fetchingKonstituen: false,
-	fetchingProposal: false,
+	fetchingProposalItem: false,
 	fetchingProposalList: false,
 
 	processingCreateKonstituen: false,
@@ -25,7 +25,7 @@ const states = (set, get) => ({
 	konstituenDetail: null,
 	penerimaKonstituenDetail: null,
 	konstituen: null,
-	proposal: null,
+	proposalItem: null,
 	proposalList: null,
 
 	getKonstituenList: async (params) => {
@@ -106,21 +106,21 @@ const states = (set, get) => ({
 		set({ proposalList: success ? payload : null });
 		set({ fetchingProposalList: false });
 	},
-	getProposal: async (proposalID) => {
-		set({ fetchingProposal: true });
-		set({ proposal: null });
+	getProposalItem: async (proposalID) => {
+		set({ fetchingProposalItem: true });
+		set({ proposalItem: null });
 
-		const { success, payload } = await SERVICE_KONSTITUEN.getProposal(proposalID);
+		const { success, payload } = await SERVICE_KONSTITUEN.getProposalItem(proposalID);
 
-		set({ proposal: success ? payload : null });
-		set({ fetchingProposal: false });
+		set({ proposalItem: success ? payload : null });
+		set({ fetchingProposalItem: false });
 	},
-	postProposalCreate: async (params, callback) => {
+	createProposal: async (params, callback) => {
 		setPageLoading(true);
 		set({ processingCreateProposal: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_KONSTITUEN.postProposalCreate(params);
+		const { payload, success } = await SERVICE_KONSTITUEN.createProposal(params);
 
 		toastRequestResult(loader, success, 'Proposal created', payload?.odoo_error || payload?.message);
 		set({ processingCreateProposal: false });

@@ -208,3 +208,7 @@ export const formProductMovementSchema = yup.object().shape({
 	description: yup.string().required('Deskripsi wajib diisi'),
 	method: yup.string().required('Belum memilih metode')
 });
+
+export const formProposalSchema = yup.object().shape({
+	name: yup.string().required('Usulan wajib diisi')
+});

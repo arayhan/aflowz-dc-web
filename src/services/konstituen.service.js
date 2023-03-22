@@ -95,7 +95,7 @@ export const getProposalList = async (params) => {
 	}
 };
 
-export const getProposal = async (proposalID) => {
+export const getProposalItem = async (proposalID) => {
 	try {
 		const response = await http.get(`/konstituen/proposal/${proposalID}`);
 		return { success: response.data.success, payload: response.data.data };
@@ -104,7 +104,7 @@ export const getProposal = async (proposalID) => {
 	}
 };
 
-export const postProposalCreate = async (params) => {
+export const createProposal = async (params) => {
 	const request = {
 		name: params?.name || '',
 		konstituen_id: params?.konstituen_id || 0

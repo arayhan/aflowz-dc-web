@@ -1,8 +1,7 @@
-import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useKonstituenStore } from '@/store';
-import { objectToQueryString } from '@/utils/helpers';
+import { ACTION_TYPES } from '@/utils/constants';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export const TableProposalKonstituen = ({
 	params,
@@ -13,9 +12,6 @@ export const TableProposalKonstituen = ({
 	displayedColumns,
 	isShowButtonSeeAll
 }) => {
-	const navigate = useNavigate();
-	const location = useLocation();
-
 	const { isSystem } = useAuthStore();
 	const { proposalList, fetchingProposalList, getProposalList, deleteProposal } = useKonstituenStore();
 
@@ -41,7 +37,7 @@ export const TableProposalKonstituen = ({
 				width: '100%',
 				hidden: displayedColumns && !displayedColumns.includes('Usulan'),
 				Cell: (row) => {
-					return <div className="text-sm">{moment(row.row.original.name)}</div>;
+					return <div className="text-sm">{row.row.original.name}</div>;
 				}
 			},
 			{
@@ -55,7 +51,7 @@ export const TableProposalKonstituen = ({
 								action={ACTION_TYPES.UPDATE}
 								linkTo={`/institusi/${konstituenID}/proposal/update/${row.row.original.id}`}
 							/>
-							{/* <ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityDetail(row.row.original.id)} /> */}
+							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProposal(row.row.original.id)} />
 						</div>
 					);
 				}
