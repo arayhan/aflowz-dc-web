@@ -116,7 +116,8 @@ export const formKonstituenSchema = yup.object().shape(
 		name: yup.string().required('Nama Institusi wajib diisi'),
 		konstituen_type: yup.string().required('Tipe institusi wajib dipilih'),
 		address: yup.string().required('Belum mengisi alamat institusi'),
-		city: yup.number().required('Belum memilih kota asal institusi'),
+		city_id: yup.number().required('Belum memilih kota asal institusi'),
+		district_id: yup.number().required('Belum memilih kecamatan asal institusi'),
 		pic: yup.string().required('Belum mengisi PIC institusi'),
 		pic_mobile: yup
 			.string()

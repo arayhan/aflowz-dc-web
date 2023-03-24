@@ -26,13 +26,14 @@ export const FormKonstituen = () => {
 		updateKonstituen
 	} = useKonstituenStore();
 
-	const { control, setValue, setError, handleSubmit, watch } = useForm({
+	const { control, setValue, setError, handleSubmit, watch, getValues, formState, getFieldState } = useForm({
 		resolver: yupResolver(formKonstituenSchema),
 		defaultValues: {
 			name: '',
 			konstituen_type: '',
 			address: '',
 			city_id: undefined,
+			district_id: undefined,
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -40,6 +41,7 @@ export const FormKonstituen = () => {
 	});
 
 	const onHandleSubmit = (values) => {
+		console.log({ values });
 		if (konstituenID) {
 			updateKonstituen(konstituenID, values, ({ success }) => {
 				if (success) navigate(`/institusi/${konstituenID}`, { replace: true });
@@ -225,6 +227,11 @@ export const FormKonstituen = () => {
 				>
 					Cancel
 				</Button>
+
+				{console.log('test')}
+				{console.log(getValues())}
+				{console.log(getFieldState())}
+				{console.log(formState.errors)}
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"
