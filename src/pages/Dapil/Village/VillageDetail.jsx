@@ -18,7 +18,7 @@ const VillageDetail = () => {
 
 	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
 
-	const [tablePenerimaParams] = useState({ village_id: villageID });
+	const [tablePenerimaParams] = useState({ village_id: villageID, is_receiver: true });
 
 	useEffect(() => {
 		if (villageID) getVillageDetail(villageID);

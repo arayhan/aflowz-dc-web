@@ -19,7 +19,7 @@ const DistrictDetail = () => {
 
 	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
 
-	const [tablePenerimaParams] = useState({ district_id: districtID });
+	const [tablePenerimaParams] = useState({ district_id: districtID, is_receiver: true });
 
 	useEffect(() => {
 		if (districtID) getDistrictDetail(districtID);

@@ -19,7 +19,7 @@ const CityDetail = () => {
 
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
 
-	const [tablePenerimaParams] = useState({ city_id: cityID });
+	const [tablePenerimaParams] = useState({ city_id: cityID, is_receiver: true });
 	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
 
 	useEffect(() => {

@@ -25,14 +25,8 @@ export const TablePenerima = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const {
-		downloadPenerimaList,
-		penerimaList,
-		fetchingPenerimaList,
-		getPenerimaList,
-		deletePenerima,
-		downloadCsvPenerima
-	} = usePartnerStore();
+	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
+		usePartnerStore();
 	const location = useLocation();
 
 	const [page, setPage] = useState(1);
