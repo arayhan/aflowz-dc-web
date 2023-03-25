@@ -24,8 +24,8 @@ const ProgramDetail = () => {
 	const [tableOrganizationParams] = useState(tableDefaultParams);
 	const [searchParams, setSearchParams] = useState({});
 
-	const isPIP = programDetail?.program_name === 'PIP';
-	const isKIP = programDetail?.program_name === 'KIP';
+	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip');
+	const isKIP = programDetail?.program_name?.toLowerCase().includes('kip');
 	const isPIPorKIP = isPIP || isKIP;
 
 	useEffect(() => {
