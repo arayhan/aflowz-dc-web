@@ -3,6 +3,7 @@ import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
 	TableDetailPenerimaProgram,
+	TableDetailVillageInDistrict,
 	TablePenerima,
 	TableProgramOrganization,
 	TableVillage
@@ -170,15 +171,13 @@ const ProgramDetail = () => {
 										</div>
 									</Card>
 								</div>
-								<div className="col-span-12">
-									<TableVillage
-										title={'Penerima Program Per Desa'}
-										params={searchParams ? { ...searchParams, ...tableVillageParams } : { ...tableVillageParams }}
-										setParams={setSearchParams}
-										isReadonly
-										enableClickRow
-										isShowButtonSeeAll
-									/>
+								<div className="col-span-12 bg-white rounded-md">
+									<Card
+										title={`Penerima Program Per Desa`}
+										bodyClassName={'flex items-center justify-center px-4 py-4'}
+									>
+										<TableDetailVillageInDistrict villageData={programDetail.total_penerima_program_per_village} />
+									</Card>
 								</div>
 							</div>
 						</div>
