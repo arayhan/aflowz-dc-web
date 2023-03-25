@@ -118,6 +118,7 @@ export const formKonstituenSchema = yup.object().shape(
 		address: yup.string().required('Belum mengisi alamat institusi'),
 		city_id: yup.number().required('Belum memilih kota asal institusi'),
 		district_id: yup.number().required('Belum memilih kecamatan asal institusi'),
+		village_id: yup.number().required('Belum memilih kelurahan/desa asal institusi'),
 		pic: yup.string().required('Belum mengisi PIC institusi'),
 		pic_mobile: yup
 			.string()

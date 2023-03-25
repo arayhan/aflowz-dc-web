@@ -34,6 +34,7 @@ export const FormKonstituen = () => {
 			address: '',
 			city_id: undefined,
 			district_id: undefined,
+			village_id: undefined,
 			pic: '',
 			pic_mobile: '',
 			pic_staff_id: undefined
@@ -41,7 +42,6 @@ export const FormKonstituen = () => {
 	});
 
 	const onHandleSubmit = (values) => {
-		console.log({ values });
 		if (konstituenID) {
 			updateKonstituen(konstituenID, values, ({ success }) => {
 				if (success) navigate(`/institusi/${konstituenID}`, { replace: true });
