@@ -109,7 +109,10 @@ const VillageDatabaseReport = () => {
 												</div>
 
 												<div>
-													<ChartPenerimaProgramByGender totalPria={20} totalWanita={24} />
+													<ChartPenerimaProgramByGender
+														totalPria={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_pria}
+														totalWanita={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_wanita}
+													/>
 												</div>
 
 												<div className="space-y-2">
