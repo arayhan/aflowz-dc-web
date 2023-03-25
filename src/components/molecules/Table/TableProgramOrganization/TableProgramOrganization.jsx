@@ -4,7 +4,8 @@ import {
 	TableHeader,
 	TableFooter,
 	Button,
-	CardOrganizationStructureImage
+	CardOrganizationStructureImage,
+	Badge
 } from '@/components/atoms';
 import { useAuthStore, useCityStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -55,6 +56,8 @@ export const TableProgramOrganization = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+
+	const [selectedCity, setSelectedCity] = useState(null);
 
 	const [organizationPositionParams] = useState(programID ? { program_id: programID } : null);
 
@@ -188,8 +191,11 @@ export const TableProgramOrganization = ({
 		else navigate(`/program/organization/${rowData.id}`);
 	};
 
-	const handleSetFilter = (key, params) => {
-		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+	const handleSetFilter = (key, _params) => {
+		console.log(location?.search);
+		const updatedParams = _params
+			? addQueryParams(location?.search, _params)
+			: removeQueryParams(location?.search, key);
 		const navigation = programID ? `/program/${programID}/organization` : '/program/organization';
 		if (setParams) setParams(queryStringToObject(updatedParams));
 		else navigate(navigation + updatedParams, { replace: true });
@@ -203,13 +209,14 @@ export const TableProgramOrganization = ({
 		};
 
 		if (programID) defaultParams.program_id = programID;
+		if (selectedCity) defaultParams.city_id = selectedCity.id;
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(Math.abs(offsetResult));
 			getProgramOrganizationList({ ...defaultParams, ...params });
 		}
-	}, [params, page, perPage, pageCount]);
+	}, [selectedCity, params, page, perPage, pageCount]);
 
 	useEffect(() => {
 		if (programOrganizationList) {
@@ -223,8 +230,8 @@ export const TableProgramOrganization = ({
 	}, [programID, programDetail]);
 
 	useEffect(() => {
-		if (!params?.city_id) getCityList({ limit: 10 });
-	}, [params]);
+		if (!selectedCity) getCityList({ limit: 10 });
+	}, [selectedCity]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -264,12 +271,13 @@ export const TableProgramOrganization = ({
 				</>
 			)}
 
-			{params?.city_id && isShowFilter && (
+			{selectedCity && isShowFilter && (
 				<>
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="flex justify-end w-full gap-4">
+						<div className="flex justify-end items-center w-full gap-4">
+							{selectedCity && <Badge title={selectedCity.name} onRemove={() => setSelectedCity(null)} />}
 							{(!displayedFilters || displayedFilters.includes('program_id')) && !programID && (
 								<InputSelectProgram
 									containerClassName="w-full lg:w-60"
@@ -301,7 +309,7 @@ export const TableProgramOrganization = ({
 				</>
 			)}
 
-			{!params?.city_id && (
+			{!selectedCity && (
 				<div className="flex flex-wrap items-start justify-center gap-3 p-5">
 					{cityList?.items?.map((city) => {
 						return (
@@ -309,7 +317,7 @@ export const TableProgramOrganization = ({
 								key={city.id}
 								type="button"
 								className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
-								onClick={() => setParams({ ...params, city_id: city.id })}
+								onClick={() => setSelectedCity(city)}
 							>
 								<div className="px-5">
 									<img className="w-full" src={require('@/images/icons/Icon_Home/Kota.svg').default} alt="" />
@@ -320,7 +328,7 @@ export const TableProgramOrganization = ({
 					})}
 				</div>
 			)}
-			{params?.city_id && (
+			{selectedCity && (
 				<div className="overflow-x-scroll">
 					<Table
 						columns={columns}
@@ -331,7 +339,7 @@ export const TableProgramOrganization = ({
 				</div>
 			)}
 
-			{params?.city_id && isShowFooter && (
+			{selectedCity && isShowFooter && (
 				<div className="p-6">
 					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 				</div>

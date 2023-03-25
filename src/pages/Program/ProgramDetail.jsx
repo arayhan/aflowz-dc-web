@@ -141,6 +141,7 @@ const ProgramDetail = () => {
 											params={tableOrganizationParams}
 											setParams={setTableOrganizationParams}
 											isShowButtonSeeAll
+											displayedFilters={['position_id']}
 											seeAllLink={`/program/${programDetail?.program_id}/organization`}
 										/>
 									</div>

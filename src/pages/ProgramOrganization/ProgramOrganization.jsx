@@ -16,7 +16,7 @@ const ProgramOrganization = () => {
 			<BannerFeature title="Program Organization Structure" />
 			<div className="bg-gray-100">
 				<div className="container py-6">
-					<TableProgramOrganization params={params} setParams={setParams} />
+					<TableProgramOrganization params={params} setParams={setParams} displayedFilters={['position_id']} />
 				</div>
 			</div>
 		</div>
