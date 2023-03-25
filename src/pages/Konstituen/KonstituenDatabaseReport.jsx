@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from '@/components/atoms';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
@@ -8,15 +8,13 @@ import { useParams } from 'react-router-dom';
 import { INSTITUSI_TYPES } from '@/utils/constants';
 import moment from 'moment';
 import { createArrayWithRange } from '@/utils/helpers';
-import { toast } from 'react-toastify';
 
 const KonstituenDatabaseReport = () => {
 	const { konstituenID } = useParams();
 	const pageOneRef = useRef();
 	const pageTwoRef = useRef();
 
-	const { konstituenDetail, fetchingKonstituenDetail, konstituenDetailTotalUsulan, getKonstituenDetail } =
-		useKonstituenStore();
+	const { konstituenDetail, fetchingKonstituenDetail, getKonstituenDetail } = useKonstituenStore();
 	const { programList, fetchingProgramList, getProgramList } = useProgramStore();
 
 	const TOTAL_PENERIMA_PROGRAM_LAIN_YEAR_MAX = moment().format('YYYY');
@@ -109,7 +107,7 @@ const KonstituenDatabaseReport = () => {
 											</div>
 											<div className="text-sm">
 												JUMLAH USULAN : <br />
-												<span className="capitalize">{konstituenDetailTotalUsulan || '-'}</span>
+												<span className="capitalize">{konstituenDetail?.total_konstituen_proposal ?? '-'}</span>
 											</div>
 										</div>
 									</div>
