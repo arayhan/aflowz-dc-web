@@ -1,5 +1,6 @@
 import { SERVICE_PARTNER } from '@/services';
-import { toastRequestResult } from '@/utils/helpers';
+import { exportToCsv, toastRequestResult } from '@/utils/helpers';
+import moment from 'moment';
 import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
@@ -12,6 +13,7 @@ const states = (set, get) => ({
 	fetchingStaffTitleList: false,
 	fetchingStaffList: false,
 	fetchingStaffOrganizationStructureImage: false,
+	fetchingDownloadPenerimaList: false,
 
 	processingSubmitPenerima: false,
 	processingDeletePenerima: false,
@@ -53,6 +55,37 @@ const states = (set, get) => ({
 
 		set({ penerimaList: success ? payload : null });
 		set({ fetchingPenerimaList: false });
+	},
+
+	downloadCsvPenerima: async (params, callback) => {
+		set({ fetchingDownloadPenerimaList: true });
+		const loader = toast.loading('Processing...');
+
+		const requestParams = params;
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
+
+		toastRequestResult(loader, success, 'Penerima Downloaded', payload?.odoo_error || payload?.message);
+
+		if (success) {
+			const header = ['No', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Email', 'Mobile', 'Gender', 'Program'];
+			const data = payload?.items?.map((penerima, index) => [
+				index + 1,
+				penerima?.nik_number || '-',
+				penerima?.name || '-',
+				penerima?.konstituen?.name || '-',
+				penerima?.address || '-',
+				penerima?.email || '-',
+				penerima?.mobile || '-',
+				penerima?.gender || '-',
+				penerima?.programs?.map((program) => program.name).join(', ') || '-'
+			]);
+
+			const filename = `Penerima Program - ${moment().format('yyyy MMMM DD HH:mm:ss')}.csv`;
+			exportToCsv(filename, [header, ...data]);
+		}
+
+		set({ fetchingDownloadPenerimaList: false });
+		if (callback) callback({ payload, success });
 	},
 
 	getPenerimaDetail: async (penerimaID) => {

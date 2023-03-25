@@ -25,7 +25,14 @@ export const TablePenerima = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima } = usePartnerStore();
+	const {
+		downloadPenerimaList,
+		penerimaList,
+		fetchingPenerimaList,
+		getPenerimaList,
+		deletePenerima,
+		downloadCsvPenerima
+	} = usePartnerStore();
 	const location = useLocation();
 
 	const [page, setPage] = useState(1);
@@ -144,6 +151,11 @@ export const TablePenerima = ({
 		else navigate('/penerima' + updatedParams, { replace: true });
 	};
 
+	const handleDownloadData = () => {
+		const header = ['No', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat'];
+		downloadCsvPenerima(params);
+	};
+
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = { limit: perPage, offset: offsetResult };
@@ -170,6 +182,8 @@ export const TablePenerima = ({
 					featurePath="/penerima"
 					title={title || 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
+					onClickDownloadData={handleDownloadData}
+					showButtonDownloadData
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}

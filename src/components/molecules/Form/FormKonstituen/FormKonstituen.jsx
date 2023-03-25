@@ -228,10 +228,6 @@ export const FormKonstituen = () => {
 					Cancel
 				</Button>
 
-				{console.log('test')}
-				{console.log(getValues())}
-				{console.log(getFieldState())}
-				{console.log(formState.errors)}
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"

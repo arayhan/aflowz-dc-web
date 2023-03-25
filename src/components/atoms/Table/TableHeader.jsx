@@ -14,8 +14,10 @@ export const TableHeader = ({
 	description,
 	isReadonly,
 	seeAllLink,
+	onClickDownloadData,
 	showButtonCreate,
 	showButtonSeeAll,
+	showButtonDownloadData,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
 	showButtonUploadSheetKonstituen,
@@ -55,6 +57,19 @@ export const TableHeader = ({
 					>
 						<span>Lihat Semua</span>
 					</Link>
+				)}
+				{showButtonDownloadData && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+							onClick={onClickDownloadData}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Download Data</span>
+						</button>
+					</>
 				)}
 				{!isReadonly && showButtonUploadSheetFollowers && (
 					<button

@@ -192,7 +192,6 @@ export const TableProgramOrganization = ({
 	};
 
 	const handleSetFilter = (key, _params) => {
-		console.log(location?.search);
 		const updatedParams = _params
 			? addQueryParams(location?.search, _params)
 			: removeQueryParams(location?.search, key);
@@ -276,7 +275,7 @@ export const TableProgramOrganization = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="flex justify-end items-center w-full gap-4">
+						<div className="flex items-center justify-end w-full gap-4">
 							{selectedCity && <Badge title={selectedCity.name} onRemove={() => setSelectedCity(null)} />}
 							{(!displayedFilters || displayedFilters.includes('program_id')) && !programID && (
 								<InputSelectProgram
