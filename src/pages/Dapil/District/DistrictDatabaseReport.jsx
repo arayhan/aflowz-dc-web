@@ -117,7 +117,7 @@ const DistrictDatabaseReport = () => {
 													<div className="px-10 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
 														<div className="text-2xl font-semibold text-white">
-															{districtDetail?.total_penerima_program_district_per_program}
+															{districtDetail?.total_penerima_program_district_per_orang}
 														</div>
 													</div>
 													<div className="space-y-1 text-center">
@@ -249,10 +249,12 @@ const DistrictDatabaseReport = () => {
 													</tr>
 												</thead>
 												<tbody>
-													{districtDetail?.penerima_program_district_village?.map((program) => (
+													{districtDetail?.penerima_program?.map((program) => (
 														<tr key={program?.program_id} className="odd:bg-gray-100">
-															<td className="px-6 py-3 text-sm font-semibold">{program.village_name}</td>
-															<td className="px-6 py-3 text-sm font-semibold text-center">{program?.total_penerima}</td>
+															<td className="px-6 py-3 text-sm font-semibold">{program.program_name}</td>
+															<td className="px-6 py-3 text-sm font-semibold text-center">
+																{program?.total_penerima_program}
+															</td>
 														</tr>
 													))}
 												</tbody>
