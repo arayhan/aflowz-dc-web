@@ -188,7 +188,7 @@ const VillageDatabaseReport = () => {
 													</tr>
 												</thead>
 												<tbody>
-													{villageDetail?.penerima_program_village?.map((program) => (
+													{villageDetail?.penerima_program?.map((program) => (
 														<tr key={program?.program_id} className="odd:bg-gray-100">
 															<td className="px-6 py-3 text-sm font-semibold">{program.program_name}</td>
 															<td className="px-6 py-3 text-sm font-semibold text-center">
