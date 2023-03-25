@@ -1,4 +1,5 @@
 export * from './Alert/Alert';
+export * from './Badge/Badge';
 export * from './Button/Button';
 export * from './Button/ButtonAction';
 export * from './Breadcrumb/Breadcrumb';
