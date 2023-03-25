@@ -31,7 +31,7 @@ const states = (set, get) => ({
 	getKonstituenList: async (params) => {
 		set({ fetchingKonstituenList: true });
 
-		const defaultParams = { limit: 0, offset: 0 };
+		const defaultParams = { limit: 1000, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_KONSTITUEN.getKonstituenList(requestParams);
