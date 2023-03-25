@@ -21,7 +21,7 @@ const ProgramDetail = () => {
 
 	const [tablePenerimaParams] = useState(tableDefaultParams);
 	const [tableVillageParams] = useState(tableDefaultParams);
-	const [tableOrganizationParams] = useState(tableDefaultParams);
+	const [tableOrganizationParams, setTableOrganizationParams] = useState(tableDefaultParams);
 	const [searchParams, setSearchParams] = useState({});
 
 	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip');
@@ -139,9 +139,9 @@ const ProgramDetail = () => {
 										<TableProgramOrganization
 											mainRoute={`/program/${programDetail?.program_id}/organization`}
 											params={tableOrganizationParams}
+											setParams={setTableOrganizationParams}
 											isShowButtonSeeAll
 											seeAllLink={`/program/${programDetail?.program_id}/organization`}
-											isShowFilter={false}
 										/>
 									</div>
 								)}

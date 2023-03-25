@@ -6,7 +6,7 @@ import {
 	Button,
 	CardOrganizationStructureImage
 } from '@/components/atoms';
-import { useAuthStore, useProgramStore } from '@/store';
+import { useAuthStore, useCityStore, useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
@@ -48,11 +48,15 @@ export const TableProgramOrganization = ({
 		uploadProgramOrganizationStructureImage
 	} = useProgramStore();
 
+	const { cityList, getCityList } = useCityStore();
+
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+
+	const [organizationPositionParams] = useState(programID ? { program_id: programID } : null);
 
 	const [showModalUploadOrganizationStructure, setShowModalUploadOrganizationStructure] = useState(false);
 
@@ -193,7 +197,10 @@ export const TableProgramOrganization = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = {
+			limit: perPage,
+			offset: offsetResult
+		};
 
 		if (programID) defaultParams.program_id = programID;
 
@@ -214,6 +221,10 @@ export const TableProgramOrganization = ({
 	useEffect(() => {
 		if (programID && !programDetail) getProgramDetail(programID);
 	}, [programID, programDetail]);
+
+	useEffect(() => {
+		if (!params?.city_id) getCityList({ limit: 10 });
+	}, [params]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -253,7 +264,7 @@ export const TableProgramOrganization = ({
 				</>
 			)}
 
-			{isShowFilter && (
+			{params?.city_id && isShowFilter && (
 				<>
 					<hr />
 
@@ -281,6 +292,7 @@ export const TableProgramOrganization = ({
 									containerClassName="w-full lg:w-60"
 									value={params.position_id ? Number(params.position_id) : undefined}
 									showLabel={false}
+									params={organizationPositionParams}
 									onChange={(option) => handleSetFilter('position_id', option ? { position_id: option.value } : null)}
 								/>
 							)}
@@ -289,16 +301,37 @@ export const TableProgramOrganization = ({
 				</>
 			)}
 
-			<div className="overflow-x-scroll">
-				<Table
-					columns={columns}
-					data={data}
-					onClickRow={enableClickRow && handleClickRow}
-					loading={fetchingProgramOrganizationList || programOrganizationList === null}
-				/>
-			</div>
+			{!params?.city_id && (
+				<div className="flex flex-wrap justify-center gap-3 p-5">
+					{cityList?.items?.map((city) => {
+						return (
+							<button
+								key={city.id}
+								type="button"
+								className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
+								onClick={() => setParams({ ...params, city_id: city.id })}
+							>
+								<div className="px-5">
+									<img className="w-full" src={require('@/images/icons/Icon_Home/Kota.svg').default} alt="" />
+								</div>
+								<div className="text-sm text-center lg:text-base font-extralight">{city.name}</div>
+							</button>
+						);
+					})}
+				</div>
+			)}
+			{params?.city_id && (
+				<div className="overflow-x-scroll">
+					<Table
+						columns={columns}
+						data={data}
+						onClickRow={enableClickRow && handleClickRow}
+						loading={fetchingProgramOrganizationList || programOrganizationList === null}
+					/>
+				</div>
+			)}
 
-			{isShowFooter && (
+			{params?.city_id && isShowFooter && (
 				<div className="p-6">
 					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 				</div>
