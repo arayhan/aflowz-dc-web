@@ -302,7 +302,7 @@ export const TableProgramOrganization = ({
 			)}
 
 			{!params?.city_id && (
-				<div className="flex flex-wrap justify-center gap-3 p-5">
+				<div className="flex flex-wrap items-start justify-center gap-3 p-5">
 					{cityList?.items?.map((city) => {
 						return (
 							<button
