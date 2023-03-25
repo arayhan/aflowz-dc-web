@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const Penerima = () => {
 	const { search } = useLocation();
-	const [params, setParams] = useState({ is_staff: false });
+	const [params, setParams] = useState({});
 
 	useEffect(() => {
 		setParams(search ? queryStringToObject(search) : {});
@@ -15,9 +15,9 @@ const Penerima = () => {
 		<div>
 			<BannerFeature title="Penerima" />
 			<div className="bg-gray-100">
-				<div className="py-6 container">
+				<div className="container py-6">
 					<TablePenerima
-						params={params}
+						params={{ ...params, is_staff: false }}
 						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Detail']}
 					/>
 				</div>
