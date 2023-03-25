@@ -17,7 +17,7 @@ const Penerima = () => {
 			<div className="bg-gray-100">
 				<div className="container py-6">
 					<TablePenerima
-						params={{ ...params, is_staff: false, is_receiver: true }}
+						params={{ ...params, is_receiver: true }}
 						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Detail']}
 					/>
 				</div>
