@@ -94,7 +94,7 @@ const VillageDatabaseReport = () => {
 													<div className="px-10 py-2 text-center bg-primary">
 														<div className="font-semibold text-secondary">Total</div>
 														<div className="text-2xl font-semibold text-white">
-															{villageDetail?.total_penerima_program_village_per_program}
+															{villageDetail?.total_penerima_program_village_per_orang}
 														</div>
 													</div>
 													<div className="space-y-1 text-center">
@@ -110,8 +110,8 @@ const VillageDatabaseReport = () => {
 
 												<div>
 													<ChartPenerimaProgramByGender
-														totalPria={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_pria}
-														totalWanita={villageDetail?.total_potensi_pemilih_village_per_orang_penerima_wanita}
+														totalPria={villageDetail?.total_penerima_program_village_per_orang_pria}
+														totalWanita={villageDetail?.total_penerima_program_village_per_orang_wanita}
 													/>
 												</div>
 
