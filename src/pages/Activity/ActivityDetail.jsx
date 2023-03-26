@@ -25,6 +25,7 @@ const ActivityDetail = () => {
 		<div>
 			<BannerFeature
 				title={activityItem ? `Kegiatan : ${activityItem.description}` : 'Detail Kegiatan'}
+				backButtonLinkTo="/activity"
 				loading={fetchingActivityItem}
 			/>
 
