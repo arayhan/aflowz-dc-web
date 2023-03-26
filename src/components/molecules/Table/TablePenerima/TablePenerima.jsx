@@ -146,7 +146,6 @@ export const TablePenerima = ({
 	};
 
 	const handleDownloadData = () => {
-		const header = ['No', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat'];
 		downloadCsvPenerima(params);
 	};
 
@@ -177,7 +176,7 @@ export const TablePenerima = ({
 					title={title || 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
 					onClickDownloadData={handleDownloadData}
-					showButtonDownloadData
+					showButtonDownloadData={data.length > 0}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
