@@ -17,7 +17,8 @@ export const InputSelectActivityDetail = forwardRef(
 			if (activityDetailList?.total > 0) {
 				const mapPromise = activityDetailList.items.map((promise) => ({
 					label: promise.description,
-					value: promise.id
+					value: promise.id,
+					data: promise
 				}));
 				setOptions(mapPromise);
 			}

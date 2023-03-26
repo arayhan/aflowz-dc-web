@@ -22,8 +22,7 @@ export const FormActivity = () => {
 
 	const { activityItem, activityDetailItem, fetchingActivity, processingCreateActivity, activityErrors } =
 		useActivityStore();
-	const { getActivityItem, getActivityDetailItem, createActivity, updateActivity, clearStateActivity } =
-		useActivityStore();
+	const { getActivityItem, createActivity, updateActivity, clearStateActivity } = useActivityStore();
 
 	const { control, setValue, setError, handleSubmit, watch } = useForm({
 		resolver: yupResolver(formActivitySchema),
@@ -63,6 +62,7 @@ export const FormActivity = () => {
 
 	useEffect(() => {
 		if (activityID && activityItem) {
+			setValue('is_activity_detail', activityItem.activity_details[0]?.id ? true : false);
 			setValue('description_activity', activityItem.description || '');
 			setValue('description_activity_detail', activityItem?.activity_details[0]?.description || '');
 			setValue('activity_detail_id', activityItem?.activity_details[0]?.id || '');
@@ -101,7 +101,17 @@ export const FormActivity = () => {
 									placeholder="Pilih Detail Kegiatan"
 									helper="(Kosongkan apabila ingin menambahkan kegiatan baru)"
 									onChange={(option) => {
-										setValue('activity_detail_id', option?.value || null);
+										const data = option?.data;
+
+										setValue('activity_detail_id', option?.value || 0);
+										setValue('description_activity', data?.description || '');
+										setValue('konstituen_id', data?.konstituen?.id || 0);
+										setValue('village_id', data?.village?.id || 0);
+										setValue('district_id', data?.district?.id || 0);
+										setValue('city_id', data?.city?.id || 0);
+										setValue('program_id', data?.program?.id || 0);
+										setValue('category_id', data?.category?.id || 0);
+
 										if (option) setError('activity_detail_id', null);
 									}}
 									error={error}
@@ -314,6 +324,7 @@ export const FormActivity = () => {
 				>
 					Cancel
 				</Button>
+
 				<Button
 					className={'px-7 py-3 rounded-sm'}
 					variant="primary"

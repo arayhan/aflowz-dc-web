@@ -15,7 +15,6 @@ export const InputSelectAsync = ({
 	innerRef,
 	...props
 }) => {
-	console.log({ options, value });
 	return (
 		<AsyncPaginate
 			{...props}
