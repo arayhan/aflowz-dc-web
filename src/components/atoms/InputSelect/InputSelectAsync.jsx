@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactSelectAsync from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 
 export const InputSelectAsync = ({
 	options,
@@ -15,15 +15,14 @@ export const InputSelectAsync = ({
 	innerRef,
 	...props
 }) => {
+	console.log({ options, value });
 	return (
-		<ReactSelectAsync
+		<AsyncPaginate
 			{...props}
-			cacheOptions
 			ref={innerRef}
 			value={options.filter(function (option) {
 				return option.value === value;
 			})}
-			defaultOptions
 			className={`z-10 ${props.className}`}
 			placeholder={placeholder}
 			onChange={onChange}

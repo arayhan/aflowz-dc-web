@@ -4,19 +4,29 @@ import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectInstitusiAsync = forwardRef(
 	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
-		const { konstituenList, getKonstituenList } = useKonstituenStore();
+		const { konstituenList, fetchingKonstituenList, getKonstituenList } = useKonstituenStore();
 
 		const [options, setOptions] = useState([]);
 
-		const handleLoadOptions = (search, callback) => {
-			getKonstituenList({ limit: 10, offset: 0, ...(search && { keyword: search }), ...params }, ({ payload }) => {
-				const mapKonstituen = payload.items.map((konstituen) => ({
-					label: konstituen.name,
-					value: konstituen.id
-				}));
-
-				callback(mapKonstituen);
+		const handleLoadOptions = async (search, prevOptions) => {
+			const { success, payload } = await getKonstituenList({
+				limit: 10,
+				offset: prevOptions.length,
+				...(search && { keyword: search }),
+				...params
 			});
+
+			const mapKonstituen = success
+				? payload.items.map((konstituen) => ({
+						label: konstituen.name,
+						value: konstituen.id
+				  }))
+				: [];
+
+			return {
+				options: mapKonstituen,
+				hasMore: prevOptions.length + mapKonstituen.length < payload.total
+			};
 		};
 
 		useEffect(() => {
@@ -25,7 +35,10 @@ export const InputSelectInstitusiAsync = forwardRef(
 					label: konstituen.name,
 					value: konstituen.id
 				}));
-				setOptions(mapKonstituen);
+				const newOptions = options.filter(
+					(option) => !mapKonstituen.find((konstituen) => konstituen.value === option.value)
+				);
+				setOptions([...mapKonstituen, ...newOptions]);
 			}
 		}, [konstituenList]);
 
@@ -37,6 +50,7 @@ export const InputSelectInstitusiAsync = forwardRef(
 					options={options}
 					loadOptions={handleLoadOptions}
 					onChange={onChange}
+					loading={fetchingKonstituenList}
 					placeholder={placeholder || 'Pilih Institusi'}
 					{...props}
 				/>

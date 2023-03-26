@@ -28,7 +28,7 @@ const states = (set, get) => ({
 	proposalItem: null,
 	proposalList: null,
 
-	getKonstituenList: async (params, callback) => {
+	getKonstituenList: async (params) => {
 		set({ fetchingKonstituenList: true });
 
 		const defaultParams = { limit: 1000, offset: 0 };
@@ -39,7 +39,7 @@ const states = (set, get) => ({
 		set({ konstituenList: success ? payload : null });
 		set({ fetchingKonstituenList: false });
 
-		if (callback) callback({ payload, success });
+		return { payload, success };
 	},
 	getKonstituenDetail: async (konstituenID) => {
 		set({ fetchingKonstituenDetail: true });
