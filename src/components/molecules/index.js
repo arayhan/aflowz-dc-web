@@ -61,6 +61,7 @@ export * from './Search/SearchGlobal/SearchGlobal';
 export * from './InputSelect/InputSelectMitra/InputSelectMitra';
 export * from './InputSelect/InputSelectCity/InputSelectCity';
 export * from './InputSelect/InputSelectInstitusi/InputSelectInstitusi';
+export * from './InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
 export * from './InputSelect/InputSelectInstitusiType/InputSelectInstitusiType';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';

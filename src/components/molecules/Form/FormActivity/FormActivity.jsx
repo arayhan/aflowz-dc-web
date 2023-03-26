@@ -4,8 +4,7 @@ import {
 	InputSelectActivityDetail,
 	InputSelectCity,
 	InputSelectDistrict,
-	InputSelectInstitusi,
-	InputSelectMitra,
+	InputSelectInstitusiAsync,
 	InputSelectProgram,
 	InputSelectStaff,
 	InputSelectVillage
@@ -183,7 +182,7 @@ export const FormActivity = () => {
 							name={'konstituen_id'}
 							control={control}
 							render={({ field, fieldState: { error } }) => (
-								<InputSelectInstitusi
+								<InputSelectInstitusiAsync
 									{...field}
 									disabled={processingCreateActivity || fetchingActivity || activityErrors}
 									onChange={({ value }) => {
