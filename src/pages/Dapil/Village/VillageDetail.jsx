@@ -109,22 +109,22 @@ const VillageDetail = () => {
 								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
 									value={villageDetail?.total_penerima_program_village_pip || 0}
-									linkTo={`/penerima?village_id=${villageID}&program_name=pip`}
+									linkTo={`/penerima?village_id=${villageID}&program=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima KIP'}
 									value={villageDetail?.total_penerima_program_village_kip || 0}
-									linkTo={`/penerima?village_id=${villageID}&program_name=kip`}
+									linkTo={`/penerima?village_id=${villageID}&program=kip`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima KIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_kip || 0}
-									linkTo={`/institusi?village_id=${villageID}&program_name=kip&konstituen_type=kampus`}
+									linkTo={`/institusi?village_id=${villageID}&program=kip&konstituen_type=kampus`}
 								/>
 								<CardDetailTotal
 									title={'Total Institusi Penerima PIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_pip || 0}
-									linkTo={`/institusi?village_id=${villageID}&program_name=pip&konstituen_type=sekolah`}
+									linkTo={`/institusi?village_id=${villageID}&program=pip&konstituen_type=sekolah`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}
