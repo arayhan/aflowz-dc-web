@@ -42,6 +42,16 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 				accessor: 'pic_mobile'
 			},
 			{
+				Header: 'Total Program Tersalurkan',
+				accessor: '',
+				minWidth: 250
+			},
+			{
+				Header: 'Total Penerima Benefit',
+				accessor: '',
+				minWidth: 250
+			},
+			{
 				Header: 'Detail',
 				minWidth: 180,
 				Cell: (row) => {
@@ -93,7 +103,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Mitra"
 					featurePath="/mitra"
