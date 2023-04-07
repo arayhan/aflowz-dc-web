@@ -46,7 +46,7 @@ export const TableStockiest = ({ selectedCategory }) => {
 				Header: 'Gambar Barang',
 				minWidth: 125,
 				Cell: (row) => (
-					<div className="w-full flex justify-center">
+					<div className="flex justify-center w-full">
 						<img
 							src={row.row.original?.image_url ? row.row.original?.image_url : require('@/images/dummy-product.webp')}
 							className="w-24"
@@ -57,22 +57,22 @@ export const TableStockiest = ({ selectedCategory }) => {
 			{
 				Header: 'Kode Unik Barang',
 				minWidth: 100,
-				Cell: (row) => <div className="transform: uppercase">{row.row.original.sku_code}</div>
+				Cell: (row) => <div className="uppercase transform:">{row.row.original.sku_code}</div>
 			},
 			{
 				Header: 'Nama Barang',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.name}</div>
 			},
 			{
 				Header: 'Kategori',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.category.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.category.name}</div>
 			},
 			{
 				Header: 'Deskripsi',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.description}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.description}</div>
 			},
 			{
 				Header: 'Jumlah',
@@ -81,20 +81,18 @@ export const TableStockiest = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Actions',
-				minWidth: 180,
+				minWidth: 220,
 				Cell: (row) => {
 					return (
-						isSystem && (
-							<div className="grid grid-cols-1 gap-2">
-								<ButtonAction
-									className="min-w-[100px] w-full"
-									action={ACTION_TYPES.SEE_DETAIL}
-									linkTo={`/stockiest/${row.row.original.id}`}
-								/>
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/stockiest/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProduct(row.row.original.id)} />
-							</div>
-						)
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/stockiest/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/stockiest/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProduct(row.row.original.id)} />
+								</>
+							)}
+						</div>
 					);
 				}
 			}

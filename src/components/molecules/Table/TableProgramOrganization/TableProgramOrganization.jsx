@@ -164,7 +164,7 @@ export const TableProgramOrganization = ({
 				Cell: (row) => {
 					return (
 						isSystem && (
-							<div className="grid grid-cols-2 gap-2">
+							<div className="flex gap-2">
 								<ButtonAction
 									action={ACTION_TYPES.UPDATE}
 									linkTo={

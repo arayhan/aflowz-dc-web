@@ -52,27 +52,21 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 				minWidth: 250
 			},
 			{
-				Header: 'Detail',
-				minWidth: 180,
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/mitra/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgramCategory(row.row.original.id)} />
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/mitra/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/mitra/update/${row.row.original.id}`} />
+									<ButtonAction
+										action={ACTION_TYPES.DELETE}
+										onClick={() => deleteProgramCategory(row.row.original.id)}
+									/>
+								</>
+							)}
 						</div>
 					);
 				}

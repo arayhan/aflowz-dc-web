@@ -60,30 +60,19 @@ export const TableKonstituen = ({ selectedType }) => {
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 100,
-				maxWidth: 100,
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/institusi/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
-				minWidth: 180,
+				minWidth: 220,
 				Cell: (row) => {
 					return (
-						isSystem && (
-							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/institusi/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteKonstituen(row.row.original.id)} />
-							</div>
-						)
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/institusi/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/institusi/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteKonstituen(row.row.original.id)} />
+								</>
+							)}
+						</div>
 					);
 				}
 			}

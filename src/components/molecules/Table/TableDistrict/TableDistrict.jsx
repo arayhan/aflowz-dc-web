@@ -80,28 +80,18 @@ export const TableDistrict = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 180,
-				hidden: displayedColumns && !displayedColumns.includes('Detail'),
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/district/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/district/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteDistrict(row.row.original.id)} />
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/district/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/district/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteDistrict(row.row.original.id)} />
+								</>
+							)}
 						</div>
 					);
 				}
@@ -157,7 +147,7 @@ export const TableDistrict = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}

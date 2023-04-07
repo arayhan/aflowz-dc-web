@@ -109,23 +109,18 @@ export const TablePenerima = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 150,
-				maxWidth: 150,
-				hidden: displayedColumns && !displayedColumns?.includes('Detail'),
-				Cell: (row) => {
-					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />;
-				}
-			},
-			{
 				Header: 'Actions',
-				minWidth: 180,
-				hidden: isReadonly || !isSystem,
+				minWidth: 220,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/penerima/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deletePenerima(row.row.original.id)} />
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/penerima/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deletePenerima(row.row.original.id)} />
+								</>
+							)}
 						</div>
 					);
 				}

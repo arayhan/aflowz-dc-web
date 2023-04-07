@@ -107,31 +107,27 @@ export const TableActivity = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 180,
-				hidden: displayedColumns && !displayedColumns.includes('Detail'),
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/activity/${row.row.original.activity.id}/detail/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
+						<div className="flex gap-2">
 							<ButtonAction
-								action={ACTION_TYPES.UPDATE}
-								linkTo={`/activity/${row.row.original.activity.id}/detail/update/${row.row.original.id}`}
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/activity/${row.row.original.activity.id}/detail/${row.row.original.id}`}
 							/>
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityDetail(row.row.original.id)} />
+							{isSystem && (
+								<>
+									<ButtonAction
+										action={ACTION_TYPES.UPDATE}
+										linkTo={`/activity/${row.row.original.activity.id}/detail/update/${row.row.original.id}`}
+									/>
+									<ButtonAction
+										action={ACTION_TYPES.DELETE}
+										onClick={() => deleteActivityDetail(row.row.original.id)}
+									/>
+								</>
+							)}
 						</div>
 					);
 				}

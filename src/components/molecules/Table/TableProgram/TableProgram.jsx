@@ -75,32 +75,19 @@ export const TableProgram = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 50,
-				maxWidth: 50,
-				hidden: displayedColumns && !displayedColumns.includes('Detail'),
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/program/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
-						isSystem && (
-							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgram(row.row.original.id)} />
-							</div>
-						)
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/program/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/program/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgram(row.row.original.id)} />
+								</>
+							)}
+						</div>
 					);
 				}
 			}

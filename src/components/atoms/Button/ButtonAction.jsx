@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Button } from './Button';
+import { BsEye, BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
 
 export const ButtonAction = ({ text, className, linkTo, action, targetID, showAlert, onClick }) => {
 	const navigate = useNavigate();
@@ -41,9 +42,9 @@ export const ButtonAction = ({ text, className, linkTo, action, targetID, showAl
 	return (
 		<Button className={`px-3 py-2 rounded-sm text-xs ${className}`} onClick={handleAction} variant={variant}>
 			{text && text}
-			{!text && action === ACTION_TYPES.SEE_DETAIL && 'See Detail'}
-			{!text && action === ACTION_TYPES.UPDATE && 'Update'}
-			{!text && action === ACTION_TYPES.DELETE && 'Delete'}
+			{!text && action === ACTION_TYPES.SEE_DETAIL && <BsEye />}
+			{!text && action === ACTION_TYPES.UPDATE && <BsPencilSquare />}
+			{!text && action === ACTION_TYPES.DELETE && <BsFillTrashFill />}
 		</Button>
 	);
 };

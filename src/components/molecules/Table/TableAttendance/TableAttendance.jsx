@@ -27,44 +27,33 @@ export const TableAttendance = () => {
 				Header: 'Tanggal',
 				minWidth: 175,
 				Cell: (row) => (
-					<div className="transform: capitalize">{new Date(row.row.original.date).toLocaleDateString('es-CL')}</div>
+					<div className="capitalize transform:">{new Date(row.row.original.date).toLocaleDateString('es-CL')}</div>
 				)
 			},
 			{
 				Header: 'Jumlah Hadir',
 				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.total_attendance}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.total_attendance}</div>
 			},
 			{
 				Header: 'Jumlah Tidak Hadir',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.total_abscene}</div>
-			},
-			{
-				Header: 'Detail',
-				minWidth: 100,
-				maxWidth: 100,
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/absensi/${row.row.original.id}`}
-						/>
-					);
-				}
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.total_abscene}</div>
 			},
 			{
 				Header: 'Actions',
-				minWidth: 180,
+				minWidth: 220,
 				Cell: (row) => {
 					return (
-						isSystem && (
-							<div className="grid grid-cols-2 gap-2">
-								<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/absensi/update/${row.row.original.id}`} />
-								<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteAttendance(row.row.original.id)} />
-							</div>
-						)
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/absensi/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/absensi/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteAttendance(row.row.original.id)} />
+								</>
+							)}
+						</div>
 					);
 				}
 			}

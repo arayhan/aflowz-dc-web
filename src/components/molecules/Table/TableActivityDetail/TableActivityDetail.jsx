@@ -91,31 +91,27 @@ export const TableActivityDetail = ({
 				}
 			},
 			{
-				Header: 'Detail',
-				minWidth: 180,
-				hidden: displayedColumns && !displayedColumns.includes('Detail'),
-				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/activity/${activityID}/detail/${row.row.original.id}`}
-						/>
-					);
-				}
-			},
-			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
+						<div className="flex gap-2">
 							<ButtonAction
-								action={ACTION_TYPES.UPDATE}
-								linkTo={`/activity/${activityID}/detail/update/${row.row.original.id}`}
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/activity/${activityID}/detail/${row.row.original.id}`}
 							/>
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteActivityDetail(row.row.original.id)} />
+							{isSystem && (
+								<>
+									<ButtonAction
+										action={ACTION_TYPES.UPDATE}
+										linkTo={`/activity/${activityID}/detail/update/${row.row.original.id}`}
+									/>
+									<ButtonAction
+										action={ACTION_TYPES.DELETE}
+										onClick={() => deleteActivityDetail(row.row.original.id)}
+									/>
+								</>
+							)}
 						</div>
 					);
 				}
@@ -154,7 +150,7 @@ export const TableActivityDetail = ({
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Detail Kegiatan"
 					featurePath={`/activity/${activityID}/detail`}
@@ -168,7 +164,7 @@ export const TableActivityDetail = ({
 				<>
 					<hr />
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}
