@@ -65,7 +65,9 @@ const ProgramDetail = () => {
 									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Periode</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{programDetail?.program_periode}</div>
 
-									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Mitra</div>
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										PIC PIP/KIP Kemendikbud
+									</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 										{programDetail?.program_pic}{' '}
 										{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
