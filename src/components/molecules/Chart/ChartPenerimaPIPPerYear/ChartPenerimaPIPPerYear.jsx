@@ -7,19 +7,19 @@ import { Bar } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const ChartPenerimaPIPPerYear = ({ data }) => {
-	const total = data.length;
+	const isEmpty = data.length <= 0;
 
 	return (
 		<>
-			{total === 0 && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
-			{total > 0 && (
+			{isEmpty && <NegativeCase type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />}
+			{!isEmpty && (
 				<Bar
 					data={{
-						labels: data.map((item) => item.periode),
+						labels: data.map((item) => item.program_periode),
 						datasets: [
 							{
 								label: 'Total Penerima PIP',
-								data: data.map((item) => item.total_program),
+								data: data.map((item) => item.total_penerima),
 								backgroundColor: getRandomColor(),
 								borderWidth: 1
 							}
