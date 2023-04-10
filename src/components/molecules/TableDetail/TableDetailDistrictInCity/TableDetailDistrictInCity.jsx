@@ -78,5 +78,5 @@ export const TableDetailDistrictInCity = ({ districtData }) => {
 };
 
 TableDetailDistrictInCity.defaultProps = {
-	villageData: []
+	districtData: []
 };
