@@ -1,5 +1,11 @@
-import { Button, ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, ChartPeriodeProgram, ChartPenerimaProgram, TableProgram } from '@/components/molecules';
+import { Button, ButtonAction, Card, Timeline } from '@/components/atoms';
+import {
+	BannerFeature,
+	ChartPeriodeProgram,
+	ChartPenerimaProgram,
+	TableProgram,
+	TableDetailTimeline
+} from '@/components/molecules';
 import { CardProgramCategoryOrganizationStructure } from '@/components/molecules/Card/CardProgramCategoryOrganizationStructure/CardProgramCategoryOrganizationStructure';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -100,65 +106,13 @@ const MitraDetail = () => {
 								<CardProgramCategoryOrganizationStructure programCategoryID={programCategoryID} />
 							</div>
 
-							<div className="bg-white rounded-md">
+							<div className="col-span-12 bg-white rounded-md">
 								<Card
-									title="Timeline"
-									bodyClassName={'flex px-4 py-10 overflow-x-scroll'}
-									rightComponent={
-										<Button
-											className={'w-full md:w-auto px-5 py-2 rounded-sm text-sm'}
-											variant="primary"
-											linkTo={`/mitra/${programCategoryID}/timeline/create`}
-										>
-											Create
-										</Button>
-									}
+									title={`Timeline`}
+									description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+									bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 								>
-									{programCategoryDetail?.program_plans_timeline.length === 0 && (
-										<div className="w-full p-8 text-center text-gray-400 bg-gray-100 rounded-md">
-											There is no timeline created yet
-										</div>
-									)}
-									{programCategoryDetail?.program_plans_timeline.length > 0 && (
-										<div className="relative flex items-start w-full">
-											<div className="absolute left-0 w-full h-1 bg-gray-200 top-10" />
-											{programCategoryDetail?.program_plans_timeline.map((timeline) => (
-												<div
-													key={timeline.id}
-													className="min-w-[200px] md:min-w-[250px] space-y-3 max-w-[300px] text-center"
-												>
-													<div className="text-base font-semibold md:text-lg">
-														{moment(timeline.date_plan).format('YYYY')}
-													</div>
-													<div className="relative w-full h-1 bg-primary">
-														<div className="absolute w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 bg-primary" />
-													</div>
-													<div className="text-sm text-gray-400">
-														{moment(timeline.date_plan).format('DD MMMM YYYY')}
-													</div>
-													<div className="p-4 mx-3 rounded-md shadow-md">
-														<div className="text-xs md:text-sm">{timeline.program_name}</div>
-													</div>
-													<div className="flex items-center gap-2 px-3">
-														<Button
-															className={'w-full px-4 py-2 rounded-sm text-xs md:text-sm'}
-															variant="success"
-															linkTo={`/mitra/${programCategoryID}/timeline/update/${timeline.id}`}
-														>
-															Update
-														</Button>
-														<ButtonAction
-															action={ACTION_TYPES.DELETE}
-															className={'w-full px-4 py-2 rounded-sm text-xs md:text-sm'}
-															onClick={() => deleteProgramCategoryTimeline(timeline.id)}
-														>
-															Delete
-														</ButtonAction>
-													</div>
-												</div>
-											))}
-										</div>
-									)}
+									<TableDetailTimeline timelineData={programCategoryDetail?.program_plans_timeline} />
 								</Card>
 							</div>
 
