@@ -53,13 +53,13 @@ export const ORGANIZATION_TYPE = {
 
 export const STATUS_PENERIMA_TYPES = {
 	CANDIDATE: 'candidate',
-	ACCEPTED: 'accepted',
+	CONFIRMED: 'confirmed',
 	REJECTED: 'rejected'
 };
 
 export const STATUS_PENERIMA_TYPES_ARRAY = [
 	{ label: 'Candidate', value: STATUS_PENERIMA_TYPES.CANDIDATE },
-	{ label: 'Accepted', value: STATUS_PENERIMA_TYPES.ACCEPTED },
+	{ label: 'Confirmed', value: STATUS_PENERIMA_TYPES.CONFIRMED },
 	{ label: 'Rejected', value: STATUS_PENERIMA_TYPES.REJECTED }
 ];
 
