@@ -53,6 +53,12 @@ export const TablePenerima = ({
 				hidden: displayedColumns && !displayedColumns.includes('NIK')
 			},
 			{
+				Header: 'NISN',
+				accessor: 'nisn_number',
+				minWidth: 70,
+				hidden: displayedColumns && !displayedColumns.includes('NISN')
+			},
+			{
 				Header: 'Nama Penerima',
 				accessor: 'name',
 				minWidth: 175,
@@ -208,13 +214,15 @@ export const TablePenerima = ({
 								/>
 							)}
 
-							{(!displayedFilters || displayedFilters.includes('status')) && (
+							{(!displayedFilters || displayedFilters.includes('candidate_status')) && (
 								<InputSelectStatusPenerima
 									containerClassName="w-full lg:w-60"
-									value={params.status ? Number(params.status) : undefined}
+									value={params.candidate_status ? Number(params.candidate_status) : undefined}
 									showLabel={false}
 									showPeriodeOnLabel
-									onChange={(option) => handleSetFilter('status', option ? { status: option.value } : null)}
+									onChange={(option) =>
+										handleSetFilter('candidate_status', option ? { candidate_status: option.value } : null)
+									}
 								/>
 							)}
 

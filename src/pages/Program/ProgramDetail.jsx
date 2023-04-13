@@ -30,8 +30,8 @@ const ProgramDetail = () => {
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 
-	const [tableCandidateParams] = useState({ ...tableDefaultParams, status: STATUS_PENERIMA_TYPES.CANDIDATE });
-	const [tablePenerimaParams] = useState({ ...tableDefaultParams, status: STATUS_PENERIMA_TYPES.CONFIRMED });
+	const [tableCandidateParams] = useState({ ...tableDefaultParams, candidate_status: STATUS_PENERIMA_TYPES.CANDIDATE });
+	const [tablePenerimaParams] = useState({ ...tableDefaultParams, candidate_status: STATUS_PENERIMA_TYPES.CONFIRMED });
 	const [tableOrganizationParams, setTableOrganizationParams] = useState(tableDefaultParams);
 
 	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip');
@@ -50,14 +50,31 @@ const ProgramDetail = () => {
 
 	return (
 		<div>
-			{showModalUploadSheetFollowers && (
-				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
+			{showModalUploadSheetKandidat && (
+				<ModalUploadSheetPenerima
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					status={STATUS_PENERIMA_TYPES.CANDIDATE}
+					onClose={() => setShowModalUploadSheetKandidat(false)}
+				/>
 			)}
 			{showModalUploadSheetPenerima && (
-				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
+				<ModalUploadSheetPenerima
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					status={STATUS_PENERIMA_TYPES.CONFIRMED}
+					onClose={() => setShowModalUploadSheetPenerima(false)}
+				/>
 			)}
-			{showModalUploadSheetKandidat && (
-				<ModalUploadSheetKonstituen onClose={() => setShowModalUploadSheetKandidat(false)} />
+			{showModalUploadSheetFollowers && (
+				<ModalUploadSheetFollowers
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					onClose={() => setShowModalUploadSheetFollowers(false)}
+				/>
 			)}
 
 			<BannerFeature
@@ -110,7 +127,23 @@ const ProgramDetail = () => {
 								</div>
 							</Card>
 
-							<div className="grid items-start grid-cols-2 gap-4 md:grid-cols-5">
+							<div className="grid items-start grid-cols-2 gap-4 md:grid-cols-6">
+								<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
+									<Link to={`/program/penerima/${programDetail?.program_id}`}>
+										<div className="flex items-center justify-center w-full">
+											<img
+												src={require('@/images/icons/Icon_Home/Penerima.svg').default}
+												className="w-1/2 sm:w-1/3 md:w-2/3"
+											/>
+										</div>
+										<div className="flex flex-col items-center justify-center space-y-1 text-center">
+											<span className="text-2xl md:text-4xl font-extralight">
+												{programDetail?.total_penerima_program || 0}
+											</span>
+											<div className="font-light text-gray-400">Total Calon Penerima</div>
+										</div>
+									</Link>
+								</div>
 								<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
 									<Link to={`/program/penerima/${programDetail?.program_id}`}>
 										<div className="flex items-center justify-center w-full">
@@ -168,64 +201,66 @@ const ProgramDetail = () => {
 										/>
 									</div>
 								)}
+								{isPIPorKIP && (
+									<div className="flex items-start justify-center col-span-12 gap-3 p-4 mt-8 bg-white rounded-md shadow-md">
+										<div className="flex flex-col items-center justify-center space-y-2">
+											<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">1</div>
+											<button
+												className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+												onClick={() => setShowModalUploadSheetKandidat(true)}
+											>
+												<span className="w-4">
+													<SiGooglesheets size={16} />
+												</span>
+												<span className="text-sm">Upload Kandidat</span>
+											</button>
+										</div>
+										<div className="mt-[8px] text-gray-400">
+											<FaChevronRight />
+										</div>
+										<div className="flex flex-col items-center justify-center space-y-2">
+											<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">2</div>
+											<button
+												className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+												onClick={() => setShowModalUploadSheetPenerima(true)}
+											>
+												<span className="w-4">
+													<SiGooglesheets size={16} />
+												</span>
+												<span className="text-sm">Upload Penerima Program</span>
+											</button>
+										</div>
+										<div className="mt-[8px] text-gray-400">
+											<FaChevronRight />
+										</div>
+										<div className="flex flex-col items-center justify-center space-y-2">
+											<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">3</div>
+											<button
+												className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-rose-500 hover:bg-rose-600 lg:w-auto"
+												onClick={() => setShowModalUploadSheetFollowers(true)}
+											>
+												<span className="w-4">
+													<SiGooglesheets size={16} />
+												</span>
+												<span className="text-sm">Upload Followers</span>
+											</button>
+										</div>
+									</div>
+								)}
+								{isPIPorKIP && (
+									<div className="col-span-12 md:col-span-6">
+										<TablePenerima
+											title="Calon Penerima Program"
+											programID={programDetail?.program_id}
+											programName={programDetail?.program_name}
+											isReadonly
+											isShowFilter={false}
+											params={tableCandidateParams}
+										/>
+									</div>
+								)}
 
-								<div className="flex items-start justify-center col-span-12 gap-3 p-4 mt-8 bg-white rounded-md shadow-md">
-									<div className="flex flex-col items-center justify-center space-y-2">
-										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">1</div>
-										<button
-											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
-											onClick={() => setShowModalUploadSheetFollowers(true)}
-										>
-											<span className="w-4">
-												<SiGooglesheets size={16} />
-											</span>
-											<span className="text-sm">Upload Kandidat</span>
-										</button>
-									</div>
-									<div className="mt-[8px] text-gray-400">
-										<FaChevronRight />
-									</div>
-									<div className="flex flex-col items-center justify-center space-y-2">
-										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">2</div>
-										<button
-											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
-											onClick={() => setShowModalUploadSheetPenerima(true)}
-										>
-											<span className="w-4">
-												<SiGooglesheets size={16} />
-											</span>
-											<span className="text-sm">Upload Penerima Program</span>
-										</button>
-									</div>
-									<div className="mt-[8px] text-gray-400">
-										<FaChevronRight />
-									</div>
-									<div className="flex flex-col items-center justify-center space-y-2">
-										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">3</div>
-										<button
-											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-rose-500 hover:bg-rose-600 lg:w-auto"
-											onClick={() => setShowModalUploadSheetFollowers(true)}
-										>
-											<span className="w-4">
-												<SiGooglesheets size={16} />
-											</span>
-											<span className="text-sm">Upload Followers</span>
-										</button>
-									</div>
-								</div>
-
-								<div className="col-span-12 md:col-span-6">
-									<TablePenerima
-										title="Calon Penerima Program"
-										programID={programDetail?.program_id}
-										programName={programDetail?.program_name}
-										isReadonly
-										isShowFilter={false}
-										params={tableCandidateParams}
-									/>
-								</div>
-
-								<div className="col-span-12 md:col-span-6">
+								<div className={`col-span-12 ${isPIPorKIP ? 'md:col-span-6' : ''}`}>
 									<TablePenerima
 										title="Penerima Program"
 										programID={programDetail?.program_id}

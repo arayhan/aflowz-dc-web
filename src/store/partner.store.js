@@ -20,6 +20,8 @@ const states = (set, get) => ({
 	processingCreateStaff: false,
 	processingEditStaff: false,
 	processingBulkCreatePartner: false,
+	processingBulkCreatePartnerCandidate: false,
+	processingBulkCreatePartnerConfirm: false,
 	processingUploadStaffOrganizationStructureImage: false,
 	processingDeleteStaffOrganizationStructureImage: false,
 
@@ -105,6 +107,30 @@ const states = (set, get) => ({
 
 		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
 		set({ processingBulkCreatePartner: false });
+
+		callback({ payload, success });
+	},
+
+	bulkCreatePartnerCandidate: async (params, callback) => {
+		set({ processingBulkCreatePartnerCandidate: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartnerCandidate(params);
+
+		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
+		set({ processingBulkCreatePartnerCandidate: false });
+
+		callback({ payload, success });
+	},
+
+	bulkCreatePartnerConfirm: async (params, callback) => {
+		set({ processingBulkCreatePartnerConfirm: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartnerConfirm(params);
+
+		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
+		set({ processingBulkCreatePartnerConfirm: false });
 
 		callback({ payload, success });
 	},

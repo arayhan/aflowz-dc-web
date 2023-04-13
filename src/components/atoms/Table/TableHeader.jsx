@@ -43,7 +43,7 @@ export const TableHeader = ({
 			{showModalUploadSheetKonstituen && (
 				<ModalUploadSheetKonstituen onClose={() => setShowModalUploadSheetKonstituen(false)} />
 			)}
-			<div className="w-full xl:w-1/3">
+			<div className="w-full xl:w-1/2">
 				<div className="text-xl font-light capitalize transform:">{title}</div>
 				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'hidden text-sm text-gray-400'}>
 					{description}

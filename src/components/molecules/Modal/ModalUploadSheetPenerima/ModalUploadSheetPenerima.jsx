@@ -7,10 +7,18 @@ import Swal from 'sweetalert2';
 import { usePartnerStore } from '@/store';
 import { useNavigate } from 'react-router';
 import { objectToQueryString } from '@/utils/helpers';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 
-export const ModalUploadSheetPenerima = ({ onClose }) => {
+export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 	const navigate = useNavigate();
-	const { processingBulkCreatePartner, bulkCreatePartner } = usePartnerStore();
+	const {
+		processingBulkCreatePartner,
+		processingBulkCreatePartnerCandidate,
+		processingBulkCreatePartnerConfirm,
+		bulkCreatePartner,
+		bulkCreatePartnerCandidate,
+		bulkCreatePartnerConfirm
+	} = usePartnerStore();
 
 	const MAXIMUM_FILE_SIZE = {
 		text: '10MB',
@@ -33,16 +41,34 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 				const json = xlsx.utils.sheet_to_json(worksheet);
 
 				if (json.length > 0) {
-					const params = json.map((data) => {
-						const allValuesToStringResult = data;
-						Object.keys(data).forEach((key) => {
-							allValuesToStringResult[key] = data[key].toString();
-							allValuesToStringResult['programs'] = [];
-						});
-						return allValuesToStringResult;
-					});
+					let params;
 
-					bulkCreatePartner(params, ({ payload, success }) => {
+					if (status === STATUS_PENERIMA_TYPES.CONFIRMED && isPIP) {
+						params = json.map((data) => ({
+							nisn_number: data?.nisn_number?.toString() || '',
+							program_name: data?.program_name?.toString() || '',
+							program_periode: data?.program_periode?.toString() || '',
+							program_mitra: data?.program_mitra?.toString() || ''
+						}));
+					} else if (status === STATUS_PENERIMA_TYPES.CONFIRMED && isKIP) {
+						params = json.map((data) => ({
+							nik_number: data?.nik_number?.toString() || '',
+							program_name: data?.program_name?.toString() || '',
+							program_periode: data?.program_periode?.toString() || '',
+							program_mitra: data?.program_mitra?.toString() || ''
+						}));
+					} else {
+						params = json.map((data) => {
+							const allValuesToStringResult = data;
+							Object.keys(data).forEach((key) => {
+								allValuesToStringResult[key] = data[key].toString();
+								allValuesToStringResult['programs'] = [];
+							});
+							return allValuesToStringResult;
+						});
+					}
+
+					const bulkCreateCallback = ({ payload, success }) => {
 						if (success) {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
 							const queryString = objectToQueryString(queryParams);
@@ -51,7 +77,11 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 						} else {
 							setErrors(payload);
 						}
-					});
+					};
+
+					if (status === STATUS_PENERIMA_TYPES.CANDIDATE) bulkCreatePartnerCandidate(params, bulkCreateCallback);
+					else if (status === STATUS_PENERIMA_TYPES.CONFIRMED) bulkCreatePartnerConfirm(params, bulkCreateCallback);
+					else bulkCreatePartner(params, bulkCreateCallback);
 				}
 			};
 		}
@@ -93,10 +123,16 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 
 	return (
 		<Modal
-			title={`Upload Sheet Penerima Program`}
+			title={
+				status === STATUS_PENERIMA_TYPES.CANDIDATE
+					? `Upload Sheet Calon Penerima Program`
+					: `Upload Sheet Penerima Program`
+			}
 			description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, eligendi."
 			submitButtonText={'Upload'}
-			isLoading={processingBulkCreatePartner}
+			isLoading={
+				processingBulkCreatePartner || processingBulkCreatePartnerCandidate || processingBulkCreatePartnerConfirm
+			}
 			onSubmit={handleExtractSheetToJSON}
 			onClose={handleClose}
 		>
@@ -111,7 +147,7 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 									<div className="text-sm">
 										{error.name} - {error.nik_number}
 									</div>
-									<div className="text-xs bg-red-400 p-2 rounded-md">
+									<div className="p-2 text-xs bg-red-400 rounded-md">
 										{Object.keys(error.list_error_message).map((key) => (
 											<div key={key} className="grid grid-cols-6">
 												<span>{key}</span>
@@ -132,7 +168,7 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 						</div>
 						<label
 							htmlFor="updateSheetFile"
-							className="bg-primary px-5 py-2 rounded-sm text-white cursor-pointer hover:bg-primary-400"
+							className="px-5 py-2 text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400"
 						>
 							<div>Ubah File</div>
 							<input
@@ -148,7 +184,7 @@ export const ModalUploadSheetPenerima = ({ onClose }) => {
 				{!file && (
 					<label
 						htmlFor="selectSheetFile"
-						className="block border border-dashed text-center px-4 py-16 text-gray-300 rounded-md cursor-pointer hover:bg-gray-100"
+						className="block px-4 py-16 text-center text-gray-300 border border-dashed rounded-md cursor-pointer hover:bg-gray-100"
 					>
 						<div>UPLOAD HERE</div>
 						<input
