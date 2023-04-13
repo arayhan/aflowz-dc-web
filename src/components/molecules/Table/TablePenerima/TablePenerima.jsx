@@ -8,6 +8,7 @@ import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCi
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectStatusPenerima } from '../../InputSelect/InputSelectStatusPenerima/InputSelectStatusPenerima';
 
 export const TablePenerima = ({
 	title,
@@ -204,6 +205,16 @@ export const TablePenerima = ({
 									showLabel={false}
 									showPeriodeOnLabel
 									onChange={(option) => handleSetFilter('program_id', option ? { program_id: option.value } : null)}
+								/>
+							)}
+
+							{(!displayedFilters || displayedFilters.includes('status')) && (
+								<InputSelectStatusPenerima
+									containerClassName="w-full lg:w-60"
+									value={params.status ? Number(params.status) : undefined}
+									showLabel={false}
+									showPeriodeOnLabel
+									onChange={(option) => handleSetFilter('status', option ? { status: option.value } : null)}
 								/>
 							)}
 
