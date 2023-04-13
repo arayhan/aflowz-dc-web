@@ -51,6 +51,18 @@ export const ORGANIZATION_TYPE = {
 	MITRA: 'MITRA'
 };
 
+export const STATUS_PENERIMA_TYPES = {
+	CANDIDATE: 'candidate',
+	ACCEPTED: 'accepted',
+	REJECTED: 'rejected'
+};
+
+export const STATUS_PENERIMA_TYPES_ARRAY = [
+	{ label: 'Candidate', value: STATUS_PENERIMA_TYPES.CANDIDATE },
+	{ label: 'Accepted', value: STATUS_PENERIMA_TYPES.ACCEPTED },
+	{ label: 'Rejected', value: STATUS_PENERIMA_TYPES.REJECTED }
+];
+
 export const PER_PAGE_OPTIONS = [5, 10, 20, 50, 100];
 
 export const MITRA_MENUS = [
