@@ -1,5 +1,5 @@
 import { ButtonAction, Card } from '@/components/atoms';
-import { BannerFeature, TableFollowers } from '@/components/molecules';
+import { BannerFeature, TableDetailProgramPenerima, TableFollowers } from '@/components/molecules';
 import { usePartnerStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import React, { useEffect } from 'react';
@@ -18,7 +18,7 @@ const PenerimaDetail = () => {
 		<div>
 			<BannerFeature title={penerimaDetail ? penerimaDetail.name : 'Penerima'} loading={fetchingPenerimaDetail} />
 
-			<section className="bg-gray-100 py-12 md:py-12">
+			<section className="py-12 bg-gray-100 md:py-12">
 				<div className="container">
 					{fetchingPenerimaDetail && <PenerimaDetailSkeleton />}
 					{!fetchingPenerimaDetail && penerimaDetail && (
@@ -32,31 +32,31 @@ const PenerimaDetail = () => {
 								isPrintCertif
 								isInDetail
 							>
-								<div className="grid grid-cols-12 gap-y-1 text-sm p-5">
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+								<div className="grid grid-cols-12 p-5 text-sm gap-y-1">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Nama
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.name}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.name}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Alamat
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.address}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.address}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Email
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.email}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.email}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Gender
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.gender}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.gender}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Institusi
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 										{!penerimaDetail?.konstituen.id && '-'}
 										{penerimaDetail?.konstituen.id && (
 											<ButtonAction
@@ -67,28 +67,28 @@ const PenerimaDetail = () => {
 										)}
 									</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Nomor Telepon
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.mobile}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.mobile}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Tempat, Tanggal Lahir
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 										{penerimaDetail?.ttl.birth_place}, {penerimaDetail?.ttl.birth_date}
 									</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										NIK
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.nik_number}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.nik_number}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Kota
 									</div>
 									{penerimaDetail?.city && (
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
 												linkTo={`/dapil/city/${penerimaDetail?.city.id}`}
@@ -97,11 +97,11 @@ const PenerimaDetail = () => {
 										</div>
 									)}
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Desa / Kelurahan
 									</div>
 									{penerimaDetail?.village && (
-										<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">
+										<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 											<ButtonAction
 												action={ACTION_TYPES.SEE_DETAIL}
 												linkTo={`/dapil/village/${penerimaDetail?.village.id}`}
@@ -110,42 +110,32 @@ const PenerimaDetail = () => {
 										</div>
 									)}
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Religion
 									</div>
-									<div className="col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50">{penerimaDetail?.religion}</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.religion}</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
-										Programs
-									</div>
-									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
-										{penerimaDetail?.programs.length === 0 && '-'}
-										{penerimaDetail?.programs.length > 0 &&
-											penerimaDetail?.programs.map((program) => (
-												<ButtonAction
-													key={program.id}
-													action={ACTION_TYPES.SEE_DETAIL}
-													linkTo={`/program/${program.id}`}
-													text={program.name}
-												/>
-											))}
-									</div>
-
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Is Family
 									</div>
-									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
+									<div className="flex flex-wrap col-span-8 gap-2 px-3 py-2 lg:col-span-9 bg-gray-50 space">
 										{penerimaDetail?.is_family ? 'Ya' : 'Tidak' || '-'}
 									</div>
 
-									<div className="col-span-4 lg:col-span-3 flex items-center text-gray-500 bg-gray-100 px-3 py-2">
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										Is Staff
 									</div>
-									<div className="flex flex-wrap col-span-8 lg:col-span-9 px-3 py-2 bg-gray-50 space gap-2">
+									<div className="flex flex-wrap col-span-8 gap-2 px-3 py-2 lg:col-span-9 bg-gray-50 space">
 										{(penerimaDetail?.is_staff ? 'Ya' : 'Tidak') || '-'}
 									</div>
 								</div>
 							</Card>
+
+							<div className="col-span-12 bg-white rounded-md">
+								<Card title={`Program yang Diikuti`} bodyClassName={'flex items-center justify-center'}>
+									<TableDetailProgramPenerima programData={penerimaDetail?.programs} />
+								</Card>
+							</div>
 
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-12 bg-white rounded-md">
@@ -163,17 +153,17 @@ const PenerimaDetail = () => {
 const PenerimaDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
-			<div key={item} className="col-span-12 md:col-span-4 bg-white p-4 rounded-md">
-				<div className="space-y-3 flex flex-col">
+			<div key={item} className="col-span-12 p-4 bg-white rounded-md md:col-span-4">
+				<div className="flex flex-col space-y-3">
 					<Skeleton width={200} height={20} />
 					<hr />
 					<div className="flex items-center justify-center">
-						<Skeleton className="w-48 h-48 md:w-52 md:h-52 rounded-full" />
+						<Skeleton className="w-48 h-48 rounded-full md:w-52 md:h-52" />
 					</div>
 				</div>
 			</div>
 		))}
-		<div className="col-span-12 bg-white p-5 md:p-8 rounded-md">
+		<div className="col-span-12 p-5 bg-white rounded-md md:p-8">
 			<div className="grid grid-cols-12 gap-x-4 gap-y-2">
 				<Skeleton inline containerClassName="col-span-4 md:col-span-3 lg:col-span-2" />
 				<Skeleton inline containerClassName="col-span-8 md:col-span-9 lg:col-span-10" />
