@@ -178,7 +178,7 @@ export const TablePenerima = ({
 					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={'/penerima' + objectToQueryString(params)}
 					showCounter={true}
-					description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
+					// description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
 				/>
 			</div>
 

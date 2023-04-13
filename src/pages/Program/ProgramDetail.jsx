@@ -2,6 +2,9 @@ import { Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
+	ModalUploadSheetFollowers,
+	ModalUploadSheetKonstituen,
+	ModalUploadSheetPenerima,
 	TableDetailPenerimaProgram,
 	TableDetailVillageInDistrict,
 	TablePenerima,
@@ -9,7 +12,10 @@ import {
 	TableVillage
 } from '@/components/molecules';
 import { useActivityStore, useProgramStore } from '@/store';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useEffect, useState } from 'react';
+import { FaChevronRight } from 'react-icons/fa';
+import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
@@ -20,10 +26,13 @@ const ProgramDetail = () => {
 
 	const tableDefaultParams = { program_id: params.programID };
 
-	const [tablePenerimaParams] = useState(tableDefaultParams);
-	const [tableVillageParams] = useState(tableDefaultParams);
+	const [showModalUploadSheetKandidat, setShowModalUploadSheetKandidat] = useState(false);
+	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
+	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
+
+	const [tableCandidateParams] = useState({ ...tableDefaultParams, status: STATUS_PENERIMA_TYPES.CANDIDATE });
+	const [tablePenerimaParams] = useState({ ...tableDefaultParams, status: STATUS_PENERIMA_TYPES.CONFIRMED });
 	const [tableOrganizationParams, setTableOrganizationParams] = useState(tableDefaultParams);
-	const [searchParams, setSearchParams] = useState({});
 
 	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip');
 	const isKIP = programDetail?.program_name?.toLowerCase().includes('kip');
@@ -41,6 +50,16 @@ const ProgramDetail = () => {
 
 	return (
 		<div>
+			{showModalUploadSheetFollowers && (
+				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
+			)}
+			{showModalUploadSheetPenerima && (
+				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
+			)}
+			{showModalUploadSheetKandidat && (
+				<ModalUploadSheetKonstituen onClose={() => setShowModalUploadSheetKandidat(false)} />
+			)}
+
 			<BannerFeature
 				title={programDetail ? `Program ${programDetail.program_name}` : 'Program'}
 				loading={fetchingProgramDetail}
@@ -149,16 +168,74 @@ const ProgramDetail = () => {
 										/>
 									</div>
 								)}
-								<div className="col-span-12">
+
+								<div className="flex items-start justify-center col-span-12 gap-3 p-4 mt-8 bg-white rounded-md shadow-md">
+									<div className="flex flex-col items-center justify-center space-y-2">
+										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">1</div>
+										<button
+											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+											onClick={() => setShowModalUploadSheetFollowers(true)}
+										>
+											<span className="w-4">
+												<SiGooglesheets size={16} />
+											</span>
+											<span className="text-sm">Upload Kandidat</span>
+										</button>
+									</div>
+									<div className="mt-[8px] text-gray-400">
+										<FaChevronRight />
+									</div>
+									<div className="flex flex-col items-center justify-center space-y-2">
+										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">2</div>
+										<button
+											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+											onClick={() => setShowModalUploadSheetPenerima(true)}
+										>
+											<span className="w-4">
+												<SiGooglesheets size={16} />
+											</span>
+											<span className="text-sm">Upload Penerima Program</span>
+										</button>
+									</div>
+									<div className="mt-[8px] text-gray-400">
+										<FaChevronRight />
+									</div>
+									<div className="flex flex-col items-center justify-center space-y-2">
+										<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">3</div>
+										<button
+											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-rose-500 hover:bg-rose-600 lg:w-auto"
+											onClick={() => setShowModalUploadSheetFollowers(true)}
+										>
+											<span className="w-4">
+												<SiGooglesheets size={16} />
+											</span>
+											<span className="text-sm">Upload Followers</span>
+										</button>
+									</div>
+								</div>
+
+								<div className="col-span-12 md:col-span-6">
 									<TablePenerima
+										title="Calon Penerima Program"
 										programID={programDetail?.program_id}
 										programName={programDetail?.program_name}
 										isReadonly
-										isInDetail
+										isShowFilter={false}
+										params={tableCandidateParams}
+									/>
+								</div>
+
+								<div className="col-span-12 md:col-span-6">
+									<TablePenerima
+										title="Penerima Program"
+										programID={programDetail?.program_id}
+										programName={programDetail?.program_name}
+										isReadonly
 										isShowFilter={false}
 										params={tablePenerimaParams}
 									/>
 								</div>
+
 								<div className="col-span-12">
 									<Card
 										title={'Penerima Program Per Kota'}
