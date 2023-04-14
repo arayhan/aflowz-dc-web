@@ -162,7 +162,9 @@ export const getProgramCategoryTimeline = async (programCategoryTimelineID) => {
 export const createProgramCategoryTimeline = async (params) => {
 	const request = {
 		name: params?.name || '',
-		date: params?.date || '',
+		start_date: params?.start_date || '',
+		end_date: params?.end_date || '',
+		description: params?.description || '',
 		program_category_id: params?.program_category_id || 0
 	};
 
@@ -177,7 +179,9 @@ export const createProgramCategoryTimeline = async (params) => {
 export const updateProgramCategoryTimeline = async (programID, params) => {
 	const request = {
 		name: params?.name || '',
-		date: params?.date || '',
+		start_date: params?.start_date || '',
+		end_date: params?.end_date || '',
+		description: params?.description || '',
 		program_category_id: params?.program_category_id || 0
 	};
 

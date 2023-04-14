@@ -47,7 +47,8 @@ export const formMitraSchema = yup.object().shape(
 
 export const formMitraTimelineSchema = yup.object().shape({
 	name: yup.string().required('Nama timeline wajib diisi'),
-	date: yup.string().required('Tanggal timeline wajib diisi'),
+	start_date: yup.string().required('Tanggal mulai timeline wajib diisi'),
+	end_date: yup.string().required('Tanggal berakhir timeline wajib diisi'),
 	program_category_id: yup.number().required('PIC Tim Internal wajib diisi')
 });
 

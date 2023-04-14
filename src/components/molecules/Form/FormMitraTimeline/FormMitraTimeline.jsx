@@ -18,11 +18,13 @@ export const FormMitraTimeline = () => {
 	} = useProgramStore();
 	const navigate = useNavigate();
 
-	const { control, setValue, handleSubmit } = useForm({
+	const { control, setValue, watch, handleSubmit } = useForm({
 		resolver: yupResolver(formMitraTimelineSchema),
 		defaultValues: {
 			name: '',
-			date: '',
+			start_date: '',
+			end_date: '',
+			description: '',
 			program_category_id: programCategoryID
 		}
 	});
@@ -42,7 +44,9 @@ export const FormMitraTimeline = () => {
 	useEffect(() => {
 		if (programCategoryTimelineID && programCategoryTimeline) {
 			setValue('name', programCategoryTimeline.name || '');
-			setValue('date', programCategoryTimeline.date || '');
+			setValue('start_date', programCategoryTimeline.start_date || '');
+			setValue('end_date', programCategoryTimeline.end_date || '');
+			setValue('description', programCategoryTimeline.description || '');
 		}
 	}, [programCategoryTimelineID, programCategoryTimeline]);
 
@@ -74,13 +78,41 @@ export const FormMitraTimeline = () => {
 				/>
 
 				<Controller
-					name={'date'}
+					name={'start_date'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputDate
 							{...field}
-							label="Tanggal"
-							placeholder="Tanggal"
+							label="Tanggal Mulai"
+							placeholder="Tanggal Mulai"
+							max={watch('end_date')}
+							disabled={fetchingProgramCategoryTimeline}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'end_date'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputDate
+							{...field}
+							label="Tanggal Berakhir"
+							placeholder="Tanggal Berakhir"
+							min={watch('start_date')}
+							disabled={fetchingProgramCategoryTimeline}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'description'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Deskripsi"
+							placeholder="Deskripsi"
 							disabled={fetchingProgramCategoryTimeline}
 							error={error}
 						/>

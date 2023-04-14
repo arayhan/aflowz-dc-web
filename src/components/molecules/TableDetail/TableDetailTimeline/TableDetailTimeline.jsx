@@ -30,10 +30,17 @@ export const TableDetailTimeline = ({ timelineData }) => {
 					const data = row.row.original;
 					return (
 						<div className="text-gray-400">
-							{data?.date_plan ? moment(data?.date_plan).format('DD MMMM YYYY') : '-'}
+							{data?.start_date_plan ? moment(data?.start_date_plan).format('DD MMMM YYYY') : '-'}
+							{' - '}
+							{data?.end_date_plan ? moment(data?.end_date_plan).format('DD MMMM YYYY') : '-'}
 						</div>
 					);
 				}
+			},
+			{
+				Header: 'Deskripsi',
+				minWidth: 150,
+				accessor: 'description'
 			}
 		],
 		[]

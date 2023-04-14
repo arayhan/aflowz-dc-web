@@ -111,6 +111,15 @@ const MitraDetail = () => {
 									title={`Timeline`}
 									description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 									bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									rightComponent={
+										<Button
+											className={'w-full md:w-auto px-5 py-2 rounded-sm text-sm'}
+											variant="primary"
+											linkTo={`/mitra/${programCategoryID}/timeline/create`}
+										>
+											Create
+										</Button>
+									}
 								>
 									<TableDetailTimeline timelineData={programCategoryDetail?.program_plans_timeline} />
 								</Card>
