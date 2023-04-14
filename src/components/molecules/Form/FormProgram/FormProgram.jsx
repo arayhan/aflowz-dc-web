@@ -46,6 +46,10 @@ export const FormProgram = () => {
 
 	useEffect(() => {
 		if (programID && program) {
+			const isPIP = program.name?.toLowerCase().includes('pip');
+			const isKIP = program.name?.toLowerCase().includes('kip');
+			const isPIPorKIP = isPIP || isKIP;
+
 			setValue('program_category_id', program.program_category?.id || null);
 			setValue('name', program.name || '');
 			setValue('periode', program.periode ? Number(program.periode) : null);
@@ -53,10 +57,9 @@ export const FormProgram = () => {
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
 			setValue('description', program.description || '');
-			setValue(
-				'is_special_program',
-				program.name.toLowerCase().includes('pip') || program.name.toLowerCase().includes('kip') || false
-			);
+			setValue('is_special_program', isPIPorKIP || false);
+			setValue('is_pip', isPIP);
+			setValue('is_kip', isKIP);
 		}
 	}, [programID, program]);
 
