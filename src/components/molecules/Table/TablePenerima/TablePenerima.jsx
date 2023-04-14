@@ -22,7 +22,9 @@ export const TablePenerima = ({
 	onClickRow,
 	isShowFilter,
 	enableClickRow,
-	konstituenType
+	konstituenType,
+	isPIP,
+	isKIP
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
@@ -50,13 +52,13 @@ export const TablePenerima = ({
 				Header: 'NIK',
 				accessor: 'nik_number',
 				minWidth: 70,
-				hidden: displayedColumns && !displayedColumns.includes('NIK')
+				hidden: (displayedColumns && !displayedColumns.includes('NIK')) || !isKIP
 			},
 			{
 				Header: 'NISN',
 				accessor: 'nisn_number',
 				minWidth: 70,
-				hidden: displayedColumns && !displayedColumns.includes('NISN')
+				hidden: (displayedColumns && !displayedColumns.includes('NISN')) || !isPIP
 			},
 			{
 				Header: 'Nama Penerima',
@@ -153,7 +155,7 @@ export const TablePenerima = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult };
+		const defaultParams = isShowFooter ? { limit: perPage, offset: offsetResult } : {};
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
@@ -163,11 +165,11 @@ export const TablePenerima = ({
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaList) {
+		if (penerimaList && isShowFooter) {
 			setData(penerimaList.items);
 			setPageCount(Math.ceil(penerimaList.total / perPage));
 		}
-	}, [penerimaList]);
+	}, [penerimaList, isShowFooter]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">

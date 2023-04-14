@@ -256,6 +256,9 @@ const ProgramDetail = () => {
 											isReadonly
 											isShowFilter={false}
 											params={tableCandidateParams}
+											isPIP={isPIP}
+											isKIP={isKIP}
+											isShowFooter={false}
 										/>
 									</div>
 								)}
@@ -268,6 +271,9 @@ const ProgramDetail = () => {
 										isReadonly
 										isShowFilter={false}
 										params={tablePenerimaParams}
+										isPIP={isPIP}
+										isKIP={isKIP}
+										isShowFooter={false}
 									/>
 								</div>
 
