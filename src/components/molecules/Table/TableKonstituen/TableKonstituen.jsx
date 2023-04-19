@@ -3,15 +3,17 @@ import { useAuthStore, useKonstituenStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { queryStringToObject } from '@/utils/helpers';
+import { objectToQueryString, queryStringToObject } from '@/utils/helpers';
 import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
 
-export const TableKonstituen = ({ selectedType }) => {
+export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, isShowButtonSeeAll, selectedType }) => {
 	const { isSystem } = useAuthStore();
 	const { fetchingKonstituenList, konstituenList, getKonstituenList, deleteKonstituen } = useKonstituenStore();
+
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
 	const location = useLocation();
@@ -25,29 +27,32 @@ export const TableKonstituen = ({ selectedType }) => {
 				disableSortBy: true,
 				disableFilters: true,
 				maxWidth: 20,
-				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
-				}
+				hidden: displayedColumns && !displayedColumns.includes('#'),
+				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
 				Header: 'Nama Institusi',
 				accessor: 'name',
+				hidden: displayedColumns && !displayedColumns.includes('Nama Institusi'),
 				minWidth: 175
 			},
 			{
 				Header: 'Jenis Institusi',
 				minWidth: 125,
+				hidden: displayedColumns && !displayedColumns.includes('Jenis Institusi'),
 				Cell: (row) => <div className="capitalize transform:">{row.row.original.konstituen_type}</div>
 			},
 			{
 				Header: 'Kota / Kabupaten',
 				minWidth: 150,
+				hidden: displayedColumns && !displayedColumns.includes('Kota / Kabupaten'),
 				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name}</div>
 			},
 			{
 				Header: 'List Penerima',
 				minWidth: 100,
 				maxWidth: 100,
+				hidden: displayedColumns && !displayedColumns.includes('List Penerima'),
 				Cell: (row) => {
 					return (
 						<Button
@@ -77,7 +82,7 @@ export const TableKonstituen = ({ selectedType }) => {
 				}
 			}
 		],
-		[]
+		[offset, perPage, page, isSystem]
 	);
 
 	const [searchInstitusi, setSearchInstitusi] = useState('');
@@ -89,16 +94,17 @@ export const TableKonstituen = ({ selectedType }) => {
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const params = { limit: perPage, offset: offsetResult };
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
-		if (selectedType) Object.assign(params, { konstituen_type: selectedType.konstituen_type });
-		if (location.search) Object.assign(params, queryStringToObject(location.search));
+		if (selectedType) Object.assign(defaultParams, { konstituen_type: selectedType.konstituen_type });
+		if (location.search) Object.assign(defaultParams, queryStringToObject(location.search));
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
-			getKonstituenList(params);
+			setOffset(Math.abs(offsetResult));
+			getKonstituenList({ ...defaultParams, ...params });
 		}
-	}, [selectedType, page, perPage, pageCount, location]);
+	}, [params, selectedType, page, perPage, pageCount, location]);
 
 	useEffect(() => {
 		if (konstituenList) {
@@ -111,11 +117,13 @@ export const TableKonstituen = ({ selectedType }) => {
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={selectedType?.label || 'Semua Institusi'}
+					title={title || selectedType?.label || 'Semua Institusi'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
-					isReadonly={!isSystem}
+					isReadonly={!isSystem || isReadonly}
 					// showButtonUploadSheetKonstituen
+					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonCreate={true}
+					seeAllLink={'/institusi' + objectToQueryString(params)}
 					feature={'Institusi'}
 					featurePath="/institusi"
 				/>

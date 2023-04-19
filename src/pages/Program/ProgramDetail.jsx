@@ -7,9 +7,9 @@ import {
 	ModalUploadSheetPenerima,
 	TableDetailPenerimaProgram,
 	TableDetailVillageInDistrict,
+	TableKonstituen,
 	TablePenerima,
-	TableProgramOrganization,
-	TableVillage
+	TableProgramOrganization
 } from '@/components/molecules';
 import { useActivityStore, useProgramStore } from '@/store';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
@@ -201,6 +201,22 @@ const ProgramDetail = () => {
 										/>
 									</div>
 								)}
+
+								{isPIPorKIP && (
+									<div className="col-span-12 bg-white rounded-md">
+										<TableKonstituen
+											title={`${isPIP ? 'Sekolah' : 'Kampus'} di Program ${programDetail.program_name}`}
+											isShowButtonSeeAll
+											isReadonly
+											params={{
+												konstituen_type: `${isPIP ? 'sekolah' : 'kampus'}`,
+												program_id: programDetail?.program_id
+											}}
+											enableClickRow
+										/>
+									</div>
+								)}
+
 								{isPIPorKIP && (
 									<div className="flex items-start justify-center col-span-12 gap-3 p-4 mt-8 bg-white rounded-md shadow-md">
 										<div className="flex flex-col items-center justify-center space-y-2">

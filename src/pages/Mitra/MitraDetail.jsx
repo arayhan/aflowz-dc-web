@@ -146,7 +146,7 @@ const MitraDetail = () => {
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
 									<TableProgram
-										title={programCategoryDetail.mitra_name}
+										title={`Program di ${programCategoryDetail.mitra_name}`}
 										displayedColumns={['#', 'Nama', 'PIC Internal']}
 										isShowButtonSeeAll
 										isShowFooter={false}
