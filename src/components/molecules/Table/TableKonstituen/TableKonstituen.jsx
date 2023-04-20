@@ -54,10 +54,12 @@ export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, i
 				maxWidth: 100,
 				hidden: displayedColumns && !displayedColumns.includes('List Penerima'),
 				Cell: (row) => {
+					params.konstituen_id = row.row.original.id;
+
 					return (
 						<Button
 							className="min-w-[100px] w-full bg-purple-500 hover:bg-purple-400 text-white px-3 py-2 rounded-sm text-xs"
-							linkTo={`/institusi/penerima/${row.row.original.id}`}
+							linkTo={`/penerima` + objectToQueryString(params)}
 						>
 							List Penerima
 						</Button>
