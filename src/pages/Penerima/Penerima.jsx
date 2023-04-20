@@ -19,6 +19,7 @@ const Penerima = () => {
 					<TablePenerima
 						params={{ ...params, is_receiver: true }}
 						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Program']}
+						isShowBulkDownloadCertificate
 					/>
 				</div>
 			</div>

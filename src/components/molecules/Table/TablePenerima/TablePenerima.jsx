@@ -21,6 +21,7 @@ export const TablePenerima = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
+	isShowBulkDownloadCertificate,
 	onClickRow,
 	isShowFilter,
 	enableClickRow,
@@ -70,7 +71,7 @@ export const TablePenerima = ({
 			},
 			{
 				Header: 'Institusi',
-				minWidth: 200,
+				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
 				Cell: (row) => {
 					const institusi = row.row.original.konstituen;
@@ -93,7 +94,7 @@ export const TablePenerima = ({
 			{
 				Header: 'Alamat',
 				accessor: 'address',
-				minWidth: 175,
+				minWidth: 225,
 				hidden: displayedColumns ? !displayedColumns.includes('Alamat') : true
 			},
 			// {
@@ -318,24 +319,28 @@ export const TablePenerima = ({
 				</>
 			)}
 
-			<hr />
-			<div className="flex items-center justify-end gap-3 px-6 py-4">
-				{(!params?.program_id || !params?.konstituen_id) && (
-					<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
-						<span className="w-5">
-							<FaInfoCircle size={18} />
-						</span>
-						<div className="italic">
-							Pilih program dan institusi pada filter untuk download sertifikat, data penerima sesuai dengan filter yang
-							dipilih
-						</div>
+			{isShowBulkDownloadCertificate && (
+				<>
+					<hr />
+					<div className="flex items-center justify-end gap-3 px-6 py-4">
+						{(!params?.program_id || !params?.konstituen_id) && (
+							<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
+								<span className="w-5">
+									<FaInfoCircle size={18} />
+								</span>
+								<div className="italic">
+									Pilih program dan institusi pada filter untuk download sertifikat, data penerima sesuai dengan filter
+									yang dipilih
+								</div>
+							</div>
+						)}
+						<ButtonPrintMultiplePenerimaCertificate
+							params={params}
+							disabled={!params?.program_id || !params?.konstituen_id}
+						/>
 					</div>
-				)}
-				<ButtonPrintMultiplePenerimaCertificate
-					params={params}
-					disabled={!params?.program_id || !params?.konstituen_id}
-				/>
-			</div>
+				</>
+			)}
 
 			<div className="overflow-x-scroll">
 				<Table
@@ -357,5 +362,6 @@ export const TablePenerima = ({
 TablePenerima.defaultProps = {
 	params: {},
 	isShowFooter: true,
-	isShowFilter: true
+	isShowFilter: true,
+	isShowBulkDownloadCertificate: false
 };
