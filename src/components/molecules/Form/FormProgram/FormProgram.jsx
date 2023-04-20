@@ -24,7 +24,9 @@ export const FormProgram = () => {
 			pic_mobile: '',
 			pic_staff_id: undefined,
 			description: '',
-			is_special_program: false
+			is_special_program: false,
+			is_pip: false,
+			is_kip: false
 		}
 	});
 

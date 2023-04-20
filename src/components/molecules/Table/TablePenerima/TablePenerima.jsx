@@ -320,7 +320,6 @@ export const TablePenerima = ({
 
 			<hr />
 			<div className="flex items-center justify-end gap-3 px-6 py-4">
-				{console.log({ params })}
 				{(!params?.program_id || !params?.konstituen_id) && (
 					<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
 						<span className="w-5">
