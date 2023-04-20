@@ -105,6 +105,8 @@ export const FormProgram = () => {
 									'is_special_program',
 									value?.toLowerCase().includes('pip') || value?.toLowerCase().includes('kip') || false
 								);
+								setValue('is_pip', value?.toLowerCase().includes('pip') || false);
+								setValue('is_kip', value?.toLowerCase().includes('kip') || false);
 							}}
 						/>
 					)}
