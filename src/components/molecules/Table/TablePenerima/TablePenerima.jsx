@@ -1,6 +1,6 @@
 import { ButtonAction, InputCheckbox, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
-import { ACTION_TYPES, INSTITUSI_TYPES } from '@/utils/constants';
+import { ACTION_TYPES, INSTITUSI_TYPES, STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/Inp
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { InputSelectStatusPenerima } from '../../InputSelect/InputSelectStatusPenerima/InputSelectStatusPenerima';
+import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
+import { FaInfoCircle } from 'react-icons/fa';
 
 export const TablePenerima = ({
 	title,
@@ -94,25 +96,59 @@ export const TablePenerima = ({
 				minWidth: 175,
 				hidden: displayedColumns ? !displayedColumns.includes('Alamat') : true
 			},
+			// {
+			// 	Header: 'Program',
+			// 	minWidth: 150,
+			// 	hidden: displayedColumns && !displayedColumns.includes('Program'),
+			// 	Cell: (row) => {
+			// 		const programs = row.row.original.programs;
+			// 		return (
+			// 			<div className="flex flex-wrap gap-1">
+			// 				{programs.length === 0 && '-'}
+			// 				{programs.length > 0 &&
+			// 					programs.map((program) => (
+			// 						<ButtonAction
+			// 							key={program.id}
+			// 							className="bg-purple-500 hover:bg-purple-400"
+			// 							action={ACTION_TYPES.SEE_DETAIL}
+			// 							linkTo={`/program/${program.id}`}
+			// 							text={program.name}
+			// 						/>
+			// 					))}
+			// 			</div>
+			// 		);
+			// 	}
+			// },
 			{
 				Header: 'Program',
-				minWidth: 150,
+				minWidth: 280,
 				hidden: displayedColumns && !displayedColumns.includes('Program'),
 				Cell: (row) => {
-					const programs = row.row.original.programs;
+					const programs = row.row.original.program_selections;
 					return (
 						<div className="flex flex-wrap gap-1">
 							{programs.length === 0 && '-'}
 							{programs.length > 0 &&
-								programs.map((program) => (
-									<ButtonAction
-										key={program.id}
-										className="bg-purple-500 hover:bg-purple-400"
-										action={ACTION_TYPES.SEE_DETAIL}
-										linkTo={`/program/${program.id}`}
-										text={program.name}
-									/>
-								))}
+								programs.map((program) => {
+									const statusClass =
+										program.status === STATUS_PENERIMA_TYPES.CONFIRMED
+											? 'text-green-500'
+											: STATUS_PENERIMA_TYPES.CANDIDATE
+											? 'text-blue-500'
+											: 'text-red-500';
+									return (
+										<div className="flex items-center gap-2" key={program.id}>
+											<ButtonAction
+												className="bg-purple-500 hover:bg-purple-400"
+												action={ACTION_TYPES.SEE_DETAIL}
+												linkTo={`/program/${program.program.id}`}
+												text={`${program.program.name} ${program.program.periode}`}
+											/>
+											<span>:</span>
+											<span className={`text-xs uppercase font-semibold ${statusClass}`}>{program.status}</span>
+										</div>
+									);
+								})}
 						</div>
 					);
 				}
@@ -219,7 +255,7 @@ export const TablePenerima = ({
 							{(!displayedFilters || displayedFilters.includes('candidate_status')) && (
 								<InputSelectStatusPenerima
 									containerClassName="w-full lg:w-60"
-									value={params.candidate_status ? Number(params.candidate_status) : undefined}
+									value={params?.candidate_status}
 									showLabel={false}
 									showPeriodeOnLabel
 									onChange={(option) =>
@@ -281,6 +317,26 @@ export const TablePenerima = ({
 					</div>
 				</>
 			)}
+
+			<hr />
+			<div className="flex items-center justify-end gap-3 px-6 py-4">
+				{console.log({ params })}
+				{(!params?.program_id || !params?.konstituen_id) && (
+					<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
+						<span className="w-5">
+							<FaInfoCircle size={18} />
+						</span>
+						<div className="italic">
+							Pilih program dan institusi pada filter untuk download sertifikat, data penerima sesuai dengan filter yang
+							dipilih
+						</div>
+					</div>
+				)}
+				<ButtonPrintMultiplePenerimaCertificate
+					params={params}
+					disabled={!params?.program_id || !params?.konstituen_id}
+				/>
+			</div>
 
 			<div className="overflow-x-scroll">
 				<Table

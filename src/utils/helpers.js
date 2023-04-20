@@ -1,4 +1,8 @@
 import { toast } from 'react-toastify';
+import { jsPDF } from 'jspdf';
+import certif from '@/images/certificate_dc_2020.jpg';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 export const toastRequestResult = (loader, success, successText, failedText) => {
 	toast.update(loader, {
@@ -123,4 +127,49 @@ export const exportToCsv = (filename, rows) => {
 		link.click();
 		document.body.removeChild(link);
 	}
+};
+
+export const generateCertificate = (name, isBulk = false) => {
+	let studentname = name;
+	let year = new Date().getFullYear();
+	let filename = `sertifikat-${name}-${year}`;
+	let doc = new jsPDF('landscape', 'mm', 'a4');
+	doc.addImage(certif, 'JPEG', 0, 0, 297, 210); // image certif bisa diganti sesuai dengan kebutuhan
+	doc.setFont('times');
+	/* Name */
+	if (studentname.length > 42) {
+		doc.setFontSize(20);
+		doc.text(148.5, 103, studentname, 'center');
+	} else if (studentname.length > 35 && studentname.length <= 42) {
+		doc.setFontSize(22);
+		doc.text(148.5, 103, studentname, 'center');
+	} else if (studentname.length > 21 && studentname.length <= 35) {
+		doc.setFontSize(24);
+		doc.text(148.5, 103, studentname, 'center');
+	} else if (studentname.length > 0 && studentname.length <= 21) {
+		doc.setFontSize(28);
+		doc.text(148.5, 103, studentname, 'center');
+	}
+
+	if (isBulk) return doc;
+	else doc.save(filename + '.pdf');
+};
+
+export const generateCertificateBulk = (persons, filename) => {
+	const zip = new JSZip();
+
+	persons.forEach((person) => {
+		const certificate = generateCertificate(person.name, true);
+		if (typeof certificate !== 'undefined') {
+			try {
+				zip.file(person.name + '.pdf', certificate.output('blob'));
+			} catch {
+				console.log('Something went wrong!');
+			}
+		}
+	});
+
+	zip.generateAsync({ type: 'blob' }).then(function (content) {
+		saveAs(content, `${filename}.zip`);
+	});
 };

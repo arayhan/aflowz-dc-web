@@ -1,5 +1,5 @@
 import { SERVICE_PARTNER } from '@/services';
-import { exportToCsv, toastRequestResult } from '@/utils/helpers';
+import { exportToCsv, toastRequestResult, generateCertificateBulk } from '@/utils/helpers';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import create from 'zustand';
@@ -24,6 +24,7 @@ const states = (set, get) => ({
 	processingBulkCreatePartnerConfirm: false,
 	processingUploadStaffOrganizationStructureImage: false,
 	processingDeleteStaffOrganizationStructureImage: false,
+	processingBulkDownloadPartnerCertificate: false,
 
 	penerimaItem: null,
 	penerimaList: null,
@@ -47,13 +48,15 @@ const states = (set, get) => ({
 		set({ fetchingPenerimaItem: false });
 	},
 
-	getPenerimaList: async (params) => {
+	getPenerimaList: async (params, callback) => {
 		set({ fetchingPenerimaList: true });
 
 		const defaultParams = { limit: 10, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
 		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
+
+		if (callback) callback({ payload, success });
 
 		set({ penerimaList: success ? payload : null });
 		set({ fetchingPenerimaList: false });

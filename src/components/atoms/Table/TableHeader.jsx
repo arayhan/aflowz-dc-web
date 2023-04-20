@@ -1,4 +1,5 @@
 import {
+	ButtonPrintMultiplePenerimaCertificate,
 	ModalUploadSheetFollowers,
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima
@@ -92,9 +93,6 @@ export const TableHeader = ({
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<>
-						{/* <div className="mx-2">
-							<ButtonPrintCertificateMulti names={listPenerima} />
-						</div> */}
 						<button
 							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
 							onClick={() => setShowModalUploadSheetPenerima(true)}

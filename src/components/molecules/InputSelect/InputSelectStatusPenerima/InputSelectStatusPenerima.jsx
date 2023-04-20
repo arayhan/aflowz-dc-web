@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 export const InputSelectStatusPenerima = forwardRef(({ showLabel, placeholder, error, onChange, ...props }, ref) => {
 	return (
 		<div className="space-y-1">
-			{showLabel && <InputLabel text="Pilih Tipe Institusi" name={props.name} />}
+			{showLabel && <InputLabel text="Pilih Status" name={props.name} />}
 			<InputSelect
 				ref={ref}
 				options={STATUS_PENERIMA_TYPES_ARRAY}

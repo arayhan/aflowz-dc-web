@@ -18,7 +18,7 @@ const Penerima = () => {
 				<div className="container py-6">
 					<TablePenerima
 						params={{ ...params, is_receiver: true }}
-						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Detail']}
+						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Program']}
 					/>
 				</div>
 			</div>
