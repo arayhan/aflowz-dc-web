@@ -215,3 +215,9 @@ export const formProductMovementSchema = yup.object().shape({
 export const formProposalSchema = yup.object().shape({
 	name: yup.string().required('Usulan wajib diisi')
 });
+
+export const formProgramTimelineSchema = yup.object().shape({
+	name: yup.string().required('Nama timeline wajib diisi'),
+	start_date: yup.string().required('Tanggal mulai timeline wajib diisi'),
+	end_date: yup.string().required('Tanggal berakhir timeline wajib diisi')
+});

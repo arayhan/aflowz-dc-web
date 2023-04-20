@@ -121,7 +121,11 @@ const MitraDetail = () => {
 										</Button>
 									}
 								>
-									<TableDetailTimeline timelineData={programCategoryDetail?.program_plans_timeline} />
+									<TableDetailTimeline
+										timelineData={programCategoryDetail?.program_plans_timeline}
+										actionBaseURL={'/mitra'}
+										onDelete={deleteProgramCategoryTimeline}
+									/>
 								</Card>
 							</div>
 

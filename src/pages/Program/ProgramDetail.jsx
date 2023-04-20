@@ -1,4 +1,4 @@
-import { Card } from '@/components/atoms';
+import { Button, Card, NegativeCase } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
@@ -6,13 +6,14 @@ import {
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima,
 	TableDetailPenerimaProgram,
+	TableDetailTimeline,
 	TableDetailVillageInDistrict,
 	TableKonstituen,
 	TablePenerima,
 	TableProgramOrganization
 } from '@/components/molecules';
 import { useActivityStore, useProgramStore } from '@/store';
-import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
+import { NEGATIVE_CASE_TYPES, STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useEffect, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { SiGooglesheets } from 'react-icons/si';
@@ -21,7 +22,15 @@ import { Link, useParams } from 'react-router-dom';
 
 const ProgramDetail = () => {
 	const params = useParams();
-	const { programDetail, fetchingProgramDetail, getProgramDetail } = useProgramStore();
+	const {
+		programDetail,
+		fetchingProgramDetail,
+		getProgramDetail,
+		programTimelineList,
+		fetchingProgramTimelineList,
+		getProgramTimelineList,
+		deleteProgramTimeline
+	} = useProgramStore();
 	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 	const tableDefaultParams = { program_id: params.programID };
@@ -40,6 +49,7 @@ const ProgramDetail = () => {
 
 	useEffect(() => {
 		getProgramDetail(params.programID);
+		getProgramTimelineList(params.programID);
 	}, [params]);
 
 	useEffect(() => {
@@ -189,6 +199,37 @@ const ProgramDetail = () => {
 							</div>
 
 							<div className="grid grid-cols-12 gap-4">
+								{isPIPorKIP && (
+									<div className="col-span-12 bg-white rounded-md">
+										<Card
+											title={`Timeline`}
+											description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
+											bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+											rightComponent={
+												<Button
+													className={'w-full md:w-auto px-5 py-2 rounded-sm text-sm'}
+													variant="primary"
+													linkTo={`/program/${programDetail?.program_id}/timeline/create`}
+												>
+													Create
+												</Button>
+											}
+										>
+											{fetchingProgramTimelineList && <Skeleton />}
+											{!fetchingProgramTimelineList && !programTimelineList && (
+												<NegativeCase title="No timeline created yet" type={NEGATIVE_CASE_TYPES.EMPTY_RESULT} />
+											)}
+											{!fetchingProgramTimelineList && programTimelineList && (
+												<TableDetailTimeline
+													timelineData={programTimelineList.items}
+													displayedColumns={['#', 'Deskripsi', 'Tanggal Program']}
+													actionBaseURL={'/program'}
+													onDelete={deleteProgramTimeline}
+												/>
+											)}
+										</Card>
+									</div>
+								)}
 								{isPIPorKIP && (
 									<div className="col-span-12">
 										<TableProgramOrganization

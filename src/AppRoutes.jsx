@@ -58,6 +58,7 @@ import ProgramOrganization from './pages/ProgramOrganization/ProgramOrganization
 import ProgramOrganizationForm from './pages/ProgramOrganization/ProgramOrganizationForm';
 import Proposal from './pages/Konstituen/Proposal';
 import ProposalForm from './pages/Konstituen/ProposalForm';
+import ProgramDetailTimelineForm from './pages/Program/ProgramDetailTimelineForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -79,6 +80,11 @@ export const AppRoutes = () => {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<SiteLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route
+						path="/program/:programID/timeline/update/:programTimelineID"
+						element={<ProgramDetailTimelineForm />}
+					/>
+					<Route path="/program/:programID/timeline/create" element={<ProgramDetailTimelineForm />} />
 					<Route
 						path="/mitra/:programCategoryID/timeline/update/:programCategoryTimelineID"
 						element={<MitraDetailTimelineForm />}

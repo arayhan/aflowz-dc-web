@@ -18,6 +18,8 @@ const states = (set, get) => ({
 	fetchingProgramOrganization: false,
 	fetchingProgramOrganizationList: false,
 	fetchingProgramOrganizationPositionList: false,
+	fetchingProgramTimeline: false,
+	fetchingProgramTimelineList: false,
 
 	processingCreateProgram: false,
 	processingUpdateProgram: false,
@@ -34,6 +36,9 @@ const states = (set, get) => ({
 	processingUploadProgramOrganizationStructureImage: false,
 	processingUploadProgramCategoryOrganizationStructureImage: false,
 	processingDeleteProgramCategoryOrganizationStructureImage: false,
+	processingCreateProgramTimeline: false,
+	processingUpdateProgramTimeline: false,
+	processingDeleteProgramTimeline: false,
 
 	program: null,
 	programList: null,
@@ -45,6 +50,8 @@ const states = (set, get) => ({
 	programOrganization: false,
 	programOrganizationList: false,
 	programOrganizationPositionList: false,
+	programTimeline: null,
+	programTimelineList: null,
 
 	programCategoryErrors: null,
 	programCategoryTimelineErrors: null,
@@ -342,6 +349,66 @@ const states = (set, get) => ({
 		set({ processingDeleteProgramCategoryOrganizationStructureImage: false });
 	},
 
+	getProgramTimelineList: async (programID, params) => {
+		set({ fetchingProgramTimelineList: true });
+
+		const defaultParams = { program_id: programID };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramTimelineList(requestParams);
+
+		set({ programTimelineList: success ? payload : null });
+		set({ fetchingProgramTimelineList: false });
+	},
+	getProgramTimeline: async (programTimelineID) => {
+		set({ fetchingProgramTimeline: true });
+
+		const { success, payload } = await SERVICE_PROGRAM.getProgramTimeline(programTimelineID);
+
+		if (!success) set({ programTimelineErrors: payload });
+
+		set({ programTimeline: success ? payload : null });
+		set({ fetchingProgramTimeline: false });
+	},
+	createProgramTimeline: async (params, callback) => {
+		setPageLoading(true);
+		set({ processingCreateProgramTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.createProgramTimeline(params);
+
+		toastRequestResult(loader, success, 'Timeline Mitra created', payload?.odoo_error || payload?.message);
+		set({ processingCreateProgramTimeline: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	updateProgramTimeline: async (programTimelineID, params, callback) => {
+		setPageLoading(true);
+		set({ processingUpdateProgramTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.updateProgramTimeline(programTimelineID, params);
+
+		toastRequestResult(loader, success, 'Timeline Mitra updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateProgramTimeline: false });
+		setPageLoading(false);
+
+		callback({ payload, success });
+	},
+	deleteProgramTimeline: async (programTimelineID) => {
+		setPageLoading(true);
+		set({ processingDeleteProgramTimeline: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.deleteProgramTimeline(programTimelineID);
+
+		toastRequestResult(loader, success, 'Timeline Mitra deleted', payload?.odoo_error || payload?.message);
+		get().getProgramList();
+		set({ processingDeleteProgramTimeline: false });
+		setPageLoading(false);
+	},
+
 	clearStateProgramCategory: () => {
 		set({ programCategory: null });
 		set({ programCategoryErrors: null });
@@ -350,6 +417,10 @@ const states = (set, get) => ({
 	clearStateProgramCategoryTimeline: () => {
 		set({ programCategoryTimeline: null });
 		set({ programCategoryTimelineErrors: null });
+	},
+
+	clearStateProgramTimeline: () => {
+		set({ programTimeline: null });
 	}
 });
 

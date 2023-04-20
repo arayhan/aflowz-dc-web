@@ -308,3 +308,63 @@ export const uploadProgramCategoryOrganizationStructureImage = async (programCat
 		return { success: false, payload: error };
 	}
 };
+
+export const getProgramTimelineList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/program/timeline' + queryParams);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getProgramTimeline = async (programTimelineID) => {
+	try {
+		const response = await http.get('/program/timeline/' + programTimelineID);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const createProgramTimeline = async (params) => {
+	const request = {
+		name: params?.name || '',
+		start_date: params?.start_date || '',
+		end_date: params?.end_date || '',
+		program_id: params?.program_id || 0
+	};
+
+	try {
+		const response = await http.post('/program/timeline', request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const updateProgramTimeline = async (programID, params) => {
+	const request = {
+		name: params?.name || '',
+		start_date: params?.start_date || '',
+		end_date: params?.end_date || '',
+		program_id: params?.program_id || 0
+	};
+
+	try {
+		const response = await http.put('/program/timeline/' + programID, request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const deleteProgramTimeline = async (programTimelineID) => {
+	try {
+		const response = await http.delete(`/program/timeline/${programTimelineID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
