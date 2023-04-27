@@ -39,8 +39,14 @@ const ProgramDetail = () => {
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 
-	const [tableCandidateParams] = useState({ ...tableDefaultParams, candidate_status: STATUS_PENERIMA_TYPES.CANDIDATE });
-	const [tablePenerimaParams] = useState({ ...tableDefaultParams, candidate_status: STATUS_PENERIMA_TYPES.CONFIRMED });
+	const [tableCandidateParams] = useState({
+		candidate_program_id: params.programID,
+		candidate_status: STATUS_PENERIMA_TYPES.CANDIDATE
+	});
+	const [tablePenerimaParams] = useState({
+		candidate_program_id: params.programID,
+		candidate_status: STATUS_PENERIMA_TYPES.CONFIRMED
+	});
 	const [tableOrganizationParams, setTableOrganizationParams] = useState(tableDefaultParams);
 
 	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip');
