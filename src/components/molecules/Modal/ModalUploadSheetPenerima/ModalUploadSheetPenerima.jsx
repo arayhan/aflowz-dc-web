@@ -43,20 +43,16 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 				if (json.length > 0) {
 					let params;
 
-					if (status === STATUS_PENERIMA_TYPES.CONFIRMED && isPIP) {
-						params = json.map((data) => ({
-							nisn_number: data?.nisn_number?.toString() || '',
-							program_name: data?.program_name?.toString() || '',
-							program_periode: data?.program_periode?.toString() || '',
-							program_mitra: data?.program_mitra?.toString() || ''
-						}));
-					} else if (status === STATUS_PENERIMA_TYPES.CONFIRMED && isKIP) {
-						params = json.map((data) => ({
-							nik_number: data?.nik_number?.toString() || '',
-							program_name: data?.program_name?.toString() || '',
-							program_periode: data?.program_periode?.toString() || '',
-							program_mitra: data?.program_mitra?.toString() || ''
-						}));
+					if (status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+						params = json.map((data) => {
+							const allValuesToStringResult = data;
+							Object.keys(data).forEach((key) => {
+								allValuesToStringResult[key] = data[key].toString();
+								if (!isPIP) delete allValuesToStringResult['nisn_number'];
+								if (!isKIP) delete allValuesToStringResult['nik_number'];
+							});
+							return allValuesToStringResult;
+						});
 					} else {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
