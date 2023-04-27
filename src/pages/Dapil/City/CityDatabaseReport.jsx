@@ -6,6 +6,7 @@ import { ChartPenerimaKIPPerYear, ChartPenerimaPIPPerYear, ChartPenerimaProgramB
 import Skeleton from 'react-loading-skeleton';
 import { useCityStore } from '@/store';
 import { useParams } from 'react-router-dom';
+import { INSTITUSI_TYPES } from '@/utils/constants';
 
 const CityDatabaseReport = () => {
 	const { cityID } = useParams();
@@ -18,6 +19,21 @@ const CityDatabaseReport = () => {
 
 	const [theMostTotalPenerima, setTheMostTotalPenerima] = useState(null);
 	const [theLeastTotalPenerima, setTheLeastTotalPenerima] = useState(null);
+
+	const penerimaProgramByKonstituen = cityDetail?.penerima_program_city_konstituen;
+
+	const dataSD = penerimaProgramByKonstituen?.filter((item) => {
+		return item.konstituen_name.toLowerCase().includes('sd') && item.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
+	});
+	const dataSMP = penerimaProgramByKonstituen?.filter((item) => {
+		return item.konstituen_name.toLowerCase().includes('smp') && item.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
+	});
+	const dataSMA = penerimaProgramByKonstituen?.filter((item) => {
+		return item.konstituen_name.toLowerCase().includes('sma') && item.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
+	});
+	const dataSMK = penerimaProgramByKonstituen?.filter((item) => {
+		return item.konstituen_name.toLowerCase().includes('smk') && item.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
+	});
 
 	const handleGenerateImage = async (ref) => {
 		const style = document.createElement('style');
@@ -183,24 +199,24 @@ const CityDatabaseReport = () => {
 												<div className="text-sm text-center">INSTITUSI</div>
 												<div className="px-6 py-1 text-center bg-primary">
 													<div className="text-sm font-semibold text-secondary">SD</div>
-													<div className="text-lg font-semibold text-white">0</div>
+													<div className="text-lg font-semibold text-white">{dataSD?.length || 0}</div>
 												</div>
 												<div className="px-6 py-1 text-center bg-primary">
 													<div className="text-sm font-semibold text-secondary">SMP</div>
-													<div className="text-lg font-semibold text-white">0</div>
+													<div className="text-lg font-semibold text-white">{dataSMP?.length || 0}</div>
 												</div>
 												<div className="px-6 py-1 text-center bg-primary">
 													<div className="text-sm font-semibold text-secondary">SMP</div>
-													<div className="text-lg font-semibold text-white">0</div>
+													<div className="text-lg font-semibold text-white">{dataSMA?.length || 0}</div>
 												</div>
 												<div className="px-6 py-1 text-center bg-primary">
 													<div className="text-sm font-semibold text-secondary">SMK</div>
-													<div className="text-lg font-semibold text-white">0</div>
+													<div className="text-lg font-semibold text-white">{dataSMK?.length || 0}</div>
 												</div>
 											</div>
 
 											<div className="w-full">
-												<ChartPenerimaPIPPerYear />
+												<ChartPenerimaPIPPerYear data={[]} />
 											</div>
 										</div>
 									</div>
@@ -219,7 +235,7 @@ const CityDatabaseReport = () => {
 												</div>
 
 												<div className="w-full">
-													<ChartPenerimaKIPPerYear />
+													<ChartPenerimaKIPPerYear data={[]} />
 												</div>
 											</div>
 										</div>
