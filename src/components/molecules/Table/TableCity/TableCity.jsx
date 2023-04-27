@@ -108,7 +108,7 @@ export const TableCity = ({
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/city' + updatedParams, { replace: true });
+		else navigate('/dapil/city' + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
