@@ -173,3 +173,9 @@ export const generateCertificateBulk = (persons, filename) => {
 		saveAs(content, `${filename}.zip`);
 	});
 };
+
+const PIP = ['pip', 'program indonesia pintar'];
+const KIP = ['kip', 'kartu indonesia pintar'];
+export const isPIPorKIP = (programName) => [...PIP, ...KIP].some((item) => programName.toLowerCase().includes(item));
+export const isPIP = (programName) => PIP.some((item) => programName.toLowerCase().includes(item));
+export const isKIP = (programName) => KIP.some((item) => programName.toLowerCase().includes(item));

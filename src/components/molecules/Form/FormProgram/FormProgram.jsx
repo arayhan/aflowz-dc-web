@@ -6,6 +6,7 @@ import { formProgramSchema } from '@/utils/validation-schema';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProgramStore } from '@/store';
 import { useEffect } from 'react';
+import { isKIP, isPIP, isPIPorKIP } from '@/utils/helpers';
 
 export const FormProgram = () => {
 	const { programID } = useParams();
@@ -101,12 +102,9 @@ export const FormProgram = () => {
 							onChange={(event) => {
 								const { value } = event.target;
 								setValue('name', value);
-								setValue(
-									'is_special_program',
-									value?.toLowerCase().includes('pip') || value?.toLowerCase().includes('kip') || false
-								);
-								setValue('is_pip', value?.toLowerCase().includes('pip') || false);
-								setValue('is_kip', value?.toLowerCase().includes('kip') || false);
+								setValue('is_special_program', isPIPorKIP(value) || false);
+								setValue('is_pip', isPIP(value) || false);
+								setValue('is_kip', isKIP(value) || false);
 							}}
 						/>
 					)}
