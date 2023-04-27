@@ -43,7 +43,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 			},
 			{
 				Header: 'Total Program Tersalurkan',
-				accessor: '',
+				accessor: 'total_program',
 				minWidth: 250
 			},
 			{
