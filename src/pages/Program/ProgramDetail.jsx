@@ -181,7 +181,7 @@ const ProgramDetail = () => {
 								</div>
 								{isPIPorKIP && (
 									<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
-										<Link to={`/activity?activity_program_id=${params.programID}`}>
+										<Link to={`/activity?activity_program_id=${params.programID}${isPIP ? '&is_pip=true' : ''}`}>
 											<div className="flex items-center justify-center w-full">
 												<img
 													src={require('@/images/icons/Icon_Home/Activity.svg').default}
