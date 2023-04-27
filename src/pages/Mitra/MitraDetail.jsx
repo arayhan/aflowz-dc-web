@@ -3,13 +3,12 @@ import {
 	BannerFeature,
 	ChartPeriodeProgram,
 	ChartPenerimaProgram,
-	TableProgram,
-	TableDetailTimeline
+	TableDetailTimeline,
+	TableDetailPenerimaProgram
 } from '@/components/molecules';
 import { CardProgramCategoryOrganizationStructure } from '@/components/molecules/Card/CardProgramCategoryOrganizationStructure/CardProgramCategoryOrganizationStructure';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import moment from 'moment';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
@@ -149,15 +148,12 @@ const MitraDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<TableProgram
+									<Card
 										title={`Program di ${programCategoryDetail.mitra_name}`}
-										displayedColumns={['#', 'Nama', 'PIC Internal']}
-										isShowButtonSeeAll
-										isShowFooter={false}
-										isReadonly
-										params={tableProgramParams}
-										enableClickRow
-									/>
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<TableDetailPenerimaProgram dataPenerima={programCategoryDetail.penerima_program} isPerProgram />
+									</Card>
 								</div>
 							</div>
 						</div>

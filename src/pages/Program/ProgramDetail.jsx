@@ -351,7 +351,7 @@ const ProgramDetail = () => {
 									>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailPenerimaProgram
-												dataPenerimaPerArea={programDetail?.total_penerima_program_per_city}
+												dataPenerima={programDetail?.total_penerima_program_per_city}
 												isPerCity
 											/>
 										</div>
