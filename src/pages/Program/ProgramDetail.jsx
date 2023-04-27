@@ -145,7 +145,9 @@ const ProgramDetail = () => {
 
 							<div className="grid items-start grid-cols-2 gap-4 md:grid-cols-6">
 								<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
-									<Link to={`/program/penerima/${programDetail?.program_id}`}>
+									<Link
+										to={`/penerima?program_id=${programDetail?.program_id}&candidate_status=${STATUS_PENERIMA_TYPES.CANDIDATE}`}
+									>
 										<div className="flex items-center justify-center w-full">
 											<img
 												src={require('@/images/icons/Icon_Home/Penerima.svg').default}
@@ -157,11 +159,12 @@ const ProgramDetail = () => {
 												{programDetail?.total_penerima_program || 0}
 											</span>
 											<div className="font-light text-gray-400">Total Calon Penerima</div>
+											<div className="text-xs">[data masih dummy, belum ada paramnya di response]</div>
 										</div>
 									</Link>
 								</div>
 								<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
-									<Link to={`/program/penerima/${programDetail?.program_id}`}>
+									<Link to={`/penerima?program_id=${programDetail?.program_id}`}>
 										<div className="flex items-center justify-center w-full">
 											<img
 												src={require('@/images/icons/Icon_Home/Penerima.svg').default}

@@ -133,7 +133,7 @@ const PenerimaDetail = () => {
 
 							<div className="col-span-12 bg-white rounded-md">
 								<Card title={`Program yang Diikuti`} bodyClassName={'flex items-center justify-center'}>
-									<TableDetailProgramPenerima programData={penerimaDetail?.programs} />
+									<TableDetailProgramPenerima programData={penerimaDetail?.program_selections} />
 								</Card>
 							</div>
 
