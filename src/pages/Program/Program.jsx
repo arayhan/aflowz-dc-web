@@ -22,7 +22,7 @@ const Program = () => {
 				{!isPIPorKIP && <SectionSelectProgramCategory selectedCategoryID={params.program_category_id} />}
 				{(isPIPorKIP || params.program_category_id) && (
 					<div className="container py-6">
-						<TableProgram params={{ ...params, is_special_program: isPIPorKIP }} />
+						<TableProgram params={{ ...params, is_special_program: isPIPorKIP }} isShowButtonUploadSheetPenerima />
 					</div>
 				)}
 			</div>

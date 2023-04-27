@@ -15,7 +15,8 @@ export const TableProgram = ({
 	isShowFooter,
 	isShowFilter,
 	isShowButtonSeeAll,
-	enableClickRow
+	enableClickRow,
+	isShowButtonUploadSheetPenerima
 }) => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -132,6 +133,7 @@ export const TableProgram = ({
 					isReadonly={!isSystem || isReadonly}
 					seeAllLink={'/program' + objectToQueryString(params)}
 					showButtonSeeAll={isShowButtonSeeAll}
+					showButtonUploadSheetPenerima={isShowButtonUploadSheetPenerima}
 				/>
 			</div>
 
@@ -181,5 +183,6 @@ export const TableProgram = ({
 TableProgram.defaultProps = {
 	params: {},
 	isShowFilter: true,
-	isShowFooter: true
+	isShowFooter: true,
+	isShowButtonUploadSheetPenerima: false
 };
