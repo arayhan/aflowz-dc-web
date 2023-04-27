@@ -5,6 +5,7 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { objectToQueryString, queryStringToObject } from '@/utils/helpers';
 import { SearchOnTable } from '../../Search/SearchTable/SearchTable';
+import { FaInfoCircle } from 'react-icons/fa';
 
 export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, isShowButtonSeeAll, selectedType }) => {
 	const { isSystem } = useAuthStore();
@@ -130,6 +131,9 @@ export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, i
 					featurePath="/institusi"
 				/>
 			</div>
+
+			<hr />
+
 			<div className="container flex items-center justify-start my-2">
 				<SearchOnTable
 					onChange={(e) => setSearchInstitusi(e.target.value)}
@@ -146,6 +150,19 @@ export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, i
 					}}
 				/>
 			</div>
+
+			<hr />
+			<div className="flex items-center gap-3 px-6 py-4">
+				<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
+					<span className="w-5">
+						<FaInfoCircle size={18} />
+					</span>
+					<div className="italic">
+						Pergi ke list <span className="font-bold">Penerima</span> untuk download sertifikat penerima perinstitusi
+					</div>
+				</div>
+			</div>
+
 			<div className="overflow-x-auto">
 				<Table columns={columns} data={data} loading={fetchingKonstituenList || konstituenList === null} />
 			</div>
