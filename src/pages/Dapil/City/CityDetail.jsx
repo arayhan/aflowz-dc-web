@@ -164,7 +164,9 @@ const CityDetail = () => {
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<TableDetailDistrictInCity districtData={cityDetail.penerima_program_city_district} />
+										<div className="flex overflow-scroll max-h-[200px]">
+											<TableDetailDistrictInCity districtData={cityDetail.penerima_program_city_district} />
+										</div>
 									</Card>
 								</div>
 								<div className="col-span-12">
