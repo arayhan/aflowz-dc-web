@@ -1,4 +1,5 @@
 import { Button, Table } from '@/components/atoms';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,26 +21,39 @@ export const TableDetailProgramPenerima = ({ programData }) => {
 				Header: 'Program',
 				minWidth: 150,
 				Cell: (row) => {
-					const data = row.row.original;
-					return (
+					const program = row.row.original?.program;
+					return program ? (
 						<Button
 							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/program/${data.id}`}
-							text={data.name}
+							linkTo={`/program/${program.id}`}
+							text={program.name}
 						/>
+					) : (
+						'-'
 					);
 				}
 			},
 			{
 				Header: 'Periode',
-				accessor: 'periode',
-				minWidth: 150
+				minWidth: 150,
+				Cell: (row) => {
+					const program = row.row.original?.program;
+					return <div>{program?.periode}</div>;
+				}
 			},
 			{
 				Header: 'Status',
 				minWidth: 150,
 				Cell: (row) => {
-					return <div className="text-xs font-semibold text-red-500">REJECTED</div>;
+					const data = row.row.original;
+					const statusClass =
+						data.status === STATUS_PENERIMA_TYPES.CONFIRMED
+							? 'text-green-500'
+							: STATUS_PENERIMA_TYPES.CANDIDATE
+							? 'text-blue-500'
+							: 'text-red-500';
+
+					return <div className={`text-xs font-semibold uppercase ${statusClass}`}>{data.status}</div>;
 				}
 			}
 		],
