@@ -69,34 +69,40 @@ export const MITRA_MENUS = [
 	{ id: 1, title: 'Mitra', icon: require('@/images/icons/Icon_Home/Mitra.svg').default, path: '/mitra' },
 	{ id: 2, title: 'Program', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/program' },
 	{
-		id: 2,
+		id: 3,
 		title: 'PIP',
 		icon: require('@/images/icons/Icon_Home/Program.svg').default,
 		path: '/program?keyword=PIP&category_id=6' // category id 6 = kemendikbud
 	},
 	{
-		id: 2,
+		id: 4,
 		title: 'KIP',
 		icon: require('@/images/icons/Icon_Home/Program.svg').default,
 		path: '/program?keyword=KIP&category_id=6' // category id 6 = kemendikbud
 	},
-	{ id: 3, title: 'Institusi', icon: require('@/images/icons/Icon_Home/Konstitusi.svg').default, path: '/institusi' }
+	{ id: 5, title: 'Institusi', icon: require('@/images/icons/Icon_Home/Konstitusi.svg').default, path: '/institusi' }
 ];
 
 export const KANTOR_MENUS = [
-	{ id: 4, title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' },
-	{ id: 5, title: 'Absensi', icon: require('@/images/icons/Icon_Home/Absensi.svg').default, path: '/absensi' },
-	{ id: 8, title: 'Inventory', icon: require('@/images/icons/Icon_Home/Inventory.svg').default, path: '/stockiest' }
+	{ id: 1, title: 'Tim Internal', icon: require('@/images/icons/Icon_Home/Staff.svg').default, path: '/staff' },
+	{ id: 2, title: 'Absensi', icon: require('@/images/icons/Icon_Home/Absensi.svg').default, path: '/absensi' },
+	{ id: 3, title: 'Inventory', icon: require('@/images/icons/Icon_Home/Inventory.svg').default, path: '/stockiest' }
 ];
 
 export const AKTIVITAS_MENUS = [
-	{ id: 6, title: 'Penerima', icon: require('@/images/icons/Icon_Home/Penerima.svg').default, path: '/penerima' },
-	{ id: 7, title: 'Kegiatan', icon: require('@/images/icons/Icon_Home/Activity.svg').default, path: '/activity' },
-	{ id: 9, title: 'Dapil', icon: require('@/images/icons/Icon_Home/Dapil.svg').default, path: '/dapil' }
+	{ id: 1, title: 'Penerima', icon: require('@/images/icons/Icon_Home/Penerima.svg').default, path: '/penerima' },
+	{ id: 2, title: 'Kegiatan', icon: require('@/images/icons/Icon_Home/Activity.svg').default, path: '/activity' },
+	{
+		id: 3,
+		title: 'Visitasi',
+		icon: require('@/images/icons/Icon_Home/Activity.svg').default,
+		path: '/visitasi'
+	},
+	{ id: 4, title: 'Dapil', icon: require('@/images/icons/Icon_Home/Dapil.svg').default, path: '/dapil' }
 ];
 
 export const DAPIL_MENUS = [
-	{ id: 10, title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/dapil/city' },
-	{ id: 11, title: 'Kecamatan', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/district' },
-	{ id: 12, title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/village' }
+	{ id: 1, title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/dapil/city' },
+	{ id: 2, title: 'Kecamatan', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/district' },
+	{ id: 3, title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/village' }
 ];

@@ -59,6 +59,7 @@ import ProgramOrganizationForm from './pages/ProgramOrganization/ProgramOrganiza
 import Proposal from './pages/Konstituen/Proposal';
 import ProposalForm from './pages/Konstituen/ProposalForm';
 import ProgramDetailTimelineForm from './pages/Program/ProgramDetailTimelineForm';
+import Visitasi from './pages/Visitasi/Visitasi';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -166,6 +167,7 @@ export const AppRoutes = () => {
 					<Route path="/activity/update/:activityID" element={<ActivityForm />} />
 					<Route path="/activity/create" element={<ActivityForm />} />
 					<Route path="/activity" element={<Activity />} />
+					<Route path="/visitasi" element={<Visitasi />} />
 					<Route path="/stockiest" element={<Stockiest />} />
 					<Route path="/stockiest/create" element={<StockiestCreateUpdate />} />
 					<Route path="/stockiest/update/:stockiestID" element={<StockiestCreateUpdate />} />

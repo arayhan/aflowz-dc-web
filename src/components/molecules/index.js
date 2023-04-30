@@ -42,15 +42,6 @@ export * from './Form/FormActivityPromise/FormActivityPromise';
 export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
 
-export * from './Table/TableCity/TableCity';
-export * from './Table/TableMitra/TableMitra';
-export * from './Table/TableProgram/TableProgram';
-export * from './Table/TableProgramOrganization/TableProgramOrganization';
-export * from './Table/TableKonstituen/TableKonstituen';
-export * from './Table/TableVillage/TableVillage';
-export * from './Table/TableDistrict/TableDistrict';
-export * from './Table/TableTPS/TableTPS';
-
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
@@ -100,6 +91,14 @@ export * from './Section/SectionShortcutStaffTitle/SectionShortcutStaffTitle';
 export * from './Section/SectionSelectProductCategory/SectionSelectProductCategory';
 export * from './Section/SectionSelectCategoryActivity/SectionSelectCategoryActivity';
 
+export * from './Table/TableCity/TableCity';
+export * from './Table/TableMitra/TableMitra';
+export * from './Table/TableProgram/TableProgram';
+export * from './Table/TableProgramOrganization/TableProgramOrganization';
+export * from './Table/TableKonstituen/TableKonstituen';
+export * from './Table/TableVillage/TableVillage';
+export * from './Table/TableDistrict/TableDistrict';
+export * from './Table/TableTPS/TableTPS';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePenerima/TablePenerima';
 export * from './Table/TableFollowers/TableFollowers';
@@ -112,6 +111,9 @@ export * from './Table/TableActivity/TableActivity';
 export * from './Table/TableActivityDetail/TableActivityDetail';
 export * from './Table/TableActivityPromise/TableActivityPromise';
 export * from './Table/TableProposalKonstituen/TableProposalKonstituen';
+export * from './Table/TableVisitasi/TableVisitasi';
+export * from './Table/TableVisitasiDetail/TableVisitasiDetail';
+export * from './Table/TableVisitasiPromise/TableVisitasiPromise';
 
 export * from './TableDetail/TableDetailTimeline/TableDetailTimeline';
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
