@@ -34,14 +34,26 @@ export const getVisitasiList = async (params) => {
 
 export const createVisitasi = async (params) => {
 	const request = {
-		description: params?.description_visitasi || params?.description || '',
+		name: params?.name || '',
+		date: params?.date || '',
+		origin: params?.origin || '',
+		note: params?.note || '',
+		address: params?.address || '',
+		phone: params?.phone || '',
+		is_potential: params?.is_potential || false,
+		father_name: params?.father_name || '',
+		father_phone: params?.father_phone || '',
+		mother_name: params?.mother_name || '',
+		mother_phone: params?.mother_phone || '',
+		total_family_member: params?.total_family_member || 0,
 		konstituen_id: params?.konstituen_id || 0,
+		program_id: params?.program_id || 0,
 		village_id: params?.village_id || 0,
 		district_id: params?.district_id || 0,
-		city_id: params?.city_id || 0,
-		program_id: params?.program_id || 0,
-		category_id: params?.category_id || 0
+		city_id: params?.city_id || 0
 	};
+
+	console.log({ request });
 
 	try {
 		const response = await http.post('/program/visitasi', request);
@@ -53,12 +65,23 @@ export const createVisitasi = async (params) => {
 
 export const updateVisitasi = async (visitasiID, params) => {
 	const request = {
-		description: params?.description || '',
+		name: params?.name || '',
+		date: params?.date || '',
+		origin: params?.origin || '',
+		note: params?.note || '',
+		address: params?.address || '',
+		phone: params?.phone || '',
+		is_potential: params?.is_potential || false,
+		father_name: params?.father_name || '',
+		father_phone: params?.father_phone || '',
+		mother_name: params?.mother_name || '',
+		mother_phone: params?.mother_phone || '',
+		total_family_member: params?.total_family_member || 0,
 		konstituen_id: params?.konstituen_id || 0,
+		program_id: params?.program_id || 0,
 		village_id: params?.village_id || 0,
 		district_id: params?.district_id || 0,
-		city_id: params?.city_id || 0,
-		program_id: params?.program_id || 0
+		city_id: params?.city_id || 0
 	};
 
 	try {

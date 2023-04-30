@@ -80,55 +80,29 @@ const states = (set, get) => ({
 		set({ processingCreateVisitasi: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload: payloadVisitasi, success: successActivitiy } = await SERVICE_VISITASI.createVisitasi(params);
-		const { payload: payloadDetail, success: successDetail } = await SERVICE_VISITASI.createVisitasiDetail(
-			payloadVisitasi?.id,
-			params
-		);
+		const { payload, success } = await SERVICE_VISITASI.createVisitasi(params);
 
-		if (!successActivitiy || !successDetail) {
-			set({ errorsVisitasi: payloadVisitasi, errorsVisitasiDetail: payloadDetail });
-		}
+		if (!success) set({ errorsVisitasi: payload });
 
-		toastRequestResult(
-			loader,
-			successActivitiy && successDetail,
-			'Kegiatan created',
-			payloadVisitasi?.odoo_error || payloadVisitasi?.message || payloadDetail?.odoo_error || payloadDetail?.message
-		);
+		toastRequestResult(loader, success, 'Visitasi created', payload?.odoo_error || payload?.message);
 		set({ processingCreateVisitasi: false });
-
-		callback({
-			payload: { visitasi: payloadVisitasi, visitasi_detail: payloadDetail },
-			success: successActivitiy && successDetail
-		});
+		callback({ payload, success });
 	},
 
 	updateVisitasi: async (visitasiID, params, callback) => {
 		set({ processingUpdateVisitasi: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload: payloadVisitasi, success: successActivitiy } = await SERVICE_VISITASI.updateVisitasi(params);
-		const { payload: payloadDetail, success: successDetail } = await SERVICE_VISITASI.updateVisitasiDetail(
-			visitasiID,
-			params
-		);
+		const { payload, success } = await SERVICE_VISITASI.updateVisitasi(visitasiID, params);
 
-		if (!successActivitiy || !successDetail) {
-			set({ errorsVisitasi: payloadVisitasi, errorsVisitasiDetail: payloadDetail });
-		}
+		if (!success) set({ errorsVisitasi: payload });
 
-		toastRequestResult(
-			loader,
-			successActivitiy && successDetail,
-			'Kegiatan updated',
-			payloadVisitasi?.odoo_error || payloadVisitasi?.message || payloadDetail?.odoo_error || payloadDetail?.message
-		);
+		toastRequestResult(loader, success, 'Visitasi updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateVisitasi: false });
 
 		callback({
 			payload: { visitasi: payloadVisitasi, visitasi_detail: payloadDetail },
-			success: successActivitiy && successDetail
+			success: successVisitasi && successDetail
 		});
 	},
 
@@ -138,7 +112,7 @@ const states = (set, get) => ({
 		const loader = toast.loading('Processing...');
 		const { payload, success } = await SERVICE_VISITASI.deleteVisitasi(visitasiID);
 
-		toastRequestResult(loader, success, 'Kegiatan deleted', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Visitasi deleted', payload?.odoo_error || payload?.message);
 		get().getVisitasiList();
 		set({ processingDeleteVisitasi: false });
 	},
@@ -175,7 +149,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsVisitasiDetail: payload });
 
-		toastRequestResult(loader, success, 'Detail Kegiatan created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Detail Visitasi created', payload?.odoo_error || payload?.message);
 		set({ processingCreateVisitasiDetail: false });
 
 		callback({ payload, success });
@@ -189,7 +163,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsVisitasiDetail: payload });
 
-		toastRequestResult(loader, success, 'Kegiatan Detail updated', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Visitasi Detail updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateVisitasiDetail: false });
 
 		callback({ payload, success });
@@ -204,7 +178,7 @@ const states = (set, get) => ({
 		toastRequestResult(
 			loader,
 			success,
-			'Kegiatan Detail deleted',
+			'Visitasi Detail deleted',
 			payload?.odoo_error || payload?.status || payload?.message
 		);
 		get().getVisitasiDetailList();
@@ -243,7 +217,7 @@ const states = (set, get) => ({
 
 		if (!success) set({ errorsVisitasiPromise: payload });
 
-		toastRequestResult(loader, success, 'Janji Kegiatan created', payload?.odoo_error || payload?.message);
+		toastRequestResult(loader, success, 'Janji Visitasi created', payload?.odoo_error || payload?.message);
 		set({ processingCreateVisitasiPromise: false });
 
 		callback({ payload, success });
@@ -272,7 +246,7 @@ const states = (set, get) => ({
 		toastRequestResult(
 			loader,
 			success,
-			'Janji Kegiatan deleted',
+			'Janji Visitasi deleted',
 			payload?.status || payload?.odoo_error || payload?.message
 		);
 		callback({ payload, success });

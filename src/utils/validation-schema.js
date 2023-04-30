@@ -221,3 +221,38 @@ export const formProgramTimelineSchema = yup.object().shape({
 	start_date: yup.string().required('Tanggal mulai timeline wajib diisi'),
 	end_date: yup.string().required('Tanggal berakhir timeline wajib diisi')
 });
+
+export const formVisitasiSchema = yup.object().shape({
+	name: yup.string().required('Nama mahasiswa wajib diisi'),
+	date: yup.string().required('Tanggal visitasi wajib diisi'),
+	origin: yup.string().required('Asal daerah wajib diisi'),
+	note: yup.string().required('Catatan wajib diisi'),
+	address: yup.string().required('Alamat tinggal wajib diisi'),
+	phone: yup
+		.string()
+		.required('Nomor handphone mahasiswa wajib diisi')
+		.matches(/^[0-9]*$/, 'Nomor tidak valid')
+		.min(8, 'Minimal 8 angka'),
+	father_phone: yup
+		.string()
+		.nullable()
+		.test('is-valid-phone-number', 'Nomor tidak valid.', (value) => (!value ? true : /^[0-9]*$/.test(value)))
+		.test('is-more-than-8-digits', 'Minimal 8 angka', (value) => (!value ? true : value.length > 8))
+		.notRequired(),
+	mother_phone: yup
+		.string()
+		.nullable()
+		.test('is-valid-phone-number', 'Nomor tidak valid.', (value) => (!value ? true : /^[0-9]*$/.test(value)))
+		.test('is-more-than-8-digits', 'Minimal 8 angka', (value) => (!value ? true : value.length > 8))
+		.notRequired(),
+	total_family_member: yup
+		.number()
+		.required('Wajib diisi')
+		.typeError('Harus berupa angka')
+		.min(1, 'Jumlah anggota keluarga wajib diisi'),
+	konstituen_id: yup.number().required('Institusi wajib diisi'),
+	program_id: yup.number().required('Program wajib diisi'),
+	village_id: yup.number().required('Kelurahan/Desa wajib diisi'),
+	district_id: yup.string().required('Kecamatan wajib diisi'),
+	city_id: yup.number().required('Kota wajib diisi')
+});

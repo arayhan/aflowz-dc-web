@@ -1,18 +1,18 @@
-import { BannerFeature, FormActivity } from '@/components/molecules';
+import { BannerFeature, FormVisitasi } from '@/components/molecules';
 import { useParams } from 'react-router-dom';
 
-const ActivityForm = () => {
-	const { activityID } = useParams();
+const VisitasiForm = () => {
+	const { visitasiID } = useParams();
 
 	return (
 		<div>
-			<BannerFeature title={`Kegiatan - ${activityID ? 'Update' : 'Create'}`} />
+			<BannerFeature title={`Visitasi - ${visitasiID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">
 					<div className="max-w-screen-lg mx-auto space-y-3">
 						<div className="p-8 bg-white rounded-md">
-							<FormActivity />
+							<FormVisitasi />
 						</div>
 					</div>
 				</div>
@@ -21,4 +21,4 @@ const ActivityForm = () => {
 	);
 };
 
-export default ActivityForm;
+export default VisitasiForm;

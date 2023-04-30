@@ -3,7 +3,7 @@ import { useKonstituenStore } from '@/store';
 import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectInstitusiAsync = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, ...props }, ref) => {
+	({ containerClassName, error, onChange, params, placeholder, showLabel, label, ...props }, ref) => {
 		const { konstituenList, fetchingKonstituenList, getKonstituenList } = useKonstituenStore();
 
 		const [options, setOptions] = useState([]);
@@ -44,7 +44,7 @@ export const InputSelectInstitusiAsync = forwardRef(
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Institusi" name={props.name} />}
+				{showLabel && <InputLabel text={label || 'Pilih Institusi'} name={props.name} />}
 				<InputSelectAsync
 					innerRef={ref}
 					options={options}

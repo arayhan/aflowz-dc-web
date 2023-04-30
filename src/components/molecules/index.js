@@ -41,6 +41,7 @@ export * from './Form/FormActivityDetail/FormActivityDetail';
 export * from './Form/FormActivityPromise/FormActivityPromise';
 export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
+export * from './Form/FormVisitasi/FormVisitasi';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
