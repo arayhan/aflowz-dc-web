@@ -8,18 +8,12 @@ const states = (set, get) => ({
 	fetchingVisitasiItem: false,
 	fetchingVisitasiCategory: false,
 	fetchingVisitasiList: false,
-	fetchingVisitasiDetailItem: false,
-	fetchingVisitasiDetailCategory: false,
-	fetchingVisitasiDetailList: false,
 	fetchingVisitasiPromiseItem: false,
 	fetchingVisitasiPromiseList: false,
 
 	processingCreateVisitasi: false,
 	processingUpdateVisitasi: false,
 	processingDeleteVisitasi: false,
-	processingCreateVisitasiDetail: false,
-	processingUpdateVisitasiDetail: false,
-	processingDeleteVisitasiDetail: false,
 	processingCreateVisitasiPromise: false,
 	processingUpdateVisitasiPromise: false,
 	processingDeleteVisitasiPromise: false,
@@ -27,14 +21,10 @@ const states = (set, get) => ({
 	visitasiItem: null,
 	visitasiCategory: null,
 	visitasiList: null,
-	visitasiDetailItem: null,
-	visitasiDetailCategory: null,
-	visitasiDetailList: null,
 	visitasiPromiseItem: null,
 	visitasiPromiseList: null,
 
 	errorsVisitasi: null,
-	errorsVisitasiDetail: null,
 	errorsVisitasiPromise: null,
 
 	// ==================================
@@ -112,74 +102,6 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'Visitasi deleted', payload?.odoo_error || payload?.message);
 		get().getVisitasiList();
 		set({ processingDeleteVisitasi: false });
-	},
-
-	// ==================================
-	// Visitasi Detail
-	// ==================================
-	getVisitasiDetailItem: async (visitasiID) => {
-		set({ fetchingVisitasiDetailItem: true });
-
-		const { success, payload } = await SERVICE_VISITASI.getVisitasiDetailItem(visitasiID);
-
-		set({ visitasiDetailItem: success ? payload : null });
-		set({ fetchingVisitasiDetailItem: false });
-	},
-
-	getVisitasiDetailList: async (params = {}) => {
-		set({ fetchingVisitasiDetailList: true });
-
-		const defaultParams = {};
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_VISITASI.getVisitasiDetailList(requestParams);
-
-		set({ visitasiDetailList: success ? payload : null });
-		set({ fetchingVisitasiDetailList: false });
-	},
-
-	createVisitasiDetail: async (params, callback) => {
-		set({ processingCreateVisitasi: true });
-
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_VISITASI.createVisitasiDetail(params?.visitasi_id, params);
-
-		if (!success) set({ errorsVisitasiDetail: payload });
-
-		toastRequestResult(loader, success, 'Detail Visitasi created', payload?.odoo_error || payload?.message);
-		set({ processingCreateVisitasiDetail: false });
-
-		callback({ payload, success });
-	},
-
-	updateVisitasiDetail: async (visitasiDetailID, params, callback) => {
-		set({ processingUpdateVisitasiDetail: true });
-
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_VISITASI.updateVisitasiDetail(visitasiDetailID, params);
-
-		if (!success) set({ errorsVisitasiDetail: payload });
-
-		toastRequestResult(loader, success, 'Visitasi Detail updated', payload?.odoo_error || payload?.message);
-		set({ processingUpdateVisitasiDetail: false });
-
-		callback({ payload, success });
-	},
-
-	deleteVisitasiDetail: async (visitasiDetailID) => {
-		set({ processingDeleteVisitasiDetail: true });
-
-		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_VISITASI.deleteVisitasiDetail(visitasiDetailID);
-
-		toastRequestResult(
-			loader,
-			success,
-			'Visitasi Detail deleted',
-			payload?.odoo_error || payload?.status || payload?.message
-		);
-		get().getVisitasiDetailList();
-		set({ processingDeleteVisitasiDetail: false });
 	},
 
 	// ==================================
