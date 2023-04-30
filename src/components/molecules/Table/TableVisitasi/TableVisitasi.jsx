@@ -149,7 +149,7 @@ export const TableVisitasi = ({
 							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/visitasi/${data.id}`} />
 							{isSystem && (
 								<>
-									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/visitasi/${data.id}/update`} />
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/visitasi/update/${data.id}`} />
 									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteVisitasi(data.id)} />
 								</>
 							)}

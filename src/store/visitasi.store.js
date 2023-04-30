@@ -100,10 +100,7 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'Visitasi updated', payload?.odoo_error || payload?.message);
 		set({ processingUpdateVisitasi: false });
 
-		callback({
-			payload: { visitasi: payloadVisitasi, visitasi_detail: payloadDetail },
-			success: successVisitasi && successDetail
-		});
+		callback({ payload, success });
 	},
 
 	deleteVisitasi: async (visitasiID) => {

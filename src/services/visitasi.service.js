@@ -53,8 +53,6 @@ export const createVisitasi = async (params) => {
 		city_id: params?.city_id || 0
 	};
 
-	console.log({ request });
-
 	try {
 		const response = await http.post('/program/visitasi', request);
 		return { success: response.data.success, payload: response.data.data };

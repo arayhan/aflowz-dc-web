@@ -66,7 +66,7 @@ export const FormVisitasi = () => {
 	useEffect(() => {
 		if (visitasiID && visitasiItem) {
 			setValue('name', visitasiItem.name || '');
-			setValue('date', visitasiItem.description || '');
+			setValue('date', visitasiItem.date || '');
 			setValue('origin', visitasiItem.origin || '');
 			setValue('note', visitasiItem.note || '');
 			setValue('address', visitasiItem.address || '');
@@ -77,17 +77,15 @@ export const FormVisitasi = () => {
 			setValue('mother_name', visitasiItem.mother_name || '');
 			setValue('mother_phone', visitasiItem.mother_phone || '');
 			setValue('total_family_member', visitasiItem?.total_family_member || 0);
-			setValue('konstituen_id', activityItem.konstituen.id || 0);
-			setValue('program_id', activityItem.program.id || 0);
-			setValue('village_id', activityItem.village.id || 0);
-			setValue('district_id', activityItem.district.id || 0);
-			setValue('city_id', activityItem.city.id || 0);
+			setValue('konstituen_id', visitasiItem.konstituen.id || 0);
+			setValue('program_id', visitasiItem.program.id || 0);
+			setValue('village_id', visitasiItem.village.id || 0);
+			setValue('district_id', visitasiItem.district.id || 0);
+			setValue('city_id', visitasiItem.city.id || 0);
 		}
 	}, [visitasiID, visitasiItem, visitasiDetailItem]);
 
 	useEffect(() => () => clearStateVisitasi(), []);
-
-	console.log(getValues(), getFieldState());
 
 	return (
 		<div className="space-y-8">
