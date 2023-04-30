@@ -48,7 +48,7 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 			},
 			{
 				Header: 'Total Penerima Benefit',
-				accessor: '',
+				accessor: 'total_penerima',
 				minWidth: 250
 			},
 			{
