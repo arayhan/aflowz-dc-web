@@ -3,8 +3,8 @@ import {
 	BannerFeature,
 	CardPenerimaProgramByGender,
 	ModalUploadSheetFollowers,
-	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima,
+	TableCalonPenerima,
 	TableDetailPenerimaProgram,
 	TableDetailTimeline,
 	TableDetailVillageInDistrict,
@@ -315,7 +315,7 @@ const ProgramDetail = () => {
 								)}
 								{isPIPorKIP && (
 									<div className="col-span-12 md:col-span-6">
-										<TablePenerima
+										<TableCalonPenerima
 											title="Calon Penerima Program"
 											programID={programDetail?.program_id}
 											programName={programDetail?.program_name}

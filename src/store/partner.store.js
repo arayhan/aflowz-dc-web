@@ -1,4 +1,5 @@
 import { SERVICE_PARTNER } from '@/services';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import { exportToCsv, toastRequestResult, generateCertificateBulk } from '@/utils/helpers';
 import moment from 'moment';
 import { toast } from 'react-toastify';
@@ -27,6 +28,7 @@ const states = (set, get) => ({
 	processingBulkDownloadPartnerCertificate: false,
 
 	penerimaItem: null,
+	calonPenerimaList: null,
 	penerimaList: null,
 	penerimaDetail: null,
 	staff: null,
@@ -58,7 +60,9 @@ const states = (set, get) => ({
 
 		if (callback) callback({ payload, success });
 
-		set({ penerimaList: success ? payload : null });
+		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE)
+			set({ calonPenerimaList: success ? payload : null });
+		else set({ penerimaList: success ? payload : null });
 		set({ fetchingPenerimaList: false });
 	},
 

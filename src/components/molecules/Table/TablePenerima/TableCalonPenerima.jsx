@@ -12,7 +12,7 @@ import { InputSelectStatusPenerima } from '../../InputSelect/InputSelectStatusPe
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
 
-export const TablePenerima = ({
+export const TableCalonPenerima = ({
 	title,
 	displayedColumns,
 	displayedFilters,
@@ -31,7 +31,7 @@ export const TablePenerima = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
+	const { calonPenerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
 		usePartnerStore();
 	const location = useLocation();
 
@@ -208,11 +208,11 @@ export const TablePenerima = ({
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaList) {
-			setData(penerimaList.items);
-			if (isShowFooter) setPageCount(Math.ceil(penerimaList.total / perPage));
+		if (calonPenerimaList) {
+			setData(calonPenerimaList.items);
+			if (isShowFooter) setPageCount(Math.ceil(calonPenerimaList.total / perPage));
 		}
-	}, [penerimaList, isShowFooter]);
+	}, [calonPenerimaList, isShowFooter]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -352,7 +352,7 @@ export const TablePenerima = ({
 				<Table
 					columns={columns}
 					data={data}
-					loading={fetchingPenerimaList || penerimaList === null}
+					loading={fetchingPenerimaList || calonPenerimaList === null}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>
@@ -365,7 +365,7 @@ export const TablePenerima = ({
 	);
 };
 
-TablePenerima.defaultProps = {
+TableCalonPenerima.defaultProps = {
 	params: {},
 	isShowFooter: true,
 	isShowFilter: true,

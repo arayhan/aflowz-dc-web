@@ -158,7 +158,8 @@ export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, i
 						<FaInfoCircle size={18} />
 					</span>
 					<div className="italic">
-						Pergi ke list <span className="font-bold">Penerima</span> untuk download sertifikat penerima perinstitusi
+						Klik tombol <span className="font-bold">List Penerima</span> pada tabel untuk download sertifikat penerima
+						perinstitusi
 					</div>
 				</div>
 			</div>

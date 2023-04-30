@@ -101,6 +101,7 @@ export * from './Table/TableDistrict/TableDistrict';
 export * from './Table/TableTPS/TableTPS';
 export * from './Table/TableMitra/TableMitra';
 export * from './Table/TablePenerima/TablePenerima';
+export * from './Table/TablePenerima/TableCalonPenerima';
 export * from './Table/TableFollowers/TableFollowers';
 export * from './Table/TableProgram/TableProgram';
 export * from './Table/TableKonstituen/TableKonstituen';
