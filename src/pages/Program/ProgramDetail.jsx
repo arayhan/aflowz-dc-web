@@ -181,7 +181,13 @@ const ProgramDetail = () => {
 								</div>
 								{isPIPorKIP && (
 									<div className="grid py-5 bg-white rounded-md cols-span-1 md:py-auto">
-										<Link to={`/activity?activity_program_id=${params.programID}${isPIP ? '&is_pip=true' : ''}`}>
+										<Link
+											to={
+												isPIP
+													? `/activity?activity_program_id=${params.programID}${isPIP ? '&is_pip=true' : ''}`
+													: `/visitasi?program_id=${params.programID}`
+											}
+										>
 											<div className="flex items-center justify-center w-full">
 												<img
 													src={require('@/images/icons/Icon_Home/Activity.svg').default}
@@ -193,7 +199,7 @@ const ProgramDetail = () => {
 												{!fetchingActivityDetailList && activityDetailList && (
 													<span className="text-2xl md:text-4xl font-extralight">{activityDetailList?.total || 0}</span>
 												)}
-												<div className="font-light text-gray-400">Total Kegiatan</div>
+												<div className="font-light text-gray-400">Total {isPIP ? 'Kegiatan' : 'Visitasi'}</div>
 											</div>
 										</Link>
 									</div>

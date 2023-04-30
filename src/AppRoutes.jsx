@@ -62,6 +62,7 @@ import ProgramDetailTimelineForm from './pages/Program/ProgramDetailTimelineForm
 import Visitasi from './pages/Visitasi/Visitasi';
 import VisitasiForm from './pages/Visitasi/VisitasiForm';
 import VisitasiDetail from './pages/Visitasi/VisitasiDetail';
+import VisitasiPromiseForm from './pages/Visitasi/VisitasiPromiseForm';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -169,6 +170,7 @@ export const AppRoutes = () => {
 					<Route path="/activity/update/:activityID" element={<ActivityForm />} />
 					<Route path="/activity/create" element={<ActivityForm />} />
 					<Route path="/activity" element={<Activity />} />
+					<Route path="/visitasi/:visitasiID/promise/create" element={<VisitasiPromiseForm />} />
 					<Route path="/visitasi/:visitasiID" element={<VisitasiDetail />} />
 					<Route path="/visitasi/update/:visitasiID" element={<VisitasiForm />} />
 					<Route path="/visitasi/create" element={<VisitasiForm />} />

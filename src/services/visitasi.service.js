@@ -123,7 +123,7 @@ export const getVisitasiPromiseList = async (params) => {
 
 export const createVisitasiPromise = async (params) => {
 	const request = {
-		visitasi_detail_id: params?.visitasi_detail_id || 0,
+		visitasi_id: params?.visitasi_id || 0,
 		name: params?.name || '',
 		realization: params?.realization || false
 	};

@@ -256,3 +256,7 @@ export const formVisitasiSchema = yup.object().shape({
 	district_id: yup.string().required('Kecamatan wajib diisi'),
 	city_id: yup.number().required('Kota wajib diisi')
 });
+
+export const formVisitasiPromiseSchema = yup.object().shape({
+	name: yup.string().required('Janji wajib diisi')
+});

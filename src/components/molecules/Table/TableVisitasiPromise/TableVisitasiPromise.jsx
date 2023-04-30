@@ -71,7 +71,6 @@ export const TableVisitasiPromise = ({
 								action={ACTION_TYPES.DELETE}
 								onClick={() =>
 									deleteVisitasiPromise(row.row.original.id, () => {
-										getVisitasiDetailItem(visitasiID);
 										getVisitasiPromiseList({ limit: perPage, offset: offset, ...params }, false);
 									})
 								}
