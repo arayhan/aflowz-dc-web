@@ -211,7 +211,9 @@ const DistrictDatabaseReport = () => {
 												</div>
 
 												<div className="w-full">
-													<ChartPenerimaPIPPerYear />
+													<ChartPenerimaPIPPerYear
+														data={districtDetail?.total_penerima_program_pip_district_by_periode_per_orang}
+													/>
 												</div>
 											</div>
 										</div>
@@ -229,7 +231,9 @@ const DistrictDatabaseReport = () => {
 												</div>
 
 												<div className="w-full">
-													<ChartPenerimaKIPPerYear />
+													<ChartPenerimaKIPPerYear
+														data={districtDetail?.total_penerima_program_kip_district_by_periode_per_orang}
+													/>
 												</div>
 											</div>
 										</div>

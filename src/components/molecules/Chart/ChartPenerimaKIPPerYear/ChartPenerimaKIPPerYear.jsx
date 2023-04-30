@@ -19,7 +19,7 @@ export const ChartPenerimaKIPPerYear = ({ data }) => {
 						datasets: [
 							{
 								label: 'Total Penerima KIP',
-								data: data.map((item) => item.total_program),
+								data: data.map((item) => item.total_penerima),
 								backgroundColor: getRandomColor(),
 								borderWidth: 1
 							}

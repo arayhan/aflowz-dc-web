@@ -216,7 +216,9 @@ const CityDatabaseReport = () => {
 											</div>
 
 											<div className="w-full">
-												<ChartPenerimaPIPPerYear data={[]} />
+												<ChartPenerimaPIPPerYear
+													data={cityDetail?.total_penerima_program_pip_city_by_periode_per_orang}
+												/>
 											</div>
 										</div>
 									</div>
@@ -235,7 +237,9 @@ const CityDatabaseReport = () => {
 												</div>
 
 												<div className="w-full">
-													<ChartPenerimaKIPPerYear data={[]} />
+													<ChartPenerimaKIPPerYear
+														data={cityDetail?.total_penerima_program_kip_city_by_periode_per_orang}
+													/>
 												</div>
 											</div>
 										</div>

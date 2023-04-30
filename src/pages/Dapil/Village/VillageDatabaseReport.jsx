@@ -149,7 +149,9 @@ const VillageDatabaseReport = () => {
 													</div>
 
 													<div className="w-full">
-														<ChartPenerimaPIPPerYear />
+														<ChartPenerimaPIPPerYear
+															data={villageDetail?.total_penerima_program_pip_village_by_periode_per_orang}
+														/>
 													</div>
 												</div>
 											</div>
@@ -173,7 +175,9 @@ const VillageDatabaseReport = () => {
 												</div>
 
 												<div className="w-full">
-													<ChartPenerimaKIPPerYear />
+													<ChartPenerimaKIPPerYear
+														data={villageDetail?.total_penerima_program_kip_village_by_periode_per_orang}
+													/>
 												</div>
 											</div>
 										</div>
