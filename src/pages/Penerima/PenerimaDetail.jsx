@@ -80,6 +80,11 @@ const PenerimaDetail = () => {
 									</div>
 
 									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										NISN
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.nisn_number}</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										NIK
 									</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{penerimaDetail?.nik_number}</div>
