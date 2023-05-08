@@ -17,7 +17,8 @@ export const TableProgram = ({
 	isShowButtonSeeAll,
 	enableClickRow,
 	isShowButtonUploadSheetFollowers,
-	isShowButtonUploadSheetPenerima
+	isShowButtonUploadSheetPenerima,
+	isShowButtonUploadSheetKandidat
 }) => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -136,6 +137,7 @@ export const TableProgram = ({
 					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadSheetFollowers={isShowButtonUploadSheetFollowers}
 					showButtonUploadSheetPenerima={isShowButtonUploadSheetPenerima}
+					showButtonUploadSheetKandidat={isShowButtonUploadSheetKandidat}
 				/>
 			</div>
 

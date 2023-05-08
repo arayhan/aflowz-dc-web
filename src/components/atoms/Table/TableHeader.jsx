@@ -4,6 +4,8 @@ import {
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima
 } from '@/components/molecules';
+import { useProgramStore } from '@/store';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
@@ -19,6 +21,7 @@ export const TableHeader = ({
 	showButtonCreate,
 	showButtonSeeAll,
 	showButtonDownloadData,
+	showButtonUploadSheetKandidat,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerima,
 	showButtonUploadSheetKonstituen,
@@ -29,17 +32,44 @@ export const TableHeader = ({
 }) => {
 	const location = useLocation();
 
-	const [showModalUploadSheetKonstituen, setShowModalUploadSheetKonstituen] = useState(false);
+	const { programDetail } = useProgramStore();
+
+	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip') || false;
+	const isKIP = programDetail?.program_name?.toLowerCase().includes('kip') || false;
+	const isPIPorKIP = isPIP || isKIP || false;
+
+	const [showModalUploadSheetKandidat, setShowModalUploadSheetKandidat] = useState(false);
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
+	const [showModalUploadSheetKonstituen, setShowModalUploadSheetKonstituen] = useState(false);
 
 	return (
 		<div className="flex flex-col items-start justify-between w-full gap-4 lg:flex-row lg:items-center">
+			{showModalUploadSheetKandidat && (
+				<ModalUploadSheetPenerima
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					status={STATUS_PENERIMA_TYPES.CANDIDATE}
+					onClose={() => setShowModalUploadSheetKandidat(false)}
+				/>
+			)}
 			{showModalUploadSheetFollowers && (
-				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
+				<ModalUploadSheetFollowers
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					onClose={() => setShowModalUploadSheetFollowers(false)}
+				/>
 			)}
 			{showModalUploadSheetPenerima && (
-				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerima(false)} />
+				<ModalUploadSheetPenerima
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					status={STATUS_PENERIMA_TYPES.CONFIRMED}
+					onClose={() => setShowModalUploadSheetPenerima(false)}
+				/>
 			)}
 			{showModalUploadSheetKonstituen && (
 				<ModalUploadSheetKonstituen onClose={() => setShowModalUploadSheetKonstituen(false)} />
@@ -90,6 +120,19 @@ export const TableHeader = ({
 					>
 						<span className="text-sm">Upload Struktur Organisasi</span>
 					</button>
+				)}
+				{!isReadonly && showButtonUploadSheetKandidat && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+							onClick={() => setShowModalUploadSheetKandidat(true)}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Upload Kandidat</span>
+						</button>
+					</>
 				)}
 				{!isReadonly && showButtonUploadSheetPenerima && (
 					<>
