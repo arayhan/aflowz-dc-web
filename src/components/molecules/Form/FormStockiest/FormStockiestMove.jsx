@@ -175,6 +175,26 @@ export const FormStockiestMove = () => {
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
+			<div>
+				<Controller
+					name={'method'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectProductMovement
+							{...field}
+							disabled={processingUpdateProduct}
+							onChange={({ value }) => {
+								setValue('method', value);
+								setMethod(value);
+								setError('method', null);
+							}}
+							error={error}
+							isForm
+						/>
+					)}
+				/>
+			</div>
+			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
 				<Controller
 					name={'province'}
@@ -312,24 +332,6 @@ export const FormStockiestMove = () => {
 							placeholder="Deskripsi"
 							disabled={processingUpdateProduct}
 							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
-					name={'method'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputSelectProductMovement
-							{...field}
-							disabled={processingUpdateProduct}
-							onChange={({ value }) => {
-								setValue('method', value);
-								setMethod(value);
-								setError('method', null);
-							}}
-							error={error}
-							isForm
 						/>
 					)}
 				/>
