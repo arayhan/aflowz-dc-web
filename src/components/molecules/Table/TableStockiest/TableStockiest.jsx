@@ -1,7 +1,9 @@
-import { Button, ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { ButtonAction, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, useStockiestStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
+import moment from 'moment';
+import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 
 export const TableStockiest = ({ selectedCategory }) => {
 	const { isSystem } = useAuthStore();
@@ -78,6 +80,32 @@ export const TableStockiest = ({ selectedCategory }) => {
 				Header: 'Jumlah',
 				accessor: 'quantity',
 				maxWidth: 100
+			},
+			{
+				Header: 'Last Updated',
+				accessor: 'last_updated',
+				minWidth: 200,
+				Cell: (row) => {
+					const data = row.row.original;
+					return data?.last_updated ? (
+						<div className="text-xs space-y-1">
+							<div className="flex items-center space-x-2">
+								<span className="text-primary-800">
+									<FaCalendarAlt />
+								</span>
+								<span>{moment(data.last_updated).format('DD MMMM YYYY')}</span>
+							</div>
+							<div className="flex items-center space-x-2">
+								<span className="text-primary-800">
+									<FaClock />
+								</span>
+								<span>{moment(data.last_updated).format('HH:mm:ss')}</span>
+							</div>
+						</div>
+					) : (
+						'-'
+					);
+				}
 			},
 			{
 				Header: 'Actions',
