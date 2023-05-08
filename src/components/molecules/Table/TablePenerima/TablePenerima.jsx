@@ -119,7 +119,7 @@ export const TablePenerima = ({
 										className="bg-purple-500 hover:bg-purple-400"
 										action={ACTION_TYPES.SEE_DETAIL}
 										linkTo={`/program/${program.id}`}
-										text={program.name}
+										text={`${program.name} (${program.periode})`}
 									/>
 								))}
 						</div>
