@@ -124,3 +124,4 @@ export * from './TableDetail/TableDetailStructureOrganization/TableDetailStructu
 export * from './TableDetail/TableDetailDistrictInCity/TableDetailDistrictInCity';
 export * from './TableDetail/TableDetailVillageInDistrict/TableDetailVillageInDistrict';
 export * from './TableDetail/TableDetailProgramPenerima/TableDetailProgramPenerima';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailTotalUsulanPerProgram';

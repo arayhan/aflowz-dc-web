@@ -1,6 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
-import { BannerFeature, TableStaffDetailInstitusi, TableStaffDetailProgram } from '@/components/molecules';
+import {
+	BannerFeature,
+	TableStaffDetailInstitusi,
+	TableStaffDetailProgram,
+	TableStaffDetailTotalUsulanPerProgram
+} from '@/components/molecules';
 import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
@@ -193,19 +198,26 @@ const StaffDetail = () => {
 										</div>
 									</div>
 								</div>
-								<div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+								<div className="grid grid-cols-1 gap-5 lg:grid-cols-2 my-5">
+									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailProgram
 											fetchData={staff?.programs}
 											isReadonly={!isSystem}
 											titleHeader={'List Program'}
 										/>
 									</div>
-									<div className="my-5 p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailInstitusi
 											fetchData={staff?.konstituens_pic}
 											isReadonly={!isSystem}
 											titleHeader={'List Institusi'}
+										/>
+									</div>
+									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
+										<TableStaffDetailTotalUsulanPerProgram
+											fetchData={staff?.confirmed_candidate_proposals}
+											isReadonly={!isSystem}
+											titleHeader={'Total Usulan Per Program'}
 										/>
 									</div>
 								</div>
