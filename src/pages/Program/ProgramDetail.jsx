@@ -284,7 +284,7 @@ const ProgramDetail = () => {
 												<span className="w-4">
 													<SiGooglesheets size={16} />
 												</span>
-												<span className="text-sm">Upload Kandidat</span>
+												<span className="text-sm">Upload Usulan</span>
 											</button>
 										</div>
 										<div className="mt-[8px] text-gray-400">
@@ -322,7 +322,7 @@ const ProgramDetail = () => {
 								{isPIPorKIP && (
 									<div className="col-span-12 md:col-span-6">
 										<TableCalonPenerima
-											title="Calon Penerima Program"
+											title="Usulan Penerima Program"
 											programID={programDetail?.program_id}
 											programName={programDetail?.program_name}
 											isReadonly
