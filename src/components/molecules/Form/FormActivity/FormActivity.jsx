@@ -5,6 +5,7 @@ import {
 	InputSelectCity,
 	InputSelectDistrict,
 	InputSelectInstitusiAsync,
+	InputSelectPartner,
 	InputSelectProgram,
 	InputSelectStaff,
 	InputSelectVillage
@@ -36,6 +37,7 @@ export const FormActivity = () => {
 			city_id: undefined,
 			program_id: undefined,
 			category_id: undefined,
+			partner_id: undefined,
 			activity_date: '',
 			pic: '',
 			pic_mobile: '',
@@ -72,6 +74,7 @@ export const FormActivity = () => {
 			setValue('city_id', activityItem.city.id || 0);
 			setValue('program_id', activityItem.program.id || 0);
 			setValue('category_id', activityItem.category.id || 0);
+			setValue('partner_id', activityItem.partner.id || 0);
 			setValue('activity_date', activityItem?.activity_details[0]?.activity_date || '');
 			setValue('pic', activityItem?.activity_details[0]?.pic || '');
 			setValue('pic_mobile', activityItem?.activity_details[0]?.pic_mobile || '');
@@ -254,6 +257,23 @@ export const FormActivity = () => {
 						/>
 					</>
 				)}
+
+				<Controller
+					name={'partner_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectPartner
+							{...field}
+							label="Rumah Warga"
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							onChange={({ value }) => {
+								setValue('partner_id', value);
+								setError('partner_id', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
 
 				<Controller
 					name={'activity_date'}

@@ -7,6 +7,9 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set, get) => ({
+	fetchingPartnerItem: false,
+	fetchingPartnerList: false,
+	fetchingPartnerDetail: false,
 	fetchingPenerimaItem: false,
 	fetchingPenerimaList: false,
 	fetchingPenerimaDetail: false,
@@ -27,8 +30,11 @@ const states = (set, get) => ({
 	processingDeleteStaffOrganizationStructureImage: false,
 	processingBulkDownloadPartnerCertificate: false,
 
-	penerimaItem: null,
+	partnerItem: null,
+	partnerList: null,
+	partnerDetail: null,
 	calonPenerimaList: null,
+	penerimaItem: null,
 	penerimaList: null,
 	penerimaDetail: null,
 	staff: null,
@@ -37,6 +43,32 @@ const states = (set, get) => ({
 	staffTitleParentList: null,
 	penerimaAllCity: null,
 	staffOrganizationStructureImage: null,
+
+	// =================================
+	// ALL
+	// =================================
+	getPartnerItem: async (partnerID) => {
+		set({ fetchingPartnerItem: true });
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerItem(partnerID);
+
+		set({ partnerItem: success ? payload : null });
+		set({ fetchingPartnerItem: false });
+	},
+
+	getPartnerList: async (params, callback) => {
+		set({ fetchingPartnerList: true });
+
+		const defaultParams = { limit: 10, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
+
+		if (callback) callback({ payload, success });
+		else set({ partnerList: success ? payload : null });
+
+		set({ fetchingPartnerList: false });
+	},
 
 	// =================================
 	// PENERIMA
