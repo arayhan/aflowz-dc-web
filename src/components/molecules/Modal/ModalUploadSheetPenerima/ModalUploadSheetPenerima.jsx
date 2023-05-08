@@ -43,7 +43,7 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 				if (json.length > 0) {
 					let params;
 
-					if (status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+					if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
 							Object.keys(data).forEach((key) => {
