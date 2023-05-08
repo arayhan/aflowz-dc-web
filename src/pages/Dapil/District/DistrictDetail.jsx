@@ -8,7 +8,7 @@ import {
 	TableDetailVillageInDistrict,
 	TablePenerima
 } from '@/components/molecules';
-import { useDistrictStore } from '@/store';
+import { useActivityStore, useDistrictStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -18,24 +18,28 @@ const DistrictDetail = () => {
 	const { districtID } = useParams();
 
 	const { districtDetail, fetchingDistrictDetail, getDistrictDetail } = useDistrictStore();
+	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 	const [tablePenerimaParams] = useState({ district_id: districtID, is_receiver: true });
 
 	useEffect(() => {
-		if (districtID) getDistrictDetail(districtID);
+		if (districtID) {
+			getDistrictDetail(districtID);
+			getActivityDetailList({ activity_district_id: districtID });
+		}
 	}, [districtID]);
 
 	return (
 		<div>
 			<BannerFeature
 				title={districtDetail ? `Kecamatan ${districtDetail.district_name}` : 'Kecamatan'}
-				loading={fetchingDistrictDetail}
+				loading={fetchingDistrictDetail || fetchingActivityDetailList}
 			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{fetchingDistrictDetail && <DistrictDetailSkeleton />}
-					{!fetchingDistrictDetail && districtDetail && (
+					{(fetchingDistrictDetail || fetchingActivityDetailList) && <DistrictDetailSkeleton />}
+					{(!fetchingDistrictDetail || fetchingActivityDetailList) && districtDetail && (
 						<div className="space-y-4">
 							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
 								<Button
@@ -129,6 +133,11 @@ const DistrictDetail = () => {
 									title={'Total Institusi Penerima KIP'}
 									value={districtDetail?.total_institusi_penerima_program_district_kip || 0}
 									linkTo={`/institusi?district_id=${districtID}&program=kip&konstituen_type=kampus`}
+								/>
+								<CardDetailTotal
+									title={'Total Kunjungan'}
+									value={activityDetailList?.total || 0}
+									linkTo={`/activity?activity_district_id=${districtID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}

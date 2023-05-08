@@ -4,10 +4,9 @@ import {
 	CardDetailTotal,
 	ChartPenerimaProgramByGender,
 	ChartPeriodeProgram,
-	TableDetailTotalPenerimaByProgram,
 	TablePenerima
 } from '@/components/molecules';
-import { useVillageStore } from '@/store';
+import { useActivityStore, useVillageStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -17,21 +16,28 @@ const VillageDetail = () => {
 	const { villageID } = useParams();
 
 	const { villageDetail, fetchingVillageDetail, getVillageDetail } = useVillageStore();
+	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 	const [tablePenerimaParams] = useState({ village_id: villageID, is_receiver: true });
 
 	useEffect(() => {
-		if (villageID) getVillageDetail(villageID);
+		if (villageID) {
+			getVillageDetail(villageID);
+			getActivityDetailList({ activity_village_id: villageID });
+		}
 	}, [villageID]);
 
 	return (
 		<div>
-			<BannerFeature title={villageDetail ? `${villageDetail.village_name}` : 'Desa'} loading={fetchingVillageDetail} />
+			<BannerFeature
+				title={villageDetail ? `${villageDetail.village_name}` : 'Desa'}
+				loading={fetchingVillageDetail || fetchingActivityDetailList}
+			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{fetchingVillageDetail && <VillageDetailSkeleton />}
-					{!fetchingVillageDetail && villageDetail && (
+					{(fetchingVillageDetail || fetchingActivityDetailList) && <VillageDetailSkeleton />}
+					{(!fetchingVillageDetail || fetchingActivityDetailList) && villageDetail && (
 						<div className="space-y-4">
 							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
 								<Button
@@ -125,6 +131,11 @@ const VillageDetail = () => {
 									title={'Total Institusi Penerima PIP'}
 									value={villageDetail?.total_institusi_penerima_program_village_pip || 0}
 									linkTo={`/institusi?village_id=${villageID}&program=pip&konstituen_type=sekolah`}
+								/>
+								<CardDetailTotal
+									title={'Total Kunjungan'}
+									value={activityDetailList?.total || 0}
+									linkTo={`/activity?activity_village_id=${villageID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}

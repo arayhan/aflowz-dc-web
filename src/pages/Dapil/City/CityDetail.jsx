@@ -8,7 +8,7 @@ import {
 	TablePenerima
 } from '@/components/molecules';
 import { TableDetailDistrictInCity } from '@/components/molecules/TableDetail/TableDetailDistrictInCity/TableDetailDistrictInCity';
-import { useCityStore } from '@/store';
+import { useActivityStore, useCityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -18,22 +18,29 @@ const CityDetail = () => {
 	const { cityID } = useParams();
 
 	const { cityDetail, fetchingCityDetail, getCityDetail } = useCityStore();
+	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 	const [tablePenerimaParams] = useState({ city_id: cityID, is_receiver: true });
 	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
-		if (cityID) getCityDetail(cityID);
+		if (cityID) {
+			getCityDetail(cityID);
+			getActivityDetailList({ activity_city_id: cityID });
+		}
 	}, [cityID]);
 
 	return (
 		<div>
-			<BannerFeature title={cityDetail ? `${cityDetail.city_name}` : 'Kota'} loading={fetchingCityDetail} />
+			<BannerFeature
+				title={cityDetail ? `${cityDetail.city_name}` : 'Kota'}
+				loading={fetchingCityDetail || fetchingActivityDetailList}
+			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{fetchingCityDetail && <CityDetailSkeleton />}
-					{!fetchingCityDetail && cityDetail && (
+					{(fetchingCityDetail || fetchingActivityDetailList) && <CityDetailSkeleton />}
+					{(!fetchingCityDetail || fetchingActivityDetailList) && cityDetail && (
 						<div className="space-y-4">
 							<div className="flex flex-col items-center justify-end gap-4 sm:flex-row">
 								<Button
@@ -112,6 +119,11 @@ const CityDetail = () => {
 									title={'Total Institusi Penerima KIP'}
 									value={cityDetail?.total_institusi_penerima_program_city_kip || 0}
 									linkTo={`/institusi?city_id=${cityID}&program=kip&konstituen_type=kampus`}
+								/>
+								<CardDetailTotal
+									title={'Total Kunjungan'}
+									value={activityDetailList?.total || 0}
+									linkTo={`/activity?activity_city_id=${cityID}`}
 								/>
 								<CardDetailTotal
 									title={'Total Penerima Program Lebih Dari Satu'}
