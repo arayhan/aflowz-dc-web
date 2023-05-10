@@ -47,9 +47,9 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
 							Object.keys(data).forEach((key) => {
-								allValuesToStringResult[key] = data[key].toString();
-								if (!isPIP) delete allValuesToStringResult['nisn_number'];
-								if (!isKIP) delete allValuesToStringResult['nik_number'];
+								allValuesToStringResult[key] = data[key]?.toString() || '';
+								if (!isPIP && allValuesToStringResult?.nisn_number) delete allValuesToStringResult['nisn_number'];
+								if (!isKIP && allValuesToStringResult?.nik_number) delete allValuesToStringResult['nik_number'];
 							});
 							return allValuesToStringResult;
 						});
@@ -57,7 +57,7 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
 							Object.keys(data).forEach((key) => {
-								allValuesToStringResult[key] = data[key].toString();
+								allValuesToStringResult[key] = data[key]?.toString() || '';
 								allValuesToStringResult['programs'] = [];
 							});
 							return allValuesToStringResult;
