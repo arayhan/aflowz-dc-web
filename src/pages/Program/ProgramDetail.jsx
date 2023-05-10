@@ -41,7 +41,7 @@ const ProgramDetail = () => {
 
 	const [tableCandidateParams] = useState({
 		candidate_program_id: params.programID,
-		candidate_status: STATUS_PENERIMA_TYPES.CANDIDATE
+		candidate_status: `${STATUS_PENERIMA_TYPES.CANDIDATE}, ${STATUS_PENERIMA_TYPES.REJECTED}`
 	});
 	const [tablePenerimaParams] = useState({
 		candidate_program_id: params.programID,
@@ -156,10 +156,9 @@ const ProgramDetail = () => {
 										</div>
 										<div className="flex flex-col items-center justify-center space-y-1 text-center">
 											<span className="text-2xl md:text-4xl font-extralight">
-												{programDetail?.total_penerima_program || 0}
+												{programDetail?.total_candidate_penerima_program || 0}
 											</span>
 											<div className="font-light text-gray-400">Total Calon Penerima</div>
-											<div className="text-xs">[data masih dummy, belum ada paramnya di response]</div>
 										</div>
 									</Link>
 								</div>
