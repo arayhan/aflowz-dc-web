@@ -103,63 +103,63 @@ export const TableCalonPenerima = ({
 				minWidth: 225,
 				hidden: displayedColumns ? !displayedColumns.includes('Alamat') : true
 			},
-			{
-				Header: 'Program',
-				minWidth: 150,
-				hidden: displayedColumns && !displayedColumns.includes('Program'),
-				Cell: (row) => {
-					const programs = row.row.original.programs;
-					return (
-						<div className="flex flex-wrap gap-1">
-							{programs.length === 0 && '-'}
-							{programs.length > 0 &&
-								programs.map((program) => (
-									<ButtonAction
-										key={program.id}
-										className="bg-purple-500 hover:bg-purple-400"
-										action={ACTION_TYPES.SEE_DETAIL}
-										linkTo={`/program/${program.id}`}
-										text={program.name}
-									/>
-								))}
-						</div>
-					);
-				}
-			},
 			// {
 			// 	Header: 'Program',
-			// 	minWidth: 280,
+			// 	minWidth: 150,
 			// 	hidden: displayedColumns && !displayedColumns.includes('Program'),
 			// 	Cell: (row) => {
-			// 		const programs = row.row.original.program_selections;
+			// 		const programs = row.row.original.programs;
 			// 		return (
 			// 			<div className="flex flex-wrap gap-1">
 			// 				{programs.length === 0 && '-'}
 			// 				{programs.length > 0 &&
-			// 					programs.map((program) => {
-			// 						const statusClass =
-			// 							program.status === STATUS_PENERIMA_TYPES.CONFIRMED
-			// 								? 'text-green-500'
-			// 								: STATUS_PENERIMA_TYPES.CANDIDATE
-			// 								? 'text-blue-500'
-			// 								: 'text-red-500';
-			// 						return (
-			// 							<div className="flex items-center gap-2" key={program.id}>
-			// 								<ButtonAction
-			// 									className="bg-purple-500 hover:bg-purple-400"
-			// 									action={ACTION_TYPES.SEE_DETAIL}
-			// 									linkTo={`/program/${program.program.id}`}
-			// 									text={`${program.program.name} ${program.program.periode}`}
-			// 								/>
-			// 								<span>:</span>
-			// 								<span className={`text-xs uppercase font-semibold ${statusClass}`}>{program.status}</span>
-			// 							</div>
-			// 						);
-			// 					})}
+			// 					programs.map((program) => (
+			// 						<ButtonAction
+			// 							key={program.id}
+			// 							className="bg-purple-500 hover:bg-purple-400"
+			// 							action={ACTION_TYPES.SEE_DETAIL}
+			// 							linkTo={`/program/${program.id}`}
+			// 							text={program.name}
+			// 						/>
+			// 					))}
 			// 			</div>
 			// 		);
 			// 	}
 			// },
+			{
+				Header: 'Status',
+				minWidth: 280,
+				hidden: displayedColumns && !displayedColumns.includes('Program'),
+				Cell: (row) => {
+					const programs = row.row.original.program_selections;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{programs.length === 0 && '-'}
+							{programs.length > 0 &&
+								programs.map((program) => {
+									const statusClass =
+										program.status === STATUS_PENERIMA_TYPES.CONFIRMED
+											? 'text-green-500'
+											: STATUS_PENERIMA_TYPES.CANDIDATE
+											? 'text-blue-500'
+											: 'text-red-500';
+									return (
+										<div className="flex items-center gap-2" key={program.id}>
+											<ButtonAction
+												className="bg-purple-500 hover:bg-purple-400"
+												action={ACTION_TYPES.SEE_DETAIL}
+												linkTo={`/program/${program.program.id}`}
+												text={`${program.program.name} ${program.program.periode}`}
+											/>
+											<span>:</span>
+											<span className={`text-xs uppercase font-semibold ${statusClass}`}>{program.status}</span>
+										</div>
+									);
+								})}
+						</div>
+					);
+				}
+			},
 			{
 				Header: 'Actions',
 				minWidth: 220,
@@ -352,7 +352,7 @@ export const TableCalonPenerima = ({
 				<Table
 					columns={columns}
 					data={data}
-					loading={fetchingPenerimaList || calonPenerimaList === null}
+					loading={fetchingPenerimaList}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>

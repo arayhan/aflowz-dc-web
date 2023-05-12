@@ -200,6 +200,10 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = isShowFooter ? { limit: perPage, offset: offsetResult } : {};
 
+		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+			params.candidate_program_id = params.program_id;
+		}
+
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(Math.abs(offsetResult));
@@ -208,10 +212,8 @@ export const TablePenerima = ({
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaList) {
-			setData(penerimaList.items);
-			if (isShowFooter) setPageCount(Math.ceil(penerimaList.total / perPage));
-		}
+		if (penerimaList?.items) setData(penerimaList.items);
+		if (isShowFooter && penerimaList?.total) setPageCount(Math.ceil(penerimaList.total / perPage));
 	}, [penerimaList, isShowFooter]);
 
 	return (

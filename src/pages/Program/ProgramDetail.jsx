@@ -334,7 +334,6 @@ const ProgramDetail = () => {
 											params={tableCandidateParams}
 											isPIP={isPIP}
 											isKIP={isKIP}
-											isShowFooter={false}
 										/>
 									</div>
 								)}
@@ -349,7 +348,6 @@ const ProgramDetail = () => {
 										params={tablePenerimaParams}
 										isPIP={isPIP}
 										isKIP={isKIP}
-										isShowFooter={false}
 									/>
 								</div>
 

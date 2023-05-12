@@ -85,16 +85,15 @@ const states = (set, get) => ({
 	getPenerimaList: async (params, callback) => {
 		set({ fetchingPenerimaList: true });
 
-		const defaultParams = { limit: 10, offset: 0 };
-		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
-
-		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(params);
 
 		if (callback) callback({ payload, success });
 
-		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE)
+		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+			set({ penerimaList: success ? payload : null });
+		} else {
 			set({ calonPenerimaList: success ? payload : null });
-		else set({ penerimaList: success ? payload : null });
+		}
 		set({ fetchingPenerimaList: false });
 	},
 
