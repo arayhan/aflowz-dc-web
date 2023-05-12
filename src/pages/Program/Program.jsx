@@ -26,7 +26,7 @@ const Program = () => {
 							params={{ ...params, is_special_program: isPIPorKIP }}
 							isShowButtonUploadSheetFollowers
 							isShowButtonUploadSheetPenerima
-							isShowButtonUploadSheetKandidat
+							isShowButtonUploadSheetKandidat={isPIPorKIP}
 						/>
 					</div>
 				)}
