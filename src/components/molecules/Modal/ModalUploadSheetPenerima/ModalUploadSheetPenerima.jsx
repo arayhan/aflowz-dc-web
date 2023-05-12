@@ -4,7 +4,7 @@ import * as xlsx from 'xlsx';
 import { SiGooglesheets } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import { usePartnerStore } from '@/store';
+import { usePartnerStore, useProgramStore } from '@/store';
 import { useNavigate } from 'react-router';
 import { objectToQueryString } from '@/utils/helpers';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
@@ -19,6 +19,7 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 		bulkCreatePartnerCandidate,
 		bulkCreatePartnerConfirm
 	} = usePartnerStore();
+	const { programDetail } = useProgramStore();
 
 	const MAXIMUM_FILE_SIZE = {
 		text: '10MB',
@@ -44,15 +45,13 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 					let params;
 
 					if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-						params = json.map((data) => {
-							const allValuesToStringResult = data;
-							Object.keys(data).forEach((key) => {
-								allValuesToStringResult[key] = data[key]?.toString() || '';
-								if (!isPIP && allValuesToStringResult?.nisn_number) delete allValuesToStringResult['nisn_number'];
-								if (!isKIP && allValuesToStringResult?.nik_number) delete allValuesToStringResult['nik_number'];
-							});
-							return allValuesToStringResult;
-						});
+						params = json.map((data) => ({
+							nik_number: isKIP ? data?.nik_number?.toString() || '' : '',
+							nisn_number: isPIP ? data?.nisn_number?.toString() || '' : '',
+							program_name: programDetail?.program_name || data?.program_name?.toString() || '',
+							program_periode: programDetail?.program_periode || data?.program_periode?.toString() || '',
+							program_mitra: programDetail?.program_mitra || data?.program_mitra?.toString() || ''
+						}));
 					} else {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
