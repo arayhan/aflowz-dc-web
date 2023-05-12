@@ -44,7 +44,7 @@ const ProgramDetail = () => {
 		candidate_status: `${STATUS_PENERIMA_TYPES.CANDIDATE}, ${STATUS_PENERIMA_TYPES.REJECTED}`
 	});
 	const [tablePenerimaParams] = useState({
-		candidate_program_id: params.programID,
+		program_id: params.programID,
 		candidate_status: STATUS_PENERIMA_TYPES.CONFIRMED
 	});
 	const [tableOrganizationParams, setTableOrganizationParams] = useState(tableDefaultParams);
