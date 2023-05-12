@@ -201,7 +201,10 @@ export const TablePenerima = ({
 		const defaultParams = isShowFooter ? { limit: perPage, offset: offsetResult } : {};
 
 		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-			params.candidate_program_id = params.program_id;
+			params = {
+				candidate_program_id: params.program_id,
+				candidate_status: params.candidate_status
+			};
 		}
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);

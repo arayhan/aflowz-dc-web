@@ -5,7 +5,7 @@ import {
 	InputSelectCity,
 	InputSelectDistrict,
 	InputSelectInstitusiAsync,
-	InputSelectPartner,
+	InputSelectPartnerAsync,
 	InputSelectProgram,
 	InputSelectStaff,
 	InputSelectVillage
@@ -262,9 +262,10 @@ export const FormActivity = () => {
 					name={'partner_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectPartner
+						<InputSelectPartnerAsync
 							{...field}
 							label="Rumah Warga"
+							placeholder="Pilih Rumah Warga"
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
 							onChange={({ value }) => {
 								setValue('partner_id', value);

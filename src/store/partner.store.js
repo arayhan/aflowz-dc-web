@@ -68,6 +68,8 @@ const states = (set, get) => ({
 		else set({ partnerList: success ? payload : null });
 
 		set({ fetchingPartnerList: false });
+
+		return { payload, success };
 	},
 
 	// =================================

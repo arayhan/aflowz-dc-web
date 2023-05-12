@@ -78,6 +78,7 @@ export * from './InputSelect/InputSelectActivityDetail/InputSelectActivityDetail
 export * from './InputSelect/InputSelectActivityCategory/InputSelectActivityCategory';
 export * from './InputSelect/InputSelectStatusPenerima/InputSelectStatusPenerima';
 export * from './InputSelect/InputSelectPartner/InputSelectPartner';
+export * from './InputSelect/InputSelectPartner/InputSelectPartnerAsync';
 
 export * from './Modal/ModalUploadImage/ModalUploadImage';
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
