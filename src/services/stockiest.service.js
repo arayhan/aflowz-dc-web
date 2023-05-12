@@ -99,7 +99,7 @@ export const updateStockProduct = async (params, dataProduct) => {
 	try {
 		let prodArr = [];
 		dataProduct.forEach((item) => {
-			prodArr.push({ product_id: item.id, quantity: item.quantity });
+			prodArr.push({ product_id: item.id, quantity: item.quantity, warehouse_id: item?.warehouse?.id || 0 });
 		});
 
 		let data = {
@@ -129,6 +129,16 @@ export const getProductLogList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);
 		const response = await http.get(stockProduct + '/move' + queryParams);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
+export const getWarehouseList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/stock/warehouse' + queryParams);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

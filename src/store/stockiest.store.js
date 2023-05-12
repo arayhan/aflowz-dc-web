@@ -12,6 +12,7 @@ const states = (set, get) => ({
 	fetchingProduct: false,
 	fetchingProductCategoryList: false,
 	fetchingProductLogList: false,
+	fetchingWarehouseList: false,
 
 	processingCreateProduct: false,
 	processingUpdateProduct: false,
@@ -21,6 +22,7 @@ const states = (set, get) => ({
 	product: null,
 	productCategoryList: null,
 	productLogList: null,
+	warehouseList: null,
 
 	getProductList: async (params) => {
 		set({ fetchingProductList: true });
@@ -133,6 +135,17 @@ const states = (set, get) => ({
 
 		set({ productLogList: success ? payload : null });
 		set({ fetchingProductLogList: false });
+	},
+
+	getWarehouseList: async (params) => {
+		set({ fetchingWarehouseList: true });
+		const defaultParams = { limit: 10, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_STOCKIEST.getWarehouseList(requestParams);
+
+		set({ warehouseList: success ? payload : null });
+		set({ fetchingWarehouseList: false });
 	},
 
 	clearStateProduct: async () => {

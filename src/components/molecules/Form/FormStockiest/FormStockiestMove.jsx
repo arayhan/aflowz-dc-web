@@ -11,7 +11,8 @@ import {
 	InputSelectProvince,
 	InputSelectVillage,
 	InputSelectStaff,
-	InputSelectProductMovement
+	InputSelectProductMovement,
+	InputSelectWarehouse
 } from '../../index';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,6 +21,7 @@ import { formProductMovementSchema } from '@/utils/validation-schema';
 export const FormStockiestMove = () => {
 	const [dataTable, setDataTable] = useState([]);
 	const [product, setProduct] = useState(null);
+	const [warehouse, setWarehouse] = useState(null);
 	const [quantity, setQuantity] = useState('');
 	const [showError, setShowError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -40,7 +42,7 @@ export const FormStockiestMove = () => {
 				Header: 'Gambar Barang',
 				minWidth: 125,
 				Cell: (row) => (
-					<div className="w-full flex justify-center">
+					<div className="flex justify-center w-full">
 						<img
 							src={row.row.original?.image_url ? row.row.original?.image_url : require('@/images/dummy-product.webp')}
 							className="w-24"
@@ -51,17 +53,27 @@ export const FormStockiestMove = () => {
 			{
 				Header: 'Kode Unik Barang',
 				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.sku_code}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.sku_code}</div>
 			},
 			{
 				Header: 'Nama Barang',
 				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.name}</div>
+			},
+			{
+				Header: 'Gudang',
+				minWidth: 125,
+				Cell: (row) => <div className="capitalize transform:">{row.row.original?.warehouse?.name || '-'}</div>
+			},
+			{
+				Header: 'Kode Gudang',
+				minWidth: 125,
+				Cell: (row) => <div className="capitalize transform:">{row.row.original?.warehouse?.code || '-'}</div>
 			},
 			{
 				Header: 'Jumlah',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.quantity}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.quantity}</div>
 			},
 			{
 				Header: 'Hapus',
@@ -105,6 +117,7 @@ export const FormStockiestMove = () => {
 					name: prod?.name,
 					sku_code: prod?.sku_code,
 					image_url: prod?.image_url,
+					warehouse,
 					quantity: qty
 				};
 				if (exist === undefined) {
@@ -122,6 +135,7 @@ export const FormStockiestMove = () => {
 				id: prod?.id,
 				name: prod?.name,
 				sku_code: prod?.sku_code,
+				warehouse,
 				image_url: prod?.image_url,
 				quantity: qty
 			};
@@ -138,6 +152,7 @@ export const FormStockiestMove = () => {
 
 	const reset = (message) => {
 		setProduct(null);
+		setWarehouse(null);
 		setQuantity('');
 		setErrorMessage(message);
 		setShowError(true);
@@ -171,7 +186,7 @@ export const FormStockiestMove = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">Checkin / Checkout Barang</div>
+				<div className="text-xl font-light">Checkin / Checkout Barang</div>
 				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
@@ -337,8 +352,8 @@ export const FormStockiestMove = () => {
 				/>
 			</div>
 			<hr />
-			<div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6 items-end">
-				<div className="md:col-span-2">
+			<div className="grid items-end grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6">
+				<div className="md:col-span-3">
 					<InputSelectProduct
 						disabled={processingUpdateProduct}
 						value={product}
@@ -347,7 +362,16 @@ export const FormStockiestMove = () => {
 						}}
 					/>
 				</div>
-				<div className="md:col-span-2">
+				<div className="md:col-span-3">
+					<InputSelectWarehouse
+						disabled={processingUpdateProduct}
+						value={warehouse}
+						onChange={({ value }) => {
+							setWarehouse(value);
+						}}
+					/>
+				</div>
+				<div className="md:col-span-3">
 					<InputText
 						disabled={true}
 						label="Stok Tersedia"
@@ -356,7 +380,7 @@ export const FormStockiestMove = () => {
 						type={'number'}
 					/>
 				</div>
-				<div className="md:col-span-2">
+				<div className="md:col-span-3">
 					<InputText
 						disabled={processingUpdateProduct}
 						label="Jumlah Barang"
