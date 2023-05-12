@@ -1,15 +1,16 @@
-import { Button, ButtonAction, Card, Timeline } from '@/components/atoms';
+import { Button, ButtonAction, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	ChartPeriodeProgram,
 	ChartPenerimaProgram,
 	TableDetailTimeline,
-	TableDetailPenerimaProgram
+	TableDetailPenerimaProgram,
+	TableDetailTotalProgramByCity
 } from '@/components/molecules';
 import { CardProgramCategoryOrganizationStructure } from '@/components/molecules/Card/CardProgramCategoryOrganizationStructure/CardProgramCategoryOrganizationStructure';
 import { useProgramStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
@@ -21,8 +22,6 @@ const MitraDetail = () => {
 		getProgramCategoryDetail,
 		deleteProgramCategoryTimeline
 	} = useProgramStore();
-
-	const [tableProgramParams] = useState({ program_category_id: programCategoryID });
 
 	useEffect(() => {
 		if (programCategoryID) getProgramCategoryDetail(programCategoryID);
@@ -153,6 +152,14 @@ const MitraDetail = () => {
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<TableDetailPenerimaProgram dataPenerima={programCategoryDetail.penerima_program} isPerProgram />
+									</Card>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<Card
+										title={`Total Program ${programCategoryDetail.mitra_name} Per Kota`}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										<TableDetailTotalProgramByCity cityData={programCategoryDetail?.total_program_by_mitra_in_city} />
 									</Card>
 								</div>
 							</div>

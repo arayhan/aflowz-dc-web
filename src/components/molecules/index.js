@@ -126,3 +126,4 @@ export * from './TableDetail/TableDetailDistrictInCity/TableDetailDistrictInCity
 export * from './TableDetail/TableDetailVillageInDistrict/TableDetailVillageInDistrict';
 export * from './TableDetail/TableDetailProgramPenerima/TableDetailProgramPenerima';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailTotalUsulanPerProgram';
+export * from './TableDetail/TableDetailTotalProgramByCity/TableDetailTotalProgramByCity';
