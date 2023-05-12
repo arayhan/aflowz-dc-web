@@ -194,9 +194,14 @@ const ProgramDetail = () => {
 												/>
 											</div>
 											<div className="flex flex-col items-center justify-center space-y-1 text-center">
-												{fetchingActivityDetailList && <Skeleton width={80} height={30} />}
-												{!fetchingActivityDetailList && activityDetailList && (
+												{isPIP && fetchingActivityDetailList && <Skeleton width={80} height={30} />}
+												{isPIP && !fetchingActivityDetailList && activityDetailList && (
 													<span className="text-2xl md:text-4xl font-extralight">{activityDetailList?.total || 0}</span>
+												)}
+												{isKIP && (
+													<span className="text-2xl md:text-4xl font-extralight">
+														{programDetail?.total_visitasi || 0}
+													</span>
 												)}
 												<div className="font-light text-gray-400">Total {isPIP ? 'Kegiatan' : 'Visitasi'}</div>
 											</div>
