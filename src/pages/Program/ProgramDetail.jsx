@@ -41,7 +41,7 @@ const ProgramDetail = () => {
 
 	const [tableCandidateParams] = useState({
 		candidate_program_id: params.programID,
-		candidate_status: `${STATUS_PENERIMA_TYPES.CANDIDATE}, ${STATUS_PENERIMA_TYPES.REJECTED}`
+		candidate_status: `${STATUS_PENERIMA_TYPES.CANDIDATE},${STATUS_PENERIMA_TYPES.REJECTED}`
 	});
 	const [tablePenerimaParams] = useState({
 		program_id: params.programID,
