@@ -30,8 +30,14 @@ export const TablePenerima = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { penerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
-		usePartnerStore();
+	const {
+		penerimaList,
+		fetchingPenerimaList,
+		calonPenerimaList,
+		getPenerimaList,
+		deletePenerima,
+		downloadCsvPenerima
+	} = usePartnerStore();
 	const location = useLocation();
 
 	const [page, setPage] = useState(1);
@@ -214,7 +220,11 @@ export const TablePenerima = ({
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaList?.items) setData(penerimaList.items);
+		if (penerimaList?.items || calonPenerimaList?.items) {
+			setData(
+				params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
+			);
+		}
 		if (isShowFooter && penerimaList?.total) setPageCount(Math.ceil(penerimaList.total / perPage));
 	}, [penerimaList, isShowFooter]);
 

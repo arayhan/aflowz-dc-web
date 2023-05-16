@@ -91,6 +91,8 @@ const states = (set, get) => ({
 
 		if (callback) callback({ payload, success });
 
+		console.log({ params, payload });
+
 		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
 			set({ penerimaList: success ? payload : null });
 		} else {
