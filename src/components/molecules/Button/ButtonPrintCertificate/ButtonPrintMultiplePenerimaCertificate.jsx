@@ -6,7 +6,7 @@ export const ButtonPrintMultiplePenerimaCertificate = ({ params, disabled }) => 
 	const { getPenerimaList } = usePartnerStore();
 
 	const handlePrint = () => {
-		getPenerimaList({ ...params, offset: 0, limit: 700 }, async ({ success, payload }) => {
+		getPenerimaList({ ...params, offset: 0, limit: 500 }, async ({ success, payload }) => {
 			if (success && payload?.items.length > 0) {
 				const penerimaIDs = payload?.items.map((item) => item.id);
 				const url = `https://dcstg.timtangguhdc.id/web/binary/download_document/dc_partner.download_license_report/${
