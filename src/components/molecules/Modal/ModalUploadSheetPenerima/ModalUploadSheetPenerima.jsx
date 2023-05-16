@@ -45,13 +45,35 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 					let params;
 
 					if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-						params = json.map((data) => ({
-							nik_number: isKIP ? data?.nik_number?.toString() || '' : '',
-							nisn_number: isPIP ? data?.nisn_number?.toString() || '' : '',
-							program_name: programDetail?.program_name || data?.program_name?.toString() || '',
-							program_periode: programDetail?.program_periode || data?.program_periode?.toString() || '',
-							program_mitra: programDetail?.program_mitra || data?.program_mitra?.toString() || ''
-						}));
+						params = json.map((data) => {
+							const allValuesToStringResult = data;
+							const neededKeys = [
+								'nik_number',
+								'nisn_number',
+								'program_name',
+								'program_periode',
+								'program_mitra',
+								'programs'
+							];
+
+							Object.keys(data).forEach((key) => {
+								if (neededKeys.includes(key)) {
+									allValuesToStringResult['nik_number'] = isKIP ? data?.nik_number?.toString() || '' : '';
+									allValuesToStringResult['nisn_number'] = isPIP ? data?.nisn_number?.toString() || '' : '';
+									allValuesToStringResult['program_name'] =
+										programDetail?.program_name || data?.program_name?.toString() || '';
+									allValuesToStringResult['program_periode'] =
+										programDetail?.program_periode || data?.program_periode?.toString() || '';
+									allValuesToStringResult['program_mitra'] =
+										programDetail?.program_mitra || data?.program_mitra?.toString() || '';
+									allValuesToStringResult['programs'] = [];
+								} else {
+									allValuesToStringResult[key] = '';
+								}
+							});
+
+							return allValuesToStringResult;
+						});
 					} else {
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
