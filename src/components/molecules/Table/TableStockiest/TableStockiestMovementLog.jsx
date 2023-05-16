@@ -75,22 +75,22 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'Kota',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.city.name || '-'}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name || '-'}</div>
 			},
 			{
 				Header: 'Kecamatan',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.district.name || '-'}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.district.name || '-'}</div>
 			},
 			{
 				Header: 'Kelurahan/Desa',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.village.name || '-'}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.village.name || '-'}</div>
 			},
 			{
 				Header: 'Institusi',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.konstituen.name || '-'}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.konstituen.name || '-'}</div>
 			},
 			{
 				Header: 'Program',
@@ -100,7 +100,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'PIC Tim Internal',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.pic_staff.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.pic_staff.name}</div>
 			},
 			{
 				Header: 'Jumlah',
@@ -117,6 +117,16 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 				Header: 'Deskripsi',
 				minWidth: 200,
 				Cell: (row) => <div>{row.row.original.description ? row.row.original.description : 'Stock Updated'}</div>
+			},
+			{
+				Header: 'Asal Gudang',
+				minWidth: 200,
+				Cell: (row) => <div>{row.row.original.from_location?.warehouse?.name || '-'}</div>
+			},
+			{
+				Header: 'Tujuan Gudang',
+				minWidth: 200,
+				Cell: (row) => <div>{row.row.original.to_location?.warehouse?.name || '-'}</div>
 			}
 		],
 		[offset, perPage, page, isSystem]
@@ -133,7 +143,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 				/>
 			</div>
 
-			<div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+			<div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 lg:grid-cols-4">
 				<div>
 					<InputSelectProductMovement onChange={(e) => setLogType(e.value)} value={logType} />
 				</div>
@@ -171,7 +181,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 						<InputText disabled={true} placeholder="Pilih Tanggal" label={'Tanggal Akhir'} />
 					)}
 				</div>
-				<div className="flex justify-evenly items-end">
+				<div className="flex items-end justify-evenly">
 					<Button
 						variant={'primary'}
 						className={'px-7 py-2'}
