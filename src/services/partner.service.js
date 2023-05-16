@@ -68,7 +68,7 @@ export const bulkCreatePartnerConfirm = async (params) => {
 	};
 
 	try {
-		const response = await http.post('/partner/candidate/confirm', request);
+		const response = await http.post('/partner', request);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
