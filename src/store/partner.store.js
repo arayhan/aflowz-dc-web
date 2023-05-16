@@ -1,6 +1,6 @@
 import { SERVICE_PARTNER } from '@/services';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
-import { exportToCsv, toastRequestResult, generateCertificateBulk } from '@/utils/helpers';
+import { exportToCsv, toastRequestResult } from '@/utils/helpers';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import create from 'zustand';

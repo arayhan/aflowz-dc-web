@@ -8,7 +8,6 @@ import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCi
 import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
-import { InputSelectStatusPenerima } from '../../InputSelect/InputSelectStatusPenerima/InputSelectStatusPenerima';
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
 
@@ -329,21 +328,15 @@ export const TableCalonPenerima = ({
 				<>
 					<hr />
 					<div className="flex items-center justify-end gap-3 px-6 py-4">
-						{(!params?.program_id || !params?.konstituen_id) && (
+						{!params?.program_id && (
 							<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
 								<span className="w-5">
 									<FaInfoCircle size={18} />
 								</span>
-								<div className="italic">
-									Pilih program dan institusi pada filter untuk download sertifikat, data penerima sesuai dengan filter
-									yang dipilih
-								</div>
+								<div className="italic">Pilih program pada filter untuk download sertifikat</div>
 							</div>
 						)}
-						<ButtonPrintMultiplePenerimaCertificate
-							params={params}
-							disabled={!params?.program_id || !params?.konstituen_id}
-						/>
+						<ButtonPrintMultiplePenerimaCertificate params={params} disabled={!params?.program_id} />
 					</div>
 				</>
 			)}

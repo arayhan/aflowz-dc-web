@@ -1,36 +1,27 @@
-import React, { useEffect } from 'react';
 import { FaDownload } from 'react-icons/fa';
-import { useKonstituenStore, usePartnerStore, useProgramStore } from '@/store';
+import { usePartnerStore } from '@/store';
 import { toast } from 'react-toastify';
-import { generateCertificateBulk } from '@/utils/helpers';
 
 export const ButtonPrintMultiplePenerimaCertificate = ({ params, disabled }) => {
 	const { getPenerimaList } = usePartnerStore();
-	const { konstituen, getKonstituen } = useKonstituenStore();
-	const { program, getProgram } = useProgramStore();
 
 	const handlePrint = () => {
-		const loader = toast.loading('Downloading...');
-		getPenerimaList({ ...params, offset: 0, limit: 1000 }, ({ success, payload }) => {
+		getPenerimaList({ ...params, offset: 0 }, async ({ success, payload }) => {
 			if (success && payload?.items.length > 0) {
-				toast.update(loader, { render: 'Zipping...', isLoading: true });
-				generateCertificateBulk(payload.items, `Sertifikat - ${program.name} - ${konstituen.name}`);
-				toast.update(loader, { type: 'success', render: 'Certificate Downloaded', isLoading: false, autoClose: 1500 });
+				const penerimaIDs = payload?.items.map((item) => item.id);
+				const url = `https://dcstg.timtangguhdc.id/web/binary/download_document/dc_partner.download_license_report/${
+					params?.program_id
+				}/${penerimaIDs.join(',')}`;
+				window.open(url, '_blank');
 			} else {
-				toast.update(loader, {
-					type: 'error',
-					render: 'Download Certificate Failed',
+				toast.loading(payload?.items.length === 0 ? 'Data is empty' : 'Download Certificate Failed', {
+					type: payload?.items.length === 0 ? 'warning' : 'error',
 					isLoading: false,
 					autoClose: 1500
 				});
 			}
 		});
 	};
-
-	useEffect(() => {
-		if (params?.konstituen_id) getKonstituen(params?.konstituen_id);
-		if (params?.program_id) getProgram(params?.program_id);
-	}, [params]);
 
 	return (
 		<div>
