@@ -99,7 +99,7 @@ export const updateStockProduct = async (params, dataProduct) => {
 	try {
 		let prodArr = [];
 		dataProduct.forEach((item) => {
-			prodArr.push({ product_id: item.id, quantity: item.quantity, warehouse_id: item?.warehouse?.id || 0 });
+			prodArr.push({ product_id: item.id, quantity: item.quantity });
 		});
 
 		let data = {
@@ -110,7 +110,8 @@ export const updateStockProduct = async (params, dataProduct) => {
 			program_id: params?.program || 0,
 			pic_staff_id: params?.pic_staff_id || 0,
 			description: params?.description || '',
-			products: prodArr || []
+			products: prodArr || [],
+			warehouse_id: item?.warehouse?.id || 0
 		};
 
 		if (params.method === 'in') {
