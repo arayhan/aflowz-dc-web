@@ -116,6 +116,7 @@ const states = (set, get) => ({
 		set({ processingUpdateProduct: true });
 
 		const loader = toast.loading('Processing...');
+
 		const { payload, success } = await SERVICE_STOCKIEST.updateStockProduct(params, dataProduct);
 
 		toastRequestResult(loader, success, 'Product updated', payload?.odoo_error || payload?.message);

@@ -26,6 +26,12 @@ export const FormStockiestMove = () => {
 	const [showError, setShowError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [method, setMethod] = useState('');
+
+	const WAREHOUSE_QUANTITY =
+		warehouse && product
+			? product.quantity_stock_locations?.find((val) => val.warehouse.id === warehouse?.id)?.quantity
+			: 0;
+
 	const columns = useMemo(
 		() => [
 			{
@@ -100,6 +106,7 @@ export const FormStockiestMove = () => {
 
 	const onSubmitAttendance = (values) => {
 		if (dataTable.length > 0) {
+			values.warehouse_id = warehouse?.id;
 			updateStockProduct(values, dataTable, ({ success }) => {
 				if (success) navigate(`/stockiest`);
 			});
@@ -109,15 +116,35 @@ export const FormStockiestMove = () => {
 	};
 
 	const onAdded = (prod, qty) => {
-		if (method === 'out') {
-			if (qty < prod.quantity) {
+		if (product && method && warehouse && qty > 0) {
+			if (method === 'out') {
+				if (qty < WAREHOUSE_QUANTITY) {
+					let exist = dataTable.find((val) => val.id === prod.id);
+					let data = {
+						id: prod?.id,
+						name: prod?.name,
+						sku_code: prod?.sku_code,
+						image_url: prod?.image_url,
+						warehouse,
+						quantity: qty
+					};
+					if (exist === undefined) {
+						setDataTable([...dataTable, { ...data }]);
+						reset();
+					} else {
+						reset('Barang sudah diterdaftar');
+					}
+				} else {
+					reset('Barang tidak mencukupi');
+				}
+			} else if (method === 'in') {
 				let exist = dataTable.find((val) => val.id === prod.id);
 				let data = {
 					id: prod?.id,
 					name: prod?.name,
 					sku_code: prod?.sku_code,
-					image_url: prod?.image_url,
 					warehouse,
+					image_url: prod?.image_url,
 					quantity: qty
 				};
 				if (exist === undefined) {
@@ -126,39 +153,21 @@ export const FormStockiestMove = () => {
 				} else {
 					reset('Barang sudah diterdaftar');
 				}
-			} else {
-				reset('Barang tidak mencukupi');
-			}
-		} else if (method === 'in') {
-			let exist = dataTable.find((val) => val.id === prod.id);
-			let data = {
-				id: prod?.id,
-				name: prod?.name,
-				sku_code: prod?.sku_code,
-				warehouse,
-				image_url: prod?.image_url,
-				quantity: qty
-			};
-			if (exist === undefined) {
-				setDataTable([...dataTable, { ...data }]);
-				reset();
-			} else {
-				reset('Barang sudah diterdaftar');
 			}
 		} else {
-			reset('Belum memilih metode');
+			if (!method) reset('Belum memilih metode');
+			else if (!product) reset('Belum memilih produk');
+			else if (!warehouse) reset('Belum memilih gudang');
+			else if (qty <= 0) reset('Harap isi jumlah barang');
 		}
 	};
 
 	const reset = (message) => {
-		setProduct(null);
-		setWarehouse(null);
-		setQuantity('');
 		setErrorMessage(message);
 		setShowError(true);
 		setTimeout(() => {
 			setShowError(false);
-		}, 1000);
+		}, 1500);
 	};
 
 	const onDelete = (val) => {
@@ -354,6 +363,15 @@ export const FormStockiestMove = () => {
 			<hr />
 			<div className="grid items-end grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6">
 				<div className="md:col-span-3">
+					<InputSelectWarehouse
+						disabled={processingUpdateProduct || dataTable?.length > 0}
+						value={warehouse}
+						onChange={({ value }) => {
+							setWarehouse(value);
+						}}
+					/>
+				</div>
+				<div className="md:col-span-3">
 					<InputSelectProduct
 						disabled={processingUpdateProduct}
 						value={product}
@@ -363,20 +381,11 @@ export const FormStockiestMove = () => {
 					/>
 				</div>
 				<div className="md:col-span-3">
-					<InputSelectWarehouse
-						disabled={processingUpdateProduct}
-						value={warehouse}
-						onChange={({ value }) => {
-							setWarehouse(value);
-						}}
-					/>
-				</div>
-				<div className="md:col-span-3">
 					<InputText
 						disabled={true}
 						label="Stok Tersedia"
 						placeholder="Stok yang tersedia"
-						value={product !== null ? product?.quantity : ''}
+						value={product !== null ? WAREHOUSE_QUANTITY : ''}
 						type={'number'}
 					/>
 				</div>
