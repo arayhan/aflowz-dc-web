@@ -25,7 +25,8 @@ const Program = () => {
 						<TableProgram
 							params={{ ...params, is_special_program: isPIPorKIP }}
 							isShowButtonUploadSheetFollowers
-							isShowButtonUploadSheetPenerima
+							isShowButtonUploadSheetPenerimaConfirmed={isPIPorKIP}
+							isShowButtonUploadSheetPenerimaGeneral={!isPIPorKIP}
 							isShowButtonUploadSheetKandidat={isPIPorKIP}
 						/>
 					</div>

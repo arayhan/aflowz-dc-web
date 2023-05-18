@@ -56,21 +56,33 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 								'programs'
 							];
 
-							Object.keys(data).forEach((key) => {
-								if (neededKeys.includes(key)) {
-									allValuesToStringResult['nik_number'] = isKIP ? data?.nik_number?.toString() || '' : '';
-									allValuesToStringResult['nisn_number'] = isPIP ? data?.nisn_number?.toString() || '' : '';
-									allValuesToStringResult['program_name'] =
-										programDetail?.program_name || data?.program_name?.toString() || '';
-									allValuesToStringResult['program_periode'] =
-										programDetail?.program_periode || data?.program_periode?.toString() || '';
-									allValuesToStringResult['program_mitra'] =
-										programDetail?.program_mitra || data?.program_mitra?.toString() || '';
+							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+								Object.keys(data).forEach((key) => {
+									if (neededKeys.includes(key)) {
+										allValuesToStringResult['nik_number'] =
+											status === STATUS_PENERIMA_TYPES.CANDIDATE || isKIP ? data?.nik_number?.toString() || '' : '';
+										allValuesToStringResult['nisn_number'] =
+											status === STATUS_PENERIMA_TYPES.CANDIDATE || isPIP ? data?.nisn_number?.toString() || '' : '';
+										allValuesToStringResult['program_name'] =
+											programDetail?.program_name || data?.program_name?.toString() || '';
+										allValuesToStringResult['program_periode'] =
+											programDetail?.program_periode || data?.program_periode?.toString() || '';
+										allValuesToStringResult['program_mitra'] = 'Kementrian Pendidikan & Kebudayaan';
+										allValuesToStringResult['programs'] = [];
+									} else {
+										if (status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+											allValuesToStringResult[key] = data[key]?.toString() || '';
+										} else {
+											allValuesToStringResult[key] = '';
+										}
+									}
+								});
+							} else {
+								Object.keys(data).forEach((key) => {
+									allValuesToStringResult[key] = data[key]?.toString() || '';
 									allValuesToStringResult['programs'] = [];
-								} else {
-									allValuesToStringResult[key] = '';
-								}
-							});
+								});
+							}
 
 							return allValuesToStringResult;
 						});
@@ -95,6 +107,8 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 							setErrors(payload);
 						}
 					};
+
+					console.log({ status, params, json });
 
 					if (status === STATUS_PENERIMA_TYPES.CANDIDATE) bulkCreatePartnerCandidate(params, bulkCreateCallback);
 					else if (status === STATUS_PENERIMA_TYPES.CONFIRMED) bulkCreatePartnerConfirm(params, bulkCreateCallback);

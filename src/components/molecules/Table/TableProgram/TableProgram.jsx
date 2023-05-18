@@ -17,7 +17,8 @@ export const TableProgram = ({
 	isShowButtonSeeAll,
 	enableClickRow,
 	isShowButtonUploadSheetFollowers,
-	isShowButtonUploadSheetPenerima,
+	isShowButtonUploadSheetPenerimaConfirmed,
+	isShowButtonUploadSheetPenerimaGeneral,
 	isShowButtonUploadSheetKandidat
 }) => {
 	const location = useLocation();
@@ -136,7 +137,8 @@ export const TableProgram = ({
 					seeAllLink={'/program' + objectToQueryString(params)}
 					showButtonSeeAll={isShowButtonSeeAll}
 					showButtonUploadSheetFollowers={isShowButtonUploadSheetFollowers}
-					showButtonUploadSheetPenerima={isShowButtonUploadSheetPenerima}
+					showButtonUploadSheetPenerimaConfirmed={isShowButtonUploadSheetPenerimaConfirmed}
+					showButtonUploadSheetPenerimaGeneral={isShowButtonUploadSheetPenerimaGeneral}
 					showButtonUploadSheetKandidat={isShowButtonUploadSheetKandidat}
 				/>
 			</div>

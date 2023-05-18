@@ -1,11 +1,11 @@
 import {
-	ButtonPrintMultiplePenerimaCertificate,
 	ModalUploadSheetFollowers,
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima
 } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
+import { queryStringToObject } from '@/utils/helpers';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
@@ -23,7 +23,8 @@ export const TableHeader = ({
 	showButtonDownloadData,
 	showButtonUploadSheetKandidat,
 	showButtonUploadSheetFollowers,
-	showButtonUploadSheetPenerima,
+	showButtonUploadSheetPenerimaGeneral,
+	showButtonUploadSheetPenerimaConfirmed,
 	showButtonUploadSheetKonstituen,
 	showButtonUploadOrganizationStructure,
 	showButtonCheckout,
@@ -31,15 +32,23 @@ export const TableHeader = ({
 	setShowModalUploadOrganizationStructure
 }) => {
 	const location = useLocation();
+	const params = location.search ? queryStringToObject(location.search) : {};
 
 	const { programDetail } = useProgramStore();
 
-	const isPIP = programDetail?.program_name?.toLowerCase().includes('pip') || false;
-	const isKIP = programDetail?.program_name?.toLowerCase().includes('kip') || false;
+	const isPIP =
+		programDetail?.program_name?.toLowerCase().includes('pip') ||
+		params?.keyword?.toLowerCase().includes('pip') ||
+		false;
+	const isKIP =
+		programDetail?.program_name?.toLowerCase().includes('kip') ||
+		params?.keyword?.toLowerCase().includes('kip') ||
+		false;
 	const isPIPorKIP = isPIP || isKIP || false;
 
 	const [showModalUploadSheetKandidat, setShowModalUploadSheetKandidat] = useState(false);
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
+	const [showModalUploadSheetPenerimaGeneral, setShowModalUploadSheetPenerimaGeneral] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 	const [showModalUploadSheetKonstituen, setShowModalUploadSheetKonstituen] = useState(false);
 
@@ -62,12 +71,20 @@ export const TableHeader = ({
 					onClose={() => setShowModalUploadSheetFollowers(false)}
 				/>
 			)}
+			{showModalUploadSheetPenerimaGeneral && (
+				<ModalUploadSheetPenerima
+					isPIP={isPIP}
+					isKIP={isKIP}
+					isPIPorKIP={isPIPorKIP}
+					onClose={() => setShowModalUploadSheetPenerimaGeneral(false)}
+				/>
+			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima
 					isPIP={isPIP}
 					isKIP={isKIP}
 					isPIPorKIP={isPIPorKIP}
-					status={STATUS_PENERIMA_TYPES.CONFIRMED}
+					status={statusPenerima}
 					onClose={() => setShowModalUploadSheetPenerima(false)}
 				/>
 			)}
@@ -130,11 +147,24 @@ export const TableHeader = ({
 							<span className="w-4">
 								<SiGooglesheets size={16} />
 							</span>
-							<span className="text-sm">Upload Kandidat</span>
+							<span className="text-sm">Upload Usulan</span>
 						</button>
 					</>
 				)}
-				{!isReadonly && showButtonUploadSheetPenerima && (
+				{!isReadonly && showButtonUploadSheetPenerimaGeneral && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+							onClick={() => setShowModalUploadSheetPenerimaGeneral(true)}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Upload Penerima Program</span>
+						</button>
+					</>
+				)}
+				{!isReadonly && showButtonUploadSheetPenerimaConfirmed && (
 					<>
 						<button
 							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
