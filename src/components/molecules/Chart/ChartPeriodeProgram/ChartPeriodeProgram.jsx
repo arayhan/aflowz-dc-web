@@ -18,7 +18,7 @@ export const ChartPeriodeProgram = ({ data, dataLabels }) => {
 						datasets: [
 							{
 								label: dataLabels?.map((item) => `Total ${item}`) || 'Total',
-								data: data.map((item) => item.total_penerima),
+								data: data.map((item) => item.total_program),
 								backgroundColor: getRandomColor(),
 								borderWidth: 1
 							}
