@@ -65,7 +65,7 @@ const StockiestDetail = () => {
 												{product?.quantity_stock_locations?.map((location) => (
 													<InputTextInfo
 														key={location.location_id}
-														tag={`Gudang ${location?.location_name}`}
+														tag={`${location?.warehouse?.name}`}
 														value={location?.quantity || 'Belum Mencantumkan'}
 													/>
 												))}
