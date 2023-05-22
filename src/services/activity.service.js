@@ -40,7 +40,8 @@ export const createActivity = async (params) => {
 		district_id: params?.district_id || 0,
 		city_id: params?.city_id || 0,
 		program_id: params?.program_id || 0,
-		category_id: params?.category_id || 0
+		category_id: params?.category_id || 0,
+		partner_id: params?.partner_id || 0
 	};
 
 	try {
@@ -58,7 +59,8 @@ export const updateActivity = async (activityID, params) => {
 		village_id: params?.village_id || 0,
 		district_id: params?.district_id || 0,
 		city_id: params?.city_id || 0,
-		program_id: params?.program_id || 0
+		program_id: params?.program_id || 0,
+		partner_id: params?.partner_id || 0
 	};
 
 	try {
