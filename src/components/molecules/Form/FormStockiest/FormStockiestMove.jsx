@@ -385,7 +385,7 @@ export const FormStockiestMove = () => {
 						disabled={true}
 						label="Stok Tersedia"
 						placeholder="Stok yang tersedia"
-						value={product !== null ? WAREHOUSE_QUANTITY : ''}
+						value={product !== null ? WAREHOUSE_QUANTITY || 0 : ''}
 						type={'number'}
 					/>
 				</div>
