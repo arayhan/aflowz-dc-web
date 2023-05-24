@@ -107,9 +107,9 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 				minWidth: 50,
 				Cell: (row) => {
 					if (row.row.original.reference.includes('OUT')) {
-						return <div>- {row.row.original.quantity}</div>;
+						return <div className="font-semibold text-red-500">- {row.row.original.quantity}</div>;
 					} else {
-						return <div>+ {row.row.original.quantity}</div>;
+						return <div className="font-semibold text-green-500">+ {row.row.original.quantity}</div>;
 					}
 				}
 			},
