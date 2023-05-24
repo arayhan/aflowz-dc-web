@@ -7,8 +7,8 @@ import {
 	TableCalonPenerima,
 	TableDetailPenerimaProgram,
 	TableDetailTimeline,
+	TableDetailTotalPenerimaByKonstituen,
 	TableDetailVillageInDistrict,
-	TableKonstituen,
 	TablePenerima,
 	TableProgramOrganization
 } from '@/components/molecules';
@@ -263,16 +263,10 @@ const ProgramDetail = () => {
 								)}
 
 								{isPIPorKIP && (
-									<div className="col-span-12 bg-white rounded-md">
-										<TableKonstituen
-											title={`${isPIP ? 'Sekolah' : 'Kampus'} di Program ${programDetail.program_name}`}
-											isShowButtonSeeAll
-											isReadonly
-											params={{
-												konstituen_type: `${isPIP ? 'sekolah' : 'kampus'}`,
-												program_id: programDetail?.program_id
-											}}
-											enableClickRow
+									<div className="col-span-12 overflow-x-scroll bg-white rounded-md">
+										<TableDetailTotalPenerimaByKonstituen
+											dataPenerima={programDetail?.total_penerima_program_per_institusi}
+											programID={programDetail?.program_id}
 										/>
 									</div>
 								)}
