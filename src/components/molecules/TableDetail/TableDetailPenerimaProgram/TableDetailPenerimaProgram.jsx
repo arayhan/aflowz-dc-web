@@ -48,7 +48,13 @@ export const TableDetailPenerimaProgram = ({ dataPenerima, isPerVillage, isPerCi
 						: isPerProgram
 						? Number(data['program_id'])
 						: 0;
-					const navigate = isPerCity ? `/city` : isPerVillage ? `/village` : isPerProgram ? `/program` : '';
+					const navigate = isPerCity
+						? `/dapil/city`
+						: isPerVillage
+						? `/dapil/village`
+						: isPerProgram
+						? `/dapil/program`
+						: '';
 					return (
 						<ButtonAction
 							className="min-w-[100px] w-full"
