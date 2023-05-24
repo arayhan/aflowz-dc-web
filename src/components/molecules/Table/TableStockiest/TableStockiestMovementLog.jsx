@@ -99,7 +99,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			},
 			{
 				Header: 'PIC Tim Internal',
-				minWidth: 150,
+				minWidth: 200,
 				Cell: (row) => <div className="capitalize transform:">{row.row.original.pic_staff.name}</div>
 			},
 			{
