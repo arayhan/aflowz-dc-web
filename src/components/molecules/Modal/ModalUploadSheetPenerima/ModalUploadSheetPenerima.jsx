@@ -59,10 +59,8 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
 								Object.keys(data).forEach((key) => {
 									if (neededKeys.includes(key)) {
-										allValuesToStringResult['nik_number'] =
-											status === STATUS_PENERIMA_TYPES.CANDIDATE ? data?.nik_number?.toString() : '';
-										allValuesToStringResult['nisn_number'] =
-											status === STATUS_PENERIMA_TYPES.CANDIDATE ? data?.nisn_number?.toString() : '';
+										allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
+										allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
 										allValuesToStringResult['program_name'] =
 											programDetail?.program_name || data?.program_name?.toString() || '';
 										allValuesToStringResult['program_periode'] =
