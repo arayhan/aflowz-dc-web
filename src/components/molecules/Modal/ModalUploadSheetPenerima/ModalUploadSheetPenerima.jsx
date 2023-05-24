@@ -60,9 +60,9 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 								Object.keys(data).forEach((key) => {
 									if (neededKeys.includes(key)) {
 										allValuesToStringResult['nik_number'] =
-											status === STATUS_PENERIMA_TYPES.CANDIDATE || data?.nik_number?.toString() || '';
+											status === STATUS_PENERIMA_TYPES.CANDIDATE ? data?.nik_number?.toString() : '';
 										allValuesToStringResult['nisn_number'] =
-											status === STATUS_PENERIMA_TYPES.CANDIDATE || data?.nisn_number?.toString() || '';
+											status === STATUS_PENERIMA_TYPES.CANDIDATE ? data?.nisn_number?.toString() : '';
 										allValuesToStringResult['program_name'] =
 											programDetail?.program_name || data?.program_name?.toString() || '';
 										allValuesToStringResult['program_periode'] =
@@ -184,7 +184,7 @@ export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
 											<div key={key} className="flex">
 												<div className="inline-block">{key}</div>
 												<div className="px-2">:</div>
-												<div className="col-span-5 inline-block">{error.list_error_message[key]}</div>
+												<div className="inline-block col-span-5">{error.list_error_message[key]}</div>
 											</div>
 										))}
 									</div>
