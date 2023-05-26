@@ -68,29 +68,18 @@ const ProgramDetail = () => {
 		<div>
 			{showModalUploadSheetKandidat && (
 				<ModalUploadSheetPenerima
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
 					status={STATUS_PENERIMA_TYPES.CANDIDATE}
 					onClose={() => setShowModalUploadSheetKandidat(false)}
 				/>
 			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
 					status={STATUS_PENERIMA_TYPES.CONFIRMED}
 					onClose={() => setShowModalUploadSheetPenerima(false)}
 				/>
 			)}
 			{showModalUploadSheetFollowers && (
-				<ModalUploadSheetFollowers
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
-					onClose={() => setShowModalUploadSheetFollowers(false)}
-				/>
+				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
 			)}
 
 			<BannerFeature
