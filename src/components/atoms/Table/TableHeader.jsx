@@ -3,9 +3,7 @@ import {
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima
 } from '@/components/molecules';
-import { useProgramStore } from '@/store';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
-import { queryStringToObject } from '@/utils/helpers';
 import React, { useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
@@ -32,19 +30,6 @@ export const TableHeader = ({
 	setShowModalUploadOrganizationStructure
 }) => {
 	const location = useLocation();
-	const params = location.search ? queryStringToObject(location.search) : {};
-
-	const { programDetail } = useProgramStore();
-
-	const isPIP =
-		programDetail?.program_name?.toLowerCase().includes('pip') ||
-		params?.keyword?.toLowerCase().includes('pip') ||
-		false;
-	const isKIP =
-		programDetail?.program_name?.toLowerCase().includes('kip') ||
-		params?.keyword?.toLowerCase().includes('kip') ||
-		false;
-	const isPIPorKIP = isPIP || isKIP || false;
 
 	const [showModalUploadSheetKandidat, setShowModalUploadSheetKandidat] = useState(false);
 	const [showModalUploadSheetPenerima, setShowModalUploadSheetPenerima] = useState(false);
@@ -56,35 +41,19 @@ export const TableHeader = ({
 		<div className="flex flex-col items-start justify-between w-full gap-4 lg:flex-row lg:items-center">
 			{showModalUploadSheetKandidat && (
 				<ModalUploadSheetPenerima
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
 					status={STATUS_PENERIMA_TYPES.CANDIDATE}
 					onClose={() => setShowModalUploadSheetKandidat(false)}
 				/>
 			)}
 			{showModalUploadSheetFollowers && (
-				<ModalUploadSheetFollowers
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
-					onClose={() => setShowModalUploadSheetFollowers(false)}
-				/>
+				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
 			)}
 			{showModalUploadSheetPenerimaGeneral && (
-				<ModalUploadSheetPenerima
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
-					onClose={() => setShowModalUploadSheetPenerimaGeneral(false)}
-				/>
+				<ModalUploadSheetPenerima onClose={() => setShowModalUploadSheetPenerimaGeneral(false)} />
 			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima
-					isPIP={isPIP}
-					isKIP={isKIP}
-					isPIPorKIP={isPIPorKIP}
-					status={statusPenerima}
+					status={STATUS_PENERIMA_TYPES.CONFIRMED}
 					onClose={() => setShowModalUploadSheetPenerima(false)}
 				/>
 			)}

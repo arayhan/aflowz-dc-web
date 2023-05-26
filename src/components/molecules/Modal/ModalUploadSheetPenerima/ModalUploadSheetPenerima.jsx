@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 import { objectToQueryString } from '@/utils/helpers';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 
-export const ModalUploadSheetPenerima = ({ isPIP, isKIP, status, onClose }) => {
+export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 	const navigate = useNavigate();
 	const {
 		processingBulkCreatePartner,
