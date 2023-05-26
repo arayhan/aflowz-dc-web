@@ -174,18 +174,16 @@ const CityDetail = () => {
 									<Card
 										title={`List Kecamatan di Kota ${cityDetail.city_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<div className="flex overflow-scroll max-h-[200px]">
+										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailDistrictInCity districtData={cityDetail.penerima_program_city_district} />
 										</div>
 									</Card>
 								</div>
-								<div className="col-span-12">
+								<div className="col-span-12 bg-white rounded-md">
 									<Card
 										title={`Total Penerima Setiap Program di Kota ${cityDetail.city_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
 									>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailTotalPenerimaByProgram dataPenerima={cityDetail?.penerima_program_city} />

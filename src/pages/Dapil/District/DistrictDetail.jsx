@@ -177,16 +177,14 @@ const DistrictDetail = () => {
 									<Card
 										title={`List Desa di Kecamatan ${districtDetail.district_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<TableDetailVillageInDistrict villageData={districtDetail.penerima_program_district_village} />
 									</Card>
 								</div>
-								<div className="col-span-12">
+								<div className="col-span-12 bg-white rounded-md">
 									<Card
 										title={`List Program di Kecamatan ${districtDetail.district_name}`}
 										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
 									>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailTotalPenerimaByProgram dataPenerima={districtDetail?.penerima_program} />
