@@ -41,7 +41,6 @@ export const TableSelectRole = ({ onRemoveRole, onAddRole, onUpdateRole, selecte
 				Header: 'Action',
 				Cell: (row) => (
 					<ButtonAction
-						className="min-w-[100px] w-full"
 						action={ACTION_TYPES.DELETE}
 						showAlert={false}
 						onClick={() => onRemoveRole(Number(row.row.id))}

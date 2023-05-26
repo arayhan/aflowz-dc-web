@@ -56,7 +56,7 @@ export const TableDetailStructureOrganization = ({ dataOrganization }) => {
 				Cell: (row) => {
 					const data = row.row.original;
 					const navigate = `/staff/${data.partner_id}`;
-					return <ButtonAction className="min-w-[100px] w-full" action={ACTION_TYPES.SEE_DETAIL} linkTo={navigate} />;
+					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={navigate} />;
 				}
 			}
 		],

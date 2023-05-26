@@ -87,13 +87,7 @@ export const TablePenerimaKonstituenDetail = ({ konstituenID, isInDetail }) => {
 				minWidth: 50,
 				maxWidth: 50,
 				Cell: (row) => {
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/penerima/${row.row.original.id}`}
-						/>
-					);
+					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/penerima/${row.row.original.id}`} />;
 				}
 			}
 		],
