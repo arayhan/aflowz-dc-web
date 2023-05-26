@@ -116,8 +116,8 @@ export const TablePenerima = ({
 					const programs = row.row.original.programs;
 					return (
 						<div className="flex flex-wrap gap-1">
-							{programs.length === 0 && '-'}
-							{programs.length > 0 &&
+							{programs?.length === 0 && '-'}
+							{programs?.length > 0 &&
 								programs.map((program) => (
 									<ButtonAction
 										key={program.id}
@@ -237,7 +237,7 @@ export const TablePenerima = ({
 					title={title || 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
 					onClickDownloadData={handleDownloadData}
-					showButtonDownloadData={data.length > 0}
+					showButtonDownloadData={data?.length > 0}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
@@ -360,7 +360,7 @@ export const TablePenerima = ({
 				<Table
 					columns={columns}
 					data={data}
-					loading={fetchingPenerimaList || penerimaList === null}
+					loading={fetchingPenerimaList}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>
