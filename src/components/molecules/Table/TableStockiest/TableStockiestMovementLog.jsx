@@ -76,7 +76,10 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 				Cell: (row) => {
 					moment.locale('id');
 					const data = row.row.original;
-					const date = data?.date ? new Date(data.date) : null;
+					const date = data?.date;
+
+					const utcDateTime = moment.utc(date, 'YYYY-MM-DD HH:mm:ss');
+					const jakartaDateTime = utcDateTime.tz('Asia/Jakarta');
 
 					return date ? (
 						<div className="space-y-1 text-xs">
@@ -84,13 +87,13 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 								<span className="text-primary-800">
 									<FaCalendarAlt />
 								</span>
-								<span>{moment(date).tz('Asia/Jakarta').format('DD MMMM YYYY')}</span>
+								<span>{jakartaDateTime.format('DD MMMM YYYY')}</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<span className="text-primary-800">
 									<FaClock />
 								</span>
-								<span>{moment(date).tz('Asia/Jakarta').format('HH:mm:ss')}</span>
+								<span>{jakartaDateTime.format('HH:mm:ss')}</span>
 							</div>
 						</div>
 					) : (
