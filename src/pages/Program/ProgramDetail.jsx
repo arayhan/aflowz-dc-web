@@ -9,13 +9,15 @@ import {
 	TableDetailTimeline,
 	TableDetailTotalPenerimaByKonstituen,
 	TableDetailVillageInDistrict,
+	TableKonstituen,
 	TablePenerima,
 	TableProgramOrganization
 } from '@/components/molecules';
 import { useActivityStore, useProgramStore } from '@/store';
 import { NEGATIVE_CASE_TYPES, STATUS_PENERIMA_TYPES } from '@/utils/constants';
+import { objectToQueryString } from '@/utils/helpers';
 import React, { useEffect, useState } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronRight, FaInfoCircle } from 'react-icons/fa';
 import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
@@ -252,11 +254,42 @@ const ProgramDetail = () => {
 								)}
 
 								{isPIPorKIP && (
-									<div className="col-span-12 overflow-x-scroll bg-white rounded-md">
-										<TableDetailTotalPenerimaByKonstituen
-											dataPenerima={programDetail?.total_penerima_program_per_institusi}
-											programID={programDetail?.program_id}
-										/>
+									<div className="col-span-12 bg-white rounded-md">
+										<Card
+											title={`${isPIP ? 'Sekolah' : 'Kampus'} di Program ${programDetail.program_name}`}
+											bodyClassName={'flex flex-col items-start justify-center gap-3 p-4'}
+											rightComponent={
+												<Link
+													to={
+														'/institusi' +
+														objectToQueryString({
+															konstituen_type: `${isPIP ? 'sekolah' : 'kampus'}`,
+															program_id: programDetail?.program_id
+														})
+													}
+													className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-sm text-center text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+												>
+													<span>Lihat Semua</span>
+												</Link>
+											}
+										>
+											<div className="flex items-center gap-2 p-2 text-xs text-gray-500 bg-yellow-400 rounded-sm">
+												<span className="w-5">
+													<FaInfoCircle size={18} />
+												</span>
+												<div className="italic">
+													Klik tombol <span className="font-bold">List Penerima</span> pada tabel untuk download
+													sertifikat penerima perinstitusi
+												</div>
+											</div>
+											<hr />
+											<div className="max-w-full overflow-x-scroll">
+												<TableDetailTotalPenerimaByKonstituen
+													dataPenerima={programDetail?.total_penerima_program_per_institusi}
+													programID={programDetail?.program_id}
+												/>
+											</div>
+										</Card>
 									</div>
 								)}
 
