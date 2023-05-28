@@ -19,21 +19,21 @@ export const TableStaffDetailTotalUsulanPerProgram = ({ fetchData, isReadonly, t
 				Header: 'Nama Program',
 				minWidth: 150,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original.program?.name || '-'}</div>;
+					return <div className="capitalize transform:">{row.row.original.program?.name || '-'}</div>;
 				}
 			},
 			{
 				Header: 'Periode',
 				minWidth: 200,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original.program?.periode || '-'}</div>;
+					return <div className="capitalize transform:">{row.row.original.program?.periode || '-'}</div>;
 				}
 			},
 			{
 				Header: 'Total Usulan',
 				minWidth: 200,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original?.total_candidate || '-'}</div>;
+					return <div className="capitalize transform:">{row.row.original?.total_candidate || '-'}</div>;
 				}
 			},
 			{
@@ -44,7 +44,7 @@ export const TableStaffDetailTotalUsulanPerProgram = ({ fetchData, isReadonly, t
 						<ButtonAction
 							className="bg-purple-500 hover:bg-purple-400 px-9"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/program/${row.row.original.id}`}
+							linkTo={`/program/${row.row.original.program.id}`}
 						/>
 					);
 				}
@@ -58,7 +58,7 @@ export const TableStaffDetailTotalUsulanPerProgram = ({ fetchData, isReadonly, t
 			<div className="p-6">
 				<TableHeader title={titleHeader} isReadonly={isReadonly} showButtonCreate={false} />
 			</div>
-			<div className="h-fit overflow-y-auto">
+			<div className="overflow-y-auto h-fit">
 				<Table columns={columns} data={fetchData} loading={null} />
 			</div>
 		</>
