@@ -220,11 +220,9 @@ export const TablePenerima = ({
 	}, [params, page, perPage, pageCount]);
 
 	useEffect(() => {
-		if (penerimaList?.items || calonPenerimaList?.items) {
-			setData(
-				params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
-			);
-		} else setData([]);
+		setData(
+			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
+		);
 		if (isShowFooter && penerimaList?.total) setPageCount(Math.ceil(penerimaList.total / perPage));
 	}, [penerimaList, isShowFooter]);
 

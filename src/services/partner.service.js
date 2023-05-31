@@ -2,6 +2,8 @@ import { useAuthStore } from '@/store';
 import { objectToQueryString } from '@/utils/helpers';
 import { http, baseURL } from './http';
 
+let controller = new AbortController();
+
 export const getPartnerItem = async (partnerID) => {
 	try {
 		const response = await http.get(`/partner/${partnerID}`);
@@ -12,9 +14,13 @@ export const getPartnerItem = async (partnerID) => {
 };
 
 export const getPartnerList = async (params) => {
+	controller.abort();
+
+	controller = new AbortController();
+	const signal = controller.signal;
 	try {
 		const queryParams = objectToQueryString(params);
-		const response = await http.get('/partner' + queryParams);
+		const response = await http.get('/partner' + queryParams, { signal });
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
