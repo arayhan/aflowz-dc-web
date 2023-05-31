@@ -24,10 +24,8 @@ const Program = () => {
 					<div className="container py-6">
 						<TableProgram
 							params={{ ...params, is_special_program: isPIPorKIP }}
-							isShowButtonUploadSheetFollowers
-							isShowButtonUploadSheetPenerimaConfirmed={isPIPorKIP}
+							isShowButtonUploadSheetFollowers={!isPIPorKIP}
 							isShowButtonUploadSheetPenerimaGeneral={!isPIPorKIP}
-							isShowButtonUploadSheetKandidat={isPIPorKIP}
 						/>
 					</div>
 				)}
