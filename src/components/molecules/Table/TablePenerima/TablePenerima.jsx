@@ -26,7 +26,8 @@ export const TablePenerima = ({
 	enableClickRow,
 	konstituenType,
 	isPIP,
-	isKIP
+	isKIP,
+	isNeedAbort
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
@@ -215,7 +216,7 @@ export const TablePenerima = ({
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(Math.abs(offsetResult));
-			getPenerimaList({ ...defaultParams, ...params });
+			getPenerimaList({ ...defaultParams, ...params }, () => {}, isNeedAbort);
 		}
 	}, [params, page, perPage, pageCount]);
 
@@ -377,5 +378,6 @@ TablePenerima.defaultProps = {
 	isShowFilter: true,
 	isShowBulkDownloadCertificate: false,
 	isPIP: true,
-	isKIP: true
+	isKIP: true,
+	isNeedAbort: false
 };

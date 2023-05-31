@@ -84,10 +84,10 @@ const states = (set, get) => ({
 		set({ fetchingPenerimaItem: false });
 	},
 
-	getPenerimaList: async (params, callback) => {
+	getPenerimaList: async (params, callback, isNeedAbort = false) => {
 		set({ fetchingPenerimaList: true });
 
-		const { success, payload } = await SERVICE_PARTNER.getPartnerList(params);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(params, isNeedAbort);
 
 		if (callback) callback({ payload, success });
 

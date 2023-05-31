@@ -25,6 +25,7 @@ const Penerima = () => {
 								? 'Calon Penerima Program'
 								: 'Penerima Program'
 						} `}
+						isNeedAbort
 						params={{ ...params, candidate_status: params?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED }}
 						displayedColumns={['#', 'NIK', 'NISN', 'Nama Penerima', 'Institusi', 'Alamat', 'Program']}
 						isShowBulkDownloadCertificate

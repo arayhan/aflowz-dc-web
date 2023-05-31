@@ -13,14 +13,14 @@ export const getPartnerItem = async (partnerID) => {
 	}
 };
 
-export const getPartnerList = async (params) => {
+export const getPartnerList = async (params, isNeedAbort = false) => {
 	controller.abort();
 
 	controller = new AbortController();
 	const signal = controller.signal;
 	try {
 		const queryParams = objectToQueryString(params);
-		const response = await http.get('/partner' + queryParams, { signal });
+		const response = await http.get('/partner' + queryParams, isNeedAbort ? { signal } : {});
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
