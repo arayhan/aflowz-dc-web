@@ -69,22 +69,22 @@ export const TableCalonPenerima = ({
 				}
 			},
 			{
-				Header: isKIP || isPIP ? 'Nama Usulan' : 'Nama Penerima',
+				Header: isKIP ? 'Nama Usulan' : isPIP ? 'Nama Siswa' : 'Nama Penerima',
 				accessor: 'name',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
 				Header: 'No HP',
-				minWidth: 70,
-				hidden: (displayedColumns && !displayedColumns.includes('No HP')) || !isPIP,
+				minWidth: 120,
+				hidden: (displayedColumns && !displayedColumns.includes('No HP')) || isPIP,
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.mobile || '-'}</div>;
 				}
 			},
 			{
-				Header: isKIP ? 'Nama PT' : 'Institusi',
+				Header: isKIP ? 'Nama PT' : isPIP ? 'Nama Sekolah' : 'Institusi',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
 				Cell: (row) => {
@@ -103,6 +103,16 @@ export const TableCalonPenerima = ({
 							)}
 						</div>
 					);
+				}
+			},
+
+			{
+				Header: 'Nama Ibu Kandung',
+				minWidth: 70,
+				hidden: (displayedColumns && !displayedColumns.includes('Nama Ibu Kandung')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.added_information?.mother_name || '-'}</div>;
 				}
 			},
 			{
