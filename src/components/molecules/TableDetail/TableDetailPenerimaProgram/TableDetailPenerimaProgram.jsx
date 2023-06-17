@@ -21,13 +21,21 @@ export const TableDetailPenerimaProgram = ({ dataPenerima, isPerVillage, isPerCi
 				minWidth: 150
 			},
 			{
-				Header: `${isPerCity ? 'PIC Kota' : isPerVillage ? 'PIC Desa/Kelurahan' : isPerProgram ? 'PIC Internal' : ''}`,
-				accessor: 'pic',
-				hidden: !isPerCity && !isPerVillage,
+				Header: `${isPerProgram ? 'Nama PIC Mitra' : ''}`,
+				accessor: 'mitra_pic',
+				hidden: !isPerProgram,
 				minWidth: 150
 			},
 			{
-				Header: 'Total Penerima',
+				Header: `${
+					isPerCity ? 'PIC Kota' : isPerVillage ? 'PIC Desa/Kelurahan' : isPerProgram ? 'Nama PJ Internal DC' : ''
+				}`,
+				accessor: 'pic',
+				hidden: !isPerCity && !isPerVillage && !isPerProgram,
+				minWidth: 200
+			},
+			{
+				Header: `${isPerProgram ? 'Jumlah Program Tersalurkan' : 'Total Penerima'}`,
 				accessor: !isPerProgram ? 'total_penerima' : 'total_penerima_program',
 				maxWidth: 100
 			},
@@ -55,13 +63,7 @@ export const TableDetailPenerimaProgram = ({ dataPenerima, isPerVillage, isPerCi
 						: isPerProgram
 						? `/dapil/program`
 						: '';
-					return (
-						<ButtonAction
-							className="min-w-[100px] w-full"
-							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`${navigate}/${accessor}`}
-						/>
-					);
+					return <ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`${navigate}/${accessor}`} />;
 				}
 			}
 		],
