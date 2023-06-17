@@ -10,6 +10,7 @@ import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSe
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
+import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
 
 export const TablePenerima = ({
 	title,
@@ -132,40 +133,6 @@ export const TablePenerima = ({
 					);
 				}
 			},
-			// {
-			// 	Header: 'Program',
-			// 	minWidth: 280,
-			// 	hidden: displayedColumns && !displayedColumns.includes('Program'),
-			// 	Cell: (row) => {
-			// 		const programs = row.row.original.program_selections;
-			// 		return (
-			// 			<div className="flex flex-wrap gap-1">
-			// 				{programs.length === 0 && '-'}
-			// 				{programs.length > 0 &&
-			// 					programs.map((program) => {
-			// 						const statusClass =
-			// 							program.status === STATUS_PENERIMA_TYPES.CONFIRMED
-			// 								? 'text-green-500'
-			// 								: STATUS_PENERIMA_TYPES.CANDIDATE
-			// 								? 'text-blue-500'
-			// 								: 'text-red-500';
-			// 						return (
-			// 							<div className="flex items-center gap-2" key={program.id}>
-			// 								<ButtonAction
-			// 									className="bg-purple-500 hover:bg-purple-400"
-			// 									action={ACTION_TYPES.SEE_DETAIL}
-			// 									linkTo={`/program/${program.program.id}`}
-			// 									text={`${program.program.name} ${program.program.periode}`}
-			// 								/>
-			// 								<span>:</span>
-			// 								<span className={`text-xs uppercase font-semibold ${statusClass}`}>{program.status}</span>
-			// 							</div>
-			// 						);
-			// 					})}
-			// 			</div>
-			// 		);
-			// 	}
-			// },
 			{
 				Header: 'Actions',
 				minWidth: 220,
@@ -242,7 +209,6 @@ export const TablePenerima = ({
 					showButtonSeeAll={isShowButtonSeeAll}
 					seeAllLink={'/penerima' + objectToQueryString(params)}
 					showCounter={true}
-					// description={penerimaList?.total > 0 && `Total: ${penerimaList?.total} Orang`}
 				/>
 			</div>
 
@@ -272,18 +238,6 @@ export const TablePenerima = ({
 								/>
 							)}
 
-							{/* {(!displayedFilters || displayedFilters.includes('candidate_status')) && (
-								<InputSelectStatusPenerima
-									containerClassName="w-full lg:w-60"
-									value={params?.candidate_status}
-									showLabel={false}
-									showPeriodeOnLabel
-									onChange={(option) =>
-										handleSetFilter('candidate_status', option ? { candidate_status: option.value } : null)
-									}
-								/>
-							)} */}
-
 							{(!displayedFilters || displayedFilters.includes('konstituen_id')) && (
 								<InputSelectInstitusi
 									containerClassName="w-full lg:w-60"
@@ -302,6 +256,15 @@ export const TablePenerima = ({
 									onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
 								/>
 							)}
+							{(!displayedFilters || displayedFilters.includes('district_id')) && (
+								<InputSelectDistrict
+									containerClassName="w-full lg:w-60"
+									value={params.district_id ? Number(params.district_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('district_id', option ? { district_id: option.value } : null)}
+								/>
+							)}
+
 							{(!displayedFilters || displayedFilters.includes('village_id')) && (
 								<InputSelectVillage
 									containerClassName="w-full lg:w-60"
@@ -310,6 +273,7 @@ export const TablePenerima = ({
 									onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
 								/>
 							)}
+
 							{konstituenType && konstituenType === INSTITUSI_TYPES.SEKOLAH && displayedFilters.includes('is_pip') && (
 								<InputCheckbox
 									label="PIP Only"
