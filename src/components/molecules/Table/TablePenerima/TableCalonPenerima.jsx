@@ -69,13 +69,22 @@ export const TableCalonPenerima = ({
 				}
 			},
 			{
-				Header: 'Nama Penerima',
+				Header: isKIP || isPIP ? 'Nama Usulan' : 'Nama Penerima',
 				accessor: 'name',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
-				Header: 'Institusi',
+				Header: 'No HP',
+				minWidth: 70,
+				hidden: (displayedColumns && !displayedColumns.includes('No HP')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.mobile || '-'}</div>;
+				}
+			},
+			{
+				Header: isKIP ? 'Nama PT' : 'Institusi',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Institusi'),
 				Cell: (row) => {
@@ -96,35 +105,6 @@ export const TableCalonPenerima = ({
 					);
 				}
 			},
-			{
-				Header: 'Alamat',
-				accessor: 'address',
-				minWidth: 225,
-				hidden: displayedColumns ? !displayedColumns.includes('Alamat') : true
-			},
-			// {
-			// 	Header: 'Program',
-			// 	minWidth: 150,
-			// 	hidden: displayedColumns && !displayedColumns.includes('Program'),
-			// 	Cell: (row) => {
-			// 		const programs = row.row.original.programs;
-			// 		return (
-			// 			<div className="flex flex-wrap gap-1">
-			// 				{programs.length === 0 && '-'}
-			// 				{programs.length > 0 &&
-			// 					programs.map((program) => (
-			// 						<ButtonAction
-			// 							key={program.id}
-			// 							className="bg-purple-500 hover:bg-purple-400"
-			// 							action={ACTION_TYPES.SEE_DETAIL}
-			// 							linkTo={`/program/${program.id}`}
-			// 							text={program.name}
-			// 						/>
-			// 					))}
-			// 			</div>
-			// 		);
-			// 	}
-			// },
 			{
 				Header: 'Status',
 				minWidth: 280,

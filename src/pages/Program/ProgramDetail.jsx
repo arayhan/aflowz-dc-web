@@ -313,8 +313,10 @@ const ProgramDetail = () => {
 									</div>
 								)}
 
+								<hr className="col-span-12 my-8" />
+
 								{isPIPorKIP && (
-									<div className="flex items-start justify-center col-span-12 gap-3 p-4 mt-8 bg-white rounded-md shadow-md">
+									<div className="flex items-start justify-center col-span-12 gap-3 p-4 bg-white rounded-md shadow-md">
 										<div className="flex flex-col items-center justify-center space-y-2">
 											<div className="inline-flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full">1</div>
 											<button
@@ -359,8 +361,9 @@ const ProgramDetail = () => {
 										</div>
 									</div>
 								)}
+
 								{isPIPorKIP && (
-									<div className="col-span-12 md:col-span-6">
+									<div className="col-span-12">
 										<TableCalonPenerima
 											title="Usulan Penerima Program"
 											programID={programDetail?.program_id}
@@ -374,7 +377,7 @@ const ProgramDetail = () => {
 									</div>
 								)}
 
-								<div className={`col-span-12 ${isPIPorKIP ? 'md:col-span-6' : ''}`}>
+								<div className={`col-span-12`}>
 									<TablePenerima
 										title="Penerima Program"
 										programID={programDetail?.program_id}
@@ -386,6 +389,8 @@ const ProgramDetail = () => {
 										isKIP={isKIP}
 									/>
 								</div>
+
+								<hr className="col-span-12 my-8" />
 
 								<div className="col-span-12">
 									<Card
