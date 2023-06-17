@@ -33,24 +33,23 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 				minWidth: 300
 			},
 			{
-				Header: 'Nama PIC',
+				Header: 'Menteri/Kepala Lembaga',
 				accessor: 'pic',
 				minWidth: 250
 			},
 			{
-				Header: 'Nomor PIC',
-				accessor: 'pic_mobile'
+				Header: 'Alamat Mitra',
+				minWidth: 250,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.address || '-'}</div>;
+				}
 			},
-			{
-				Header: 'Total Program Tersalurkan',
-				accessor: 'total_program',
-				minWidth: 250
-			},
-			{
-				Header: 'Total Penerima Benefit',
-				accessor: 'total_penerima',
-				minWidth: 250
-			},
+			// {
+			// 	Header: 'Jumlah Program Kemitraan',
+			// 	accessor: 'total_penerima',
+			// 	minWidth: 250
+			// },
 			{
 				Header: 'Actions',
 				minWidth: 220,

@@ -6,7 +6,7 @@ const Mitra = () => {
 		<div className="bg-gray-100">
 			<BannerFeature title="Mitra" />
 			<div className="container py-16">
-				<TableMitra />
+				<TableMitra enableClickRow />
 			</div>
 		</div>
 	);
