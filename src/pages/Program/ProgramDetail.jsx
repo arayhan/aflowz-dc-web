@@ -9,7 +9,6 @@ import {
 	TableDetailTimeline,
 	TableDetailTotalPenerimaByKonstituen,
 	TableDetailVillageInDistrict,
-	TableKonstituen,
 	TablePenerima,
 	TableProgramOrganization
 } from '@/components/molecules';
@@ -109,23 +108,44 @@ const ProgramDetail = () => {
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{programDetail?.program_periode}</div>
 
 									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
-										PIC Lembaga Kemitraan
+										{isKIP && 'Nama PIC KIP Kuliah Mitra'}
+										{!isPIPorKIP && 'PIC Lembaga Kemitraan'}
 									</div>
-									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
-										{programDetail?.program_pic}{' '}
-										{programDetail?.program_pic_mobile && `(${programDetail?.program_pic_mobile})`}
-									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{programDetail?.program_pic} </div>
 
-									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Tim Internal</div>
+									{programDetail?.program_pic_mobile && (
+										<>
+											<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+												Kontak PIC Mitra
+											</div>
+											<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+												{programDetail?.program_pic_mobile}
+											</div>
+										</>
+									)}
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Nama PJ Internal DC
+									</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 										<Link
 											to={`/staff/${programDetail?.pic_staff.id}`}
 											className="underline text-primary hover:text-primary-400"
 										>
-											{programDetail?.pic_staff.name}{' '}
-											{programDetail?.pic_staff.mobile && `(${programDetail?.pic_staff.mobile})`}
+											{programDetail?.pic_staff.name}
 										</Link>
 									</div>
+
+									{programDetail?.pic_staff.mobile && (
+										<>
+											<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+												Kontak PJ Internal DC
+											</div>
+											<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+												{programDetail?.pic_staff.mobile}
+											</div>
+										</>
+									)}
 
 									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Deskripsi Program</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
