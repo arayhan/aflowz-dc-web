@@ -109,6 +109,7 @@ const ProgramDetail = () => {
 
 									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
 										{isKIP && 'Nama PIC KIP Kuliah Mitra'}
+										{isPIP && 'Nama PIC PIP Mitra'}
 										{!isPIPorKIP && 'PIC Lembaga Kemitraan'}
 									</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{programDetail?.program_pic} </div>
@@ -116,7 +117,9 @@ const ProgramDetail = () => {
 									{programDetail?.program_pic_mobile && (
 										<>
 											<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
-												Kontak PIC Mitra
+												{isKIP && 'Kontak PIC KIP Mitra'}
+												{isPIP && 'Kontak PIC PIP Mitra'}
+												{!isPIPorKIP && 'Kontak PIC Mitra'}
 											</div>
 											<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
 												{programDetail?.program_pic_mobile}
