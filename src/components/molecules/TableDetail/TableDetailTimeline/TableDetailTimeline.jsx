@@ -54,7 +54,7 @@ export const TableDetailTimeline = ({ actionBaseURL, timelineData, displayedColu
 				hidden: displayedColumns && !displayedColumns.includes('Jumlah Target Penerima'),
 				Cell: (row) => {
 					const data = row.row.original;
-					return <div className="text-gray-400">{data?.target_receiver}</div>;
+					return <div className="text-gray-400">{data?.target_receiver || '-'}</div>;
 				}
 			},
 			{

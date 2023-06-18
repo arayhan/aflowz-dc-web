@@ -62,7 +62,7 @@ export const TableCalonPenerima = ({
 			{
 				Header: 'NISN',
 				minWidth: 70,
-				hidden: (displayedColumns && !displayedColumns.includes('NISN')) || !isPIP,
+				hidden: (displayedColumns && !displayedColumns.includes('NISN')) || (!isPIP && !isKIP),
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.nisn_number || '-'}</div>;
@@ -75,8 +75,17 @@ export const TableCalonPenerima = ({
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
 			},
 			{
+				Header: 'Kelas',
+				minWidth: 100,
+				hidden: (displayedColumns && !displayedColumns.includes('Kelas')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.class_level || '-'}</div>;
+				}
+			},
+			{
 				Header: 'No HP',
-				minWidth: 120,
+				minWidth: 180,
 				hidden: (displayedColumns && !displayedColumns.includes('No HP')) || isPIP,
 				Cell: (row) => {
 					const data = row.row.original;
@@ -105,7 +114,15 @@ export const TableCalonPenerima = ({
 					);
 				}
 			},
-
+			{
+				Header: 'Jurusan',
+				minWidth: 100,
+				hidden: (displayedColumns && !displayedColumns.includes('Jurusan')) || !isKIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.major || '-'}</div>;
+				}
+			},
 			{
 				Header: 'Nama Ibu Kandung',
 				minWidth: 70,
@@ -147,6 +164,33 @@ export const TableCalonPenerima = ({
 								})}
 						</div>
 					);
+				}
+			},
+			{
+				Header: 'Nomor Rekening',
+				minWidth: 180,
+				hidden: (displayedColumns && !displayedColumns.includes('Nomor Rekening')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.account_number || '-'}</div>;
+				}
+			},
+			{
+				Header: 'No. Virtual Account',
+				minWidth: 200,
+				hidden: (displayedColumns && !displayedColumns.includes('No. Virtual Account')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.virtual_account || '-'}</div>;
+				}
+			},
+			{
+				Header: 'No. SK',
+				minWidth: 150,
+				hidden: (displayedColumns && !displayedColumns.includes('No. SK')) || !isPIP,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.no_sk || '-'}</div>;
 				}
 			},
 			{
