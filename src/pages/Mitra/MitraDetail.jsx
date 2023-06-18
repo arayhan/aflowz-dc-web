@@ -108,7 +108,7 @@ const MitraDetail = () => {
 								<Card
 									title={`Timeline`}
 									description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-									bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									bodyClassName={'overflow-x-scroll'}
 									rightComponent={
 										<Button
 											className={'w-full md:w-auto px-5 py-2 rounded-sm text-sm'}

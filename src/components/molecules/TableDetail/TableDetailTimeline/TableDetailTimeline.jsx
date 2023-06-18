@@ -1,6 +1,6 @@
 import { ButtonAction, Table } from '@/components/atoms';
 import { useAuthStore } from '@/store';
-import { ACTION_TYPES } from '@/utils/constants';
+import { ACTION_TYPES, TIMELINE_STATUS } from '@/utils/constants';
 import moment from 'moment';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
@@ -32,16 +32,7 @@ export const TableDetailTimeline = ({ actionBaseURL, timelineData, displayedColu
 				}
 			},
 			{
-				Header: 'Deskripsi',
-				minWidth: 150,
-				hidden: displayedColumns && !displayedColumns.includes('Deskripsi'),
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div className="text-gray-400">{data?.description || data?.name}</div>;
-				}
-			},
-			{
-				Header: 'Tanggal Program',
+				Header: 'Timeline',
 				minWidth: 150,
 				hidden: displayedColumns && !displayedColumns.includes('Tanggal Program'),
 				Cell: (row) => {
@@ -55,6 +46,66 @@ export const TableDetailTimeline = ({ actionBaseURL, timelineData, displayedColu
 							{endDate ? moment(endDate).format('DD MMMM YYYY') : '-'}
 						</div>
 					);
+				}
+			},
+			{
+				Header: 'Jumlah Target Penerima',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Target Penerima'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="text-gray-400">{data?.target_receiver}</div>;
+				}
+			},
+			{
+				Header: 'Jumlah Pendaftar Saat Ini',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Pendaftar Saat Ini'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="italic font-semibold text-orange-500">Under Maintenance</div>;
+				}
+			},
+			{
+				Header: 'Jumlah Lolos Seleksi',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Lolos Seleksi'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="italic font-semibold text-orange-500">Under Maintenance</div>;
+				}
+			},
+			{
+				Header: 'PJ Internal',
+				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('PJ Internal'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="italic text-gray-400">{data?.pic_staff?.name || '-'}</div>;
+				}
+			},
+			{
+				Header: 'Deskripsi',
+				minWidth: 150,
+				hidden: displayedColumns && !displayedColumns.includes('Deskripsi'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="text-gray-400">{data?.description || data?.name}</div>;
+				}
+			},
+			{
+				Header: 'Status',
+				minWidth: 150,
+				Cell: (row) => {
+					const data = row.row.original;
+					const statusClass =
+						data.status === TIMELINE_STATUS.DONE
+							? 'text-green-500'
+							: TIMELINE_STATUS.ONGOING
+							? 'text-orange-500'
+							: 'text-yellow-500';
+
+					return <div className={`text-xs font-semibold uppercase ${statusClass}`}>{data.status}</div>;
 				}
 			},
 			{
