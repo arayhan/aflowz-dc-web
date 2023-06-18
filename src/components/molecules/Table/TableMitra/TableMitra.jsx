@@ -45,11 +45,11 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 					return <div>{data?.address || '-'}</div>;
 				}
 			},
-			// {
-			// 	Header: 'Jumlah Program Kemitraan',
-			// 	accessor: 'total_penerima',
-			// 	minWidth: 250
-			// },
+			{
+				Header: 'Jumlah Program Kemitraan',
+				accessor: 'total_program',
+				minWidth: 250
+			},
 			{
 				Header: 'Actions',
 				minWidth: 220,
