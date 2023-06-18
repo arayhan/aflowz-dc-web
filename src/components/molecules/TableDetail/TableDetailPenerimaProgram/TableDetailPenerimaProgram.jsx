@@ -22,7 +22,7 @@ export const TableDetailPenerimaProgram = ({ dataPenerima, isPerVillage, isPerCi
 			},
 			{
 				Header: `${isPerProgram ? 'Nama PIC Mitra' : ''}`,
-				accessor: 'mitra_pic',
+				accessor: 'program_pic',
 				hidden: !isPerProgram,
 				minWidth: 150
 			},
@@ -30,14 +30,14 @@ export const TableDetailPenerimaProgram = ({ dataPenerima, isPerVillage, isPerCi
 				Header: `${
 					isPerCity ? 'PIC Kota' : isPerVillage ? 'PIC Desa/Kelurahan' : isPerProgram ? 'Nama PJ Internal DC' : ''
 				}`,
-				accessor: 'pic',
+				accessor: 'pic_staff.name',
 				hidden: !isPerCity && !isPerVillage && !isPerProgram,
 				minWidth: 200
 			},
 			{
 				Header: `${isPerProgram ? 'Jumlah Program Tersalurkan' : 'Total Penerima'}`,
 				accessor: !isPerProgram ? 'total_penerima' : 'total_penerima_program',
-				maxWidth: 100
+				minWidth: 180
 			},
 			{
 				Header: 'Periode',
