@@ -29,14 +29,29 @@ export const TableFollowers = ({ data, enableClickRow }) => {
 				minWidth: 250
 			},
 			{
-				Header: 'Email',
-				accessor: 'email',
+				Header: 'No. HP',
+				accessor: 'mobile',
+				minWidth: 200
+			},
+			{
+				Header: 'Alamat Lengkap',
+				accessor: 'address',
 				minWidth: 300
 			},
 			{
-				Header: 'Nomor Telepon',
-				accessor: 'mobile',
-				minWidth: 250
+				Header: 'Kabupaten/Kota',
+				accessor: 'city.name',
+				minWidth: 180
+			},
+			{
+				Header: 'Kecamatan',
+				accessor: 'district.name',
+				minWidth: 180
+			},
+			{
+				Header: 'Desa/Kelurahan',
+				accessor: 'village.name',
+				minWidth: 180
 			}
 		],
 		[]
@@ -46,7 +61,7 @@ export const TableFollowers = ({ data, enableClickRow }) => {
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
-			<div className="p-6 flex items-center justify-between">
+			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Followers"
 					title={'List Followers'}
