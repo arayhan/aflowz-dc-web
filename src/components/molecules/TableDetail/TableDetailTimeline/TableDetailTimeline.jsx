@@ -58,24 +58,6 @@ export const TableDetailTimeline = ({ actionBaseURL, timelineData, displayedColu
 				}
 			},
 			{
-				Header: 'Jumlah Pendaftar Saat Ini',
-				minWidth: 200,
-				hidden: displayedColumns && !displayedColumns.includes('Jumlah Pendaftar Saat Ini'),
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div className="italic font-semibold text-orange-500">Under Maintenance</div>;
-				}
-			},
-			{
-				Header: 'Jumlah Lolos Seleksi',
-				minWidth: 200,
-				hidden: displayedColumns && !displayedColumns.includes('Jumlah Lolos Seleksi'),
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div className="italic font-semibold text-orange-500">Under Maintenance</div>;
-				}
-			},
-			{
 				Header: 'PJ Internal',
 				minWidth: 180,
 				hidden: displayedColumns && !displayedColumns.includes('PJ Internal'),
