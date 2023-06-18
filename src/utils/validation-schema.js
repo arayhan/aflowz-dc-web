@@ -49,7 +49,11 @@ export const formMitraTimelineSchema = yup.object().shape({
 	name: yup.string().required('Nama timeline wajib diisi'),
 	start_date: yup.string().required('Tanggal mulai timeline wajib diisi'),
 	end_date: yup.string().required('Tanggal berakhir timeline wajib diisi'),
-	program_category_id: yup.number().required('PIC Tim Internal wajib diisi')
+	program_category_id: yup.number().required('PIC Tim Internal wajib diisi'),
+	target_receiver: yup.string().required('Jumlah Target Penerima wajib diisi'),
+	pic_staff_id: yup.number().required('PJ Internal wajib diisi'),
+	location: yup.string().required('Lokasi wajib diisi'),
+	status: yup.string().required('Status wajib diisi')
 });
 
 export const formCitySchema = yup.object().shape(

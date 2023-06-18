@@ -40,6 +40,18 @@ export const INSTITUSI_TYPE_ARRAY = [
 	{ label: 'Lainnya', value: INSTITUSI_TYPES.LAINNYA }
 ];
 
+export const TIMELINE_STATUS = {
+	SOON: 'soon',
+	ONGOING: 'ongoing',
+	DONE: 'done'
+};
+
+export const TIMELINE_STATUS_ARRAY = [
+	{ label: 'Akan Datang', value: TIMELINE_STATUS.SOON },
+	{ label: 'Berlangsung', value: TIMELINE_STATUS.ONGOING },
+	{ label: 'Selesai', value: TIMELINE_STATUS.DONE }
+];
+
 export const NEGATIVE_CASE_TYPES = {
 	EMPTY_RESULT: 'EMPTY_RESULT',
 	EMPTY_SEARCH: 'EMPTY_SEARCH',

@@ -169,7 +169,11 @@ export const createProgramCategoryTimeline = async (params) => {
 		start_date: params?.start_date || '',
 		end_date: params?.end_date || '',
 		description: params?.description || '',
-		program_category_id: params?.program_category_id || 0
+		program_category_id: params?.program_category_id || 0,
+		target_receiver: params?.target_receiver || '',
+		pic_staff_id: params?.pic_staff_id || 0,
+		location: params?.location || '',
+		status: params?.status || ''
 	};
 
 	try {
@@ -186,7 +190,11 @@ export const updateProgramCategoryTimeline = async (programID, params) => {
 		start_date: params?.start_date || '',
 		end_date: params?.end_date || '',
 		description: params?.description || '',
-		program_category_id: params?.program_category_id || 0
+		program_category_id: params?.program_category_id || 0,
+		target_receiver: params?.target_receiver ? Number(params?.target_receiver) : '',
+		pic_staff_id: params?.pic_staff_id || 0,
+		location: params?.location || '',
+		status: params?.status || ''
 	};
 
 	try {

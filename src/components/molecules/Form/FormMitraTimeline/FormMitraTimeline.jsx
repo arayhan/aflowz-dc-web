@@ -1,4 +1,5 @@
 import { Button, InputDate, InputText } from '@/components/atoms';
+import { InputSelectStaff, InputSelectTimelineStatus } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { formMitraTimelineSchema } from '@/utils/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -25,6 +26,10 @@ export const FormMitraTimeline = () => {
 			start_date: '',
 			end_date: '',
 			description: '',
+			target_receiver: '',
+			location: '',
+			pic_staff_id: undefined,
+			status: '',
 			program_category_id: programCategoryID
 		}
 	});
@@ -47,6 +52,10 @@ export const FormMitraTimeline = () => {
 			setValue('start_date', programCategoryTimeline.start_date || '');
 			setValue('end_date', programCategoryTimeline.end_date || '');
 			setValue('description', programCategoryTimeline.description || '');
+			setValue('target_receiver', programCategoryTimeline.target_receiver || '');
+			setValue('pic_staff_id', programCategoryTimeline.pic_staff?.id || undefined);
+			setValue('location', programCategoryTimeline.location || '');
+			setValue('status', programCategoryTimeline.status || '');
 		}
 	}, [programCategoryTimelineID, programCategoryTimeline]);
 
@@ -69,8 +78,8 @@ export const FormMitraTimeline = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama"
-							placeholder="Nama"
+							label="Nama Timeline"
+							placeholder="Nama Timeline"
 							disabled={fetchingProgramCategoryTimeline}
 							error={error}
 						/>
@@ -100,6 +109,64 @@ export const FormMitraTimeline = () => {
 							label="Tanggal Berakhir"
 							placeholder="Tanggal Berakhir"
 							min={watch('start_date')}
+							disabled={fetchingProgramCategoryTimeline}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'target_receiver'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Jumlah Target Penerima"
+							placeholder="Jumlah Target Penerima"
+							disabled={fetchingProgramCategoryTimeline}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'pic_staff_id'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectStaff
+							{...field}
+							params={{ limit: 1000 }}
+							disabled={fetchingProgramCategoryTimeline}
+							onChange={({ value }) => {
+								setValue('pic_staff_id', value);
+								setError('pic_staff_id', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'status'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectTimelineStatus
+							{...field}
+							disabled={fetchingProgramCategoryTimeline}
+							onChange={({ value }) => {
+								setValue('status', value);
+								setError('status', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'location'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Lokasi"
+							placeholder="Lokasi"
 							disabled={fetchingProgramCategoryTimeline}
 							error={error}
 						/>
