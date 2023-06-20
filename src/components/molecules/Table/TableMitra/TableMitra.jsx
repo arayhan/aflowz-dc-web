@@ -48,7 +48,13 @@ export const TableMitra = ({ params, isShowFooter, enableClickRow }) => {
 			{
 				Header: 'Jumlah Program Kemitraan',
 				accessor: 'total_program',
-				minWidth: 250
+				Cell: (row) => {
+					const data = row.row.original;
+					const totalProgram =
+						data.list_program?.length > 1 &&
+						data.list_program.filter((value, index, self) => index === self.findIndex((t) => t.name === value.name));
+					return <div>{totalProgram?.length || 0}</div>;
+				}
 			},
 			{
 				Header: 'Actions',
