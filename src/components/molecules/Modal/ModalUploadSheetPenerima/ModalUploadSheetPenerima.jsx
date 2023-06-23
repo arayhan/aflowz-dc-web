@@ -53,7 +53,9 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 								'program_name',
 								'program_periode',
 								'program_mitra',
-								'programs'
+								'account_number',
+								'virtual_account',
+								'no_sk'
 							];
 
 							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
@@ -61,19 +63,17 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 									if (neededKeys.includes(key)) {
 										allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
 										allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
-										allValuesToStringResult['program_name'] =
-											programDetail?.program_name || data?.program_name?.toString() || '';
-										allValuesToStringResult['program_periode'] =
-											programDetail?.program_periode || data?.program_periode?.toString() || '';
+										allValuesToStringResult['program_name'] = data?.program_name?.toString() || '';
+										allValuesToStringResult['program_periode'] = data?.program_periode?.toString() || '';
+										allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
+										allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
+										allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
 										allValuesToStringResult['program_mitra'] =
 											data?.program_mitra?.toString() || 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
-										allValuesToStringResult['programs'] = [];
 									} else {
-										if (status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-											allValuesToStringResult[key] = data[key]?.toString() || '';
-										} else {
-											allValuesToStringResult[key] = '';
-										}
+										status === STATUS_PENERIMA_TYPES.CANDIDATE
+											? (allValuesToStringResult[key] = data[key]?.toString() || '')
+											: (allValuesToStringResult[key] = '');
 									}
 								});
 							} else {
