@@ -65,7 +65,8 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 											programDetail?.program_name || data?.program_name?.toString() || '';
 										allValuesToStringResult['program_periode'] =
 											programDetail?.program_periode || data?.program_periode?.toString() || '';
-										// allValuesToStringResult['program_mitra'] = 'Kementrian Pendidikan & Kebudayaan';
+										allValuesToStringResult['program_mitra'] =
+											data?.program_mitra?.toString() || 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
 										allValuesToStringResult['programs'] = [];
 									} else {
 										if (status === STATUS_PENERIMA_TYPES.CANDIDATE) {
