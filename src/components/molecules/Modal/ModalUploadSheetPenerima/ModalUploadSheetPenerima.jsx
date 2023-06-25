@@ -103,12 +103,12 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 						});
 					}
 
-					console.log({
-						program_name: programDetail?.program_name,
-						isPIP: isPIP(programDetail?.program_name),
-						status,
-						params
-					});
+					// console.log({
+					// 	program_name: programDetail?.program_name,
+					// 	isPIP: isPIP(programDetail?.program_name),
+					// 	status,
+					// 	params
+					// });
 
 					const bulkCreateCallback = ({ payload, success }) => {
 						if (success) {
