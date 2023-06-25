@@ -306,7 +306,7 @@ const ProgramDetail = () => {
 												</div>
 											</div>
 											<hr />
-											<div className="max-w-full overflow-x-scroll">
+											<div className="w-full max-w-full overflow-x-scroll">
 												<TableDetailTotalPenerimaByKonstituen
 													dataPenerima={programDetail?.total_penerima_program_per_institusi}
 													programID={programDetail?.program_id}

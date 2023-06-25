@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { usePartnerStore, useProgramStore } from '@/store';
 import { useNavigate } from 'react-router';
-import { objectToQueryString } from '@/utils/helpers';
+import { isPIP, objectToQueryString } from '@/utils/helpers';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 
 export const ModalUploadSheetPenerima = ({ status, onClose }) => {
@@ -63,13 +63,18 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 									if (neededKeys.includes(key)) {
 										allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
 										allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
-										allValuesToStringResult['program_name'] = data?.program_name?.toString() || '';
-										allValuesToStringResult['program_periode'] = data?.program_periode?.toString() || '';
-										allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
-										allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
-										allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
+										allValuesToStringResult['program_name'] =
+											programDetail?.program_name || data?.program_name?.toString() || '';
+										allValuesToStringResult['program_periode'] =
+											programDetail?.program_periode || data?.program_periode?.toString() || '';
 										allValuesToStringResult['program_mitra'] =
-											data?.program_mitra?.toString() || 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+											'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+
+										if (isPIP(programDetail?.program_name)) {
+											allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
+											allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
+											allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
+										}
 									} else {
 										status === STATUS_PENERIMA_TYPES.CANDIDATE
 											? (allValuesToStringResult[key] = data[key]?.toString() || '')
