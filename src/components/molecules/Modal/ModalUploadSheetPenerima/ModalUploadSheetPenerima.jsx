@@ -59,6 +59,7 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							];
 
 							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+								allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
 								allValuesToStringResult['program_name'] =
 									programDetail?.program_name || data?.program_name?.toString() || '';
 								allValuesToStringResult['program_periode'] =
@@ -68,7 +69,6 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 								allValuesToStringResult['programs'] = [];
 
 								if (isPIP(programDetail?.program_name)) {
-									allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
 									allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
 									allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
 									allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
@@ -103,12 +103,12 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 						});
 					}
 
-					// console.log({
-					// 	program_name: programDetail?.program_name,
-					// 	isPIP: isPIP(programDetail?.program_name),
-					// 	status,
-					// 	params
-					// });
+					console.log({
+						program_name: programDetail?.program_name,
+						isPIP: isPIP(programDetail?.program_name),
+						status,
+						params
+					});
 
 					const bulkCreateCallback = ({ payload, success }) => {
 						if (success) {
