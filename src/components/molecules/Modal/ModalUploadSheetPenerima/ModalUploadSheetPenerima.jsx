@@ -46,7 +46,7 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 
 					if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
 						params = json.map((data) => {
-							const allValuesToStringResult = data;
+							const allValuesToStringResult = {};
 							const neededKeys = [
 								'nik_number',
 								'nisn_number',
@@ -59,28 +59,30 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							];
 
 							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-								Object.keys(data).forEach((key) => {
-									if (neededKeys.includes(key)) {
-										allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
-										allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
-										allValuesToStringResult['program_name'] =
-											programDetail?.program_name || data?.program_name?.toString() || '';
-										allValuesToStringResult['program_periode'] =
-											programDetail?.program_periode || data?.program_periode?.toString() || '';
-										allValuesToStringResult['program_mitra'] =
-											'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+								allValuesToStringResult['program_name'] =
+									programDetail?.program_name || data?.program_name?.toString() || '';
+								allValuesToStringResult['program_periode'] =
+									programDetail?.program_periode || data?.program_periode?.toString() || '';
+								allValuesToStringResult['program_mitra'] =
+									'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+								allValuesToStringResult['programs'] = [];
 
-										if (isPIP(programDetail?.program_name)) {
-											allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
-											allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
-											allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
+								if (isPIP(programDetail?.program_name)) {
+									allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
+									allValuesToStringResult['account_number'] = data?.account_number?.toString() || '';
+									allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
+									allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
+								} else {
+									allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
+								}
+
+								if (status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+									Object.keys(data).forEach((key) => {
+										if (!neededKeys.includes(key)) {
+											allValuesToStringResult[key] = data[key]?.toString() || '';
 										}
-									} else {
-										status === STATUS_PENERIMA_TYPES.CANDIDATE
-											? (allValuesToStringResult[key] = data[key]?.toString() || '')
-											: (allValuesToStringResult[key] = '');
-									}
-								});
+									});
+								}
 							} else {
 								Object.keys(data).forEach((key) => {
 									allValuesToStringResult[key] = data[key]?.toString() || '';
@@ -100,6 +102,13 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							return allValuesToStringResult;
 						});
 					}
+
+					// console.log({
+					// 	program_name: programDetail?.program_name,
+					// 	isPIP: isPIP(programDetail?.program_name),
+					// 	status,
+					// 	params
+					// });
 
 					const bulkCreateCallback = ({ payload, success }) => {
 						if (success) {
