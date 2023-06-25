@@ -115,7 +115,10 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
 							const queryString = objectToQueryString(queryParams);
 							setErrors(null);
-							navigate('/penerima' + queryString);
+							onClose();
+							if (status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+								navigate('/penerima' + queryString);
+							} else navigate('/program/' + programDetail.program_id);
 						} else {
 							setErrors(payload);
 						}

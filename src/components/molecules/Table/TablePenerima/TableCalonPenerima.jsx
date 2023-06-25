@@ -144,11 +144,7 @@ export const TableCalonPenerima = ({
 							{programs.length > 0 &&
 								programs.map((program) => {
 									const statusClass =
-										program.status === STATUS_PENERIMA_TYPES.CONFIRMED
-											? 'text-green-500'
-											: STATUS_PENERIMA_TYPES.CANDIDATE
-											? 'text-blue-500'
-											: 'text-red-500';
+										program.status === STATUS_PENERIMA_TYPES.CANDIDATE ? 'text-blue-500' : 'text-red-500';
 									return (
 										<div className="flex items-center gap-2" key={program.id}>
 											<ButtonAction
