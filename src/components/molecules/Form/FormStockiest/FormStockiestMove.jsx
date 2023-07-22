@@ -17,6 +17,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProductMovementSchema } from '@/utils/validation-schema';
+import { PRODUCT_MOVEMENT_TYPE } from '@/utils/constants';
 
 export const FormStockiestMove = () => {
 	const [dataTable, setDataTable] = useState([]);
@@ -117,7 +118,7 @@ export const FormStockiestMove = () => {
 
 	const onAdded = (prod, qty) => {
 		if (product && method && warehouse && qty > 0) {
-			if (method === 'out') {
+			if (method === PRODUCT_MOVEMENT_TYPE.IN) {
 				if (qty < WAREHOUSE_QUANTITY) {
 					let exist = dataTable.find((val) => val.id === prod.id);
 					let data = {
@@ -132,26 +133,26 @@ export const FormStockiestMove = () => {
 						setDataTable([...dataTable, { ...data }]);
 						reset();
 					} else {
-						reset('Barang sudah diterdaftar');
+						reset('Barang sudah terdaftar');
 					}
 				} else {
 					reset('Barang tidak mencukupi');
 				}
-			} else if (method === 'in') {
+			} else {
 				let exist = dataTable.find((val) => val.id === prod.id);
 				let data = {
 					id: prod?.id,
 					name: prod?.name,
 					sku_code: prod?.sku_code,
-					warehouse,
 					image_url: prod?.image_url,
+					warehouse,
 					quantity: qty
 				};
 				if (exist === undefined) {
 					setDataTable([...dataTable, { ...data }]);
 					reset();
 				} else {
-					reset('Barang sudah diterdaftar');
+					reset('Barang sudah terdaftar');
 				}
 			}
 		} else {

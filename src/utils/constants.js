@@ -118,3 +118,11 @@ export const DAPIL_MENUS = [
 	{ id: 2, title: 'Kecamatan', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/district' },
 	{ id: 3, title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/village' }
 ];
+
+export const PRODUCT_MOVEMENT_TYPE = {
+	IN: 'in',
+	OUT: 'out',
+	RETURN: 'return',
+	CORRECTION_IN: 'correction-in',
+	CORRECTION_OUT: 'correction-out'
+};

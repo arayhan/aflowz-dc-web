@@ -1,5 +1,6 @@
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
+import { PRODUCT_MOVEMENT_TYPE } from '@/utils/constants';
 
 const stockProduct = '/stock/product';
 
@@ -114,11 +115,20 @@ export const updateStockProduct = async (params, dataProduct) => {
 			warehouse_id: params?.warehouse_id || 0
 		};
 
-		if (params.method === 'in') {
+		if (params.method === PRODUCT_MOVEMENT_TYPE.IN) {
 			const response = await http.post(stockProduct + `/in`, data);
 			return { success: response.data.success, payload: response.data.data };
-		} else if (params.method === 'out') {
+		} else if (params.method === PRODUCT_MOVEMENT_TYPE.OUT) {
 			const response = await http.post(stockProduct + `/out`, data);
+			return { success: response.data.success, payload: response.data.data };
+		} else if (params.method === PRODUCT_MOVEMENT_TYPE.CORRECTION_IN) {
+			const response = await http.post(stockProduct + `/correction-in`, data);
+			return { success: response.data.success, payload: response.data.data };
+		} else if (params.method === PRODUCT_MOVEMENT_TYPE.CORRECTION_OUT) {
+			const response = await http.post(stockProduct + `/correction-out`, data);
+			return { success: response.data.success, payload: response.data.data };
+		} else if (params.method === PRODUCT_MOVEMENT_TYPE.RETURN) {
+			const response = await http.post(stockProduct + `/return`, data);
 			return { success: response.data.success, payload: response.data.data };
 		}
 	} catch (error) {
