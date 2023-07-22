@@ -71,6 +71,18 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
+				Header: 'Unique ID',
+				disableSortBy: true,
+				disableFilters: true,
+				minWidth: 120,
+				Cell: (row) => <div className="text-xs">{row.row.original.id}</div>
+			},
+			{
+				Header: 'Metode',
+				minWidth: 200,
+				Cell: (row) => <div>{row.row.original.type}</div>
+			},
+			{
 				Header: 'Tanggal',
 				minWidth: 150,
 				Cell: (row) => {
