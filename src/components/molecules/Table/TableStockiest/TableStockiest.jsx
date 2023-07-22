@@ -79,8 +79,21 @@ export const TableStockiest = ({ selectedCategory }) => {
 			},
 			{
 				Header: 'Jumlah',
-				accessor: 'quantity',
-				maxWidth: 100
+				minWidth: 200,
+				maxWidth: 300,
+				Cell: (row) => {
+					const data = row.row.original;
+					return (
+						<ul className="ml-4 text-xs list-disc list-outside">
+							<li>Total : {data.quantity}</li>
+							{data.quantity_stock_locations.map((stock) => (
+								<li key={stock.id}>
+									{stock.warehouse.name} : {stock.quantity}
+								</li>
+							))}
+						</ul>
+					);
+				}
 			},
 			{
 				Header: 'Last Updated',
