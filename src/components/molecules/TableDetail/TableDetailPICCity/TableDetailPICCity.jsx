@@ -48,21 +48,6 @@ export const TableDetailPICCity = ({ PICCityData }) => {
 						'-'
 					);
 				}
-			},
-			{
-				Header: 'Status',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					const statusClass =
-						data.status === STATUS_PENERIMA_TYPES.CONFIRMED
-							? 'text-green-500'
-							: STATUS_PENERIMA_TYPES.CANDIDATE
-							? 'text-blue-500'
-							: 'text-red-500';
-
-					return <div className={`text-xs font-semibold uppercase ${statusClass}`}>{data.status}</div>;
-				}
 			}
 		],
 		[]
