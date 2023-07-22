@@ -18,7 +18,7 @@ export const TableDetailPICVillage = ({ PICVillageData }) => {
 				}
 			},
 			{
-				Header: 'PIC',
+				Header: 'PIC Eksternal',
 				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
@@ -26,7 +26,7 @@ export const TableDetailPICVillage = ({ PICVillageData }) => {
 				}
 			},
 			{
-				Header: 'No Kotak',
+				Header: 'No Kontak',
 				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
