@@ -17,7 +17,20 @@ const Activity = () => {
 			<SectionSelectCategoryActivity params={params} selectedCategoryID={params.activity_category_id} />
 			{params && (
 				<div className="container py-16">
-					<TableActivity params={params} />
+					<TableActivity
+						displayedColumns={[
+							'#',
+							'Nama Kegiatan',
+							'Kategori Kegiatan',
+							'Program Terkait',
+							'Institusi Terkait',
+							'Tanggal Kunjungan/Kegiatan',
+							'PIC Tim Internal',
+							'Partner yang Dikunjungi',
+							'Kontak PIC'
+						]}
+						params={params}
+					/>
 				</div>
 			)}
 		</div>

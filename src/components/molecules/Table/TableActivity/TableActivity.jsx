@@ -41,14 +41,6 @@ export const TableActivity = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Tanggal Kegiatan',
-				width: '100%',
-				hidden: displayedColumns && !displayedColumns.includes('Tanggal Kegiatan'),
-				Cell: (row) => {
-					return <div className="text-sm">{moment(row.row.original.activity_date).format('DD MMMM yyyy')}</div>;
-				}
-			},
-			{
 				Header: 'Nama Kegiatan',
 				accessor: 'description',
 				width: '100%',
@@ -82,12 +74,89 @@ export const TableActivity = ({
 				}
 			},
 			{
+				Header: 'Program Terkait',
+				width: '100%',
+				minWidth: 225,
+				hidden: displayedColumns && !displayedColumns.includes('Program Terkait'),
+				Cell: (row) => {
+					return row.row.original.program?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/program/${row.row.original.program?.id}`}
+							text={row.row.original.program?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'Institusi Terkait',
+				width: '100%',
+				minWidth: 225,
+				hidden: displayedColumns && !displayedColumns.includes('Institusi Terkait'),
+				Cell: (row) => {
+					return row.row.original.konstituen?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/konstituen/${row.row.original.konstituen?.id}`}
+							text={row.row.original.konstituen?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
 				Header: 'Status',
 				width: '100%',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Status'),
 				Cell: (row) => {
 					return row.row.original.status ? <div className="capitalize">{row.row.original.status}</div> : '-';
+				}
+			},
+			{
+				Header: 'Tanggal Kunjungan/Kegiatan',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Tanggal Kunjungan/Kegiatan'),
+				Cell: (row) => {
+					return <div className="text-sm">{moment(row.row.original.activity_date).format('DD MMMM yyyy')}</div>;
+				}
+			},
+			{
+				Header: 'PIC Tim Internal',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('PIC Tim Internal'),
+				Cell: (row) => {
+					return row.row.original.pic || '-';
+				}
+			},
+			{
+				Header: 'Partner yang Dikunjungi',
+				width: '100%',
+				minWidth: 225,
+				hidden: displayedColumns && !displayedColumns.includes('Partner yang Dikunjungi'),
+				Cell: (row) => {
+					return row.row.original.partner?.id ? (
+						<Button
+							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+							linkTo={`/penerima/${row.row.original.partner?.id}`}
+							text={row.row.original.partner?.name}
+						/>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'Kontak PIC',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Kontak PIC'),
+				Cell: (row) => {
+					return row.row.original.pic_mobile || '-';
 				}
 			},
 			{
