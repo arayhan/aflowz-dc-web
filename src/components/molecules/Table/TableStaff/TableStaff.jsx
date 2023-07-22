@@ -57,9 +57,14 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 				}
 			},
 			{
-				Header: 'Kota / Kabupaten',
+				Header: 'No Kontak',
 				minWidth: 150,
-				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name}</div>
+				Cell: (row) => <div className="capitalize">{row.row.original.mobile}</div>
+			},
+			{
+				Header: 'Deskripsi',
+				minWidth: 150,
+				Cell: (row) => <div className="capitalize">{row.row.original.description || '-'}</div>
 			},
 			{
 				Header: 'Actions',
