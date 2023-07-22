@@ -131,3 +131,6 @@ export * from './TableDetail/TableDetailProgramPenerima/TableDetailProgramPeneri
 export * from './TableDetail/TableStaffDetail/TableStaffDetailTotalUsulanPerProgram';
 export * from './TableDetail/TableDetailTotalProgramByCity/TableDetailTotalProgramByCity';
 export * from './TableDetail/TableDetailTotalPenerimaByKonstituen/TableDetailTotalPenerimaByKonstituen';
+export * from './TableDetail/TableDetailPICCity/TableDetailPICCity';
+export * from './TableDetail/TableDetailPICDistrict/TableDetailPICDistrict';
+export * from './TableDetail/TableDetailPICVillage/TableDetailPICVillage';

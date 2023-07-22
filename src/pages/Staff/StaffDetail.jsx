@@ -2,13 +2,16 @@ import { useParams } from 'react-router-dom';
 import { useAuthStore, usePartnerStore } from '@/store';
 import {
 	BannerFeature,
+	TableDetailPICCity,
+	TableDetailPICDistrict,
+	TableDetailPICVillage,
 	TableStaffDetailInstitusi,
 	TableStaffDetailProgram,
 	TableStaffDetailTotalUsulanPerProgram
 } from '@/components/molecules';
 import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
+import { Button, ButtonAction, Card, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 import { MdAddAPhoto } from 'react-icons/md';
 
@@ -198,7 +201,7 @@ const StaffDetail = () => {
 										</div>
 									</div>
 								</div>
-								<div className="grid grid-cols-1 gap-5 lg:grid-cols-2 my-5">
+								<div className="grid grid-cols-1 gap-5 my-5 lg:grid-cols-2">
 									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
 										<TableStaffDetailProgram
 											fetchData={staff?.programs}
@@ -219,6 +222,21 @@ const StaffDetail = () => {
 											isReadonly={!isSystem}
 											titleHeader={'Total Usulan Per Program'}
 										/>
+									</div>
+									<div className="bg-white rounded-md">
+										<Card title={`PIC Kota`} bodyClassName={' p-2 overflow-x-auto overflow-y-auto max-h-[50vh]'}>
+											<TableDetailPICCity PICCityData={staff.cities_pic} />
+										</Card>
+									</div>
+									<div className="bg-white rounded-md">
+										<Card title={`PIC Kecamatan`} bodyClassName={' p-2 overflow-x-auto overflow-y-auto max-h-[50vh]'}>
+											<TableDetailPICDistrict PICDistrictData={staff.district_pic} />
+										</Card>
+									</div>
+									<div className="bg-white rounded-md">
+										<Card title={`PIC Desa`} bodyClassName={' p-2 overflow-x-auto overflow-y-auto max-h-[50vh]'}>
+											<TableDetailPICVillage PICVillageData={staff.village_pic} />
+										</Card>
 									</div>
 								</div>
 							</div>
