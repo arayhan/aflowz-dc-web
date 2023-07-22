@@ -44,22 +44,28 @@ export const TableProgram = ({
 				Cell: (row) => <div className="text-gray-400">{Number(row.row.id) + offset + 1}</div>
 			},
 			{
-				Header: 'Nama',
+				Header: 'Nama Program',
 				accessor: 'name',
 				minWidth: 215,
-				hidden: displayedColumns && !displayedColumns.includes('Nama')
-			},
-			{
-				Header: 'Mitra',
-				minWidth: 250,
-				hidden: displayedColumns && !displayedColumns.includes('Mitra'),
-				Cell: (row) => <div>{row.row.original.program_category.name}</div>
+				hidden: displayedColumns && !displayedColumns.includes('Nama Program')
 			},
 			{
 				Header: 'Periode',
 				accessor: 'periode',
 				maxWidth: 50,
 				hidden: displayedColumns && !displayedColumns.includes('Periode')
+			},
+			{
+				Header: 'PIC Mitra',
+				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('PIC Mitra'),
+				Cell: (row) => <div>{row.row.original.pic || '-'}</div>
+			},
+			{
+				Header: 'Kontak PIC Mitra',
+				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('Kontak PIC Mitra'),
+				Cell: (row) => <div>{row.row.original.pic_mobile || '-'}</div>
 			},
 			{
 				Header: 'PIC Internal',
@@ -77,6 +83,12 @@ export const TableProgram = ({
 						'-'
 					);
 				}
+			},
+			{
+				Header: 'Kontak PIC Internal',
+				minWidth: 250,
+				hidden: displayedColumns && !displayedColumns.includes('Kontak PIC Internal'),
+				Cell: (row) => <div>{row.row.original.pic_staff.mobile || '-'}</div>
 			},
 			{
 				Header: 'Actions',
