@@ -8,7 +8,7 @@ export const InputSelectReligion = forwardRef(({ error, onChange, ...props }, re
 		{ label: 'Kristen Katolik', value: 'Kristen Katolik' },
 		{ label: 'Hindu', value: 'Hindu' },
 		{ label: 'Buddha', value: 'Buddha' },
-		{ label: 'Kong Hu Cu', value: 'Kon Hu Cu' }
+		{ label: 'Kong Hu Cu', value: 'Kong Hu Cu' }
 	];
 
 	return (

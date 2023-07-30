@@ -43,7 +43,10 @@ export const FormStaff = () => {
 			mobile: '',
 			email: '',
 			religion: '',
-			staff_titles: []
+			staff_titles: [],
+			list_pic_cities: [],
+			list_pic_districts: [],
+			list_pic_villages: []
 		}
 	});
 
@@ -353,7 +356,73 @@ export const FormStaff = () => {
 						/>
 					)}
 				/>
+
+				<Controller
+					name={'list_pic_cities'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectCity
+							{...field}
+							label="Pilih Kota PIC"
+							disabled={processingCreateStaff || fetchingStaff}
+							onChange={(values, option) => {
+								const newValues =
+									option.action === 'remove-value'
+										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
+										: values.map((item) => item.value);
+								setValue('list_pic_cities', newValues);
+							}}
+							multiple
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'list_pic_districts'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectDistrict
+							{...field}
+							label="Pilih Kecamatan PIC"
+							disabled={processingCreateStaff || fetchingStaff}
+							onChange={(values, option) => {
+								const newValues =
+									option.action === 'remove-value'
+										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
+										: values.map((item) => item.value);
+								setValue('list_pic_districts', newValues);
+							}}
+							multiple
+							params={{ limit: 2000, offset: 0 }}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'list_pic_villages'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectVillage
+							{...field}
+							label="Pilih Kelurahan/Desa PIC"
+							disabled={processingCreateStaff || fetchingStaff}
+							onChange={(values, option) => {
+								const newValues =
+									option.action === 'remove-value'
+										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
+										: values.map((item) => item.value);
+								setValue('list_pic_villages', newValues);
+							}}
+							multiple
+							params={{ limit: 2000, offset: 0 }}
+							error={error}
+						/>
+					)}
+				/>
 			</div>
+
 			<hr />
 
 			<Controller

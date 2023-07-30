@@ -3,32 +3,31 @@ import { useCityStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectCity = forwardRef(
-	({ containerClassName, error, onChange, showLabel, params, ...props }, ref) => {
-		const { cityList, fetchingCityList, getCityList } = useCityStore();
+	({ containerClassName, error, onChange, label, showLabel, params, multiple, ...props }, ref) => {
+		const { fetchingCityList, getCityList } = useCityStore();
 
 		const [options, setOptions] = useState([]);
 
-		useEffect(() => {
-			if (params) getCityList({ ...params });
-			else getCityList();
-		}, [params]);
+		const handleSetOptions = async () => {
+			const response = params ? await getCityList({ ...params }) : await getCityList();
+			const options = response.payload?.items?.map((city) => ({ label: city.name, value: city.id }));
+			setOptions(options);
+		};
 
 		useEffect(() => {
-			if (cityList?.total > 0) {
-				const mapCity = cityList.items.map((city) => ({ label: city.name, value: city.id }));
-				setOptions(mapCity);
-			}
-		}, [cityList]);
+			handleSetOptions();
+		}, [params]);
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Kota" name={props.name} />}
+				{showLabel && <InputLabel text={label} name={props.name} />}
 				<InputSelect
 					ref={ref}
+					multi={multiple}
 					options={options}
 					loading={fetchingCityList}
 					onChange={onChange}
-					placeholder="Pilih Kota"
+					placeholder={label}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}
@@ -39,8 +38,10 @@ export const InputSelectCity = forwardRef(
 
 InputSelectCity.displayName = 'InputSelectCity';
 InputSelectCity.defaultProps = {
+	multiple: false,
 	name: 'city',
 	params: {},
+	label: 'Pilih Kota',
 	containerClassName: '',
 	showLabel: true
 };

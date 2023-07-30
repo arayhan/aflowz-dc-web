@@ -41,6 +41,8 @@ const states = (set) => ({
 
 		set({ districtList: success ? payload : null });
 		set({ fetchingDistrictList: false });
+
+		return { success, payload: success ? payload : null };
 	},
 
 	getDistrictDetail: async (districtID) => {

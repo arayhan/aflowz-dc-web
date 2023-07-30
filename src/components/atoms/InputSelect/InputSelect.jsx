@@ -8,9 +8,7 @@ export const InputSelect = forwardRef(
 			<ReactSelect
 				{...props}
 				ref={ref}
-				value={options.filter(function (option) {
-					return option.value === value;
-				})}
+				value={options?.filter((option) => (multi ? value?.includes(option.value) : option.value === value))}
 				className={`z-10 ${props.className}`}
 				placeholder={placeholder}
 				onChange={onChange}
@@ -31,7 +29,7 @@ export const InputSelect = forwardRef(
 					menuPortal: (styles) => ({ ...styles, zIndex: 30 })
 				}}
 				menuPortalTarget={document.body}
-				options={options}
+				options={multi ? options?.filter((option) => !value?.includes(option.value)) : options}
 			/>
 		);
 	}

@@ -3,33 +3,30 @@ import { useVillageStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectVillage = forwardRef(
-	({ containerClassName, error, onChange, showLabel, params, ...props }, ref) => {
-		const { villageList, fetchingVillageList, getVillageList } = useVillageStore();
+	({ containerClassName, error, onChange, showLabel, label, multiple, params, ...props }, ref) => {
+		const { fetchingVillageList, getVillageList } = useVillageStore();
 
 		const [options, setOptions] = useState([]);
 
-		useEffect(() => {
-			if (params) getVillageList({ ...params });
-			if (params === null) setOptions([]);
-		}, [params]);
+		const handleSetOptions = async () => {
+			const response = params ? await getVillageList({ ...params }) : await getVillageList();
+			const options = response.payload?.items?.map((village) => ({ label: village.name, value: village.id }));
+			setOptions(options);
+		};
 
 		useEffect(() => {
-			if (villageList?.total > 0) {
-				const villageMap = villageList.items.map((village) => ({ label: village.name, value: village.id }));
-				setOptions(villageMap);
-			} else {
-				setOptions([]);
-			}
-		}, [villageList]);
+			handleSetOptions();
+		}, [params]);
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Kelurahan/Desa" name={props.name} />}
+				{showLabel && <InputLabel text={label} name={props.name} />}
 				<InputSelect
 					ref={ref}
+					multi={multiple}
 					options={options}
 					loading={fetchingVillageList}
-					placeholder="Pilih Kelurahan/Desa"
+					placeholder={label}
 					onChange={onChange}
 					{...props}
 				/>
@@ -42,6 +39,8 @@ export const InputSelectVillage = forwardRef(
 InputSelectVillage.displayName = 'InputSelectVillage';
 InputSelectVillage.defaultProps = {
 	name: 'village',
+	multiple: false,
+	label: 'Pilih Kelurahan/Desa',
 	params: {},
 	containerClassName: '',
 	showLabel: true

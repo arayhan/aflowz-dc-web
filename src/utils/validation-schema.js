@@ -158,7 +158,10 @@ export const formStaffSchema = yup.object().shape({
 		.min(8, 'Minimal 8 angka'),
 	email: yup.string().email().required('Belum mengisi email'),
 	religion: yup.string().required('Belum memilih agama'),
-	staff_titles: yup.array().min(1, 'Role wajib diisi')
+	staff_titles: yup.array().min(1, 'Role wajib diisi'),
+	list_pic_cities: yup.array().min(1, 'Belum memilih PIC kota'),
+	list_pic_districts: yup.array().min(1, 'Belum memilih PIC kecamatan'),
+	list_pic_villages: yup.array().min(1, 'Belum memilih PIC kelurahan/desa')
 });
 
 export const formActivitySchema = yup.object().shape({

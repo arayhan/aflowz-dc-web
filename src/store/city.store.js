@@ -43,6 +43,8 @@ const states = (set, get) => ({
 
 		set({ cityList: success ? payload : null });
 		set({ fetchingCityList: false });
+
+		return { success, payload: success ? payload : null };
 	},
 
 	getCityDetail: async (cityID) => {

@@ -3,32 +3,31 @@ import { useDistrictStore } from '@/store';
 import React, { useEffect, useState, forwardRef } from 'react';
 
 export const InputSelectDistrict = forwardRef(
-	({ containerClassName, error, onChange, showLabel, params, ...props }, ref) => {
-		const { districtList, fetchingDistrictList, getDistrictList } = useDistrictStore();
+	({ containerClassName, error, multiple, onChange, label, showLabel, params, ...props }, ref) => {
+		const { fetchingDistrictList, getDistrictList } = useDistrictStore();
 
 		const [options, setOptions] = useState([]);
 
-		useEffect(() => {
-			if (params) getDistrictList({ ...params });
-			if (params === null) setOptions([]);
-		}, [params]);
+		const handleSetOptions = async () => {
+			const response = params ? await getDistrictList({ ...params }) : await getDistrictList();
+			const options = response.payload?.items?.map((district) => ({ label: district.name, value: district.id }));
+			setOptions(options);
+		};
 
 		useEffect(() => {
-			if (districtList?.total >= 0) {
-				const mapDistrict = districtList.items.map((city) => ({ label: city.name, value: city.id }));
-				setOptions(mapDistrict);
-			}
-		}, [districtList]);
+			handleSetOptions();
+		}, [params]);
 
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
-				{showLabel && <InputLabel text="Pilih Kecamatan" name={props.name} />}
+				{showLabel && <InputLabel text={label} name={props.name} />}
 				<InputSelect
 					ref={ref}
 					options={options}
+					multi={multiple}
 					loading={fetchingDistrictList}
 					onChange={onChange}
-					placeholder="Pilih Kecamatan"
+					placeholder={label}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}
@@ -40,6 +39,8 @@ export const InputSelectDistrict = forwardRef(
 InputSelectDistrict.displayName = 'InputSelectDistrict';
 InputSelectDistrict.defaultProps = {
 	name: 'district',
+	label: 'Pilih Kecamatan',
+	multiple: false,
 	params: {},
 	containerClassName: '',
 	showLabel: true
