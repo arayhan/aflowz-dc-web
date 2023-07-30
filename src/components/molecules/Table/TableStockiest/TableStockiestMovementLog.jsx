@@ -81,7 +81,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'Metode',
 				minWidth: 200,
-				Cell: (row) => <div>{row.row.original.type}</div>
+				Cell: (row) => <div>{row.row.original.picking_method}</div>
 			},
 			{
 				Header: 'Tanggal',
