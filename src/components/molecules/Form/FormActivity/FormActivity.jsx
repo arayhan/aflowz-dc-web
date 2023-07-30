@@ -41,7 +41,11 @@ export const FormActivity = () => {
 			activity_date: '',
 			pic: '',
 			pic_mobile: '',
-			pic_staff_id: undefined
+			pic_staff_id: undefined,
+			total_participant: undefined,
+			item: '',
+			total_item: undefined,
+			checkout_description: ''
 		}
 	});
 
@@ -335,11 +339,12 @@ export const FormActivity = () => {
 				/>
 
 				<Controller
-					name={''}
+					name={'total_participant'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
+							type="number"
 							label="Jumlah Peserta yang Hadir"
 							placeholder="Jumlah Peserta yang Hadir"
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
@@ -349,7 +354,7 @@ export const FormActivity = () => {
 				/>
 
 				<Controller
-					name={''}
+					name={'item'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText
@@ -363,11 +368,12 @@ export const FormActivity = () => {
 				/>
 
 				<Controller
-					name={''}
+					name={'total_item'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
+							type="number"
 							label="Jumlah Barang"
 							placeholder="Jumlah Barang"
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
@@ -377,7 +383,7 @@ export const FormActivity = () => {
 				/>
 
 				<Controller
-					name={''}
+					name={'checkout_description'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputText
