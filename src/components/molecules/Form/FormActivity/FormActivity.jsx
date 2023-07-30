@@ -333,6 +333,62 @@ export const FormActivity = () => {
 						/>
 					)}
 				/>
+
+				<Controller
+					name={''}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Jumlah Peserta yang Hadir"
+							placeholder="Jumlah Peserta yang Hadir"
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={''}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Barang"
+							placeholder="Barang"
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={''}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Jumlah Barang"
+							placeholder="Jumlah Barang"
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={''}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Deskripsi Checkout"
+							placeholder="Deskripsi Checkout"
+							disabled={processingCreateActivity || fetchingActivity || activityErrors}
+							error={error}
+						/>
+					)}
+				/>
 			</div>
 
 			<hr />
