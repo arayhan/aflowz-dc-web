@@ -1,14 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { useAuthStore, useStockiestStore } from '@/store';
+import { useStockiestStore } from '@/store';
 import { BannerFeature } from '@/components/molecules';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Button, ButtonAction, InputTextInfo } from '@/components/atoms';
+import { ButtonAction, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 import { TableStockiestMovementLog } from '@/components/molecules/index';
 
 const StockiestDetail = () => {
-	const { isSystem, isAdmin } = useAuthStore();
 	const params = useParams();
 	const { product, fetchingProduct, getProduct } = useStockiestStore();
 
@@ -34,9 +33,6 @@ const StockiestDetail = () => {
 									<div className="flex flex-col items-start justify-between gap-4 p-4 md:flex-row md:items-center">
 										<div className="w-full space-y-2">
 											<div className="text-xl font-light capitalize tranform:">Detail {product?.name}</div>
-											{/* <div className="text-sm text-gray-400">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											</div> */}
 										</div>
 										<div className="flex flex-col items-center justify-end w-full gap-4 md:flex-row">
 											<ButtonAction

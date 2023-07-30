@@ -1,4 +1,4 @@
-import { Button, TableHeader, Table, TableFooter, InputLabel } from '@/components/atoms';
+import { Button, TableHeader, Table, TableFooter, InputLabel, ButtonAction } from '@/components/atoms';
 import { InputText } from '@/components/atoms/index';
 import { useStockiestStore, useAuthStore } from '@/store';
 import { useState, useEffect, useMemo } from 'react';
@@ -8,6 +8,7 @@ import { objectToQueryString, queryStringToObject } from '@/utils/helpers';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import moment from 'moment-timezone';
 import 'moment/locale/id';
+import { ACTION_TYPES } from '@/utils/constants';
 
 export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) => {
 	const { isSystem } = useAuthStore();
@@ -141,7 +142,17 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 			{
 				Header: 'PIC Tim Internal',
 				minWidth: 200,
-				Cell: (row) => <div className="capitalize transform:">{row.row.original.pic_staff.name}</div>
+				Cell: (row) =>
+					row.row.original.pic_staff?.name ? (
+						<ButtonAction
+							className="bg-purple-500 hover:bg-purple-400"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/staff/${row.row.original.pic_staff.id}`}
+							text={row.row.original.pic_staff.name}
+						/>
+					) : (
+						'-'
+					)
 			},
 			{
 				Header: 'Jumlah',
