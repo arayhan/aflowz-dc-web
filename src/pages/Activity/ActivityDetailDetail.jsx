@@ -56,31 +56,17 @@ const ActivityDetailDetail = () => {
 									</div>
 
 									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
-										Deskripsi Detail Kegiatan
-									</div>
-									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{activityDetailItem?.description}</div>
-
-									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
-										Tanggal Kegiatan
+										Kategori Kegiatan
 									</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
-										{activityDetailItem?.activity_date}
-									</div>
-
-									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Mitra</div>
-									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
-										{activityDetailItem?.pic} {activityDetailItem?.pic_mobile && `(${activityDetailItem?.pic_mobile})`}
-									</div>
-
-									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">PIC Tim Internal</div>
-									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
-										<Link
-											to={`/staff/${activityDetailItem?.pic_staff_id.id}`}
-											className="underline text-primary hover:text-primary-400"
-										>
-											{activityDetailItem?.pic_staff_id.name}{' '}
-											{activityDetailItem?.pic_staff_id.mobile && `(${activityDetailItem?.pic_staff_id.mobile})`}
-										</Link>
+										{!activityDetailItem?.category.id && '-'}
+										{activityDetailItem?.category.id && (
+											<ButtonAction
+												action={ACTION_TYPES.SEE_DETAIL}
+												linkTo={`/activity?activity_category_id=${activityDetailItem?.category.id}`}
+												text={activityDetailItem?.category.name}
+											/>
+										)}
 									</div>
 
 									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
@@ -95,6 +81,137 @@ const ActivityDetailDetail = () => {
 												text={activityDetailItem?.program.name}
 											/>
 										)}
+									</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Institusi
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{!activityDetailItem?.konstituen.id && '-'}
+										{activityDetailItem?.konstituen.id && (
+											<ButtonAction
+												action={ACTION_TYPES.SEE_DETAIL}
+												linkTo={`/institusi/${activityDetailItem?.konstituen.id}`}
+												text={activityDetailItem?.konstituen.name}
+											/>
+										)}
+									</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Alamat Kunjungan
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										<table>
+											<tr>
+												<td>Kota</td>
+												<td className="px-3">:</td>
+												<td>
+													{!activityDetailItem?.city?.id && '-'}
+													{activityDetailItem?.city?.id && (
+														<ButtonAction
+															action={ACTION_TYPES.SEE_DETAIL}
+															linkTo={`/dapil/city/${activityDetailItem?.city.id}`}
+															text={activityDetailItem?.city.name}
+														/>
+													)}
+												</td>
+											</tr>
+											<tr>
+												<td>Kecamatan</td>
+												<td className="px-3">:</td>
+												<td>
+													{!activityDetailItem?.district?.id && '-'}
+													{activityDetailItem?.district?.id && (
+														<ButtonAction
+															action={ACTION_TYPES.SEE_DETAIL}
+															linkTo={`/dapil/district/${activityDetailItem?.district.id}`}
+															text={activityDetailItem?.district.name}
+														/>
+													)}
+												</td>
+											</tr>
+											<tr>
+												<td>Desa/Kelurahan</td>
+												<td className="px-3">:</td>
+												<td>
+													{!activityDetailItem?.village?.id && '-'}
+													{activityDetailItem?.village?.id && (
+														<ButtonAction
+															action={ACTION_TYPES.SEE_DETAIL}
+															linkTo={`/dapil/village/${activityDetailItem?.village.id}`}
+															text={activityDetailItem?.village.name}
+														/>
+													)}
+												</td>
+											</tr>
+										</table>
+									</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Rumah Warga
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{!activityDetailItem?.partner?.id && '-'}
+										{activityDetailItem?.partner?.id && (
+											<ButtonAction
+												action={ACTION_TYPES.SEE_DETAIL}
+												linkTo={`/partner/${activityDetailItem?.partner.id}`}
+												text={activityDetailItem?.partner.name}
+											/>
+										)}
+									</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Jumlah Peserta yang hadir
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{activityDetailItem?.total_participant}
+									</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Tim Internal</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{!activityDetailItem?.pic_staff_id?.id && '-'}
+										{activityDetailItem?.pic_staff_id?.id && (
+											<Link
+												to={`/staff/${activityDetailItem?.pic_staff_id.id}`}
+												className="underline text-primary hover:text-primary-400"
+											>
+												{activityDetailItem?.pic_staff_id.name}{' '}
+												{activityDetailItem?.pic_staff_id.mobile && `(${activityDetailItem?.pic_staff_id.mobile})`}
+											</Link>
+										)}
+									</div>
+
+									<div className="flex items-center col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Tanggal Kunjungan
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{activityDetailItem?.activity_date}
+									</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										PIC Tempat Kunjungan
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{activityDetailItem?.pic || '-'}</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Kontak PIC</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{activityDetailItem?.pic_mobile || '-'}
+									</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Barang Yang Diberikan
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{activityDetailItem?.item || '-'}</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Jumlah Barang</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{activityDetailItem?.total_item}</div>
+
+									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">
+										Checkout Description
+									</div>
+									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">
+										{activityDetailItem?.checkout_description}
 									</div>
 								</div>
 							</Card>
