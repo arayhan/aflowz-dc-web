@@ -40,16 +40,7 @@ export const createActivity = async (params) => {
 		district_id: params?.district_id || 0,
 		city_id: params?.city_id || 0,
 		program_id: params?.program_id || 0,
-		category_id: params?.category_id || 0,
-		partner_id: params?.partner_id || 0,
-		activity_date: params?.activity_date || '',
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || '',
-		total_participant: params?.total_participant || '',
-		item: params?.item || '',
-		total_item: params?.total_item || '',
-		checkout_description: params?.checkout_description || ''
+		category_id: params?.category_id || 0
 	};
 
 	try {
@@ -127,7 +118,12 @@ export const createActivityDetail = async (activityID, params) => {
 		pic: params?.pic || '',
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0,
-		promise_datas: params?.promise_datas || []
+		promise_datas: params?.promise_datas || [],
+		partner_id: params?.partner_id || 0,
+		total_participant: params?.total_participant || '',
+		item: params?.item || '',
+		total_item: params?.total_item || '',
+		checkout_description: params?.checkout_description || ''
 	};
 
 	try {
