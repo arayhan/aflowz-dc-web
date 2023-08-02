@@ -142,20 +142,12 @@ export const TableActivity = ({
 				}
 			},
 			{
-				Header: 'Partner yang Dikunjungi',
+				Header: 'PIC yang Dikunjungi',
 				width: '100%',
 				minWidth: 225,
 				hidden: displayedColumns && !displayedColumns.includes('Partner yang Dikunjungi'),
 				Cell: (row) => {
-					return row.row.original.partner?.id ? (
-						<Button
-							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/penerima/${row.row.original.partner?.id}`}
-							text={row.row.original.partner?.name}
-						/>
-					) : (
-						'-'
-					);
+					return row.row.original.pic || '-';
 				}
 			},
 			{
