@@ -12,30 +12,15 @@ export const TableDetailPICCity = ({ PICCityData }) => {
 				accessor: '',
 				disableSortBy: true,
 				disableFilters: true,
+				width: '40px',
 				maxWidth: 20,
 				Cell: (row) => {
 					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
 				}
 			},
 			{
-				Header: 'PIC Eksternal',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.city_pic_external}</div>;
-				}
-			},
-			{
-				Header: 'No Kontak',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.city_pic_external_mobile}</div>;
-				}
-			},
-			{
 				Header: 'Kota',
-				minWidth: 150,
+				width: '100%',
 				Cell: (row) => {
 					const data = row.row.original;
 					return data ? (

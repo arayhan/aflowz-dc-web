@@ -230,12 +230,12 @@ const StaffDetail = () => {
 									</div>
 									<div className="bg-white rounded-md">
 										<Card title={`PIC Kecamatan`} bodyClassName={' p-2 overflow-x-auto overflow-y-auto max-h-[50vh]'}>
-											<TableDetailPICDistrict PICDistrictData={staff.district_pic} />
+											<TableDetailPICDistrict PICDistrictData={staff.districts_pic} />
 										</Card>
 									</div>
 									<div className="bg-white rounded-md">
 										<Card title={`PIC Desa`} bodyClassName={' p-2 overflow-x-auto overflow-y-auto max-h-[50vh]'}>
-											<TableDetailPICVillage PICVillageData={staff.village_pic} />
+											<TableDetailPICVillage PICVillageData={staff.villages_pic} />
 										</Card>
 									</div>
 								</div>

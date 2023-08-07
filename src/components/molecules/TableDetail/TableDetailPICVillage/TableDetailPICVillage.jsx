@@ -18,24 +18,8 @@ export const TableDetailPICVillage = ({ PICVillageData }) => {
 				}
 			},
 			{
-				Header: 'PIC Eksternal',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.village_pic_external}</div>;
-				}
-			},
-			{
-				Header: 'No Kontak',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.village_pic_external_mobile}</div>;
-				}
-			},
-			{
-				Header: 'Kota',
-				minWidth: 150,
+				Header: 'Desa/Kelurahan',
+				width: '100%',
 				Cell: (row) => {
 					const data = row.row.original;
 					return data ? (

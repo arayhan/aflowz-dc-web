@@ -1,5 +1,4 @@
 import { Button, Table } from '@/components/atoms';
-import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,24 +17,8 @@ export const TableDetailPICDistrict = ({ PICDistrictData }) => {
 				}
 			},
 			{
-				Header: 'PIC Eksternal',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.district_pic_external}</div>;
-				}
-			},
-			{
-				Header: 'No Kontak',
-				minWidth: 150,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div>{data.district_pic_external_mobile}</div>;
-				}
-			},
-			{
-				Header: 'Kota',
-				minWidth: 150,
+				Header: 'Kecamatan',
+				width: '100%',
 				Cell: (row) => {
 					const data = row.row.original;
 					return data ? (
