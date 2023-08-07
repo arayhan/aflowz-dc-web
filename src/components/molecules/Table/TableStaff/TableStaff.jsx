@@ -1,4 +1,4 @@
-import { ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
+import { Button, ButtonAction, InputText, Table, TableFooter, TableHeader } from '@/components/atoms';
 import { useAuthStore, usePartnerStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
@@ -39,7 +39,7 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 			},
 			{
 				Header: 'Role',
-				minWidth: 150,
+				minWidth: 240,
 				Cell: (row) => {
 					const data = row.row.original;
 					return data.staff_titles.length > 0 ? (
@@ -60,6 +60,69 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 				Header: 'No Kontak',
 				minWidth: 150,
 				Cell: (row) => <div className="capitalize">{row.row.original.mobile}</div>
+			},
+			{
+				Header: 'PIC Kota',
+				minWidth: 200,
+				Cell: (row) => {
+					const cities_pic = row.row.original.cities_pic;
+					return cities_pic.length > 0 ? (
+						<div className="grid gap-2">
+							{cities_pic.map((city) => (
+								<Button
+									key={city?.city_id}
+									className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+									linkTo={`/dapil/city/${city?.city_id}`}
+									text={city?.city_name}
+								/>
+							))}
+						</div>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'PIC Kecamatan',
+				minWidth: 200,
+				Cell: (row) => {
+					const districts_pic = row.row.original.districts_pic;
+					return districts_pic.length > 0 ? (
+						<div className="grid gap-2">
+							{districts_pic.map((district) => (
+								<Button
+									key={district?.district_id}
+									className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+									linkTo={`/dapil/district/${district?.district_id}`}
+									text={district?.district_name}
+								/>
+							))}
+						</div>
+					) : (
+						'-'
+					);
+				}
+			},
+			{
+				Header: 'PIC Desa/Kelurahan',
+				minWidth: 200,
+				Cell: (row) => {
+					const villages_pic = row.row.original.villages_pic;
+					return villages_pic.length > 0 ? (
+						<div className="grid gap-2">
+							{villages_pic.map((village) => (
+								<Button
+									key={village?.village_id}
+									className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
+									linkTo={`/dapil/village/${village?.village_id}`}
+									text={village?.village_name}
+								/>
+							))}
+						</div>
+					) : (
+						'-'
+					);
+				}
 			},
 			{
 				Header: 'Deskripsi',
