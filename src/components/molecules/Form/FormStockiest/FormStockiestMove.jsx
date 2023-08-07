@@ -118,7 +118,11 @@ export const FormStockiestMove = () => {
 
 	const onAdded = (prod, qty) => {
 		if (product && method && warehouse && qty > 0) {
-			if (method === PRODUCT_MOVEMENT_TYPE.IN) {
+			if (
+				method === PRODUCT_MOVEMENT_TYPE.OUT ||
+				method === PRODUCT_MOVEMENT_TYPE.CORRECTION_OUT ||
+				method === PRODUCT_MOVEMENT_TYPE.RETURN
+			) {
 				if (qty < WAREHOUSE_QUANTITY) {
 					let exist = dataTable.find((val) => val.id === prod.id);
 					let data = {
@@ -210,6 +214,7 @@ export const FormStockiestMove = () => {
 							disabled={processingUpdateProduct}
 							onChange={({ value }) => {
 								setValue('method', value);
+								setDataTable([]);
 								setMethod(value);
 								setError('method', null);
 							}}
