@@ -4,6 +4,9 @@ import { useEffect, useState, useMemo } from 'react';
 import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useNavigate } from 'react-router-dom';
+import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
+import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
+import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 
 export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }) => {
 	const navigate = useNavigate();
@@ -199,6 +202,35 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 									onChange={(event) => {
 										handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
 									}}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('city_pic_id')) && (
+								<InputSelectCity
+									containerClassName="w-full lg:w-60"
+									value={params.city_pic_id ? Number(params.city_pic_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('city_pic_id', option ? { city_pic_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('district_pic_id')) && (
+								<InputSelectDistrict
+									containerClassName="w-full lg:w-60"
+									value={params.district_pic_id ? Number(params.district_pic_id) : undefined}
+									showLabel={false}
+									onChange={(option) =>
+										handleSetFilter('district_pic_id', option ? { district_pic_id: option.value } : null)
+									}
+								/>
+							)}
+
+							{(!displayedFilters || displayedFilters.includes('village_pic_id')) && (
+								<InputSelectVillage
+									containerClassName="w-full lg:w-60"
+									value={params.village_pic_id ? Number(params.village_pic_id) : undefined}
+									showLabel={false}
+									onChange={(option) =>
+										handleSetFilter('village_pic_id', option ? { village_pic_id: option.value } : null)
+									}
 								/>
 							)}
 						</div>
