@@ -3,6 +3,7 @@ import { BannerFeature, TableActivityPromise } from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useEffect, useState } from 'react';
+import { FiUser } from 'react-icons/fi';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useParams } from 'react-router-dom';
 
@@ -229,10 +230,10 @@ const ActivityDetailDetail = () => {
 								<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
 									<Link to={`/penerima?program_id=${activityDetailItem?.program.id}`}>
 										<div className="flex flex-col items-center justify-center space-y-1 text-center">
-											<span className="text-2xl md:text-4xl font-extralight">
-												{activityDetailItem?.total_participant || 0}
+											<span className="py-1">
+												<FiUser size={32} />
 											</span>
-											<div className="font-light text-gray-400">Lihat Peserta </div>
+											<div className="font-light text-gray-400">Lihat Peserta</div>
 										</div>
 									</Link>
 								</div>

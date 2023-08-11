@@ -137,7 +137,7 @@ const KonstituenDetail = () => {
 													<span className="text-2xl md:text-4xl font-extralight">
 														{konstituenDetail?.total_konstituen_activity_detail || 0}
 													</span>
-													<div className="font-light text-gray-400">Total Kegiatan </div>
+													<div className="font-light text-gray-400">Total Kegiatan</div>
 												</div>
 											</Link>
 										</div>
