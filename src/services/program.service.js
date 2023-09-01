@@ -38,6 +38,9 @@ export const createProgram = async (params) => {
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0,
 		description: params?.description || '',
+		location: params?.location || '',
+		date: params?.date || '',
+		total_participant: params?.total_participant || 0,
 		is_special_program: params?.is_special_program || false,
 		is_pip: params?.is_pip || false,
 		is_kip: params?.is_kip || false
@@ -60,6 +63,9 @@ export const updateProgram = async (programID, params) => {
 		pic_mobile: params?.pic_mobile || '',
 		pic_staff_id: params?.pic_staff_id || 0,
 		description: params?.description || '',
+		location: params?.location || '',
+		date: params?.date || '',
+		total_participant: params?.total_participant || 0,
 		is_special_program: params?.is_special_program || false,
 		is_pip: params?.is_pip || false,
 		is_kip: params?.is_kip || false

@@ -1,4 +1,4 @@
-import { Button, InputCheckbox, InputText } from '@/components/atoms';
+import { Button, InputDate, InputText } from '@/components/atoms';
 import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -25,6 +25,9 @@ export const FormProgram = () => {
 			pic_mobile: '',
 			pic_staff_id: undefined,
 			description: '',
+			location: '',
+			date: '',
+			total_participant: undefined,
 			is_special_program: false,
 			is_pip: false,
 			is_kip: false
@@ -60,6 +63,9 @@ export const FormProgram = () => {
 			setValue('pic', program.pic || '');
 			setValue('pic_mobile', program.pic_mobile || '');
 			setValue('description', program.description || '');
+			setValue('location', program.location || '');
+			setValue('date', program.date || '');
+			setValue('total_participant', program.total_participant || null);
 			setValue('is_special_program', isPIPorKIP || false);
 			setValue('is_pip', isPIP);
 			setValue('is_kip', isKIP);
@@ -177,6 +183,47 @@ export const FormProgram = () => {
 							{...field}
 							label="Deskripsi Program"
 							placeholder="Deskripsi Program"
+							disabled={processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'location'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Lokasi Pelaksanaan Program"
+							placeholder="Lokasi Pelaksanaan Program"
+							disabled={processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
+					name={'date'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputDate
+							{...field}
+							label="Tanggal Pelaksanaan program"
+							placeholder="Tanggal Pelaksanaan program"
+							disabled={processingCreateProgram || fetchingProgram}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_participant'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Jumlah Peserta"
+							placeholder="Jumlah Peserta"
 							disabled={processingCreateProgram || fetchingProgram}
 							error={error}
 						/>

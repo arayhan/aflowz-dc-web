@@ -17,7 +17,10 @@ export const formProgramSchema = yup.object().shape(
 			.required('Nomor PIC Kementerian wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka'),
-		description: yup.string().required('Deskripsi wajib diisi')
+		description: yup.string().required('Deskripsi wajib diisi'),
+		location: yup.string().required('Lokasi pelaksanaan program wajib diisi'),
+		date: yup.string().required('Tanggal pelaksanaan program wajib diisi'),
+		total_participant: yup.number().required('Jumlah peserta wajib diisi')
 	},
 	['pic_mobile', 'pic_mobile']
 );
