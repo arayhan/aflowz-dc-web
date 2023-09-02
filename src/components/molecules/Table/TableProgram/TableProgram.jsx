@@ -69,8 +69,8 @@ export const TableProgram = ({
 			},
 			{
 				Header: 'PIC Internal',
-				width: 80,
-				maxWidth: 80,
+				minWidth: 150,
+				maxWidth: 150,
 				hidden: displayedColumns && !displayedColumns.includes('PIC Internal'),
 				Cell: (row) => {
 					return row.row.original.pic_staff?.id ? (
@@ -86,9 +86,27 @@ export const TableProgram = ({
 			},
 			{
 				Header: 'Kontak PIC Internal',
-				minWidth: 250,
+				minWidth: 200,
 				hidden: displayedColumns && !displayedColumns.includes('Kontak PIC Internal'),
 				Cell: (row) => <div>{row.row.original.pic_staff.mobile || '-'}</div>
+			},
+			{
+				Header: 'Lokasi Pelaksanaan Program',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Lokasi Pelaksanaan Program'),
+				Cell: (row) => <div>{row.row.original.location || '-'}</div>
+			},
+			{
+				Header: 'Tanggal Pelaksanaan Program',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Tanggal Pelaksanaan Program'),
+				Cell: (row) => <div>{row.row.original.date || '-'}</div>
+			},
+			{
+				Header: 'Jumlah Peserta',
+				minWidth: 100,
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Peserta'),
+				Cell: (row) => <div>{row.row.original.total_participant || '-'}</div>
 			},
 			{
 				Header: 'Actions',
