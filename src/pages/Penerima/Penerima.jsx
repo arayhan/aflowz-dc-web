@@ -27,7 +27,9 @@ const Penerima = () => {
 						} `}
 						isNeedAbort
 						params={{ ...params, candidate_status: params?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED }}
-						displayedColumns={['#', 'NIK', 'NISN', 'Nama Penerima', 'Institusi', 'Alamat', 'Program']}
+						displayedColumns={['#', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Program', 'Counting Followers']}
+						isKIP={false}
+						isPIP={false}
 						isShowBulkDownloadCertificate
 					/>
 				</div>

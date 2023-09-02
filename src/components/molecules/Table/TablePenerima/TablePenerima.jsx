@@ -61,7 +61,7 @@ export const TablePenerima = ({
 			{
 				Header: 'NIK',
 				minWidth: 70,
-				hidden: (displayedColumns && !displayedColumns.includes('NIK')) || !isKIP,
+				hidden: (displayedColumns && !displayedColumns.includes('NIK')) || isPIP,
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.nik_number || '-'}</div>;
@@ -77,7 +77,7 @@ export const TablePenerima = ({
 				}
 			},
 			{
-				Header: isKIP ? 'Nama Usulan' : isPIP ? 'Nama Siswa' : 'Nama Penerima',
+				Header: isKIP ? 'Nama Usulan' : isPIP ? 'Nama Siswa' : 'Nama',
 				accessor: 'name',
 				minWidth: 175,
 				hidden: displayedColumns && !displayedColumns.includes('Nama Penerima')
@@ -118,6 +118,37 @@ export const TablePenerima = ({
 									text={institusi.name}
 								/>
 							)}
+						</div>
+					);
+				}
+			},
+			{
+				Header: 'Alamat',
+				minWidth: 100,
+				hidden: displayedColumns && !displayedColumns.includes('Alamat'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.address || '-'}</div>;
+				}
+			},
+			{
+				Header: 'Program Yang Pernah Diterima',
+				minWidth: 150,
+				Cell: (row) => {
+					const programs = row.row.original.programs;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{programs.length === 0 && '-'}
+							{programs.length > 0 &&
+								programs.map((program) => (
+									<ButtonAction
+										key={program.id}
+										className="w-full bg-purple-500 hover:bg-purple-400"
+										action={ACTION_TYPES.SEE_DETAIL}
+										linkTo={`/program/${program.id}`}
+										text={program.name}
+									/>
+								))}
 						</div>
 					);
 				}
@@ -165,6 +196,15 @@ export const TablePenerima = ({
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.no_sk || '-'}</div>;
+				}
+			},
+			{
+				Header: 'Counting Followers',
+				minWidth: 150,
+				hidden: displayedColumns && !displayedColumns.includes('Counting Followers'),
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div>{data?.total_followers || '-'}</div>;
 				}
 			},
 			{
