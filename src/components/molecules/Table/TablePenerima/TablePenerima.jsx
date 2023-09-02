@@ -199,9 +199,9 @@ export const TablePenerima = ({
 				}
 			},
 			{
-				Header: 'Counting Followers',
+				Header: 'Jumlah Followers',
 				minWidth: 150,
-				hidden: displayedColumns && !displayedColumns.includes('Counting Followers'),
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Followers'),
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.total_followers || '-'}</div>;

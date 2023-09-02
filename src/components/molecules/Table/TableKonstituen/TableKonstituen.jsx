@@ -38,16 +38,34 @@ export const TableKonstituen = ({ title, displayedColumns, params, isReadonly, i
 				minWidth: 175
 			},
 			{
-				Header: 'Jenis Institusi',
-				minWidth: 125,
+				Header: 'Kategori Institusi',
+				minWidth: 100,
 				hidden: displayedColumns && !displayedColumns.includes('Jenis Institusi'),
-				Cell: (row) => <div className="capitalize transform:">{row.row.original.konstituen_type}</div>
+				Cell: (row) => <div className="capitalize">{row.row.original.konstituen_type}</div>
 			},
 			{
-				Header: 'Kota / Kabupaten',
+				Header: 'Alamat',
+				minWidth: 275,
+				hidden: displayedColumns && !displayedColumns.includes('Alamat'),
+				Cell: (row) => <div className="capitalize">{row.row.original.address}</div>
+			},
+			{
+				Header: 'Jumlah Penerima Program',
+				minWidth: 170,
+				hidden: displayedColumns && !displayedColumns.includes('Jumlah Penerima Program'),
+				Cell: (row) => <div className="capitalize">{row.row.original.total_penerima_program}</div>
+			},
+			{
+				Header: 'PIC Institusi',
 				minWidth: 150,
-				hidden: displayedColumns && !displayedColumns.includes('Kota / Kabupaten'),
-				Cell: (row) => <div className="capitalize transform:">{row.row.original.city.name}</div>
+				hidden: displayedColumns && !displayedColumns.includes('PIC Institusi'),
+				Cell: (row) => <div className="capitalize">{row.row.original.pic}</div>
+			},
+			{
+				Header: 'Kontak PIC Institusi',
+				minWidth: 120,
+				hidden: displayedColumns && !displayedColumns.includes('PIC Institusi'),
+				Cell: (row) => <div className="capitalize">{row.row.original.pic_mobile}</div>
 			},
 			{
 				Header: 'List Penerima',
