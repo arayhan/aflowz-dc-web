@@ -75,7 +75,7 @@ const ProgramDetail = () => {
 			)}
 			{showModalUploadSheetPenerima && (
 				<ModalUploadSheetPenerima
-					status={STATUS_PENERIMA_TYPES.CONFIRMED}
+					status={isPIPorKIP ? STATUS_PENERIMA_TYPES.CONFIRMED : null}
 					onClose={() => setShowModalUploadSheetPenerima(false)}
 				/>
 			)}
@@ -324,6 +324,20 @@ const ProgramDetail = () => {
 								)}
 
 								<hr className="col-span-12 my-8" />
+
+								{!isPIPorKIP && (
+									<div className="flex items-start justify-end col-span-12 gap-3 p-4 bg-white rounded-md shadow-md">
+										<button
+											className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-500 rounded-sm hover:bg-green-600 lg:w-auto"
+											onClick={() => setShowModalUploadSheetPenerima(true)}
+										>
+											<span className="w-4">
+												<SiGooglesheets size={16} />
+											</span>
+											<span className="text-sm">Upload Penerima Program</span>
+										</button>
+									</div>
+								)}
 
 								{isPIPorKIP && (
 									<div className="flex items-start justify-center col-span-12 gap-3 p-4 bg-white rounded-md shadow-md">

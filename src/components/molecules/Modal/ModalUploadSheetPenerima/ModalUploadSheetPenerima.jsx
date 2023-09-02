@@ -59,13 +59,25 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							];
 
 							if (status === STATUS_PENERIMA_TYPES.CONFIRMED || status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-								allValuesToStringResult['nisn_number'] = data?.nisn_number?.toString() || '';
+								allValuesToStringResult['name'] = data?.name?.toString() || data?.['Nama']?.toString() || '';
+								allValuesToStringResult['nisn_number'] =
+									data?.nisn_number?.toString() || data?.['NISN']?.toString() || '';
+								allValuesToStringResult['mobile'] = data?.mobile?.toString() || data?.['No HP']?.toString() || '';
+								allValuesToStringResult['address'] = data?.address?.toString() || data?.['Alamat']?.toString() || '';
+								allValuesToStringResult['city'] = data?.city?.toString() || data?.['Kabupaten']?.toString() || '';
+								allValuesToStringResult['district'] =
+									data?.district?.toString() || data?.['Kecamatan']?.toString() || '';
+								allValuesToStringResult['village'] = data?.village?.toString() || data?.['Desa']?.toString() || '';
+								allValuesToStringResult['institusi'] =
+									data?.institusi?.toString() || data?.['Institusi']?.toString() || '';
+								allValuesToStringResult['gender'] = data?.gender?.toString() || data?.['Gender']?.toString() || '';
 								allValuesToStringResult['program_name'] =
 									programDetail?.program_name || data?.program_name?.toString() || '';
 								allValuesToStringResult['program_periode'] =
 									programDetail?.program_periode || data?.program_periode?.toString() || '';
 								allValuesToStringResult['program_mitra'] =
 									'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+								allValuesToStringResult['staff_name'] = data?.staff_name?.toString() || '';
 								allValuesToStringResult['programs'] = [];
 
 								if (isPIP(programDetail?.program_name)) {
@@ -73,7 +85,8 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 									allValuesToStringResult['virtual_account'] = data?.virtual_account?.toString() || '';
 									allValuesToStringResult['no_sk'] = data?.no_sk?.toString() || '';
 								} else {
-									allValuesToStringResult['nik_number'] = data?.nik_number?.toString() || '';
+									allValuesToStringResult['nik_number'] =
+										data?.nik_number?.toString() || data?.['NIK']?.toString() || '';
 								}
 
 								if (status === STATUS_PENERIMA_TYPES.CANDIDATE) {
@@ -103,13 +116,6 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 						});
 					}
 
-					// console.log({
-					// 	program_name: programDetail?.program_name,
-					// 	isPIP: isPIP(programDetail?.program_name),
-					// 	status,
-					// 	params
-					// });
-
 					const bulkCreateCallback = ({ payload, success }) => {
 						if (success) {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
@@ -127,6 +133,8 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 					if (status === STATUS_PENERIMA_TYPES.CANDIDATE) bulkCreatePartnerCandidate(params, bulkCreateCallback);
 					else if (status === STATUS_PENERIMA_TYPES.CONFIRMED) bulkCreatePartnerConfirm(params, bulkCreateCallback);
 					else bulkCreatePartner(params, bulkCreateCallback);
+				} else {
+					toast.warning('Data kosong');
 				}
 			};
 		}

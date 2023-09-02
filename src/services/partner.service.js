@@ -44,7 +44,7 @@ export const bulkCreatePartner = async (params) => {
 	};
 
 	try {
-		const response = await http.post('/partner', request);
+		const response = await http.post('/partner', request, { baseURL: baseURL.replace('v1', 'v2') });
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };
