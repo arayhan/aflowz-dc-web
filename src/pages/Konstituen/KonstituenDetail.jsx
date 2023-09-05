@@ -204,7 +204,6 @@ const KonstituenDetail = () => {
 											<TablePenerima
 												title="Penerima Program"
 												konstituenType={konstituenDetail?.konstituen_type}
-												params={searchPenerima ? { ...searchPenerima, ...tablePenerima } : { ...tablePenerima }}
 												setParams={setSearchPenerima}
 												isReadonly
 												enableClickRow
@@ -212,6 +211,7 @@ const KonstituenDetail = () => {
 												displayedColumns={['#', 'NIK', 'Nama Penerima', 'Program', 'Alamat', 'Detail']}
 											/>
 										</div>
+										<div className="col-span-12"></div>
 									</div>
 								</div>
 							</div>

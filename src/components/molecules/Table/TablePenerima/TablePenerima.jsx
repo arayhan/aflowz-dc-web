@@ -266,7 +266,7 @@ export const TablePenerima = ({
 			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
 		);
 		if (isShowFooter && penerimaList?.total) setPageCount(Math.ceil(penerimaList.total / perPage));
-	}, [penerimaList, isShowFooter]);
+	}, [calonPenerimaList, penerimaList, isShowFooter]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">

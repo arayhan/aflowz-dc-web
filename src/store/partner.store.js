@@ -91,9 +91,9 @@ const states = (set, get) => ({
 
 		if (callback) callback({ payload, success });
 
-		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED && payload?.code !== 'ERR_CANCELED') {
 			set({ penerimaList: success ? payload : null });
-		} else {
+		} else if (payload?.code !== 'ERR_CANCELED') {
 			set({ calonPenerimaList: success ? payload : null });
 		}
 		set({ fetchingPenerimaList: false });
