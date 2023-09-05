@@ -253,6 +253,7 @@ export const TablePenerima = ({
 				candidate_program_id: params.program_id,
 				candidate_status: params.candidate_status
 			};
+			delete params.program_id;
 		}
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
