@@ -103,10 +103,11 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 						});
 					} else {
 						const allValuesToStringResult = {};
-						allValuesToStringResult['program_id'] = programDetail?.program_id || data?.program_id?.toString() || '';
 						allValuesToStringResult['program_name'] =
 							programDetail?.program_name || data?.program_name?.toString() || '';
 						allValuesToStringResult['program_mitra'] = 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+						allValuesToStringResult['program_periode'] =
+							programDetail?.program_periode || data?.program_periode?.toString() || '';
 
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
