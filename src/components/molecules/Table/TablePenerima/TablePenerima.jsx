@@ -249,6 +249,7 @@ export const TablePenerima = ({
 
 		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
 			params = {
+				...params,
 				candidate_program_id: params.program_id,
 				candidate_status: params.candidate_status
 			};
