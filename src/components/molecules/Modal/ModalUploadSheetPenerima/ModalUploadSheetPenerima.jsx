@@ -71,12 +71,8 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 								allValuesToStringResult['institusi'] =
 									data?.institusi?.toString() || data?.['Institusi']?.toString() || '';
 								allValuesToStringResult['gender'] = data?.gender?.toString() || data?.['Gender']?.toString() || '';
-								allValuesToStringResult['program_name'] =
-									programDetail?.program_name || data?.program_name?.toString() || '';
 								allValuesToStringResult['program_periode'] =
 									programDetail?.program_periode || data?.program_periode?.toString() || '';
-								allValuesToStringResult['program_mitra'] =
-									'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
 								allValuesToStringResult['staff_name'] = data?.staff_name?.toString() || '';
 								allValuesToStringResult['programs'] = [];
 
@@ -106,6 +102,12 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							return allValuesToStringResult;
 						});
 					} else {
+						const allValuesToStringResult = {};
+						allValuesToStringResult['program_id'] = programDetail?.program_id || data?.program_id?.toString() || '';
+						allValuesToStringResult['program_name'] =
+							programDetail?.program_name || data?.program_name?.toString() || '';
+						allValuesToStringResult['program_mitra'] = 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
+
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
 							Object.keys(data).forEach((key) => {
