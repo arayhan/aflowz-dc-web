@@ -4,6 +4,7 @@ import {
 	BannerFeature,
 	BarChartPenerimaKonstituenPerTahun,
 	PieChartPenerimaKonstituenByGender,
+	TableDetailPromise,
 	TableDetailStructureOrganization,
 	TableDetailTotalPenerimaByProgram,
 	TablePenerima,
@@ -13,7 +14,6 @@ import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Button, ButtonAction, Card, InputTextInfo } from '@/components/atoms';
 import { ACTION_TYPES, INSTITUSI_TYPES } from '@/utils/constants';
-import { toast } from 'react-toastify';
 
 const KonstituenDetail = () => {
 	const params = useParams();
@@ -26,8 +26,7 @@ const KonstituenDetail = () => {
 		konstituenDetail?.konstituen_type === INSTITUSI_TYPES.KAMPUS ||
 		konstituenDetail?.konstituen_type === INSTITUSI_TYPES.SEKOLAH;
 
-	const [tablePenerima] = useState({ konstituen_id: konstituenID, is_receiver: true });
-	const [searchPenerima, setSearchPenerima] = useState({});
+	const [, setSearchPenerima] = useState({});
 
 	const [tableProposal] = useState({ limit: 5 });
 
@@ -211,7 +210,17 @@ const KonstituenDetail = () => {
 												displayedColumns={['#', 'NIK', 'Nama Penerima', 'Program', 'Alamat', 'Detail']}
 											/>
 										</div>
-										<div className="col-span-12"></div>
+										<div className="col-span-12">
+											<Card title={`List Janji`} className={'bg-white rounded-md'}>
+												<div className="flex p-4 overflow-scroll max-h-96">
+													<TableDetailPromise
+														promiseData={konstituenDetail?.list_promise}
+														onDeletePromise={() => getKonstituenDetail(konstituenID)}
+														onChangeRealtization={() => getKonstituenDetail(konstituenID)}
+													/>
+												</div>
+											</Card>
+										</div>
 									</div>
 								</div>
 							</div>
