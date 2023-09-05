@@ -265,7 +265,13 @@ export const TablePenerima = ({
 		setData(
 			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
 		);
-		if (isShowFooter && penerimaList?.total) setPageCount(Math.ceil(penerimaList.total / perPage));
+		if (isShowFooter && penerimaList?.total) {
+			if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
+				setPageCount(Math.ceil(penerimaList.total / perPage));
+			} else if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
+				setPageCount(Math.ceil(calonPenerimaList.total / perPage));
+			}
+		}
 	}, [calonPenerimaList, penerimaList, isShowFooter]);
 
 	return (
