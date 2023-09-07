@@ -47,7 +47,6 @@ export const TablePenerima = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
-
 	const columns = useMemo(
 		() => [
 			{
@@ -61,7 +60,7 @@ export const TablePenerima = ({
 			{
 				Header: 'NIK',
 				minWidth: 70,
-				hidden: (displayedColumns && !displayedColumns.includes('NIK')) || isPIP,
+				hidden: displayedColumns && !displayedColumns.includes('NIK') && isPIP,
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.nik_number || '-'}</div>;
@@ -70,7 +69,7 @@ export const TablePenerima = ({
 			{
 				Header: 'NISN',
 				minWidth: 70,
-				hidden: (displayedColumns && !displayedColumns.includes('NISN')) || (!isPIP && !isKIP),
+				hidden: displayedColumns && !displayedColumns.includes('NISN') && !isPIP && !isKIP,
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div>{data?.nisn_number || '-'}</div>;
