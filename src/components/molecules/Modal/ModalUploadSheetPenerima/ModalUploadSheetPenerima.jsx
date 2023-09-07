@@ -97,6 +97,10 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 									});
 								}
 							} else {
+								allValuesToStringResult['program_name'] =
+									programDetail?.program_name || data?.program_name?.toString() || '';
+								allValuesToStringResult['program_periode'] =
+									programDetail?.program_periode || data?.program_periode?.toString() || '';
 								Object.keys(data).forEach((key) => {
 									allValuesToStringResult[key] = data[key]?.toString() || '';
 									allValuesToStringResult['programs'] = [];
@@ -106,15 +110,16 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							return allValuesToStringResult;
 						});
 					} else {
-						const allValuesToStringResult = {};
-						allValuesToStringResult['program_name'] =
-							programDetail?.program_name || data?.program_name?.toString() || '';
-						allValuesToStringResult['program_mitra'] = 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI';
-						allValuesToStringResult['program_periode'] =
-							programDetail?.program_periode || data?.program_periode?.toString() || '';
-
 						params = json.map((data) => {
 							const allValuesToStringResult = data;
+							allValuesToStringResult['program_name'] =
+								programDetail?.program_name || data?.program_name?.toString() || '';
+							allValuesToStringResult['program_mitra'] = programDetail?.mitra?.name;
+							allValuesToStringResult['program_periode'] =
+								programDetail?.program_periode || data?.program_periode?.toString() || '';
+
+							console.log({ allValuesToStringResult });
+
 							Object.keys(data).forEach((key) => {
 								allValuesToStringResult[key] = data[key]?.toString() || '';
 								allValuesToStringResult['programs'] = [];
