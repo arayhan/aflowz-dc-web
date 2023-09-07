@@ -6,6 +6,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectPeriode } from '../../InputSelect/InputSelectPeriode/InputSelectPeriode';
 import { InputSelectProgramCategory } from '../../InputSelect/InputSelectProgramCategory/InputSelectProgramCategory';
+import Swal from 'sweetalert2';
 
 export const TableProgram = ({
 	title,
@@ -25,7 +26,7 @@ export const TableProgram = ({
 	const navigate = useNavigate();
 
 	const { isSystem } = useAuthStore();
-	const { programList, fetchingProgramList, getProgramList, deleteProgram } = useProgramStore();
+	const { programList, fetchingProgramList, getProgramList, deleteProgram, changeProgramStatus } = useProgramStore();
 
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
@@ -110,8 +111,9 @@ export const TableProgram = ({
 			},
 			{
 				Header: 'Actions',
-				minWidth: 220,
+				minWidth: params.is_special_program ? 220 : 300,
 				Cell: (row) => {
+					const data = row.row.original;
 					return (
 						<div className="flex gap-2">
 							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/program/${row.row.original.id}`} />
@@ -121,6 +123,14 @@ export const TableProgram = ({
 									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteProgram(row.row.original.id)} />
 								</>
 							)}
+							{!params.is_special_program && data.status === 'available' && (
+								<button
+									className="px-2 py-1 text-xs text-white bg-green-500 rounded-sm"
+									onClick={() => handleChangeStatus(row.row.original.id)}
+								>
+									Ubah Status
+								</button>
+							)}
 						</div>
 					);
 				}
@@ -128,6 +138,18 @@ export const TableProgram = ({
 		],
 		[offset, perPage, page, isSystem]
 	);
+
+	const handleChangeStatus = (programID) => {
+		Swal.fire({
+			title: 'Apakah Anda yakin mengubah status item ini?',
+			icon: 'warning',
+			showCancelButton: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				changeProgramStatus(programID);
+			}
+		});
+	};
 
 	const handleClickRow = (rowData) => navigate(`/program/${rowData.id}`);
 

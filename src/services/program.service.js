@@ -88,6 +88,15 @@ export const deleteProgram = async (programID) => {
 	}
 };
 
+export const changePorgramStatus = async (programID) => {
+	try {
+		const response = await http.post(`/program/validate/${programID}`);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getProgramCategory = async (programCategoryID) => {
 	try {
 		const response = await http.get('/program/category/' + programCategoryID);

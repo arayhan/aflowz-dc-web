@@ -122,6 +122,19 @@ const states = (set, get) => ({
 		set({ processingDeleteProgram: false });
 		setPageLoading(false);
 	},
+	changeProgramStatus: async (programID) => {
+		setPageLoading(true);
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PROGRAM.changePorgramStatus(programID);
+		toastRequestResult(
+			loader,
+			success,
+			'Program already locked/done, you cannot validate this program',
+			payload?.odoo_error || payload?.message
+		);
+		get().getProgramList();
+		setPageLoading(false);
+	},
 	getProgramCategory: async (programCategoryID) => {
 		set({ fetchingProgramCategory: true });
 
