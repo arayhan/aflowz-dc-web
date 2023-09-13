@@ -42,7 +42,7 @@ export const ModalUploadSheetKonstituen = ({ onClose }) => {
 						return allValuesToStringResult;
 					});
 
-					bulkCreatePartner(params, ({ payload, success }) => {
+					bulkCreatePartner(params, 'v2', ({ payload, success }) => {
 						if (success) {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
 							const queryString = objectToQueryString(queryParams);

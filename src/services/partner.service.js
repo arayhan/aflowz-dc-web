@@ -36,7 +36,7 @@ export const getPartnerDetail = async (partnerID) => {
 	}
 };
 
-export const bulkCreatePartner = async (params) => {
+export const bulkCreatePartner = async (params, apiVersion = 'v2') => {
 	const { username } = useAuthStore.getState().profile;
 	const request = {
 		created_by: username,
@@ -44,7 +44,7 @@ export const bulkCreatePartner = async (params) => {
 	};
 
 	try {
-		const response = await http.post('/partner', request, { baseURL: baseURL.replace('v1', 'v2') });
+		const response = await http.post('/partner', request, { baseURL: baseURL.replace('v1', apiVersion) });
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

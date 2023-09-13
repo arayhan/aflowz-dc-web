@@ -144,7 +144,7 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 
 					if (status === STATUS_PENERIMA_TYPES.CANDIDATE) bulkCreatePartnerCandidate(params, bulkCreateCallback);
 					else if (status === STATUS_PENERIMA_TYPES.CONFIRMED) bulkCreatePartnerConfirm(params, bulkCreateCallback);
-					else bulkCreatePartner(params, bulkCreateCallback);
+					else bulkCreatePartner(params, 'v2', bulkCreateCallback);
 				} else {
 					toast.warning('Data kosong');
 				}

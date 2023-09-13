@@ -48,7 +48,7 @@ export const ModalUploadSheetFollowers = ({ onClose }) => {
 						return stringValues;
 					});
 
-					bulkCreatePartner(params, ({ payload, success }) => {
+					bulkCreatePartner(params, 'v1', ({ payload, success }) => {
 						if (success) {
 							const queryParams = { order_by: 'create_date', order_by_type: 'desc' };
 							const queryString = objectToQueryString(queryParams);
@@ -117,7 +117,7 @@ export const ModalUploadSheetFollowers = ({ onClose }) => {
 									<div className="text-sm">
 										{error.name} - {error.nik_number}
 									</div>
-									<div className="text-xs bg-red-400 p-2 rounded-md">
+									<div className="p-2 text-xs bg-red-400 rounded-md">
 										{Object.keys(error.list_error_message).map((key) => (
 											<div key={key} className="grid grid-cols-6">
 												<span>{key}</span>
@@ -138,7 +138,7 @@ export const ModalUploadSheetFollowers = ({ onClose }) => {
 						</div>
 						<label
 							htmlFor="updateSheetFile"
-							className="bg-primary px-5 py-2 rounded-sm text-white cursor-pointer hover:bg-primary-400"
+							className="px-5 py-2 text-white rounded-sm cursor-pointer bg-primary hover:bg-primary-400"
 						>
 							<div>Ubah File</div>
 							<input
@@ -154,7 +154,7 @@ export const ModalUploadSheetFollowers = ({ onClose }) => {
 				{!file && (
 					<label
 						htmlFor="selectSheetFile"
-						className="block border border-dashed text-center px-4 py-16 text-gray-300 rounded-md cursor-pointer hover:bg-gray-100"
+						className="block px-4 py-16 text-center text-gray-300 border border-dashed rounded-md cursor-pointer hover:bg-gray-100"
 					>
 						<div>UPLOAD HERE</div>
 						<input

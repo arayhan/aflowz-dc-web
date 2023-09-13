@@ -139,11 +139,11 @@ const states = (set, get) => ({
 		set({ fetchingPenerimaDetail: false });
 	},
 
-	bulkCreatePartner: async (params, callback) => {
+	bulkCreatePartner: async (params, apiVersion = 'v2', callback) => {
 		set({ processingBulkCreatePartner: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params);
+		const { payload, success } = await SERVICE_PARTNER.bulkCreatePartner(params, apiVersion);
 
 		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
 		set({ processingBulkCreatePartner: false });
