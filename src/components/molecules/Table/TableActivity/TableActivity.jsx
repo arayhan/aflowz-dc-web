@@ -253,11 +253,14 @@ export const TableActivity = ({
 					<div className="px-6 py-4">
 						<div className="flex justify-end w-full gap-4">
 							<InputText
-								value={params?.keyword || ''}
+								value={params?.keyword ? decodeURIComponent(params?.keyword) : ''}
 								showLabel={false}
 								placeholder="Cari nama kegiatan"
 								onChange={(event) => {
-									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+									handleSetFilter(
+										'keyword',
+										event.target.value ? { keyword: encodeURIComponent(event.target.value) } : undefined
+									);
 								}}
 							/>
 						</div>

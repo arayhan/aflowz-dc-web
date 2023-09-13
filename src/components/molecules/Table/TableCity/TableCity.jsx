@@ -107,6 +107,7 @@ export const TableCity = ({
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
+		console.log({ updatedParams, key, params });
 		if (setParams) setParams(queryStringToObject(updatedParams));
 		else navigate('/dapil/city' + updatedParams, { replace: true });
 	};
@@ -148,11 +149,14 @@ export const TableCity = ({
 					<div className="px-6 py-4">
 						<div className="flex justify-end w-full gap-4">
 							<InputText
-								value={params?.keyword || ''}
+								value={params?.keyword ? decodeURIComponent(params?.keyword) : ''}
 								showLabel={false}
 								placeholder="Cari nama kota"
 								onChange={(event) => {
-									handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+									handleSetFilter(
+										'keyword',
+										event.target.value ? { keyword: encodeURIComponent(event.target.value) } : undefined
+									);
 								}}
 							/>
 						</div>

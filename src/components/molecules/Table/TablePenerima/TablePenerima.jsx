@@ -301,11 +301,14 @@ export const TablePenerima = ({
 						<div className="grid items-center justify-end w-full grid-cols-1 gap-4 text-sm sm:grid-cols-2 lg:flex">
 							{(!displayedFilters || displayedFilters.includes('keyword')) && (
 								<InputText
-									value={params?.keyword || ''}
+									value={params?.keyword ? decodeURIComponent(params?.keyword) : ''}
 									showLabel={false}
 									placeholder="Cari penerima"
 									onChange={(event) => {
-										handleSetFilter('keyword', event.target.value ? { keyword: event.target.value } : undefined);
+										handleSetFilter(
+											'keyword',
+											event.target.value ? { keyword: encodeURIComponent(event.target.value) } : undefined
+										);
 									}}
 								/>
 							)}
