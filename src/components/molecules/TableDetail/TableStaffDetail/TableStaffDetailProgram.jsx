@@ -19,21 +19,43 @@ export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) 
 				Header: 'Nama Program',
 				minWidth: 150,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original.name}</div>;
+					return <div className="capitalize transform:">{row.row.original.name}</div>;
 				}
 			},
 			{
 				Header: 'Mitra',
 				minWidth: 200,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original.program_category.name}</div>;
+					return <div className="capitalize transform:">{row.row.original.program_category.name}</div>;
 				}
 			},
 			{
 				Header: 'Periode',
 				minWidth: 20,
 				Cell: (row) => {
-					return <div className="transform: capitalize">{row.row.original.periode}</div>;
+					return <div className="capitalize transform:">{row.row.original.periode}</div>;
+				}
+			},
+			{
+				Header: 'Program PIC',
+				minWidth: 20,
+				Cell: (row) => {
+					const data = row.row.original;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{data.programs_pic.length === 0 && '-'}
+							{data.programs_pic.length > 0 &&
+								data.map((program_pic) => (
+									<ButtonAction
+										key={program_pic.id}
+										className="w-full bg-purple-500 hover:bg-purple-400"
+										action={ACTION_TYPES.SEE_DETAIL}
+										linkTo={`/staff/${program_pic.id}`}
+										text={program_pic.name}
+									/>
+								))}
+						</div>
+					);
 				}
 			},
 			{
@@ -63,7 +85,7 @@ export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) 
 					showButtonCreate={false}
 				/>
 			</div>
-			<div className="h-fit overflow-y-auto">
+			<div className="overflow-y-auto h-fit">
 				<Table columns={columns} data={fetchData} loading={null} />
 			</div>
 		</>
