@@ -203,6 +203,7 @@ const KonstituenDetail = () => {
 											<TablePenerima
 												title="Penerima Program"
 												konstituenType={konstituenDetail?.konstituen_type}
+												params={{ konstituen_id: konstituenID }}
 												setParams={setSearchPenerima}
 												isReadonly
 												enableClickRow
