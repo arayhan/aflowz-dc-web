@@ -376,6 +376,7 @@ export const FormActivity = () => {
 							type="number"
 							label="Jumlah Barang"
 							placeholder="Jumlah Barang"
+							min={0}
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
 							error={error}
 						/>

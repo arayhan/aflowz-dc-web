@@ -167,11 +167,9 @@ export const formStaffSchema = yup.object().shape({
 export const formActivitySchema = yup.object().shape({
 	description_activity: yup.string().required('Nama Kegiatan wajib diisi'),
 	description_activity_detail: yup.string().required('Nama Detail Kegiatan wajib diisi'),
-	konstituen_id: yup.number().required('Institusi wajib diisi'),
 	village_id: yup.number().required('Kelurahan/Desa wajib diisi'),
 	district_id: yup.string().required('Kecamatan wajib diisi'),
 	city_id: yup.number().required('Kota wajib diisi'),
-	program_id: yup.number().required('Program wajib diisi'),
 	category_id: yup.number().required('Kategori kegiatan wajib diisi'),
 	activity_date: yup.string().required('Tanggal kegiatan wajib diisi'),
 	pic: yup.string().required('PIC kegiatan wajib diisi'),
@@ -182,8 +180,6 @@ export const formActivitySchema = yup.object().shape({
 		.min(8, 'Minimal 8 angka'),
 	pic_staff_id: yup.number().required('PIC tim internal wajib diisi'),
 	total_participant: yup.number().required('Total peserta wajib diisi'),
-	item: yup.string().required('Barang wajib diisi'),
-	total_item: yup.number().required('Total barang wajib diisi'),
 	checkout_description: yup.string().required('Deskripsi Checkout wajib diisi')
 });
 
