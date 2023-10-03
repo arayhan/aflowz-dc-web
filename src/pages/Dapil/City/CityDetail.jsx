@@ -102,12 +102,12 @@ const CityDetail = () => {
 								/>
 								<CardDetailTotal
 									title={'Total Siswa Penerima PIP'}
-									value={cityDetail?.total_penerima_program_city_pip || 0}
+									value={cityDetail?.total_penerima_program_pip_city || 0}
 									linkTo={`/penerima?city_id=${cityID}&program=pip`}
 								/>
 								<CardDetailTotal
 									title={'Total Mahasiswa Penerima KIP'}
-									value={cityDetail?.total_penerima_program_city_kip || 0}
+									value={cityDetail?.total_penerima_program_kip_city || 0}
 									linkTo={`/penerima?city_id=${cityID}&program=kip`}
 								/>
 								<CardDetailTotal
