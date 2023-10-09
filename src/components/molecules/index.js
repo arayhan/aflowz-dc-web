@@ -46,6 +46,7 @@ export * from './Form/FormVisitasiPromise/FormVisitasiPromise';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
+export * from './TableDetail/TableStaffDetail/TableStaffDetailProgramPIC';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailInstitusi';
 
 export * from './TableSelect/TableSelectRole/TableSelectRole';

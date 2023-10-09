@@ -2,7 +2,7 @@ import { ButtonAction, Table, TableHeader } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 import { useMemo } from 'react';
 
-export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) => {
+export const TableStaffDetailProgramPIC = ({ fetchData, isReadonly, titleHeader }) => {
 	const columns = useMemo(
 		() => [
 			{
@@ -19,7 +19,7 @@ export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) 
 				Header: 'Nama Program',
 				minWidth: 150,
 				Cell: (row) => {
-					return <div className="capitalize transform:">{row.row.original.name}</div>;
+					return <div className="capitalize transform:">{row.row.original.program_name}</div>;
 				}
 			},
 			{
@@ -33,29 +33,14 @@ export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) 
 				Header: 'Periode',
 				minWidth: 20,
 				Cell: (row) => {
-					return <div className="capitalize transform:">{row.row.original.periode}</div>;
+					return <div className="capitalize transform:">{row.row.original.program_periode}</div>;
 				}
 			},
 			{
 				Header: 'Program PIC',
 				minWidth: 20,
 				Cell: (row) => {
-					const data = row.row.original;
-					return (
-						<div className="flex flex-wrap gap-1">
-							{data.programs_pic?.length === 0 && '-'}
-							{data.programs_pic?.length > 0 &&
-								data.map((program_pic) => (
-									<ButtonAction
-										key={program_pic.id}
-										className="w-full bg-purple-500 hover:bg-purple-400"
-										action={ACTION_TYPES.SEE_DETAIL}
-										linkTo={`/staff/${program_pic.id}`}
-										text={program_pic.name}
-									/>
-								))}
-						</div>
-					);
+					return <div className="capitalize transform:">{row.row.original.program_pic_external}</div>;
 				}
 			},
 			{
@@ -66,7 +51,7 @@ export const TableStaffDetailProgram = ({ fetchData, isReadonly, titleHeader }) 
 						<ButtonAction
 							className="bg-purple-500 hover:bg-purple-400 px-9"
 							action={ACTION_TYPES.SEE_DETAIL}
-							linkTo={`/program/${row.row.original.id}`}
+							linkTo={`/program/${row.row.original.program_id}`}
 						/>
 					);
 				}

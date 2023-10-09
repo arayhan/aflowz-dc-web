@@ -6,7 +6,7 @@ import {
 	TableDetailPICDistrict,
 	TableDetailPICVillage,
 	TableStaffDetailInstitusi,
-	TableStaffDetailProgram,
+	TableStaffDetailProgramPIC,
 	TableStaffDetailTotalUsulanPerProgram
 } from '@/components/molecules';
 import { useEffect, useRef, useState } from 'react';
@@ -167,10 +167,10 @@ const StaffDetail = () => {
 													tag={'Role'}
 													value={
 														<div>
-															{staff?.staff_titles.length === 0 && (
+															{staff?.staff_titles?.length === 0 && (
 																<div className="text-gray-500">Belum Mencantumkan</div>
 															)}
-															{staff?.staff_titles.length > 0 && (
+															{staff?.staff_titles?.length > 0 && (
 																<ul className="space-y-2 list-disc list-inside">
 																	{staff?.staff_titles.map((title) => {
 																		return (
@@ -203,10 +203,10 @@ const StaffDetail = () => {
 								</div>
 								<div className="grid grid-cols-1 gap-5 my-5 lg:grid-cols-2">
 									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
-										<TableStaffDetailProgram
-											fetchData={staff?.programs}
+										<TableStaffDetailProgramPIC
+											fetchData={staff?.programs_pic}
 											isReadonly={!isSystem}
-											titleHeader={'List Program'}
+											titleHeader={'List Program PIC'}
 										/>
 									</div>
 									<div className="p-2 bg-white rounded-md shadow-lg max-h-[50vh] overflow-x-auto overflow-y-auto">
