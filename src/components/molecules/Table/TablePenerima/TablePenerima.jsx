@@ -21,6 +21,8 @@ export const TablePenerima = ({
 	isReadonly,
 	isShowFooter,
 	isShowButtonSeeAll,
+	isShowButtonSeeAnonymousData,
+	isShowButtonUploadAnonymousData,
 	isShowBulkDownloadCertificate,
 	onClickRow,
 	isShowFilter,
@@ -47,6 +49,9 @@ export const TablePenerima = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
+
+	const IS_ANONYMOUS_DATA = Boolean(params.is_no_nik_number && params.is_no_nisn_number);
+
 	const columns = useMemo(
 		() => [
 			{
@@ -279,12 +284,19 @@ export const TablePenerima = ({
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					feature="Penerima"
+					feature={IS_ANONYMOUS_DATA ? 'Penerima Anonymous' : 'Penerima'}
 					featurePath="/penerima"
 					title={title || 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
+					onClickSeeAnonymousData={() =>
+						navigate('/penerima' + objectToQueryString({ is_no_nik_number: true, is_no_nisn_number: true }))
+					}
 					onClickDownloadData={handleDownloadData}
-					showButtonDownloadData={data?.length > 0}
+					onClickDownloadAnonymousData={handleDownloadData}
+					showButtonSeeAnonymousData={isShowButtonSeeAnonymousData && !IS_ANONYMOUS_DATA}
+					showButtonUploadAnonymousData={isShowButtonUploadAnonymousData && IS_ANONYMOUS_DATA}
+					showButtonDownloadAnonymousData={data?.length > 0 && IS_ANONYMOUS_DATA}
+					showButtonDownloadData={data?.length > 0 && !IS_ANONYMOUS_DATA}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
@@ -425,6 +437,8 @@ TablePenerima.defaultProps = {
 	isShowFooter: true,
 	isShowFilter: true,
 	isShowBulkDownloadCertificate: false,
+	isShowButtonSeeAnonymousData: false,
+	isShowButtonUploadAnonymousData: false,
 	isPIP: true,
 	isKIP: true,
 	isNeedAbort: false

@@ -51,6 +51,21 @@ export const bulkCreatePartner = async (params, apiVersion = 'v2') => {
 	}
 };
 
+export const bulkUploadAnonymouseData = async (params) => {
+	const { username } = useAuthStore.getState().profile;
+	const request = {
+		updated_by: username,
+		datas: params
+	};
+
+	try {
+		const response = await http.put('/partner/bulk-anonymous', request);
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const bulkCreatePartnerCandidate = async (params) => {
 	const { username } = useAuthStore.getState().profile;
 	const request = {

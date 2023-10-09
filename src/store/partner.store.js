@@ -26,6 +26,7 @@ const states = (set, get) => ({
 	processingBulkCreatePartner: false,
 	processingBulkCreatePartnerCandidate: false,
 	processingBulkCreatePartnerConfirm: false,
+	processingBulkUploadAnonymouseData: false,
 	processingUploadStaffOrganizationStructureImage: false,
 	processingDeleteStaffOrganizationStructureImage: false,
 	processingBulkDownloadPartnerCertificate: false,
@@ -147,6 +148,18 @@ const states = (set, get) => ({
 
 		toastRequestResult(loader, success, 'Penerima Created', payload?.odoo_error || payload?.message);
 		set({ processingBulkCreatePartner: false });
+
+		callback({ payload, success });
+	},
+
+	bulkUploadAnonymouseData: async (params, callback) => {
+		set({ processingBulkUploadAnonymouseData: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_PARTNER.bulkUploadAnonymouseData(params);
+
+		toastRequestResult(loader, success, 'Penerima Anonymous Updated', payload?.odoo_error || payload?.message);
+		set({ processingBulkUploadAnonymouseData: false });
 
 		callback({ payload, success });
 	},

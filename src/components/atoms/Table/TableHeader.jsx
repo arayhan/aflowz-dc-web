@@ -1,10 +1,12 @@
 import {
+	ModalUploadSheetAnonymousData,
 	ModalUploadSheetFollowers,
 	ModalUploadSheetKonstituen,
 	ModalUploadSheetPenerima
 } from '@/components/molecules';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useState } from 'react';
+import { BsEyeFill, BsUpload } from 'react-icons/bs';
 import { SiGooglesheets } from 'react-icons/si';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -16,9 +18,14 @@ export const TableHeader = ({
 	isReadonly,
 	seeAllLink,
 	onClickDownloadData,
+	onClickSeeAnonymousData,
+	onClickDownloadAnonymousData,
 	showButtonCreate,
 	showButtonSeeAll,
 	showButtonDownloadData,
+	showButtonDownloadAnonymousData,
+	showButtonUploadAnonymousData,
+	showButtonSeeAnonymousData,
 	showButtonUploadSheetKandidat,
 	showButtonUploadSheetFollowers,
 	showButtonUploadSheetPenerimaGeneral,
@@ -36,6 +43,7 @@ export const TableHeader = ({
 	const [showModalUploadSheetPenerimaGeneral, setShowModalUploadSheetPenerimaGeneral] = useState(false);
 	const [showModalUploadSheetFollowers, setShowModalUploadSheetFollowers] = useState(false);
 	const [showModalUploadSheetKonstituen, setShowModalUploadSheetKonstituen] = useState(false);
+	const [showModalUploadSheetAnonymousData, setShowModalUploadSheetAnonymousData] = useState(false);
 
 	return (
 		<div className="flex flex-col items-start justify-between w-full gap-4 lg:flex-row lg:items-center">
@@ -44,6 +52,9 @@ export const TableHeader = ({
 					status={STATUS_PENERIMA_TYPES.CANDIDATE}
 					onClose={() => setShowModalUploadSheetKandidat(false)}
 				/>
+			)}
+			{showModalUploadSheetAnonymousData && (
+				<ModalUploadSheetAnonymousData onClose={() => setShowModalUploadSheetAnonymousData(false)} />
 			)}
 			{showModalUploadSheetFollowers && (
 				<ModalUploadSheetFollowers onClose={() => setShowModalUploadSheetFollowers(false)} />
@@ -74,6 +85,45 @@ export const TableHeader = ({
 					>
 						<span>Lihat Semua</span>
 					</Link>
+				)}
+				{showButtonSeeAnonymousData && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-600 rounded-sm hover:bg-green-700 lg:w-auto"
+							onClick={onClickSeeAnonymousData}
+						>
+							<span className="w-4">
+								<BsEyeFill size={16} />
+							</span>
+							<span className="text-sm">See Anonymouse Data</span>
+						</button>
+					</>
+				)}
+				{showButtonUploadAnonymousData && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-green-600 rounded-sm hover:bg-green-700 lg:w-auto"
+							onClick={() => setShowModalUploadSheetAnonymousData(true)}
+						>
+							<span className="w-4">
+								<BsUpload size={16} />
+							</span>
+							<span className="text-sm">Upload Anonymous Data</span>
+						</button>
+					</>
+				)}
+				{showButtonDownloadAnonymousData && (
+					<>
+						<button
+							className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all bg-blue-500 rounded-sm hover:bg-blue-600 lg:w-auto"
+							onClick={onClickDownloadAnonymousData}
+						>
+							<span className="w-4">
+								<SiGooglesheets size={16} />
+							</span>
+							<span className="text-sm">Download Anonymous Data</span>
+						</button>
+					</>
 				)}
 				{showButtonDownloadData && (
 					<>

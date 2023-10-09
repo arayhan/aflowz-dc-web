@@ -86,6 +86,7 @@ export * from './Modal/ModalUploadImage/ModalUploadImage';
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
 export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
 export * from './Modal/ModalUploadSheetKonstituen/ModalUploadSheetKonstituen';
+export * from './Modal/ModalUploadSheetAnonymousData/ModalUploadSheetAnonymousData';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';

@@ -119,6 +119,10 @@ export const DAPIL_MENUS = [
 	{ id: 3, title: 'Desa', icon: require('@/images/icons/Icon_Home/Desa.svg').default, path: '/dapil/village' }
 ];
 
+export const KAMPANYE_MENUS = [
+	{ id: 1, title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/dapil/city' },
+];
+
 export const PRODUCT_MOVEMENT_TYPE = {
 	IN: 'in',
 	OUT: 'out',

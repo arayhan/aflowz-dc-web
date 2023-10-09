@@ -39,6 +39,8 @@ const Penerima = () => {
 						]}
 						isKIP
 						isPIP
+						isShowButtonUploadAnonymousData
+						isShowButtonSeeAnonymousData
 						isShowBulkDownloadCertificate
 					/>
 				</div>
