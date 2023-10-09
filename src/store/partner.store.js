@@ -100,14 +100,19 @@ const states = (set, get) => ({
 		set({ fetchingPenerimaList: false });
 	},
 
-	downloadCsvPenerima: async (params, callback) => {
+	downloadCsvPenerima: async (params, isAnonymous, callback) => {
 		set({ fetchingDownloadPenerimaList: true });
 		const loader = toast.loading('Processing...');
 
 		const requestParams = params;
 		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
 
-		toastRequestResult(loader, success, 'Penerima Downloaded', payload?.odoo_error || payload?.message);
+		toastRequestResult(
+			loader,
+			success,
+			isAnonymous ? 'Penerima Anonymous Downloaded' : 'Penerima Downloaded',
+			payload?.odoo_error || payload?.message
+		);
 
 		if (success) {
 			const header = ['No', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Email', 'Mobile', 'Gender', 'Program'];
@@ -123,7 +128,9 @@ const states = (set, get) => ({
 				penerima?.programs?.map((program) => program.name).join(', ') || '-'
 			]);
 
-			const filename = `Penerima Program - ${moment().format('yyyy MMMM DD HH:mm:ss')}.csv`;
+			const filename = `${isAnonymous ? 'Penerima Anonymous' : 'Penerima Program'} - ${moment().format(
+				'yyyy MMMM DD HH:mm:ss'
+			)}.csv`;
 			exportToCsv(filename, [header, ...data]);
 		}
 

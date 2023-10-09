@@ -8,6 +8,8 @@ const Penerima = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
+	const IS_ANONYMOUS_DATA = Boolean(params.is_no_nik_number && params.is_no_nisn_number);
+
 	useEffect(() => {
 		setParams(search ? queryStringToObject(search) : {});
 	}, [search]);
@@ -15,7 +17,13 @@ const Penerima = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={`${params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE ? 'Calon Penerima' : 'Penerima'} `}
+				title={`${
+					params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE
+						? 'Calon Penerima'
+						: IS_ANONYMOUS_DATA
+						? 'Penerima Anonymous'
+						: 'Penerima'
+				} `}
 			/>
 			<div className="bg-gray-100">
 				<div className="container py-6">

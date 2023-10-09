@@ -243,8 +243,8 @@ export const TablePenerima = ({
 		else navigate('/penerima' + updatedParams, { replace: true });
 	};
 
-	const handleDownloadData = () => {
-		downloadCsvPenerima(params);
+	const handleDownloadData = (isAnonymous = false) => {
+		downloadCsvPenerima(params, isAnonymous);
 	};
 
 	useEffect(() => {
@@ -286,13 +286,13 @@ export const TablePenerima = ({
 				<TableHeader
 					feature={IS_ANONYMOUS_DATA ? 'Penerima Anonymous' : 'Penerima'}
 					featurePath="/penerima"
-					title={title || 'Penerima Program'}
+					title={title || IS_ANONYMOUS_DATA ? 'Penerima Anonymous' : 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
 					onClickSeeAnonymousData={() =>
 						navigate('/penerima' + objectToQueryString({ is_no_nik_number: true, is_no_nisn_number: true }))
 					}
 					onClickDownloadData={handleDownloadData}
-					onClickDownloadAnonymousData={handleDownloadData}
+					onClickDownloadAnonymousData={() => handleDownloadData(true)}
 					showButtonSeeAnonymousData={isShowButtonSeeAnonymousData && !IS_ANONYMOUS_DATA}
 					showButtonUploadAnonymousData={isShowButtonUploadAnonymousData && IS_ANONYMOUS_DATA}
 					showButtonDownloadAnonymousData={data?.length > 0 && IS_ANONYMOUS_DATA}
