@@ -120,7 +120,7 @@ export const DAPIL_MENUS = [
 ];
 
 export const KAMPANYE_MENUS = [
-	{ id: 1, title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/dapil/city' },
+	{ id: 1, title: 'Kota', icon: require('@/images/icons/Icon_Home/Kota.svg').default, path: '/dapil/city' }
 ];
 
 export const PRODUCT_MOVEMENT_TYPE = {
