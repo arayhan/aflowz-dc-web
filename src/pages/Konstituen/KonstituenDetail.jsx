@@ -120,7 +120,7 @@ const KonstituenDetail = () => {
 											</Link>
 										</div>
 										<div className="px-8 py-6 mb-2 bg-white rounded-md shadow-lg cursor-pointer md:px-10">
-											<Link to={`/institusi/penerima/${konstituenDetail?.konstituen_id}`}>
+											<Link to={`/penerima?konstituen_id=${konstituenDetail?.konstituen_id}`}>
 												<div className="flex flex-col items-center justify-center space-y-1 text-center">
 													<span className="text-2xl md:text-4xl font-extralight">
 														{konstituenDetail?.total_penerima_program_konstituen_per_orang || 0}

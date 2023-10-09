@@ -286,7 +286,7 @@ export const TablePenerima = ({
 				<TableHeader
 					feature={IS_ANONYMOUS_DATA ? 'Penerima Anonymous' : 'Penerima'}
 					featurePath="/penerima"
-					title={title || IS_ANONYMOUS_DATA ? 'Penerima Anonymous' : 'Penerima Program'}
+					title={title || 'Penerima Program'}
 					isReadonly={!isSystem || isReadonly}
 					onClickSeeAnonymousData={() =>
 						navigate('/penerima' + objectToQueryString({ is_no_nik_number: true, is_no_nisn_number: true }))
