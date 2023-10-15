@@ -115,10 +115,22 @@ const states = (set, get) => ({
 		);
 
 		if (success) {
-			const header = ['No', 'NIK', 'Nama Penerima', 'Institusi', 'Alamat', 'Email', 'Mobile', 'Gender', 'Program'];
+			const header = [
+				'No',
+				'NIK',
+				'NISN',
+				'Nama Penerima',
+				'Institusi',
+				'Alamat',
+				'Email',
+				'Mobile',
+				'Gender',
+				'Program'
+			];
 			const data = payload?.items?.map((penerima, index) => [
 				index + 1,
 				penerima?.nik_number || '-',
+				penerima?.nisn_number || '-',
 				penerima?.name || '-',
 				penerima?.konstituen?.name || '-',
 				penerima?.address || '-',
