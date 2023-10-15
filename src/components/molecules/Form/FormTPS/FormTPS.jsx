@@ -12,7 +12,7 @@ export const FormTPS = () => {
 	const { TPSID } = useParams();
 	const navigate = useNavigate();
 
-	const { TPS, fetchingTPS, processingCreateTPS, TPSErrors } = useTPSStore();
+	const { TPSItem, fetchingTPS, processingCreateTPS, TPSErrors } = useTPSStore();
 	const { getTPSItem, createTPS, updateTPS, clearStateTPS } = useTPSStore();
 
 	const { control, setValue, setError, handleSubmit } = useForm({
@@ -48,29 +48,35 @@ export const FormTPS = () => {
 	}, [TPSID]);
 
 	useEffect(() => {
-		if (TPSID && TPS) {
-			setValue('name', TPS.name || '');
-			setValue('periode', TPS.periode ? Number(TPS.periode) : null);
-			setValue('contact', TPS?.contact || '');
-			setValue('total_target_voters', TPS?.total_target_voters ? Number(TPS?.total_target_voters) : undefined);
-			setValue('total_dc_voters', TPS?.total_dc_voters ? Number(TPS?.total_dc_voters) : undefined);
-			setValue('total_legitimate_vote', TPS?.total_legitimate_vote ? Number(TPS?.total_legitimate_vote) : undefined);
-			setValue('total_invalid_vote', TPS?.total_invalid_vote ? Number(TPS?.total_invalid_vote) : undefined);
-			setValue('village_id', TPS?.village?.id || null);
+		if (TPSID && TPSItem) {
+			setValue('name', TPSItem.name || '');
+			setValue('periode', TPSItem.periode ? Number(TPSItem.periode) : null);
+			setValue('contact', TPSItem?.contact || '');
+			setValue('total_target_voters', TPSItem?.total_target_voters ? Number(TPSItem?.total_target_voters) : undefined);
+			setValue('total_dc_voters', TPSItem?.total_dc_voters ? Number(TPSItem?.total_dc_voters) : undefined);
+			setValue(
+				'total_legitimate_vote',
+				TPSItem?.total_legitimate_vote ? Number(TPSItem?.total_legitimate_vote) : undefined
+			);
+			setValue('total_invalid_vote', TPSItem?.total_invalid_vote ? Number(TPSItem?.total_invalid_vote) : undefined);
+			setValue('village_id', TPSItem?.village?.id || null);
 			setValue(
 				'witness_staff_ids',
-				TPS?.witness_staff_ids
-					? TPS?.witness_staff_ids.map((witness) => ({ value: witness.id, label: witness.name }))
+				TPSItem?.witness_staff_ids
+					? TPSItem?.witness_staff_ids.map((witness) => ({ value: witness.id, label: witness.name }))
 					: []
 			);
 			setValue(
 				'volunteer_staff_ids',
-				TPS?.volunteer_staff_ids
-					? TPS?.volunteer_staff_ids.map((volunteerStaff) => ({ value: volunteerStaff.id, label: volunteerStaff.name }))
+				TPSItem?.volunteer_staff_ids
+					? TPSItem?.volunteer_staff_ids.map((volunteerStaff) => ({
+							value: volunteerStaff.id,
+							label: volunteerStaff.name
+					  }))
 					: []
 			);
 		}
-	}, [TPSID, TPS]);
+	}, [TPSID, TPSItem]);
 
 	useEffect(() => () => clearStateTPS(), []);
 
@@ -147,8 +153,8 @@ export const FormTPS = () => {
 						<InputText
 							{...field}
 							type="number"
-							label="Total Pemilih DC"
-							placeholder="Total Pemilih DC"
+							label="Total Suara DC"
+							placeholder="Total Suara DC"
 							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							error={error}
 						/>
@@ -162,8 +168,8 @@ export const FormTPS = () => {
 						<InputText
 							{...field}
 							type="number"
-							label="Total Pemilih Yang Sah"
-							placeholder="Total Pemilih Yang Sah"
+							label="Total Suara Yang Sah"
+							placeholder="Total Suara Yang Sah"
 							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							error={error}
 						/>
@@ -177,8 +183,8 @@ export const FormTPS = () => {
 						<InputText
 							{...field}
 							type="number"
-							label="Total Pemilih Yang Tidak Valid"
-							placeholder="Total Pemilih Yang Tidak Valid"
+							label="Total Suara Yang Tidak Valid"
+							placeholder="Total Suara Yang Tidak Valid"
 							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							error={error}
 						/>

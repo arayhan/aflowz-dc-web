@@ -98,10 +98,10 @@ export const formTPSSchema = yup.object().shape(
 			.required('Kontak wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka'),
-		total_target_voters: yup.number().required('Total Target Pemilih wajib diisi'),
-		total_dc_voters: yup.number().required('Total Pemilih DC wajib diisi'),
-		total_legitimate_vote: yup.number().required('Total Pemilih Yang Sah wajib diisi'),
-		total_invalid_vote: yup.number().required('Total Pemilih Yang Tidak Valid wajib diisi'),
+		total_target_voters: yup.number().required('Total Target Suara wajib diisi'),
+		total_dc_voters: yup.number().required('Total Suara DC wajib diisi'),
+		total_legitimate_vote: yup.number().required('Total Suara Yang Sah wajib diisi'),
+		total_invalid_vote: yup.number().required('Total Suara Yang Tidak Valid wajib diisi'),
 		village_id: yup.number().required('Kelurahan/Desa wajib diisi')
 	},
 	['contact', 'contact']

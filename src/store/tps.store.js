@@ -21,13 +21,13 @@ const states = (set, get) => ({
 
 	getTPSItem: async (TPSID) => {
 		set({ fetchingTPS: true });
-		set({ TPS: null });
+		set({ TPSItem: null });
 
 		const { success, payload } = await SERVICE_TPS.getTPSItem(TPSID);
 
 		if (!success) set({ errorsTPS: payload });
 
-		set({ TPS: success ? payload : null });
+		set({ TPSItem: success ? payload : null });
 		set({ fetchingTPS: false });
 	},
 
