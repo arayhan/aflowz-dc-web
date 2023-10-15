@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
-import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
+import { InputSelectPeriode } from '../../InputSelect/InputSelectPeriode/InputSelectPeriode';
 
 export const FormTPS = () => {
 	const { TPSID } = useParams();
@@ -19,10 +19,15 @@ export const FormTPS = () => {
 		resolver: yupResolver(formTPSSchema),
 		defaultValues: {
 			name: '',
-			village_id: '',
-			pic: '',
-			pic_mobile: '',
-			pic_staff_id: undefined
+			periode: undefined,
+			contact: '',
+			total_target_voters: undefined,
+			total_dc_voters: undefined,
+			total_legitimate_vote: undefined,
+			total_invalid_vote: undefined,
+			village_id: undefined,
+			witness_staff_ids: [],
+			volunteer_staff_ids: []
 		}
 	});
 
@@ -45,10 +50,25 @@ export const FormTPS = () => {
 	useEffect(() => {
 		if (TPSID && TPS) {
 			setValue('name', TPS.name || '');
-			setValue('village_id', TPS?.village?.id || 0);
-			setValue('pic_staff_id', TPS?.pic_staff?.id || 0);
-			setValue('pic', TPS.pic || '');
-			setValue('pic_mobile', TPS.pic_mobile || '');
+			setValue('periode', TPS.periode ? Number(TPS.periode) : null);
+			setValue('contact', TPS?.contact || '');
+			setValue('total_target_voters', TPS?.total_target_voters ? Number(TPS?.total_target_voters) : undefined);
+			setValue('total_dc_voters', TPS?.total_dc_voters ? Number(TPS?.total_dc_voters) : undefined);
+			setValue('total_legitimate_vote', TPS?.total_legitimate_vote ? Number(TPS?.total_legitimate_vote) : undefined);
+			setValue('total_invalid_vote', TPS?.total_invalid_vote ? Number(TPS?.total_invalid_vote) : undefined);
+			setValue('village_id', TPS?.village?.id || null);
+			setValue(
+				'witness_staff_ids',
+				TPS?.witness_staff_ids
+					? TPS?.witness_staff_ids.map((witness) => ({ value: witness.id, label: witness.name }))
+					: []
+			);
+			setValue(
+				'volunteer_staff_ids',
+				TPS?.volunteer_staff_ids
+					? TPS?.volunteer_staff_ids.map((volunteerStaff) => ({ value: volunteerStaff.id, label: volunteerStaff.name }))
+					: []
+			);
 		}
 	}, [TPSID, TPS]);
 
@@ -57,7 +77,7 @@ export const FormTPS = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{TPSID ? 'Edit' : 'Tambah'} TPS</div>
+				<div className="text-xl font-light">{TPSID ? 'Edit' : 'Tambah'} TPS</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -76,6 +96,96 @@ export const FormTPS = () => {
 				/>
 
 				<Controller
+					name={'periode'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectPeriode
+							{...field}
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							onChange={({ value }) => {
+								setValue('periode', value);
+								setError('periode', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'contact'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="Kontak"
+							placeholder="Contoh : 08xxxxxxxxxx"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_target_voters'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Total Target Pemilih"
+							placeholder="Total Target Pemilih"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_dc_voters'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Total Pemilih DC"
+							placeholder="Total Pemilih DC"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_legitimate_vote'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Total Pemilih Yang Sah"
+							placeholder="Total Pemilih Yang Sah"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_invalid_vote'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Total Pemilih Yang Tidak Valid"
+							placeholder="Total Pemilih Yang Tidak Valid"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
@@ -86,50 +196,6 @@ export const FormTPS = () => {
 								setValue('village_id', value);
 								setError('village_id', null);
 							}}
-							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
-					name={'pic_staff_id'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
-							{...field}
-							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
-							onChange={({ value }) => {
-								setValue('pic_staff_id', value);
-								setError('pic_staff_id', null);
-							}}
-							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
-					name={'pic'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputText
-							{...field}
-							label="Nama PIC Kementerian"
-							placeholder="Nama PIC Kementerian"
-							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
-							error={error}
-						/>
-					)}
-				/>
-
-				<Controller
-					name={'pic_mobile'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputText
-							{...field}
-							label="Nomor Telepon PIC Kementerian"
-							placeholder="Contoh : 08xxxxxxxxxx"
-							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							error={error}
 						/>
 					)}

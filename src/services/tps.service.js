@@ -23,10 +23,15 @@ export const getTPSList = async (params) => {
 export const createTPS = async (params) => {
 	const request = {
 		name: params?.name || '',
+		periode: params?.periode.toString() || '',
+		contact: params?.contact || '',
+		total_target_voters: params?.total_target_voters || null,
+		total_dc_voters: params?.total_dc_voters || null,
+		total_legitimate_vote: params?.total_legitimate_vote || null,
+		total_invalid_vote: params?.total_invalid_vote || null,
 		village_id: params?.village_id || 0,
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0
+		witness_staff_ids: params?.witness_staff_ids || [],
+		volunteer_staff_ids: params?.volunteer_staff_ids || []
 	};
 
 	try {
@@ -40,10 +45,15 @@ export const createTPS = async (params) => {
 export const updateTPS = async (TPSID, params) => {
 	const request = {
 		name: params?.name || '',
+		periode: params?.periode.toString() || '',
+		contact: params?.contact || '',
+		total_target_voters: params?.total_target_voters || null,
+		total_dc_voters: params?.total_dc_voters || null,
+		total_legitimate_vote: params?.total_legitimate_vote || null,
+		total_invalid_vote: params?.total_invalid_vote || null,
 		village_id: params?.village_id || 0,
-		pic: params?.pic || '',
-		pic_mobile: params?.pic_mobile || '',
-		pic_staff_id: params?.pic_staff_id || 0
+		witness_staff_ids: params?.witness_staff_ids || [],
+		volunteer_staff_ids: params?.volunteer_staff_ids || []
 	};
 
 	try {
