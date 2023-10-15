@@ -4,10 +4,14 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
+import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
+import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 
 export const TableTPS = ({
 	title,
 	displayedColumns,
+	displayedFilters,
 	params,
 	setParams,
 	isReadonly,
@@ -43,23 +47,116 @@ export const TableTPS = ({
 				Header: 'Nama TPS',
 				accessor: 'name',
 				width: '100%',
-				minWidth: 300,
+				minWidth: 250,
 				hidden: displayedColumns && !displayedColumns.includes('Nama TPS')
 			},
 			{
-				Header: 'Nama PIC',
+				Header: 'Periode',
+				accessor: 'periode',
+				maxWidth: 50,
+				hidden: displayedColumns && !displayedColumns.includes('Periode')
+			},
+			{
+				Header: 'Suara Partai',
 				width: '100%',
-				minWidth: 300,
-				hidden: !displayedColumns || (displayedColumns && !displayedColumns.includes('Nama PIC')),
+				minWidth: 250,
+				hidden: displayedColumns || (displayedColumns && !displayedColumns.includes('Suara Partai')),
 				Cell: (row) => {
-					return row.row.original.pic_staff?.id ? (
-						<Button
-							className="px-5 py-2 text-xs rounded-sm text-white bg-purple-500 hover:bg-purple-400 min-w-[100px] w-full"
-							linkTo={`/staff/${row.row.original.pic_staff?.id}`}
-							text={row.row.original.pic_staff?.name}
+					const party_votes = row.row.original.party_votes;
+					return (
+						<div className="grid gap-2">
+							{party_votes.length === 0 && '-'}
+							{party_votes.length > 0 &&
+								party_votes.map((partyVote) => (
+									<div key={partyVote.party.id} className="flex items-center gap-2">
+										<ButtonAction
+											className="w-full bg-purple-500 hover:bg-purple-400"
+											action={ACTION_TYPES.SEE_DETAIL}
+											linkTo={`/partai/${partyVote.id}`}
+											text={partyVote.party.name}
+										/>{' '}
+										: <div>{partyVote.total_voters}</div>
+									</div>
+								))}
+						</div>
+					);
+				}
+			},
+			{
+				Header: 'Saksi',
+				width: '100%',
+				minWidth: 250,
+				hidden: displayedColumns || (displayedColumns && !displayedColumns.includes('Saksi')),
+				Cell: (row) => {
+					const witnesses = row.row.original.witnesses;
+					return (
+						<div className="flex flex-wrap gap-1">
+							{witnesses.length === 0 && '-'}
+							{witnesses.length > 0 &&
+								witnesses.map((witness) => (
+									<ButtonAction
+										key={witness.id}
+										className="w-full bg-purple-500 hover:bg-purple-400"
+										action={ACTION_TYPES.SEE_DETAIL}
+										linkTo={`/witness/${witness.id}`}
+										text={witness.name}
+									/>
+								))}
+						</div>
+					);
+				}
+			},
+			{
+				Header: 'Kota',
+				accessor: 'city',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Kota'),
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							key={row.row.original.city.id}
+							className="w-full bg-purple-500 hover:bg-purple-400"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/dapil/city/${row.row.original.city.id}`}
+							text={row.row.original.city.name}
 						/>
-					) : (
-						'-'
+					);
+				}
+			},
+			{
+				Header: 'Kecamatan',
+				accessor: 'district',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Kecamatan'),
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							key={row.row.original.district.id}
+							className="w-full bg-purple-500 hover:bg-purple-400"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/dapil/district/${row.row.original.district.id}`}
+							text={row.row.original.district.name}
+						/>
+					);
+				}
+			},
+			{
+				Header: 'Desa/Kelurahan',
+				accessor: 'village',
+				width: '100%',
+				minWidth: 200,
+				hidden: displayedColumns && !displayedColumns.includes('Desa/Kelurahan'),
+				Cell: (row) => {
+					return (
+						<ButtonAction
+							key={row.row.original.village.id}
+							className="w-full bg-purple-500 hover:bg-purple-400"
+							action={ACTION_TYPES.SEE_DETAIL}
+							linkTo={`/dapil/village/${row.row.original.village.id}`}
+							text={row.row.original.village.name}
+						/>
 					);
 				}
 			},
@@ -82,12 +179,16 @@ export const TableTPS = ({
 			{
 				Header: 'Actions',
 				minWidth: 220,
-				hidden: !isSystem || isReadonly,
 				Cell: (row) => {
 					return (
-						<div className="grid grid-cols-2 gap-2">
-							<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/tps/update/${row.row.original.id}`} />
-							<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteTPS(row.row.original.id)} />
+						<div className="flex gap-2">
+							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/tps/${row.row.original.id}`} />
+							{isSystem && (
+								<>
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/tps/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteTPS(row.row.original.id)} />
+								</>
+							)}
 						</div>
 					);
 				}
@@ -109,7 +210,7 @@ export const TableTPS = ({
 
 	useEffect(() => {
 		const offsetResult = (page - 1) * perPage;
-		const defaultParams = { limit: perPage, offset: offsetResult, is_follower: false };
+		const defaultParams = { limit: perPage, offset: offsetResult };
 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
@@ -143,7 +244,32 @@ export const TableTPS = ({
 					<hr />
 
 					<div className="px-6 py-4">
-						<div className="w-full flex justify-end gap-4">
+						<div className="flex justify-end w-full gap-4">
+							{(!displayedFilters || displayedFilters.includes('city_id')) && (
+								<InputSelectCity
+									containerClassName="w-full lg:w-60"
+									value={params.city_id ? Number(params.city_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('district_id')) && (
+								<InputSelectDistrict
+									containerClassName="w-full lg:w-60"
+									value={params.district_id ? Number(params.district_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('district_id', option ? { district_id: option.value } : null)}
+								/>
+							)}
+
+							{(!displayedFilters || displayedFilters.includes('village_id')) && (
+								<InputSelectVillage
+									containerClassName="w-full lg:w-60"
+									value={params.village_id ? Number(params.village_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
+								/>
+							)}
 							<InputText
 								value={params?.keyword || ''}
 								showLabel={false}

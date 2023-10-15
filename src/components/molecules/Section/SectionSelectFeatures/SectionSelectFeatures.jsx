@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AKTIVITAS_MENUS, KANTOR_MENUS, MENUS, MITRA_MENUS } from '@/utils/constants';
+import { AKTIVITAS_MENUS, KAMPANYE_MENUS, KANTOR_MENUS, MENUS, MITRA_MENUS } from '@/utils/constants';
 import { SearchGlobal } from '../../Search/SearchGlobal/SearchGlobal';
 
 export const SectionSelectFeatures = () => {
@@ -62,13 +62,35 @@ export const SectionSelectFeatures = () => {
 							})}
 						</div>
 					</div>
-					<div className="w-full bg-white shadow-md rounded-xl md:col-span-2">
+					<div className="w-full bg-white shadow-md rounded-xl">
 						<div className="p-4 text-2xl text-center font-extralight">
 							<div>AKTIVITAS</div>
 						</div>
 						<hr />
 						<div className="flex flex-wrap justify-center w-full gap-3 px-4 py-8 max-w-screen-2xl md:gap-5">
 							{AKTIVITAS_MENUS.map((menu) => {
+								return (
+									<Link
+										key={menu.path}
+										to={menu.path}
+										className="w-24 py-2 text-opacity-50 transition-all bg-white border-2 rounded-md shadow-lg cursor-pointer sm:w-28 md:w-32 hover:bg-gray-100"
+									>
+										<div className="px-5">
+											<img className="w-full" src={menu.icon} alt="" />
+										</div>
+										<div className="text-sm text-center lg:text-lg font-extralight">{menu.title}</div>
+									</Link>
+								);
+							})}
+						</div>
+					</div>
+					<div className="w-full bg-white shadow-md rounded-xl">
+						<div className="p-4 text-2xl text-center font-extralight">
+							<div>KAMPANYE</div>
+						</div>
+						<hr />
+						<div className="flex flex-wrap justify-center w-full gap-3 px-4 py-8 max-w-screen-2xl md:gap-5">
+							{KAMPANYE_MENUS.map((menu) => {
 								return (
 									<Link
 										key={menu.path}
