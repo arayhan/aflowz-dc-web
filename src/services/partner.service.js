@@ -27,6 +27,16 @@ export const getPartnerList = async (params, isNeedAbort = false) => {
 	}
 };
 
+export const downloadPartnerList = async (params) => {
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/partner/download' + queryParams, { responseType: 'blob' });
+		return { success: response.status === 200, payload: response.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const getPartnerDetail = async (partnerID) => {
 	try {
 		const response = await http.get('/partner/' + partnerID);

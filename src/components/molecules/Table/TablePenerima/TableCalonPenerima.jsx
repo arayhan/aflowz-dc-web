@@ -222,7 +222,7 @@ export const TableCalonPenerima = ({
 	};
 
 	const handleDownloadData = () => {
-		downloadCsvPenerima(params);
+		downloadCsvPenerima(params, false);
 	};
 
 	useEffect(() => {

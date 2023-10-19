@@ -244,7 +244,7 @@ export const TablePenerima = ({
 	};
 
 	const handleDownloadData = (isAnonymous = false) => {
-		downloadCsvPenerima(params, isAnonymous);
+		downloadCsvPenerima(params, isAnonymous, title);
 	};
 
 	useEffect(() => {
@@ -291,7 +291,7 @@ export const TablePenerima = ({
 					onClickSeeAnonymousData={() =>
 						navigate('/penerima' + objectToQueryString({ is_no_nik_number: true, is_no_nisn_number: true }))
 					}
-					onClickDownloadData={handleDownloadData}
+					onClickDownloadData={() => handleDownloadData(false)}
 					onClickDownloadAnonymousData={() => handleDownloadData(true)}
 					showButtonSeeAnonymousData={isShowButtonSeeAnonymousData && !IS_ANONYMOUS_DATA}
 					showButtonUploadAnonymousData={isShowButtonUploadAnonymousData && IS_ANONYMOUS_DATA}

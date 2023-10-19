@@ -34,7 +34,12 @@ const Penerima = () => {
 								: 'Penerima Program'
 						} `}
 						isNeedAbort
-						params={{ ...params, candidate_status: params?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED }}
+						params={{
+							...params,
+							...(IS_ANONYMOUS_DATA
+								? { is_receiver: true }
+								: { candidate_status: params?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED })
+						}}
 						displayedColumns={[
 							'#',
 							'NIK',

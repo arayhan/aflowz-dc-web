@@ -100,12 +100,14 @@ const states = (set, get) => ({
 		set({ fetchingPenerimaList: false });
 	},
 
-	downloadCsvPenerima: async (params, isAnonymous, callback) => {
+	downloadCsvPenerima: async (params, isAnonymous, title, callback) => {
 		set({ fetchingDownloadPenerimaList: true });
 		const loader = toast.loading('Processing...');
 
 		const requestParams = params;
-		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
+		const { success, payload } = isAnonymous
+			? await SERVICE_PARTNER.downloadPartnerList(requestParams)
+			: await SERVICE_PARTNER.getPartnerList(requestParams);
 
 		toastRequestResult(
 			loader,
@@ -115,35 +117,53 @@ const states = (set, get) => ({
 		);
 
 		if (success) {
-			const header = [
-				'No',
-				'NIK',
-				'NISN',
-				'Nama Penerima',
-				'Institusi',
-				'Alamat',
-				'Email',
-				'Mobile',
-				'Gender',
-				'Program'
-			];
-			const data = payload?.items?.map((penerima, index) => [
-				index + 1,
-				penerima?.nik_number || '-',
-				penerima?.nisn_number || '-',
-				penerima?.name || '-',
-				penerima?.konstituen?.name || '-',
-				penerima?.address || '-',
-				penerima?.email || '-',
-				penerima?.mobile || '-',
-				penerima?.gender || '-',
-				penerima?.programs?.map((program) => program.name).join(', ') || '-'
-			]);
+			if (isAnonymous) {
+				const href = URL.createObjectURL(payload);
+				const link = document.createElement('a');
 
-			const filename = `${isAnonymous ? 'Penerima Anonymous' : 'Penerima Program'} - ${moment().format(
-				'yyyy MMMM DD HH:mm:ss'
-			)}.csv`;
-			exportToCsv(filename, [header, ...data]);
+				link.href = href;
+				link.setAttribute(
+					'download',
+					`${isAnonymous ? 'Penerima Anonymous' : title || 'Penerima Program'} - ${moment().format(
+						'yyyy MMMM DD HH:mm:ss'
+					)}.csv`
+				);
+				document.body.appendChild(link);
+				link.click();
+
+				document.body.removeChild(link);
+				URL.revokeObjectURL(href);
+			} else {
+				const header = [
+					'No',
+					'NIK',
+					'NISN',
+					'Nama Penerima',
+					'Institusi',
+					'Alamat',
+					'Email',
+					'Mobile',
+					'Gender',
+					'Program'
+				];
+				const data = payload?.items?.map((penerima, index) => [
+					index + 1,
+					penerima?.nik_number || '-',
+					penerima?.nisn_number || '-',
+					penerima?.name || '-',
+					penerima?.konstituen?.name || '-',
+					penerima?.address || '-',
+					penerima?.email || '-',
+					penerima?.mobile || '-',
+					penerima?.gender || '-',
+					penerima?.programs?.map((program) => program.name).join(', ') || '-'
+				]);
+
+				const filename = `${isAnonymous ? 'Penerima Anonymous' : 'Penerima Program'} - ${moment().format(
+					'yyyy MMMM DD HH:mm:ss'
+				)}.csv`;
+				exportToCsv(filename, [header, ...data]);
+			}
 		}
 
 		set({ fetchingDownloadPenerimaList: false });
