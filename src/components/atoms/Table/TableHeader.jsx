@@ -73,9 +73,11 @@ export const TableHeader = ({
 			)}
 			<div className="w-full xl:w-1/2">
 				<div className="text-xl font-light capitalize transform:">{title}</div>
-				<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'hidden text-sm text-gray-400'}>
-					{description}
-				</div>
+				{description && (
+					<div className={showCounter ? 'text-lg font-light transform: capitalize' : 'hidden text-sm text-gray-400'}>
+						{description}
+					</div>
+				)}
 			</div>
 			<div className="flex flex-col w-full gap-3 xl:w-1/2 md:justify-end md:flex-row">
 				{showButtonSeeAll && seeAllLink && (

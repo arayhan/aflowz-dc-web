@@ -11,3 +11,4 @@ export * as SERVICE_TPS from './tps.service';
 export * as SERVICE_STOCKIEST from './stockiest.service';
 export * as SERVICE_ACTIVITY from './activity.service';
 export * as SERVICE_VISITASI from './visitasi.service';
+export * as SERVICE_REALCOUNT from './realcount.service';

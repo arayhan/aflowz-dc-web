@@ -13,3 +13,4 @@ export * from './stockiest.store';
 export * from './dapil.store';
 export * from './activity.store';
 export * from './visitasi.store';
+export * from './realcount.store';
