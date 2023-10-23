@@ -52,12 +52,8 @@ export const TableDetailRealcount = ({ isLoading, realcountData }) => {
 				}
 			}))
 		],
-		[]
+		[realcountData]
 	);
 
-	return <Table loading={isLoading} columns={columns} data={[realcountData]} />;
-};
-
-TableDetailRealcount.defaultProps = {
-	realcountData: {}
+	return <Table loading={isLoading} columns={columns} data={realcountData ? [realcountData] : []} />;
 };
