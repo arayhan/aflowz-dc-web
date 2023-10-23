@@ -5,7 +5,8 @@ import {
 	TableDetailRealcount,
 	TableDetailRelawan,
 	TableDetailSaksi,
-	TablePenerima
+	TablePenerima,
+	TableStockiestMovementLog
 } from '@/components/molecules';
 import { useRealcountStore, useTPSStore } from '@/store';
 import { useEffect, useState } from 'react';
@@ -129,6 +130,14 @@ const TPSDetail = () => {
 											/>
 										</div>
 									</Card>
+								</div>
+
+								<div className="col-span-12 bg-white rounded-md">
+									<TableStockiestMovementLog
+										params={{ village_id: TPSItem.village.id }}
+										isShowFooter
+										isReadonly={true}
+									/>
 								</div>
 							</div>
 						</div>
