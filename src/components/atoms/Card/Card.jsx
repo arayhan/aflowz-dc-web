@@ -19,7 +19,7 @@ export const Card = ({
 			<div className="flex flex-col justify-between gap-3 p-4 md:items-center md:flex-row">
 				<div className="space-y-2">
 					{title && <div className="text-xl font-light">{title}</div>}
-					{/* {description && <div className="text-sm text-gray-400">{description}</div>} */}
+					{description && <div className="text-sm text-gray-400">{description}</div>}
 				</div>
 				{rightComponent && <div className="flex items-center justify-center">{rightComponent}</div>}
 				{isInDetail && (

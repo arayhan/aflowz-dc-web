@@ -1,5 +1,5 @@
 import { Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, TableDetailRealcount } from '@/components/molecules';
+import { BannerFeature, CardDetailTotal, TableDetailRealcount, TableDetailSaksi } from '@/components/molecules';
 import { useRealcountStore, useTPSStore } from '@/store';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -11,6 +11,8 @@ const TPSDetail = () => {
 
 	const { TPSItem, getTPSItem, fetchingTPSItem } = useTPSStore();
 	const { realcountVillageDetail, getRealcountVillageDetail, fetchingRealcountVillageDetail } = useRealcountStore();
+
+	const title = TPSItem ? `${TPSItem.name} - ${TPSItem.village.name}` : 'TPS';
 
 	useEffect(() => {
 		getTPSItem(TPSID);
@@ -31,13 +33,7 @@ const TPSDetail = () => {
 					{fetchingTPSItem && <TPSDetailSkeleton />}
 					{!fetchingTPSItem && TPSItem && (
 						<div className="space-y-6">
-							<Card
-								title={`${TPSItem.name} - ${TPSItem.village.name}`}
-								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-								className={'bg-white rounded-md'}
-								linkRoute={`/tps/update/${TPSItem?.id}`}
-								isInDetail
-							>
+							<Card title={title} className={'bg-white rounded-md'} linkRoute={`/tps/update/${TPSItem?.id}`} isInDetail>
 								<div className="grid grid-cols-12 p-5 text-sm gap-y-1">
 									<div className="col-span-4 px-3 py-2 text-gray-500 bg-gray-100 lg:col-span-3">Nomor TPS</div>
 									<div className="col-span-8 px-3 py-2 lg:col-span-9 bg-gray-50">{TPSItem?.name || '-'}</div>
@@ -83,12 +79,22 @@ const TPSDetail = () => {
 
 							<div className="grid items-start grid-cols-12 gap-4">
 								<div className="col-span-12">
-									<Card title={'Informasi Real Count '} className={'bg-white rounded-md'}>
+									<Card title={'Informasi Real Count'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailRealcount
 												isLoading={fetchingRealcountVillageDetail}
 												realcountData={realcountVillageDetail}
 											/>
+										</div>
+									</Card>
+								</div>
+							</div>
+
+							<div className="grid items-start grid-cols-12 gap-4">
+								<div className="col-span-12">
+									<Card title={'List Saksi'} description={title} className={'bg-white rounded-md'}>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailSaksi isLoading={fetchingRealcountVillageDetail} saksiData={TPSItem?.witnesses} />
 										</div>
 									</Card>
 								</div>
