@@ -50,7 +50,7 @@ export const TablePenerima = ({
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
-	const IS_ANONYMOUS_DATA = Boolean(params.is_no_nik_number && params.is_no_nisn_number);
+	const IS_ANONYMOUS_DATA = params && Boolean(params.is_no_nik_number && params.is_no_nisn_number);
 
 	const columns = useMemo(
 		() => [

@@ -1,7 +1,14 @@
 import { Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, TableDetailRealcount, TableDetailSaksi } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	TableDetailRealcount,
+	TableDetailRelawan,
+	TableDetailSaksi,
+	TablePenerima
+} from '@/components/molecules';
 import { useRealcountStore, useTPSStore } from '@/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
@@ -12,6 +19,8 @@ const TPSDetail = () => {
 	const { TPSItem, getTPSItem, fetchingTPSItem } = useTPSStore();
 	const { realcountVillageDetail, getRealcountVillageDetail, fetchingRealcountVillageDetail } = useRealcountStore();
 
+	const [tablePenerimaParams, setTablePenerimaParams] = useState({});
+
 	const title = TPSItem ? `${TPSItem.name} - ${TPSItem.village.name}` : 'TPS';
 
 	useEffect(() => {
@@ -21,6 +30,7 @@ const TPSDetail = () => {
 	useEffect(() => {
 		if (TPSItem) {
 			getRealcountVillageDetail(TPSItem?.village?.id, { periode: TPSItem?.periode });
+			setTablePenerimaParams({ village_id: TPSItem?.village?.id, is_receiver: true });
 		}
 	}, [TPSItem]);
 
@@ -88,13 +98,35 @@ const TPSDetail = () => {
 										</div>
 									</Card>
 								</div>
-							</div>
 
-							<div className="grid items-start grid-cols-12 gap-4">
 								<div className="col-span-12">
 									<Card title={'List Saksi'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailSaksi isLoading={fetchingRealcountVillageDetail} saksiData={TPSItem?.witnesses} />
+										</div>
+									</Card>
+								</div>
+
+								<div className="col-span-12 bg-white rounded-md">
+									<TablePenerima
+										title={`Penerima Program Desa ${TPSItem.village.name}`}
+										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
+										isShowButtonSeeAll
+										isShowFooter={false}
+										isShowFilter={false}
+										isReadonly
+										params={tablePenerimaParams}
+										enableClickRow
+									/>
+								</div>
+
+								<div className="col-span-12">
+									<Card title={'List Relawan'} description={title} className={'bg-white rounded-md'}>
+										<div className="flex p-4 overflow-scroll max-h-96">
+											<TableDetailRelawan
+												isLoading={fetchingRealcountVillageDetail}
+												relawanData={TPSItem?.volunteers}
+											/>
 										</div>
 									</Card>
 								</div>
