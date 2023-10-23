@@ -201,7 +201,6 @@ export const FormStockiestMove = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="text-xl font-light">Checkin / Checkout Barang</div>
-				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			<div>

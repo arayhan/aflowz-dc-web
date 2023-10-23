@@ -25,7 +25,6 @@ const PenerimaDetail = () => {
 						<div className="space-y-6">
 							<Card
 								title={'Details'}
-								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
 								linkRoute={`/penerima/update/${penerimaDetail?.id}`}
 								penerima={penerimaDetail}

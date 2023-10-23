@@ -95,7 +95,6 @@ const ProgramDetail = () => {
 						<div className="space-y-6">
 							<Card
 								title={'Details'}
-								description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 								className={'bg-white rounded-md'}
 								linkRoute={`/program/update/${programDetail?.program_id}`}
 								isInDetail
@@ -243,7 +242,6 @@ const ProgramDetail = () => {
 									<div className="col-span-12 bg-white rounded-md">
 										<Card
 											title={`Timeline`}
-											description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 											bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 											rightComponent={
 												<Button
@@ -417,11 +415,7 @@ const ProgramDetail = () => {
 								<hr className="col-span-12 my-8" />
 
 								<div className="col-span-12">
-									<Card
-										title={'Penerima Program Per Kota'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-										className={'bg-white rounded-md'}
-									>
+									<Card title={'Penerima Program Per Kota'} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailPenerimaProgram
 												dataPenerima={programDetail?.total_penerima_program_per_city}

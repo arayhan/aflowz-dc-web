@@ -60,7 +60,6 @@ const CityDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
 									<div className="text-xl font-light">Details</div>
-									{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 								</div>
 								<hr />
 								<div className="p-5">
@@ -138,7 +137,6 @@ const CityDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Program by Periode per Orang'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram
@@ -150,7 +148,6 @@ const CityDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Program by Periode per Program'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram
@@ -171,20 +168,14 @@ const CityDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<Card
-										title={`List Kecamatan di Kota ${cityDetail.city_name}`}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-									>
+									<Card title={`List Kecamatan di Kota ${cityDetail.city_name}`}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailDistrictInCity districtData={cityDetail.penerima_program_city_district} />
 										</div>
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<Card
-										title={`Total Penerima Setiap Program di Kota ${cityDetail.city_name}`}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-									>
+									<Card title={`Total Penerima Setiap Program di Kota ${cityDetail.city_name}`}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailTotalPenerimaByProgram dataPenerima={cityDetail?.penerima_program_city} />
 										</div>

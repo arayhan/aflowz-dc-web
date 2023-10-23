@@ -57,7 +57,6 @@ const VillageDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
 									<div className="text-xl font-light">Details</div>
-									{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 								</div>
 								<hr />
 								<div className="p-5">
@@ -150,7 +149,6 @@ const VillageDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program By Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPenerimaProgramByGender
@@ -162,7 +160,6 @@ const VillageDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program per Periode'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram

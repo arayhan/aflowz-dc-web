@@ -107,7 +107,6 @@ const MitraDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<Card
 									title={`Timeline`}
-									description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 									bodyClassName={'overflow-x-scroll'}
 									rightComponent={
 										<Button
@@ -131,7 +130,6 @@ const MitraDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPenerimaProgram data={programCategoryDetail?.penerima_program} />
@@ -140,7 +138,6 @@ const MitraDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Periode Program'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram data={programCategoryDetail?.total_program_by_periode} />

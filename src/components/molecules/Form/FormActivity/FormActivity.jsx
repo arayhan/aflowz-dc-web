@@ -92,7 +92,6 @@ export const FormActivity = () => {
 		<div className="space-y-8">
 			<div>
 				<div className="text-xl font-light">{activityID ? 'Edit' : 'Tambah'} Kegiatan</div>
-				<div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
 			</div>
 			{!activityID && (
 				<>

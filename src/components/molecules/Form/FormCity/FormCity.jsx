@@ -57,8 +57,7 @@ export const FormCity = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{cityID ? 'Edit' : 'Tambah'} Kota</div>
-				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
+				<div className="text-xl font-light">{cityID ? 'Edit' : 'Tambah'} Kota</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">

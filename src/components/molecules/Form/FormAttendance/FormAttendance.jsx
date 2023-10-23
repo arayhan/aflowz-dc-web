@@ -34,12 +34,12 @@ export const FormAttendance = () => {
 			{
 				Header: 'Nama',
 				minWidth: 125,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.name}</div>
 			},
 			{
 				Header: 'Keterangan',
 				minWidth: 150,
-				Cell: (row) => <div className="transform: capitalize">{row.row.original.desc_name}</div>
+				Cell: (row) => <div className="capitalize transform:">{row.row.original.desc_name}</div>
 			},
 			{
 				Header: 'Hapus',
@@ -144,10 +144,9 @@ export const FormAttendance = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">
+				<div className="text-xl font-light">
 					{attendanceID ? 'Edit' : 'Tambah'} Absensi {attendanceID && `Tanggal ${date?.toLocaleDateString('id-ID')}`}
 				</div>
-				{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 			</div>
 			<hr />
 			{!attendanceID && (
@@ -166,7 +165,7 @@ export const FormAttendance = () => {
 					</div>
 				</div>
 			)}
-			<div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6 items-end">
+			<div className="grid items-end grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6">
 				<div className="md:col-span-2">
 					<InputSelectStaff
 						disabled={processingCreateAttendance || fetchingAttendance}

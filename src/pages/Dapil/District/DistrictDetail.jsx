@@ -59,7 +59,6 @@ const DistrictDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<div className="p-4 space-y-2">
 									<div className="text-xl font-light">Details</div>
-									{/* <div className="text-sm text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
 								</div>
 								<hr />
 								<div className="p-5">
@@ -152,7 +151,6 @@ const DistrictDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program By Gender'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPenerimaProgramByGender
@@ -164,7 +162,6 @@ const DistrictDetail = () => {
 								<div className="col-span-12 bg-white rounded-md sm:col-span-6">
 									<Card
 										title={'Jumlah Penerima Program per Periode'}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
 										<ChartPeriodeProgram
@@ -174,18 +171,12 @@ const DistrictDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<Card
-										title={`List Desa di Kecamatan ${districtDetail.district_name}`}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-									>
+									<Card title={`List Desa di Kecamatan ${districtDetail.district_name}`}>
 										<TableDetailVillageInDistrict villageData={districtDetail.penerima_program_district_village} />
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<Card
-										title={`List Program di Kecamatan ${districtDetail.district_name}`}
-										description={'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-									>
+									<Card title={`List Program di Kecamatan ${districtDetail.district_name}`}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailTotalPenerimaByProgram dataPenerima={districtDetail?.penerima_program} />
 										</div>
