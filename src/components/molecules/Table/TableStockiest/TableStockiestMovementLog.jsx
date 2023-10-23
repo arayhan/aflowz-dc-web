@@ -10,7 +10,7 @@ import moment from 'moment-timezone';
 import 'moment/locale/id';
 import { ACTION_TYPES } from '@/utils/constants';
 
-export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) => {
+export const TableStockiestMovementLog = ({ params, productID, isShowFooter, isReadonly }) => {
 	const { isSystem } = useAuthStore();
 	const { productLogList, fetchingProductLogList, getProductLogList } = useStockiestStore();
 	const [page, setPage] = useState(1);
@@ -41,7 +41,7 @@ export const TableStockiestMovementLog = ({ params, isShowFooter, isReadonly }) 
 		if (pageCount > 0 && page > pageCount) setPage(pageCount);
 		else {
 			setOffset(offsetResult);
-			getProductLogList({ ...defaultParams, product_id: params });
+			getProductLogList({ ...defaultParams, ...params });
 		}
 	}, [params, page, perPage, pageCount, search]);
 

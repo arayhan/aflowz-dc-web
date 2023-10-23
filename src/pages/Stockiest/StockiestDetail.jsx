@@ -71,7 +71,11 @@ const StockiestDetail = () => {
 								</div>
 								<div className="grid grid-cols-1 gap-5">
 									<div className="p-2 my-5 overflow-x-auto overflow-y-auto bg-white rounded-md shadow-lg">
-										<TableStockiestMovementLog params={params.stockiestID} isShowFooter isReadonly={true} />
+										<TableStockiestMovementLog
+											params={{ product_id: params.stockiestID }}
+											isShowFooter
+											isReadonly={true}
+										/>
 									</div>
 								</div>
 							</div>
