@@ -3,10 +3,9 @@ import {
 	BannerFeature,
 	CardDetailTotal,
 	TableActivity,
-	TableDetailPenerimaProgram,
+	TableDetailPenerimaKampanye,
 	TableDetailRealCountVillage,
 	TableDetailRelawan,
-	TablePenerima,
 	TableStockiestMovementLog,
 	TableTPS
 } from '@/components/molecules';
@@ -95,19 +94,14 @@ const RealCountDistrictDetail = () => {
 							</div>
 
 							<div className="space-y-4 bg-white rounded-md">
-								<TablePenerima
-									title={`Penerima Program - Kecamatan ${districtDetail.district_name}`}
-									displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
-									isShowButtonSeeAll
-									isShowFooter={false}
-									isShowFilter={false}
-									isReadonly
-									params={{ district_id: districtID }}
-									maxHeight={500}
-									enableClickRow
-								/>
+								<Card title={'List Penerima'} className={'bg-white rounded-md'}>
+									<div className="flex overflow-scroll max-h-96">
+										<TableDetailPenerimaKampanye
+											dataPenerima={realcountDistrictDetail?.list_penerima_program_by_district}
+										/>
+									</div>
+								</Card>
 							</div>
-
 							<div>
 								<Card title={'List Relawan'} className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
