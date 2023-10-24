@@ -5,21 +5,21 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set, get) => ({
-	fetchingRealcountVillageDetail: false,
+	fetchingRealCountVillageDetail: false,
 
 	realcountVillageDetail: null,
 
-	getRealcountVillageDetail: async (villageID, params) => {
-		set({ fetchingRealcountVillageDetail: true });
+	getRealCountVillageDetail: async (villageID, params) => {
+		set({ fetchingRealCountVillageDetail: true });
 
 		const defaultParams = { limit: 0, offset: 0 };
 		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
-		const { success, payload } = await SERVICE_REALCOUNT.getRealcountVillageDetail(villageID, requestParams);
+		const { success, payload } = await SERVICE_REALCOUNT.getRealCountVillageDetail(villageID, requestParams);
 
 		set({ realcountVillageDetail: success ? payload : null });
-		set({ fetchingRealcountVillageDetail: false });
+		set({ fetchingRealCountVillageDetail: false });
 	}
 });
 
-export const useRealcountStore = create(devtools(states));
+export const useRealCountStore = create(devtools(states));

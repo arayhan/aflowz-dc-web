@@ -1,7 +1,7 @@
 import { objectToQueryString } from '@/utils/helpers';
 import { http } from './http';
 
-export const getRealcountVillageDetail = async (villageID, params) => {
+export const getRealCountVillageDetail = async (villageID, params) => {
 	try {
 		const queryParams = objectToQueryString(params);
 		const response = await http.get(`/page-detail/real-count/village/${villageID}` + queryParams);

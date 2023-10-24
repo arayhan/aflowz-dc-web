@@ -1,7 +1,7 @@
 import { Table } from '@/components/atoms';
 import React, { useMemo } from 'react';
 
-export const TableDetailRealcount = ({ isLoading, realcountData }) => {
+export const TableDetailRealCount = ({ isLoading, realcountData }) => {
 	const columns = useMemo(
 		() => [
 			{

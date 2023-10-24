@@ -121,7 +121,29 @@ export const DAPIL_MENUS = [
 
 export const KAMPANYE_MENUS = [
 	{ id: 1, title: 'TPS', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/tps' },
-	{ id: 2, title: 'Saksi', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/saksi' }
+	{ id: 2, title: 'Saksi', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/saksi' },
+	{ id: 2, title: 'Real Count', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/realcount' }
+];
+
+export const KAMPANYE_REALCOUNT_MENUS = [
+	{
+		id: 1,
+		title: 'Kota',
+		icon: require('@/images/icons/Icon_Home/Kota.svg').default,
+		path: '/realcount/city'
+	},
+	{
+		id: 2,
+		title: 'Kecamatan',
+		icon: require('@/images/icons/Icon_Home/Desa.svg').default,
+		path: '/realcount/district'
+	},
+	{
+		id: 3,
+		title: 'Desa',
+		icon: require('@/images/icons/Icon_Home/Desa.svg').default,
+		path: '/realcount/village'
+	}
 ];
 
 export const PRODUCT_MOVEMENT_TYPE = {

@@ -15,7 +15,8 @@ export const TableCity = ({
 	isShowButtonSeeAll,
 	onClickRow,
 	isShowFilter,
-	enableClickRow
+	enableClickRow,
+	isRealCount
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
@@ -85,7 +86,10 @@ export const TableCity = ({
 				Cell: (row) => {
 					return (
 						<div className="flex gap-2">
-							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/dapil/city/${row.row.original.id}`} />
+							<ButtonAction
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/${isRealCount ? 'realcount' : 'dapil'}/city/${row.row.original.id}`}
+							/>
 							{isSystem && (
 								<>
 									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/dapil/city/update/${row.row.original.id}`} />
@@ -102,14 +106,13 @@ export const TableCity = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/dapil/city/${rowData.id}`);
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/city/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
-		console.log({ updatedParams, key, params });
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/dapil/city' + updatedParams, { replace: true });
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/city` + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
@@ -135,7 +138,7 @@ export const TableCity = ({
 			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Kota"
-					featurePath="/dapil/city"
+					featurePath="/$isRealCount ? 'realcount' : 'apil'd/city"
 					title={title || 'List Kota'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
