@@ -15,7 +15,8 @@ export const TableDistrict = ({
 	isShowButtonSeeAll,
 	onClickRow,
 	isShowFilter,
-	enableClickRow
+	enableClickRow,
+	isRealCount
 }) => {
 	const navigate = useNavigate();
 
@@ -85,10 +86,13 @@ export const TableDistrict = ({
 				Cell: (row) => {
 					return (
 						<div className="flex gap-2">
-							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/district/${row.row.original.id}`} />
+							<ButtonAction
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/${isRealCount ? 'realcount' : 'dapil'}/district/${row.row.original.id}`}
+							/>
 							{isSystem && (
 								<>
-									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/district/update/${row.row.original.id}`} />
+									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/dapil/district/update/${row.row.original.id}`} />
 									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteDistrict(row.row.original.id)} />
 								</>
 							)}
@@ -102,13 +106,13 @@ export const TableDistrict = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/district/${rowData.id}`);
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/district/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/district' + updatedParams, { replace: true });
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/district` + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
@@ -134,12 +138,13 @@ export const TableDistrict = ({
 			<div className="p-6">
 				<TableHeader
 					feature="Kecamatan"
-					featurePath="/district"
+					featurePath="/dapil/district"
 					title={title || 'List Kecamatan'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
+					showButtonCreate={!isRealCount}
 					showButtonSeeAll={isShowButtonSeeAll}
-					seeAllLink={'/district' + objectToQueryString(params)}
+					seeAllLink={'/dapil/district' + objectToQueryString(params)}
 				/>
 			</div>
 			{isShowFilter && (

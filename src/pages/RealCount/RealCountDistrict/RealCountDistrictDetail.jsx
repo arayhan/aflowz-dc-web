@@ -3,41 +3,44 @@ import {
 	BannerFeature,
 	CardDetailTotal,
 	TableActivity,
-	TableDetailRealCountDistrict,
+	TableDetailPenerimaProgram,
+	TableDetailRealCountVillage,
 	TableDetailRelawan,
 	TablePenerima,
 	TableStockiestMovementLog,
 	TableTPS
 } from '@/components/molecules';
-import { useCityStore, useRealCountStore } from '@/store';
+import { useDistrictStore, useRealCountStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
-const RealCountCityDetail = () => {
-	const { cityID } = useParams();
+const RealCountDistrictDetail = () => {
+	const { districtID } = useParams();
 
-	const { fetchingCityDetail, cityDetail, getCityDetail } = useCityStore();
-	const { fetchingRealCountCityDetail, realcountCityDetail, getRealCountCityDetail } = useRealCountStore();
+	const { fetchingDistrictDetail, districtDetail, getDistrictDetail } = useDistrictStore();
+	const { fetchingRealCountDistrictDetail, realcountDistrictDetail, getRealCountDistrictDetail } = useRealCountStore();
 
 	useEffect(() => {
-		if (cityID) {
-			getCityDetail(cityID);
-			getRealCountCityDetail(cityID);
+		if (districtID) {
+			getDistrictDetail(districtID);
+			getRealCountDistrictDetail(districtID);
 		}
-	}, [cityID]);
+	}, [districtID]);
+
+	console.log({ realcountDistrictDetail });
 
 	return (
 		<div>
 			<BannerFeature
-				title={cityDetail ? `Real Count - Kota ${cityDetail.city_name}` : 'Real Count Kota'}
-				loading={fetchingRealCountCityDetail || fetchingCityDetail}
+				title={districtDetail ? `Real Count - Kecamatan ${districtDetail.district_name}` : 'Real Count Kecamatan'}
+				loading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
 			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{(fetchingRealCountCityDetail || fetchingCityDetail) && <RealCountCityDetailSkeleton />}
-					{!fetchingRealCountCityDetail && !fetchingCityDetail && realcountCityDetail && (
+					{(fetchingRealCountDistrictDetail || fetchingDistrictDetail) && <RealCountDistrictDetailSkeleton />}
+					{!fetchingRealCountDistrictDetail && !fetchingDistrictDetail && realcountDistrictDetail && (
 						<div className="space-y-8">
 							<div className="space-y-4">
 								<div className="space-y-2">
@@ -46,28 +49,28 @@ const RealCountCityDetail = () => {
 								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 									<CardDetailTotal
 										title={'Jumlah TPS'}
-										value={realcountCityDetail?.total_tps || 0}
-										linkTo={`/tps?city_id=${cityID}`}
+										value={realcountDistrictDetail?.total_tps || 0}
+										linkTo={`/tps?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Mata Pilih'}
-										value={realcountCityDetail?.total_tps || 0}
-										linkTo={`/tps?city_id=${cityID}`}
+										value={realcountDistrictDetail?.total_tps || 0}
+										linkTo={`/tps?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={realcountCityDetail?.total_penerima_program_by_city || 0}
-										linkTo={`/penerima?city_id=${cityID}`}
+										value={realcountDistrictDetail?.total_penerima_program_by_district || 0}
+										linkTo={`/penerima?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
-										value={realcountCityDetail?.total_potensi_suara || 0}
-										linkTo={`/tps?city_id=${cityID}`}
+										value={realcountDistrictDetail?.total_potensi_suara || 0}
+										linkTo={`/tps?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
-										value={realcountCityDetail?.total_saksi || 0}
-										linkTo={`/saksi?city_id=${cityID}`}
+										value={realcountDistrictDetail?.total_saksi || 0}
+										linkTo={`/saksi?district_id=${districtID}`}
 									/>
 								</div>
 							</div>
@@ -75,9 +78,9 @@ const RealCountCityDetail = () => {
 							<div className="space-y-4">
 								<Card title="Informasi Real Count" className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
-										<TableDetailRealCountDistrict
-											isLoading={fetchingRealCountCityDetail || fetchingCityDetail}
-											realcountDistrictData={realcountCityDetail?.regional_voters_detail}
+										<TableDetailRealCountVillage
+											isLoading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
+											realcountVillageData={realcountDistrictDetail?.regional_voters_detail}
 										/>
 									</div>
 								</Card>
@@ -85,21 +88,21 @@ const RealCountCityDetail = () => {
 
 							<div className="space-y-4 bg-white rounded-md">
 								<TableTPS
-									title={`List TPS - Kota ${cityDetail.city_name}`}
+									title={`List TPS - Kecamatan ${districtDetail.district_name}`}
 									isShowFilter={false}
-									params={{ city_id: cityID }}
+									params={{ district_id: districtID }}
 								/>
 							</div>
 
 							<div className="space-y-4 bg-white rounded-md">
 								<TablePenerima
-									title={`Penerima Program - Kota ${cityDetail.city_name}`}
+									title={`Penerima Program - Kecamatan ${districtDetail.district_name}`}
 									displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 									isShowButtonSeeAll
 									isShowFooter={false}
 									isShowFilter={false}
 									isReadonly
-									params={{ city_id: cityID }}
+									params={{ district_id: districtID }}
 									maxHeight={500}
 									enableClickRow
 								/>
@@ -109,8 +112,8 @@ const RealCountCityDetail = () => {
 								<Card title={'List Relawan'} className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
 										<TableDetailRelawan
-											isLoading={fetchingRealCountCityDetail || fetchingCityDetail}
-											relawanData={realcountCityDetail?.list_relawan}
+											isLoading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
+											relawanData={realcountDistrictDetail?.list_relawan}
 										/>
 									</div>
 								</Card>
@@ -119,7 +122,7 @@ const RealCountCityDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<TableStockiestMovementLog
 									title="List Riwayat Barang Kampanye"
-									params={{ city_id: cityID }}
+									params={{ district_id: districtID }}
 									isShowFooter
 									isReadonly={true}
 								/>
@@ -139,7 +142,7 @@ const RealCountCityDetail = () => {
 										'Partner yang Dikunjungi',
 										'Kontak PIC'
 									]}
-									params={{ activity_city_id: cityID }}
+									params={{ activity_district_id: districtID }}
 								/>
 							</div>
 						</div>
@@ -150,7 +153,7 @@ const RealCountCityDetail = () => {
 	);
 };
 
-const RealCountCityDetailSkeleton = () => (
+const RealCountDistrictDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
 			<div key={item} className="col-span-12 p-4 bg-white rounded-md md:col-span-4">
@@ -176,4 +179,4 @@ const RealCountCityDetailSkeleton = () => (
 	</div>
 );
 
-export default RealCountCityDetail;
+export default RealCountDistrictDetail;

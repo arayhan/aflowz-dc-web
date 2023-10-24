@@ -138,10 +138,11 @@ export const TableCity = ({
 			<div className="flex items-center justify-between p-6">
 				<TableHeader
 					feature="Kota"
-					featurePath="/$isRealCount ? 'realcount' : 'apil'd/city"
+					featurePath={`/${isRealCount ? 'realcount' : 'dapil'}/city`}
 					title={title || 'List Kota'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
+					showButtonCreate={!isRealCount}
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>

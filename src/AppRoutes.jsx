@@ -68,6 +68,8 @@ import Saksi from './pages/Saksi/Saksi';
 import RealCount from './pages/RealCount/RealCount';
 import RealCountCity from './pages/RealCount/RealCountCity/RealCountCity';
 import RealCountCityDetail from './pages/RealCount/RealCountCity/RealCountCityDetail';
+import RealCountDistrict from './pages/RealCount/RealCountDistrict/RealCountDistrict';
+import RealCountDistrictDetail from './pages/RealCount/RealCountDistrict/RealCountDistrictDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -190,6 +192,8 @@ export const AppRoutes = () => {
 					<Route path="/realcount" element={<RealCount />} />
 					<Route path="/realcount/city" element={<RealCountCity />} />
 					<Route path="/realcount/city/:cityID" element={<RealCountCityDetail />} />
+					<Route path="/realcount/district" element={<RealCountDistrict />} />
+					<Route path="/realcount/district/:districtID" element={<RealCountDistrictDetail />} />
 				</Route>
 			</Route>
 		</Routes>

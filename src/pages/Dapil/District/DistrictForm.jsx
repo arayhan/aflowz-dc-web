@@ -8,7 +8,7 @@ const DistrictForm = () => {
 
 	return (
 		<div>
-			<BannerFeature title={`Kota - ${districtID ? 'Update' : 'Create'}`} />
+			<BannerFeature title={`Kecamatan - ${districtID ? 'Update' : 'Create'}`} />
 
 			<section className="bg-gray-100">
 				<div className="container py-16">
