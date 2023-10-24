@@ -1,9 +1,9 @@
 import { Button } from '@/components/atoms';
 import React from 'react';
 
-export const CardDetailTotal = ({ value, title, buttonText, linkTo }) => {
+export const CardDetailTotal = ({ value, title, buttonText, linkTo, className = '' }) => {
 	return (
-		<div className="bg-white rounded-md">
+		<div className={`bg-white rounded-md ${className}`}>
 			<div className="flex flex-col items-center justify-center px-3 py-6 space-y-1 text-center">
 				<span className="text-2xl md:text-4xl font-extralight">{value}</span>
 				<div className="text-sm font-light text-gray-400">{title}</div>

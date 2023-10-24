@@ -66,7 +66,8 @@ import VisitasiPromiseForm from './pages/Visitasi/VisitasiPromiseForm';
 import TPSDetail from './pages/TPS/TPSDetail';
 import Saksi from './pages/Saksi/Saksi';
 import RealCount from './pages/RealCount/RealCount';
-import { RealCountCity } from './pages/RealCount/RealCountCity/RealCountCity';
+import RealCountCity from './pages/RealCount/RealCountCity/RealCountCity';
+import RealCountCityDetail from './pages/RealCount/RealCountCity/RealCountCityDetail';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -188,6 +189,7 @@ export const AppRoutes = () => {
 					<Route path="/saksi" element={<Saksi />} />
 					<Route path="/realcount" element={<RealCount />} />
 					<Route path="/realcount/city" element={<RealCountCity />} />
+					<Route path="/realcount/city/:cityID" element={<RealCountCityDetail />} />
 				</Route>
 			</Route>
 		</Routes>

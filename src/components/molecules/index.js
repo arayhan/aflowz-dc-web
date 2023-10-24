@@ -139,5 +139,6 @@ export * from './TableDetail/TableDetailPICDistrict/TableDetailPICDistrict';
 export * from './TableDetail/TableDetailPICVillage/TableDetailPICVillage';
 export * from './TableDetail/TableDetailPromise/TableDetailPromise';
 export * from './TableDetail/TableDetailRealCount/TableDetailRealCount';
+export * from './TableDetail/TableDetailRealCount/TableDetailRealCountDistrict';
 export * from './TableDetail/TableDetailSaksi/TableDetailSaksi';
 export * from './TableDetail/TableDetailRelawan/TableDetailRelawan';

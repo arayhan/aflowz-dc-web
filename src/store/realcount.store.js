@@ -1,14 +1,25 @@
 import { SERVICE_REALCOUNT } from '@/services';
-import { toastRequestResult } from '@/utils/helpers';
-import { toast } from 'react-toastify';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const states = (set, get) => ({
+const states = (set) => ({
+	fetchingRealCountCityDetail: false,
 	fetchingRealCountVillageDetail: false,
 
+	realcountCityDetail: null,
 	realcountVillageDetail: null,
 
+	getRealCountCityDetail: async (cityID, params) => {
+		set({ fetchingRealCountCityDetail: true });
+
+		const defaultParams = { limit: 0, offset: 0 };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
+
+		const { success, payload } = await SERVICE_REALCOUNT.getRealCountCityDetail(cityID, requestParams);
+
+		set({ realcountCityDetail: success ? payload : null });
+		set({ fetchingRealCountCityDetail: false });
+	},
 	getRealCountVillageDetail: async (villageID, params) => {
 		set({ fetchingRealCountVillageDetail: true });
 

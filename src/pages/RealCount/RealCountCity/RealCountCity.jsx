@@ -3,7 +3,7 @@ import { queryStringToObject } from '@/utils/helpers';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const RealCountCity = () => {
+const RealCountCity = () => {
 	const { search } = useLocation();
 	const [params, setParams] = useState({});
 
@@ -20,3 +20,5 @@ export const RealCountCity = () => {
 		</div>
 	);
 };
+
+export default RealCountCity;
