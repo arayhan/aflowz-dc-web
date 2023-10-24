@@ -2,6 +2,7 @@ import { Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
+	TableActivity,
 	TableDetailRealcount,
 	TableDetailRelawan,
 	TableDetailSaksi,
@@ -137,6 +138,22 @@ const TPSDetail = () => {
 										params={{ village_id: TPSItem.village.id }}
 										isShowFooter
 										isReadonly={true}
+									/>
+								</div>
+								<div className="col-span-12 bg-white rounded-md">
+									<TableActivity
+										displayedColumns={[
+											'#',
+											'Nama Kegiatan',
+											'Kategori Kegiatan',
+											'Program Terkait',
+											'Institusi Terkait',
+											'Tanggal Kunjungan/Kegiatan',
+											'PIC Tim Internal',
+											'Partner yang Dikunjungi',
+											'Kontak PIC'
+										]}
+										params={{ village_id: TPSItem.village.id }}
 									/>
 								</div>
 							</div>
