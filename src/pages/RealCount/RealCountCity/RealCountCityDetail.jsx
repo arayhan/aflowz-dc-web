@@ -1,5 +1,14 @@
 import { Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, TableDetailRealCountDistrict } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	TableActivity,
+	TableDetailRealCountDistrict,
+	TableDetailRelawan,
+	TablePenerima,
+	TableStockiestMovementLog,
+	TableTPS
+} from '@/components/molecules';
 import { useCityStore, useRealCountStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -64,33 +73,74 @@ const RealCountCityDetail = () => {
 							</div>
 
 							<div className="space-y-4">
-								<div className="space-y-2">
-									<div className="text-xl font-semibold">Real Count</div>
-								</div>
-								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-									<CardDetailTotal
-										className="lg:col-start-2"
-										title={'Total Perolehan Suara'}
-										value={cityDetail?.total_tps || 0}
-										linkTo={`/tps?city_id=${cityID}`}
-									/>
-									<CardDetailTotal
-										className="lg:col-start-3"
-										title={'Target Perolehan Suara'}
-										value={cityDetail?.total_tps || 0}
-										linkTo={`/tps?city_id=${cityID}`}
-									/>
-								</div>
-								<div>
-									<Card className={'bg-white rounded-md'} hideHeader>
-										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailRealCountDistrict
-												isLoading={fetchingRealCountCityDetail || fetchingCityDetail}
-												realcountDistrictData={realcountCityDetail?.regional_voters_detail}
-											/>
-										</div>
-									</Card>
-								</div>
+								<Card title="Informasi Real Count" className={'bg-white rounded-md'}>
+									<div className="flex p-4 overflow-scroll max-h-96">
+										<TableDetailRealCountDistrict
+											isLoading={fetchingRealCountCityDetail || fetchingCityDetail}
+											realcountDistrictData={realcountCityDetail?.regional_voters_detail}
+										/>
+									</div>
+								</Card>
+							</div>
+
+							<div className="space-y-4 bg-white rounded-md">
+								<TableTPS
+									title={`List TPS - Kota ${cityDetail.city_name}`}
+									isShowFilter={false}
+									params={{ city_id: cityID }}
+								/>
+							</div>
+
+							<div className="space-y-4 bg-white rounded-md">
+								<TablePenerima
+									title={`Penerima Program - Kota ${cityDetail.city_name}`}
+									displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
+									isShowButtonSeeAll
+									isShowFooter={false}
+									isShowFilter={false}
+									isReadonly
+									params={{ city_id: cityID }}
+									maxHeight={500}
+									enableClickRow
+								/>
+							</div>
+
+							<div>
+								<Card title={'List Relawan'} className={'bg-white rounded-md'}>
+									<div className="flex p-4 overflow-scroll max-h-96">
+										<TableDetailRelawan
+											isLoading={fetchingRealCountCityDetail || fetchingCityDetail}
+											relawanData={realcountCityDetail?.list_relawan}
+										/>
+									</div>
+								</Card>
+							</div>
+
+							<div className="col-span-12 bg-white rounded-md">
+								<TableStockiestMovementLog
+									title="List Riwayat Barang Kampanye"
+									params={{ city_id: cityID }}
+									isShowFooter
+									isReadonly={true}
+								/>
+							</div>
+
+							<div className="col-span-12 bg-white rounded-md">
+								<TableActivity
+									title="List Riwayat Kunjungan Kampanye"
+									displayedColumns={[
+										'#',
+										'Nama Kegiatan',
+										'Kategori Kegiatan',
+										'Program Terkait',
+										'Institusi Terkait',
+										'Tanggal Kunjungan/Kegiatan',
+										'PIC Tim Internal',
+										'Partner yang Dikunjungi',
+										'Kontak PIC'
+									]}
+									params={{ activity_city_id: cityID }}
+								/>
 							</div>
 						</div>
 					)}

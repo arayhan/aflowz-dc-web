@@ -10,7 +10,7 @@ import moment from 'moment-timezone';
 import 'moment/locale/id';
 import { ACTION_TYPES } from '@/utils/constants';
 
-export const TableStockiestMovementLog = ({ params, productID, isShowFooter, isReadonly }) => {
+export const TableStockiestMovementLog = ({ params, title, isShowFooter, isReadonly }) => {
 	const { isSystem } = useAuthStore();
 	const { productLogList, fetchingProductLogList, getProductLogList } = useStockiestStore();
 	const [page, setPage] = useState(1);
@@ -188,7 +188,7 @@ export const TableStockiestMovementLog = ({ params, productID, isShowFooter, isR
 		<div className="bg-white rounded-md shadow-md">
 			<div className="p-6">
 				<TableHeader
-					title={'Product Movement Log'}
+					title={title || 'Product Movement Log'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
 					showButtonCreate={false}

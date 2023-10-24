@@ -28,6 +28,7 @@ export const TablePenerima = ({
 	isShowFilter,
 	enableClickRow,
 	konstituenType,
+	maxHeight,
 	isPIP,
 	isKIP,
 	isNeedAbort
@@ -415,7 +416,7 @@ export const TablePenerima = ({
 				</>
 			)}
 
-			<div className="overflow-x-scroll">
+			<div className="overflow-x-scroll" style={maxHeight ? { maxHeight, overflowY: 'scroll' } : {}}>
 				<Table
 					columns={columns}
 					data={data}
