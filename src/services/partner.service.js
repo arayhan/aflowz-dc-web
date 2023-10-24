@@ -27,6 +27,20 @@ export const getPartnerList = async (params, isNeedAbort = false) => {
 	}
 };
 
+export const getPartnerSaksiList = async (params, isNeedAbort = false) => {
+	controller.abort();
+
+	controller = new AbortController();
+	const signal = controller.signal;
+	try {
+		const queryParams = objectToQueryString(params);
+		const response = await http.get('/partner/tps/witness' + queryParams, isNeedAbort ? { signal } : {});
+		return { success: response.data.success, payload: response.data.data };
+	} catch (error) {
+		return { success: false, payload: error };
+	}
+};
+
 export const downloadPartnerList = async (params) => {
 	try {
 		const queryParams = objectToQueryString(params);

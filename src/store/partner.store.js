@@ -18,6 +18,7 @@ const states = (set, get) => ({
 	fetchingStaffList: false,
 	fetchingStaffOrganizationStructureImage: false,
 	fetchingDownloadPenerimaList: false,
+	fetchingPartnerSaksiList: false,
 
 	processingSubmitPenerima: false,
 	processingDeletePenerima: false,
@@ -44,6 +45,7 @@ const states = (set, get) => ({
 	staffTitleParentList: null,
 	penerimaAllCity: null,
 	staffOrganizationStructureImage: null,
+	partnerSaksiList: null,
 
 	// =================================
 	// ALL
@@ -382,6 +384,19 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'Organization Structure deleted', payload?.odoo_error || payload?.message);
 		get().getStaffOrganizationStructureImage();
 		set({ processingDeleteStaffOrganizationStructureImage: false });
+	},
+
+	// =================================
+	// STAFF
+	// =================================
+	getPartnerSaksiList: async (params) => {
+		set({ fetchingPartnerSaksiList: true });
+		const reqParams = { ...params };
+
+		const { success, payload } = await SERVICE_PARTNER.getPartnerSaksiList(reqParams);
+
+		set({ partnerSaksiList: success ? payload : null });
+		set({ fetchingPartnerSaksiList: false });
 	}
 });
 

@@ -120,7 +120,8 @@ export const DAPIL_MENUS = [
 ];
 
 export const KAMPANYE_MENUS = [
-	{ id: 1, title: 'TPS', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/tps' }
+	{ id: 1, title: 'TPS', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/tps' },
+	{ id: 2, title: 'Saksi', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/saksi' }
 ];
 
 export const PRODUCT_MOVEMENT_TYPE = {

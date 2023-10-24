@@ -64,6 +64,7 @@ import VisitasiForm from './pages/Visitasi/VisitasiForm';
 import VisitasiDetail from './pages/Visitasi/VisitasiDetail';
 import VisitasiPromiseForm from './pages/Visitasi/VisitasiPromiseForm';
 import TPSDetail from './pages/TPS/TPSDetail';
+import Saksi from './pages/Saksi/Saksi';
 
 export const AppRoutes = () => {
 	const { isLoggedIn } = useAuthStore();
@@ -153,10 +154,6 @@ export const AppRoutes = () => {
 					<Route path="/absensi/:attendanceID" element={<AttendanceDetail />} />
 					<Route path="/absensi/create" element={<AttendanceCreateUpdate />} />
 					<Route path="/absensi/update/:attendanceID" element={<AttendanceCreateUpdate />} />
-					<Route path="/tps/update/:TPSID" element={<TPSForm />} />
-					<Route path="/tps/create" element={<TPSForm />} />
-					<Route path="/tps/:TPSID" element={<TPSDetail />} />
-					<Route path="/tps" element={<TPS />} />
 					<Route
 						path="/activity/:activityID/detail/:activityDetailID/promise/update/:activityPromiseID"
 						element={<ActivityPromiseForm />}
@@ -182,6 +179,11 @@ export const AppRoutes = () => {
 					<Route path="/stockiest/update/:stockiestID" element={<StockiestCreateUpdate />} />
 					<Route path="/stockiest/move" element={<StockiestMove />} />
 					<Route path="/stockiest/:stockiestID" element={<StockiestDetail />} />
+					<Route path="/tps/update/:TPSID" element={<TPSForm />} />
+					<Route path="/tps/create" element={<TPSForm />} />
+					<Route path="/tps/:TPSID" element={<TPSDetail />} />
+					<Route path="/tps" element={<TPS />} />
+					<Route path="/saksi" element={<Saksi />} />
 				</Route>
 			</Route>
 		</Routes>

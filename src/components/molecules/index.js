@@ -122,6 +122,7 @@ export * from './Table/TableActivityPromise/TableActivityPromise';
 export * from './Table/TableProposalKonstituen/TableProposalKonstituen';
 export * from './Table/TableVisitasi/TableVisitasi';
 export * from './Table/TableVisitasiPromise/TableVisitasiPromise';
+export * from './Table/TableSaksi/TableSaksi';
 
 export * from './TableDetail/TableDetailTimeline/TableDetailTimeline';
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';
