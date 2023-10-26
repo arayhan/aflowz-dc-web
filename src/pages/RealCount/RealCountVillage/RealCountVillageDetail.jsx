@@ -9,35 +9,35 @@ import {
 	TableStockiestMovementLog,
 	TableTPS
 } from '@/components/molecules';
-import { useDistrictStore, useRealCountStore } from '@/store';
+import { useVillageStore, useRealCountStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 
-const RealCountDistrictDetail = () => {
-	const { districtID } = useParams();
+const RealCountVillageDetail = () => {
+	const { villageID } = useParams();
 
-	const { fetchingDistrictDetail, districtDetail, getDistrictDetail } = useDistrictStore();
-	const { fetchingRealCountDistrictDetail, realcountDistrictDetail, getRealCountDistrictDetail } = useRealCountStore();
+	const { fetchingVillageDetail, villageDetail, getVillageDetail } = useVillageStore();
+	const { fetchingRealCountVillageDetail, realcountVillageDetail, getRealCountVillageDetail } = useRealCountStore();
 
 	useEffect(() => {
-		if (districtID) {
-			getDistrictDetail(districtID);
-			getRealCountDistrictDetail(districtID);
+		if (villageID) {
+			getVillageDetail(villageID);
+			getRealCountVillageDetail(villageID);
 		}
-	}, [districtID]);
+	}, [villageID]);
 
 	return (
 		<div>
 			<BannerFeature
-				title={districtDetail ? `Real Count - Kecamatan ${districtDetail.district_name}` : 'Real Count Kecamatan'}
-				loading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
+				title={villageDetail ? `Real Count - Kecamatan ${villageDetail.village_name}` : 'Real Count Kecamatan'}
+				loading={fetchingRealCountVillageDetail || fetchingVillageDetail}
 			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{(fetchingRealCountDistrictDetail || fetchingDistrictDetail) && <RealCountDistrictDetailSkeleton />}
-					{!fetchingRealCountDistrictDetail && !fetchingDistrictDetail && realcountDistrictDetail && (
+					{(fetchingRealCountVillageDetail || fetchingVillageDetail) && <RealCountVillageDetailSkeleton />}
+					{!fetchingRealCountVillageDetail && !fetchingVillageDetail && realcountVillageDetail && (
 						<div className="space-y-8">
 							<div className="space-y-4">
 								<div className="space-y-2">
@@ -46,28 +46,28 @@ const RealCountDistrictDetail = () => {
 								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 									<CardDetailTotal
 										title={'Jumlah TPS'}
-										value={realcountDistrictDetail?.total_tps || 0}
-										linkTo={`/tps?district_id=${districtID}`}
+										value={realcountVillageDetail?.total_tps || 0}
+										linkTo={`/tps?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Mata Pilih'}
-										value={realcountDistrictDetail?.total_tps || 0}
-										linkTo={`/tps?district_id=${districtID}`}
+										value={realcountVillageDetail?.total_tps || 0}
+										linkTo={`/tps?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={realcountDistrictDetail?.total_penerima_program_by_district || 0}
-										linkTo={`/penerima?district_id=${districtID}`}
+										value={realcountVillageDetail?.total_penerima_program_by_village || 0}
+										linkTo={`/penerima?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
-										value={realcountDistrictDetail?.total_potensi_suara || 0}
-										linkTo={`/tps?district_id=${districtID}`}
+										value={realcountVillageDetail?.total_potensi_suara || 0}
+										linkTo={`/tps?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
-										value={realcountDistrictDetail?.total_saksi || 0}
-										linkTo={`/saksi?district_id=${districtID}`}
+										value={realcountVillageDetail?.total_saksi || 0}
+										linkTo={`/saksi?village_id=${villageID}`}
 									/>
 								</div>
 							</div>
@@ -76,8 +76,8 @@ const RealCountDistrictDetail = () => {
 								<Card title="Informasi Real Count" className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
 										<TableDetailRealCountVillage
-											isLoading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
-											realcountVillageData={realcountDistrictDetail?.regional_voters_detail}
+											isLoading={fetchingRealCountVillageDetail || fetchingVillageDetail}
+											realcountVillageData={realcountVillageDetail?.regional_voters_detail}
 										/>
 									</div>
 								</Card>
@@ -85,9 +85,9 @@ const RealCountDistrictDetail = () => {
 
 							<div className="space-y-4 bg-white rounded-md">
 								<TableTPS
-									title={`List TPS - Kecamatan ${districtDetail.district_name}`}
+									title={`List TPS - Kecamatan ${villageDetail.village_name}`}
 									isShowFilter={false}
-									params={{ district_id: districtID }}
+									params={{ village_id: villageID }}
 								/>
 							</div>
 
@@ -95,7 +95,7 @@ const RealCountDistrictDetail = () => {
 								<Card title={'List Penerima'} className={'bg-white rounded-md'}>
 									<div className="flex overflow-scroll max-h-96">
 										<TableDetailPenerimaKampanye
-											dataPenerima={realcountDistrictDetail?.list_penerima_program_by_district}
+											dataPenerima={realcountVillageDetail?.list_penerima_program_by_village}
 										/>
 									</div>
 								</Card>
@@ -104,8 +104,8 @@ const RealCountDistrictDetail = () => {
 								<Card title={'List Relawan'} className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
 										<TableDetailRelawan
-											isLoading={fetchingRealCountDistrictDetail || fetchingDistrictDetail}
-											relawanData={realcountDistrictDetail?.list_relawan}
+											isLoading={fetchingRealCountVillageDetail || fetchingVillageDetail}
+											relawanData={realcountVillageDetail?.list_relawan}
 										/>
 									</div>
 								</Card>
@@ -114,7 +114,7 @@ const RealCountDistrictDetail = () => {
 							<div className="col-span-12 bg-white rounded-md">
 								<TableStockiestMovementLog
 									title="List Riwayat Barang Kampanye"
-									params={{ district_id: districtID }}
+									params={{ village_id: villageID }}
 									isShowFooter
 									isReadonly={true}
 								/>
@@ -134,7 +134,7 @@ const RealCountDistrictDetail = () => {
 										'Partner yang Dikunjungi',
 										'Kontak PIC'
 									]}
-									params={{ activity_district_id: districtID }}
+									params={{ activity_village_id: villageID }}
 								/>
 							</div>
 						</div>
@@ -145,7 +145,7 @@ const RealCountDistrictDetail = () => {
 	);
 };
 
-const RealCountDistrictDetailSkeleton = () => (
+const RealCountVillageDetailSkeleton = () => (
 	<div className="grid grid-cols-12 gap-6">
 		{[1, 2, 3].map((item) => (
 			<div key={item} className="col-span-12 p-4 bg-white rounded-md md:col-span-4">
@@ -171,4 +171,4 @@ const RealCountDistrictDetailSkeleton = () => (
 	</div>
 );
 
-export default RealCountDistrictDetail;
+export default RealCountVillageDetail;
