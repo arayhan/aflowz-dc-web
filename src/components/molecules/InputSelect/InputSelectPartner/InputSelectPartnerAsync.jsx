@@ -25,7 +25,8 @@ export const InputSelectPartnerAsync = forwardRef(
 								? partner.nisn_number + ' (NISN)'
 								: ''
 						}`,
-						value: partner.id
+						value: partner.id,
+						data: partner
 				  }))
 				: [];
 
@@ -38,8 +39,15 @@ export const InputSelectPartnerAsync = forwardRef(
 		useEffect(() => {
 			if (partnerList?.total > 0) {
 				const mapPartner = partnerList.items.map((partner) => ({
-					label: `${partner.nik_number} - ${partner.name}`,
-					value: partner.id
+					label: `${partner.name} - ${
+						partner.nik_number
+							? partner.nik_number + ' (NIK)'
+							: partner.nisn_number
+							? partner.nisn_number + ' (NISN)'
+							: ''
+					}`,
+					value: partner.id,
+					data: partner
 				}));
 				const newOptions = options.filter((option) => !mapPartner.find((partner) => partner.value === option.value));
 				setOptions([...mapPartner, ...newOptions]);
@@ -55,6 +63,7 @@ export const InputSelectPartnerAsync = forwardRef(
 					loadOptions={handleLoadOptions}
 					onChange={onChange}
 					loading={fetchingPartnerList}
+					disabled={fetchingPartnerList}
 					placeholder={placeholder || 'Pilih Partner'}
 					{...props}
 				/>

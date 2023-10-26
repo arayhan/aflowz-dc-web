@@ -270,3 +270,9 @@ export const formVisitasiSchema = yup.object().shape({
 export const formVisitasiPromiseSchema = yup.object().shape({
 	name: yup.string().required('Janji wajib diisi')
 });
+
+export const formDPTSchema = yup.object().shape({
+	tps_id: yup.number().required('TPS wajib diisi'),
+	partner_id: yup.number().required('Staff wajib diisi'),
+	nik_number: yup.string().required('Staff tidak memiliki NIK')
+});

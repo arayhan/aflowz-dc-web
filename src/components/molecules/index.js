@@ -43,6 +43,7 @@ export * from './Form/FormStockiest/FormStockiest';
 export * from './Form/FormStockiest/FormStockiestMove';
 export * from './Form/FormVisitasi/FormVisitasi';
 export * from './Form/FormVisitasiPromise/FormVisitasiPromise';
+export * from './Form/FormDPT/FormDPT';
 
 export * from './TableDetail/TableDetailPenerimaKonstituen/TablePenerimaKonstituen';
 export * from './TableDetail/TableStaffDetail/TableStaffDetailProgram';
@@ -82,6 +83,7 @@ export * from './InputSelect/InputSelectPartner/InputSelectPartner';
 export * from './InputSelect/InputSelectPartner/InputSelectPartnerAsync';
 export * from './InputSelect/InputSelectWarehouse/InputSelectWarehouse';
 export * from './InputSelect/InputSelectTimelineStatus/InputSelectTimelineStatus';
+export * from './InputSelect/InputSelectTPS/InputSelectTPS';
 
 export * from './Modal/ModalUploadImage/ModalUploadImage';
 export * from './Modal/ModalUploadSheetPenerima/ModalUploadSheetPenerima';
@@ -123,6 +125,7 @@ export * from './Table/TableProposalKonstituen/TableProposalKonstituen';
 export * from './Table/TableVisitasi/TableVisitasi';
 export * from './Table/TableVisitasiPromise/TableVisitasiPromise';
 export * from './Table/TableSaksi/TableSaksi';
+export * from './Table/TableDPT/TableDPT';
 
 export * from './TableDetail/TableDetailTimeline/TableDetailTimeline';
 export * from './TableDetail/TableDetailPenerimaProgram/TableDetailPenerimaProgram';

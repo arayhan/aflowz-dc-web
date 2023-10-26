@@ -72,7 +72,7 @@ export const TableTPS = ({
 										<ButtonAction
 											className="w-full bg-purple-500 hover:bg-purple-400"
 											action={ACTION_TYPES.SEE_DETAIL}
-											linkTo={`/partai/${partyVote.id}`}
+											linkTo={`/dpt/${partyVote.id}`}
 											text={partyVote.party.name}
 										/>{' '}
 										: <div>{partyVote.total_voters}</div>

@@ -67,25 +67,15 @@ const TPSDetail = () => {
 
 							<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 								<CardDetailTotal title={'Jumlah DPT'} value={TPSItem?.total_dpt || 0} linkTo={`/dpt?tps_id=${TPSID}`} />
-								<CardDetailTotal
-									title={'Jumlah Target Suara'}
-									value={TPSItem?.total_target_voters || 0}
-									linkTo={`/dpt?tps_id=${TPSID}`}
-								/>
-								<CardDetailTotal
-									title={'Jumlah Potensi Pemilih'}
-									value={TPSItem?.total_potensi_suara || 0}
-									linkTo={`/dpt?tps_id=${TPSID}`}
-								/>
+								<CardDetailTotal title={'Jumlah Target Suara'} value={TPSItem?.total_target_voters || 0} />
+								<CardDetailTotal title={'Jumlah Potensi Pemilih'} value={TPSItem?.total_potensi_suara || 0} />
 								<CardDetailTotal
 									title={`Perolehan Suara DC ${Number(TPSItem?.periode) - 5}`}
 									value={TPSItem?.total_dc_voters || 0}
-									linkTo={`/dpt?tps_id=${TPSID}`}
 								/>
 								<CardDetailTotal
 									title={`Perolehan Suara PAN ${Number(TPSItem?.periode) - 5}`}
 									value={TPSItem?.total_pan_voters || 0}
-									linkTo={`/dpt?tps_id=${TPSID}`}
 								/>
 							</div>
 

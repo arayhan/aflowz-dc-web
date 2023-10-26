@@ -122,7 +122,8 @@ export const DAPIL_MENUS = [
 export const KAMPANYE_MENUS = [
 	{ id: 1, title: 'TPS', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/tps' },
 	{ id: 2, title: 'Saksi', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/saksi' },
-	{ id: 2, title: 'Real Count', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/realcount' }
+	{ id: 3, title: 'Real Count', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/realcount' },
+	{ id: 4, title: 'DPT', icon: require('@/images/icons/Icon_Home/Program.svg').default, path: '/dpt' }
 ];
 
 export const KAMPANYE_REALCOUNT_MENUS = [
