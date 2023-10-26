@@ -1,5 +1,4 @@
 import { Button, Table } from '@/components/atoms';
-import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
