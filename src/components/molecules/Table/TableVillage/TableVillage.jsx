@@ -16,7 +16,8 @@ export const TableVillage = ({
 	isShowButtonSeeAll,
 	onClickRow,
 	isShowFilter,
-	enableClickRow
+	enableClickRow,
+	isRealCount
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
@@ -87,13 +88,10 @@ export const TableVillage = ({
 				Cell: (row) => {
 					return (
 						<div className="flex gap-2">
-							<ButtonAction action={ACTION_TYPES.SEE_DETAIL} linkTo={`/dapil/village/${row.row.original.id}`} />
-							{isSystem && (
-								<>
-									<ButtonAction action={ACTION_TYPES.UPDATE} linkTo={`/dapil/village/update/${row.row.original.id}`} />
-									<ButtonAction action={ACTION_TYPES.DELETE} onClick={() => deleteVillage(row.row.original.id)} />
-								</>
-							)}
+							<ButtonAction
+								action={ACTION_TYPES.SEE_DETAIL}
+								linkTo={`/${isRealCount ? 'realcount' : 'dapil'}/village/${row.row.original.id}`}
+							/>
 						</div>
 					);
 				}
@@ -104,13 +102,13 @@ export const TableVillage = ({
 
 	const handleClickRow = (rowData) => {
 		if (onClickRow) onClickRow(rowData);
-		else navigate(`/dapil/village/${rowData.id}`);
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/village/${rowData.id}`);
 	};
 
 	const handleSetFilter = (key, params) => {
 		const updatedParams = params ? addQueryParams(location.search, params) : removeQueryParams(location.search, key);
 		if (setParams) setParams(queryStringToObject(updatedParams));
-		else navigate('/dapil/village' + updatedParams, { replace: true });
+		else navigate(`/${isRealCount ? 'realcount' : 'dapil'}/village` + updatedParams, { replace: true });
 	};
 
 	useEffect(() => {
@@ -137,11 +135,11 @@ export const TableVillage = ({
 				<TableHeader
 					feature="Desa"
 					title={title || 'List Desa'}
-					featurePath="/dapil/village"
-					seeAllLink={'/dapil/village' + objectToQueryString(params)}
-					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
+					featurePath={`/${isRealCount ? 'realcount' : 'dapil'}/village`}
+					seeAllLink={`/${isRealCount ? 'realcount' : 'dapil'}/village` + objectToQueryString(params)}
 					isReadonly={!isSystem || isReadonly}
 					showButtonSeeAll={isShowButtonSeeAll}
+					showButtonCreate={false}
 				/>
 			</div>
 			{isShowFilter && (
