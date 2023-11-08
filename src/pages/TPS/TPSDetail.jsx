@@ -21,9 +21,11 @@ const TPSDetail = () => {
 	const { TPSItem, getTPSItem, fetchingTPSItem } = useTPSStore();
 	const { realcountVillageDetail, getRealCountVillageDetail, fetchingRealCountVillageDetail } = useRealCountStore();
 
-	const [tablePenerimaParams, setTablePenerimaParams] = useState({});
+	const [tablePenerimaParams, setTablePenerimaParams] = useState(null);
+	const [tableActivityParams, setTableActivityParams] = useState(null);
+	const [tableStockiestParams, setTableStockiestParams] = useState(null);
 
-	const title = TPSItem ? `${TPSItem.name} - ${TPSItem.village.name}` : 'TPS';
+	const title = TPSItem ? `${TPSItem.name} - ${TPSItem?.village.name}` : 'TPS';
 
 	useEffect(() => {
 		getTPSItem(TPSID);
@@ -33,6 +35,8 @@ const TPSDetail = () => {
 		if (TPSItem) {
 			getRealCountVillageDetail(TPSItem?.village?.id, { periode: TPSItem?.periode });
 			setTablePenerimaParams({ village_id: TPSItem?.village?.id, is_receiver: true });
+			setTableActivityParams({ activity_village_id: TPSItem?.village.id });
+			setTableStockiestParams({ village_id: TPSItem?.village.id });
 		}
 	}, [TPSItem]);
 
@@ -99,18 +103,20 @@ const TPSDetail = () => {
 									</Card>
 								</div>
 
-								<div className="col-span-12 bg-white rounded-md">
-									<TablePenerima
-										title={`Penerima Program Desa ${TPSItem.village.name}`}
-										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
-										isShowButtonSeeAll
-										isShowFooter={false}
-										isShowFilter={false}
-										isReadonly
-										params={tablePenerimaParams}
-										enableClickRow
-									/>
-								</div>
+								{tablePenerimaParams && (
+									<div className="col-span-12 bg-white rounded-md">
+										<TablePenerima
+											title={`Penerima Program Desa ${TPSItem.village.name}`}
+											displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
+											isShowButtonSeeAll
+											isShowFooter={false}
+											isShowFilter={false}
+											isReadonly
+											params={tablePenerimaParams}
+											enableClickRow
+										/>
+									</div>
+								)}
 
 								<div className="col-span-12">
 									<Card title={'List Relawan'} description={title} className={'bg-white rounded-md'}>
@@ -123,29 +129,32 @@ const TPSDetail = () => {
 									</Card>
 								</div>
 
-								<div className="col-span-12 bg-white rounded-md">
-									<TableStockiestMovementLog
-										params={{ village_id: TPSItem.village.id }}
-										isShowFooter
-										isReadonly={true}
-									/>
-								</div>
-								<div className="col-span-12 bg-white rounded-md">
-									<TableActivity
-										displayedColumns={[
-											'#',
-											'Nama Kegiatan',
-											'Kategori Kegiatan',
-											'Program Terkait',
-											'Institusi Terkait',
-											'Tanggal Kunjungan/Kegiatan',
-											'PIC Tim Internal',
-											'Partner yang Dikunjungi',
-											'Kontak PIC'
-										]}
-										params={{ activity_village_id: TPSItem.village.id }}
-									/>
-								</div>
+								{tableStockiestParams && (
+									<div className="col-span-12 bg-white rounded-md">
+										<TableStockiestMovementLog params={tableStockiestParams} isShowFooter isReadonly={true} />
+									</div>
+								)}
+
+								{tableActivityParams && (
+									<div className="col-span-12 bg-white rounded-md">
+										<TableActivity
+											title="Kegiatan Kunjungan Kampanye"
+											isShowButtonCreate={false}
+											displayedColumns={[
+												'#',
+												'Nama Kegiatan',
+												'Kategori Kegiatan',
+												'Program Terkait',
+												'Institusi Terkait',
+												'Tanggal Kunjungan/Kegiatan',
+												'PIC Tim Internal',
+												'Partner yang Dikunjungi',
+												'Kontak PIC'
+											]}
+											params={tableActivityParams}
+										/>
+									</div>
+								)}
 							</div>
 						</div>
 					)}

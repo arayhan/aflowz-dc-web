@@ -16,6 +16,7 @@ export const TableActivity = ({
 	isShowButtonSeeAll,
 	onClickRow,
 	isShowFilter,
+	isShowButtonCreate,
 	enableClickRow
 }) => {
 	const navigate = useNavigate();
@@ -243,6 +244,7 @@ export const TableActivity = ({
 					title={title || 'List Kegiatan'}
 					description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium animi dolorum eveniet."
 					isReadonly={!isSystem || isReadonly}
+					showButtonCreate={isShowButtonCreate}
 					showButtonSeeAll={isShowButtonSeeAll}
 				/>
 			</div>

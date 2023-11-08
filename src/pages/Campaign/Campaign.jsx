@@ -11,6 +11,8 @@ const Campaign = () => {
 
 	const { fetchingCampaignDetail, campaignDetail, getCampaignDetail } = useCampaignStore();
 
+	const tableTPSParams = { provinceID: provinceID };
+
 	useEffect(() => {
 		if (provinceID) {
 			getCampaignDetail(provinceID, { periode });
@@ -70,14 +72,16 @@ const Campaign = () => {
 								</Card>
 							</div>
 
-							<div className="space-y-4 bg-white rounded-md">
-								<TableTPS
-									title={`List TPS - ${provinceName}`}
-									isShowFilter={false}
-									params={{ provinceID: provinceID }}
-									enableClickRow
-								/>
-							</div>
+							{tableTPSParams && (
+								<div className="space-y-4 bg-white rounded-md">
+									<TableTPS
+										title={`List TPS - ${provinceName}`}
+										isShowFilter={false}
+										params={tableTPSParams}
+										enableClickRow
+									/>
+								</div>
+							)}
 						</div>
 					)}
 				</div>
