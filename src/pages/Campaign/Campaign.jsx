@@ -2,6 +2,7 @@ import { Card } from '@/components/atoms';
 import { BannerFeature, CardDetailTotal, TableDetailRealCountCity, TableTPS } from '@/components/molecules';
 import { useCampaignStore } from '@/store';
 import React, { useEffect } from 'react';
+import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
 
 const Campaign = () => {
@@ -82,6 +83,47 @@ const Campaign = () => {
 									/>
 								</div>
 							)}
+
+							<div className="bg-white shadow-md rounded-sm p-4 flex justify-end">
+								<button
+									className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-primary-500 hover:bg-primary-600 lg:w-auto"
+									onClick={() => {}}
+								>
+									<span className="w-4">
+										<SiGooglesheets size={16} />
+									</span>
+									<span className="text-sm">Upload Survey</span>
+								</button>
+							</div>
+
+							<div className="grid md:grid-cols-2 gap-4">
+								<div className="bg-white rounded-md">
+									<Card
+										title={'Demografi'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										CHART HERE
+									</Card>
+								</div>
+								<div className="bg-white rounded-md">
+									<Card title={'Gender'} bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+										CHART HERE
+									</Card>
+								</div>
+								<div className="bg-white rounded-md">
+									<Card title={'Usia'} bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+										CHART HERE
+									</Card>
+								</div>
+								<div className="bg-white rounded-md">
+									<Card
+										title={'Tingkat Pendidikan'}
+										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+									>
+										CHART HERE
+									</Card>
+								</div>
+							</div>
 						</div>
 					)}
 				</div>
