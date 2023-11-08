@@ -46,27 +46,27 @@ const RealCountVillageDetail = () => {
 								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 									<CardDetailTotal
 										title={'Jumlah TPS'}
-										value={realcountVillageDetail?.total_tps || 0}
+										value={realcountVillageDetail?.total_tps ?? '-'}
 										linkTo={`/tps?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Mata Pilih'}
-										value={realcountVillageDetail?.total_tps || 0}
-										linkTo={`/tps?village_id=${villageID}`}
+										value={realcountVillageDetail?.total_dpt ?? '-'}
+										linkTo={`/dpt?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={realcountVillageDetail?.total_penerima_program_by_village || 0}
+										value={realcountVillageDetail?.total_penerima_program_by_village ?? '-'}
 										linkTo={`/penerima?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
-										value={realcountVillageDetail?.total_potensi_suara || 0}
+										value={realcountVillageDetail?.total_potensi_suara ?? '-'}
 										linkTo={`/tps?village_id=${villageID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
-										value={realcountVillageDetail?.total_saksi || 0}
+										value={realcountVillageDetail?.total_saksi ?? '-'}
 										linkTo={`/saksi?village_id=${villageID}`}
 									/>
 								</div>

@@ -46,27 +46,27 @@ const RealCountDistrictDetail = () => {
 								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 									<CardDetailTotal
 										title={'Jumlah TPS'}
-										value={realcountDistrictDetail?.total_tps || 0}
+										value={realcountDistrictDetail?.total_tps ?? '-'}
 										linkTo={`/tps?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Mata Pilih'}
-										value={realcountDistrictDetail?.total_tps || 0}
-										linkTo={`/tps?district_id=${districtID}`}
+										value={realcountDistrictDetail?.total_dpt ?? '-'}
+										linkTo={`/dpt?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={realcountDistrictDetail?.total_penerima_program_by_district || 0}
+										value={realcountDistrictDetail?.total_penerima_program_by_district ?? '-'}
 										linkTo={`/penerima?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
-										value={realcountDistrictDetail?.total_potensi_suara || 0}
+										value={realcountDistrictDetail?.total_potensi_suara ?? '-'}
 										linkTo={`/tps?district_id=${districtID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
-										value={realcountDistrictDetail?.total_saksi || 0}
+										value={realcountDistrictDetail?.total_saksi ?? '-'}
 										linkTo={`/saksi?district_id=${districtID}`}
 									/>
 								</div>
