@@ -59,25 +59,22 @@ export const TableTPS = ({
 			{
 				Header: 'Suara Partai',
 				width: '100%',
-				minWidth: 250,
+				minWidth: 150,
 				hidden: displayedColumns || (displayedColumns && !displayedColumns.includes('Suara Partai')),
 				Cell: (row) => {
 					const party_votes = row.row.original.party_votes;
 					return (
 						<div className="grid gap-2">
 							{party_votes.length === 0 && '-'}
-							{party_votes.length > 0 &&
-								party_votes.map((partyVote) => (
-									<div key={partyVote.party.id} className="flex items-center gap-2">
-										<ButtonAction
-											className="w-full bg-purple-500 hover:bg-purple-400"
-											action={ACTION_TYPES.SEE_DETAIL}
-											linkTo={`/dpt/${partyVote.id}`}
-											text={partyVote.party.name}
-										/>{' '}
-										: <div>{partyVote.total_voters}</div>
-									</div>
-								))}
+							{party_votes.length > 0 && (
+								<ul className="text-sm w-full list-disc list-outside">
+									{party_votes.map((partyVote) => (
+										<li key={partyVote.party.id}>
+											<span className="font-semibold">{partyVote.party.name}</span>: {partyVote.total_voters}
+										</li>
+									))}
+								</ul>
+							)}
 						</div>
 					);
 				}
