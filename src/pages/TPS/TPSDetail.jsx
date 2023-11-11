@@ -1,4 +1,4 @@
-import { Card } from '@/components/atoms';
+import { Button, Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
@@ -88,6 +88,7 @@ const TPSDetail = () => {
 									<Card title={'Informasi Real Count'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
 											<TableDetailRealCount
+												TPSID={TPSID}
 												isLoading={fetchingRealCountVillageDetail}
 												realcountData={realcountVillageDetail}
 											/>

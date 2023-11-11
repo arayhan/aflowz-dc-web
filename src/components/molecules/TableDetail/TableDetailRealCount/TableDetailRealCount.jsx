@@ -1,7 +1,10 @@
 import { Table } from '@/components/atoms';
+import { useTPSStore } from '@/store';
 import React, { useMemo } from 'react';
 
-export const TableDetailRealCount = ({ isLoading, realcountData }) => {
+export const TableDetailRealCount = ({ TPSID, isLoading, realcountData }) => {
+	const { processingUpdateTPSPartyVotes, updateTPSPartyVotes } = useTPSStore();
+
 	const columns = useMemo(
 		() => [
 			{
@@ -48,7 +51,35 @@ export const TableDetailRealCount = ({ isLoading, realcountData }) => {
 				Header: `Suara Total ${item?.party_name}`,
 				minWidth: 180,
 				Cell: () => {
-					return <div className="text-gray-400">{item?.total_party_voters ?? '-'}</div>;
+					const handleUpdate = async (e) => {
+						const { value } = e.target;
+
+						if (value !== item.total_party_voters) {
+							const params = {
+								party_id: item.party_id,
+								total_voters: value
+							};
+							await updateTPSPartyVotes(TPSID, params);
+							await getRealCountVillageDetail(TPSItem?.village?.id, { periode: TPSItem?.periode });
+						}
+					};
+
+					return processingUpdateTPSPartyVotes ? (
+						<div>Loading...</div>
+					) : (
+						<div className="text-gray-400">
+							{item?.total_party_voters >= 0 ? (
+								<input
+									type="number"
+									className="p-0 border-0"
+									defaultValue={item.total_party_voters}
+									onBlur={handleUpdate}
+								/>
+							) : (
+								'-'
+							)}
+						</div>
+					);
 				}
 			}))
 		],

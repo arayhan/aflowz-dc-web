@@ -12,12 +12,14 @@ const states = (set, get) => ({
 	processingCreateTPS: false,
 	processingUpdateTPS: false,
 	processingDeleteTPS: false,
+	processingUpdateTPSPartyVotes: false,
 
 	TPSItem: null,
 	TPSList: null,
 	TPSDetail: null,
 
 	errorsTPS: null,
+	errorsTPSPartyVotes: null,
 
 	getTPSItem: async (TPSID) => {
 		set({ fetchingTPS: true });
@@ -80,6 +82,20 @@ const states = (set, get) => ({
 		toastRequestResult(loader, success, 'TPS deleted', payload?.odoo_error || payload?.message);
 		get().getTPSList();
 		set({ processingDeleteTPS: false });
+	},
+
+	updateTPSPartyVotes: async (TPSID, params, callback) => {
+		set({ processingUpdateTPSPartyVotes: true });
+
+		const loader = toast.loading('Processing...');
+		const { payload, success } = await SERVICE_TPS.updateTPSPartyVotes(TPSID, params);
+
+		if (!success) set({ errorsTPSPartyVotes: payload });
+
+		toastRequestResult(loader, success, 'TPS Party Voter updated', payload?.odoo_error || payload?.message);
+		set({ processingUpdateTPSPartyVotes: false });
+
+		callback({ payload, success });
 	},
 
 	clearStateTPS: () => {
