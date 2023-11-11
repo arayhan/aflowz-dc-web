@@ -22,6 +22,7 @@ export * from './Chart/ChartPenerimaProgramByGender/ChartPenerimaProgramByGender
 export * from './Chart/ChartPeriodeProgram/ChartPeriodeProgram';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
+export * from './Chart/ChartCampaign/ChartCampaignDemografi';
 
 export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
@@ -91,6 +92,7 @@ export * from './Modal/ModalUploadSheetFollowers/ModalUploadSheetFollowers';
 export * from './Modal/ModalUploadSheetKonstituen/ModalUploadSheetKonstituen';
 export * from './Modal/ModalUploadSheetAnonymousData/ModalUploadSheetAnonymousData';
 export * from './Modal/ModalFilterPenerima/ModalFilterPenerima';
+export * from './Modal/ModalUploadSurvey/ModalUploadSurvey';
 
 export * from './Section/SectionSelectFeatures/SectionSelectFeatures';
 export * from './Section/SectionSelectProgram/SectionSelectProgram';

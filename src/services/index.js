@@ -14,3 +14,4 @@ export * as SERVICE_VISITASI from './visitasi.service';
 export * as SERVICE_REALCOUNT from './realcount.service';
 export * as SERVICE_DPT from './dpt.service';
 export * as SERVICE_CAMPAIGN from './campaign.service';
+export * as SERVICE_SURVEY from './survey.service';

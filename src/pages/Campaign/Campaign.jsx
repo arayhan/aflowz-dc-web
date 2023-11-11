@@ -1,7 +1,14 @@
 import { Card } from '@/components/atoms';
-import { BannerFeature, CardDetailTotal, TableDetailRealCountCity, TableTPS } from '@/components/molecules';
+import {
+	BannerFeature,
+	CardDetailTotal,
+	ChartCampaignDemografi,
+	ModalUploadSurvey,
+	TableDetailRealCountCity,
+	TableTPS
+} from '@/components/molecules';
 import { useCampaignStore } from '@/store';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
 
@@ -9,6 +16,8 @@ const Campaign = () => {
 	const provinceID = '617'; // Provinsi Bengkulu
 	const provinceName = 'Provinsi Bengkulu'; // Provinsi Bengkulu
 	const periode = '2023';
+
+	const [showUploadSurveyModal, setShowUploadSurveyModal] = useState(false);
 
 	const { fetchingCampaignDetail, campaignDetail, getCampaignDetail } = useCampaignStore();
 
@@ -22,6 +31,8 @@ const Campaign = () => {
 
 	return (
 		<div>
+			{showUploadSurveyModal && <ModalUploadSurvey onClose={() => setShowUploadSurveyModal(false)} />}
+
 			<BannerFeature title={`Kampanye - ${provinceName}`} loading={false} />
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
@@ -36,27 +47,27 @@ const Campaign = () => {
 								<div className="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 									<CardDetailTotal
 										title={'Jumlah TPS'}
-										value={campaignDetail?.total_tps || 0}
+										value={campaignDetail?.total_tps ?? '-'}
 										linkTo={`/tps?province_id=${provinceID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Mata Pilih'}
-										value={campaignDetail?.total_tps || 0}
-										linkTo={`/tps?province_id=${provinceID}`}
+										value={campaignDetail?.total_dpt ?? '-'}
+										linkTo={`/dpt?province_id=${provinceID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={campaignDetail?.total_penerima_program_by_city || 0}
+										value={campaignDetail?.total_penerima_program_by_city ?? '-'}
 										linkTo={`/penerima?province_id=${provinceID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
-										value={campaignDetail?.total_potensi_suara || 0}
+										value={campaignDetail?.total_potensi_suara ?? '-'}
 										linkTo={`/tps?province_id=${provinceID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
-										value={campaignDetail?.total_saksi || 0}
+										value={campaignDetail?.total_saksi ?? '-'}
 										linkTo={`/saksi?province_id=${provinceID}`}
 									/>
 								</div>
@@ -87,7 +98,7 @@ const Campaign = () => {
 							<div className="bg-white shadow-md rounded-sm p-4 flex justify-end">
 								<button
 									className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-primary-500 hover:bg-primary-600 lg:w-auto"
-									onClick={() => {}}
+									onClick={() => setShowUploadSurveyModal(true)}
 								>
 									<span className="w-4">
 										<SiGooglesheets size={16} />
@@ -102,7 +113,7 @@ const Campaign = () => {
 										title={'Demografi'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										CHART HERE
+										<ChartCampaignDemografi />
 									</Card>
 								</div>
 								<div className="bg-white rounded-md">

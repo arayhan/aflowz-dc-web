@@ -16,3 +16,4 @@ export * from './visitasi.store';
 export * from './realcount.store';
 export * from './dpt.store';
 export * from './campaign.store';
+export * from './survey.store';
