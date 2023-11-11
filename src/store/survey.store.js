@@ -5,6 +5,10 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set) => ({
+	survey: null,
+
+	fetchingSurvey: null,
+
 	processingBulkCreateSurvey: false,
 
 	bulkCreateSurvey: async (params, callback) => {

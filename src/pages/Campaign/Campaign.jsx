@@ -15,7 +15,7 @@ import Skeleton from 'react-loading-skeleton';
 const Campaign = () => {
 	const provinceID = '617'; // Provinsi Bengkulu
 	const provinceName = 'Provinsi Bengkulu'; // Provinsi Bengkulu
-	const periode = '2023';
+	const periode = '2020,2021,2022,2023,2024';
 
 	const [showUploadSurveyModal, setShowUploadSurveyModal] = useState(false);
 
@@ -73,6 +73,19 @@ const Campaign = () => {
 								</div>
 							</div>
 
+							<div className="flex gap-4">
+								<CardDetailTotal
+									className="w-full"
+									title={'Total Perolehan Suara'}
+									value={campaignDetail?.total_legitimate_vote ?? '-'}
+								/>
+								<CardDetailTotal
+									className="w-full"
+									title={'Target Perolehan Suara'}
+									value={campaignDetail?.total_target_vote ?? '-'}
+								/>
+							</div>
+
 							<div className="space-y-4">
 								<Card title="Informasi Real Count" className={'bg-white rounded-md'}>
 									<div className="flex overflow-scroll max-h-96">
@@ -95,7 +108,7 @@ const Campaign = () => {
 								</div>
 							)}
 
-							<div className="bg-white shadow-md rounded-sm p-4 flex justify-end">
+							<div className="flex justify-end p-4 bg-white rounded-sm shadow-md">
 								<button
 									className="flex items-center justify-center w-full px-5 py-3 space-x-2 text-white transition-all rounded-sm bg-primary-500 hover:bg-primary-600 lg:w-auto"
 									onClick={() => setShowUploadSurveyModal(true)}
@@ -107,7 +120,7 @@ const Campaign = () => {
 								</button>
 							</div>
 
-							<div className="grid md:grid-cols-2 gap-4">
+							<div className="grid gap-4 md:grid-cols-2">
 								<div className="bg-white rounded-md">
 									<Card
 										title={'Demografi'}
