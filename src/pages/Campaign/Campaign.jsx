@@ -8,6 +8,7 @@ import {
 	TableTPS
 } from '@/components/molecules';
 import { useCampaignStore, useSurveyStore } from '@/store';
+import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import React, { useEffect, useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
@@ -61,12 +62,12 @@ const Campaign = () => {
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
 										value={campaignDetail?.total_penerima_program_by_city ?? '-'}
-										linkTo={`/penerima?province_id=${provinceID}`}
+										linkTo={`/penerima?province_id=${provinceID}&candidate_status=${STATUS_PENERIMA_TYPES.CONFIRMED}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Potensi Suara'}
 										value={campaignDetail?.total_potensi_suara ?? '-'}
-										linkTo={`/tps?province_id=${provinceID}`}
+										linkTo={`/penerima?province_id=${provinceID}`}
 									/>
 									<CardDetailTotal
 										title={'Jumlah Saksi'}
