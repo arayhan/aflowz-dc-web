@@ -7,7 +7,7 @@ import {
 	TableDetailRealCountCity,
 	TableTPS
 } from '@/components/molecules';
-import { useCampaignStore } from '@/store';
+import { useCampaignStore, useSurveyStore } from '@/store';
 import React, { useEffect, useState } from 'react';
 import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
@@ -20,10 +20,13 @@ const Campaign = () => {
 	const [showUploadSurveyModal, setShowUploadSurveyModal] = useState(false);
 
 	const { fetchingCampaignDetail, campaignDetail, getCampaignDetail } = useCampaignStore();
+	const { survey, getSurvey } = useSurveyStore();
 
 	const tableTPSParams = { provinceID: provinceID };
 
 	useEffect(() => {
+		getSurvey();
+
 		if (provinceID) {
 			getCampaignDetail(provinceID, { periode });
 		}
@@ -126,7 +129,7 @@ const Campaign = () => {
 										title={'Demografi'}
 										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
 									>
-										<ChartCampaignDemografi />
+										<ChartCampaignDemografi data={survey} />
 									</Card>
 								</div>
 								<div className="bg-white rounded-md">

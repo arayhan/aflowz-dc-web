@@ -11,6 +11,15 @@ const states = (set) => ({
 
 	processingBulkCreateSurvey: false,
 
+	getSurvey: async () => {
+		set({ fetchingSurvey: true });
+
+		const { success, payload } = await SERVICE_SURVEY.getSurvey();
+
+		set({ survey: success ? payload : null });
+		set({ fetchingSurvey: false });
+	},
+
 	bulkCreateSurvey: async (params, callback) => {
 		set({ processingBulkCreateSurvey: true });
 

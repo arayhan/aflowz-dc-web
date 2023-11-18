@@ -1,4 +1,4 @@
-import { Button } from '@/components/atoms';
+import { Button, InputText } from '@/components/atoms';
 import { useDPTStore } from '@/store';
 import { formDPTSchema } from '@/utils/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 import { InputSelectTPS } from '../../InputSelect/InputSelectTPS/InputSelectTPS';
-import { InputSelectPartnerAsync } from '../../InputSelect/InputSelectPartner/InputSelectPartnerAsync';
 
 export const FormDPT = () => {
 	const { DPTID } = useParams();
@@ -15,11 +14,10 @@ export const FormDPT = () => {
 	const { DPTItem, fetchingDPT, processingCreateDPT, DPTErrors } = useDPTStore();
 	const { getDPTItem, createDPT, updateDPT, clearStateDPT } = useDPTStore();
 
-	const { control, formState, setValue, setError, handleSubmit } = useForm({
+	const { control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formDPTSchema),
 		defaultValues: {
 			tps_id: undefined,
-			partner_id: undefined,
 			nik_number: ''
 		}
 	});
@@ -43,7 +41,6 @@ export const FormDPT = () => {
 	useEffect(() => {
 		if (DPTID && DPTItem) {
 			setValue('tps_id', DPTItem.tps.id || undefined);
-			setValue('partner_id', DPTItem.partner.id || undefined);
 			setValue('nik_number', DPTItem.nik_number || '');
 		}
 	}, [DPTID, DPTItem]);
@@ -58,6 +55,19 @@ export const FormDPT = () => {
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
 				<Controller
+					name={'nik_number'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							label="NIK"
+							placeholder="NIK"
+							disabled={processingCreateDPT || fetchingDPT || DPTErrors}
+							error={error}
+						/>
+					)}
+				/>
+				<Controller
 					name={'tps_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
@@ -69,26 +79,6 @@ export const FormDPT = () => {
 								setError('tps_id', null);
 							}}
 							error={error}
-						/>
-					)}
-				/>
-				<Controller
-					name={'partner_id'}
-					control={control}
-					render={({ field, fieldState: { error } }) => (
-						<InputSelectPartnerAsync
-							{...field}
-							label="Staff"
-							placeholder="Pilih Staff"
-							disabled={processingCreateDPT || fetchingDPT || DPTErrors}
-							params={{ is_staff: true }}
-							onChange={({ value, data }) => {
-								setValue('partner_id', value);
-								setValue('nik_number', data?.nik_number || '');
-								setError('partner_id', null);
-								setError('nik_number', null);
-							}}
-							error={error || formState.errors?.nik_number}
 						/>
 					)}
 				/>
