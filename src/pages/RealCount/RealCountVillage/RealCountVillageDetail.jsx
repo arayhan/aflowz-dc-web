@@ -9,7 +9,7 @@ import {
 	TableStockiestMovementLog,
 	TableTPS
 } from '@/components/molecules';
-import { useVillageStore, useRealCountStore } from '@/store';
+import { useRealCountStore } from '@/store';
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
@@ -17,12 +17,10 @@ import { useParams } from 'react-router-dom';
 const RealCountVillageDetail = () => {
 	const { villageID } = useParams();
 
-	const { fetchingVillageDetail, villageDetail, getVillageDetail } = useVillageStore();
 	const { fetchingRealCountVillageDetail, realcountVillageDetail, getRealCountVillageDetail } = useRealCountStore();
 
 	useEffect(() => {
 		if (villageID) {
-			getVillageDetail(villageID);
 			getRealCountVillageDetail(villageID);
 		}
 	}, [villageID]);
@@ -30,14 +28,16 @@ const RealCountVillageDetail = () => {
 	return (
 		<div>
 			<BannerFeature
-				title={villageDetail ? `Real Count - Kecamatan ${villageDetail.village_name}` : 'Real Count Kecamatan'}
-				loading={fetchingRealCountVillageDetail || fetchingVillageDetail}
+				title={
+					realcountVillageDetail ? `Real Count - Kecamatan ${realcountVillageDetail.name}` : 'Real Count Kecamatan'
+				}
+				loading={fetchingRealCountVillageDetail}
 			/>
 
 			<section className="py-12 bg-gray-100 md:py-20">
 				<div className="container">
-					{(fetchingRealCountVillageDetail || fetchingVillageDetail) && <RealCountVillageDetailSkeleton />}
-					{!fetchingRealCountVillageDetail && !fetchingVillageDetail && realcountVillageDetail && (
+					{fetchingRealCountVillageDetail && <RealCountVillageDetailSkeleton />}
+					{!fetchingRealCountVillageDetail && realcountVillageDetail && (
 						<div className="space-y-8">
 							<div className="space-y-4">
 								<div className="space-y-2">
@@ -76,7 +76,7 @@ const RealCountVillageDetail = () => {
 								<Card title="Informasi Real Count" className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
 										<TableDetailRealCountVillage
-											isLoading={fetchingRealCountVillageDetail || fetchingVillageDetail}
+											isLoading={fetchingRealCountVillageDetail}
 											realcountVillageData={realcountVillageDetail?.regional_voters_detail}
 										/>
 									</div>
@@ -85,7 +85,7 @@ const RealCountVillageDetail = () => {
 
 							<div className="space-y-4 bg-white rounded-md">
 								<TableTPS
-									title={`List TPS - Kecamatan ${villageDetail.village_name}`}
+									title={`List TPS - Kecamatan ${realcountVillageDetail.name}`}
 									isShowFilter={false}
 									params={{ village_id: villageID }}
 								/>
@@ -104,7 +104,7 @@ const RealCountVillageDetail = () => {
 								<Card title={'List Relawan'} className={'bg-white rounded-md'}>
 									<div className="flex p-4 overflow-scroll max-h-96">
 										<TableDetailRelawan
-											isLoading={fetchingRealCountVillageDetail || fetchingVillageDetail}
+											isLoading={fetchingRealCountVillageDetail}
 											relawanData={realcountVillageDetail?.list_relawan}
 										/>
 									</div>

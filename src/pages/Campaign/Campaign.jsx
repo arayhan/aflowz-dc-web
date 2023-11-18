@@ -61,7 +61,7 @@ const Campaign = () => {
 									/>
 									<CardDetailTotal
 										title={'Jumlah Penerima'}
-										value={campaignDetail?.total_penerima_program_by_city ?? '-'}
+										value={campaignDetail?.total_penerima ?? '-'}
 										linkTo={`/penerima?province_id=${provinceID}&candidate_status=${STATUS_PENERIMA_TYPES.CONFIRMED}`}
 									/>
 									<CardDetailTotal
