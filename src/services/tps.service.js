@@ -73,14 +73,14 @@ export const deleteTPS = async (TPSID) => {
 	}
 };
 
-export const updateTPSPartyVotes = async (TPSID, params) => {
+export const updateTPSPartyVotes = async (partyID, params) => {
 	const request = {
 		party_id: params?.party_id || 0,
 		total_voters: params?.total_voters ? Number(params?.total_voters) : null
 	};
 
 	try {
-		const response = await http.put(`/tps/party/votes/${TPSID}`, request);
+		const response = await http.put(`/tps/party/votes/${partyID}`, request);
 		return { success: response.data.success, payload: response.data.data };
 	} catch (error) {
 		return { success: false, payload: error };

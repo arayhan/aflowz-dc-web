@@ -84,11 +84,11 @@ const states = (set, get) => ({
 		set({ processingDeleteTPS: false });
 	},
 
-	updateTPSPartyVotes: async (TPSID, params, callback) => {
+	updateTPSPartyVotes: async (partyID, params, callback) => {
 		set({ processingUpdateTPSPartyVotes: true });
 
 		const loader = toast.loading('Processing...');
-		const { payload, success } = await SERVICE_TPS.updateTPSPartyVotes(TPSID, params);
+		const { payload, success } = await SERVICE_TPS.updateTPSPartyVotes(partyID, params);
 
 		if (!success) set({ errorsTPSPartyVotes: payload });
 

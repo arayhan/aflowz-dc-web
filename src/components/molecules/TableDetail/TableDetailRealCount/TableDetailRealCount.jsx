@@ -3,7 +3,7 @@ import { useTPSStore } from '@/store';
 import React, { useMemo } from 'react';
 
 export const TableDetailRealCount = ({ TPSID, isLoading, realcountData }) => {
-	const { processingUpdateTPSPartyVotes, updateTPSPartyVotes } = useTPSStore();
+	const { getTPSItem, processingUpdateTPSPartyVotes, updateTPSPartyVotes } = useTPSStore();
 
 	const columns = useMemo(
 		() => [
@@ -36,7 +36,7 @@ export const TableDetailRealCount = ({ TPSID, isLoading, realcountData }) => {
 				minWidth: 180,
 				Cell: (row) => {
 					const data = row.row.original;
-					return <div className="text-gray-400">{data?.total_dewi_coryati_voters ?? '-'}</div>;
+					return <div className="text-gray-400">{data?.total_dc_voters ?? '-'}</div>;
 				}
 			},
 			{
@@ -47,20 +47,20 @@ export const TableDetailRealCount = ({ TPSID, isLoading, realcountData }) => {
 					return <div className="text-gray-400">{data?.total_pan_voters ?? '-'}</div>;
 				}
 			},
-			...(realcountData?.total_voters_per_party || []).map((item) => ({
-				Header: `Suara Total ${item?.party_name}`,
+			...(realcountData?.party_votes || []).map((party_voter) => ({
+				Header: `Suara Total ${party_voter?.party.name}`,
 				minWidth: 180,
 				Cell: () => {
 					const handleUpdate = async (e) => {
 						const { value } = e.target;
 
-						if (value !== item.total_party_voters) {
+						if (value !== party_voter.total_voters) {
 							const params = {
-								party_id: item.party_id,
+								party_id: party_voter.party.id,
 								total_voters: value
 							};
-							await updateTPSPartyVotes(TPSID, params);
-							await getRealCountVillageDetail(TPSItem?.village?.id, { periode: TPSItem?.periode });
+							await updateTPSPartyVotes(party_voter.id, params);
+							await getTPSItem(TPSID);
 						}
 					};
 
@@ -68,11 +68,11 @@ export const TableDetailRealCount = ({ TPSID, isLoading, realcountData }) => {
 						<div>Loading...</div>
 					) : (
 						<div className="text-gray-400">
-							{item?.total_party_voters >= 0 ? (
+							{party_voter?.total_voters >= 0 ? (
 								<input
 									type="number"
 									className="p-0 border-0"
-									defaultValue={item.total_party_voters}
+									defaultValue={party_voter.total_voters}
 									onBlur={handleUpdate}
 								/>
 							) : (

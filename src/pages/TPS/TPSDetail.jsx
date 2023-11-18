@@ -1,4 +1,4 @@
-import { Button, Card } from '@/components/atoms';
+import { Card } from '@/components/atoms';
 import {
 	BannerFeature,
 	CardDetailTotal,
@@ -9,7 +9,7 @@ import {
 	TablePenerima,
 	TableStockiestMovementLog
 } from '@/components/molecules';
-import { useRealCountStore, useTPSStore } from '@/store';
+import { useTPSStore } from '@/store';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,6 @@ const TPSDetail = () => {
 	const TPSID = params.TPSID;
 
 	const { TPSItem, getTPSItem, fetchingTPSItem } = useTPSStore();
-	const { realcountVillageDetail, getRealCountVillageDetail, fetchingRealCountVillageDetail } = useRealCountStore();
 
 	const [tablePenerimaParams, setTablePenerimaParams] = useState(null);
 	const [tableActivityParams, setTableActivityParams] = useState(null);
@@ -33,7 +32,6 @@ const TPSDetail = () => {
 
 	useEffect(() => {
 		if (TPSItem) {
-			getRealCountVillageDetail(TPSItem?.village?.id, { periode: TPSItem?.periode });
 			setTablePenerimaParams({ village_id: TPSItem?.village?.id, is_receiver: true });
 			setTableActivityParams({ activity_village_id: TPSItem?.village.id });
 			setTableStockiestParams({ village_id: TPSItem?.village.id });
@@ -87,11 +85,7 @@ const TPSDetail = () => {
 								<div className="col-span-12">
 									<Card title={'Informasi Real Count'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailRealCount
-												TPSID={TPSID}
-												isLoading={fetchingRealCountVillageDetail}
-												realcountData={realcountVillageDetail}
-											/>
+											<TableDetailRealCount TPSID={TPSID} isLoading={fetchingTPSItem} realcountData={TPSItem} />
 										</div>
 									</Card>
 								</div>
@@ -99,7 +93,7 @@ const TPSDetail = () => {
 								<div className="col-span-12">
 									<Card title={'List Saksi'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailSaksi isLoading={fetchingRealCountVillageDetail} saksiData={TPSItem?.witnesses} />
+											<TableDetailSaksi isLoading={fetchingTPSItem} saksiData={TPSItem?.witnesses} />
 										</div>
 									</Card>
 								</div>
@@ -122,10 +116,7 @@ const TPSDetail = () => {
 								<div className="col-span-12">
 									<Card title={'List Relawan'} description={title} className={'bg-white rounded-md'}>
 										<div className="flex p-4 overflow-scroll max-h-96">
-											<TableDetailRelawan
-												isLoading={fetchingRealCountVillageDetail}
-												relawanData={TPSItem?.volunteers}
-											/>
+											<TableDetailRelawan isLoading={fetchingTPSItem} relawanData={TPSItem?.volunteers} />
 										</div>
 									</Card>
 								</div>
