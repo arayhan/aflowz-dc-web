@@ -294,7 +294,7 @@ export const getPartnerAllCity = async () => {
 		// ];
 
 		let result = getCity.data.data.items.map(async (val) => {
-			let total = await http.get(`/partner?is_receiver=true&city_id=${val.id}`);
+			let total = await http.get(`/partner?is_receiver=true&city_id=${val.id}&limit=1`);
 			return {
 				id: val.id,
 				name: val.name,
