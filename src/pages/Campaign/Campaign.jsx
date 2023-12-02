@@ -3,6 +3,9 @@ import {
 	BannerFeature,
 	CardDetailTotal,
 	ChartCampaignDemografi,
+	ChartCampaignGender,
+	ChartCampaignPendidikan,
+	ChartCampaignUsia,
 	ModalUploadSurvey,
 	TableDetailRealCountCity,
 	TableTPS
@@ -14,6 +17,24 @@ import { SiGooglesheets } from 'react-icons/si';
 import Skeleton from 'react-loading-skeleton';
 
 const Campaign = () => {
+	const options = {
+		scaleOverride: true,
+		scales: {
+			yAxes: {
+				ticks: {
+					min: -15,
+					max: 1000
+				}
+			},
+			xAxes: {
+				ticks: {
+					min: -15,
+					max: 1000
+				}
+			}
+		}
+	};
+
 	const provinceID = '617'; // Provinsi Bengkulu
 	const provinceName = 'Provinsi Bengkulu'; // Provinsi Bengkulu
 	const periode = '2020,2021,2022,2023,2024';
@@ -124,33 +145,28 @@ const Campaign = () => {
 								</button>
 							</div>
 
-							<div className="grid gap-4 md:grid-cols-2">
-								<div className="bg-white rounded-md">
-									<Card
-										title={'Demografi'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
-									>
-										<ChartCampaignDemografi data={survey} />
-									</Card>
-								</div>
-								<div className="bg-white rounded-md">
-									<Card title={'Gender'} bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
-										CHART HERE
-									</Card>
-								</div>
-								<div className="bg-white rounded-md">
-									<Card title={'Usia'} bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
-										CHART HERE
-									</Card>
-								</div>
-								<div className="bg-white rounded-md">
-									<Card
-										title={'Tingkat Pendidikan'}
-										bodyClassName={'flex items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
-									>
-										CHART HERE
-									</Card>
-								</div>
+							<div className="bg-white rounded-md">
+								<Card title={'Demografi'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+									<ChartCampaignDemografi data={survey} options={options} />
+								</Card>
+							</div>
+							<div className="bg-white rounded-md">
+								<Card title={'Gender'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+									<ChartCampaignGender data={survey} options={options} />
+								</Card>
+							</div>
+							<div className="bg-white rounded-md">
+								<Card title={'Usia'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+									<ChartCampaignUsia data={survey} options={options} />
+								</Card>
+							</div>
+							<div className="bg-white rounded-md">
+								<Card
+									title={'Tingkat Pendidikan'}
+									bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
+								>
+									<ChartCampaignPendidikan data={survey} options={options} />
+								</Card>
 							</div>
 						</div>
 					)}
