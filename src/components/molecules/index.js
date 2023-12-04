@@ -23,6 +23,9 @@ export * from './Chart/ChartPeriodeProgram/ChartPeriodeProgram';
 export * from './Chart/ChartPenerimaKonstituenByGender/PieChartPenerimaKonstituenByGender';
 export * from './Chart/ChartPenerimaKontituenByPeriode/BarChartPenerimaKonstituenByPeriode';
 export * from './Chart/ChartCampaign/ChartCampaignDemografi';
+export * from './Chart/ChartCampaign/ChartCampaignGender';
+export * from './Chart/ChartCampaign/ChartCampaignPendidikan';
+export * from './Chart/ChartCampaign/ChartCampaignUsia';
 
 export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';

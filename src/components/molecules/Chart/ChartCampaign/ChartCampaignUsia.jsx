@@ -3,19 +3,8 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const ChartCampaignDemografi = ({ data }) => {
-	const labels = [
-		'Kab. Bengkulu Selatan',
-		'Kab. Bengkulu Tengah',
-		'Kab, Bengkulu Utara',
-		'Kab. Kaur',
-		'Kab. Kepahiang',
-		'Kab. Lebong',
-		'Kab. Mukomuko',
-		'Kab. Raja Lebong',
-		'Kab. Seluma',
-		'Kota Bengkulu'
-	];
+export const ChartCampaignUsia = ({ data }) => {
+	const labels = ['Dibawah 22', '22-30', '31-40', '41-52', '53-71', 'Diatas 71'];
 
 	const arrayColor = [
 		'rgba(40, 74, 245, 0.6)',
@@ -37,18 +26,7 @@ export const ChartCampaignDemografi = ({ data }) => {
 						labels: labels,
 						datasets: data?.items.map((item) => ({
 							label: item.name,
-							data: [
-								item.kabupaten_bengkulu_selatan,
-								item.kabupaten_bengkulu_tengah,
-								item.kabupaten_bengkulu_utara,
-								item.kabupaten_kaur,
-								item.kabupaten_kepahiang,
-								item.kabupaten_lebong,
-								item.kabupaten_mukomuko,
-								item.kabupaten_rejang_lebong,
-								item.kabupaten_seluma,
-								item.kota_bengkulu
-							],
+							data: [item.u22, item.u22_30, item.u31_40, item.u41_52, item.u53_71, item.u71],
 							backgroundColor: arrayColor[item.id % 4],
 							borderWidth: 1
 						}))
