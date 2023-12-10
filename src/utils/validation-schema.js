@@ -162,7 +162,7 @@ export const formStaffSchema = yup.object().shape({
 		.required('Nomor wajib diisi')
 		.matches(/^[0-9]*$/, 'Nomor tidak valid (Harus berupa angka)')
 		.min(8, 'Minimal 8 angka'),
-	email: yup.string().email().required('Belum mengisi email'),
+	email: yup.string().email('Format Email tidak sesuai'),
 	religion: yup.string().required('Belum memilih agama'),
 	staff_titles: yup.array().min(1, 'Role wajib diisi')
 });
