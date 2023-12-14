@@ -65,6 +65,7 @@ export * from './InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
 export * from './InputSelect/InputSelectInstitusiType/InputSelectInstitusiType';
 export * from './InputSelect/InputSelectPeriode/InputSelectPeriode';
 export * from './InputSelect/InputSelectStaff/InputSelectStaff';
+export * from './InputSelect/InputSelectStaff/InputSelectStaffAsync';
 export * from './InputSelect/InputSelectGender/InpurSelectGender';
 export * from './InputSelect/InputSelectStaffTitle/InputSelectStaffTitle';
 export * from './InputSelect/InputSelectProvince/InputSelectProvince';

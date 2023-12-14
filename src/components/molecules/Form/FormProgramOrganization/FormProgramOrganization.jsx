@@ -4,7 +4,7 @@ import {
 	InputSelectInstitusi,
 	InputSelectOrganizationPosition,
 	InputSelectProgram,
-	InputSelectStaff
+	InputSelectStaffAsync
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -76,7 +76,7 @@ export const FormProgramOrganization = () => {
 					name={'partner_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={
 								processingCreateProgramOrganization ||

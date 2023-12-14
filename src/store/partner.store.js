@@ -264,14 +264,22 @@ const states = (set, get) => ({
 	// =================================
 	// STAFF
 	// =================================
-	getStaffList: async (params) => {
+	getStaffList: async (params, callback) => {
 		set({ fetchingStaffList: true });
-		const reqParams = { ...params, is_staff: true };
+		const defaultParams = { limit: 10, offset: 0, is_staff: true };
+		const requestParams = params ? { ...defaultParams, ...params } : defaultParams;
 
-		const { success, payload } = await SERVICE_PARTNER.getPartnerList(reqParams);
+		const { success, payload } = await SERVICE_PARTNER.getPartnerList(requestParams);
 
 		set({ staffList: success ? payload : null });
 		set({ fetchingStaffList: false });
+
+		if (callback) callback({ payload, success });
+		else set({ partnerList: success ? payload : null });
+
+		set({ fetchingPartnerList: false });
+
+		return { payload, success };
 	},
 
 	getStaffTitleList: async () => {
