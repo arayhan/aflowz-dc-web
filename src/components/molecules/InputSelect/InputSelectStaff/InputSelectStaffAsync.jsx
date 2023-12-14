@@ -9,8 +9,6 @@ export const InputSelectStaffAsync = forwardRef(
 		const [options, setOptions] = useState([]);
 
 		const handleLoadOptions = async (search, prevOptions) => {
-			console.log({ prevOptions });
-
 			const { success, payload } = await getStaffList({
 				limit: 10,
 				offset: prevOptions.length,
@@ -25,8 +23,6 @@ export const InputSelectStaffAsync = forwardRef(
 						data: staff
 				  }))
 				: [];
-
-			console.log({ success, payload, mapStaff });
 
 			return {
 				options: mapStaff,
