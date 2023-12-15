@@ -3,6 +3,7 @@ import {
 	BannerFeature,
 	CardDetailTotal,
 	ChartCampaignDemografi,
+	ChartCampaignElektabitilasProvinsi,
 	ChartCampaignGender,
 	ChartCampaignPendidikan,
 	ChartCampaignUsia,
@@ -151,6 +152,14 @@ const Campaign = () => {
 									bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4"
 								>
 									<ChartCampaignDemografi data={survey} options={options} />
+								</Card>
+							</div>
+							<div className="bg-white rounded-md">
+								<Card
+									title="Elektabilitas Provinsi"
+									bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4"
+								>
+									<ChartCampaignElektabitilasProvinsi data={survey} options={options} />
 								</Card>
 							</div>
 							<div className="bg-white rounded-md">

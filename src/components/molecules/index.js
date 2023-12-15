@@ -26,6 +26,7 @@ export * from './Chart/ChartCampaign/ChartCampaignDemografi';
 export * from './Chart/ChartCampaign/ChartCampaignGender';
 export * from './Chart/ChartCampaign/ChartCampaignPendidikan';
 export * from './Chart/ChartCampaign/ChartCampaignUsia';
+export * from './Chart/ChartCampaign/ChartCampaignElektabitilasProvinsi';
 
 export * from './Form/FormCity/FormCity';
 export * from './Form/FormProgram/FormProgram';
