@@ -5,11 +5,11 @@ import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryPa
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
-import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
+import { InputSelectInstitusiAsync } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
 
 export const TableCalonPenerima = ({
 	title,
@@ -301,7 +301,7 @@ export const TableCalonPenerima = ({
 							)} */}
 
 							{(!displayedFilters || displayedFilters.includes('konstituen_id')) && (
-								<InputSelectInstitusi
+								<InputSelectInstitusiAsync
 									containerClassName="w-full lg:w-60"
 									value={params.konstituen_id ? Number(params.konstituen_id) : undefined}
 									showLabel={false}

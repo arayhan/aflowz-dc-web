@@ -7,7 +7,7 @@ import { InputSelectProvince } from '../../InputSelect/InputSelectProvince/Input
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
-import { InputSelectInstitusi } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusi';
+import { InputSelectInstitusiAsync } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
 
 export const FormPenerima = () => {
 	const { penerimaID } = useParams();
@@ -69,7 +69,7 @@ export const FormPenerima = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{penerimaID ? 'Edit' : 'Tambah'} Penerima</div>
+				<div className="text-xl font-light">{penerimaID ? 'Edit' : 'Tambah'} Penerima</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -234,7 +234,7 @@ export const FormPenerima = () => {
 					name={'konstituen_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectInstitusi
+						<InputSelectInstitusiAsync
 							{...field}
 							disabled={processingSubmitPenerima || fetchingPenerimaItem}
 							onChange={(option) => {

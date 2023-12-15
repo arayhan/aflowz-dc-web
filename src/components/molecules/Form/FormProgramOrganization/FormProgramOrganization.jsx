@@ -1,7 +1,7 @@
 import { Button } from '@/components/atoms';
 import {
 	InputSelectCity,
-	InputSelectInstitusi,
+	InputSelectInstitusiAsync,
 	InputSelectOrganizationPosition,
 	InputSelectProgram,
 	InputSelectStaffAsync
@@ -137,7 +137,7 @@ export const FormProgramOrganization = () => {
 					name={'konstituen_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectInstitusi
+						<InputSelectInstitusiAsync
 							{...field}
 							disabled={
 								processingCreateProgramOrganization ||

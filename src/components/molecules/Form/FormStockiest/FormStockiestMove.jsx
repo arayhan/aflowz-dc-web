@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router';
 import {
 	InputSelectCity,
 	InputSelectDistrict,
-	InputSelectInstitusi,
 	InputSelectProduct,
 	InputSelectProgram,
 	InputSelectProvince,
 	InputSelectVillage,
 	InputSelectStaffAsync,
 	InputSelectProductMovement,
-	InputSelectWarehouse
+	InputSelectWarehouse,
+	InputSelectInstitusiAsync
 } from '../../index';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -323,7 +323,7 @@ export const FormStockiestMove = () => {
 					name={'konstituen'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectInstitusi
+						<InputSelectInstitusiAsync
 							{...field}
 							disabled={processingUpdateProduct}
 							onChange={({ value }) => {
