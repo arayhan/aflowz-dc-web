@@ -146,25 +146,25 @@ const Campaign = () => {
 							</div>
 
 							<div className="bg-white rounded-md">
-								<Card title={'Demografi'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+								<Card
+									title="Elektabilitas Kabupaten"
+									bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4"
+								>
 									<ChartCampaignDemografi data={survey} options={options} />
 								</Card>
 							</div>
 							<div className="bg-white rounded-md">
-								<Card title={'Gender'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+								<Card title="Gender" bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4">
 									<ChartCampaignGender data={survey} options={options} />
 								</Card>
 							</div>
 							<div className="bg-white rounded-md">
-								<Card title={'Usia'} bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}>
+								<Card title="Usia" bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4">
 									<ChartCampaignUsia data={survey} options={options} />
 								</Card>
 							</div>
 							<div className="bg-white rounded-md">
-								<Card
-									title={'Tingkat Pendidikan'}
-									bodyClassName={'items-center justify-center px-4 md:px-8 xl:px-12 py-4'}
-								>
+								<Card title="Tingkat Pendidikan" bodyClassName="items-center justify-center px-4 md:px-8 xl:px-12 py-4">
 									<ChartCampaignPendidikan data={survey} options={options} />
 								</Card>
 							</div>
