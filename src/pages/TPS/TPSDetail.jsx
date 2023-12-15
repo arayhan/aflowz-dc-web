@@ -104,7 +104,6 @@ const TPSDetail = () => {
 											title={`Penerima Program Desa ${TPSItem.village.name}`}
 											displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 											isShowButtonSeeAll
-											isShowFooter={false}
 											isShowFilter={false}
 											isReadonly
 											params={tablePenerimaParams}

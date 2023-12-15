@@ -21,7 +21,6 @@ const CityDetail = () => {
 	const { activityDetailList, fetchingActivityDetailList, getActivityDetailList } = useActivityStore();
 
 	const [tablePenerimaParams] = useState({ city_id: cityID, is_receiver: true });
-	const [tableDistrictParams, setTableDistrictParams] = useState({ city_id: cityID });
 
 	useEffect(() => {
 		if (cityID) {
@@ -186,7 +185,6 @@ const CityDetail = () => {
 										title={`Penerima Program Kota ${cityDetail.city_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
-										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
 										params={tablePenerimaParams}

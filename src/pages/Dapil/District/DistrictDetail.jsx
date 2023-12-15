@@ -187,7 +187,6 @@ const DistrictDetail = () => {
 										title={`Penerima Program di Kecamatan ${districtDetail.district_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
-										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
 										params={tablePenerimaParams}

@@ -173,7 +173,6 @@ const VillageDetail = () => {
 										title={`Penerima Program ${villageDetail.village_name}`}
 										displayedColumns={['#', 'Nama Penerima', 'NIK', 'Alamat']}
 										isShowButtonSeeAll
-										isShowFooter={false}
 										isShowFilter={false}
 										isReadonly
 										params={tablePenerimaParams}
