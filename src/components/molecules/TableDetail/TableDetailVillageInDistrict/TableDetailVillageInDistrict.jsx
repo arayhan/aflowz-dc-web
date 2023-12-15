@@ -1,7 +1,11 @@
-import { Button, Table } from '@/components/atoms';
-import { useMemo } from 'react';
+import { Button, Table, TableFooter } from '@/components/atoms';
+import { useEffect, useMemo, useState } from 'react';
 
 export const TableDetailVillageInDistrict = ({ villageData }) => {
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+
 	const columns = useMemo(
 		() => [
 			{
@@ -74,7 +78,20 @@ export const TableDetailVillageInDistrict = ({ villageData }) => {
 		[]
 	);
 
-	return <Table columns={columns} data={villageData} />;
+	useEffect(() => {
+		if (villageData) {
+			setPageCount(Math.ceil(villageData.length / perPage));
+		}
+	}, [villageData]);
+
+	return (
+		<div>
+			<Table columns={columns} data={villageData} />
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+			</div>
+		</div>
+	);
 };
 
 TableDetailVillageInDistrict.defaultProps = {
