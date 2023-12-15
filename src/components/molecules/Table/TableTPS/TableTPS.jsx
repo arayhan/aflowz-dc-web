@@ -32,6 +32,8 @@ export const TableTPS = ({
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
+	console.log({ TPSList });
+
 	const columns = useMemo(
 		() => [
 			{
@@ -57,6 +59,12 @@ export const TableTPS = ({
 				hidden: displayedColumns && !displayedColumns.includes('Periode')
 			},
 			{
+				Header: 'Suara Dewi Coryati',
+				accessor: 'total_dc_voters',
+				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('Suara Dewi Coryati')
+			},
+			{
 				Header: 'Suara Partai',
 				width: '100%',
 				minWidth: 150,
@@ -67,7 +75,7 @@ export const TableTPS = ({
 						<div className="grid gap-2">
 							{party_votes.length === 0 && '-'}
 							{party_votes.length > 0 && (
-								<ul className="text-sm w-full list-disc list-outside">
+								<ul className="w-full text-sm list-disc list-outside">
 									{party_votes.map((partyVote) => (
 										<li key={partyVote.party.id}>
 											<span className="font-semibold">{partyVote.party.name}</span>: {partyVote.total_voters}
