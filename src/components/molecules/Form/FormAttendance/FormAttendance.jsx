@@ -2,9 +2,9 @@ import { Button, InputLabel, Table } from '@/components/atoms';
 import { useAttendanceStore } from '@/store';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { InputSelectStaffAsync } from '@/components/molecules';
 import { InputSelectDate } from '../../InputSelect/InpuSelectDate/InputSelectDate';
 import { InputSelectAttendance } from '../../InputSelect/InputSelectAttendance/InputSelectAttendance';
-import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
 
 export const FormAttendance = () => {
 	const [date, setDate] = useState(null);
@@ -167,7 +167,7 @@ export const FormAttendance = () => {
 			)}
 			<div className="grid items-end grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6">
 				<div className="md:col-span-2">
-					<InputSelectStaff
+					<InputSelectStaffAsync
 						disabled={processingCreateAttendance || fetchingAttendance}
 						value={person?.value}
 						onChange={(value) => {

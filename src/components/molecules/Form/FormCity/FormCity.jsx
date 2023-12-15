@@ -5,8 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
-import { InputSelectProvince } from '../../InputSelect/InputSelectProvince/InputSelectProvince';
-import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
+import { InputSelectStaffAsync, InputSelectProvince } from '@/components/molecules';
 
 export const FormCity = () => {
 	const { cityID } = useParams();
@@ -96,7 +95,7 @@ export const FormCity = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateCity || fetchingCity || cityErrors}
 							onChange={({ value }) => {

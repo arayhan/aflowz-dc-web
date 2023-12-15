@@ -7,7 +7,7 @@ import {
 	InputSelectInstitusiAsync,
 	InputSelectPartnerAsync,
 	InputSelectProgram,
-	InputSelectStaff,
+	InputSelectStaffAsync,
 	InputSelectVillage
 } from '@/components/molecules';
 import { useActivityStore } from '@/store';
@@ -297,7 +297,7 @@ export const FormActivity = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateActivity || fetchingActivity || activityErrors}
 							onChange={({ value }) => {

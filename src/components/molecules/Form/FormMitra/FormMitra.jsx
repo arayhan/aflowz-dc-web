@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
-import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
+import { InputSelectStaffAsync } from '@/components/molecules';
 
 export const FormMitra = () => {
 	const { programCategoryID } = useParams();
@@ -58,7 +58,7 @@ export const FormMitra = () => {
 	return (
 		<div className="space-y-8">
 			<div>
-				<div className="font-light text-xl">{programCategoryID ? 'Edit' : 'Tambah'} Mitra</div>
+				<div className="text-xl font-light">{programCategoryID ? 'Edit' : 'Tambah'} Mitra</div>
 			</div>
 			<hr />
 			<div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
@@ -80,7 +80,7 @@ export const FormMitra = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateProgramCategory || fetchingProgramCategory || programCategoryErrors}
 							onChange={({ value }) => {

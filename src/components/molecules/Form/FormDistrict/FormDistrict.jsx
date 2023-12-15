@@ -5,8 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
-import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
-import { InputSelectStaff } from '../../InputSelect/InputSelectStaff/InputSelectStaff';
+import { InputSelectStaffAsync, InputSelectCity } from '@/components/molecules';
 
 export const FormDistrict = () => {
 	const { districtID } = useParams();
@@ -95,7 +94,7 @@ export const FormDistrict = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateDistrict || fetchingDistrict || districtErrors}
 							onChange={({ value }) => {

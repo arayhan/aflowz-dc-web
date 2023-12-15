@@ -1,5 +1,5 @@
 import { Button, InputDate, InputText } from '@/components/atoms';
-import { InputSelectMitra, InputSelectPeriode, InputSelectStaff } from '@/components/molecules';
+import { InputSelectMitra, InputSelectPeriode, InputSelectStaffAsync } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formProgramSchema } from '@/utils/validation-schema';
@@ -136,7 +136,7 @@ export const FormProgram = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateProgram || fetchingProgram}
 							onChange={({ value }) => {

@@ -1,5 +1,5 @@
 import { Button, InputDate, InputText } from '@/components/atoms';
-import { InputSelectStaff, InputSelectTimelineStatus } from '@/components/molecules';
+import { InputSelectStaffAsync, InputSelectTimelineStatus } from '@/components/molecules';
 import { useProgramStore } from '@/store';
 import { formMitraTimelineSchema } from '@/utils/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -132,7 +132,7 @@ export const FormMitraTimeline = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							params={{ limit: 1000 }}
 							disabled={fetchingProgramCategoryTimeline}

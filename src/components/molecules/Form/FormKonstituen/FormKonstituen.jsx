@@ -3,7 +3,7 @@ import {
 	InputSelectCity,
 	InputSelectDistrict,
 	InputSelectInstitusiType,
-	InputSelectStaff,
+	InputSelectStaffAsync,
 	InputSelectVillage
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
@@ -203,7 +203,7 @@ export const FormKonstituen = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateKonstituen || fetchingKonstituen}
 							onChange={({ value }) => {

@@ -1,5 +1,5 @@
 import { Button, InputDate, InputText } from '@/components/atoms';
-import { InputSelectActivityPromise, InputSelectStaff } from '@/components/molecules';
+import { InputSelectStaffAsync } from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { formActivityDetailSchema } from '@/utils/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -105,7 +105,7 @@ export const FormActivityDetail = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingCreateActivityDetail || processingUpdateActivityDetail || fetchingActivityDetailItem}
 							onChange={({ value }) => {

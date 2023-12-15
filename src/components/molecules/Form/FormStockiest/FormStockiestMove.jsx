@@ -1,6 +1,6 @@
 import { Button, Table, InputText } from '@/components/atoms';
 import { useStockiestStore } from '@/store';
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import {
 	InputSelectCity,
@@ -10,7 +10,7 @@ import {
 	InputSelectProgram,
 	InputSelectProvince,
 	InputSelectVillage,
-	InputSelectStaff,
+	InputSelectStaffAsync,
 	InputSelectProductMovement,
 	InputSelectWarehouse
 } from '../../index';
@@ -339,7 +339,7 @@ export const FormStockiestMove = () => {
 					name={'pic_staff_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectStaff
+						<InputSelectStaffAsync
 							{...field}
 							disabled={processingUpdateProduct}
 							onChange={({ value }) => {
