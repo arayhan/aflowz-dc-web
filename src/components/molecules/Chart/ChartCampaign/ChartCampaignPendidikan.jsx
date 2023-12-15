@@ -17,7 +17,7 @@ export const ChartCampaignPendidikan = ({ data }) => {
 		<div className="flex flex-col items-center justify-center gap-3 text-center">
 			<div className="space-y-2">
 				<div className="p-2 text-sm bg-gray-100 rounded-md">
-					Total : <span className="font-semibold">{data.total}</span>
+					Total : <span className="font-semibold">{data?.total}</span>
 				</div>
 			</div>
 			{data && (
