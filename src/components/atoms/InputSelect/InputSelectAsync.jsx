@@ -20,7 +20,7 @@ export const InputSelectAsync = ({
 			{...props}
 			ref={innerRef}
 			value={options.filter(function (option) {
-				return option.value === value;
+				return multi ? value.includes(option.value) : option.value === value;
 			})}
 			className={`z-10 ${props.className}`}
 			placeholder={placeholder}

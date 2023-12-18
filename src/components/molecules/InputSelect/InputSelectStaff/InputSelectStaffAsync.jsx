@@ -3,10 +3,11 @@ import { usePartnerStore } from '@/store';
 import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectStaffAsync = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, label, ...props }, ref) => {
+	({ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, ...props }, ref) => {
 		const { staffList, fetchingStaffList, getStaffList } = usePartnerStore();
 
 		const [options, setOptions] = useState([]);
+		const [values, setValues] = useState([]);
 
 		const handleLoadOptions = async (search, prevOptions) => {
 			const { success, payload } = await getStaffList({
@@ -42,6 +43,17 @@ export const InputSelectStaffAsync = forwardRef(
 			}
 		}, [staffList]);
 
+		useEffect(() => {
+			if (options.length > 0) {
+				const _values = props.value?.map((value) => options.find((option) => option.value === value));
+				setValues(_values);
+			}
+		}, [options, props.value]);
+
+		useEffect(() => {
+			getStaffList({ limit: 50, ...params });
+		}, []);
+
 		return (
 			<div className={`space-y-1 ${containerClassName}`}>
 				{showLabel && <InputLabel text={label || 'Pilih PJ Internal DC'} name={props.name} />}
@@ -52,7 +64,9 @@ export const InputSelectStaffAsync = forwardRef(
 					onChange={onChange}
 					loading={fetchingStaffList}
 					disabled={fetchingStaffList}
+					value={values}
 					placeholder={placeholder || 'Pilih PJ Internal DC'}
+					multi={multiple}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}

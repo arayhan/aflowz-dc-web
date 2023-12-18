@@ -102,7 +102,9 @@ export const formTPSSchema = yup.object().shape(
 		total_dc_voters: yup.number().required('Total Suara DC wajib diisi'),
 		total_legitimate_vote: yup.number().required('Total Suara Yang Sah wajib diisi'),
 		total_invalid_vote: yup.number().required('Total Suara Yang Tidak Valid wajib diisi'),
-		village_id: yup.number().required('Kelurahan/Desa wajib diisi')
+		village_id: yup.number().required('Kelurahan/Desa wajib diisi'),
+		witness_staff_ids: yup.array().min(1, 'Saksi wajib diisi'),
+		volunteer_staff_ids: yup.array().min(1, 'Relawan wajib diisi')
 	},
 	['contact', 'contact']
 );

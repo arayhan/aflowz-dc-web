@@ -7,6 +7,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { InputSelectPeriode } from '../../InputSelect/InputSelectPeriode/InputSelectPeriode';
+import { InputSelectStaffAsync } from '../../InputSelect/InputSelectStaff/InputSelectStaffAsync';
 
 export const FormTPS = () => {
 	const { TPSID } = useParams();
@@ -60,20 +61,10 @@ export const FormTPS = () => {
 			);
 			setValue('total_invalid_vote', TPSItem?.total_invalid_vote ? Number(TPSItem?.total_invalid_vote) : undefined);
 			setValue('village_id', TPSItem?.village?.id || null);
-			setValue(
-				'witness_staff_ids',
-				TPSItem?.witness_staff_ids
-					? TPSItem?.witness_staff_ids.map((witness) => ({ value: witness.id, label: witness.name }))
-					: []
-			);
+			setValue('witness_staff_ids', TPSItem?.witnesses ? TPSItem.witnesses.map((witness) => witness.id) : []);
 			setValue(
 				'volunteer_staff_ids',
-				TPSItem?.volunteer_staff_ids
-					? TPSItem?.volunteer_staff_ids.map((volunteerStaff) => ({
-							value: volunteerStaff.id,
-							label: volunteerStaff.name
-					  }))
-					: []
+				TPSItem?.volunteers ? TPSItem?.volunteers.map((volunteerStaff) => volunteerStaff.id) : []
 			);
 		}
 	}, [TPSID, TPSItem]);
@@ -201,6 +192,50 @@ export const FormTPS = () => {
 							onChange={({ value }) => {
 								setValue('village_id', value);
 								setError('village_id', null);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'witness_staff_ids'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectStaffAsync
+							{...field}
+							label="Pilih Saksi"
+							placeholder="Pilih Saksi"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							multiple
+							onChange={(values, option) => {
+								const newValues =
+									option.action === 'remove-value'
+										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
+										: values.map((item) => item.value);
+								setValue('witness_staff_ids', newValues);
+							}}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'volunteer_staff_ids'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputSelectStaffAsync
+							{...field}
+							label="Pilih Relawan"
+							placeholder="Pilih Relawan"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							multiple
+							onChange={(values, option) => {
+								const newValues =
+									option.action === 'remove-value'
+										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
+										: values.map((item) => item.value);
+								setValue('volunteer_staff_ids', newValues);
 							}}
 							error={error}
 						/>
