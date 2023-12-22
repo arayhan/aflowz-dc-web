@@ -28,7 +28,7 @@ export const TableDetailRealCountDistrict = ({ isLoading, realcountDistrictData 
 				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
-					return <div className="text-gray-400">{data?.total_legitimate_vote ?? '-'}</div>;
+					return <div className="text-gray-400">{data?.total_tps ?? '-'}</div>;
 				}
 			},
 			{
@@ -36,7 +36,7 @@ export const TableDetailRealCountDistrict = ({ isLoading, realcountDistrictData 
 				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
-					return <div className="text-gray-400">{data?.total_legitimate_vote ?? '-'}</div>;
+					return <div className="text-gray-400">{data?.total_dpt ?? '-'}</div>;
 				}
 			},
 			{
@@ -44,7 +44,7 @@ export const TableDetailRealCountDistrict = ({ isLoading, realcountDistrictData 
 				minWidth: 150,
 				Cell: (row) => {
 					const data = row.row.original;
-					return <div className="text-gray-400">{data?.total_legitimate_vote ?? '-'}</div>;
+					return <div className="text-gray-400">{data?.total_target_vote ?? '-'}</div>;
 				}
 			},
 			{
