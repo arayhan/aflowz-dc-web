@@ -3,7 +3,10 @@ import { usePartnerStore } from '@/store';
 import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectStaffAsync = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, ...props }, ref) => {
+	(
+		{ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, disabled, ...props },
+		ref
+	) => {
 		const { staffList, fetchingStaffList, getStaffList } = usePartnerStore();
 
 		const [options, setOptions] = useState([]);
@@ -45,13 +48,15 @@ export const InputSelectStaffAsync = forwardRef(
 
 		useEffect(() => {
 			if (options.length > 0) {
-				const _values = props.value?.map((value) => options.find((option) => option.value === value));
+				const _values = multiple
+					? props.value?.map((value) => options.find((option) => option.value === value))
+					: options.find((option) => option.value === props.value);
 				setValues(_values);
 			}
-		}, [options, props.value]);
+		}, [options, props.value, multiple]);
 
 		useEffect(() => {
-			getStaffList({ limit: 50, ...params });
+			getStaffList({ limit: 100, ...params });
 		}, []);
 
 		return (
@@ -63,7 +68,7 @@ export const InputSelectStaffAsync = forwardRef(
 					loadOptions={handleLoadOptions}
 					onChange={onChange}
 					loading={fetchingStaffList}
-					disabled={fetchingStaffList}
+					disabled={fetchingStaffList || disabled}
 					value={values}
 					placeholder={placeholder || 'Pilih PJ Internal DC'}
 					multi={multiple}
