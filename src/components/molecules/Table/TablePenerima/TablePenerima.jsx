@@ -272,14 +272,14 @@ export const TablePenerima = ({
 		setData(
 			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
 		);
-		if (isShowFooter && penerimaList?.total) {
+		if (isShowFooter) {
 			if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
-				setPageCount(Math.ceil(penerimaList.total / perPage));
-			} else if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-				setPageCount(Math.ceil(calonPenerimaList.total / perPage));
+				setPageCount(Math.ceil(penerimaList?.total / perPage));
+			} else {
+				setPageCount(Math.ceil(calonPenerimaList?.total / perPage));
 			}
 		}
-	}, [calonPenerimaList, penerimaList, isShowFooter]);
+	}, [params, calonPenerimaList, penerimaList, isShowFooter]);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
