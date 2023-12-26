@@ -425,10 +425,7 @@ const ProgramDetail = () => {
 									</Card>
 								</div>
 								<div className="col-span-12 bg-white rounded-md">
-									<Card
-										title={`Penerima Program Per Desa`}
-										bodyClassName={'flex items-center justify-center px-4 py-4'}
-									>
+									<Card title={`Penerima Program Per Desa`} bodyClassName={'flex w-full items-center'}>
 										<TableDetailVillageInDistrict villageData={programDetail.total_penerima_program_per_village} />
 									</Card>
 								</div>

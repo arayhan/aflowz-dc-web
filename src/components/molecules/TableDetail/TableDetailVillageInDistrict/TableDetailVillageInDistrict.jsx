@@ -2,6 +2,7 @@ import { Button, Table, TableFooter } from '@/components/atoms';
 import { useEffect, useMemo, useState } from 'react';
 
 export const TableDetailVillageInDistrict = ({ villageData }) => {
+	const [paginatedData, setPaginatedData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
@@ -15,7 +16,7 @@ export const TableDetailVillageInDistrict = ({ villageData }) => {
 				disableFilters: true,
 				maxWidth: 20,
 				Cell: (row) => {
-					return <div className="text-gray-400">{Number(row.row.id) + 1}</div>;
+					return <div className="text-gray-400">{(page - 1) * perPage + row.row.index + 1}</div>;
 				}
 			},
 			{
@@ -75,18 +76,20 @@ export const TableDetailVillageInDistrict = ({ villageData }) => {
 				}
 			}
 		],
-		[]
+		[page, perPage]
 	);
 
 	useEffect(() => {
 		if (villageData) {
+			const paginated = villageData.slice((page - 1) * perPage, page * perPage);
+			setPaginatedData(paginated);
 			setPageCount(Math.ceil(villageData.length / perPage));
 		}
-	}, [villageData]);
+	}, [villageData, page, perPage]);
 
 	return (
-		<div>
-			<Table columns={columns} data={villageData} />
+		<div className="w-full">
+			<Table columns={columns} data={paginatedData} />
 			<div className="p-6">
 				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
 			</div>
