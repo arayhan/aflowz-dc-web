@@ -1,9 +1,14 @@
-import { Button, ButtonAction, Table } from '@/components/atoms';
+import { Button, ButtonAction, Table, TableFooter } from '@/components/atoms';
 import { ACTION_TYPES } from '@/utils/constants';
 import { objectToQueryString } from '@/utils/helpers';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export const TableDetailTotalPenerimaByKonstituen = ({ dataPenerima, programID }) => {
+	const [paginatedData, setPaginatedData] = useState([]);
+	const [page, setPage] = useState(1);
+	const [pageCount, setPageCount] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+
 	const columns = useMemo(
 		() => [
 			{
@@ -72,8 +77,23 @@ export const TableDetailTotalPenerimaByKonstituen = ({ dataPenerima, programID }
 				}
 			}
 		],
-		[]
+		[page, perPage]
 	);
 
-	return <Table columns={columns} data={dataPenerima} />;
+	useEffect(() => {
+		if (dataPenerima) {
+			const paginated = dataPenerima.slice((page - 1) * perPage, page * perPage);
+			setPaginatedData(paginated);
+			setPageCount(Math.ceil(dataPenerima.length / perPage));
+		}
+	}, [dataPenerima, page, perPage]);
+
+	return (
+		<div className="w-full">
+			<Table columns={columns} data={paginatedData} />
+			<div className="p-6">
+				<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+			</div>
+		</div>
+	);
 };
