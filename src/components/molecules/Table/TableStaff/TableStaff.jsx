@@ -5,8 +5,11 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
+import { InputSelectPICCity } from '../../InputSelect/InputSelectCity/InputSelectPICCity';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
 import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectPICDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectPICDistrict';
+import { InputSelectPICVillage } from '../../InputSelect/InputSelectVillage/InputSelectPICVillage';
 
 export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }) => {
 	const navigate = useNavigate();
@@ -207,8 +210,32 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 									}}
 								/>
 							)}
-							{(!displayedFilters || displayedFilters.includes('city_pic_id')) && (
+							{(!displayedFilters || displayedFilters.includes('city_id')) && (
 								<InputSelectCity
+									containerClassName="w-full lg:w-60"
+									value={params.city_id ? Number(params.city_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('city_id', option ? { city_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('district_id')) && (
+								<InputSelectDistrict
+									containerClassName="w-full lg:w-60"
+									value={params.district_id ? Number(params.district_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('district_id', option ? { district_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('village_id')) && (
+								<InputSelectVillage
+									containerClassName="w-full lg:w-60"
+									value={params.village_id ? Number(params.village_id) : undefined}
+									showLabel={false}
+									onChange={(option) => handleSetFilter('village_id', option ? { village_id: option.value } : null)}
+								/>
+							)}
+							{(!displayedFilters || displayedFilters.includes('city_pic_id')) && (
+								<InputSelectPICCity
 									containerClassName="w-full lg:w-60"
 									value={params.city_pic_id ? Number(params.city_pic_id) : undefined}
 									showLabel={false}
@@ -216,7 +243,7 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 								/>
 							)}
 							{(!displayedFilters || displayedFilters.includes('district_pic_id')) && (
-								<InputSelectDistrict
+								<InputSelectPICDistrict
 									containerClassName="w-full lg:w-60"
 									value={params.district_pic_id ? Number(params.district_pic_id) : undefined}
 									showLabel={false}
@@ -225,9 +252,8 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 									}
 								/>
 							)}
-
 							{(!displayedFilters || displayedFilters.includes('village_pic_id')) && (
-								<InputSelectVillage
+								<InputSelectPICVillage
 									containerClassName="w-full lg:w-60"
 									value={params.village_pic_id ? Number(params.village_pic_id) : undefined}
 									showLabel={false}
