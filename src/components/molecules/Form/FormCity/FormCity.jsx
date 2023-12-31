@@ -141,7 +141,7 @@ export const FormCity = () => {
 					className={'px-7 py-3 rounded-sm mx-2'}
 					variant="warning"
 					disabled={processingCreateCity || fetchingCity || cityErrors}
-					linkTo={cityID ? `/city/${cityID}` : '/city'}
+					linkTo={cityID ? `/dapil/city/${cityID}` : '/city'}
 				>
 					Cancel
 				</Button>
