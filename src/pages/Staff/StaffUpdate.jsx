@@ -9,7 +9,7 @@ const StaffUpdate = () => {
 			<section className="bg-gray-100">
 				<div className="container py-16">
 					<div className="max-w-screen-lg mx-auto">
-						<div className="bg-white p-8 rounded-md">
+						<div className="p-8 bg-white rounded-md">
 							<FormStaff />
 						</div>
 					</div>

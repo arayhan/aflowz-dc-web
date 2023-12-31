@@ -27,7 +27,7 @@ export const FormStaff = () => {
 
 	const { staff, fetchingStaff, processingCreateStaff, getStaff, postStaffCreate, updateStaff } = usePartnerStore();
 
-	const { watch, control, setValue, setError, handleSubmit } = useForm({
+	const { getValues, watch, control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formStaffSchema),
 		defaultValues: {
 			nik_number: '',
@@ -44,9 +44,9 @@ export const FormStaff = () => {
 			email: '',
 			religion: '',
 			staff_titles: [],
-			list_pic_cities: [],
-			list_pic_districts: [],
-			list_pic_villages: []
+			cities_pic: [],
+			districts_pic: [],
+			villages_pic: []
 		}
 	});
 
@@ -89,6 +89,21 @@ export const FormStaff = () => {
 					? staff.staff_titles.map((role) => ({ staff_title_id: role.parent.id, branch_title: role.name }))
 					: []
 			);
+
+			if (staff.cities_pic?.length > 0) {
+				const mapCities = staff.cities_pic.map((city) => city.city_id);
+				setValue('cities_pic', mapCities);
+			}
+
+			if (staff.districts_pic?.length > 0) {
+				const mapDistricts = staff.districts_pic.map((district) => district.district_id);
+				setValue('districts_pic', mapDistricts);
+			}
+
+			if (staff.villages_pic?.length > 0) {
+				const mapVillages = staff.villages_pic.map((village) => village.village_id);
+				setValue('villages_pic', mapVillages);
+			}
 			setPlaceholderCity(staff.city?.name);
 			setPlaceholderDistrict(staff.district?.name);
 			setPlaceholderVillage(staff.village?.name);
@@ -357,7 +372,7 @@ export const FormStaff = () => {
 				/>
 
 				<Controller
-					name={'list_pic_cities'}
+					name={'cities_pic'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectCity
@@ -369,7 +384,7 @@ export const FormStaff = () => {
 									option.action === 'remove-value'
 										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
 										: values.map((item) => item.value);
-								setValue('list_pic_cities', newValues);
+								setValue('cities_pic', newValues);
 							}}
 							multiple
 							error={error}
@@ -378,7 +393,7 @@ export const FormStaff = () => {
 				/>
 
 				<Controller
-					name={'list_pic_districts'}
+					name={'districts_pic'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectDistrict
@@ -390,7 +405,7 @@ export const FormStaff = () => {
 									option.action === 'remove-value'
 										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
 										: values.map((item) => item.value);
-								setValue('list_pic_districts', newValues);
+								setValue('districts_pic', newValues);
 							}}
 							multiple
 							params={{ limit: 2000, offset: 0 }}
@@ -400,7 +415,7 @@ export const FormStaff = () => {
 				/>
 
 				<Controller
-					name={'list_pic_villages'}
+					name={'villages_pic'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
 						<InputSelectVillage
@@ -412,7 +427,7 @@ export const FormStaff = () => {
 									option.action === 'remove-value'
 										? values.filter((item) => item.value !== option.removedValue.value).map((item) => item.value)
 										: values.map((item) => item.value);
-								setValue('list_pic_villages', newValues);
+								setValue('villages_pic', newValues);
 							}}
 							multiple
 							params={{ limit: 2000, offset: 0 }}
