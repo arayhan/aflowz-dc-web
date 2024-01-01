@@ -44,7 +44,7 @@ export const FormDistrict = () => {
 	useEffect(() => {
 		if (districtID && district) {
 			setValue('name', district.name || '');
-			setValue('city_id', district?.district?.id || 0);
+			setValue('city_id', district?.city?.id || 0);
 			setValue('pic_staff_id', district?.pic_staff?.id || 0);
 			setValue('pic', district.pic || '');
 			setValue('pic_mobile', district.pic_mobile || '');
