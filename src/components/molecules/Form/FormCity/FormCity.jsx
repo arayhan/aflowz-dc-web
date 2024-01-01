@@ -113,8 +113,8 @@ export const FormCity = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Kementerian"
-							placeholder="Nama PIC Kementerian"
+							label="Nama PIC Daerah"
+							placeholder="Nama PIC Daerah"
 							disabled={processingCreateCity || fetchingCity || cityErrors}
 							error={error}
 						/>
@@ -127,7 +127,7 @@ export const FormCity = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nomor Telepon PIC Kementerian"
+							label="Nomor Telepon PIC Daerah"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={processingCreateCity || fetchingCity || cityErrors}
 							error={error}

@@ -112,8 +112,8 @@ export const FormDistrict = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nama PIC Kementerian"
-							placeholder="Nama PIC Kementerian"
+							label="Nama PIC Daerah"
+							placeholder="Nama PIC Daerah"
 							disabled={processingCreateDistrict || fetchingDistrict || districtErrors}
 							error={error}
 						/>
@@ -126,7 +126,7 @@ export const FormDistrict = () => {
 					render={({ field, fieldState: { error } }) => (
 						<InputText
 							{...field}
-							label="Nomor Telepon PIC Kementerian"
+							label="Nomor Telepon PIC Daerah"
 							placeholder="Contoh : 08xxxxxxxxxx"
 							disabled={processingCreateDistrict || fetchingDistrict || districtErrors}
 							error={error}

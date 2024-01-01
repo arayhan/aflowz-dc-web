@@ -64,10 +64,10 @@ export const formCitySchema = yup.object().shape(
 		name: yup.string().required('Nama program wajib diisi'),
 		province_id: yup.string().required('Provinsi wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
-		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
+		pic: yup.string().required('Nama PIC Daerah wajib diisi'),
 		pic_mobile: yup
 			.string()
-			.required('Nomor PIC Kementerian wajib diisi')
+			.required('Nomor PIC Daerah wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka')
 	},
@@ -79,10 +79,10 @@ export const formVillageSchema = yup.object().shape(
 		name: yup.string().required('Nama program wajib diisi'),
 		district_id: yup.string().required('District wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
-		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
+		pic: yup.string().required('Nama PIC Daerah wajib diisi'),
 		pic_mobile: yup
 			.string()
-			.required('Nomor PIC Kementerian wajib diisi')
+			.required('Nomor PIC Daerah wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka')
 	},
@@ -114,10 +114,10 @@ export const formDistrictSchema = yup.object().shape(
 		name: yup.string().required('Nama program wajib diisi'),
 		city_id: yup.number().required('Kota wajib diisi'),
 		pic_staff_id: yup.number().required('PIC Tim Internal wajib diisi'),
-		pic: yup.string().required('Nama PIC Kementerian wajib diisi'),
+		pic: yup.string().required('Nama PIC Daerah wajib diisi'),
 		pic_mobile: yup
 			.string()
-			.required('Nomor PIC Kementerian wajib diisi')
+			.required('Nomor PIC Daerah wajib diisi')
 			.matches(/^[0-9]*$/, 'Nomor tidak valid')
 			.min(8, 'Minimal 8 angka')
 	},
