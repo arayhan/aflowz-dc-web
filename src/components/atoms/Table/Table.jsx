@@ -25,7 +25,7 @@ export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => 
 								!column.hidden && (
 									<th
 										key={column.id}
-										className="px-5 md:px-6 py-5 text-left text-xs font-medium uppercase text-gray-500"
+										className="px-5 py-5 text-xs font-medium text-left text-gray-500 uppercase md:px-6"
 										{...column.getHeaderProps({
 											style: data.length > 0 && {
 												minWidth: column.minWidth,
@@ -67,7 +67,7 @@ export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => 
 										!cell.column.hidden && (
 											<td
 												key={cell.value}
-												className="px-5 md:px-6 py-2 md:py-3 text-xs md:text-sm"
+												className="px-5 py-2 text-xs md:px-6 md:py-3 md:text-sm"
 												{...cell.getCellProps()}
 											>
 												{cell.render('Cell')}
@@ -85,9 +85,9 @@ export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => 
 
 Table.Skeleton = ({ columns }) => {
 	return [1, 2, 3].map((array) => (
-		<tr key={array} className="hover:bg-gray-50 border-b last:border-b-0">
+		<tr key={array} className="border-b hover:bg-gray-50 last:border-b-0">
 			{columns.map((column) => (
-				<td key={column.Header} className="px-5 md:px-6 py-2 md:py-3">
+				<td key={column.Header} className="px-5 py-2 md:px-6 md:py-3">
 					<Skeleton height={20} />
 				</td>
 			))}
