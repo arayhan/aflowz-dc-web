@@ -176,9 +176,9 @@ export const postStaffCreate = async (params) => {
 			is_staff: true,
 			staff_titles: params?.staff_titles || [],
 			village: getData[3].data.data.name || '',
-			list_pic_cities: params?.list_pic_cities || [],
-			list_pic_districts: params?.list_pic_districts || [],
-			list_pic_villages: params?.list_pic_villages || []
+			list_pic_cities: params?.cities_pic || [],
+			list_pic_districts: params?.districts_pic || [],
+			list_pic_villages: params?.villages_pic || []
 		}
 	];
 
@@ -218,9 +218,9 @@ export const updateStaff = async (staffID, params) => {
 		religion: params?.religion || '',
 		staff_title_ids: params?.staff_titles || [],
 		is_staff: true,
-		list_pic_cities: params?.list_pic_cities || [],
-		list_pic_districts: params?.list_pic_districts || [],
-		list_pic_villages: params?.list_pic_villages || []
+		list_pic_cities: params?.cities_pic || [],
+		list_pic_districts: params?.districts_pic || [],
+		list_pic_villages: params?.villages_pic || []
 	};
 	try {
 		const response = await http.put(`/partner/${staffID}`, data);

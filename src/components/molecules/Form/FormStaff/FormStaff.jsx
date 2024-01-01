@@ -25,7 +25,8 @@ export const FormStaff = () => {
 	const [getDistrict, setGetDistrict] = useState(0);
 	const [getVillage, setGetVillage] = useState(0);
 
-	const { staff, fetchingStaff, processingCreateStaff, getStaff, postStaffCreate, updateStaff } = usePartnerStore();
+	const { staff, fetchingStaff, processingCreateStaff } = usePartnerStore();
+	const { getStaff, clearStaff, postStaffCreate, updateStaff } = usePartnerStore();
 
 	const { getValues, watch, control, setValue, setError, handleSubmit } = useForm({
 		resolver: yupResolver(formStaffSchema),
@@ -65,6 +66,12 @@ export const FormStaff = () => {
 	useEffect(() => {
 		if (staffID) getStaff(staffID);
 	}, [staffID]);
+
+	useEffect(() => {
+		return () => {
+			clearStaff();
+		};
+	}, []);
 
 	useEffect(() => {
 		if (staffID && staff) {

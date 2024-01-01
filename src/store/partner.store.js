@@ -312,6 +312,10 @@ const states = (set, get) => ({
 		set({ fetchingStaff: false });
 	},
 
+	clearStaff: () => {
+		set({ staff: null });
+	},
+
 	postStaffCreate: async (params, callback) => {
 		set({ processingCreateStaff: true });
 
