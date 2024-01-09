@@ -26,19 +26,19 @@ export const TableDetailRelawan = ({ isLoading, relawanData }) => {
 				}
 			},
 			{
-				Header: 'Email',
-				minWidth: 180,
-				Cell: (row) => {
-					const data = row.row.original;
-					return <div className="text-gray-400">{data?.email ?? '-'}</div>;
-				}
-			},
-			{
 				Header: 'Kontak',
 				minWidth: 180,
 				Cell: (row) => {
 					const data = row.row.original;
 					return <div className="text-gray-400">{data?.mobile ?? '-'}</div>;
+				}
+			},
+			{
+				Header: 'Gender',
+				minWidth: 180,
+				Cell: (row) => {
+					const data = row.row.original;
+					return <div className="text-gray-400">{data?.gender ?? '-'}</div>;
 				}
 			},
 			{
