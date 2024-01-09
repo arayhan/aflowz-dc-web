@@ -41,6 +41,9 @@ const states = (set, get) => ({
 
 		return { payload, success };
 	},
+	clearKonstituenList: () => {
+		set({ konstituenList: null });
+	},
 	getKonstituenDetail: async (konstituenID) => {
 		set({ fetchingKonstituenDetail: true });
 
@@ -96,7 +99,9 @@ const states = (set, get) => ({
 		set({ konstituen: success ? payload : null });
 		set({ fetchingKonstituen: false });
 	},
-
+	clearKonstituen: () => {
+		set({ konstituen: null });
+	},
 	getProposalList: async (params) => {
 		set({ fetchingProposalList: true });
 
