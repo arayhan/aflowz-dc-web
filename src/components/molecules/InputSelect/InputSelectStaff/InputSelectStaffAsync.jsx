@@ -47,7 +47,6 @@ export const InputSelectStaffAsync = forwardRef(
 
 				setOptions([...mapStaff, ...newOptions]);
 			} else if (staff) {
-				console.log(staff.name);
 				const selectedStaff = { label: `${staff.nik_number} - ${staff.name}`, value: staff.id, data: staff };
 				setOptions([...options, selectedStaff]);
 			}
