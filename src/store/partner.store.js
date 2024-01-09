@@ -7,12 +7,12 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 const states = (set, get) => ({
-	fetchingPartnerItem: true,
-	fetchingPartnerList: true,
-	fetchingPartnerDetail: true,
-	fetchingPenerimaItem: true,
-	fetchingPenerimaList: true,
-	fetchingPenerimaDetail: true,
+	fetchingPartnerItem: false,
+	fetchingPartnerList: false,
+	fetchingPartnerDetail: false,
+	fetchingPenerimaItem: false,
+	fetchingPenerimaList: false,
+	fetchingPenerimaDetail: false,
 	fetchingStaff: false,
 	fetchingStaffTitleList: false,
 	fetchingStaffList: false,
@@ -88,18 +88,25 @@ const states = (set, get) => ({
 	},
 
 	getPenerimaList: async (params, callback, isNeedAbort = false) => {
+		get().clearPenerimaList();
 		set({ fetchingPenerimaList: true });
 
 		const { success, payload } = await SERVICE_PARTNER.getPartnerList(params, isNeedAbort);
 
 		if (callback) callback({ payload, success });
 
-		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED && payload?.code !== 'ERR_CANCELED') {
-			set({ penerimaList: success ? payload : null });
-		} else if (payload?.code !== 'ERR_CANCELED') {
-			set({ calonPenerimaList: success ? payload : null });
+		if (payload?.code !== 'ERR_CANCELED') {
+			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED
+				? set({ penerimaList: success ? payload : null })
+				: set({ calonPenerimaList: success ? payload : null });
+
+			set({ fetchingPenerimaList: false });
 		}
-		set({ fetchingPenerimaList: false });
+	},
+
+	clearPenerimaList: () => {
+		set({ penerimaList: null });
+		set({ calonPenerimaList: null });
 	},
 
 	downloadCsvPenerima: async (params, isAnonymous, title, callback) => {

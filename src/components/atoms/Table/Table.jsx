@@ -86,11 +86,13 @@ export const Table = ({ loading, columns, data, hiddenColumns, onClickRow }) => 
 Table.Skeleton = ({ columns }) => {
 	return [1, 2, 3].map((array) => (
 		<tr key={array} className="border-b hover:bg-gray-50 last:border-b-0">
-			{columns.map((column) => (
-				<td key={column.Header} className="px-5 py-2 md:px-6 md:py-3">
-					<Skeleton height={20} />
-				</td>
-			))}
+			{columns
+				.filter((column) => !column.hidden)
+				.map((column) => (
+					<td key={column.Header} className="px-5 py-2 md:px-6 md:py-3">
+						<Skeleton height={20} />
+					</td>
+				))}
 		</tr>
 	));
 };

@@ -41,15 +41,21 @@ export const TablePenerima = ({
 		calonPenerimaList,
 		getPenerimaList,
 		deletePenerima,
-		downloadCsvPenerima
+		downloadCsvPenerima,
+		clearPenerimaList
 	} = usePartnerStore();
 	const location = useLocation();
 
 	const [page, setPage] = useState(1);
-	const [pageCount, setPageCount] = useState(1);
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
-	const [data, setData] = useState([]);
+
+	const PAGE_COUNT =
+		(penerimaList?.total ? Math.ceil(penerimaList?.total / perPage) : Math.ceil(calonPenerimaList?.total / perPage)) ||
+		1;
+	const DATA =
+		(params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items) ||
+		[];
 
 	const IS_ANONYMOUS_DATA = params && Boolean(params.is_no_nik_number && params.is_no_nisn_number);
 
@@ -252,34 +258,17 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = isShowFooter ? { limit: perPage, offset: offsetResult } : {};
 
-		if (params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE) {
-			params = {
-				...params,
-				candidate_program_id: params.program_id,
-				candidate_status: params.candidate_status
-			};
-			delete params.program_id;
-		}
+		console.log({ page, perPage, params });
 
-		if (pageCount > 0 && page > pageCount) setPage(pageCount);
-		else {
-			setOffset(Math.abs(offsetResult));
-			getPenerimaList({ ...defaultParams, ...params }, () => {}, isNeedAbort);
-		}
-	}, [params, page, perPage, pageCount]);
+		setOffset(Math.abs(offsetResult));
+		getPenerimaList({ ...defaultParams, ...params }, () => {}, isNeedAbort);
+	}, [page, perPage, isShowFooter, params, isNeedAbort]);
 
 	useEffect(() => {
-		setData(
-			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items
-		);
-		if (isShowFooter) {
-			if (params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED) {
-				setPageCount(Math.ceil(penerimaList?.total / perPage));
-			} else {
-				setPageCount(Math.ceil(calonPenerimaList?.total / perPage));
-			}
-		}
-	}, [params, calonPenerimaList, penerimaList, isShowFooter]);
+		return () => {
+			clearPenerimaList();
+		};
+	}, []);
 
 	return (
 		<div className="bg-white rounded-md shadow-md">
@@ -296,8 +285,8 @@ export const TablePenerima = ({
 					onClickDownloadAnonymousData={() => handleDownloadData(true)}
 					showButtonSeeAnonymousData={isShowButtonSeeAnonymousData && !IS_ANONYMOUS_DATA}
 					showButtonUploadAnonymousData={isShowButtonUploadAnonymousData && IS_ANONYMOUS_DATA}
-					showButtonDownloadAnonymousData={data?.length > 0 && IS_ANONYMOUS_DATA}
-					showButtonDownloadData={data?.length > 0 && !IS_ANONYMOUS_DATA}
+					showButtonDownloadAnonymousData={DATA?.length > 0 && IS_ANONYMOUS_DATA}
+					showButtonDownloadData={DATA?.length > 0 && !IS_ANONYMOUS_DATA}
 					showButtonUploadSheetPenerima
 					showButtonCreate={false}
 					showButtonSeeAll={isShowButtonSeeAll}
@@ -419,14 +408,26 @@ export const TablePenerima = ({
 			<div className="overflow-x-scroll" style={maxHeight ? { maxHeight, overflowY: 'scroll' } : {}}>
 				<Table
 					columns={columns}
-					data={data}
+					data={DATA}
 					loading={fetchingPenerimaList}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>
 			{isShowFooter && (
 				<div className="p-6">
-					<TableFooter page={page} setPage={setPage} pageCount={pageCount} perPage={perPage} setPerPage={setPerPage} />
+					<TableFooter
+						page={page}
+						setPage={(newPage) => {
+							clearPenerimaList();
+							setPage(newPage);
+						}}
+						pageCount={PAGE_COUNT}
+						perPage={perPage}
+						setPerPage={(newPerPage) => {
+							clearPenerimaList();
+							setPerPage(newPerPage);
+						}}
+					/>
 				</div>
 			)}
 		</div>

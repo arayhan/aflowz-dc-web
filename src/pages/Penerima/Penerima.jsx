@@ -1,24 +1,20 @@
 import { BannerFeature, TablePenerima } from '@/components/molecules';
 import { STATUS_PENERIMA_TYPES } from '@/utils/constants';
 import { queryStringToObject } from '@/utils/helpers';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Penerima = () => {
 	const { search } = useLocation();
-	const [params, setParams] = useState({});
 
-	const IS_ANONYMOUS_DATA = Boolean(params.is_no_nik_number && params.is_no_nisn_number);
-
-	useEffect(() => {
-		setParams(search ? queryStringToObject(search) : {});
-	}, [search]);
+	const PARAMS = search ? queryStringToObject(search) : {};
+	const IS_ANONYMOUS_DATA = Boolean(PARAMS.is_no_nik_number && PARAMS.is_no_nisn_number);
 
 	return (
 		<div>
 			<BannerFeature
 				title={`${
-					params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE
+					PARAMS?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE
 						? 'Calon Penerima'
 						: IS_ANONYMOUS_DATA
 						? 'Penerima Anonymous'
@@ -29,16 +25,16 @@ const Penerima = () => {
 				<div className="container py-6">
 					<TablePenerima
 						title={`${
-							params?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE
+							PARAMS?.candidate_status === STATUS_PENERIMA_TYPES.CANDIDATE
 								? 'Calon Penerima Program'
 								: 'Penerima Program'
 						} `}
 						isNeedAbort
 						params={{
-							...params,
+							...PARAMS,
 							...(IS_ANONYMOUS_DATA
 								? { is_receiver: true }
-								: { candidate_status: params?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED })
+								: { candidate_status: PARAMS?.candidate_status || STATUS_PENERIMA_TYPES.CONFIRMED })
 						}}
 						displayedColumns={[
 							'#',
