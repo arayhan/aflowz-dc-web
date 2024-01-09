@@ -258,8 +258,6 @@ export const TablePenerima = ({
 		const offsetResult = (page - 1) * perPage;
 		const defaultParams = isShowFooter ? { limit: perPage, offset: offsetResult } : {};
 
-		console.log({ page, perPage, params });
-
 		setOffset(Math.abs(offsetResult));
 		getPenerimaList({ ...defaultParams, ...params }, () => {}, isNeedAbort);
 	}, [page, perPage, isShowFooter, params, isNeedAbort]);

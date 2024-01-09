@@ -32,8 +32,6 @@ export const TableTPS = ({
 	const [offset, setOffset] = useState(0);
 	const [data, setData] = useState([]);
 
-	console.log({ TPSList });
-
 	const columns = useMemo(
 		() => [
 			{

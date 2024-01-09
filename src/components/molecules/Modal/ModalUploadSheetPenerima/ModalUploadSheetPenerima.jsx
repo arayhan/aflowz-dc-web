@@ -118,8 +118,6 @@ export const ModalUploadSheetPenerima = ({ status, onClose }) => {
 							allValuesToStringResult['program_periode'] =
 								programDetail?.program_periode || data?.program_periode?.toString() || '';
 
-							console.log({ allValuesToStringResult });
-
 							Object.keys(data).forEach((key) => {
 								allValuesToStringResult[key] = data[key]?.toString() || '';
 								allValuesToStringResult['programs'] = [];
