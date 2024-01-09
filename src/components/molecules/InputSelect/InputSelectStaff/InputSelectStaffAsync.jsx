@@ -4,13 +4,15 @@ import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectStaffAsync = forwardRef(
 	(
-		{ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, disabled, ...props },
+		{ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, disabled, value, ...props },
 		ref
 	) => {
-		const { staffList, fetchingStaffList, getStaffList } = usePartnerStore();
+		const { staff, staffList, fetchingStaff, fetchingStaffList } = usePartnerStore();
+		const { getStaffList, getStaff, clearStaff } = usePartnerStore();
 
 		const [options, setOptions] = useState([]);
-		const [values, setValues] = useState([]);
+
+		const IS_LOADING = fetchingStaffList || fetchingStaff;
 
 		const handleLoadOptions = async (search, prevOptions) => {
 			const { success, payload } = await getStaffList({
@@ -42,21 +44,32 @@ export const InputSelectStaffAsync = forwardRef(
 					data: staff
 				}));
 				const newOptions = options.filter((option) => !mapStaff.find((staff) => staff.value === option.value));
+
 				setOptions([...mapStaff, ...newOptions]);
+			} else if (staff) {
+				console.log(staff.name);
+				const selectedStaff = { label: `${staff.nik_number} - ${staff.name}`, value: staff.id, data: staff };
+				setOptions([...options, selectedStaff]);
 			}
-		}, [staffList]);
+		}, [multiple, staff, staffList]);
 
 		useEffect(() => {
-			if (options.length > 0) {
-				const _values = multiple
-					? props.value?.map((value) => options.find((option) => option.value === value))
-					: options.find((option) => option.value === props.value);
-				setValues(_values);
+			if (multiple && value?.length > 0) {
+				Promise.all(value.map((item) => getStaff(item)));
+			} else {
+				getStaff(value);
 			}
-		}, [options, props.value, multiple]);
+		}, [multiple, value]);
 
 		useEffect(() => {
-			getStaffList({ limit: 100, ...params });
+			getStaffList({ limit: 500 });
+		}, []);
+
+		useEffect(() => {
+			return () => {
+				clearStaff();
+				setOptions([]);
+			};
 		}, []);
 
 		return (
@@ -67,11 +80,11 @@ export const InputSelectStaffAsync = forwardRef(
 					options={options}
 					loadOptions={handleLoadOptions}
 					onChange={onChange}
-					loading={fetchingStaffList}
-					disabled={disabled}
-					value={values}
+					loading={IS_LOADING}
+					disabled={(options.length === 0 && IS_LOADING) || disabled}
 					placeholder={placeholder || 'Pilih PJ Internal DC'}
 					multi={multiple}
+					value={value}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}
@@ -84,5 +97,6 @@ InputSelectStaffAsync.displayName = 'InputSelectStaffAsync';
 InputSelectStaffAsync.defaultProps = {
 	name: 'institusi',
 	containerClassName: '',
-	showLabel: true
+	showLabel: true,
+	multiple: false
 };
