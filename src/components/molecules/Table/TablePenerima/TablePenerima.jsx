@@ -39,6 +39,7 @@ export const TablePenerima = ({
 		penerimaList,
 		fetchingPenerimaList,
 		calonPenerimaList,
+		fetchingCalonPenerimaList,
 		getPenerimaList,
 		deletePenerima,
 		downloadCsvPenerima,
@@ -50,12 +51,9 @@ export const TablePenerima = ({
 	const [perPage, setPerPage] = useState(10);
 	const [offset, setOffset] = useState(0);
 
-	const PAGE_COUNT =
-		(penerimaList?.total ? Math.ceil(penerimaList?.total / perPage) : Math.ceil(calonPenerimaList?.total / perPage)) ||
-		1;
-	const DATA =
-		(params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED ? penerimaList?.items : calonPenerimaList?.items) ||
-		[];
+	const IS_PENERIMA_CONFIRMED = params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED;
+	const PAGE_COUNT = Math.ceil((IS_PENERIMA_CONFIRMED ? penerimaList?.total : calonPenerimaList?.total) / perPage) || 1;
+	const DATA = (IS_PENERIMA_CONFIRMED ? penerimaList?.items : calonPenerimaList?.items) || [];
 
 	const IS_ANONYMOUS_DATA = params && Boolean(params.is_no_nik_number && params.is_no_nisn_number);
 
@@ -157,7 +155,7 @@ export const TablePenerima = ({
 										className="w-full bg-purple-500 hover:bg-purple-400"
 										action={ACTION_TYPES.SEE_DETAIL}
 										linkTo={`/program/${program.id}`}
-										text={program.name}
+										text={`${program.name} ${program.periode ? `(${program.periode})` : ''}`}
 									/>
 								))}
 						</div>
@@ -407,7 +405,7 @@ export const TablePenerima = ({
 				<Table
 					columns={columns}
 					data={DATA}
-					loading={fetchingPenerimaList}
+					loading={IS_PENERIMA_CONFIRMED ? fetchingPenerimaList : fetchingCalonPenerimaList}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>

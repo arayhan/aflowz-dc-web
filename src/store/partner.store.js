@@ -12,6 +12,7 @@ const states = (set, get) => ({
 	fetchingPartnerDetail: false,
 	fetchingPenerimaItem: false,
 	fetchingPenerimaList: false,
+	fetchingCalonPenerimaList: false,
 	fetchingPenerimaDetail: false,
 	fetchingStaff: false,
 	fetchingStaffTitleList: false,
@@ -88,19 +89,21 @@ const states = (set, get) => ({
 	},
 
 	getPenerimaList: async (params, callback, isNeedAbort = false) => {
+		const IS_PENERIMA_CONFIRMED = params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED;
+
 		get().clearPenerimaList();
-		set({ fetchingPenerimaList: true });
+		set(IS_PENERIMA_CONFIRMED ? { fetchingPenerimaList: true } : { fetchingCalonPenerimaList: true });
 
 		const { success, payload } = await SERVICE_PARTNER.getPartnerList(params, isNeedAbort);
 
 		if (callback) callback({ payload, success });
 
 		if (payload?.code !== 'ERR_CANCELED') {
-			params?.candidate_status === STATUS_PENERIMA_TYPES.CONFIRMED
+			IS_PENERIMA_CONFIRMED
 				? set({ penerimaList: success ? payload : null })
 				: set({ calonPenerimaList: success ? payload : null });
 
-			set({ fetchingPenerimaList: false });
+			set(IS_PENERIMA_CONFIRMED ? { fetchingPenerimaList: false } : { fetchingCalonPenerimaList: false });
 		}
 	},
 

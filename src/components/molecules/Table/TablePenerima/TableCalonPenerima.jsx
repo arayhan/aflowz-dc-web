@@ -30,7 +30,7 @@ export const TableCalonPenerima = ({
 }) => {
 	const navigate = useNavigate();
 	const { isSystem } = useAuthStore();
-	const { calonPenerimaList, fetchingPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
+	const { calonPenerimaList, fetchingCalonPenerimaList, getPenerimaList, deletePenerima, downloadCsvPenerima } =
 		usePartnerStore();
 	const location = useLocation();
 
@@ -375,7 +375,7 @@ export const TableCalonPenerima = ({
 				<Table
 					columns={columns}
 					data={data}
-					loading={fetchingPenerimaList}
+					loading={fetchingCalonPenerimaList}
 					onClickRow={enableClickRow && handleClickRow}
 				/>
 			</div>
