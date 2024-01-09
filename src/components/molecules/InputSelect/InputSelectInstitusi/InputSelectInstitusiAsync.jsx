@@ -31,7 +31,6 @@ export const InputSelectInstitusiAsync = forwardRef(
 		};
 
 		useEffect(() => {
-			console.log({ value, konstituen, konstituenList });
 			if (konstituenList?.total > 0) {
 				const mapKonstituen = konstituenList.items.map((konstituen) => ({
 					label: konstituen.name,
