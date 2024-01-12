@@ -184,8 +184,7 @@ export const formActivitySchema = yup.object().shape({
 		.matches(/^[0-9]*$/, 'Nomor tidak valid')
 		.min(8, 'Minimal 8 angka'),
 	pic_staff_id: yup.number().required('PIC tim internal wajib diisi'),
-	total_participant: yup.number().required('Total peserta wajib diisi'),
-	checkout_description: yup.string().required('Deskripsi Checkout wajib diisi')
+	total_participant: yup.number().required('Total peserta wajib diisi')
 });
 
 export const formActivityDetailSchema = yup.object().shape({
