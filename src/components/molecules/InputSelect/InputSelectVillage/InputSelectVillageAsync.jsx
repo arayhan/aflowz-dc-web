@@ -3,11 +3,13 @@ import { useVillageStore } from '@/store';
 import React, { useState, forwardRef, useEffect } from 'react';
 
 export const InputSelectVillageAsync = forwardRef(
-	({ containerClassName, error, onChange, params, placeholder, showLabel, label, value, ...props }, ref) => {
-		const { village, villageList, fetchingVillageList } = useVillageStore();
-		const { getVillageList, getVillage, clearVillageList, clearVillage } = useVillageStore();
+	({ containerClassName, error, onChange, params, placeholder, showLabel, label, multiple, value, ...props }, ref) => {
+		const { village, villageList, fetchingVillageItem, fetchingVillageList } = useVillageStore();
+		const { getVillageList, getVillageItem, clearVillageList, clearVillage } = useVillageStore();
 
 		const [options, setOptions] = useState([]);
+
+		const IS_LOADING = fetchingVillageList || fetchingVillageItem;
 
 		const handleLoadOptions = async (search, prevOptions) => {
 			const { success, payload } = await getVillageList({
@@ -16,8 +18,6 @@ export const InputSelectVillageAsync = forwardRef(
 				...(search && { keyword: search }),
 				...params
 			});
-
-			console.log({ payload });
 
 			const mapVillage = success
 				? payload.items.map((village) => ({
@@ -40,12 +40,33 @@ export const InputSelectVillageAsync = forwardRef(
 				}));
 				const newOptions = options.filter((option) => !mapVillage.find((village) => village.value === option.value));
 				setOptions([...mapVillage, ...newOptions]);
-			} else if (value && !villageList && !village) {
-				getVillage(value);
-			} else if (value && village) {
+			} else if (village) {
 				setOptions([{ label: village.name, value: village.id }]);
 			}
 		}, [value, villageList, village]);
+
+		useEffect(() => {
+			if (villageList?.total > 0) {
+				const mapVillage = villageList.items.map((village) => ({
+					label: village.name,
+					value: village.id,
+					data: village
+				}));
+				const newOptions = options.filter((option) => !mapVillage.find((village) => village.value === option.value));
+				setOptions([...mapVillage, ...newOptions]);
+			} else if (village) {
+				const selectedVillage = { label: village.name, value: village.id, data: village };
+				setOptions([...options, selectedVillage]);
+			}
+		}, [multiple, village, villageList]);
+
+		useEffect(() => {
+			if (multiple && value?.length > 0) {
+				Promise.all(value.map((item) => getVillageItem(item)));
+			} else if (value) {
+				getVillageItem(value);
+			}
+		}, [multiple, value]);
 
 		useEffect(() => {
 			return () => {
@@ -63,9 +84,10 @@ export const InputSelectVillageAsync = forwardRef(
 					options={options}
 					loadOptions={handleLoadOptions}
 					onChange={onChange}
-					loading={fetchingVillageList}
+					loading={IS_LOADING}
 					placeholder={placeholder || 'Pilih Village'}
 					value={value}
+					multi={multiple}
 					{...props}
 				/>
 				{error && <InputError message={error.message} />}

@@ -8,7 +8,7 @@ import {
 	InputSelectPartnerAsync,
 	InputSelectProgram,
 	InputSelectStaffAsync,
-	InputSelectVillage
+	InputSelectVillageAsync
 } from '@/components/molecules';
 import { useActivityStore } from '@/store';
 import { formActivitySchema } from '@/utils/validation-schema';
@@ -246,12 +246,13 @@ export const FormActivity = () => {
 							name={'village_id'}
 							control={control}
 							render={({ field, fieldState: { error } }) => (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									{...field}
 									disabled={!watch('district_id') || processingCreateActivity || fetchingActivity || activityErrors}
+									value={watch('village_id')}
 									params={watch('district_id') ? { district_id: watch('district_id') } : null}
-									onChange={({ value }) => {
-										setValue('village_id', value);
+									onChange={(option) => {
+										setValue('village_id', option?.value ?? null);
 										setError('village_id', null);
 									}}
 									error={error}

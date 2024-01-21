@@ -96,7 +96,9 @@ const states = (set, get) => ({
 	clearStateVillage: () => {
 		set({ village: null });
 		set({ errorsVillage: null });
-	}
+	},
+	clearVillage: () => set({ village: null }),
+	clearVillageList: () => set({ villageList: null })
 });
 
 export const useVillageStore = create(devtools(states, { name: 'village-store', getStorage: () => localStorage }));
