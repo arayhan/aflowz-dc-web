@@ -71,6 +71,7 @@ export * from './InputSelect/InputSelectGender/InpurSelectGender';
 export * from './InputSelect/InputSelectStaffTitle/InputSelectStaffTitle';
 export * from './InputSelect/InputSelectProvince/InputSelectProvince';
 export * from './InputSelect/InputSelectVillage/InputSelectVillage';
+export * from './InputSelect/InputSelectVillage/InputSelectVillageAsync';
 export * from './InputSelect/InputSelectReligion/InputSelectReligion';
 export * from './InputSelect/InpuSelectDate/InputSelectDate';
 export * from './InputSelect/InputSelectDistrict/InputSelectDistrict';

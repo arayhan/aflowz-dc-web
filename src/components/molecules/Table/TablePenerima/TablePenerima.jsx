@@ -11,6 +11,7 @@ import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrint
 import { FaInfoCircle } from 'react-icons/fa';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
 import { InputSelectInstitusiAsync } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 
 export const TablePenerima = ({
 	title,
@@ -348,7 +349,7 @@ export const TablePenerima = ({
 							)}
 
 							{(!displayedFilters || displayedFilters.includes('village_id')) && (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									containerClassName="w-full lg:w-60"
 									value={params.village_id ? Number(params.village_id) : undefined}
 									showLabel={false}
