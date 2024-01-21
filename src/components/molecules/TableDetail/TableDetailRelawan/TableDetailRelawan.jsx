@@ -34,11 +34,25 @@ export const TableDetailRelawan = ({ isLoading, relawanData }) => {
 				}
 			},
 			{
-				Header: 'Gender',
+				Header: 'Desa/Kelurahan',
 				minWidth: 180,
 				Cell: (row) => {
-					const data = row.row.original;
-					return <div className="text-gray-400">{data?.gender ?? '-'}</div>;
+					const village = row.row.original?.village;
+					return (
+						<div className="text-gray-400">
+							{village?.name ? (
+								<ButtonAction
+									key={village.id}
+									className="w-full bg-purple-500 hover:bg-purple-400"
+									action={ACTION_TYPES.SEE_DETAIL}
+									linkTo={`/dapil/village/${village.id}`}
+									text={village.name}
+								/>
+							) : (
+								'-'
+							)}
+						</div>
+					);
 				}
 			},
 			{
