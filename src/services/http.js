@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `${process.env.REACT_APP_API_BASE_URL_PROD}/dewi-coryati/api/v1`;
+const baseURL = `${process.env.REACT_APP_API_BASE_URL}/dewi-coryati/api/v1`;
 
 const http = axios.create({
 	baseURL,
