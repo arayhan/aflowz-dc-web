@@ -6,7 +6,6 @@ import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';

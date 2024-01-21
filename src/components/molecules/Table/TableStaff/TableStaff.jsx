@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectPICCity } from '../../InputSelect/InputSelectCity/InputSelectPICCity';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 import { InputSelectPICDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectPICDistrict';
 import { InputSelectPICVillage } from '../../InputSelect/InputSelectVillage/InputSelectPICVillage';
 
@@ -227,7 +227,7 @@ export const TableStaff = ({ params, setParams, isShowFilter, displayedFilters }
 								/>
 							)}
 							{(!displayedFilters || displayedFilters.includes('village_id')) && (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									containerClassName="w-full lg:w-60"
 									value={params.village_id ? Number(params.village_id) : undefined}
 									showLabel={false}

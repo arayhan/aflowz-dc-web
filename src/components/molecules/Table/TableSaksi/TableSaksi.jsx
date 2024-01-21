@@ -6,7 +6,7 @@ import { addQueryParams, queryStringToObject, removeQueryParams } from '@/utils/
 import { useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 
 export const TableSaksi = ({ params, setParams, isShowFilter, displayedFilters }) => {
 	const navigate = useNavigate();
@@ -207,7 +207,7 @@ export const TableSaksi = ({ params, setParams, isShowFilter, displayedFilters }
 							)}
 
 							{(!displayedFilters || displayedFilters.includes('village_pic_id')) && (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									containerClassName="w-full lg:w-60"
 									value={params.village_pic_id ? Number(params.village_pic_id) : undefined}
 									showLabel={false}

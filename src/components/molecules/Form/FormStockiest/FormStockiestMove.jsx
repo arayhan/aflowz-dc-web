@@ -8,7 +8,7 @@ import {
 	InputSelectProduct,
 	InputSelectProgram,
 	InputSelectProvince,
-	InputSelectVillage,
+	InputSelectVillageAsync,
 	InputSelectStaffAsync,
 	InputSelectProductMovement,
 	InputSelectWarehouse,
@@ -290,7 +290,7 @@ export const FormStockiestMove = () => {
 					name={'village'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={processingUpdateProduct}
 							onChange={({ value }) => {

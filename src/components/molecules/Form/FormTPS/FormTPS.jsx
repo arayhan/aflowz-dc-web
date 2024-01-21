@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 import { InputSelectPeriode } from '../../InputSelect/InputSelectPeriode/InputSelectPeriode';
 import { InputSelectStaffAsync } from '../../InputSelect/InputSelectStaff/InputSelectStaffAsync';
 
@@ -186,7 +186,7 @@ export const FormTPS = () => {
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							onChange={({ value }) => {

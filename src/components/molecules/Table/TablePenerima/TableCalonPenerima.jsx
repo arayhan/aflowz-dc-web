@@ -6,7 +6,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 import { ButtonPrintMultiplePenerimaCertificate } from '../../Button/ButtonPrintCertificate/ButtonPrintMultiplePenerimaCertificate';
 import { FaInfoCircle } from 'react-icons/fa';
 import { InputSelectInstitusiAsync } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
@@ -319,7 +319,7 @@ export const TableCalonPenerima = ({
 								/>
 							)}
 							{(!displayedFilters || displayedFilters.includes('village_id')) && (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									containerClassName="w-full lg:w-60"
 									value={params.village_id ? Number(params.village_id) : undefined}
 									showLabel={false}

@@ -4,7 +4,7 @@ import {
 	InputSelectDistrict,
 	InputSelectInstitusiType,
 	InputSelectStaffAsync,
-	InputSelectVillage
+	InputSelectVillageAsync
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -159,12 +159,13 @@ export const FormKonstituen = () => {
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={!watch('district_id') || processingCreateKonstituen || fetchingKonstituen}
+							value={watch('village_id')}
 							params={watch('district_id') ? { district_id: watch('district_id') } : null}
-							onChange={({ value }) => {
-								setValue('village_id', value);
+							onChange={(option) => {
+								setValue('village_id', option?.value ?? null);
 								setError('village_id', null);
 							}}
 							error={error}

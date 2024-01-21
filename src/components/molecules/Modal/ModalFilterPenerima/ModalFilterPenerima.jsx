@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectProgram } from '../../InputSelect/InputSelectProgram/InputSelectProgram';
 import { InputSelectProvince } from '../../InputSelect/InputSelectProvince/InputSelectProvince';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 
 export const ModalFilterPenerima = ({ isLoading, onSubmit, onClose }) => {
 	const { control, setValue, setError, handleSubmit } = useForm({
@@ -21,7 +21,7 @@ export const ModalFilterPenerima = ({ isLoading, onSubmit, onClose }) => {
 			onClose={onClose}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<div className="relative grid lg:grid-cols-2 gap-4">
+			<div className="relative grid gap-4 lg:grid-cols-2">
 				<Controller
 					name={'program_id'}
 					control={control}
@@ -71,7 +71,7 @@ export const ModalFilterPenerima = ({ isLoading, onSubmit, onClose }) => {
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							onChange={({ value }) => {
 								setValue('village_id', value);

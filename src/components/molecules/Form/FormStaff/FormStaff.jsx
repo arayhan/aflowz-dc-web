@@ -6,7 +6,7 @@ import {
 	InputSelectGender,
 	InputSelectReligion,
 	InputSelectDate,
-	InputSelectVillage,
+	InputSelectVillageAsync,
 	TableSelectRole
 } from '@/components/molecules';
 import { useForm, Controller } from 'react-hook-form';
@@ -319,7 +319,7 @@ export const FormStaff = () => {
 					name={'village'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={processingCreateStaff || fetchingStaff}
 							onChange={({ value }) => {
@@ -415,7 +415,6 @@ export const FormStaff = () => {
 								setValue('districts_pic', newValues);
 							}}
 							multiple
-							params={{ limit: 2000, offset: 0 }}
 							error={error}
 						/>
 					)}
@@ -425,7 +424,7 @@ export const FormStaff = () => {
 					name={'villages_pic'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							label="Pilih Kelurahan/Desa PIC"
 							disabled={processingCreateStaff || fetchingStaff}
@@ -437,7 +436,6 @@ export const FormStaff = () => {
 								setValue('villages_pic', newValues);
 							}}
 							multiple
-							params={{ limit: 2000, offset: 0 }}
 							error={error}
 						/>
 					)}

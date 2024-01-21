@@ -6,7 +6,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 
 export const TableTPS = ({
 	title,
@@ -266,7 +266,7 @@ export const TableTPS = ({
 							)}
 
 							{(!displayedFilters || displayedFilters.includes('village_id')) && (
-								<InputSelectVillage
+								<InputSelectVillageAsync
 									containerClassName="w-full lg:w-60"
 									value={params.village_id ? Number(params.village_id) : undefined}
 									showLabel={false}

@@ -4,14 +4,10 @@ import { ACTION_TYPES } from '@/utils/constants';
 import { addQueryParams, objectToQueryString, queryStringToObject, removeQueryParams } from '@/utils/helpers';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
-import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
 
 export const TableDPT = ({
 	title,
 	displayedColumns,
-	displayedFilters,
 	params,
 	setParams,
 	isReadonly,

@@ -5,7 +5,7 @@ import { usePartnerStore } from '@/store';
 import { useEffect } from 'react';
 import { InputSelectProvince } from '../../InputSelect/InputSelectProvince/InputSelectProvince';
 import { InputSelectCity } from '../../InputSelect/InputSelectCity/InputSelectCity';
-import { InputSelectVillage } from '../../InputSelect/InputSelectVillage/InputSelectVillage';
+import { InputSelectVillageAsync } from '../../InputSelect/InputSelectVillage/InputSelectVillageAsync';
 import { InputSelectDistrict } from '../../InputSelect/InputSelectDistrict/InputSelectDistrict';
 import { InputSelectInstitusiAsync } from '../../InputSelect/InputSelectInstitusi/InputSelectInstitusiAsync';
 
@@ -218,12 +218,13 @@ export const FormPenerima = () => {
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={!watch('district_id') || processingSubmitPenerima || fetchingPenerimaItem}
+							value={watch('village_id')}
 							params={watch('district_id') ? { district_id: watch('district_id') } : null}
 							onChange={(option) => {
-								setValue('village_id', option?.value || null);
+								setValue('village_id', option?.value ?? null);
 								setError('village_id', null);
 							}}
 							error={error}

@@ -4,8 +4,7 @@ import {
 	InputSelectDistrict,
 	InputSelectInstitusiAsync,
 	InputSelectProgram,
-	InputSelectStaff,
-	InputSelectVillage
+	InputSelectVillageAsync
 } from '@/components/molecules';
 import { useVisitasiStore } from '@/store';
 import { formVisitasiSchema } from '@/utils/validation-schema';
@@ -216,7 +215,7 @@ export const FormVisitasi = () => {
 					name={'village_id'}
 					control={control}
 					render={({ field, fieldState: { error } }) => (
-						<InputSelectVillage
+						<InputSelectVillageAsync
 							{...field}
 							disabled={!watch('district_id') || processingCreateVisitasi || fetchingVisitasi || visitasiErrors}
 							params={watch('district_id') ? { district_id: watch('district_id') } : null}
