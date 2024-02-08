@@ -24,6 +24,7 @@ export const FormTPS = () => {
 			contact: '',
 			total_target_voters: undefined,
 			total_dc_voters: undefined,
+			total_pan_voters: undefined,
 			total_legitimate_vote: undefined,
 			total_invalid_vote: undefined,
 			village_id: undefined,
@@ -55,6 +56,7 @@ export const FormTPS = () => {
 			setValue('contact', TPSItem?.contact || '');
 			setValue('total_target_voters', TPSItem?.total_target_voters ? Number(TPSItem?.total_target_voters) : undefined);
 			setValue('total_dc_voters', TPSItem?.total_dc_voters ? Number(TPSItem?.total_dc_voters) : undefined);
+			setValue('total_pan_voters', TPSItem?.total_pan_voters ? Number(TPSItem?.total_pan_voters) : undefined);
 			setValue(
 				'total_legitimate_vote',
 				TPSItem?.total_legitimate_vote ? Number(TPSItem?.total_legitimate_vote) : undefined
@@ -146,6 +148,21 @@ export const FormTPS = () => {
 							type="number"
 							label="Total Suara DC"
 							placeholder="Total Suara DC"
+							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
+							error={error}
+						/>
+					)}
+				/>
+
+				<Controller
+					name={'total_pan_voters'}
+					control={control}
+					render={({ field, fieldState: { error } }) => (
+						<InputText
+							{...field}
+							type="number"
+							label="Total Suara PAN"
+							placeholder="Total Suara PAN"
 							disabled={processingCreateTPS || fetchingTPS || TPSErrors}
 							error={error}
 						/>

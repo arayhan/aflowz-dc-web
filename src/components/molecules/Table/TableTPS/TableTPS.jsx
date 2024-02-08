@@ -63,6 +63,12 @@ export const TableTPS = ({
 				hidden: displayedColumns && !displayedColumns.includes('Suara Dewi Coryati')
 			},
 			{
+				Header: 'Suara PAN',
+				accessor: 'total_pan_voters',
+				minWidth: 180,
+				hidden: displayedColumns && !displayedColumns.includes('Suara PAN')
+			},
+			{
 				Header: 'Suara Partai',
 				width: '100%',
 				minWidth: 150,
